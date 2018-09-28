@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.config";
+option java_outer_classname = "SamplingConfigProtos";
+
+import "config/log_collector_config.proto";
+
+message SamplingConfig {
+    // Requests will be logged uniformly at random with this probability. Valid
+    // range: [0, 1.0].
+    double sampling_rate = 1;
+}
+
+// Configuration for logging query/responses.
+message LoggingConfig {
+    LogCollectorConfig log_collector_config = 1;
+    SamplingConfig sampling_config = 2;
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.prediction";
+option java_outer_classname = "ClassificationProtos";
+
+import "apis/common/input.proto";
+import "apis/common/model.proto";
+
+// A single class.
+message Class {
+  // Label or name of the class.
+  string label = 1;
+  // Score for this class (e.g., the probability the item belongs to this class).
+  float score = 2;
+}
+
+// List of classes for a single item (tensorflow.Example).
+message Classifications {
+  repeated Class classes = 1;
+}
+
+// Contains one result per input example, in the same order as the input in
+// ClassificationRequest.
+message ClassificationResult {
+  repeated Classifications classifications = 1;
+}
+
+// RPC Interfaces
+
+message ClassificationRequest {
+  // Model Specification. If version is not specified, will use the latest (numerical) version.
+  ModelSpec model_spec = 1;
+
+  // Input data.
+  Input input = 2;
+}
+
+message ClassificationResponse {
+  // Result of the classification.
+  ClassificationResult result = 1;
+
+  // Effective Model Specification used for classification.
+  ModelSpec model_spec = 2;
+}

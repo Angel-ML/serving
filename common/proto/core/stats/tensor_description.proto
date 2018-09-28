@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.core.stats";
+option java_outer_classname = "TensorDescriptionProtos";
+
+import "core/graph/types.proto";
+import "core/graph/tensor_shape.proto";
+import "core/stats/allocation_description.proto";
+
+message TensorDescription {
+    // Data type of tensor elements
+    DataType dtype = 1;
+
+    // Shape of the tensor.
+    TensorShapeProto shape = 2;
+
+    // Information about the size and allocator used for the data
+    AllocationDescription allocation_description = 4;
+};

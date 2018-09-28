@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.modelmgr";
+option java_outer_classname = "StatusProtos";
+
+import "apis/modelmgr/error_codes.proto";
+
+
+// Status that corresponds to Status in
+// third_party/tensorflow/core/lib/core/status.h.
+message StatusProto {
+    // Error code.
+    Code error_code = 1 [json_name = "error_code"];
+
+    // Error message. Will only be set if an error was encountered.
+    string error_message = 2 [json_name = "error_message"];
+}

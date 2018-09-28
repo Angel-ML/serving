@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.config";
+option java_outer_classname = "ConfigProtos";
+
+import "core/graph/cost_graph.proto";
+import "core/graph/graph.proto";
+import "core/stats/step_stats.proto";
+import "core/debug.proto";
+
+
+// Options for a single Run() call.
+message RunOptions {
+    // TODO(pbar) Turn this into a TraceOptions proto which allows
+    // tracing to be controlled in a more orthogonal manner?
+    enum TraceLevel {
+        NO_TRACE = 0;
+        SOFTWARE_TRACE = 1;
+        HARDWARE_TRACE = 2;
+        FULL_TRACE = 3;
+    }
+    TraceLevel trace_level = 1;
+
+    // Time to wait for operation to complete in milliseconds.
+    int64 timeout_in_ms = 2;
+
+    // The thread pool to use, if session_inter_op_thread_pool is configured.
+    // To use the caller thread set this to -1 - this uses the caller thread
+    // to execute Session::Run() and thus avoids a context switch. Using the
+    // caller thread to execute Session::Run() should be done ONLY for simple
+    // graphs, where the overhead of an additional context switch is
+    // comparable with the overhead of Session::Run().
+    int32 inter_op_thread_pool = 3;
+
+    // Whether the partition graph(s) executed by the executor(s) should be
+    // outputted via RunMetadata.
+    bool output_partition_graphs = 5;
+
+    // EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
+    DebugOptions debug_options = 6;
+
+    // When enabled, causes tensor allocation information to be included in
+    // the error message when the Run() call fails because the allocator ran
+    // out of memory (OOM).
+    //
+    // Enabling this option can slow down the Run() call.
+    bool report_tensor_allocations_upon_oom = 7;
+
+    // Everything inside Experimental is subject to change and is not subject
+    // to API stability guarantees in
+    // https://www.tensorflow.org/guide/version_compat.
+    message Experimental {
+        // If non-zero, declares that this graph is going to use collective
+        // ops and must synchronize step_ids with any other graph with this
+        // same group_key value (in a distributed computation where tasks
+        // run disjoint graphs).
+        int64 collective_graph_key = 1;
+    };
+
+    Experimental experimental = 8;
+
+    reserved 4;
+}
+
+// Metadata output (i.e., non-Tensor) for a single Run() call.
+message RunMetadata {
+    // Statistics traced for this step. Populated if tracing is turned on via the
+    // "RunOptions" proto.
+    // EXPERIMENTAL: The format and set of events may change in future versions.
+    StepStats step_stats = 1;
+
+    // The cost graph for the computation defined by the run call.
+    CostGraphDef cost_graph = 2;
+
+    // Graphs of the partitions executed by executors.
+    repeated GraphDef partition_graphs = 3;
+}
+

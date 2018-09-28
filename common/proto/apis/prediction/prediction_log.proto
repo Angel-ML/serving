@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.prediction";
+option java_outer_classname = "PredictionLogProtos";
+
+
+import "apis/prediction/classification.proto";
+import "apis/prediction/inference.proto";
+import "apis/prediction/predict.proto";
+import "apis/prediction/regression.proto";
+import "apis/session/session_service.proto";
+import "core/logging.proto";
+
+
+
+message ClassifyLog {
+  ClassificationRequest request = 1;
+  ClassificationResponse response = 2;
+}
+
+message RegressLog {
+  RegressionRequest request = 1;
+  RegressionResponse response = 2;
+}
+
+message PredictLog {
+  PredictRequest request = 1;
+  PredictResponse response = 2;
+}
+
+message MultiInferenceLog {
+  MultiInferenceRequest request = 1;
+  MultiInferenceResponse response = 2;
+}
+
+message SessionRunLog {
+  SessionRunRequest request = 1;
+  SessionRunResponse response = 2;
+}
+
+// Logged model inference request.
+message PredictionLog {
+  LogMetadata log_metadata = 1;
+  oneof log_type {
+    ClassifyLog classify_log = 2;
+    RegressLog regress_log = 3;
+    PredictLog predict_log = 6;
+    MultiInferenceLog multi_inference_log = 4;
+    SessionRunLog session_run_log = 5;
+  }
+}

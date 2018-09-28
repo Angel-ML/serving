@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.prediction";
+option java_outer_classname = "PredictionServiceProtos";
+
+import "apis/prediction/classification.proto";
+import "apis/prediction/get_model_metadata.proto";
+import "apis/prediction/inference.proto";
+import "apis/prediction/predict.proto";
+import "apis/prediction/regression.proto";
+
+// open source marker; do not remove
+// PredictionService provides access to machine-learned models loaded by
+// model_servers.
+service PredictionService {
+  // Classify.
+  rpc Classify(ClassificationRequest) returns (ClassificationResponse);
+
+  // Regress.
+  rpc Regress(RegressionRequest) returns (RegressionResponse);
+
+  // Predict -- provides access to loaded TensorFlow model.
+  rpc Predict(PredictRequest) returns (PredictResponse);
+
+  // MultiInference API for multi-headed models.
+  rpc MultiInference(MultiInferenceRequest) returns (MultiInferenceResponse);
+
+  // GetModelMetadata - provides access to metadata for loaded models.
+  rpc GetModelMetadata(GetModelMetadataRequest)
+      returns (GetModelMetadataResponse);
+}

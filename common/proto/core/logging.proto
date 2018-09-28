@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.core";
+option java_outer_classname = "LoggingProtos";
+
+import "apis/common/model.proto";
+import "config/logging_config.proto";
+
+// Metadata logged along with the request logs.
+message LogMetadata {
+    angel.serving.ModelSpec model_spec = 1;
+    SamplingConfig sampling_config = 2;
+    // TODO(b/33279154): Add more metadata as mentioned in the bug.
+}
