@@ -20,6 +20,7 @@
         <scala.version>2.11.8</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.logging.version>3.9.0</scala.logging.version>
+        <scala.scalatest.version>3.0.5</scala.scalatest.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <main.basedir>${project.basedir}</main.basedir>
@@ -85,6 +86,12 @@
             <groupId>com.typesafe.scala-logging</groupId>
             <artifactId>scala-logging_${scala.binary.version}</artifactId>
             <version>${scala.logging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.binary.version}</artifactId>
+            <version>${scala.scalatest.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
