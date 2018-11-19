@@ -7,9 +7,7 @@
     <version>0.1.0-SNAPSHOT</version>
     <modules>
         <module>common</module>
-        <module>core</module>
-        <module>service</module>
-        <module>sources</module>
+        <module>server</module>
         <module>client</module>
     </modules>
 
