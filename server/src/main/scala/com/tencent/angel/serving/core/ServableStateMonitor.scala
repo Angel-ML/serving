@@ -4,12 +4,12 @@ import java.util
 import java.util.concurrent.locks.{ReentrantLock, ReentrantReadWriteLock}
 
 import com.tencent.angel.serving.core.EventBus.EventAndTime
-
+import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 
 
 class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
+
   import ManagerState._
   import ServableStateMonitor._
 
@@ -26,13 +26,13 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
   private val logLock = new ReentrantReadWriteLock()
   private val logReadLock: ReentrantReadWriteLock.ReadLock = logLock.readLock()
   private val logWriteLock: ReentrantReadWriteLock.WriteLock = logLock.writeLock()
-  private val log: BoundedLog = new util.ArrayDeque[ServableStateAndTime]((maxLogEvents*1.2).toInt)
+  private val log: BoundedLog = new util.ArrayDeque[ServableStateAndTime]((maxLogEvents * 1.2).toInt)
 
   bus.subscribe(handleEvent)
 
   private def handleEvent(stateAndTime: ServableStateAndTime): Unit = {
-    val name = stateAndTime.event.id.name
-    val version = stateAndTime.event.id.version
+    val name = stateAndTime.state.id.name
+    val version = stateAndTime.state.id.version
 
     statesWriteLock.lock()
     try {
@@ -65,12 +65,12 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
   }
 
   private def updateLiveStates(stateAndTime: ServableStateAndTime): Unit = {
-    val name = stateAndTime.event.id.name
-    val version = stateAndTime.event.id.version
+    val name = stateAndTime.state.id.name
+    val version = stateAndTime.state.id.version
 
     liveStatesWriteLock.lock()
     try {
-      if (stateAndTime.event.managerState != ManagerState.kEnd) {
+      if (stateAndTime.state.managerState != ManagerState.kEnd) {
         if (liveStates.contains(name)) {
           liveStates(name)(version) = stateAndTime
         } else {
@@ -109,13 +109,13 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     if (servableStateAndTime.isEmpty) {
       None
     } else {
-      Some(servableStateAndTime.get.event)
+      Some(servableStateAndTime.get.state)
     }
   }
 
   def getVersionStates(servableName: String): VersionMap = {
     statesReadLock.lock()
-    try{
+    try {
       states.getOrElse(servableName, new mutable.HashMap[Version, ServableStateAndTime]())
     } finally {
       statesReadLock
@@ -124,7 +124,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   def getAllServableStates: ServableMap = {
     statesReadLock.lock()
-    try{
+    try {
       states
     } finally {
       statesReadLock.unlock()
@@ -133,7 +133,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   def getLiveServableStates: ServableMap = {
     liveStatesReadLock.lock()
-    try{
+    try {
       liveStates
     } finally {
       liveStatesReadLock.unlock()
@@ -142,7 +142,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   def getBoundedLog: BoundedLog = {
     logReadLock.lock()
-    try{
+    try {
       log
     } finally {
       logReadLock.unlock()
@@ -151,36 +151,108 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   //--------------------------------------------------------------------
 
-  val servableStateNotificationRequests = new ListBuffer[ServableStateNotificationRequest]()
+  private val notificationLock = new ReentrantLock()
+  private val servableStateNotificationRequests = new util.ArrayList[ServableStateNotificationRequest]()
 
   def waitUntilServablesReachState(servables: List[ServableRequest], goalState: ManagerState): Unit = {
     val lock = new ReentrantLock()
     val cond = lock.newCondition()
+    var condFlag = false
 
+    // return when one of the ServableRequest reach the goalState, not all
     notifyWhenServablesReachState(servables, goalState,
-      (idStateMap: Map[ServableId, ManagerState]) => { cond.signal() }
+      (idStateMap: Map[ServableId, ManagerState]) => {
+        if (idStateMap != null && idStateMap.nonEmpty) {
+          condFlag = true
+          cond.signal()
+        }
+      }
     )
 
-    cond.await()
+    while (!condFlag) {
+      cond.await()
+    }
   }
 
   def notifyWhenServablesReachState(servables: List[ServableRequest], goalState: ManagerState,
                                     func: ServableStateNotifierFn): Unit = {
-    servableStateNotificationRequests.append(ServableStateNotificationRequest(servables, goalState, func))
+    notificationLock.lock()
+    try {
+      servableStateNotificationRequests.add(ServableStateNotificationRequest(servables, goalState, func))
+    } finally {
+      notificationLock.unlock()
+    }
+
     maybeSendStateReachedNotifications()
+
   }
 
   private def maybeSendStateReachedNotifications(): Unit = {
-    servableStateNotificationRequests.foreach{ case (servables, goalState, func) =>
+    notificationLock.lock()
+    try {
+      val iter = servableStateNotificationRequests.iterator()
 
+      while (iter.hasNext) {
+        val notificationRequest = iter.next()
+        val optStateAndStatesReached = shouldSendStateReachedNotification(notificationRequest)
+        if (optStateAndStatesReached != null && optStateAndStatesReached.nonEmpty) {
+          notificationRequest.notifierFn(optStateAndStatesReached.get)
+          iter.remove()
+        }
+      }
+    } finally {
+      notificationLock.unlock()
     }
+
   }
 
-  private def shouldSendStateReachedNotification()
+  private def shouldSendStateReachedNotification(notificationRequest: ServableStateNotificationRequest
+                                                ): Option[Map[ServableId, ManagerState]] = {
+    statesReadLock.lock()
+    val ret = new mutable.HashMap[ServableId, ManagerState]()
+    val goalState = notificationRequest.goalState
+
+    try {
+      notificationRequest.servables.foreach { servableRequest =>
+        val name = servableRequest.name
+        if (states.contains(name)) {
+          val versionMap = states(name)
+
+          if (versionMap != null && versionMap.nonEmpty) {
+            val version = if (servableRequest.version.nonEmpty) {
+              servableRequest.version.get
+            } else {
+              servableRequest.autoVersionPolicy match {
+                case AutoVersionPolicy.kEarliest => versionMap.keys.min
+                case AutoVersionPolicy.kLatest => versionMap.keys.max
+              }
+            }
+
+            if (versionMap.contains(version)) {
+              val servableId = ServableId(name, version)
+              val managerState = versionMap(version).state.managerState
+              if (goalState == managerState) {
+                ret(servableId) = managerState
+              }
+            }
+          }
+        }
+      }
+    } finally {
+      statesReadLock.unlock()
+    }
+
+    if (ret.isEmpty) {
+      None
+    } else {
+      Some(ret.toMap)
+    }
+  }
 
 }
 
 object ServableStateMonitor {
+
   import ManagerState._
 
   type ServableName = String
@@ -199,4 +271,5 @@ object ServableStateMonitor {
 
   case class ServableStateNotificationRequest(servables: List[ServableRequest], goalState: ManagerState,
                                               notifierFn: ServableStateNotifierFn)
+
 }

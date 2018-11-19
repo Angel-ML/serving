@@ -3,6 +3,12 @@ package com.tencent.angel.serving.core
 
 case class ServableId(name: String, version: Long) {
   override def toString: String = s"{name: $name, version: $version}"
+
+  def ==(other: ServableId): Boolean = {
+    this.name == other.name && this.version == other.version
+  }
+
+  def !=(other: ServableId): Boolean = !(this == other)
 }
 
 

@@ -1,23 +1,23 @@
 package com.tencent.angel.serving.core
 
+import java.util
 import java.util.concurrent.locks.ReentrantLock
-
-import scala.collection.mutable.ListBuffer
 
 
 class EventBus[E] {
+
   import EventBus._
 
-  val lock = new ReentrantLock()
+  private val lock = new ReentrantLock()
 
-  val subscriptions: ListBuffer[(Subscription[E], Callback[E])] = new ListBuffer[(Subscription[E], Callback[E])]()
+  private val subscriptions: util.ArrayList[(Subscription[E], Callback[E])] = new util.ArrayList[(Subscription[E], Callback[E])]()
 
   def subscribe(callback: Callback[E]): Subscription[E] = {
     lock.lock()
 
     try {
       val subscription = new Subscription[E](this)
-      subscriptions.append((subscription, callback))
+      subscriptions.add((subscription, callback))
       subscription
     } finally {
       lock.unlock()
@@ -28,9 +28,13 @@ class EventBus[E] {
     lock.lock()
 
     try {
-      // maybe here is a bug
-      subscriptions.zipWithIndex.collect{ case ((sub, _), idx) if sub == subscription => idx }
-        .foreach{ idx => subscriptions.remove(idx)}
+      val iter = subscriptions.iterator()
+      while (iter.hasNext) {
+        val sub = iter.next()._1
+        if (subscription != null && sub == subscription) {
+          iter.remove()
+        }
+      }
     } finally {
       lock.unlock()
     }
@@ -41,17 +45,25 @@ class EventBus[E] {
 
     try {
       val eventAndTime = EventAndTime(event, System.currentTimeMillis())
-      subscriptions.foreach{ case (_, callback) => callback(eventAndTime)}
-    } finally  {
+      val iter = subscriptions.iterator()
+      while (iter.hasNext) {
+        val callback = iter.next()._2
+        callback(eventAndTime)
+      }
+    } finally {
       lock.unlock()
     }
   }
 }
 
+
 object EventBus {
+
   case class Subscription[E](bus: EventBus[E])
 
-  case class EventAndTime[E](event: E, eventTimeMicros: Long)
+  case class EventAndTime[E](event: E, eventTimeMicros: Long) {
+    def state: E = event
+  }
 
   type Callback[E] = EventAndTime[E] => Unit
 }
