@@ -5,7 +5,7 @@ trait Loader {
 
   def load(): Unit
 
-  def unLoad(): Unit
+  def unload(): Unit
 
   def servable(): Any
 }

@@ -19,7 +19,7 @@ abstract class SourceRouter[T](val numOutputPorts: Int) extends TargetBase[T] {
   override def setAspiredVersions(servableName: String, versions: List[ServableData[T]]): Unit = {
     val outputPort = route(servableName, versions)
     if (outputPort < 0 || outputPort >= numOutputPorts) {
-      throw new Exception("route error!")
+      throw RouteExceptions("route error!")
     }
     if (outputPorts == null) {
       getOutputPorts

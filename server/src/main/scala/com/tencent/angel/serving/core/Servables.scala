@@ -1,5 +1,7 @@
 package com.tencent.angel.serving.core
 
+import com.tencent.angel.serving.core.LoaderHarness.State._
+
 
 case class ServableId(name: String, version: Long) {
   override def toString: String = s"{name: $name, version: $version}"
@@ -13,6 +15,24 @@ case class ServableId(name: String, version: Long) {
 
 
 case class ServableData[T](id: ServableId, status: Status, data: T)
+
+
+case class Aspired(private var aspired: Boolean) {
+  def setAspired(aspiredValue: Boolean): Unit = {
+    aspired = aspiredValue
+  }
+
+  def isAspired: Boolean = aspired
+}
+
+
+case class ServableStateSnapshot[T](id: ServableId, state: State, additionalState: Option[T]) {
+  def ==(other: ServableStateSnapshot[T]): Boolean = {
+    this.id == other.id && this.state == other.state && this.additionalState == other.additionalState
+  }
+
+  def !=(other: ServableStateSnapshot[T]): Boolean = !(this == other)
+}
 
 
 class ServableRequest(val name: String, val version: Option[Long] = None) {
