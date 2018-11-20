@@ -1,6 +1,10 @@
 package com.tencent.angel.serving.core
 
+import java.util.concurrent.locks.ReentrantLock
+
+import com.tencent.angel.serving.core.EventBus.EventAndTime
 import com.tencent.angel.serving.core.LoaderHarness.State._
+import com.tencent.angel.serving.core.ManagerState.ManagerState
 
 
 case class ServableId(name: String, version: Long) {
@@ -15,6 +19,44 @@ case class ServableId(name: String, version: Long) {
 
 
 case class ServableData[T](id: ServableId, status: Status, data: T)
+
+
+class ServableState(val id: ServableId, var managerState: ManagerState, var health: Status) {
+  def managerStateString(state: ManagerState): String = state match {
+    case ManagerState.kStart => "Start"
+    case ManagerState.kLoading => "Loading"
+    case ManagerState.kAvailable => "Available"
+    case ManagerState.kUnloading => "Unloading"
+    case ManagerState.kEnd => "End"
+  }
+
+  override def toString: String = {
+    s"id: ${id.toString}, manager_state: ${managerStateString(managerState)}, health: ${health.toString}"
+  }
+
+  def ==(other: ServableState): Boolean = {
+    this.id == other.id && this.managerState == other.managerState && this.health == other.health
+  }
+
+  def !=(other: ServableState): Boolean = !(this == other)
+}
+
+
+object ManagerState extends Enumeration {
+  type ManagerState = Value
+  val kStart, kLoading, kAvailable, kUnloading, kEnd = Value
+}
+
+
+object ServableState {
+  def apply(id: ServableId, managerState: ManagerState, health: Status): ServableState = {
+    new ServableState(id, managerState, health)
+  }
+
+  implicit def toEventAndTime(state: ServableState): EventAndTime[ServableState] = {
+    EventAndTime(state, System.currentTimeMillis())
+  }
+}
 
 
 case class Aspired(private var aspired: Boolean) {
@@ -32,6 +74,87 @@ case class ServableStateSnapshot[T](id: ServableId, state: State, additionalStat
   }
 
   def !=(other: ServableStateSnapshot[T]): Boolean = !(this == other)
+}
+
+
+class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: Int, loadRetryIntervalMicros: Long) {
+
+  import LoaderHarness.ErrorCallback
+
+  var state: State = kNew
+
+  private val statusLock = new ReentrantLock()
+  var status: ManagerState = _
+  val additionalState: Aspired = Aspired(true)
+  var cancelLoadRetry: Boolean = false
+  var errorCallback: ErrorCallback = _
+
+  def loadRequested(): Unit = transitionState(kNew, kLoadRequested)
+
+  def loadApproved(): Unit = transitionState(kLoadRequested, kLoadApproved)
+
+  def load(): Unit = synchronized(state) {
+    assert(state == kLoadApproved)
+    state = kLoading
+    loader.load()
+    state = kReady
+  }
+
+  def unloadRequested(): Unit = transitionState(kReady, kUnloadRequested)
+
+  def startQuiescing(): Unit = transitionState(kUnloadRequested, kQuiescing)
+
+  def doneQuiescing(): Unit = transitionState(kQuiescing, kQuiesced)
+
+  def unload(): Unit = synchronized(state) {
+    assert(state == kQuiesced)
+    state = kUnloading
+    loader.unload()
+    state = kDisabled
+  }
+
+  def loaderStateSnapshot(): ServableStateSnapshot[Aspired] = {
+    ServableStateSnapshot[Aspired](id, state, Some(additionalState))
+  }
+
+  def transitionState(from: State, to: State): Unit = synchronized(state) {
+    if (status != from) {
+      throw MonitorExceptions("from state does not match current state!")
+    }
+
+    state = to
+  }
+
+  def error(mStatus: ManagerState): Unit = synchronized(state) {
+    state = kError
+
+    statusLock.lock()
+    try {
+      status = mStatus
+      if (errorCallback != null) {
+        errorCallback(id, status)
+      }
+    } finally {
+      statusLock.unlock()
+    }
+  }
+
+  def isAspired: Boolean = additionalState.isAspired
+
+  def setAspired(aspired: Boolean): Unit = additionalState.setAspired(aspired)
+
+}
+
+
+object LoaderHarness {
+
+  object State extends Enumeration {
+    type State = Value
+    val kNew, kLoadRequested, kLoadApproved, kLoading, kReady = Value
+    val kUnloadRequested, kQuiescing, kQuiesced, kUnloading, kDisabled, kError = Value
+  }
+
+  type ErrorCallback = (ServableId, ManagerState) => Unit
 }
 
 
