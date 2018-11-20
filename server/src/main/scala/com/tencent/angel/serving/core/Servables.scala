@@ -6,7 +6,9 @@ case class ServableId(name: String, version: Long) {
 }
 
 
-case class ServableData[T](id: ServableId, status: Status, data: T)
+case class ServableData[T](id: ServableId, status_ : Status, data: T){
+  def status: Status = status_
+}
 
 
 class ServableRequest(val name: String, val version: Option[Long] = None) {

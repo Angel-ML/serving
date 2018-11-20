@@ -1,4 +1,4 @@
-package com.tencent.angel
+package com.tencent.angel.serving.sources
 
 import java.io.File
 import java.util._
@@ -11,7 +11,7 @@ object SystemFileUtils {
     filePath.isDirectory
   }
 
-  def getChildren(base_path: String, children: ArrayList[String]): Boolean ={
+  def getChildren(base_path: String, children: List[String]): Boolean ={
     val listFiles = FileUtils.listFiles(new File(base_path),null,false).iterator()
     while(listFiles.hasNext){
      children.add(listFiles.next().getName)

@@ -4763,7 +4763,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
        *
        * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
        */
-      public Builder setFileSystemPollWaitSeconds(long value) {
+      public Builder setFileSystemPollWaitSeconds
+      (long value) {
         
         fileSystemPollWaitSeconds_ = value;
         onChanged();
