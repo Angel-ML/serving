@@ -61,11 +61,11 @@ abstract class AspiredVersionPolicy {
 
 
 class AvailabilityPreservingPolicy extends AspiredVersionPolicy {
-
+  override def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[AspiredVersionPolicy.ServableAction] = ???
 }
 
 class ResourcePreservingPolicy extends AspiredVersionPolicy {
-
+  override def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[AspiredVersionPolicy.ServableAction] = ???
 }
 
 

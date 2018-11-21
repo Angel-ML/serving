@@ -3,7 +3,8 @@ package com.tencent.angel.serving.core
 import java.util
 import java.util.{Timer, TimerTask}
 import java.util.concurrent.locks.ReentrantLock
-
+import com.tencent.angel.serving.core.LoaderHarness.State._
+import com.tencent.angel.serving.core.AspiredVersionsManager._
 import com.tencent.angel.serving.core.AspiredVersionPolicy.{Action, ServableAction}
 
 
@@ -12,9 +13,6 @@ class AspiredVersionsManager private(
                                       val aspiredVersionPolicy: AspiredVersionPolicy,
                                       val basicManager: BasicManager
                                     ) extends Target[Loader] with Manager {
-
-  import com.tencent.angel.serving.core.LoaderHarness.State._
-  import com.tencent.angel.serving.core.AspiredVersionsManager._
 
   val versionsRequestsLock = new ReentrantLock()
   val pendingAspiredVersionsRequests: AspiredVersionsMap = new util.HashMap[String, List[ServableData[Loader]]]()
@@ -93,7 +91,7 @@ class AspiredVersionsManager private(
       // first deal with unload
       versions.foreach {
         case version if toUnload.contains(version.id.version) => // unload
-          basicManager.getAdditionalServableState(version.id).setAspired(false)
+          basicManager.setAspiredState(version.id, aspired = false)
           basicManager.cancelLoadServableRetry(version.id)
         case _ => // nothing to do
       }
