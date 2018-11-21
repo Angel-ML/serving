@@ -16,7 +16,7 @@ abstract class SourceAdapter[S, T] extends TargetBase[T] with Source[S] {
 
   def setAspiredVersionsCallback(callback: AspiredVersionsCallback[S]): Unit = {
     lock.lock()
-    try{
+    try {
       outgoingCallback = callback
       flag = true
       cond.signal()
@@ -44,17 +44,14 @@ abstract class UnarySourceAdapter[S, T] extends SourceAdapter[S, T] {
   def convert(data: ServableData[T]): ServableData[S]
 
   override def adapt(servableName: String, versions: List[ServableData[T]]): List[ServableData[S]] = {
-    versions.map{version =>
-      if (version.status == Status.OK) {
-        val adapted = convert(version)
-        if (adapted != null) {
-          adapted
-        } else {
-          new ServableData[S](version.id, version.status, null.asInstanceOf[S])
-        }
+    versions.map { version =>
+      val adapted = convert(version)
+      if (adapted != null) {
+        adapted
       } else {
-        new ServableData[S](version.id, version.status, null.asInstanceOf[S])
+        new ServableData[S](version.id, null.asInstanceOf[S])
       }
+
     }
   }
 }
@@ -62,13 +59,7 @@ abstract class UnarySourceAdapter[S, T] extends SourceAdapter[S, T] {
 
 class ErrorSourceAdapter[S, T] extends SourceAdapter[S, T] {
   override def adapt(servableName: String, versions: List[ServableData[T]]): List[ServableData[S]] = {
-    versions.map{version =>
-      if (version.status == Status.OK) {
-          new ServableData[S](version.id, Status.Error, null.asInstanceOf[S])
-      } else {
-        new ServableData[S](version.id, version.status, null.asInstanceOf[S])
-      }
-    }
+    versions.map { version => new ServableData[S](version.id, null.asInstanceOf[S]) }
   }
 }
 

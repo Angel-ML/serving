@@ -28,10 +28,3 @@ abstract class TargetBase[T] extends Target[T] {
     }
   }
 }
-
-
-object ConnectSourceToTarget {
-  def apply[T](source: Source[T], target: Target[T]): Unit = {
-    source.setAspiredVersionsCallback(target.getAspiredVersionsCallback)
-  }
-}

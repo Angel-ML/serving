@@ -1,5 +1,7 @@
 package com.tencent.angel.serving
 
+import com.tencent.angel.config.ResourceProtos
+
 package object core {
   type Routes = Map[String, Int]
 
@@ -8,4 +10,6 @@ package object core {
   type AspiredVersionsCallback[T] = (String, List[ServableData[T]]) => Unit
 
   type StoragePathSourceAdapter = SourceAdapter[StoragePath, Loader]
+
+  type ResourceAllocation = ResourceProtos.ResourceAllocation
 }

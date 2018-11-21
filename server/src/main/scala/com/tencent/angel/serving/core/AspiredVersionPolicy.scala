@@ -4,13 +4,12 @@ package com.tencent.angel.serving.core
 abstract class AspiredVersionPolicy {
   import com.tencent.angel.serving.core.AspiredVersionPolicy.ServableAction
 
-  def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableAction]
+  def getNextAction(versions: List[ServableStateSnapshot]): Option[ServableAction]
 
-  def getHighestAspiredNewServableId(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableId] = {
+  def getHighestAspiredNewServableId(versions: List[ServableStateSnapshot]): Option[ServableId] = {
     var highestVersionId: Option[ServableId] = null
     versions.foreach { snapshot =>
-      if (snapshot.additionalState.isDefined && snapshot.additionalState.get.isAspired &&
-        snapshot.state == LoaderHarness.State.kNew) {
+      if (snapshot.aspired && snapshot.state == LoaderHarness.State.kNew) {
         if (highestVersionId == null) {
           highestVersionId = Some(snapshot.id)
         } else {
@@ -24,10 +23,10 @@ abstract class AspiredVersionPolicy {
     highestVersionId
   }
 
-  protected def getHighestServableId(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableId] = {
+  protected def getHighestServableId(versions: List[ServableStateSnapshot]): Option[ServableId] = {
     var highestVersionId: Option[ServableId] = null
     versions.foreach { snapshot =>
-      if (snapshot.additionalState.isDefined && snapshot.additionalState.get.isAspired) {
+      if (snapshot.aspired) {
         if (highestVersionId == null) {
           highestVersionId = Some(snapshot.id)
         } else {
@@ -41,10 +40,10 @@ abstract class AspiredVersionPolicy {
     highestVersionId
   }
 
-  protected def getLowestServableId(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableId] = {
+  protected def getLowestServableId(versions: List[ServableStateSnapshot]): Option[ServableId] = {
     var lowestVersionId: Option[ServableId] = null
     versions.foreach { snapshot =>
-      if (snapshot.additionalState.isDefined && snapshot.additionalState.get.isAspired) {
+      if (snapshot.aspired) {
         if (lowestVersionId == null) {
           lowestVersionId = Some(snapshot.id)
         } else {
@@ -61,11 +60,12 @@ abstract class AspiredVersionPolicy {
 
 
 class AvailabilityPreservingPolicy extends AspiredVersionPolicy {
-  override def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[AspiredVersionPolicy.ServableAction] = ???
+  override def getNextAction(versions: List[ServableStateSnapshot]): Option[AspiredVersionPolicy.ServableAction] = ???
 }
 
+
 class ResourcePreservingPolicy extends AspiredVersionPolicy {
-  override def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[AspiredVersionPolicy.ServableAction] = ???
+  override def getNextAction(versions: List[ServableStateSnapshot]): Option[AspiredVersionPolicy.ServableAction] = ???
 }
 
 

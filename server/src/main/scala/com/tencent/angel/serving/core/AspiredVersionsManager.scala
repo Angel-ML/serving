@@ -31,12 +31,9 @@ class AspiredVersionsManager private(
     basicManager.getManagedServableNames.foreach { servableName =>
       val stateSnapshots = basicManager.getManagedServableStateSnapshots(servableName)
       stateSnapshots.foreach { stateSnapshot =>
-        if (stateSnapshot.additionalState.nonEmpty) {
-          val state = stateSnapshot.state
-          val isAspired = stateSnapshot.additionalState.get.isAspired
-          if (state == kNew || state == kDisabled || state == kError || !isAspired) {
-            basicManager.stopManagingServable(stateSnapshot.id)
-          }
+        val state = stateSnapshot.state
+        if (state == kNew || state == kDisabled || state == kError || !stateSnapshot.aspired) {
+          basicManager.stopManagingServable(stateSnapshot.id)
         }
       }
     }
@@ -72,7 +69,7 @@ class AspiredVersionsManager private(
 
     val servableStateSnapshots = basicManager.getManagedServableStateSnapshots(servableName)
     val oldInvalidateAspiredVersions = servableStateSnapshots.collect {
-      case snapshot if snapshot.additionalState.nonEmpty && !snapshot.additionalState.get.isAspired =>
+      case snapshot if !snapshot.aspired =>
         snapshot.id.version
     }.toSet
 
@@ -81,7 +78,7 @@ class AspiredVersionsManager private(
       false // Sit on it for now. We'll check again later
     } else {
       val oldWorkingAspiredVersions = servableStateSnapshots.collect {
-        case snapshot if snapshot.additionalState.nonEmpty && snapshot.additionalState.get.isAspired =>
+        case snapshot if snapshot.aspired =>
           snapshot.id.version
       }.toSet
 

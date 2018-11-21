@@ -9,6 +9,9 @@ case class AdaptExceptions(message: String) extends RuntimeException(message)
 case class MonitorExceptions(message: String) extends RuntimeException(message)
 
 
+case class LoadExceptions(message: String) extends Exception(message)
+
+
 case class ResourceExceptions(message: String) extends RuntimeException(message)
 
 
