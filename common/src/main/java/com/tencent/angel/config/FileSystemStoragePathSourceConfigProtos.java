@@ -3368,8 +3368,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
         public Builder setServableName(
             java.lang.String value) {
           if (value == null) {
-            throw new NullPointerException();
-          }
+    throw new NullPointerException();
+  }
   
           servableName_ = value;
           onChanged();
@@ -3400,9 +3400,9 @@ public final class FileSystemStoragePathSourceConfigProtos {
         public Builder setServableNameBytes(
             com.google.protobuf.ByteString value) {
           if (value == null) {
-            throw new NullPointerException();
-          }
-          checkByteStringIsUtf8(value);
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
           
           servableName_ = value;
           onChanged();
@@ -3459,8 +3459,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
         public Builder setBasePath(
             java.lang.String value) {
           if (value == null) {
-            throw new NullPointerException();
-          }
+    throw new NullPointerException();
+  }
   
           basePath_ = value;
           onChanged();
@@ -3489,9 +3489,9 @@ public final class FileSystemStoragePathSourceConfigProtos {
         public Builder setBasePathBytes(
             com.google.protobuf.ByteString value) {
           if (value == null) {
-            throw new NullPointerException();
-          }
-          checkByteStringIsUtf8(value);
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
           
           basePath_ = value;
           onChanged();
@@ -4629,8 +4629,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Deprecated public Builder setServableName(
           java.lang.String value) {
         if (value == null) {
-          throw new NullPointerException();
-        }
+    throw new NullPointerException();
+  }
   
         servableName_ = value;
         onChanged();
@@ -4663,9 +4663,9 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Deprecated public Builder setServableNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
-          throw new NullPointerException();
-        }
-        checkByteStringIsUtf8(value);
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
         
         servableName_ = value;
         onChanged();
@@ -4710,8 +4710,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Deprecated public Builder setBasePath(
           java.lang.String value) {
         if (value == null) {
-          throw new NullPointerException();
-        }
+    throw new NullPointerException();
+  }
   
         basePath_ = value;
         onChanged();
@@ -4732,9 +4732,9 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Deprecated public Builder setBasePathBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
-          throw new NullPointerException();
-        }
-        checkByteStringIsUtf8(value);
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
         
         basePath_ = value;
         onChanged();
@@ -4763,8 +4763,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        *
        * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
        */
-      public Builder setFileSystemPollWaitSeconds
-      (long value) {
+      public Builder setFileSystemPollWaitSeconds(long value) {
         
         fileSystemPollWaitSeconds_ = value;
         onChanged();
