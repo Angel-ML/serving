@@ -2,9 +2,9 @@ package com.tencent.angel.serving.core
 
 
 abstract class AspiredVersionPolicy {
-  import com.tencent.angel.serving.core.AspiredVersionPolicy.Action._
+  import com.tencent.angel.serving.core.AspiredVersionPolicy.ServableAction
 
-  def getNextAction(versions: ServableStateSnapshot[Aspired]): Option[Action]
+  def getNextAction(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableAction]
 
   def getHighestAspiredNewServableId(versions: List[ServableStateSnapshot[Aspired]]): Option[ServableId] = {
     var highestVersionId: Option[ServableId] = null
