@@ -1,5 +1,7 @@
 package com.tencent.angel.serving.core
 
+import com.tencent.angel.confg.ResourceAllocation
+
 class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries: Int, loadRetryIntervalMicros: Long) {
   val usedResources: ResourceAllocation = null
   val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
@@ -7,9 +9,12 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
   def reserveResources(harness: LoaderHarness): Boolean = synchronized(this) {
     val retriedFn = () => {
       val resources = harness.loader.estimateResources()
-      verifyValidity(resources)
-      if (overbind(usedResources) + resources < totalResources) {
-        true
+      if (resources.verify()) {
+        if (overbind(usedResources) + resources < totalResources) {
+          true
+        } else {
+          false
+        }
       } else {
         false
       }
@@ -26,18 +31,17 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
     usedResources.clear()
     servables.foreach { harness =>
       val resources = harness.loader.estimateResources()
-      verifyValidity(resources)
-      usedResources += resources
+      if (resources.verify()) {
+        usedResources += resources
+      } else {
+        // resource error
+        throw ResourceExceptions("estimateResources Error!")
+      }
     }
   }
 
-  private def verifyValidity(servableResources: ResourceAllocation): Boolean = {
 
-  }
-
-  private def overbind(servableResources: ResourceAllocation): ResourceAllocation = {
-
-  }
+  private def overbind(servableResources: ResourceAllocation): ResourceAllocation = servableResources * 1.2
 }
 
 

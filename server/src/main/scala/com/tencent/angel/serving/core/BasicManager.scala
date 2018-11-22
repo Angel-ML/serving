@@ -5,6 +5,7 @@ import java.util.concurrent.locks.{ReentrantLock, ReentrantReadWriteLock}
 import collection.mutable
 import java.util.concurrent.{ExecutorService, Executors}
 
+import com.tencent.angel.confg.ResourceAllocation
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind
 import com.tencent.angel.serving.core.LoaderHarness.State
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy
@@ -287,13 +288,12 @@ object BasicManager {
 
     def manageServableWithAdditionalState(servable: ServableData[Loader], aspired: Boolean
                                          )(callback: ServableState => Unit): Unit = {
-      val harness = LoaderHarness(servable.id, servable.data, maxNumLoadRetries, loadRetryIntervalMicros)
-      harness.setAspired(aspired)
-
       managedLock.lock()
       try {
         val harnessOpt = getHarnessInternal(servable.id)
-        if (harnessOpt.nonEmpty) {
+        if (harnessOpt.isEmpty) {
+          val harness = LoaderHarness(servable.id, servable.data, maxNumLoadRetries, loadRetryIntervalMicros)
+          harness.setAspired(aspired)
           managedMap.addBinding(servable.id.name, harness)
           callback(new ServableState(servable.id, ManagerState.kStart))
         } else {

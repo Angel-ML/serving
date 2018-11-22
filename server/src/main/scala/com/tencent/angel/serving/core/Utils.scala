@@ -23,8 +23,3 @@ object ConnectSourceToTarget {
     source.setAspiredVersionsCallback(target.getAspiredVersionsCallback)
   }
 }
-
-
-object ResourceAllocation {
-
-}
