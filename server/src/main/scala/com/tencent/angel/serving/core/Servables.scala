@@ -10,6 +10,7 @@ import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy.{AutoVer
 import org.slf4j.{Logger, LoggerFactory}
 
 
+
 case class ServableId(name: String, version: Long) {
   override def toString: String = s"{name: $name, version: $version}"
 
