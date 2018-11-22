@@ -99,9 +99,32 @@ class ServerCore(val options: ServerOptions) extends Manager {
 
 
   //-------------------------------------------------------------------------Request Processing
-  def servableRequestFromModelSpec(modelSpec: ModelSpec): ServableRequest = ???
+  @throws(classOf[CoreExceptions])
+  def servableRequestFromModelSpec(modelSpec: ModelSpec): ServableRequest = {
+    val name = modelSpec.getName
+    if (name.isEmpty) {
+      throw CoreExceptions("modelSpec name is empty")
+    }
 
-  def getModelVersionForLabel(modelName: String, label: String): Long = ???
+    modelSpec.getVersionChoiceCase match {
+      case ModelSpec.VersionChoiceCase.VERSION =>
+        ServableRequest.specific(name, modelSpec.getVersion.getValue)
+      case ModelSpec.VersionChoiceCase.VERSION_LABEL =>
+        val version = getModelVersionForLabel(name, modelSpec.getVersionLabel)
+        ServableRequest.specific(name, version)
+      case ModelSpec.VersionChoiceCase.VERSIONCHOICE_NOT_SET =>
+        ServableRequest.latest(name)
+    }
+  }
+
+  @throws(classOf[CoreExceptions])
+  def getModelVersionForLabel(modelName: String, label: String): Long = {
+    try {
+      modelLabelsToVersions(modelName)(label)
+    } catch {
+      case _: Exception => throw CoreExceptions("version not found!")
+    }
+  }
 }
 
 object ServerCore {

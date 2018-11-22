@@ -246,7 +246,7 @@ object ServableRequest {
     req
   }
 
-  def latest(name: String, version: Long): ServableRequest = {
+  def latest(name: String): ServableRequest = {
     new ServableRequest(name, autoVersionPolicy=AutoVersionPolicy.kLatest)
   }
 

@@ -1,5 +1,8 @@
 package com.tencent.angel.serving.core
 
+case class CoreExceptions(message: String) extends Exception(message)
+
+
 case class RouteExceptions(message: String) extends RuntimeException(message)
 
 
