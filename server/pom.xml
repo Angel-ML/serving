@@ -17,5 +17,5 @@
         </dependency>
     </dependencies>
 
-    <artifactId>core</artifactId>
+    <artifactId>server</artifactId>
 </project>
