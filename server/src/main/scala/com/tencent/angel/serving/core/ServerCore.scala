@@ -23,6 +23,7 @@ case class ServerOptions(){
   var failIfNoModelVersionsFound: Boolean = false
   var allowVersionLabels:Boolean = true
   var platformConfigMap: PlatformConfigMap = ???
+  var numInitialLoadThreads: Int = 4 * 1
   var servableStateMonitorCreator: ServableStateMonitorCreator = ???
   var customModelConfigLoader: CustomModelConfigLoader = ???
 
@@ -71,16 +72,7 @@ object ServerCore {
 
   def createResourceTracker(): ResourceTracker = ???
 
-  def createAdapter(modelPlatform: String): StoragePathSourceAdapter = {
-    val platformConfig = options_.platformConfigMap.getPlatformConfigsMap.get(modelPlatform)
-    if (platformConfig == None){
-      throw FailedPreconditions(s"PlatformConfigMap has no entry for platform ${modelPlatform}")
-    }
-    val adapterConfig = platformConfig.getSourceAdapterConfig
-
-  }
-
-
+  def createAdapter(modelPlatform: String): StoragePathSourceAdapter = ???
 
   def createStoragePathSourceConfig(config: ModelServerConfig): FileSystemStoragePathSourceConfig = {
     val servables = new java.util.ArrayList[ServableToMonitor]()
@@ -355,7 +347,20 @@ object ServerCore {
     manager_ = options_.customModelConfigLoader(config_.getCustomModelConfig, servableEventBus)
   }
 
-  def connectAdaptersToManagerAndAwaitModelLoads(adapters: SourceAdapters): Unit = ???
+  def connectAdaptersToManagerAndAwaitModelLoads(adapters: SourceAdapters): Unit = {
+    val modelsToAwait = List[ServableRequest]()
+    for ((modelConfig: ModelConfig) <- config_.getModelConfigList.getConfigList){
+      modelsToAwait.:+(ServableRequest.earliest(modelConfig.getName))
+    }
+    val adapterList = List[Source[Loader]]()
+    adapters.platformAdapters.foreach{ case(_, adapter) =>
+      adapterList.:+(adapter)
+    }
+    adapterList :+(adapters.errorAdapter)
+    LoadServablesFast.connectSourcesWithFastInitialLoad(manager_, adapterList, servableStateMonitor,
+      modelsToAwait, options_.numInitialLoadThreads)
+  }
+
 
   def newModelNamesInSourceConfig(oldConfig: FileSystemStoragePathSourceConfig,
                                   newConfig: FileSystemStoragePathSourceConfig): Set[String] = {

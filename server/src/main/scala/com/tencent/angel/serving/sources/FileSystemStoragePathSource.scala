@@ -177,13 +177,13 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     var versions: List[ServableData[StoragePath]] = null
     servable.getServableVersionPolicy.getPolicyChoiceCase match {
       //todo
-      case x if (x.asInstanceOf[PolicyChoiceCase.LATEST.type]) =>
+      case x if (x.isInstanceOf[PolicyChoiceCase.LATEST.type]) =>
         versions = AspireLastestVersions(servable, childrenByVersion)
-      case x if (x.asInstanceOf[PolicyChoiceCase.ALL.type]) =>
+      case x if (x.isInstanceOf[PolicyChoiceCase.ALL.type]) =>
         versions = AspireAllVersions(servable, children)
-      case x if (x.asInstanceOf[PolicyChoiceCase.SPECIFIC.type]) =>
+      case x if (x.isInstanceOf[PolicyChoiceCase.SPECIFIC.type]) =>
         versions = AspireSpecificVersions(servable, childrenByVersion)
-      case x if (x.asInstanceOf[PolicyChoiceCase.POLICYCHOICE_NOT_SET.type]) =>
+      case x if (x.isInstanceOf[PolicyChoiceCase.POLICYCHOICE_NOT_SET.type]) =>
         versions = AspireLastestVersions(servable, childrenByVersion)
     }
     versions
