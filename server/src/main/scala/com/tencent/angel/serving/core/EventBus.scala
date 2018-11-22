@@ -59,6 +59,8 @@ class EventBus[E] {
 
 object EventBus {
 
+  def apply[E]() = new EventBus[E]
+
   case class Subscription[E](bus: EventBus[E])
 
   case class EventAndTime[E](event: E, eventTimeMicros: Long) {
