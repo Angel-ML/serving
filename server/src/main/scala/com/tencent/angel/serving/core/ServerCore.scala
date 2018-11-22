@@ -5,15 +5,19 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
-import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig.ConfigCase
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
-import com.tencent.angel.config.PlatformConfigProtos.{PlatformConfig, PlatformConfigMap}
-import com.tencent.angel.serving.core.ManagerState.ManagerState
-import com.tencent.angel.serving.core.ServableStateMonitor.{ServableMap, ServableStateAndTime, VersionMap}
-import com.tencent.angel.serving.serving._
-import com.tencent.angel.serving.sources.FileSystemStoragePathSource
+import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
+import com.tencent.angel.serving.core.ServableStateMonitor.VersionMap
+import com.tencent.angel.serving.core.ServerCore._
 import org.apache.commons.io.FilenameUtils
-import org.apache.commons.logging.LogFactory
+import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
+import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig.ConfigCase
+import com.tencent.angel.serving.serving.{ModelServerConfig, _}
+import com.tencent.angel.serving.sources.FileSystemStoragePathSource
+import org.slf4j.{Logger, LoggerFactory}
+
+import scala.collection.mutable
+
 
 case class ServerOptions(){
   var modelServerConfig: ModelServerConfig = ???
@@ -29,29 +33,115 @@ case class ServerOptions(){
 
 }
 
-
 class ServerCore(val options: ServerOptions) extends Manager {
-  override def availableServableIds: List[ServableId] = ???
 
-  override def availableServableHandles[T]: Map[ServableId, ServableHandle[T]] = ???
+  private val LOG: Logger = LoggerFactory.getLogger(classOf[ServerCore])
 
-  override def servableHandle[T](request: ServableRequest): ServableHandle[T] = ???
+  private val platform2RouterPort = new mutable.HashMap[String, Int]()
+  private val servableRventBus = EventBus[ServableState]()
+  private val servableStateMonitor = new ServableStateMonitor(servableRventBus, 1000)
+  private val aspiredVersionPolicy: AspiredVersionPolicy = ???
+  private val manager: AspiredVersionsManager = new AspiredVersionsManager()
 
-  override def untypedServableHandle(request: ServableRequest): UntypedServableHandle = ???
+  private val modelLabelsToVersions = new mutable.HashMap[String, mutable.HashMap[String, Int]]()
 
-  override def availableUntypedServableHandles: Map[ServableId, UntypedServableHandle] = ???
+  //-------------------------------------------------------------------------Server Setup and Initialization
+  private def initialize(policy: AspiredVersionPolicy): Unit = {
+    // 1. initial aspiredVersionPolicy
+
+    // 2. initial manager(AspiredVersionsManager)
+  }
+
+  def reloadConfig(newConfig: ModelServerConfig): Unit ={
+    configWriteLock.lock()
+    try {
+      // Determine whether to accept this config transition.
+      val isFirstConfig = config_.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET
+      val acceptTransition = isFirstConfig || (config_.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST
+        && newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST)
+      if (!acceptTransition){
+        throw FailedPreconditions("Cannot transition to requested config. It is only legal to transition " +
+          "from one ModelConfigList to another.")
+      }
+      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET){
+        //Nothing to load. In this case we allow a future call with a non-empty config.
+        LOG.info("nothing to load, taking no action fo empty config")
+        return
+      }
+      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
+        validateModelConfigList(newConfig.getModelConfigList, options_)
+      }
+      if(newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST &&
+        config_.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
+        validateNoModelsChangePlatforms(config_.getModelConfigList, newConfig.getModelConfigList)
+      }
+      config_ = newConfig
+      updateModelVersionLabelMap()
+
+      LOG.info("adding or updating models")
+      config_.getConfigCase match {
+        case ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST =>{
+          if (options_.modelConfigListRootDir != ""){
+            updateModelConfigListRelativePaths(options_.modelConfigListRootDir, config_.getModelConfigList)
+          }
+          addModelsViaModelConfigList()
+        }
+        case ModelServerConfig.ConfigCase.CUSTOM_MODEL_CONFIG =>{
+          addModelsViaCustomModelConfig()
+        }
+        case _ => throw new Exception("Invalid ServerModelConfig")
+      }
+      maybeUpdateServerRequestLogger(config_.getConfigCase)
+
+    } finally {
+      configWriteLock.unlock()
+    }
+  }
+
+  private def updateModelVersionLabelMap(): Unit = {
+
+  }
+
+
+  //-------------------------------------------------------------------------Manager
+  override def availableServableIds: List[ServableId] = {
+    manager.availableServableIds
+  }
+
+  override def availableServableHandles[Loader]: Map[ServableId, ServableHandle[Loader]] = {
+    manager.availableServableHandles
+  }
+
+  override def servableHandle[Loader](request: ServableRequest): ServableHandle[Loader] = {
+    manager.servableHandle(request)
+  }
+
+  override def untypedServableHandle(request: ServableRequest): UntypedServableHandle = {
+    manager.untypedServableHandle(request)
+  }
+
+  override def availableUntypedServableHandles: Map[ServableId, UntypedServableHandle] = {
+    manager.availableUntypedServableHandles
+  }
+
+
+  //-------------------------------------------------------------------------Request Processing
+  def servableRequestFromModelSpec(modelSpec: ModelSpec): ServableRequest = ???
+
+  def getModelVersionForLabel(modelName: String, label: String): Long = ???
 }
 
 object ServerCore {
-  val LOG = LogFactory.getLog(classOf[ServerCore])
-  var options_ :ServerOptions = ???
-  var config_ : ModelServerConfig = ???
-  var platformToRouterPort_ : Map[String, Int] = ???
-  var modelLabelToVersions_ : Map[String, Map[String, Int]] = ???
-  var storagePathSourceAndRouter: StoragePathSourceAndRouter = null
-  var servableStateMonitor: ServableStateMonitor = ???
-  var servableEventBus: EventBus[ServableState] = ???
-  var manager_ : AspiredVersionsManager = ???
+  private val LOG = LoggerFactory.getLogger(classOf[ServerCore])
+  private val options_ :ServerOptions = ???
+  private var config_ : ModelServerConfig = _
+  private val servableEventBus = EventBus[ServableState]()
+  private val aspiredVersionPolicy: AspiredVersionPolicy = ???
+  private val platformToRouterPort_ : Map[String, Int] = Map[String, Int]()
+  private var modelLabelToVersions_ : Map[String, Map[String, Int]] = Map[String, Map[String, Int]]()
+  private var storagePathSourceAndRouter: StoragePathSourceAndRouter = null
+  private val servableStateMonitor: ServableStateMonitor = new ServableStateMonitor(servableEventBus, 1000)
+  private val manager: AspiredVersionsManager = new AspiredVersionsManager()
 
   case class StoragePathSourceAndRouter(source: FileSystemStoragePathSource, router: DynamicSourceRouter[StoragePath])
 
@@ -73,6 +163,10 @@ object ServerCore {
   def createResourceTracker(): ResourceTracker = ???
 
   def createAdapter(modelPlatform: String): StoragePathSourceAdapter = ???
+
+  def maybeUpdateServerRequestLogger(configCase: ConfigCase): Unit = ???
+
+  def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = ???
 
   def createStoragePathSourceConfig(config: ModelServerConfig): FileSystemStoragePathSourceConfig = {
     val servables = new java.util.ArrayList[ServableToMonitor]()
@@ -145,52 +239,6 @@ object ServerCore {
       throw InvalidArguments(s"Illegal setting ModelServerConfig::model_platform.")
     }
     platform
-  }
-
-  def reloadConfig(newConfig: ModelServerConfig): Unit ={
-    configWriteLock.lock()
-    try {
-      // Determine whether to accept this config transition.
-      val isFirstConfig = config_.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET
-      val acceptTransition = isFirstConfig || (config_.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST
-        && newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST)
-      if (!acceptTransition){
-        throw FailedPreconditions("Cannot transition to requested config. It is only legal to transition " +
-          "from one ModelConfigList to another.")
-      }
-      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET){
-        //Nothing to load. In this case we allow a future call with a non-empty config.
-        LOG.info("nothing to load, taking no action fo empty config")
-        return
-      }
-      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
-        validateModelConfigList(newConfig.getModelConfigList, options_)
-      }
-      if(newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST &&
-        config_.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
-        validateNoModelsChangePlatforms(config_.getModelConfigList, newConfig.getModelConfigList)
-      }
-      config_ = newConfig
-      updateModelVersionLabelMap()
-
-      LOG.info("adding or updating models")
-      config_.getConfigCase match {
-        case ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST =>{
-          if (options_.modelConfigListRootDir != ""){
-             updateModelConfigListRelativePaths(options_.modelConfigListRootDir, config_.getModelConfigList)
-          }
-          addModelsViaModelConfigList()
-        }
-        case ModelServerConfig.ConfigCase.CUSTOM_MODEL_CONFIG =>{
-          addModelsViaCustomModelConfig()
-        }
-        case _ => throw new Exception("Invalid ServerModelConfig")
-      }
-      maybeUpdateServerRequestLogger(config_.getConfigCase)
-
-    } finally {
-      configWriteLock.unlock()
-    }
   }
 
   def validateModelConfigList(configList: ModelConfigList, options: ServerOptions): Unit = {
@@ -302,7 +350,7 @@ object ServerCore {
     }
   }
 
-  def maybeUpdateServerRequestLogger(configCase: ConfigCase): Unit = ???
+
 
   def addModelsViaModelConfigList()= {
     val isFirstConfig = storagePathSourceAndRouter == None
@@ -344,7 +392,7 @@ object ServerCore {
     if (options_.customModelConfigLoader == None){
       throw InvalidArguments("Missing custom_model_config_loader in ServerCore Options")
     }
-    manager_ = options_.customModelConfigLoader(config_.getCustomModelConfig, servableEventBus)
+    options_.customModelConfigLoader(config_.getCustomModelConfig, servableEventBus, manager)
   }
 
   def connectAdaptersToManagerAndAwaitModelLoads(adapters: SourceAdapters): Unit = {
@@ -357,10 +405,9 @@ object ServerCore {
       adapterList.:+(adapter)
     }
     adapterList :+(adapters.errorAdapter)
-    LoadServablesFast.connectSourcesWithFastInitialLoad(manager_, adapterList, servableStateMonitor,
+    LoadServablesFast.connectSourcesWithFastInitialLoad(manager, adapterList, servableStateMonitor,
       modelsToAwait, options_.numInitialLoadThreads)
   }
-
 
   def newModelNamesInSourceConfig(oldConfig: FileSystemStoragePathSourceConfig,
                                   newConfig: FileSystemStoragePathSourceConfig): Set[String] = {
@@ -414,5 +461,4 @@ object ServerCore {
     }
   }
 
-  def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = ???
 }

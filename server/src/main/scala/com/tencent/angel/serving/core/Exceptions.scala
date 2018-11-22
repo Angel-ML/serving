@@ -15,6 +15,9 @@ case class LoadExceptions(message: String) extends Exception(message)
 case class ResourceExceptions(message: String) extends RuntimeException(message)
 
 
+case class ConfigExceptions(message: String) extends RuntimeException(message)
+
+
 case class ManagerExceptions(message: String) extends RuntimeException(message)
 
 case class FailedPreconditions(message: String) extends Exception(message)
