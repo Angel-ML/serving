@@ -60,7 +60,7 @@ abstract class UnarySourceAdapter[S, T] extends SourceAdapter[S, T] {
 }
 
 
-class ErrorSourceAdapter[S, T] extends SourceAdapter[S, T] {
+class ErrorSourceAdapter[S, T](exception: Exception) extends SourceAdapter[S, T] {
   override def adapt(servableName: String, versions: List[ServableData[T]]): List[ServableData[S]] = {
     versions.map{version =>
       if (version.status == Status.OK) {

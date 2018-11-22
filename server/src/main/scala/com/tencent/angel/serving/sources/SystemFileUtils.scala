@@ -1,6 +1,7 @@
 package com.tencent.angel.serving.sources
 
 import java.io.File
+import java.nio.file.FileSystem
 import java.util._
 
 import org.apache.commons.io.FileUtils
@@ -18,6 +19,11 @@ object SystemFileUtils {
     }
     !children.isEmpty
   }
+
+  def flushFileSystemCaches(): Unit ={
+
+  }
+
 
   def main(args: Array[String]): Unit ={
     val path ="F:\\srh"
