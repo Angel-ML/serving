@@ -3,9 +3,12 @@ package com.tencent.angel.serving.core
 import java.util.concurrent.locks.ReentrantLock
 
 import com.tencent.angel.serving.core.EventBus.EventAndTime
-import com.tencent.angel.serving.core.LoaderHarness.State._
+import com.tencent.angel.serving.core.LoaderHarness.State.{State, _}
 import com.tencent.angel.serving.core.ManagerState.ManagerState
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind.Kind
+import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy.{AutoVersionPolicy, kLatest}
+import org.slf4j.{Logger, LoggerFactory}
+
 
 
 case class ServableId(name: String, version: Long) {
@@ -69,26 +72,20 @@ object ServableState {
 }
 
 
-case class Aspired(private var aspired: Boolean) {
-  def setAspired(aspiredValue: Boolean): Unit = {
-    aspired = aspiredValue
-  }
-
-  def isAspired: Boolean = aspired
-}
-
-
 class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: Int, loadRetryIntervalMicros: Long) {
 
   import LoaderHarness.ErrorCallback
 
+  val LOG: Logger = LoggerFactory.getLogger(classOf[LoaderHarness])
+
   var state: State = kNew
 
   private val statusLock = new ReentrantLock()
-  var status: ManagerState = _
-  val additionalState: Aspired = Aspired(true)
-  var cancelLoadRetry: Boolean = false
-  var errorCallback: ErrorCallback = _
+  private var additionalState: Boolean = true
+  private var retryFlag: Boolean = false
+  var errorCallback: ErrorCallback = (id: ServableId, state: State) => {}
+
+  private val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
 
   def loadRequested(): Unit = transitionState(kNew, kLoadRequested)
 
@@ -97,8 +94,27 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
   def load(): Unit = synchronized(state) {
     assert(state == kLoadApproved)
     state = kLoading
-    loader.load()
-    state = kReady
+
+    val retriedFn = () => {
+      try {
+        loader.load()
+        true
+      } catch {
+        case LoadExceptions(msg) =>
+          LOG.info(msg)
+          false
+        case _: Exception => false
+      }
+    }
+
+    val isCancelledFn = () => {
+      retryFlag
+    }
+    if (retry(retriedFn, isCancelledFn)) {
+      state = kReady
+    } else {
+      state = kError
+    }
   }
 
   def unloadRequested(): Unit = transitionState(kReady, kUnloadRequested)
@@ -114,46 +130,51 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
     state = kDisabled
   }
 
-  def loaderStateSnapshot(): ServableStateSnapshot[Aspired] = {
-    ServableStateSnapshot[Aspired](id, state, Some(additionalState))
+  def loaderStateSnapshot(): ServableStateSnapshot = {
+    ServableStateSnapshot(id, state, additionalState)
   }
 
   def transitionState(from: State, to: State): Unit = synchronized(state) {
-    if (status != from) {
+    if (state != from) {
       throw MonitorExceptions("from state does not match current state!")
     }
 
     state = to
   }
 
-  def error(mStatus: ManagerState): Unit = synchronized(state) {
-    state = kError
-
+  def error(): Unit = synchronized(state) {
     statusLock.lock()
     try {
-      status = mStatus
       if (errorCallback != null) {
-        errorCallback(id, status)
+        errorCallback(id, state)
       }
+      state = kError
     } finally {
       statusLock.unlock()
     }
   }
 
-  def isAspired: Boolean = additionalState.isAspired
+  def isAspired: Boolean = additionalState
 
-  def setAspired(aspired: Boolean): Unit = additionalState.setAspired(aspired)
+  def setAspired(aspired: Boolean): Unit = {
+    additionalState = aspired
+  }
+
+  def cancelLoadRetry(): Unit = {
+    retryFlag = true
+  }
+
+  def isRetryCanceled: Boolean = retryFlag
 
   override def equals(obj: Any): Boolean = {
     val other = obj.asInstanceOf[LoaderHarness]
-    this.id == other.id && this.loader == other.loader &&
-      this.loadRetryIntervalMicros == other.loadRetryIntervalMicros &&
-      this.maxNumLoadRetries == other.maxNumLoadRetries
+    this.id == other.id && this.loader == other.loader
   }
 
   override def hashCode(): Int = {
     id.hashCode() + loader.hashCode()
   }
+
 }
 
 
@@ -169,24 +190,46 @@ object LoaderHarness {
     val kUnloadRequested, kQuiescing, kQuiesced, kUnloading, kDisabled, kError = Value
   }
 
-  type ErrorCallback = (ServableId, ManagerState) => Unit
+  type ErrorCallback = (ServableId, State) => Unit
 }
 
 
-case class ServableStateSnapshot[T](id: ServableId, state: State, additionalState: Option[T]) {
-  def ==(other: ServableStateSnapshot[T]): Boolean = {
-    this.id == other.id && this.state == other.state && this.additionalState == other.additionalState
+case class ServableStateSnapshot(id: ServableId, state: State, aspired: Boolean) {
+  def ==(other: ServableStateSnapshot): Boolean = {
+    this.id == other.id && this.state == other.state && this.aspired == other.aspired
   }
 
-  def !=(other: ServableStateSnapshot[T]): Boolean = !(this == other)
+  def !=(other: ServableStateSnapshot): Boolean = !(this == other)
 }
 
 
-class ServableRequest(val name: String, val version: Option[Long] = None) {
+class ServableRequest(val name: String, val version: Option[Long] = None, val autoVersionPolicy: AutoVersionPolicy = kLatest) {
 
-  import ServableRequest.AutoVersionPolicy._
+  override def hashCode(): Int = {
+    val versionHash = if (version.nonEmpty) {
+      version.get.hashCode()
+    } else {
+      autoVersionPolicy match {
+        case kLatest => Long.MaxValue.hashCode()
+        case kEarliest => Long.MinValue.hashCode()
+      }
+    }
 
-  var autoVersionPolicy: AutoVersionPolicy = kLatest
+    name.hashCode + versionHash
+  }
+
+  override def equals(obj: Any): Boolean = {
+    val other = obj.asInstanceOf[ServableRequest]
+    val version = if (other.version.nonEmpty && this.version.nonEmpty) {
+      other.version.get == this.version.get
+    } else if (other.version.isEmpty && this.version.isEmpty) {
+      other.autoVersionPolicy == this.autoVersionPolicy
+    } else {
+      false
+    }
+
+    other.name == this.name && version
+  }
 }
 
 
@@ -200,12 +243,13 @@ object ServableRequest {
   def specific(name: String, version: Long): ServableRequest = new ServableRequest(name, Some(version))
 
   def earliest(name: String): ServableRequest = {
-    val req = new ServableRequest(name)
-    req.autoVersionPolicy = AutoVersionPolicy.kEarliest
+    val req = new ServableRequest(name, autoVersionPolicy=AutoVersionPolicy.kEarliest)
     req
   }
 
-  def latest(name: String, version: Long): ServableRequest = new ServableRequest(name)
+  def latest(name: String, version: Long): ServableRequest = {
+    new ServableRequest(name, autoVersionPolicy=AutoVersionPolicy.kLatest)
+  }
 
   def fromId(sId: ServableId): ServableRequest = {
     new ServableRequest(sId.name, Some(sId.version))
