@@ -5,7 +5,7 @@ import java.util.concurrent.locks.{ReentrantLock, ReentrantReadWriteLock}
 import collection.mutable
 import java.util.concurrent.{ExecutorService, Executors}
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind
 import com.tencent.angel.serving.core.LoaderHarness.State
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy

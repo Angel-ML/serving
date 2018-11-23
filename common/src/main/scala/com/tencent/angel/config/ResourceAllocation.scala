@@ -1,4 +1,4 @@
-package com.tencent.angel.confg
+package com.tencent.angel.config
 
 import com.tencent.angel.config.ResourceProtos
 import com.google.protobuf.UInt32Value

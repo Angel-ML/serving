@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.core
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 
 trait Loader {
   def estimateResources(): ResourceAllocation
