@@ -16,13 +16,13 @@ import org.slf4j.{Logger, LoggerFactory}
 class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
                    maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
                    totalResources: ResourceAllocation,
-                   servableEventBus: EventBus[ServableStateAndTime]) extends Manager {
+                   servableEventBus: EventBus[ServableState]) extends Manager {
 
   import BasicManager._
 
-  val LOG: Logger = LoggerFactory.getLogger(classOf[BasicManager])
+  private val LOG: Logger = LoggerFactory.getLogger(classOf[BasicManager])
 
-  private val resourceRracker: ResourceTracker = new ResourceTracker(totalResources,
+  val resourceRracker: ResourceTracker = new ResourceTracker(totalResources,
     maxNumLoadRetries, loadRetryIntervalMicros)
 
   private val executorLock = new ReentrantLock()
@@ -43,7 +43,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     loadOrUnloadServable(req)
   }
 
-  def loadOrUnloadServable(request: LoadOrUnloadRequest): Unit = {
+  private def loadOrUnloadServable(request: LoadOrUnloadRequest): Unit = {
     executorLock.lock()
     try {
       val harnessOpt = managedMap.getHarnessOption(request.servableId)
@@ -71,7 +71,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  def handleLoadOrUnloadRequest(request: LoadOrUnloadRequest): Unit = {
+  private def handleLoadOrUnloadRequest(request: LoadOrUnloadRequest): Unit = {
     val harnessOpt = managedMap.getHarnessOption(request.servableId)
     if (harnessOpt.nonEmpty) {
       val harness = harnessOpt.get
@@ -87,7 +87,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  def approveLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Boolean = {
+  private def approveLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Boolean = {
     request.kind match {
       case Kind.kUnload =>
         approveLoad(harness)
@@ -96,7 +96,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  def approveLoad(harness: LoaderHarness): Boolean = {
+  private def approveLoad(harness: LoaderHarness): Boolean = {
     val resourceReservationStatus = reserveResources(harness)
 
     if (!resourceReservationStatus) {
@@ -109,12 +109,12 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     resourceReservationStatus
   }
 
-  def approveUnload(harness: LoaderHarness): Boolean = {
+  private def approveUnload(harness: LoaderHarness): Boolean = {
     harness.startQuiescing()
     true
   }
 
-  def executeLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Unit = {
+  private def executeLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Unit = {
     request.kind match {
       case Kind.kUnload =>
         executeLoad(harness)
@@ -123,14 +123,14 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  def executeLoad(harness: LoaderHarness): Unit = {
+  private def executeLoad(harness: LoaderHarness): Unit = {
     publishOnEventBus(new ServableState(harness.id, ManagerState.kLoading))
     harness.load()
     servingMap.update(managedMap)
     publishOnEventBus(new ServableState(harness.id, ManagerState.kAvailable))
   }
 
-  def executeUnload(harness: LoaderHarness): Unit = {
+  private def executeUnload(harness: LoaderHarness): Unit = {
     publishOnEventBus(new ServableState(harness.id, ManagerState.kUnloading))
     servingMap.update(managedMap)
     harness.doneQuiescing()
@@ -145,7 +145,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  def reserveResources(harness: LoaderHarness): Boolean = synchronized(this) {
+  private def reserveResources(harness: LoaderHarness): Boolean = synchronized(this) {
     // GetLoadersCurrentlyUsingResources
     val harnessList = new mutable.ListBuffer[LoaderHarness]()
     managedMap.getManagedServableNames.foreach(name =>
