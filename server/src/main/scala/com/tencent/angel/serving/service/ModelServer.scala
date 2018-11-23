@@ -2,11 +2,15 @@ package com.tencent.angel.serving.service
 
 import io.grpc.Server
 import io.grpc.ServerBuilder
-import java.io.IOException
+import java.io.{FileInputStream, IOException}
 import java.util.logging.Logger
 
-import com.tencent.angel.serving.core.{ServerCore, ServerOptions}
+import com.tencent.angel.confg.{Entry, Resource, ResourceAllocation}
+import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
+import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
+import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}
 import com.tencent.angel.serving.servables.angel.AngelPredictor
+import com.tencent.angel.serving.serving.ModelServerConfig
 
 case class Options() {
   var grpcPort: Int = 8500
@@ -30,6 +34,8 @@ case class Options() {
 
 class ModelServer(val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]], val port: Int) {
 
+  import ModelServer.{readModelConfigFile, readPlatformConfigFile, defaultResourceAllocation}
+
   private val logger = Logger.getLogger(classOf[ModelServer].getName)
 
   var server: Server = _
@@ -39,8 +45,19 @@ class ModelServer(val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]], val p
   }
 
   def buildAndStart(options: Options): Unit = {
-    val serverOptions: ServerOptions = new ServerOptions
-    val serverCore: ServerCore = new ServerCore(serverOptions)
+    val eventBus = new EventBus[ServableState]()
+    val monitor = new ServableStateMonitor(eventBus, 1000)
+    val modelServerConfig: ModelServerConfig = readModelConfigFile(options.modelConfigFile)
+    val platformConfigMap: PlatformConfigMap = readPlatformConfigFile(options.platformConfigFile)
+    val totalResources: ResourceAllocation = defaultResourceAllocation()
+    val servingContext: ServingContext = new ServingContext(eventBus, monitor, totalResources, platformConfigMap)
+
+    servingContext.maxNumLoadRetries = options.maxNumLoadRetries
+    servingContext.loadRetryIntervalMicros = options.LoadRetryIntervalMicros
+
+    val serverCore: ServerCore = new ServerCore(servingContext)
+    serverCore.reloadConfig(modelServerConfig)
+
     val predictionServiceImpl: PredictionServiceImpl = new PredictionServiceImpl(serverCore, new AngelPredictor())
     server = serverBuilder.addService(predictionServiceImpl).build()
     start()
@@ -82,12 +99,32 @@ object ModelServer {
   /**
     * Main method.  This comment makes the linter happy.
     */
+
   @throws[Exception]
   def main(args: Array[String]): Unit = {
     val options = Options()
     val server = new ModelServer(options.grpcPort)
     server.buildAndStart(options)
     server.waitForTermination()
+  }
+
+  @throws[IOException]
+  def readPlatformConfigFile(platformConfigFile: String): PlatformConfigMap = {
+    val is = new FileInputStream(platformConfigFile)
+    PlatformConfigMap.parseFrom(is)
+  }
+
+  @throws[IOException]
+  def readModelConfigFile(modelConfigFile: String): ModelServerConfig = {
+    val is = new FileInputStream(modelConfigFile)
+    ModelServerConfig.parseFrom(is)
+  }
+
+  def defaultResourceAllocation(): ResourceAllocation = {
+    val run = Runtime.getRuntime
+    val available = (run.totalMemory() * 0.8).toLong
+
+    ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), available)))
   }
 
 }

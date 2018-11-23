@@ -126,6 +126,17 @@ class ResourcePreservingPolicy extends AspiredVersionPolicy {
 
 object AspiredVersionPolicy {
 
+  def apply(classNmae: String): AspiredVersionPolicy = {
+    val cls = classNmae match {
+      case "AvailabilityPreservingPolicy" =>
+        Class.forName(s"com.tencent.angel.serving.core.$classNmae")
+      case "ResourcePreservingPolicy" =>
+        Class.forName(s"com.tencent.angel.serving.core.$classNmae")
+    }
+
+    cls.newInstance().asInstanceOf[AspiredVersionPolicy]
+  }
+
   object Action extends Enumeration {
     type Action = Value
     val kLoad, kUnload = Value

@@ -3,28 +3,35 @@ package com.tencent.angel.serving.core
 import java.util
 import java.util.{Timer, TimerTask}
 import java.util.concurrent.locks.ReentrantLock
+
+import com.tencent.angel.confg.ResourceAllocation
 import com.tencent.angel.serving.core.LoaderHarness.State._
 import com.tencent.angel.serving.core.AspiredVersionsManager._
 import com.tencent.angel.serving.core.AspiredVersionPolicy.{Action, ServableAction}
 
 
 class AspiredVersionsManager private(
-                                      val manageStateIntervalMicros: Long,
-                                      val aspiredVersionPolicy: AspiredVersionPolicy,
-                                      val basicManager: BasicManager
+                                      manageStateDelayMicros: Long,
+                                      manageStateIntervalMicros: Long,
+                                      aspiredVersionPolicy: AspiredVersionPolicy,
+                                      numLoadThreads: Int, numUnloadThreads: Int,
+                                      maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
+                                      totalResources: ResourceAllocation,
+                                      servableEventBus: EventBus[ServableState]
                                     ) extends Target[Loader] with Manager {
+  val basicManager: BasicManager = new BasicManager(numLoadThreads, numUnloadThreads, maxNumLoadRetries,
+    loadRetryIntervalMicros, totalResources, servableEventBus)
+  private val versionsRequestsLock = new ReentrantLock()
+  private val pendingAspiredVersionsRequests: AspiredVersionsMap = new util.HashMap[String, List[ServableData[Loader]]]()
 
-  val versionsRequestsLock = new ReentrantLock()
-  val pendingAspiredVersionsRequests: AspiredVersionsMap = new util.HashMap[String, List[ServableData[Loader]]]()
-
-  val manageStateThread = new Timer("PeriodicFunction", true)
+  private val manageStateThread = new Timer("PeriodicFunction", true)
   manageStateThread.scheduleAtFixedRate(new TimerTask {
     override def run(): Unit = {
       flushServables()
       handlePendingAspiredVersionsRequests()
       invokePolicyAndExecuteAction()
     }
-  }, 1000, manageStateIntervalMicros)
+  }, manageStateDelayMicros, manageStateIntervalMicros)
 
   private def flushServables(): Unit = {
     // remove element form basicManager
@@ -161,7 +168,7 @@ class AspiredVersionsManager private(
     }
   }
 
-  def enqueueAspiredVersionsRequest(servableName: String, versions: List[ServableData[Loader]]): Unit = {
+  private def enqueueAspiredVersionsRequest(servableName: String, versions: List[ServableData[Loader]]): Unit = {
     val validationStatus = versions.forall(version => version.id.name == servableName)
 
     versionsRequestsLock.lock()

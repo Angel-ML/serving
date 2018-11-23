@@ -10,7 +10,7 @@ package object core {
 
   type StoragePathSourceAdapter = SourceAdapter[StoragePath, Loader]
 
-  type CustomModelConfigLoader = (Any, EventBus[ServableState], AspiredVersionsManager) => Unit
+  type CustomModelConfigLoader = (Any, AspiredVersionsManager) => Unit
 
   type ServableStateMonitorCreator = (EventBus[ServableState], ServableStateMonitor) => Unit
 }
