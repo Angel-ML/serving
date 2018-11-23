@@ -5,7 +5,7 @@ import io.grpc.ServerBuilder
 import java.io.{FileInputStream, IOException}
 import java.util.logging.Logger
 
-import com.tencent.angel.confg.{Entry, Resource, ResourceAllocation}
+import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}

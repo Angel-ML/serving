@@ -4,13 +4,16 @@ import java.util
 import java.util.{ArrayList, Timer, TimerTask}
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
-import com.tencent.angel.config._
+import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
+import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.PolicyChoiceCase
+import com.tencent.angel.serving.serving.FileSystemStoragePathSourceConfig
 import com.tencent.angel.serving.core._
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.logging.LogFactory
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.collection.JavaConverters._
 
 
 object FileSystemStoragePathSource {
@@ -44,12 +47,12 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   def updateConfig(config: FileSystemStoragePathSourceConfig): Unit = {
     configWriteLock.lock()
     try {
-      if (timer != null && config.fileSystemPollWaitSeconds != config_.fileSystemPollWaitSeconds) {
+      if (timer != null && config != config_.getFileSystemPollWaitSeconds) {
         throw InvalidArguments("Changing file_system_poll_wait_seconds is not supported")
       }
       //normalize
 
-      if (config.failIfZeroVersionsAtStartup) {
+      if (config.getFailIfZeroVersionsAtStartup) {
         try {
           failIfZeroVersions(config)
         } catch {
@@ -89,14 +92,14 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   def getDeletedServables(oldConfig: FileSystemStoragePathSourceConfig, newConfig: FileSystemStoragePathSourceConfig
                          ): Set[String] = {
     val newServables: Set[String] = Set[String]()
-    newConfig.servables.foreach( servable =>
-      newServables + servable.servableName
+    newConfig.getServablesList.asScala.foreach( servable =>
+      newServables + servable.getServableName
     )
 
     val deletedServables: Set[String] = Set[String]()
-    oldConfig.servables.foreach( oldServable =>
-      if (!newServables.contains(oldServable.servableName)) {
-        deletedServables + oldServable.servableName
+    oldConfig.getServablesList.asScala.foreach( oldServable =>
+      if (!newServables.contains(oldServable.getServableName)) {
+        deletedServables + oldServable.getServableName
       }
     )
     deletedServables
@@ -116,7 +119,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
           configWriteLock.unlock()
           pollFileSystemAndInvokeCallback()
         }
-      }, 0, config_.fileSystemPollWaitSeconds * 1000)
+      }, 0, config_.getFileSystemPollWaitSeconds * 1000)
 
     } finally {
       callbackWriteLock.unlock()
@@ -139,9 +142,9 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
                               Map[String, List[ServableData[StoragePath]]] = {
     val versionsByServableName = mutable.Map[String, List[ServableData[StoragePath]]]()
     try {
-      config.servables.foreach{ servable =>
+      config.getServablesList.asScala.foreach{ servable =>
         val versions = pollFileSystemForServable(servable)
-        versionsByServableName + (servable.servableName -> versions)
+        versionsByServableName + (servable.getServableName -> versions)
       }
     } catch {
       case e: InvalidArguments => {LOG(e)}
@@ -150,15 +153,15 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def pollFileSystemForServable(servable: ServableToMonitor): List[ServableData[StoragePath]] = {
-    if (!SystemFileUtils.fileExist(servable.basePath)) {
-      throw new Exception(s"Could not find base path ${servable.basePath} for servable ${servable.servableName}")
+    if (!SystemFileUtils.fileExist(servable.getBasePath)) {
+      throw new Exception(s"Could not find base path ${servable.getBasePath} for servable ${servable.getServableName}")
     }
 
     //Retrieve a list of base-path children from the file system.
-    val children = SystemFileUtils.getChildren(servable.basePath)
+    val children = SystemFileUtils.getChildren(servable.getBasePath)
     if (children.isEmpty) {
-      throw InvalidArguments("The base path " + servable.basePath + " for servable " +
-        servable.servableName + "has not children")
+      throw InvalidArguments("The base path " + servable.getBasePath + " for servable " +
+        servable.getServableName + "has not children")
     }
 
     //real children
@@ -170,30 +173,30 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     val childrenByVersion = indexChildrenByVersion(realChildren)
 
     var versions: List[ServableData[StoragePath]] = null
-    servable.servableVersionPolicy match {
-      case x: LatestPolicy => versions = AspireLastestVersions(servable, childrenByVersion)
-      case x: AllPolicy => versions = AspireAllVersions(servable, children)
-      case x: SpecificPolicy => versions = AspireSpecificVersions(servable, childrenByVersion)
-      case _  => versions = AspireLastestVersions(servable, childrenByVersion)
+    servable.getServableVersionPolicy.getPolicyChoiceCase match {
+      case PolicyChoiceCase.LATEST => versions = AspireLastestVersions(servable, childrenByVersion)
+      case PolicyChoiceCase.ALL => versions = AspireAllVersions(servable, children)
+      case PolicyChoiceCase.SPECIFIC => versions = AspireSpecificVersions(servable, childrenByVersion)
+      case PolicyChoiceCase.POLICYCHOICE_NOT_SET  => versions = AspireLastestVersions(servable, childrenByVersion)
     }
     versions
   }
 
   def AspireVersions(servable: ServableToMonitor, versionRelativePath: String, versionNumber: Long
                     ): ServableData[StoragePath] = {
-    val servableId = ServableId(servable.servableName, versionNumber)
-    val fullPath: StoragePath = FilenameUtils.concat(servable.basePath, versionRelativePath)
+    val servableId = ServableId(servable.getServableName, versionNumber)
+    val fullPath: StoragePath = FilenameUtils.concat(servable.getBasePath, versionRelativePath)
     ServableData[StoragePath](servableId, fullPath)
   }
 
   def AspireLastestVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
                             ): List[ServableData[StoragePath]]= {
     val numServableVersionsToServe: Long = math.max(
-      servable.servableVersionPolicy.asInstanceOf[LatestPolicy].latest.numVersions, 0)
+      servable.getServableVersionPolicy.getLatest.getNumVersions, 0)
     val versions = ListBuffer[ServableData[StoragePath]]()
     var numVersionsEmitted = 0
     if (childrenByVersion.isEmpty){
-      LOG.warn(s"No versions of servable  ${servable.servableName} found under base path ${servable.basePath}")
+      LOG.warn(s"No versions of servable  ${servable.getServableName} found under base path ${servable.getBasePath}")
     } else {
       childrenByVersion.foreach { case (versionNumber: Long, child: String) =>
         if (numVersionsEmitted < numServableVersionsToServe) {
@@ -219,7 +222,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
       }
     }
     if (!atLeastOneVersionFound){
-      LOG.warn(s"No versions of servable  ${servable.servableName} found under base path ${servable.basePath}")
+      LOG.warn(s"No versions of servable  ${servable.getServableName} found under base path ${servable.getBasePath}")
     }
     versions.toList
   }
@@ -228,7 +231,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   def AspireSpecificVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
                              ): List[ServableData[StoragePath]] = {
     val versions = ListBuffer[ServableData[StoragePath]]()
-    val versionsToServe = servable.servableVersionPolicy.asInstanceOf[SpecificPolicy].specific.versions
+    val versionsToServe = servable.getServableVersionPolicy.getSpecific.getVersionsList
     val aspiredVersions = new util.HashSet[Long]()
     childrenByVersion.foreach { case (version_number: Long, child: String) =>
       if (versionsToServe.contains(version_number)) {
@@ -236,14 +239,14 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
         aspiredVersions.add(version_number)
       }
     }
-    versionsToServe.foreach{ version =>
+    versionsToServe.asScala.foreach{ version =>
       if (!aspiredVersions.contains(version)) {
-        LOG.warn(s"version ${version} of servable ${servable.servableName} , which was requested to be served as " +
+        LOG.warn(s"version ${version} of servable ${servable.getServableName} , which was requested to be served as " +
           s"a specific version in the servable's version policy, was not found in the system.")
       }
     }
     if (aspiredVersions.isEmpty){
-      LOG.warn(s"No versions of servable  ${servable.servableName} found under base path ${servable.basePath}")
+      LOG.warn(s"No versions of servable  ${servable.getServableName} found under base path ${servable.getBasePath}")
     }
     versions.toList
   }

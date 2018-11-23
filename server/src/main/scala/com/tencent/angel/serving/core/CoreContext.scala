@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.core
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig.ConfigCase
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
