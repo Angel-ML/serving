@@ -17,9 +17,8 @@ import scala.collection.mutable
 class ServingContext(eventBus: EventBus[ServableState],
                      monitor: ServableStateMonitor,
                      totalResources: ResourceAllocation,
-                     modelServerConfig: ModelServerConfig,
-                     platformConfigMap: PlatformConfigMap) extends CoreContext(eventBus, monitor, totalResources,
-  modelServerConfig, platformConfigMap) {
+                     platformConfigMap: PlatformConfigMap) extends CoreContext(
+  eventBus, monitor, totalResources, platformConfigMap) {
 
   import ServingContext._
 

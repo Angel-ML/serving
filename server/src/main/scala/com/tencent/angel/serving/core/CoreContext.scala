@@ -14,7 +14,6 @@ import scala.collection.JavaConverters._
 abstract class CoreContext(val eventBus: EventBus[ServableState],
                            val monitor: ServableStateMonitor,
                            val totalResources: ResourceAllocation,
-                           var modelServerConfig: ModelServerConfig,
                            var platformConfigMap: PlatformConfigMap,
                            policyClassName: String = "AvailabilityPreservingPolicy"
                           ) {
