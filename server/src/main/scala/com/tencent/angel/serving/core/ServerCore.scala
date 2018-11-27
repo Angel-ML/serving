@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.serving.core.ServableStateMonitor.VersionMap
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
-import com.tencent.angel.serving.serving.ModelServerConfig
+import org.apache.commons.io.FilenameUtils
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.JavaConverters._
@@ -49,14 +49,15 @@ class ServerCore(val context: CoreContext) extends Manager {
         LOG.info("nothing to load, taking no action fo empty config")
         return
       }
-      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST) {
-        validateModelConfigList(newConfig.getModelConfigList)
-      }
       if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST &&
         config.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST) {
         validateNoModelsChangePlatforms(config.getModelConfigList, newConfig.getModelConfigList)
       }
-      config = newConfig
+      if (newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST) {
+        config = validateModelConfigList(newConfig)
+      } else {
+        config = newConfig
+      }
       updateModelVersionLabelMap()
 
       LOG.info("adding or updating models")
@@ -79,10 +80,10 @@ class ServerCore(val context: CoreContext) extends Manager {
   }
 
   // make sure: no replicated names, and no relative path
-  private def validateModelConfigList(configList: ModelConfigList): Unit = {
+  private def validateModelConfigList(config: ModelServerConfig): ModelServerConfig = {
     //unique model
     val modelNames = new mutable.HashSet[String]()
-    configList.getConfigList.asScala.foreach { model => // ModelConfig
+    config.getModelConfigList.getConfigList.asScala.foreach { model => // ModelConfig
       val name = model.getName
       if (modelNames.contains(name)) {
         throw InvalidArguments(s"Illegal to list model $name, multiple times in config list")
@@ -103,8 +104,19 @@ class ServerCore(val context: CoreContext) extends Manager {
         //todo
         throw InvalidArguments(s"Expected non-empty absolute path or URI; " +
           s"got model_config_list_root_dir= ${context.modelConfigListRootDir}")
+      } else {
+        return updateModelConfigListRelativePaths(context.modelConfigListRootDir, config)
+      }
+    } else {
+      // all base path must be absolute
+      config.getModelConfigList.getConfigList.asScala.foreach{ modelConfig =>
+        if (ServerCore.uriIsRelativePath(modelConfig.getBasePath)){
+          throw InvalidArguments(s"Expected model: ${modelConfig.getName} " +
+            s" to have an absolute path or uri, basepath = ${modelConfig.getBasePath}")
+        }
       }
     }
+    config
   }
 
   private def validateNoModelsChangePlatforms(oldConfigList: ModelConfigList, newConfigList: ModelConfigList): Unit = {
@@ -122,6 +134,30 @@ class ServerCore(val context: CoreContext) extends Manager {
         }
       }
     }
+  }
+
+  private def updateModelConfigListRelativePaths(modelConfigListRootDir: String,
+                                                 config: ModelServerConfig): ModelServerConfig = {
+    val configBuilder: ModelServerConfig.Builder = config.toBuilder
+    val builder: ModelConfigList.Builder = configBuilder.getModelConfigListBuilder
+
+    config.getModelConfigList.getConfigList.asScala.zipWithIndex.foreach { case (modelConfig, idx) =>
+      val basePath = modelConfig.getBasePath
+      // Don't modify absolute paths.
+      if (ServerCore.uriIsRelativePath(basePath)) {
+        val fullPath = FilenameUtils.concat(modelConfigListRootDir, basePath)
+        if (ServerCore.uriIsRelativePath(fullPath)) {
+          throw InvalidArguments(s"Expected model ${modelConfig.getName}, with updated base_path = " +
+            s"JoinPath($modelConfigListRootDir, $basePath) to have an absolute path; got $fullPath")
+        }
+
+        val newModelConfig = builder.getConfigBuilder(idx).setBasePath(fullPath).build()
+        builder.setConfig(idx, newModelConfig)
+      }
+    }
+
+    builder.build()
+    configBuilder.build()
   }
 
 

@@ -4,9 +4,8 @@ import java.util
 import java.util.{ArrayList, Timer, TimerTask}
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
-import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.PolicyChoiceCase
-import com.tencent.angel.serving.serving.FileSystemStoragePathSourceConfig
+import com.tencent.angel.serving.serving.{FileSystemStoragePathSourceConfig, ServableToMonitor}
 import com.tencent.angel.serving.core._
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.logging.LogFactory
@@ -50,7 +49,6 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
       if (timer != null && config != config_.getFileSystemPollWaitSeconds) {
         throw InvalidArguments("Changing file_system_poll_wait_seconds is not supported")
       }
-      //normalize
 
       if (config.getFailIfZeroVersionsAtStartup) {
         try {
@@ -82,27 +80,17 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def unAspireServables(servableNames: Set[String]): Unit = {
-    servableNames.foreach { servableName =>
-      AspiredVersionsCallback_(servableName, null)
-    }
+    servableNames.map(AspiredVersionsCallback_(_, null))
   }
 
   // Returns the names of servables that appear in 'old_config' but not in
   // 'new_config'. Assumes both configs are normalized.
   def getDeletedServables(oldConfig: FileSystemStoragePathSourceConfig, newConfig: FileSystemStoragePathSourceConfig
                          ): Set[String] = {
-    val newServables: Set[String] = Set[String]()
-    newConfig.getServablesList.asScala.foreach( servable =>
-      newServables + servable.getServableName
-    )
+    val newServables = newConfig.getServablesList.asScala.toSet[String]
 
-    val deletedServables: Set[String] = Set[String]()
-    oldConfig.getServablesList.asScala.foreach( oldServable =>
-      if (!newServables.contains(oldServable.getServableName)) {
-        deletedServables + oldServable.getServableName
-      }
-    )
-    deletedServables
+    oldConfig.getServablesList.asScala.filterNot(
+      (oldServable: ServableToMonitor) => newServables.contains(oldServable.getServableName)).toSet[String]
   }
 
   override def setAspiredVersionsCallback(callback: AspiredVersionsCallback[StoragePath]): Unit = {
@@ -116,7 +104,6 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
       timer = new Timer("FileSystemStoragePathSource_filesystem_polling_thread")
       timer.schedule(new TimerTask {
         override def run(): Unit = {
-          configWriteLock.unlock()
           pollFileSystemAndInvokeCallback()
         }
       }, 0, config_.getFileSystemPollWaitSeconds * 1000)
@@ -127,14 +114,14 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def pollFileSystemAndInvokeCallback() = {
-    configWriteLock.lock()
+    configReadLock.lock()
     try {
       val versionsByServableName = pollFileSystemForConfig(config_)
       versionsByServableName.foreach { case (servableName, versions) =>
         AspiredVersionsCallback_(servableName, versions)
       }
     } finally {
-      configWriteLock.unlock()
+      configReadLock.unlock()
     }
   }
 
@@ -164,20 +151,13 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
         servable.getServableName + "has not children")
     }
 
-    //real children
-    val realChildren = new ArrayList[String]()
-    (0 until children.size()).foreach { i =>
-      realChildren.add(children.get(i).substring(0, children.get(i).indexOf("/")))
-    }
-    children.clear()
-    val childrenByVersion = indexChildrenByVersion(realChildren)
+    val childrenByVersion = indexChildrenByVersion(children)
 
-    var versions: List[ServableData[StoragePath]] = null
-    servable.getServableVersionPolicy.getPolicyChoiceCase match {
-      case PolicyChoiceCase.LATEST => versions = AspireLastestVersions(servable, childrenByVersion)
-      case PolicyChoiceCase.ALL => versions = AspireAllVersions(servable, children)
-      case PolicyChoiceCase.SPECIFIC => versions = AspireSpecificVersions(servable, childrenByVersion)
-      case PolicyChoiceCase.POLICYCHOICE_NOT_SET  => versions = AspireLastestVersions(servable, childrenByVersion)
+    val versions = servable.getServableVersionPolicy.getPolicyChoiceCase match {
+      case PolicyChoiceCase.LATEST => AspireLastestVersions(servable, childrenByVersion)
+      case PolicyChoiceCase.ALL => AspireAllVersions(servable, children)
+      case PolicyChoiceCase.SPECIFIC => AspireSpecificVersions(servable, childrenByVersion)
+      case PolicyChoiceCase.POLICYCHOICE_NOT_SET  => AspireLastestVersions(servable, childrenByVersion)
     }
     versions
   }
@@ -191,8 +171,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
 
   def AspireLastestVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
                             ): List[ServableData[StoragePath]]= {
-    val numServableVersionsToServe: Long = math.max(
-      servable.getServableVersionPolicy.getLatest.getNumVersions, 0)
+    val numServableVersionsToServe = math.max(servable.getServableVersionPolicy.getLatest.getNumVersions, 0)
     val versions = ListBuffer[ServableData[StoragePath]]()
     var numVersionsEmitted = 0
     if (childrenByVersion.isEmpty){
@@ -212,9 +191,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
                         ): List[ServableData[StoragePath]] = {
     val versions = ListBuffer[ServableData[StoragePath]]()
     var atLeastOneVersionFound = false
-    val it = children.iterator()
-    while(it.hasNext){
-      val child = it.next()
+    children.asScala.foreach{ child =>
       val versionNumber = parseVersionNumber(child)
       if (versionNumber > 0) {
         versions :+ AspireVersions(servable, child, versionNumber)
@@ -262,9 +239,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
 
   def indexChildrenByVersion(children: ArrayList[String]): Map[Long, String] = {
     val childrenByVersion = mutable.Map[Long, String]()
-    val it = children.iterator()
-    while(it.hasNext){
-      val child = it.next()
+    children.asScala.foreach { child =>
       val versionNumber = parseVersionNumber(child)
       if (versionNumber >= 0) {
         childrenByVersion + (versionNumber -> child)

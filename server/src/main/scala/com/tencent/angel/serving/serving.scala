@@ -6,6 +6,7 @@ import com.tencent.angel.config.{FileSystemStoragePathSourceConfigProtos, ModelS
 package object serving {
 
   type FileSystemStoragePathSourceConfig = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig
+  type ServableToMonitor = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
 
   type ModelServerConfig = ModelServerConfigProtos.ModelServerConfig
 }

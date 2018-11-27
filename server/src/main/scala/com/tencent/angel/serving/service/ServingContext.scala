@@ -24,7 +24,7 @@ class ServingContext(eventBus: EventBus[ServableState],
 
   private val LOG = LogFactory.getLog(classOf[ServingContext])
 
-  private val serverRequestLogger: ServerRequestLogger = _
+  private val serverRequestLogger: ServerRequestLogger = null
   private val platform2RouterPort = new mutable.HashMap[String, Int]()
   private var storagePathSourceAndRouter: StoragePathSourceAndRouter = _
 
@@ -54,7 +54,6 @@ class ServingContext(eventBus: EventBus[ServableState],
       val oldAndNewRoutes = unionRoutes(storagePathSourceAndRouter.router.getRoutes, routes)
       reloadRoutes(oldAndNewRoutes)
       reloadStoragePathSourceConfig(sourceConfig)
-      reloadRoutes(routes)
       waitUntilModelsAvailable(newModels, monitor) //todo: ServableStateMonitor
     }
   }
@@ -69,7 +68,15 @@ class ServingContext(eventBus: EventBus[ServableState],
 
   def createResourceTracker(): ResourceTracker = ???
 
-  def createAdapter(modelPlatform: String): StoragePathSourceAdapter = ???
+  def createAdapter(modelPlatform: String): StoragePathSourceAdapter = {
+    val platformConfit = platformConfigMap.getPlatformConfigsMap.asScala.get(modelPlatform)
+    if (platformConfit.isEmpty){
+      throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: ${modelPlatform}")
+    }
+    val adapterConfig = platformConfit.get.getSourceAdapterConfig
+    val adapter: StoragePathSourceAdapter = ???
+    adapter
+  }
 
   def createStoragePathSourceConfig(config: ModelServerConfig): FileSystemStoragePathSourceConfig = {
     val servables = new java.util.ArrayList[ServableToMonitor]()
