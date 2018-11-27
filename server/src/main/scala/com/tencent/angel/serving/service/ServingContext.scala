@@ -1,12 +1,12 @@
 package com.tencent.angel.serving.service
 
-import com.tencent.angel.config.ResourceAllocation
+import com.tencent.angel.config.{ResourceAllocation, SamplingConfigProtos}
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.ServerCore.{SourceAdapters, getPlatform}
-import com.tencent.angel.serving.core.{DynamicSourceRouter, StoragePath, _}
+import com.tencent.angel.serving.core.{DynamicSourceRouter, ServerRequestLogger, StoragePath, _}
 import com.tencent.angel.serving.serving.ModelServerConfig
 import com.tencent.angel.serving.sources.FileSystemStoragePathSource
 import org.apache.commons.logging.LogFactory
@@ -23,8 +23,10 @@ class ServingContext(eventBus: EventBus[ServableState],
   import ServingContext._
 
   private val LOG = LogFactory.getLog(classOf[ServingContext])
+  private type ServerRequestLoggerUpdater = (ModelServerConfig, ServerRequestLogger) => Unit
 
-  private val serverRequestLogger: ServerRequestLogger = null
+  private val serverRequestLogger: ServerRequestLogger = new ServerRequestLogger()
+  private val serverRequestLoggerUpdater: ServerRequestLoggerUpdater = null
   private val platform2RouterPort = new mutable.HashMap[String, Int]()
   private var storagePathSourceAndRouter: StoragePathSourceAndRouter = _
 
@@ -62,7 +64,21 @@ class ServingContext(eventBus: EventBus[ServableState],
     null.asInstanceOf[CustomModelConfigLoader]
   }
 
-  override def maybeUpdateServerRequestLogger(configCase: ModelServerConfig.ConfigCase): Unit = ???
+  override def maybeUpdateServerRequestLogger(config: ModelServerConfig): Unit = {
+    if (serverRequestLoggerUpdater != null){
+      return serverRequestLoggerUpdater(config, serverRequestLogger)
+    }
+
+    if (config.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
+      val loggingMap = mutable.Map[String, SamplingConfigProtos.LoggingConfig]()
+      config.getModelConfigList.getConfigList.asScala.foreach{ modelConfig =>
+        if (modelConfig.hasLoggingConfig){
+          loggingMap.put(modelConfig.getName, modelConfig.getLoggingConfig)
+        }
+      }
+      serverRequestLogger.update(loggingMap.toMap)
+    }
+  }
 
   def createAspiredVersionsManager(policy: AspiredVersionPolicy): AspiredVersionsManager = ???
 
@@ -74,7 +90,7 @@ class ServingContext(eventBus: EventBus[ServableState],
       throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: ${modelPlatform}")
     }
     val adapterConfig = platformConfit.get.getSourceAdapterConfig
-    val adapter: StoragePathSourceAdapter = ???
+    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny(adapterConfig)
     adapter
   }
 

@@ -72,7 +72,7 @@ class ServerCore(val context: CoreContext) extends Manager {
           }
         case _ => throw new Exception("Invalid ServerModelConfig")
       }
-      context.maybeUpdateServerRequestLogger(config.getConfigCase)
+      context.maybeUpdateServerRequestLogger(config)
 
     } finally {
       configLock.unlock()

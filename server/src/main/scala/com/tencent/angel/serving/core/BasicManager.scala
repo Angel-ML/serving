@@ -13,7 +13,7 @@ import com.tencent.angel.serving.core.ServableStateMonitor.ServableStateAndTime
 import org.slf4j.{Logger, LoggerFactory}
 
 
-class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
+class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
                    maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
                    totalResources: ResourceAllocation,
                    servableEventBus: EventBus[ServableState]) extends Manager {

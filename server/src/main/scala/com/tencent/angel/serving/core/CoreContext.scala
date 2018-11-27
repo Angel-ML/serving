@@ -36,16 +36,18 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
 
   def customModelConfigLoader: CustomModelConfigLoader
 
-  def maybeUpdateServerRequestLogger(configCase: ConfigCase): Unit
+  def maybeUpdateServerRequestLogger(config: ModelServerConfig): Unit
 
   protected def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = {
     val awaitedServables:List[ServableRequest] = models.map(ServableRequest.latest(_)).toList
     val statesReached = monitor.waitUntilServablesReachState(awaitedServables, ManagerState.kAvailable)
-    val numUnavailableModels = statesReached.count(stateReached => stateReached._2 != ManagerState.kAvailable)
-    val message = String.join(numUnavailableModels.toString,"models did not become avaible:")
-    statesReached.collect{case (servableId, managerState) if (managerState != ManagerState.kAvailable)=>
-      message.concat(s"{${servableId.toString}}")}
-    throw  new Exception(message)
+    if(statesReached.nonEmpty){
+      val numUnavailableModels = statesReached.count(stateReached => stateReached._2 != ManagerState.kAvailable)
+      val message = String.join(numUnavailableModels.toString,"model(s) did not become avaible:")
+      statesReached.collect{case (servableId, managerState) if (managerState != ManagerState.kAvailable)=>
+        message.concat(s"{${servableId.toString}}")}
+      throw  new Exception(message)
+    }
   }
 
   protected def connectAdaptersToManagerAndAwaitModelLoads(adapters: SourceAdapters,
@@ -57,12 +59,6 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
     val adapterList = adapters.platformAdapters.map { case (_, adapter) =>
       adapter.asInstanceOf[Source[Loader]]
     }.toList
-    connectSourcesWithFastInitialLoad(adapterList, modelsToAwait, numInitialLoadThreads)
-  }
-
-  protected def connectSourcesWithFastInitialLoad(sources: List[Source[Loader]],
-                                                  initialServables: List[ServableRequest],
-                                                  numThreads: Int): Unit = {
-
+    LoadServablesFast.connectSourcesWithFastInitialLoad(manager, adapterList, monitor, modelsToAwait, numInitialLoadThreads)
   }
 }
