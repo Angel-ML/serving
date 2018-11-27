@@ -54,7 +54,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
         try {
           failIfZeroVersions(config)
         } catch {
-          case e: NotFoundExceptions => LOG(e)
+          case e: NotFoundExceptions => LOG.error(e.getMessage)
         }
       }
 
@@ -134,7 +134,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
         versionsByServableName + (servable.getServableName -> versions)
       }
     } catch {
-      case e: InvalidArguments => {LOG(e)}
+      case e: InvalidArguments => {LOG.error(e.getMessage)}
     }
     versionsByServableName.toMap
   }

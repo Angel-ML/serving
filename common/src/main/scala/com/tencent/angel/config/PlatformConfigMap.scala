@@ -31,7 +31,7 @@ object PlatformConfig {
   }
 
   def apply(sourceAdapterConfig: String): PlatformConfig = {
-    val platformConfigProtos = PlatformConfigProtos.PlatformConfig.parseFrom(sourceAdapterConfig.toArray[Byte])
+    val platformConfigProtos = PlatformConfigProtos.PlatformConfig.parseFrom(sourceAdapterConfig.getBytes)
     PlatformConfig(platformConfigProtos.getSourceAdapterConfig)
   }
 }
@@ -74,7 +74,7 @@ object PlatformConfigMap {
   }
 
   def apply(platformConfigMap: String): PlatformConfigMap = {
-    val platformConfigMapProto = PlatformConfigProtos.PlatformConfigMap.parseFrom(platformConfigMap.toArray[Byte])
+    val platformConfigMapProto = PlatformConfigProtos.PlatformConfigMap.parseFrom(platformConfigMap.getBytes)
     val platformMap = mutable.HashMap[String, PlatformConfig]()
     val it = platformConfigMapProto.getPlatformConfigsMap.entrySet().iterator()
     while (it.hasNext){

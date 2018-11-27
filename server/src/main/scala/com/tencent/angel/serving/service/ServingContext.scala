@@ -165,7 +165,7 @@ class ServingContext(eventBus: EventBus[ServableState],
     try {
       storagePathSourceAndRouter.router.updateRoutes(routes)
     } catch {
-      case e: Exception => LOG(e.getMessage)
+      case e: Exception => LOG.error(e.getMessage)
     }
   }
 
@@ -173,7 +173,7 @@ class ServingContext(eventBus: EventBus[ServableState],
     try {
       storagePathSourceAndRouter.source.updateConfig(sourceConfig)
     } catch {
-      case e: Exception => LOG(e.getMessage)
+      case e: Exception => LOG.error(e.getMessage)
     }
   }
 }

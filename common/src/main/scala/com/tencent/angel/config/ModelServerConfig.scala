@@ -42,7 +42,7 @@ object ModelConfig{
   }
 
   def apply(modelConfig: String): ModelConfig = {
-    val modelConfigProto = ModelServerConfigProtos.ModelConfig.parseFrom(modelConfig.toArray[Byte])
+    val modelConfigProto = ModelServerConfigProtos.ModelConfig.parseFrom(modelConfig.getBytes)
     ModelConfig(modelConfigProto.getName, modelConfigProto.getBasePath, modelConfigProto.getModelPlatform,
       ServableVersionPolicy(modelConfigProto.getModelVersionPolicy), modelConfigProto.getLoggingConfig)
   }
@@ -81,7 +81,7 @@ object ModelConfigList{
   }
 
   def apply(modelConfigList: String): ModelConfigList = {
-    val modelConfigProto = ModelServerConfigProtos.ModelConfigList.parseFrom(modelConfigList.toArray[Byte])
+    val modelConfigProto = ModelServerConfigProtos.ModelConfigList.parseFrom(modelConfigList.getBytes)
     val modelConfigs = (0 until modelConfigProto.getConfigCount).toList.map{ idx =>
       ModelConfig(modelConfigProto.getConfig(idx))
     }
@@ -128,7 +128,7 @@ object ModelServerConfig{
   }
 
   def apply(modelServerConfig: String): ModelServerConfig = {
-    val modelServerConfigProto = ModelServerConfigProtos.ModelServerConfig.parseFrom(modelServerConfig.toArray[Byte])
+    val modelServerConfigProto = ModelServerConfigProtos.ModelServerConfig.parseFrom(modelServerConfig.getBytes)
     modelServerConfigProto.getConfigCase match {
       case ConfigCase.MODEL_CONFIG_LIST =>
         val modelConfigList = ModelConfigList(modelServerConfigProto.getModelConfigList)
