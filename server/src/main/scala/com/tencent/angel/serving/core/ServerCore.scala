@@ -210,6 +210,10 @@ class ServerCore(val context: CoreContext) extends Manager {
       }
     }
   }
+
+  def getServableStateMonitor: ServableStateMonitor ={
+    servableStateMonitor
+  }
 }
 
 
