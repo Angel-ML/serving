@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType
 class HttpRestApiHandler {
   @GET
   @Path("/angelServing/v1.0/models/{modelName}/")
-  @Produces(MediaType.APPLICATION_JSON)
+  @Produces(Array(MediaType.APPLICATION_JSON))
   def processModelServiceRequest(@PathParam("modelName") modelName: String): String = {
     if(modelName.isEmpty) {
       System.out.print("Missing model name in request.")
@@ -27,7 +27,7 @@ class HttpRestApiHandler {
 
   @GET
   @Path("/angelServing/v1.0/models/{modelName}/versions/{modelVersion}")
-  @Produces(MediaType.APPLICATION_JSON)
+  @Produces(Array(MediaType.APPLICATION_JSON))
   def processModelServiceRequestWithVersion(@PathParam("modelName") modelName: String,
                                             @PathParam("modelVersion") modelVersion: String): String = {
     if(modelName.isEmpty) {
@@ -43,8 +43,8 @@ class HttpRestApiHandler {
 
   @POST
   @Path("/angelServing/v1.0/models/{modelName}/methods/{modelMethod}")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
   def processPredictionServiceRequest(requestBody: String, @PathParam("modelName") modelName: String,
                                       @PathParam("modelMethod") modelMethod: String): String ={
     if(modelMethod.equals("classify")) {
@@ -61,8 +61,8 @@ class HttpRestApiHandler {
 
   @POST
   @Path("/angelServing/v1.0/models/{modelName}/methods/{modelMethod}")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
   def processPredictionServiceRequestWithVersion(requestBody: String, @PathParam("modelName") modelName: String,
                                                  @PathParam("modelVersion") modelVersion: String,
                                                  @PathParam("modelMethod") modelMethod: String): String ={

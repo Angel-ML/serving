@@ -5,6 +5,8 @@ import com.tencent.angel.core.saver.MetaGraphProtos.{MetaGraphDef, SignatureDef}
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.prediction.PredictProtos.{PredictRequest, PredictResponse}
 import io.grpc.stub.StreamObserver
+import scala.collection.JavaConversions._
+
 
 class PredictUtil {
 

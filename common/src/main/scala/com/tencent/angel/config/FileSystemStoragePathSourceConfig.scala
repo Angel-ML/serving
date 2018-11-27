@@ -28,7 +28,7 @@ object Latest{
 
   def apply(latest: String): Latest = {
     val latestProto = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy
-      .Latest.parseFrom(latest.toArray[Byte])
+      .Latest.parseFrom(latest.getBytes)
     Latest(latestProto.getNumVersions)
   }
 
@@ -83,7 +83,7 @@ object Specific{
 
   def apply(specific: String): Specific = {
     val specificProto = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy
-      .Specific.parseFrom(specific.toArray[Byte])
+      .Specific.parseFrom(specific.getBytes)
     val versions = List[Long]()
     val it = specificProto.getVersionsList.iterator()
     while (it.hasNext){
@@ -165,7 +165,7 @@ object ServableVersionPolicy {
 
   def apply(servableVersionPolicy: String): ServableVersionPolicy = {
     val servableVersionPolicyProto = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig
-      .ServableVersionPolicy.parseFrom(servableVersionPolicy.toArray[Byte])
+      .ServableVersionPolicy.parseFrom(servableVersionPolicy.getBytes)
     servableVersionPolicyProto.getPolicyChoiceCase match {
       case PolicyChoiceCase.LATEST => LatestPolicy(Latest(servableVersionPolicyProto.getLatest))
       case PolicyChoiceCase.ALL => AllPolicy(All())
@@ -204,7 +204,7 @@ object ServableToMonitor {
 
   def apply(servableToMonitor: String): ServableToMonitor = {
     val servableToMonitorProto = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.
-      ServableToMonitor.parseFrom(servableToMonitor.toArray[Byte])
+      ServableToMonitor.parseFrom(servableToMonitor.getBytes)
     ServableToMonitor(servableToMonitorProto.getServableName, servableToMonitorProto.getBasePath,
       ServableVersionPolicy(servableToMonitorProto.getServableVersionPolicy))
   }
@@ -249,7 +249,7 @@ object FileSystemStoragePathSourceConfig {
 
   def apply(fileSystemStoragePathSourceConfig: String): FileSystemStoragePathSourceConfig = {
     val pathSourceConfigProtos = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.parseFrom(
-      fileSystemStoragePathSourceConfig.toArray[Byte])
+      fileSystemStoragePathSourceConfig.getBytes)
     val servablesList = ListBuffer[ServableToMonitor]()
     val it = pathSourceConfigProtos.getServablesList.iterator()
     while (it.hasNext) {
