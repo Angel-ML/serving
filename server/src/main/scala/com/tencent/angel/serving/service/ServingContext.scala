@@ -5,6 +5,7 @@ import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSyst
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
+import com.tencent.angel.serving.core
 import com.tencent.angel.serving.core.ServerCore.{SourceAdapters, getPlatform}
 import com.tencent.angel.serving.core.{DynamicSourceRouter, ServerRequestLogger, StoragePath, _}
 import com.tencent.angel.serving.serving.ModelServerConfig
@@ -130,7 +131,7 @@ class ServingContext(eventBus: EventBus[ServableState],
     val numOutpurPorts = targets.platformAdapters.size + 1
     val router = DynamicSourceRouter[StoragePath](numOutpurPorts, routes)
 
-    val outputPorts: List[Source[StoragePath]] = router.getOutputPorts
+    val outputPorts: List[Source[core.StoragePath]] = router.getOutputPorts
     targets.platformAdapters.foreach { case (platform, adapter) =>
       val port: Option[Int] = platform2RouterPort.get(platform)
       if (port.isEmpty) {

@@ -10,7 +10,7 @@ import com.tencent.angel.serving.core.AspiredVersionsManager._
 import com.tencent.angel.serving.core.AspiredVersionPolicy.{Action, ServableAction}
 
 
-class AspiredVersionsManager private(
+class AspiredVersionsManager (
                                       manageStateDelayMicros: Long,
                                       manageStateIntervalMicros: Long,
                                       aspiredVersionPolicy: AspiredVersionPolicy,

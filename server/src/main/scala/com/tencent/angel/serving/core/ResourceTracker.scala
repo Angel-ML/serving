@@ -6,7 +6,7 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
   val usedResources: ResourceAllocation = null
   val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
 
-  def reserveResources(harness: LoaderHarness): Boolean = synchronized(this) {
+  def reserveResources(harness: LoaderHarness): Boolean = this.synchronized {
     val retriedFn = () => {
       val resources = harness.loader.estimateResources()
       if (resources.verify()) {
@@ -27,7 +27,7 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
     retry(retriedFn, isCancelledFn)
   }
 
-  def recomputeUsedResources(servables: List[LoaderHarness]): Unit = synchronized(this) {
+  def recomputeUsedResources(servables: List[LoaderHarness]): Unit = this.synchronized {
     usedResources.clear()
     servables.foreach { harness =>
       val resources = harness.loader.estimateResources()

@@ -30,7 +30,7 @@ case class ServableId(name: String, version: Long) {
 }
 
 
-case class ServableData[T](id: ServableId, data: T)
+case class ServableData[+T](id: ServableId, data: T)
 
 
 object ManagerState extends Enumeration {
@@ -89,7 +89,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
 
   def loadApproved(): Unit = transitionState(kLoadRequested, kLoadApproved)
 
-  def load(): Unit = synchronized(state) {
+  def load(): Unit = state.synchronized {
     assert(state == kLoadApproved)
     state = kLoading
 
@@ -121,7 +121,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
 
   def doneQuiescing(): Unit = transitionState(kQuiescing, kQuiesced)
 
-  def unload(): Unit = synchronized(state) {
+  def unload(): Unit = state.synchronized {
     assert(state == kQuiesced)
     state = kUnloading
     loader.unload()
@@ -132,7 +132,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
     ServableStateSnapshot(id, state, additionalState)
   }
 
-  def transitionState(from: State, to: State): Unit = synchronized(state) {
+  def transitionState(from: State, to: State): Unit = state.synchronized {
     if (state != from) {
       throw MonitorExceptions("from state does not match current state!")
     }
@@ -140,7 +140,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
     state = to
   }
 
-  def error(): Unit = synchronized(state) {
+  def error(): Unit = state.synchronized {
     statusLock.lock()
     try {
       if (errorCallback != null) {

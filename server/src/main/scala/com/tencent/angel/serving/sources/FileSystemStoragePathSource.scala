@@ -87,10 +87,10 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   // 'new_config'. Assumes both configs are normalized.
   def getDeletedServables(oldConfig: FileSystemStoragePathSourceConfig, newConfig: FileSystemStoragePathSourceConfig
                          ): Set[String] = {
-    val newServables = newConfig.getServablesList.asScala.toSet[String]
+    val newServables = newConfig.getServablesList.asScala.map(x => x.getServableName)
 
     oldConfig.getServablesList.asScala.filterNot(
-      (oldServable: ServableToMonitor) => newServables.contains(oldServable.getServableName)).toSet[String]
+      (oldServable: ServableToMonitor) => newServables.contains(oldServable.getServableName)).map(x => x.getServableName).toSet
   }
 
   override def setAspiredVersionsCallback(callback: AspiredVersionsCallback[StoragePath]): Unit = {

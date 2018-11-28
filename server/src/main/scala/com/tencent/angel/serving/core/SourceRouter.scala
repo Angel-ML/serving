@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 abstract class SourceRouter[T](val numOutputPorts: Int) extends TargetBase[T] {
   private var outputPorts: List[IdentitySourceAdapter[T]] = _
 
-  def getOutputPorts: List[Source[T]] = synchronized(this) {
+  def getOutputPorts: List[Source[T]] = this.synchronized {
     if (outputPorts == null) {
       outputPorts = (0 until numOutputPorts).toList.map(_ => new IdentitySourceAdapter[T]())
       outputPorts
