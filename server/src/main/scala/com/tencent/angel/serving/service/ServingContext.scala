@@ -88,7 +88,7 @@ class ServingContext(eventBus: EventBus[ServableState],
   def createAdapter(modelPlatform: String): StoragePathSourceAdapter = {
     val platformConfit = platformConfigMap.getPlatformConfigsMap.asScala.get(modelPlatform)
     if (platformConfit.isEmpty){
-      throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: ${modelPlatform}")
+      throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: $modelPlatform")
     }
     val adapterConfig = platformConfit.get.getSourceAdapterConfig
     val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny(adapterConfig)
@@ -131,8 +131,8 @@ class ServingContext(eventBus: EventBus[ServableState],
     val numOutpurPorts = targets.platformAdapters.size + 1
     val router = DynamicSourceRouter[StoragePath](numOutpurPorts, routes)
 
-    val outputPorts: List[Source[core.StoragePath]] = router.getOutputPorts
-    targets.platformAdapters.foreach { case (platform, adapter) =>
+    val outputPorts: List[Source[StoragePath]] = router.getOutputPorts
+    targets.platformAdapters.foreach { case (platform, adapter: Target[StoragePath]) =>
       val port: Option[Int] = platform2RouterPort.get(platform)
       if (port.isEmpty) {
         throw FailedPreconditions("Router port for platform not found.")
@@ -150,7 +150,7 @@ class ServingContext(eventBus: EventBus[ServableState],
       platform -> adapter
     }.toMap
 
-    val errorAdapters = new ErrorSourceAdapter[StoragePath, Loader](FailedPreconditions("No platform found for model"))
+    val errorAdapters = new ErrorSourceAdapter[Loader, StoragePath](FailedPreconditions("No platform found for model"))
     SourceAdapters(platformAdapters, errorAdapters)
   }
 

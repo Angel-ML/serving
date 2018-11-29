@@ -8,7 +8,7 @@ package object core {
 
   type AspiredVersionsCallback[T] = (String, List[ServableData[T]]) => Unit
 
-  type StoragePathSourceAdapter = SourceAdapter[StoragePath, Loader]
+  type StoragePathSourceAdapter = SourceAdapter[Loader, StoragePath]
 
   type CustomModelConfigLoader = (Any, AspiredVersionsManager) => Unit
 
