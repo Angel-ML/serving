@@ -5,34 +5,19 @@ import scopt.OptionParser
 
 object Main {
 
-  case class Params(
-                     port: Int = 8500,
-                     rest_api_port: Int = 0,
-                     rest_api_timeout_in_ms: Int = 0,
-                     enable_batching: Boolean = true,
-                     batching_parameters_file: String = "",
-                     model_config_file: String = "",
-                     model_name: String = "",
-                     model_base_path: String = "",
-                     max_num_load_retries: Int = 0,
-                     load_retry_interval_micros: Long = 0,
-                     file_system_poll_wait_seconds: Int = 0,
-                     flush_filesystem_caches: Boolean = true,
-                     enable_model_warmup: Boolean = true,
-                     monitoring_config_file: String = ""
-                   ) extends AbstractParams[Params]
-
   @throws[Exception]
   def main(args: Array[String]): Unit = {
-    val defaultParams = Params()
-    val parser = new OptionParser[Params]("ModelServer") {
+    val defaultOptions = Options()
+    val parser = new OptionParser[Options]("ModelServer") {
 
       opt[Int]("port")
         .text("Port to listen on for gRPC API")
         .required()
         .action((x, c) => c.copy(port = x))
       opt[Int]("rest_api_port")
-        .text("Port to listen on for HTTP/REST API.")
+        .text("Port to listen on for HTTP/REST API.If set to zero " +
+          "HTTP/REST API will not be exported. This port must be " +
+          "different than the one specified in --port.")
         .required()
         .action((x, c) => c.copy(rest_api_port = x))
       opt[Int]("rest_api_timeout_in_ms")
@@ -42,59 +27,72 @@ object Main {
         .text("enable batching.")
         .action((x, c) => c.copy(enable_batching = x))
       opt[String]("batching_parameters_file")
-        .text("")
+        .text("If non-empty, read an ascii BatchingParameters " +
+          "protobuf from the supplied file name and use the " +
+          "contained values instead of the defaults.")
         .action((x, c) => c.copy(batching_parameters_file = x))
       opt[String]("model_config_file")
-        .text("")
+        .text("If non-empty, read an ascii ModelServerConfig " +
+          "protobuf from the supplied file name, and serve the " +
+          "models in that file. This config file can be used to " +
+          "specify multiple models to serve and other advanced " +
+          "parameters including non-default version policy. (If " +
+          "used, --model_name, --model_base_path are ignored.)")
         .action((x, c) => c.copy(model_config_file = x))
       opt[String]("model_name")
-        .text("")
+        .text("name of model (ignored " +
+          "if --model_config_file flag is set")
         .action((x, c) => c.copy(model_name = x))
       opt[String]("model_base_path")
-        .text("")
+        .text("path to export (ignored if --model_config_file flag " +
+          "is set, otherwise required)")
         .action((x, c) => c.copy(model_base_path = x))
+      opt[String]("saved_model_tags")
+        .text("Comma-separated set of tags corresponding to the meta " +
+          "graph def to load from SavedModel.")
+        .action((x, c) => c.copy(saved_model_tags = x))
       opt[Int]("max_num_load_retries")
-        .text("")
+        .text("maximum number of times it retries loading a model " +
+          "after the first failure, before giving up. " +
+          "If set to 0, a load is attempted only once. " +
+          "Default: 5")
         .action((x, c) => c.copy(max_num_load_retries = x))
       opt[Long]("load_retry_interval_micros")
-        .text("")
+        .text("The interval, in microseconds, between each servable " +
+          "load retry. If set negative, it doesn't wait. " +
+          "Default: 1 minute")
         .action((x, c) => c.copy(load_retry_interval_micros = x))
       opt[Int]("file_system_poll_wait_seconds")
-        .text("")
+        .text("interval in seconds between each poll of the file " +
+          "system for new model version")
         .action((x, c) => c.copy(file_system_poll_wait_seconds = x))
       opt[Boolean]("flush_filesystem_caches")
-        .text("")
+        .text("If true (the default), filesystem caches will be " +
+          "flushed after the initial load of all servables, and " +
+          "after each subsequent individual servable reload (if " +
+          "the number of load threads is 1). This reduces memory " +
+          "consumption of the model server, at the potential cost " +
+          "of cache misses if model files are accessed after " +
+          "servables are loaded.")
         .action((x, c) => c.copy(flush_filesystem_caches = x))
       opt[Boolean]("enable_model_warmup")
-        .text("")
+        .text("Enables model warmup, which triggers lazy " +
+          "initializations (such as TF optimizations) at load " +
+          "time, to reduce first request latency.")
         .action((x, c) => c.copy(enable_model_warmup = x))
       opt[String]("monitoring_config_file")
-        .text("")
+        .text("If non-empty, read an ascii MonitoringConfig protobuf from " +
+          "the supplied file name")
         .action((x, c) => c.copy(monitoring_config_file = x))
     }
-    parser.parse(args, defaultParams).map { params =>
-      run(params)
+    parser.parse(args, defaultOptions).map { options =>
+      run(options)
     }.getOrElse {
       sys.exit(1)
     }
   }
 
-  def run(params: Params): Unit ={
-    val options = Options()
-    options.grpcPort = params.port
-    options.httpPort = params.rest_api_port
-    options.httpTimeoutInMs = params.rest_api_timeout_in_ms
-    options.enableBatching = params.enable_batching
-    options.batchingParametersFile = params.batching_parameters_file
-    options.modelConfigFile = params.model_config_file
-    options.monitoringConfigFile = params.monitoring_config_file
-    options.model_name = params.model_name
-    options.modelBasePath = params.model_base_path
-    options.maxNumLoadRetries = params.max_num_load_retries
-    options.loadRetryIntervalMicros = params.load_retry_interval_micros
-    options.fileSystemPollWaitSeconds = params.file_system_poll_wait_seconds
-    options.flushFilesystemCaches = params.flush_filesystem_caches
-    options.enableModelWarmup = params.enable_model_warmup
+  def run(options: Options): Unit ={
     server = new ModelServer
     server.buildAndStart(options)
     server.waitForTermination()

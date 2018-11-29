@@ -30,25 +30,25 @@ class ModelServer {
   def buildAndStart(options: Options): Unit = {
     val eventBus = new EventBus[ServableState]()
     val monitor = new ServableStateMonitor(eventBus, 1000)
-    val modelServerConfig: ModelServerConfig = readModelConfigFile(options.modelConfigFile)
-    val platformConfigMap: PlatformConfigMap = readPlatformConfigFile(options.platformConfigFile)
+    val modelServerConfig: ModelServerConfig = readModelConfigFile(options.model_config_file)
+    val platformConfigMap: PlatformConfigMap = readPlatformConfigFile(options.platform_config_file)
     val totalResources: ResourceAllocation = defaultResourceAllocation()
     val servingContext: ServingContext = new ServingContext(eventBus, monitor, totalResources, platformConfigMap)
 
-    servingContext.maxNumLoadRetries = options.maxNumLoadRetries
-    servingContext.loadRetryIntervalMicros = options.loadRetryIntervalMicros
+    servingContext.maxNumLoadRetries = options.max_num_load_retries
+    servingContext.loadRetryIntervalMicros = options.load_retry_interval_micros
 
     serverCore = new ServerCore(servingContext)
     serverCore.reloadConfig(modelServerConfig)
 
     predictionServiceImpl = new PredictionServiceImpl(serverCore, new AngelPredictor())
     modelServiceImpl = new ModelServiceImpl(serverCore)
-    val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]] = ServerBuilder.forPort(options.grpcPort)
+    val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]] = ServerBuilder.forPort(options.port)
     serverBuilder.addService(predictionServiceImpl)
     serverBuilder.addService(modelServiceImpl)
     grpcServer = serverBuilder.build()
     import org.eclipse.jetty.server.Server
-    httpServer = new Server(options.httpPort)
+    httpServer = new Server(options.rest_api_port)
     val servletContextHandler = new ServletContextHandler(NO_SESSIONS)
     servletContextHandler.setContextPath("/")
     httpServer.setHandler(servletContextHandler)

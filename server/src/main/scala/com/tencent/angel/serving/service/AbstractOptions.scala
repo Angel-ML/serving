@@ -2,7 +2,7 @@ package com.tencent.angel.serving.service
 
 import scala.reflect.runtime.universe._
 
-abstract class AbstractParams[T: TypeTag] {
+abstract class AbstractOptions[T: TypeTag] {
 
   private def tag: TypeTag[T] = typeTag[T]
   override def toString: String = {
