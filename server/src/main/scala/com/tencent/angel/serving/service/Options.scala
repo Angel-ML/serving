@@ -1,22 +1,20 @@
 package com.tencent.angel.serving.service
 
-case class Options() {
-  var grpcPort: Int = 8500
-
-  var httpPort: Int = 0
-  var httpTimeoutInMs = 30000
-
-  var enableBatching: Boolean = false
-  var batchingParametersFile: String = _
-  var model_name: String = _
-  var maxNumLoadRetries: Int = 5
-  var loadRetryIntervalMicros: Long = 1L * 60 * 1000 * 1000
-  var fileSystemPollWaitSeconds: Int = 1
-  var flushFilesystemCaches: Boolean = true
-  var modelBasePath: String = _
-  var savedModelTags: String = _
-  var platformConfigFile: String = _
-  var modelConfigFile: String = _
-  var enableModelWarmup: Boolean = true
-  var monitoringConfigFile: String = _
-}
+case class Options(
+                   port: Int = 8500,
+                   rest_api_port: Int = 0,
+                   rest_api_timeout_in_ms: Int = 3000,
+                   enable_batching: Boolean = true,
+                   batching_parameters_file: String = "",
+                   model_config_file: String = "",
+                   platform_config_file: String = "",
+                   model_name: String = "",
+                   model_base_path: String = "",
+                   saved_model_tags: String = "",
+                   max_num_load_retries: Int = 5,
+                   load_retry_interval_micros: Long = 60*1000*1000,
+                   file_system_poll_wait_seconds: Int = 1,
+                   flush_filesystem_caches: Boolean = true,
+                   enable_model_warmup: Boolean = true,
+                   monitoring_config_file: String = ""
+                 ) extends AbstractOptions[Options]

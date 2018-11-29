@@ -30,7 +30,7 @@ case class ServableId(name: String, version: Long) {
 }
 
 
-case class ServableData[+T](id: ServableId, data: T)
+case class ServableData[T](id: ServableId, data: T)
 
 
 object ManagerState extends Enumeration {
