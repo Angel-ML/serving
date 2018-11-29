@@ -3,7 +3,6 @@ package com.tencent.angel.serving.core
 import java.util.concurrent.locks.ReentrantLock
 
 import com.tencent.angel.serving.core.EventBus.EventAndTime
-import com.tencent.angel.serving.core.LoaderHarness.State.{State, _}
 import com.tencent.angel.serving.core.ManagerState.ManagerState
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind.Kind
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy.{AutoVersionPolicy, kLatest}
@@ -31,7 +30,7 @@ case class ServableId(name: String, version: Long) {
 }
 
 
-case class ServableData[T](id: ServableId, data: T)
+case class ServableData[+T](id: ServableId, data: T)
 
 
 object ManagerState extends Enumeration {
@@ -75,15 +74,14 @@ object ServableState {
 class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: Int, loadRetryIntervalMicros: Long) {
 
   import LoaderHarness.ErrorCallback
-
+  import com.tencent.angel.serving.core.LoaderHarness.State._
   val LOG: Logger = LoggerFactory.getLogger(classOf[LoaderHarness])
 
   var state: State = kNew
-
   private val statusLock = new ReentrantLock()
   private var additionalState: Boolean = true
   private var retryFlag: Boolean = false
-  var errorCallback: ErrorCallback = (id: ServableId, state: State) => {}
+  var errorCallback: ErrorCallback = (ServableId, State) => {}
 
   private val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
 
@@ -91,7 +89,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
 
   def loadApproved(): Unit = transitionState(kLoadRequested, kLoadApproved)
 
-  def load(): Unit = synchronized(state) {
+  def load(): Unit = state.synchronized {
     assert(state == kLoadApproved)
     state = kLoading
 
@@ -123,7 +121,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
 
   def doneQuiescing(): Unit = transitionState(kQuiescing, kQuiesced)
 
-  def unload(): Unit = synchronized(state) {
+  def unload(): Unit = state.synchronized {
     assert(state == kQuiesced)
     state = kUnloading
     loader.unload()
@@ -134,7 +132,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
     ServableStateSnapshot(id, state, additionalState)
   }
 
-  def transitionState(from: State, to: State): Unit = synchronized(state) {
+  def transitionState(from: State, to: State): Unit = state.synchronized {
     if (state != from) {
       throw MonitorExceptions("from state does not match current state!")
     }
@@ -142,7 +140,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
     state = to
   }
 
-  def error(): Unit = synchronized(state) {
+  def error(): Unit = state.synchronized {
     statusLock.lock()
     try {
       if (errorCallback != null) {
@@ -190,11 +188,11 @@ object LoaderHarness {
     val kUnloadRequested, kQuiescing, kQuiesced, kUnloading, kDisabled, kError = Value
   }
 
-  type ErrorCallback = (ServableId, State) => Unit
+  type ErrorCallback = (ServableId, State.State) => Unit
 }
 
 
-case class ServableStateSnapshot(id: ServableId, state: State, aspired: Boolean) {
+case class ServableStateSnapshot(id: ServableId, state: LoaderHarness.State.State, aspired: Boolean) {
   def ==(other: ServableStateSnapshot): Boolean = {
     this.id == other.id && this.state == other.state && this.aspired == other.aspired
   }

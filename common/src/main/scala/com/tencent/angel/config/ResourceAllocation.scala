@@ -1,4 +1,4 @@
-package com.tencent.angel.confg
+package com.tencent.angel.config
 
 import com.tencent.angel.config.ResourceProtos
 import com.google.protobuf.UInt32Value
@@ -37,7 +37,7 @@ object Resource {
   }
 
   def apply(resource: String): Resource = {
-    val resourceProtos = ResourceProtos.Resource.parseFrom(resource.toArray[Byte])
+    val resourceProtos = ResourceProtos.Resource.parseFrom(resource.getBytes)
     new Resource(resourceProtos.getDevice, resourceProtos.getDeviceInstance.getValue, resourceProtos.getKind)
   }
 }
@@ -158,7 +158,7 @@ object Entry {
   }
 
   def apply(entry: String): Entry = {
-    val entryProtos = ResourceProtos.ResourceAllocation.Entry.parseFrom(entry.toArray[Byte])
+    val entryProtos = ResourceProtos.ResourceAllocation.Entry.parseFrom(entry.getBytes)
     new Entry(Resource(entryProtos.getResource), entryProtos.getQuantity)
   }
 }
@@ -337,7 +337,7 @@ object ResourceAllocation {
   }
 
   def apply(resourceAllocation: String): ResourceAllocation = {
-    val resourceAllocationProto = ResourceProtos.ResourceAllocation.parseFrom(resourceAllocation.toArray[Byte])
+    val resourceAllocationProto = ResourceProtos.ResourceAllocation.parseFrom(resourceAllocation.getBytes)
     val numEntries = resourceAllocationProto.getResourceQuantitiesCount
     val resourceQuantities = (0 until numEntries).toList.map { idx =>
       Entry(resourceAllocationProto.getResourceQuantities(idx))

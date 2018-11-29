@@ -5,7 +5,7 @@ import java.util.concurrent.locks.{ReentrantLock, ReentrantReadWriteLock}
 import collection.mutable
 import java.util.concurrent.{ExecutorService, Executors}
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind
 import com.tencent.angel.serving.core.LoaderHarness.State
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy
@@ -13,7 +13,7 @@ import com.tencent.angel.serving.core.ServableStateMonitor.ServableStateAndTime
 import org.slf4j.{Logger, LoggerFactory}
 
 
-class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
+class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
                    maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
                    totalResources: ResourceAllocation,
                    servableEventBus: EventBus[ServableState]) extends Manager {
@@ -145,7 +145,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
     }
   }
 
-  private def reserveResources(harness: LoaderHarness): Boolean = synchronized(this) {
+  private def reserveResources(harness: LoaderHarness): Boolean = this.synchronized {
     // GetLoadersCurrentlyUsingResources
     val harnessList = new mutable.ListBuffer[LoaderHarness]()
     managedMap.getManagedServableNames.foreach(name =>
@@ -188,7 +188,7 @@ class BasicManager(numLoadThreads: Int, numUnloadThreads: Int,
   }
 
   def manageServable(servable: ServableData[Loader]): Unit = {
-    managedMap.manageServableWithAdditionalState(servable, aspired = true)
+    managedMap.manageServableWithAdditionalState(servable, aspired = true)_
   }
 
   def manageServableWithAdditionalState(servable: ServableData[Loader], aspired: Boolean): Unit = {
@@ -283,7 +283,7 @@ object BasicManager {
     }
 
     def manageServable(servable: ServableData[Loader]): Unit = {
-      manageServableWithAdditionalState(servable, aspired = true)
+      manageServableWithAdditionalState(servable, aspired = true)_
     }
 
     def manageServableWithAdditionalState(servable: ServableData[Loader], aspired: Boolean
@@ -419,7 +419,7 @@ object BasicManager {
           managedMap.getManagedServableNames.foreach { name =>
             managedMap.getManagedLoaderHarness(name).foreach { harness =>
               if (harness.state == LoaderHarness.State.kReady) {
-                val req = ServableRequest(harness.id.name, Some(harness.id.version))
+                val req = new ServableRequest(harness.id.name, Some(harness.id.version))
                 handlesMap.put(req, harness)
               }
             }

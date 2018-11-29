@@ -4,17 +4,17 @@ import java.util
 import java.util.{Timer, TimerTask}
 import java.util.concurrent.locks.ReentrantLock
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.serving.core.LoaderHarness.State._
 import com.tencent.angel.serving.core.AspiredVersionsManager._
 import com.tencent.angel.serving.core.AspiredVersionPolicy.{Action, ServableAction}
 
 
-class AspiredVersionsManager private(
+class AspiredVersionsManager (
                                       manageStateDelayMicros: Long,
                                       manageStateIntervalMicros: Long,
                                       aspiredVersionPolicy: AspiredVersionPolicy,
-                                      numLoadThreads: Int, numUnloadThreads: Int,
+                                      var numLoadThreads: Int, numUnloadThreads: Int,
                                       maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
                                       totalResources: ResourceAllocation,
                                       servableEventBus: EventBus[ServableState]

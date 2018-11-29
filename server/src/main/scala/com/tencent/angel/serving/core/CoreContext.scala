@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.core
 
-import com.tencent.angel.confg.ResourceAllocation
+import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig.ConfigCase
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
@@ -27,7 +27,7 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   var loadRetryIntervalMicros: Long = 60000
   var failIfNoModelVersionsFound: Boolean = false
   var allowVersionLabels: Boolean = true
-  var numInitialLoadThreads: Int = 4 * 1
+  var numInitialLoadThreads: Int = 4 * 1//4 * NumSchedulableCPUs
   val aspiredVersionPolicy: AspiredVersionPolicy = AspiredVersionPolicy(policyClassName)
 
   var manager: AspiredVersionsManager = _
@@ -36,9 +36,19 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
 
   def customModelConfigLoader: CustomModelConfigLoader
 
-  def maybeUpdateServerRequestLogger(configCase: ConfigCase): Unit
+  def maybeUpdateServerRequestLogger(config: ModelServerConfig): Unit
 
-  protected def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = ???
+  protected def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = {
+    val awaitedServables:List[ServableRequest] = models.map(ServableRequest.latest(_)).toList
+    val statesReached = monitor.waitUntilServablesReachState(awaitedServables, ManagerState.kAvailable)
+    if(statesReached.nonEmpty){
+      val numUnavailableModels = statesReached.count(stateReached => stateReached._2 != ManagerState.kAvailable)
+      val message = String.join(numUnavailableModels.toString,"model(s) did not become avaible:")
+      statesReached.collect{case (servableId, managerState) if (managerState != ManagerState.kAvailable)=>
+        message.concat(s"{${servableId.toString}}")}
+      throw  new Exception(message)
+    }
+  }
 
   protected def connectAdaptersToManagerAndAwaitModelLoads(adapters: SourceAdapters,
                                                            config: ModelServerConfig): Unit = {
@@ -49,34 +59,6 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
     val adapterList = adapters.platformAdapters.map { case (_, adapter) =>
       adapter.asInstanceOf[Source[Loader]]
     }.toList
-    connectSourcesWithFastInitialLoad(adapterList, modelsToAwait, numInitialLoadThreads)
-  }
-
-  protected def updateModelConfigListRelativePaths(modelConfigListRootDir: String,
-                                                   modelConfigList: ModelConfigList): ModelConfigList = {
-    val builder: ModelConfigList.Builder = modelConfigList.toBuilder
-
-    modelConfigList.getConfigList.asScala.zipWithIndex.foreach { case (modelConfig, idx) =>
-      val basePath = modelConfig.getBasePath
-      // Don't modify absolute paths.
-      if (ServerCore.uriIsRelativePath(basePath)) {
-        val fullPath = FilenameUtils.concat(modelConfigListRootDir, basePath)
-        if (ServerCore.uriIsRelativePath(fullPath)) {
-          throw InvalidArguments(s"Expected model ${modelConfig.getName}, with updated base_path = " +
-            s"JoinPath($modelConfigListRootDir, $basePath) to have an absolute path; got $fullPath")
-        }
-
-        val newModelConfig = builder.getConfigBuilder(idx).setBasePath(fullPath).build()
-        builder.setConfig(idx, newModelConfig)
-      }
-    }
-
-    builder.build()
-  }
-
-  protected def connectSourcesWithFastInitialLoad(sources: List[Source[Loader]],
-                                                  initialServables: List[ServableRequest],
-                                                  numThreads: Int): Unit = {
-
+    LoadServablesFast.connectSourcesWithFastInitialLoad(manager, adapterList, monitor, modelsToAwait, numInitialLoadThreads)
   }
 }

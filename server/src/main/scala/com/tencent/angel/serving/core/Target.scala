@@ -10,7 +10,7 @@ abstract class TargetBase[T] extends Target[T] {
 
   def setAspiredVersions(servableName: String, versions: List[ServableData[T]]): Unit
 
-  def detach(): Unit = synchronized(detached) {
+  def detach(): Unit = {
     if (!detached) {
       detached = true
     } else {
@@ -18,7 +18,7 @@ abstract class TargetBase[T] extends Target[T] {
     }
   }
 
-  def getAspiredVersionsCallback: AspiredVersionsCallback[T] = synchronized(detached) {
+  def getAspiredVersionsCallback: AspiredVersionsCallback[T] = {
     if (detached) {
       (name: String, versions: List[ServableData[T]]) => {}
     } else {

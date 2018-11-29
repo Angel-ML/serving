@@ -11,15 +11,12 @@ object SystemFileUtils {
     filePath.isDirectory
   }
 
-  def getChildren(base_path: String, children: List[String]): Boolean ={
+  def getChildren(base_path: String): ArrayList[String] ={
+    val children = new ArrayList[String]()
     val listFiles = FileUtils.listFiles(new File(base_path),null,false).iterator()
     while(listFiles.hasNext){
      children.add(listFiles.next().getName)
     }
-    !children.isEmpty
-  }
-
-  def flushFileSystemCaches(): Unit ={
-
+    children
   }
 }

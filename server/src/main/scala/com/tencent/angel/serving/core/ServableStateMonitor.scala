@@ -154,10 +154,11 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
   private val notificationLock = new ReentrantLock()
   private val servableStateNotificationRequests = new util.ArrayList[ServableStateNotificationRequest]()
 
-  def waitUntilServablesReachState(servables: List[ServableRequest], goalState: ManagerState): Unit = {
+  def waitUntilServablesReachState(servables: List[ServableRequest], goalState: ManagerState): Map[ServableId, ManagerState] = {
     val lock = new ReentrantLock()
     val cond = lock.newCondition()
     var condFlag = false
+    var reachedState: Map[ServableId, ManagerState] = null
 
     // return when one of the ServableRequest reach the goalState, not all
     notifyWhenServablesReachState(servables, goalState,
@@ -165,6 +166,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
         if (idStateMap != null && idStateMap.nonEmpty) {
           condFlag = true
           cond.signal()
+          reachedState = idStateMap
         }
       }
     )
@@ -172,6 +174,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     while (!condFlag) {
       cond.await()
     }
+    reachedState
   }
 
   def notifyWhenServablesReachState(servables: List[ServableRequest], goalState: ManagerState,
