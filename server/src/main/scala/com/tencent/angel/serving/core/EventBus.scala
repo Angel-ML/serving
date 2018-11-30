@@ -48,6 +48,7 @@ class EventBus[E] {
       val iter = subscriptions.iterator()
       while (iter.hasNext) {
         val callback = iter.next()._2
+        println("EventBus => publish => callback: has problem")
         callback(eventAndTime)
       }
     } finally {

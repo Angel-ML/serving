@@ -131,7 +131,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     try {
       config.getServablesList.asScala.foreach{ servable =>
         val versions = pollFileSystemForServable(servable)
-        versionsByServableName + (servable.getServableName -> versions)
+        versionsByServableName += (servable.getServableName -> versions)
       }
     } catch {
       case e: InvalidArguments => {LOG.error(e.getMessage)}
@@ -171,7 +171,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
 
   def AspireLastestVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
                             ): List[ServableData[StoragePath]]= {
-    val numServableVersionsToServe = math.max(servable.getServableVersionPolicy.getLatest.getNumVersions, 0)
+    val numServableVersionsToServe = math.max(servable.getServableVersionPolicy.getLatest.getNumVersions, 1)
     val versions = ListBuffer[ServableData[StoragePath]]()
     var numVersionsEmitted = 0
     if (childrenByVersion.isEmpty){
@@ -179,7 +179,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     } else {
       childrenByVersion.foreach { case (versionNumber: Long, child: String) =>
         if (numVersionsEmitted < numServableVersionsToServe) {
-          versions :+ AspireVersions(servable, child, versionNumber)
+          versions += AspireVersions(servable, child, versionNumber)
           numVersionsEmitted += 1
         }
       }
@@ -194,7 +194,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     children.foreach{ child =>
       val versionNumber = parseVersionNumber(child)
       if (versionNumber > 0) {
-        versions :+ AspireVersions(servable, child, versionNumber)
+        versions += AspireVersions(servable, child, versionNumber)
         atLeastOneVersionFound = true
       }
     }
@@ -212,7 +212,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     val aspiredVersions = new util.HashSet[Long]()
     childrenByVersion.foreach { case (version_number: Long, child: String) =>
       if (versionsToServe.contains(version_number)) {
-        versions :+ AspireVersions(servable, child, version_number)
+        versions += AspireVersions(servable, child, version_number)
         aspiredVersions.add(version_number)
       }
     }

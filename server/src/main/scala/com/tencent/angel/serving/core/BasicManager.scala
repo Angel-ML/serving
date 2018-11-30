@@ -244,7 +244,12 @@ object BasicManager {
     def getManagedServableStateSnapshots(servableName: String): List[ServableStateSnapshot] = {
       managedLock.lock()
       try {
-        managedMap(servableName).toList.map { harness => harness.loaderStateSnapshot() }
+        val harnessLoader = managedMap.getOrElse(servableName, null)
+        if (harnessLoader != null){
+          harnessLoader.toList.map { harness => harness.loaderStateSnapshot() }
+        } else {
+          List()
+        }
       } finally {
         managedLock.unlock()
       }
@@ -291,7 +296,7 @@ object BasicManager {
       managedLock.lock()
       try {
         val harnessOpt = getHarnessInternal(servable.id)
-        if (harnessOpt.isEmpty) {
+        if (harnessOpt == null) {
           val harness = LoaderHarness(servable.id, servable.data, maxNumLoadRetries, loadRetryIntervalMicros)
           harness.setAspired(aspired)
           managedMap.addBinding(servable.id.name, harness)
@@ -325,7 +330,12 @@ object BasicManager {
     }
 
     private def getHarnessInternal(id: ServableId): Option[LoaderHarness] = {
-      managedMap(id.name).find { harness => harness.id == id }
+      val harnessLoader = managedMap.getOrElse(id.name, null)
+      if (harnessLoader != null){
+        harnessLoader.find { harness => harness.id == id }
+      }else{
+        null
+      }
     }
 
     def getHarnessOption(id: ServableId): Option[LoaderHarness] = {

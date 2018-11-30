@@ -9,9 +9,9 @@ class SimpleLoader[ServableType](creator: Unit => ServableType, resourceEstimate
   private val creator_ : Unit => ServableType = creator
   private val resourceEstimate_ : Unit => ResourceAllocation = resourceEstimate
   private var memorizedResourceEstimator: ResourceAllocation = null
-  private var resourceUtil: ResourceUtil = ???
-  private var ramResource: Resource = ???
-  private var servable_ : ServableType = ???
+  private var resourceUtil: ResourceUtil = null
+  private var ramResource: Resource = null
+  private var servable_ : ServableType = null.asInstanceOf[ServableType]
 
 
   override def estimateResources(): ResourceAllocation = ???
