@@ -26,6 +26,7 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   var maxNumLoadRetries: Int = 3
   var loadRetryIntervalMicros: Long = 60000
   var failIfNoModelVersionsFound: Boolean = false
+  var flushFilesystemCaches: Boolean = true
   var allowVersionLabels: Boolean = true
   var numInitialLoadThreads: Int = 4 * 1//4 * NumSchedulableCPUs
   val aspiredVersionPolicy: AspiredVersionPolicy = AspiredVersionPolicy(policyClassName)

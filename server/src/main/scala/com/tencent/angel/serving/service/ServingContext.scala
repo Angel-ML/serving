@@ -5,12 +5,11 @@ import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSyst
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
-import com.tencent.angel.serving.core
 import com.tencent.angel.serving.core.ServerCore.{SourceAdapters, getPlatform}
 import com.tencent.angel.serving.core.{DynamicSourceRouter, ServerRequestLogger, StoragePath, _}
 import com.tencent.angel.serving.serving.ModelServerConfig
 import com.tencent.angel.serving.sources.FileSystemStoragePathSource
-import org.apache.commons.logging.LogFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -23,7 +22,7 @@ class ServingContext(eventBus: EventBus[ServableState],
 
   import ServingContext._
 
-  private val LOG = LogFactory.getLog(classOf[ServingContext])
+  private val LOG:Logger = LoggerFactory.getLogger(classOf[ServingContext])
   private type ServerRequestLoggerUpdater = (ModelServerConfig, ServerRequestLogger) => Unit
 
   private val serverRequestLogger: ServerRequestLogger = new ServerRequestLogger()

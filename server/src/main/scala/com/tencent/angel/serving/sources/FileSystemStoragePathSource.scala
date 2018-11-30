@@ -8,7 +8,7 @@ import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSyst
 import com.tencent.angel.serving.serving.{FileSystemStoragePathSourceConfig, ServableToMonitor}
 import com.tencent.angel.serving.core._
 import org.apache.commons.io.FilenameUtils
-import org.apache.commons.logging.LogFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -32,7 +32,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
 
   import FileSystemStoragePathSource._
   var config_ : FileSystemStoragePathSourceConfig = config
-  val LOG = LogFactory.getLog(classOf[FileSystemStoragePathSource])
+  val LOG:Logger = LoggerFactory.getLogger(classOf[FileSystemStoragePathSource])
 
   private val callbackLock = new ReentrantReadWriteLock()
   private val callbackReadLock: ReentrantReadWriteLock.ReadLock = callbackLock.readLock()

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.servable";
+option java_outer_classname = "SessionBundleSourceAdapterConfigProtos";
+
+import "servable/session_bundle_config.proto";
+
+// Config proto for SessionBundleSourceAdapter.
+message SessionBundleSourceAdapterConfig {
+    SessionBundleConfig config = 1;
+}

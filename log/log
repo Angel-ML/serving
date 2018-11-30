@@ -1,0 +1,9 @@
+18/11/30 09:53:57 INFO service.ModelServer : Building single TensorFlow model file config: model_name: default model_base_path: /d/test
+18/11/30 09:53:58 INFO service.ModelServer : model_config_list {
+  config {
+    name: "default"
+    base_path: "/d/test"
+    model_platform: "Angel"
+  }
+}
+

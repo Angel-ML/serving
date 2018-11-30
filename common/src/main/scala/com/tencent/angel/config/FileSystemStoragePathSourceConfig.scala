@@ -1,9 +1,27 @@
 package com.tencent.angel.config
 
-
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.PolicyChoiceCase
 
 import scala.collection.mutable.ListBuffer
+
+class All {
+  def toProto : FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All ={
+    val builder = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.newBuilder()
+    builder.build()
+  }
+
+  override def toString: String = toProto.toString
+
+  override def equals(obj: scala.Any): Boolean = this.equals(obj)
+
+  def ==(other: All): Boolean = this.equals(other)
+
+  def !=(other: All): Boolean = !(this == other)
+}
+
+object All {
+  def apply(): All = new All()
+}
 
 case class Latest(numVersions: Int) {
   def toProto : FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest ={
@@ -21,7 +39,7 @@ case class Latest(numVersions: Int) {
   def !=(other: Latest): Boolean = !(this == other)
 }
 
-object Latest{
+object Latest {
   def apply(latest: FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest): Latest = {
     Latest(latest.getNumVersions)
   }
@@ -32,25 +50,6 @@ object Latest{
     Latest(latestProto.getNumVersions)
   }
 
-}
-
-class All{
-  def toProto : FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All ={
-    val builder = FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.newBuilder()
-    builder.build()
-  }
-
-  override def toString: String = toProto.toString
-
-  override def equals(obj: scala.Any): Boolean = this.equals(obj)
-
-  def ==(other: All): Boolean = this.equals(other)
-
-  def !=(other: All): Boolean = !(this == other)
-}
-
-object All{
-  def apply(): All = new All()
 }
 
 case class Specific(versions: List[Long]){
