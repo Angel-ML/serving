@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package angel;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.servable";
+option java_outer_classname = "SavedModelBundleSourceAdapterConfigProtos";
+
+import "servable/session_bundle_config.proto";
+
+// Config proto for SavedModelBundleSourceAdapter.
+message SavedModelBundleSourceAdapterConfig {
+    // A SessionBundleConfig.
+    // FOR INTERNAL USE ONLY DURING TRANSITION TO SAVED_MODEL. WILL BE DEPRECATED.
+    // TODO(b/32248363): Replace this field with the "real" field(s).
+    SessionBundleConfig legacy_config = 1000;
+}
