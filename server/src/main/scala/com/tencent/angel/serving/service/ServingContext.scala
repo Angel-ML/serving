@@ -29,6 +29,7 @@ class ServingContext(eventBus: EventBus[ServableState],
   private val serverRequestLoggerUpdater: ServerRequestLoggerUpdater = null
   private val platform2RouterPort = new mutable.HashMap[String, Int]()
   private var storagePathSourceAndRouter: StoragePathSourceAndRouter = _
+  setPlatform2RouterPort(platformConfigMap)
 
 
   override def addModelsViaModelConfigList(config: ModelServerConfig): Unit = {
@@ -80,16 +81,25 @@ class ServingContext(eventBus: EventBus[ServableState],
     }
   }
 
+  def setPlatform2RouterPort(platformConfigMap: PlatformConfigMap): Unit = {
+    var portNum: Int = 0
+    val platformConfigs = platformConfigMap.getPlatformConfigs.asScala
+    for((platform, _) <- platformConfigs) {
+      platform2RouterPort.put(platform, portNum)
+      portNum = portNum + 1
+    }
+  }
+
   def createAspiredVersionsManager(policy: AspiredVersionPolicy): AspiredVersionsManager = ???
 
   def createResourceTracker(): ResourceTracker = ???
 
   def createAdapter(modelPlatform: String): StoragePathSourceAdapter = {
-    val platformConfit = platformConfigMap.getPlatformConfigsMap.asScala.get(modelPlatform)
-    if (platformConfit.isEmpty){
+    val platformConfig = platformConfigMap.getPlatformConfigsMap.asScala.get(modelPlatform)
+    if (platformConfig.isEmpty){
       throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: $modelPlatform")
     }
-    val adapterConfig = platformConfit.get.getSourceAdapterConfig
+    val adapterConfig = platformConfig.get.getSourceAdapterConfig
     val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny(adapterConfig)
     adapter
   }

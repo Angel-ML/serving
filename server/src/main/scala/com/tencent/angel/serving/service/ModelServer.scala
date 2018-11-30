@@ -32,7 +32,7 @@ class ModelServer {
   var httpServer: org.eclipse.jetty.server.Server = _
 
   def buildSingleModelConfig(modelName : String, modelBasePath: String): ModelServerConfig ={
-    LOG.info("Building single TensorFlow model file config: " +
+    LOG.info("Building single Angel model file config: " +
       "model_name: " + modelName + " model_base_path: " + modelBasePath)
     val singelModel: ModelConfig = ModelConfig.newBuilder().setName(modelName)
       .setBasePath(modelBasePath).setModelPlatform("Angel").build()

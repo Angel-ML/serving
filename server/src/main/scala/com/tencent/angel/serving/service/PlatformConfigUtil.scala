@@ -20,7 +20,7 @@ object PlatformConfigUtil {
       sourceAdapterConfig = Any.pack(sessionBundleSourceAdapterConfig)
     }
     PlatformConfigMap.newBuilder()
-      .putPlatformConfigs("angel", PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
+      .putPlatformConfigs("Angel", PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
       .build()
   }
 }
