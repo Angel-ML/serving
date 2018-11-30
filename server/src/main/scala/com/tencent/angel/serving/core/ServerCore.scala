@@ -28,7 +28,7 @@ class ServerCore(val context: CoreContext) extends Manager {
   private var modelLabels2Versions = new mutable.HashMap[String, mutable.HashMap[String, Long]]()
 
   private val configLock = new ReentrantLock()
-  private var config: ModelServerConfig = _
+  private var config: ModelServerConfig = ModelServerConfig.newBuilder().build()
 
   context.manager = manager
 
@@ -37,7 +37,7 @@ class ServerCore(val context: CoreContext) extends Manager {
     configLock.lock()
     try {
       // Determine whether to accept this config transition.
-      val isFirstConfig = config == null || config.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET
+      val isFirstConfig = config.getConfigCase == ModelServerConfig.ConfigCase.CONFIG_NOT_SET
       val acceptTransition = isFirstConfig || (config.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST
         && newConfig.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST)
       if (!acceptTransition) {
@@ -263,7 +263,10 @@ object ServerCore {
 
   def uriIsRelativePath(uriStr: String): Boolean = {
     val uri = new URI(uriStr)
-    !uri.isAbsolute
+    val scheme = uri.getScheme
+    val host = uri.getHost
+    val path = uri.getPath
+    (scheme == null || scheme.isEmpty) && (host == null || host.isEmpty) && !(!path.isEmpty && (path(0) == '/'))
   }
 
   def getPlatform(modelConfig: ModelConfig): String = {
