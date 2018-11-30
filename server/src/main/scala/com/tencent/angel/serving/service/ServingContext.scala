@@ -90,7 +90,7 @@ class ServingContext(eventBus: EventBus[ServableState],
       throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: $modelPlatform")
     }
     val adapterConfig = platformConfit.get.getSourceAdapterConfig
-    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny(adapterConfig)
+    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny[StoragePathSourceAdapter](adapterConfig)
     adapter
   }
 

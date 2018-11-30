@@ -12,11 +12,11 @@ object LoadServablesFast {
   def connectSourcesWithFastInitialLoad(aspiredVersionsManager: AspiredVersionsManager, sources:List[Source[Loader]],
                                         waitUntilLoaded: () => Unit, numThreads:Int): Unit = {
     val preNumLoadThreads = getManagerNumLoadThreads(aspiredVersionsManager)
-    val setManagerNumLoadThreads = setManagerNumLoadThreadsNotifier(aspiredVersionsManager)
-    setManagerNumLoadThreads(numThreads)
+//    val setManagerNumLoadThreads = setManagerNumLoadThreadsNotifier(aspiredVersionsManager)
+//    setManagerNumLoadThreads(numThreads)
     sources.foreach(source => ConnectSourceToTarget(source, aspiredVersionsManager))
     waitUntilLoaded()
-    setManagerNumLoadThreads(preNumLoadThreads)
+//    setManagerNumLoadThreads(preNumLoadThreads)
   }
 
 

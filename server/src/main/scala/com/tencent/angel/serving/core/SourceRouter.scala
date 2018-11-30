@@ -69,7 +69,14 @@ class DynamicSourceRouter[T] private(numOutputPorts: Int, private var routes: Ro
 
 object DynamicSourceRouter {
   def apply[T](numOutputPorts: Int, routes: Routes): DynamicSourceRouter[T] = {
-    assert(numOutputPorts == routes.size)
+    validateRoutes(numOutputPorts, routes)
     new DynamicSourceRouter[T](numOutputPorts, routes)
+  }
+  private def validateRoutes(numOutputPorts: Int, routes: Routes): Unit ={
+    routes.foreach{ case (name, port) =>
+        if (port < 0 || port >= numOutputPorts) throw InvalidArguments(s"port number out of range: ${port}")
+        if (port == numOutputPorts -1) throw InvalidArguments("Last port cannot be used in route map, since it's reserved for the default route")
+
+    }
   }
 }

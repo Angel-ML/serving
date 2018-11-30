@@ -1,6 +1,7 @@
 package com.tencent.angel.serving.core
 
 
+import com.google.protobuf.Message
 import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig
 import com.tencent.angel.serving.servables.angel.SavedModelBundle

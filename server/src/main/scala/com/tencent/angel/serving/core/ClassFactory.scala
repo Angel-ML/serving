@@ -2,8 +2,10 @@ package com.tencent.angel.serving.core
 
 
 import java.util.concurrent.locks.ReentrantReadWriteLock
+
 import com.google.protobuf.{Descriptors, Message}
-import com.tencent.angel.config.PlatformConfigProtos
+import com.tencent.angel.servable.{SavedModelBundleSourceAdapterConfigProtos, SessionBundleSourceAdapterConfigProtos}
+
 
 import scala.reflect.runtime.{universe => ru}
 
@@ -35,13 +37,19 @@ object ClassRegistry {
 
   def createFromAny[BaseClass](anyConfig: com.google.protobuf.Any): BaseClass = {
     val fullTypeName = parseUrlForAnyType(anyConfig.getTypeUrl)
-    val descriptor: Descriptors.Descriptor = PlatformConfigProtos.getDescriptor.findMessageTypeByName(fullTypeName)
-    val config: Message = descriptor.getOptions.newBuilderForType().build()
-    create[BaseClass](config, fullTypeName+"Creator")
+//    val descriptor: Descriptors.Descriptor = SavedModelBundleSourceAdapterConfigProtos.getDescriptor.findMessageTypeByName(fullTypeName)
+//    val config: Message = descriptor.getOptions.newBuilderForType().build()
+    var config: Message = null
+    if (fullTypeName == "SavedModelBundleSourceAdapterConfig"){
+      config = SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig.newBuilder().build()
+    } else if (fullTypeName == "SessionBundleSourceAdapterConfig"){
+      config = SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.newBuilder().build()
+    }
+    create[BaseClass](config, getClass.getPackage.getName + "." + fullTypeName + "Creator")
   }
 
 
   private def parseUrlForAnyType(typeUrl: String): String ={
-    typeUrl.substring(typeUrl.lastIndexOf("/"))
+    typeUrl.substring(typeUrl.lastIndexOf(".")+1)
   }
 }
