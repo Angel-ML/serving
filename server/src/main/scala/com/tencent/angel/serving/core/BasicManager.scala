@@ -49,7 +49,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
     executorLock.lock()
     try {
       val harnessOpt = managedMap.getHarnessOption(request.servableId)
-      LOG.info(s"request: <${request.servableId.toString}, ${request.kind}> is ready to send to threshold!")
+      LOG.info(s"request: <${request.servableId.toString}, ${request.kind}> is ready to send to thread!")
       if (harnessOpt.nonEmpty) {
         val harness = harnessOpt.get
         request.kind match {
@@ -81,9 +81,11 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
     val harnessOpt = managedMap.getHarnessOption(request.servableId)
     if (harnessOpt.nonEmpty) {
       val harness = harnessOpt.get
+      LOG.info("approveLoadOrUnload")
       val approved = approveLoadOrUnload(request, harness)
 
       if (approved) {
+        LOG.info("approved, Begin to execute")
         executeLoadOrUnload(request, harness)
       } else {
         // not approved
@@ -103,8 +105,10 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   }
 
   private def approveLoad(harness: LoaderHarness): Boolean = {
+    LOG.info("The frist step of approveLoad: reserveResources")
     val resourceReservationStatus = reserveResources(harness)
 
+    LOG.info("The second step of approveLoad: update status in LoaderHarness")
     if (!resourceReservationStatus) {
       harness.error()
       publishOnEventBus(new ServableState(harness.id, ManagerState.kEnd))
@@ -156,6 +160,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def reserveResources(harness: LoaderHarness): Boolean = this.synchronized {
     // GetLoadersCurrentlyUsingResources
     val harnessList = new mutable.ListBuffer[LoaderHarness]()
+    LOG.info("[reserveResources] 1. get harnesses that has used resources")
     managedMap.getManagedServableNames.foreach(name =>
       managedMap.getManagedLoaderHarness(name).foreach { harness =>
         val usesResources = harness.state match {
@@ -178,9 +183,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
       }
     )
 
-    LOG.info("reserveResources >> recomputeUsedResources")
+    LOG.info("[reserveResources] 2. recomputeUsedResources")
     resourceRracker.recomputeUsedResources(harnessList.toList)
-    LOG.info("reserveResources >> reserveResources")
+    LOG.info("[reserveResources] 3. reserveResources")
     resourceRracker.reserveResources(harness)
   }
 

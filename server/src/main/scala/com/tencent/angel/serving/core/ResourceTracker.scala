@@ -12,9 +12,9 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
 
   def reserveResources(harness: LoaderHarness): Boolean = this.synchronized {
     val retriedFn = () => {
-      LOG.info("[reserveResources] estimateResources start")
+      LOG.info("[reserveResources] 1. estimateResources")
       val resources = harness.loader.estimateResources()
-      LOG.info("[reserveResources] estimateResources finished")
+      LOG.info("[reserveResources] 2. verify and ensure the resources is satisfied")
       if (resources.verify()) {
         if (overbind(usedResources) + resources < totalResources) {
           true
@@ -30,7 +30,6 @@ class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries:
       harness.isRetryCanceled
     }
 
-    LOG.info("reserveResources: Begin to retry")
     retry(retriedFn, isCancelledFn)
   }
 
