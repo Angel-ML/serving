@@ -35,11 +35,13 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   //---------------------------------------------------------------------------Load/UnloadActions
   def loadServable(id: ServableId): Unit = {
     val req = LoadOrUnloadRequest(id, Kind.kLoad)
+    LOG.info(s"loadServable: ${id.toString}")
     loadOrUnloadServable(req)
   }
 
   def unloadServable(id: ServableId): Unit = {
     val req = LoadOrUnloadRequest(id, Kind.kUnload)
+    LOG.info(s"unloadServable: ${id.toString}")
     loadOrUnloadServable(req)
   }
 
@@ -47,11 +49,13 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
     executorLock.lock()
     try {
       val harnessOpt = managedMap.getHarnessOption(request.servableId)
+      LOG.info(s"request: <${request.servableId.toString}, ${request.kind}> is ready to send to threshold!")
       if (harnessOpt.nonEmpty) {
         val harness = harnessOpt.get
         request.kind match {
           case Kind.kUnload =>
             harness.unloadRequested()
+            LOG.info("[LoaderHarness-State] kReady --> kUnloadRequested")
             unloadExecutor.submit(new Runnable {
               override def run(): Unit = {
                 handleLoadOrUnloadRequest(request)
@@ -59,6 +63,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
             })
           case Kind.kLoad =>
             harness.loadRequested()
+            LOG.info("[LoaderHarness-State] kNew --> kLoadRequested")
             loadExecutor.submit(new Runnable {
               override def run(): Unit = {
                 handleLoadOrUnloadRequest(request)
@@ -66,6 +71,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
             })
         }
       }
+      
     } finally {
       executorLock.unlock()
     }
@@ -76,7 +82,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
     if (harnessOpt.nonEmpty) {
       val harness = harnessOpt.get
       val approved = approveLoadOrUnload(request, harness)
-
       if (approved) {
         executeLoadOrUnload(request, harness)
       } else {
@@ -98,12 +103,13 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
 
   private def approveLoad(harness: LoaderHarness): Boolean = {
     val resourceReservationStatus = reserveResources(harness)
-
     if (!resourceReservationStatus) {
       harness.error()
       publishOnEventBus(new ServableState(harness.id, ManagerState.kEnd))
+      LOG.info("[Manager-State] kEnd because of error")
     } else {
       harness.loadApproved()
+      LOG.info("[LoaderHarness-State] kLoadRequested --> kLoadApproved")
     }
 
     resourceReservationStatus
@@ -117,9 +123,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def executeLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Unit = {
     request.kind match {
       case Kind.kUnload =>
-        executeLoad(harness)
-      case Kind.kLoad =>
         executeUnload(harness)
+      case Kind.kLoad =>
+        executeLoad(harness)
     }
   }
 
@@ -170,7 +176,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
       }
     )
 
+    LOG.info("reserveResources >> recomputeUsedResources")
     resourceRracker.recomputeUsedResources(harnessList.toList)
+    LOG.info("reserveResources >> reserveResources")
     resourceRracker.reserveResources(harness)
   }
 

@@ -1,5 +1,6 @@
 package com.tencent.angel.serving.core
-import com.tencent.angel.config.{Resource, ResourceAllocation}
+import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
+
 import scala.collection.mutable
 
 class SimpleLoader[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation
@@ -14,7 +15,11 @@ class SimpleLoader[ServableType](creator: Unit => ServableType, resourceEstimate
   private var servable_ : ServableType = null.asInstanceOf[ServableType]
 
 
-  override def estimateResources(): ResourceAllocation = ???
+  override def estimateResources(): ResourceAllocation = {
+    val run = Runtime.getRuntime
+    val available = (run.totalMemory() * 0.8 * 0.2).toLong
+    ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), available)))
+  }
 
   override def load(): Unit = {
     servable_ = creator_()
