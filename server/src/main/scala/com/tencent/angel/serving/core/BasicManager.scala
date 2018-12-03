@@ -121,6 +121,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
 
   private def approveUnload(harness: LoaderHarness): Boolean = {
     harness.startQuiescing()
+    LOG.info("[LoaderHarness-State] kUnloadRequested --> kQuiescing")
     true
   }
 
@@ -135,17 +136,24 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
 
   private def executeLoad(harness: LoaderHarness): Unit = {
     publishOnEventBus(new ServableState(harness.id, ManagerState.kLoading))
+    LOG.info("[Manager-State] kLoading")
     harness.load()
+    LOG.info("[LoaderHarness-State] kLoadApproved --> kLoading --> kReady")
     servingMap.update(managedMap)
     publishOnEventBus(new ServableState(harness.id, ManagerState.kAvailable))
+    LOG.info("[Manager-State] kAvailable")
   }
 
   private def executeUnload(harness: LoaderHarness): Unit = {
     publishOnEventBus(new ServableState(harness.id, ManagerState.kUnloading))
+    LOG.info("[Manager-State] kUnloading")
     servingMap.update(managedMap)
     harness.doneQuiescing()
+    LOG.info("[LoaderHarness-State] kQuiescing --> kQuiesced")
     harness.unload()
+    LOG.info("[LoaderHarness-State] kQuiesced --> kUnloading --> kDisabled")
     publishOnEventBus(new ServableState(harness.id, ManagerState.kEnd))
+    LOG.info("[Manager-State] kEnd")
   }
 
   def cancelLoadServableRetry(id: ServableId): Unit = {
@@ -238,6 +246,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   //---------------------------------------------------------------------------
   private def publishOnEventBus(state: ServableState): Unit = {
     if (servableEventBus != null) {
+      LOG.info(s"[Event] <${state.id.toString}, ${state.managerState}>")
       servableEventBus.publish(state)
     }
   }
@@ -307,6 +316,7 @@ object BasicManager {
     def manageServableWithAdditionalState(servable: ServableData[Loader], aspired: Boolean
                                          )(callback: ServableState => Unit): Unit = {
       managedLock.lock()
+      LOG.info(s"manage servable: ${servable.id.toString}")
       try {
         val harnessOpt = getHarnessInternal(servable.id)
         if (harnessOpt == null) {
@@ -332,6 +342,7 @@ object BasicManager {
           harness.state match {
             case LoaderHarness.State.kNew | LoaderHarness.State.kDisabled | LoaderHarness.State.kError =>
               managedMap.removeBinding(id.name, harness)
+              LOG.info(s"stop manage servable: ${id.toString}")
             case _ => LOG.info("The state of harness is not kNew, kDisabled or kError, maybe in unloading!")
           }
         } else {

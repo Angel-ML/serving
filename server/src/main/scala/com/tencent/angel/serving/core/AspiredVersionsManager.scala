@@ -11,14 +11,14 @@ import com.tencent.angel.serving.core.AspiredVersionPolicy.{Action, ServableActi
 
 
 class AspiredVersionsManager (
-                                      manageStateDelayMicros: Long,
-                                      manageStateIntervalMicros: Long,
-                                      aspiredVersionPolicy: AspiredVersionPolicy,
-                                      var numLoadThreads: Int, numUnloadThreads: Int,
-                                      maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
-                                      totalResources: ResourceAllocation,
-                                      servableEventBus: EventBus[ServableState]
-                                    ) extends Target[Loader] with Manager {
+                               manageStateDelayMicros: Long,
+                               manageStateIntervalMicros: Long,
+                               aspiredVersionPolicy: AspiredVersionPolicy,
+                               var numLoadThreads: Int, numUnloadThreads: Int,
+                               maxNumLoadRetries: Int, loadRetryIntervalMicros: Long,
+                               totalResources: ResourceAllocation,
+                               servableEventBus: EventBus[ServableState]
+                             ) extends Target[Loader] with Manager {
   val basicManager: BasicManager = new BasicManager(numLoadThreads, numUnloadThreads, maxNumLoadRetries,
     loadRetryIntervalMicros, totalResources, servableEventBus)
   private val versionsRequestsLock = new ReentrantLock()

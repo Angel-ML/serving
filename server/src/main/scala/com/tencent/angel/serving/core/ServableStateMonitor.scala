@@ -34,7 +34,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     val name = stateAndTime.state.id.name
     val version = stateAndTime.state.id.version
 
-    //statesWriteLock.lock()
+    statesWriteLock.lock()
     try {
       if (states.contains(name)) {
         states(name)(version) = stateAndTime
@@ -44,7 +44,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
         states(name) = versionMap
       }
     } finally {
-      //statesWriteLock.unlock()
+      statesWriteLock.unlock()
     }
 
     updateLiveStates(stateAndTime)
@@ -118,7 +118,7 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     try {
       states.getOrElse(servableName, new mutable.HashMap[Version, ServableStateAndTime]())
     } finally {
-      statesReadLock
+      statesReadLock.unlock()
     }
   }
 
