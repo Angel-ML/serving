@@ -1,0 +1,40 @@
+18/12/03 20:27:26 INFO service.ModelServer : Building single Angel model file config: model_name: default model_base_path: E://mode_path
+18/12/03 20:27:26 INFO core.Retry : Retry Info: <5, 60000000>
+18/12/03 20:27:26 INFO core.ServerCore : adding or updating models
+18/12/03 20:27:26 INFO service.ServingContext : (re-)adding model: default
+18/12/03 20:27:26 INFO core.ServableStateMonitor : --------- await Before ---------
+18/12/03 20:27:27 INFO core.BasicManager : manage servable: {name: default, version: 1}
+18/12/03 20:27:27 INFO core.Retry : Retry Info: <5, 60000000>
+18/12/03 20:27:27 INFO core.BasicManager : [Event] <{name: default, version: 1}, kStart>
+18/12/03 20:27:27 INFO core.BasicManager : loadServable: {name: default, version: 1}
+18/12/03 20:27:27 INFO core.BasicManager : request: <{name: default, version: 1}, kLoad> is ready to send to thread!
+18/12/03 20:27:27 INFO core.BasicManager : [LoaderHarness-State] kNew --> kLoadRequested
+18/12/03 20:27:27 INFO core.BasicManager : approveLoadOrUnload
+18/12/03 20:27:27 INFO core.BasicManager : The frist step of approveLoad: reserveResources
+18/12/03 20:27:27 INFO core.BasicManager : [reserveResources] 1. get harnesses that has used resources
+18/12/03 20:27:27 INFO core.BasicManager : [reserveResources] 2. recomputeUsedResources
+18/12/03 20:27:27 INFO core.BasicManager : [reserveResources] 3. reserveResources
+18/12/03 20:27:27 INFO core.Retry : Begin to retry
+18/12/03 20:27:27 INFO core.Retry : [Retry] call function: retriedFn
+18/12/03 20:27:27 INFO core.ResourceTracker : [reserveResources] 1. estimateResources
+18/12/03 20:27:27 INFO core.ResourceTracker : [reserveResources] 2. verify and ensure the resources is satisfied
+18/12/03 20:27:27 INFO core.Retry : 	 --> The 1-th retry finished!
+18/12/03 20:27:27 INFO core.Retry : End retry
+18/12/03 20:27:27 INFO core.BasicManager : The second step of approveLoad: update status in LoaderHarness
+18/12/03 20:27:27 INFO core.BasicManager : [LoaderHarness-State] kLoadRequested --> kLoadApproved
+18/12/03 20:27:27 INFO core.BasicManager : approved, Begin to execute
+18/12/03 20:27:27 INFO core.BasicManager : [Event] <{name: default, version: 1}, kLoading>
+18/12/03 20:27:27 INFO core.BasicManager : [Manager-State] kLoading
+18/12/03 20:27:27 INFO core.Retry : Begin to retry
+18/12/03 20:27:27 INFO core.Retry : [Retry] call function: retriedFn
+18/12/03 20:27:27 INFO core.Retry : 	 --> The 1-th retry finished!
+18/12/03 20:27:27 INFO core.Retry : End retry
+18/12/03 20:27:27 INFO core.BasicManager : [LoaderHarness-State] kLoadApproved --> kLoading --> kReady
+18/12/03 20:27:27 INFO core.BasicManager : [Event] <{name: default, version: 1}, kAvailable>
+18/12/03 20:27:27 INFO core.ServableStateMonitor : --------- waitCond Before ---------
+18/12/03 20:27:27 INFO core.ServableStateMonitor : --------- waitCond After ---------
+18/12/03 20:27:27 INFO core.BasicManager : [Manager-State] kAvailable
+18/12/03 20:27:27 INFO core.ServableStateMonitor : --------- await After ---------
+18/12/03 20:27:27 INFO core.ServableStateMonitor : +++++++++++++++++++ waitUntilServablesReachState +++++++++++++++++++
+18/12/03 20:27:27 INFO service.ModelServer : Running gRPC ModelServer at 9876
+18/12/03 20:27:28 INFO service.ModelServer : Error occurred while starting Jetty
