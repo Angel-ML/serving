@@ -1,9 +1,10 @@
 package com.tencent.angel.serving.core
 
-import com.tencent.angel.config.ResourceAllocation
+import com.tencent.angel.config.{Entry, ResourceAllocation}
 
 class ResourceTracker(val totalResources: ResourceAllocation, maxNumLoadRetries: Int, loadRetryIntervalMicros: Long) {
-  val usedResources: ResourceAllocation = null
+  val usedResources: ResourceAllocation = new ResourceAllocation(totalResources.resourceQuantities.map{ entry =>
+    Entry(entry.resource, 0)})
   val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
 
   def reserveResources(harness: LoaderHarness): Boolean = this.synchronized {

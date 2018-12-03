@@ -1,0 +1,3 @@
+18/12/03 16:46:48 INFO service.ModelServer : Building single Angel model file config: model_name: default model_base_path: E://mode_path
+18/12/03 16:46:49 INFO core.ServerCore : adding or updating models
+18/12/03 16:46:49 INFO service.ServingContext : (re-)adding model: default

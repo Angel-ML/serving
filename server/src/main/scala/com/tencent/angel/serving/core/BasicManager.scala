@@ -90,9 +90,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def approveLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Boolean = {
     request.kind match {
       case Kind.kUnload =>
-        approveLoad(harness)
-      case Kind.kLoad =>
         approveUnload(harness)
+      case Kind.kLoad =>
+        approveLoad(harness)
     }
   }
 

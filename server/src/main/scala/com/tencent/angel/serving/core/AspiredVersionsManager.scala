@@ -76,8 +76,7 @@ class AspiredVersionsManager (
 
     val servableStateSnapshots = basicManager.getManagedServableStateSnapshots(servableName)
     val oldInvalidateAspiredVersions = servableStateSnapshots.collect {
-      case snapshot if !snapshot.aspired =>
-        snapshot.id.version
+      case snapshot if !snapshot.aspired => snapshot.id.version
     }.toSet
 
 
@@ -132,7 +131,7 @@ class AspiredVersionsManager (
   }
 
   private def performAction(servableAction: ServableAction): Unit = {
-    servableAction match {
+    servableAction.action match {
       case Action.kLoad => basicManager.loadServable(servableAction.id)
       case Action.kUnload => basicManager.unloadServable(servableAction.id)
     }
