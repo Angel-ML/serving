@@ -160,20 +160,26 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     var condFlag = false
     var reachedState: Map[ServableId, ManagerState] = null
 
-    // return when one of the ServableRequest reach the goalState, not all
-    notifyWhenServablesReachState(servables, goalState,
-      (idStateMap: Map[ServableId, ManagerState]) => {
-        if (idStateMap != null && idStateMap.nonEmpty) {
-          condFlag = true
-          cond.signal()
-          reachedState = idStateMap
+    lock.lock()
+    try {
+      // return when one of the ServableRequest reach the goalState, not all
+      notifyWhenServablesReachState(servables, goalState,
+        (idStateMap: Map[ServableId, ManagerState]) => {
+          if (idStateMap != null && idStateMap.nonEmpty) {
+            condFlag = true
+            cond.signal()
+            reachedState = idStateMap
+          }
         }
-      }
-    )
+      )
 
-    while (!condFlag) {
-      cond.await()
+      while (!condFlag) {
+        cond.await()
+      }
+    } finally {
+      lock.unlock()
     }
+
     reachedState
   }
 
