@@ -12,7 +12,6 @@ class Retry(maxNumRetries: Int, retryIntervalMicros: Long) {
       isSuccess = retriedFn()
       numTries += 1
     } while (!isCancelledFn() && !isSuccess && numTries <= maxNumRetries)
-
     isSuccess
   }
 }

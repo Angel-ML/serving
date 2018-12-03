@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.core
 
-import com.tencent.angel.config.ResourceAllocation
+import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.serving.servables.angel.SavedModelBundle
 import com.tencent.angel.serving.serving.SessionBundleConfig
 
@@ -12,7 +12,11 @@ class SavedModelBundleFactory(config: SessionBundleConfig) {
     // no `saved_model_tags` are specified.
   }
 
-  def estimateResourceRequirement(path: StoragePath): ResourceAllocation = ???
+  def estimateResourceRequirement(path: StoragePath): ResourceAllocation = {
+    val run = Runtime.getRuntime
+    val available = (run.totalMemory() * 0.8 * 0.1).toLong
+    ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), available)))
+  }
 
 }
 object SavedModelBundleFactory{

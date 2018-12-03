@@ -76,7 +76,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
     if (harnessOpt.nonEmpty) {
       val harness = harnessOpt.get
       val approved = approveLoadOrUnload(request, harness)
-
       if (approved) {
         executeLoadOrUnload(request, harness)
       } else {
@@ -98,7 +97,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
 
   private def approveLoad(harness: LoaderHarness): Boolean = {
     val resourceReservationStatus = reserveResources(harness)
-
     if (!resourceReservationStatus) {
       harness.error()
       publishOnEventBus(new ServableState(harness.id, ManagerState.kEnd))
@@ -117,9 +115,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def executeLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Unit = {
     request.kind match {
       case Kind.kUnload =>
-        executeLoad(harness)
-      case Kind.kLoad =>
         executeUnload(harness)
+      case Kind.kLoad =>
+        executeLoad(harness)
     }
   }
 
@@ -169,7 +167,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
         }
       }
     )
-
     resourceRracker.recomputeUsedResources(harnessList.toList)
     resourceRracker.reserveResources(harness)
   }
