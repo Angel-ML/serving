@@ -83,7 +83,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
       val harness = harnessOpt.get
       LOG.info("approveLoadOrUnload")
       val approved = approveLoadOrUnload(request, harness)
-
       if (approved) {
         LOG.info("approved, Begin to execute")
         executeLoadOrUnload(request, harness)
@@ -107,7 +106,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def approveLoad(harness: LoaderHarness): Boolean = {
     LOG.info("The frist step of approveLoad: reserveResources")
     val resourceReservationStatus = reserveResources(harness)
-
     LOG.info("The second step of approveLoad: update status in LoaderHarness")
     if (!resourceReservationStatus) {
       harness.error()
@@ -129,9 +127,9 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def executeLoadOrUnload(request: LoadOrUnloadRequest, harness: LoaderHarness): Unit = {
     request.kind match {
       case Kind.kUnload =>
-        executeLoad(harness)
-      case Kind.kLoad =>
         executeUnload(harness)
+      case Kind.kLoad =>
+        executeLoad(harness)
     }
   }
 

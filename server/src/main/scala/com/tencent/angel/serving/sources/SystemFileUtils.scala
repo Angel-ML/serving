@@ -15,12 +15,16 @@ object SystemFileUtils {
   }
 
   def getChildren(base_path: String): Set[String] ={
-    val listFiles = FileUtils.listFilesAndDirs(new File(base_path), TrueFileFilter.INSTANCE, TrueFileFilter.TRUE)
-    val realChildren = listFiles.asScala.filter(child => child.getAbsoluteFile.isDirectory).map(
-      child => child.getPath.substring(base_path.length-1, child.getPath.length)).filter(child => child.length>1).map{child =>
-      val childStr = child.substring(1, child.length)
+    val f = new File(base_path)
+    val len = f.getPath.length
+    val listFiles = FileUtils.listFilesAndDirs(f, TrueFileFilter.INSTANCE, TrueFileFilter.TRUE)
+    val realChildren = listFiles.asScala.filter(child => child.getAbsoluteFile.isDirectory).filterNot(
+      child => child.getPath.equals(f.getPath)).map{child =>
+      val childStr = child.getPath.substring(len + 1)
       if (childStr.contains("\\")){
         childStr.substring(0, childStr.indexOf("\\"))
+      }else if (childStr.contains("/")){
+        childStr.substring(0, childStr.indexOf("/"))
       }else {
         childStr
       }}
