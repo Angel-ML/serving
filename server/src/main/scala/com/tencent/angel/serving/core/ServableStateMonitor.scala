@@ -200,7 +200,6 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
     }
 
     maybeSendStateReachedNotifications()
-
   }
 
   private def maybeSendStateReachedNotifications(): Unit = {
