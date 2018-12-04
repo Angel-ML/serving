@@ -30,7 +30,6 @@ class ModelServiceImpl extends ModelServiceGrpc.ModelServiceImplBase {
     serverConfig.getConfigCase match {
       case ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST =>
         val list = serverConfig.getModelConfigList
-        var index = 0
         for(index <- 0 until list.getConfigCount) {
           val config = list.getConfig(index)
           System.out.print("Config entry index: " + index + " path: "

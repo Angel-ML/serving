@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RpcClient {
-    private static final Logger LOG = LoggerFactory.getLogger(RpcClient.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(RpcClient.class);
 
     private final ManagedChannel channel;
     private final PredictionServiceGrpc.PredictionServiceBlockingStub blockingStub;

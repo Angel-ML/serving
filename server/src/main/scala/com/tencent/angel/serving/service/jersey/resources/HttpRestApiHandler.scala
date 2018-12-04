@@ -5,8 +5,9 @@ import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
+import com.tencent.angel.serving.service.jersey.util.ProcessUtil
 import javax.ws.rs._
-import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.{MediaType, Response}
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.matching.Regex
@@ -19,21 +20,28 @@ class HttpRestApiHandler {
   @GET
   @Path("/angelServing/v1.0/models{requestPath:(?:/([^/:]+))?(?:/versions/(\\d+))?}")
   @Produces(Array(MediaType.APPLICATION_JSON))
-  def processModelServiceRequest(@PathParam("requestPath") requestPath: String): String = {
-    val pattern = new Regex("""(?:/([^/:]+))?(?:/versions/(\d+))?""")
-    val pattern(_, _) = requestPath
+  def processModelServiceRequest(@PathParam("requestPath") requestPath: String): Response = {
     var modelName: String = null
     var modelVersion: String = null
-    requestPath match {
-      case pattern(name, version) =>
-        modelName = name
-        modelVersion = version
-      case _ =>
-        LOG.info("unsupported request url.")
+    try{
+      val pattern = new Regex("""(?:/([^/:]+))?(?:/versions/(\d+))?""")
+      val pattern(_, _) = requestPath
+      requestPath match {
+        case pattern(name, version) =>
+          modelName = name
+          modelVersion = version
+        case _ =>
+          LOG.info("unsupported request url.")
+      }
+    } catch {
+      case ex: Exception =>
+        val errorMessage = "Resolve request path error, exception: " + ex
+        return Response.status(500).entity(errorMessage).build()
     }
     if(modelName == null || modelName.isEmpty) {
-      LOG.info("Missing model name in request.")
-      null
+      val errorMessage = "Missing model name in request."
+      LOG.info(errorMessage)
+      Response.status(500).entity(errorMessage).build()
     } else {
       val modelSpecBuilder = ModelSpec.newBuilder()
       modelSpecBuilder.setName(modelName)
@@ -44,7 +52,7 @@ class HttpRestApiHandler {
       val request = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build()
       val builder = GetModelStatusResponse.newBuilder()
       GetModelStatusImpl.getModelStatus(ModelServer.getServerCore, request, builder)
-      builder.build().toString
+      Response.status(200).entity(builder.build().toString).build()
     }
   }
 
@@ -52,56 +60,38 @@ class HttpRestApiHandler {
   @Path("/angelServing/v1.0/models/{requestPath:([^/:]+)(?:/versions/(\\d+))?:(classify|regress|predict)}")
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
-  def processPredictionServiceRequest(requestBody: String, @PathParam("requestPath") requestPath: String): String ={
-    val pattern = new Regex("""([^/:]+)(?:/versions/(\d+))?:(classify|regress|predict)""")
-    val pattern(_, _, _) = requestPath
+  def processPredictionServiceRequest(requestBody: String, @PathParam("requestPath") requestPath: String): Response ={
     var modelName: String = null
     var modelVersion: String = null
     var modelMethod: String = null
-    requestPath match {
-      case pattern(name, version, method) =>
-        modelName = name
-        modelVersion = version
-        modelMethod = method
-      case _ =>
-        LOG.info("unsupported request url.")
+    try {
+      val pattern = new Regex("""([^/:]+)(?:/versions/(\d+))?:(classify|regress|predict)""")
+      val pattern(_, _, _) = requestPath
+      requestPath match {
+        case pattern(name, version, method) =>
+          modelName = name
+          modelVersion = version
+          modelMethod = method
+        case _ =>
+          LOG.info("unsupported request url.")
+      }
+    } catch {
+      case ex: Exception =>
+        val errorMessage = "Resolve request path error, exception: " + ex
+        return Response.status(500).entity(errorMessage).build()
     }
     if(modelMethod.equals("classify")) {
-      processClassifyRequest
+      ProcessUtil.processClassifyRequest()
     } else if(modelMethod.equals("predict")) {
-      processClassifyRequest
+      ProcessUtil.processClassifyRequest()
     } else if(modelMethod.equals("regress")) {
-      processRegressRequest
+      ProcessUtil.processRegressRequest()
     } else {
-      return "error"
+      val errorMessage = "model method: " + modelMethod + " can not found."
+      LOG.info(errorMessage)
+      return Response.status(500).entity(errorMessage).build()
     }
-    "ok"
+    Response.status(200).entity("ok").build()
   }
-
-  def processClassifyRequest: Unit = {
-
-  }
-
-  def processPredictRequest: Unit = {
-
-  }
-
-  def processRegressRequest: Unit = {
-
-  }
-
-  def fillClassificationRequestFromJson(): Unit ={
-
-  }
-
-  def fillPredictRequestFromJson: Unit ={
-
-  }
-
-  def fillRegressionRequestFromJson: Unit ={
-
-  }
-
-
 }
 
