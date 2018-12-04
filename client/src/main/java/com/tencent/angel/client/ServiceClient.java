@@ -73,7 +73,7 @@ public class ServiceClient {
 
     public static void main(String[] args) throws InterruptedException {
         ServiceClient client = new ServiceClient("localhost", 8500);
-        String modelName = "AngelTest";
+        String modelName = "default";
         long modelVersion = 1L;
         try {
             client.doPredict(modelName, modelVersion);

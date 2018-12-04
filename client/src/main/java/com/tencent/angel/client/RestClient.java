@@ -7,7 +7,7 @@ import com.sun.jersey.api.client.WebResource;
 public class RestClient {
 
     public static void main(String[] args) {
-        String getResource = "";
+        String getResource = "http://localhost:8501/angelServing/v1.0/models/default/versions/1";
         String postResource = "";
         Client client = Client.create();
         WebResource getWebResource = client
@@ -16,9 +16,10 @@ public class RestClient {
                 .resource(postResource);
         ClientResponse getResponse = getWebResource.accept("application/json")
                 .get(ClientResponse.class);
-        String input = "";
-        ClientResponse postResponse = postWebResource.type("application/json")
-                .post(ClientResponse.class, input);
+        System.out.println(getResponse.getEntity(String.class));
+        //String input = "";
+        //ClientResponse postResponse = postWebResource.type("application/json")
+        //        .post(ClientResponse.class, input);
     }
 
 }
