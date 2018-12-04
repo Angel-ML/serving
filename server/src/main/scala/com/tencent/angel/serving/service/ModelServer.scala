@@ -9,12 +9,14 @@ import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}
-import com.tencent.angel.serving.servables.angel.AngelPredictor
+import com.tencent.angel.serving.servables.common.Predictor
 import com.tencent.angel.serving.serving.{BatchingParameters, ModelServerConfig}
 import org.eclipse.jetty.servlet.ServletContextHandler
 import com.sun.jersey.spi.container.servlet.ServletContainer
 import com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig
 import com.tencent.angel.servable.SessionBundleConfigProtos.{BatchingParameters, SessionBundleConfig}
+import com.tencent.angel.serving.service.common.{ModelServiceImpl, PredictionServiceImpl}
+import com.tencent.angel.serving.service.util.{Options, PlatformConfigUtil}
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
 
@@ -102,7 +104,7 @@ class ModelServer {
     serverCore = new ServerCore(servingContext)
     serverCore.reloadConfig(modelServerConfig)
 
-    predictionServiceImpl = new PredictionServiceImpl(serverCore, new AngelPredictor())
+    predictionServiceImpl = new PredictionServiceImpl(serverCore)
     modelServiceImpl = new ModelServiceImpl(serverCore)
     val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]] = ServerBuilder.forPort(serverOptions.grpc_port)
     serverBuilder.addService(predictionServiceImpl)

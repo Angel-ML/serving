@@ -1,16 +1,20 @@
-package com.tencent.angel.serving.servables.angel
+package com.tencent.angel.serving.servables.common
 
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.prediction.ClassificationProtos.{ClassificationRequest, ClassificationResponse}
 import com.tencent.angel.serving.core.{ServableHandle, ServableRequest, ServerCore}
+import com.tencent.angel.serving.servables.angel.{RunOptions, SavedModelBundle}
 import io.grpc.stub.StreamObserver
+import org.slf4j.{Logger, LoggerFactory}
 
-object AngelClassificationServiceImpl {
+object ClassificationServiceImpl {
+
+  private val LOG: Logger = LoggerFactory.getLogger(getClass)
 
   def classify(runOptions: RunOptions, core: ServerCore,
                request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {
     if(!request.hasModelSpec){
-      System.err.print("Missing ModelSpec")
+      LOG.info("Missing ModelSpec")
       return
     }
     classifyWithModelSpec(runOptions, core, request.getModelSpec, request, responseObserver)

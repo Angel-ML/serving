@@ -3,7 +3,8 @@ package com.tencent.angel.serving.service.jersey.resources
 import com.google.protobuf.Int64Value
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
-import com.tencent.angel.serving.service.{GetModelStatusImpl, ModelServer}
+import com.tencent.angel.serving.service.ModelServer
+import com.tencent.angel.serving.service.common.GetModelStatusImpl
 import javax.ws.rs._
 import javax.ws.rs.core.MediaType
 import org.slf4j.{Logger, LoggerFactory}

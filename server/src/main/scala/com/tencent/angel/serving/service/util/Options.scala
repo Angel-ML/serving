@@ -1,4 +1,4 @@
-package com.tencent.angel.serving.service
+package com.tencent.angel.serving.service.util
 
 case class Options(
                    grpc_port: Int = 8500,

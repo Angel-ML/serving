@@ -4,6 +4,9 @@ import com.tencent.angel.core.graph.TensorProtos.TensorProto;
 import com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto;
 import com.tencent.angel.core.graph.TypesProtos;
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec;
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest;
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse;
+import com.tencent.angel.serving.apis.modelmgr.ModelServiceGrpc;
 import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest;
 import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse;
 import com.tencent.angel.serving.apis.prediction.PredictionServiceGrpc;
@@ -11,25 +14,29 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class ServiceClient {
-    private static final Logger logger = Logger.getLogger(ServiceClient.class.getName());
+public class RpcClient {
+    private static final Logger LOG = LoggerFactory.getLogger(RpcClient.class.getName());
 
     private final ManagedChannel channel;
     private final PredictionServiceGrpc.PredictionServiceBlockingStub blockingStub;
     private final PredictionServiceGrpc.PredictionServiceStub asyncStub;
+    private final ModelServiceGrpc.ModelServiceBlockingStub modelServiceBlockingStub;
+    private final ModelServiceGrpc.ModelServiceStub modelServiceStub;
 
-    public ServiceClient(String host, int port) {
+    public RpcClient(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port).usePlaintext(true));
     }
 
     /** Construct client for accessing prediction service server using the existing channel. */
-    public ServiceClient(ManagedChannelBuilder<?> channelBuilder) {
+    public RpcClient(ManagedChannelBuilder<?> channelBuilder) {
         channel = channelBuilder.build();
         blockingStub = PredictionServiceGrpc.newBlockingStub(channel);
         asyncStub = PredictionServiceGrpc.newStub(channel);
+        modelServiceBlockingStub = ModelServiceGrpc.newBlockingStub(channel);
+        modelServiceStub = ModelServiceGrpc.newStub(channel);
     }
 
     public void shutdown() throws InterruptedException {
@@ -58,21 +65,25 @@ public class ServiceClient {
                 .setSignatureName("predict").build();
         PredictRequest request = PredictRequest.newBuilder().setModelSpec(modelSpec)
                 .putInputs("inputs", featuresTensorProto).build();
-
+        GetModelStatusRequest statusRequest = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build();
         // Request gRPC server
         try {
             long start = System.currentTimeMillis();
             PredictResponse response = blockingStub.predict(request);
+            LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));
             java.util.Map<String, TensorProto> outputs = response.getOutputsMap();
-            info(outputs.toString());
-            info("Finished prediction with {0} ms", (System.currentTimeMillis() - start));
+            LOG.info(outputs.toString());
+            start = System.currentTimeMillis();
+            GetModelStatusResponse statusResponse = modelServiceBlockingStub.getModelStatus(statusRequest);
+            LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
+            LOG.info(statusResponse.toString());
         } catch (StatusRuntimeException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ServiceClient client = new ServiceClient("localhost", 8500);
+        RpcClient client = new RpcClient("localhost", 8500);
         String modelName = "default";
         long modelVersion = 1L;
         try {
@@ -80,13 +91,5 @@ public class ServiceClient {
         } finally {
             client.shutdown();
         }
-    }
-
-    private void info(String msg, Object... params) {
-        logger.log(Level.INFO, msg, params);
-    }
-
-    private void warning(String msg, Object... params) {
-        logger.log(Level.WARNING, msg, params);
     }
 }

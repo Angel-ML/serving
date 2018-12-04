@@ -1,11 +1,16 @@
-package com.tencent.angel.serving.servables.angel
+package com.tencent.angel.serving.servables.common
 
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.prediction.InferenceProtos.{MultiInferenceRequest, MultiInferenceResponse}
 import com.tencent.angel.serving.core.{ServableHandle, ServableRequest, ServerCore}
+import com.tencent.angel.serving.servables.angel.{RunOptions, SavedModelBundle}
 import io.grpc.stub.StreamObserver
+import org.slf4j.{Logger, LoggerFactory}
 
 object MultiInferenceHelper {
+
+  private val LOG: Logger = LoggerFactory.getLogger(getClass)
+
   def getModelSpecFromRequest(request: MultiInferenceRequest): ModelSpec = {
     if (request.getTasksCount > 0 && request.getTasks(0).hasModelSpec) {
       return request.getTasks(0).getModelSpec

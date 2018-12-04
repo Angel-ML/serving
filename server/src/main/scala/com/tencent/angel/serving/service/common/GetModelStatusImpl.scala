@@ -1,4 +1,4 @@
-package com.tencent.angel.serving.service
+package com.tencent.angel.serving.service.common
 
 import com.google.protobuf.Int64Value
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec

@@ -1,4 +1,4 @@
-package com.tencent.angel.serving.service
+package com.tencent.angel.serving.service.common
 
 import com.tencent.angel.serving.apis.prediction.ClassificationProtos.{ClassificationRequest, ClassificationResponse}
 import com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.{GetModelMetadataRequest, GetModelMetadataResponse}
@@ -8,33 +8,36 @@ import com.tencent.angel.serving.apis.prediction.RegressionProtos.{RegressionReq
 import com.tencent.angel.serving.apis.prediction._
 import com.tencent.angel.serving.core.ServerCore
 import com.tencent.angel.serving.servables.angel._
+import com.tencent.angel.serving.servables.common._
 import io.grpc.stub.StreamObserver
 
 
 class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplBase {
 
   private var serverCore: ServerCore = _
-  private var predictor: AngelPredictor = _
 
-  def this(serverCore: ServerCore, predictor: AngelPredictor) {
+  def this(serverCore: ServerCore) {
     this()
     this.serverCore = serverCore
-    this.predictor = predictor
   }
 
   override def predict(request: PredictRequest, responseObserver: StreamObserver[PredictResponse]): Unit = {
     val runOptions = new RunOptions()
-    predictor.predict(runOptions, serverCore, request, responseObserver)
+    val responseBuilder = PredictResponse.newBuilder()
+    Predictor.predict(runOptions, serverCore, request, responseBuilder)
+    val predictResponse = responseBuilder.build()
+    responseObserver.onNext(predictResponse)
+    responseObserver.onCompleted()
   }
 
   override def classify(request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {
     val runOptions = new RunOptions()
-    AngelClassificationServiceImpl.classify(runOptions, serverCore, request, responseObserver)
+    ClassificationServiceImpl.classify(runOptions, serverCore, request, responseObserver)
   }
 
   override def regress(request: RegressionRequest, responseObserver: StreamObserver[RegressionResponse]): Unit = {
     val runOptions = new RunOptions()
-    AngelRegressionServiceImpl.regress(runOptions, serverCore, request, responseObserver)
+    RegressionServiceImpl.regress(runOptions, serverCore, request, responseObserver)
   }
 
   override def multiInference(request: MultiInferenceRequest, responseObserver: StreamObserver[MultiInferenceResponse]): Unit = {
