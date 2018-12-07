@@ -1,10 +1,8 @@
-package com.tencent.angel.serving.core
+package com.tencent.angel.serving.servables.angel
 
-
-import com.google.protobuf.Message
 import com.tencent.angel.config.ResourceAllocation
 import com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig
-import com.tencent.angel.serving.servables.angel.SavedModelBundle
+import com.tencent.angel.serving.core._
 
 import scala.collection.mutable
 

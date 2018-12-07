@@ -193,7 +193,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     var atLeastOneVersionFound = false
     children.foreach{ child =>
       val versionNumber = parseVersionNumber(child)
-      if (versionNumber > 0) {
+      if (versionNumber >= 0) {
         versions += AspireVersions(servable, child, versionNumber)
         atLeastOneVersionFound = true
       }

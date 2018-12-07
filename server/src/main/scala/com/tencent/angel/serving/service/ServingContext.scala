@@ -138,8 +138,8 @@ class ServingContext(eventBus: EventBus[ServableState],
   }
 
   def createRouter(routes: Routes, targets: SourceAdapters): DynamicSourceRouter[StoragePath] = {
-    val numOutpurPorts = targets.platformAdapters.size + 1
-    val router = DynamicSourceRouter[StoragePath](numOutpurPorts, routes)
+    val numOutputPorts = targets.platformAdapters.size + 1
+    val router = DynamicSourceRouter[StoragePath](numOutputPorts, routes)
 
     val outputPorts: List[Source[StoragePath]] = router.getOutputPorts
     targets.platformAdapters.foreach { case (platform, adapter: Target[StoragePath]) =>

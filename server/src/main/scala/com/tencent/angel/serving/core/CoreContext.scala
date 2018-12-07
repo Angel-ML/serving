@@ -42,7 +42,7 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   protected def waitUntilModelsAvailable(models: Set[String], monitor: ServableStateMonitor): Unit = {
     val awaitedServables:List[ServableRequest] = models.map(ServableRequest.latest(_)).toList
     val statesReached = monitor.waitUntilServablesReachState(awaitedServables, ManagerState.kAvailable)
-    if(statesReached.nonEmpty){
+    if(statesReached.isEmpty){
       val numUnavailableModels = statesReached.count(stateReached => stateReached._2 != ManagerState.kAvailable)
       val message = String.join(numUnavailableModels.toString,"model(s) did not become avaible:")
       statesReached.collect{case (servableId, managerState) if (managerState != ManagerState.kAvailable)=>

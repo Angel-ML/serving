@@ -88,16 +88,11 @@ class ServerCore(val context: CoreContext) extends Manager {
       if (modelNames.contains(name)) {
         throw InvalidArguments(s"Illegal to list model $name, multiple times in config list")
       }
-
-      if (ServerCore.uriIsRelativePath(model.getBasePath)) {
-        throw InvalidArguments(s"Expected model ${model.getName} to have an absolute path or URI; " +
-          s"got base_path()=${model.getBasePath}")
-      }
       modelNames.add(name)
     }
 
     // Base-paths are either all relative, or all absolute.
-    // WARNING: abuse of terminology!  These "paths" may be URIs
+    // These "paths" may be URIs
     if (context.modelConfigListRootDir != "") {
       //all base path must be relative
       if (ServerCore.uriIsRelativePath(context.modelConfigListRootDir)) {
