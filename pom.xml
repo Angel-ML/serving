@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <hadoop-version>2.2.0</hadoop-version>
         <scala.version>2.11.8</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.logging.version>3.9.0</scala.logging.version>
@@ -151,6 +152,18 @@
             <artifactId>jetty-all-server</artifactId>
             <version>8.2.0.v20160908</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <profiles>

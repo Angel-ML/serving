@@ -6,12 +6,14 @@ import java.util.concurrent.locks.{ReentrantLock, ReentrantReadWriteLock}
 import com.tencent.angel.serving.core.EventBus.EventAndTime
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy
 import scala.collection.mutable
-
+import org.slf4j.{Logger, LoggerFactory}
 
 class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   import ManagerState._
   import ServableStateMonitor._
+
+  private val LOG: Logger = LoggerFactory.getLogger(classOf[ServableStateMonitor])
 
   private val statesLock = new ReentrantReadWriteLock()
   private val statesReadLock: ReentrantReadWriteLock.ReadLock = statesLock.readLock()
@@ -155,29 +157,35 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
   private val servableStateNotificationRequests = new util.ArrayList[ServableStateNotificationRequest]()
 
   def waitUntilServablesReachState(servables: List[ServableRequest], goalState: ManagerState): Map[ServableId, ManagerState] = {
-    val lock = new ReentrantLock()
-    val cond = lock.newCondition()
     var condFlag = false
+    println("waitUntilServablesReachState:", condFlag)
     var reachedState: Map[ServableId, ManagerState] = null
+    val waitLock = new ReentrantLock()
+    val waitCond = waitLock.newCondition()
 
-    lock.lock()
-    try {
-      // return when one of the ServableRequest reach the goalState, not all
-      notifyWhenServablesReachState(servables, goalState,
-        (idStateMap: Map[ServableId, ManagerState]) => {
-          if (idStateMap != null && idStateMap.nonEmpty) {
-            condFlag = true
-            cond.signal()
+    // return when one of the ServableRequest reach the goalState, not all
+    notifyWhenServablesReachState(servables, goalState,
+      (idStateMap: Map[ServableId, ManagerState]) => {
+        if (idStateMap != null && idStateMap.nonEmpty) {
+          waitLock.lock()
+          try {
             reachedState = idStateMap
+            condFlag = true
+            waitCond.signal()
+          } finally {
+            waitLock.unlock()
           }
         }
-      )
+      }
+    )
 
+    waitLock.lock()
+    try {
       while (!condFlag) {
-        cond.await()
+        waitCond.await()
       }
     } finally {
-      lock.unlock()
+      waitLock.unlock()
     }
 
     reachedState

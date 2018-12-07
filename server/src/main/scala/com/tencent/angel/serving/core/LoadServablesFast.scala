@@ -11,12 +11,12 @@ object LoadServablesFast {
 
   def connectSourcesWithFastInitialLoad(aspiredVersionsManager: AspiredVersionsManager, sources: List[Source[Loader]],
                                         waitUntilLoaded: () => Unit, numThreads: Int): Unit = {
-    val preNumLoadThreads = getManagerNumLoadThreads(aspiredVersionsManager)
-    //    val setManagerNumLoadThreads = setManagerNumLoadThreadsNotifier(aspiredVersionsManager)
-    //    setManagerNumLoadThreads(numThreads)
+    // val preNumLoadThreads = getManagerNumLoadThreads(aspiredVersionsManager)
+    // val setManagerNumLoadThreads = setManagerNumLoadThreadsNotifier(aspiredVersionsManager)
+    // setManagerNumLoadThreads(numThreads)
     sources.foreach(source => ConnectSourceToTarget(source, aspiredVersionsManager))
     waitUntilLoaded()
-    //    setManagerNumLoadThreads(preNumLoadThreads)
+    // setManagerNumLoadThreads(preNumLoadThreads)
   }
 
 
@@ -26,7 +26,7 @@ object LoadServablesFast {
     // type WaitUntilLoaded = Unit => Unit
     val waitUntilLoaded = () => {
       val statesReached = servableStateMonitor.waitUntilServablesReachState(initialServables, ManagerState.kAvailable)
-      if (statesReached.nonEmpty) {
+      if (statesReached.isEmpty) {
         val numUnavailableModels = statesReached.count(stateReached => stateReached._2 != ManagerState.kAvailable)
         val message = String.join(numUnavailableModels.toString, "servable(s) did not become avaible:")
         statesReached.collect {

@@ -67,17 +67,17 @@ class ServingContext(eventBus: EventBus[ServableState],
 
   override def maybeUpdateServerRequestLogger(config: ModelServerConfig): Unit = {
     if (serverRequestLoggerUpdater != null){
-      return serverRequestLoggerUpdater(config, serverRequestLogger)
-    }
-
-    if (config.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
-      val loggingMap = mutable.Map[String, SamplingConfigProtos.LoggingConfig]()
-      config.getModelConfigList.getConfigList.asScala.foreach{ modelConfig =>
-        if (modelConfig.hasLoggingConfig){
-          loggingMap.put(modelConfig.getName, modelConfig.getLoggingConfig)
+      serverRequestLoggerUpdater(config, serverRequestLogger)
+    } else {
+      if (config.getConfigCase == ModelServerConfig.ConfigCase.MODEL_CONFIG_LIST){
+        val loggingMap = mutable.Map[String, SamplingConfigProtos.LoggingConfig]()
+        config.getModelConfigList.getConfigList.asScala.foreach{ modelConfig =>
+          if (modelConfig.hasLoggingConfig){
+            loggingMap.put(modelConfig.getName, modelConfig.getLoggingConfig)
+          }
         }
+        serverRequestLogger.update(loggingMap.toMap)
       }
-      serverRequestLogger.update(loggingMap.toMap)
     }
   }
 
