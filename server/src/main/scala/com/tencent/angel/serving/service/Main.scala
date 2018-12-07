@@ -1,6 +1,7 @@
 package com.tencent.angel.serving.service
 
 import com.tencent.angel.serving.service.ModelServer.server
+import com.tencent.angel.serving.service.util.Options
 import scopt.OptionParser
 
 object Main {

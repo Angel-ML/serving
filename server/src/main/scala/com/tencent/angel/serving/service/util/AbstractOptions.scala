@@ -1,4 +1,4 @@
-package com.tencent.angel.serving.service
+package com.tencent.angel.serving.service.util
 
 import scala.reflect.runtime.universe._
 
