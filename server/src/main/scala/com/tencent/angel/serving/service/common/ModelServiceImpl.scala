@@ -7,9 +7,11 @@ import com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto
 import com.tencent.angel.serving.apis.modelmgr.{ErrorCodesProtos, ModelServiceGrpc}
 import com.tencent.angel.serving.core.ServerCore
 import io.grpc.stub.StreamObserver
+import org.slf4j.{Logger, LoggerFactory}
 
 class ModelServiceImpl extends ModelServiceGrpc.ModelServiceImplBase {
 
+  private val LOG: Logger = LoggerFactory.getLogger(classOf[ModelServiceImpl])
   private var serverCore: ServerCore = _
 
   def this(serverCore: ServerCore) {
@@ -32,7 +34,7 @@ class ModelServiceImpl extends ModelServiceGrpc.ModelServiceImplBase {
         val list = serverConfig.getModelConfigList
         for(index <- 0 until list.getConfigCount) {
           val config = list.getConfig(index)
-          System.out.print("Config entry index: " + index + " path: "
+          LOG.info("Config entry index: " + index + " path: "
             + config.getBasePath + " name: " + config.getName + "platform: " + config.getModelPlatform)
         }
         serverCore.reloadConfig(serverConfig)

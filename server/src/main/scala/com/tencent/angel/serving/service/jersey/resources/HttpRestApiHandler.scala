@@ -1,11 +1,16 @@
 package com.tencent.angel.serving.service.jersey.resources
 
+import com.alibaba.fastjson.JSON
 import com.google.protobuf.Int64Value
+import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
+import com.tencent.angel.serving.apis.prediction.PredictProtos.{PredictRequest, PredictResponse}
+import com.tencent.angel.serving.servables.angel.RunOptions
+import com.tencent.angel.serving.servables.common.Predictor
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
-import com.tencent.angel.serving.service.jersey.util.ProcessUtil
+import com.tencent.angel.serving.service.jersey.util.ProcessInputOutput
 import javax.ws.rs._
 import javax.ws.rs.core.{MediaType, Response}
 import org.slf4j.{Logger, LoggerFactory}
@@ -52,7 +57,8 @@ class HttpRestApiHandler {
       val request = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build()
       val builder = GetModelStatusResponse.newBuilder()
       GetModelStatusImpl.getModelStatus(ModelServer.getServerCore, request, builder)
-      Response.status(200).entity(builder.build().toString).build()
+      val jsonFormat = JsonFormat.printer().print(builder.build())
+      Response.status(200).entity(jsonFormat).build()
     }
   }
 
@@ -80,18 +86,42 @@ class HttpRestApiHandler {
         val errorMessage = "Resolve request path error, exception: " + ex
         return Response.status(500).entity(errorMessage).build()
     }
+    var output: String = null
     if(modelMethod.equals("classify")) {
-      ProcessUtil.processClassifyRequest()
+      processClassifyRequest()
     } else if(modelMethod.equals("predict")) {
-      ProcessUtil.processClassifyRequest()
+      output = processPredictRequest(modelName, modelVersion, requestBody)
     } else if(modelMethod.equals("regress")) {
-      ProcessUtil.processRegressRequest()
+      processRegressRequest()
     } else {
       val errorMessage = "model method: " + modelMethod + " can not found."
       LOG.info(errorMessage)
       return Response.status(500).entity(errorMessage).build()
     }
-    Response.status(200).entity("ok").build()
+    Response.status(200).entity(output).build()
+  }
+
+  def processClassifyRequest(): Unit = {
+
+  }
+
+  def processPredictRequest(modelName: String, modelVersion: String, requestBody: String): String = {
+    val modelSpecBuilder = ModelSpec.newBuilder()
+    modelSpecBuilder.setName(modelName)
+    if(modelVersion !=null && !modelVersion.isEmpty) {
+      modelSpecBuilder.setVersion(Int64Value.newBuilder().setValue(modelVersion.toLong))
+    }
+    val requestBuilder = PredictRequest.newBuilder()
+    requestBuilder.setModelSpec(modelSpecBuilder.build())
+    val format =ProcessInputOutput.fillPredictRequestFromJson(requestBody, requestBuilder, modelSpecBuilder)
+    val responseBuilder = PredictResponse.newBuilder()
+    val runOptions = new RunOptions()
+    Predictor.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
+    JSON.toJSONString(responseBuilder.build().getOutputs)
+  }
+
+  def processRegressRequest(): Unit = {
+
   }
 }
 
