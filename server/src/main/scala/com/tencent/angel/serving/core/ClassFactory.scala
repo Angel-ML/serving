@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 import com.google.protobuf.{Descriptors, Message}
 import com.tencent.angel.servable.{SavedModelBundleSourceAdapterConfigProtos, SessionBundleSourceAdapterConfigProtos}
-import com.tencent.angel.serving.servables.util.Utils
+import com.tencent.angel.serving.servables.Utils
 
 import scala.reflect.runtime.{universe => ru}
 
@@ -45,6 +45,7 @@ object ClassRegistry {
     } else if (fullTypeName == "SessionBundleSourceAdapterConfig"){
       config = SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.newBuilder().build()
     }
+    println(Utils.packagePath)
     create[BaseClass](config, Utils.packagePath + "." + platform.toLowerCase() + "." + fullTypeName + "Creator")
   }
 
