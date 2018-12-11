@@ -10,6 +10,7 @@ case class Options(
                    platform_config_file: String = "",
                    model_name: String = "default",
                    model_base_path: String = "",
+                   hadoop_home: String = "",
                    saved_model_tags: String = "serve",
                    max_num_load_retries: Int = 5,
                    load_retry_interval_micros: Long = 60*1000*1000,
