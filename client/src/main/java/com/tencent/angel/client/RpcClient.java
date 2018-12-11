@@ -13,6 +13,10 @@ import com.tencent.angel.serving.apis.prediction.PredictionServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.*;
 
 import io.grpc.netty.NettyChannelBuilder;
@@ -107,15 +111,27 @@ public class RpcClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        RpcClient client = new RpcClient("localhost", 8500);
-        String modelName = "default";
-        long modelVersion = 1L;
-        try {
-            for(int i = 0; i < 1500; i++) {
-                client.doPredict(modelName, modelVersion);
-            }
-        } finally {
-            client.shutdown();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Set<Callable<String>> callables = new HashSet<Callable<String>>();
+        for(int i=0; i<30; i++) {
+            callables.add(new Callable<String>() {
+                public String call() throws Exception {
+                    LOG.info("Now in thread.");
+                    RpcClient client = new RpcClient("localhost", 8500);
+                    String modelName = "default";
+                    long modelVersion = 1L;
+                    try {
+                        for(int i = 0; i < 1000; i++) {
+                            client.doPredict(modelName, modelVersion);
+                        }
+                    } finally {
+                        client.shutdown();
+                    }
+                    return null;
+                }
+            });
         }
+        List<Future<String>> futures = executorService.invokeAll(callables);
+        executorService.shutdown();
     }
 }
