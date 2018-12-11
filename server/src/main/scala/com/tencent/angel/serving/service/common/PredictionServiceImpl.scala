@@ -10,10 +10,12 @@ import com.tencent.angel.serving.core.ServerCore
 import com.tencent.angel.serving.servables.angel._
 import com.tencent.angel.serving.servables.common._
 import io.grpc.stub.StreamObserver
+import org.slf4j.{Logger, LoggerFactory}
 
 
 class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplBase {
 
+  private val LOG: Logger = LoggerFactory.getLogger(classOf[PredictionServiceImpl])
   private var serverCore: ServerCore = _
 
   def this(serverCore: ServerCore) {
@@ -24,10 +26,12 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
   override def predict(request: PredictRequest, responseObserver: StreamObserver[PredictResponse]): Unit = {
     val runOptions = new RunOptions()
     val responseBuilder = PredictResponse.newBuilder()
+    val start = System.currentTimeMillis
     Predictor.predict(runOptions, serverCore, request, responseBuilder)
     val predictResponse = responseBuilder.build()
     responseObserver.onNext(predictResponse)
     responseObserver.onCompleted()
+    LOG.info("Finished prediction with {} ms", System.currentTimeMillis - start)
   }
 
   override def classify(request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {

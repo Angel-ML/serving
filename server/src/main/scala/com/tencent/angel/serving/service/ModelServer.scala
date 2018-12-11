@@ -9,8 +9,7 @@ import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}
-import com.tencent.angel.serving.servables.common.Predictor
-import com.tencent.angel.serving.serving.{BatchingParameters, ModelServerConfig}
+import com.tencent.angel.serving.serving.ModelServerConfig
 import org.eclipse.jetty.servlet.ServletContextHandler
 import com.sun.jersey.spi.container.servlet.ServletContainer
 import com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig

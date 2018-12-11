@@ -18,8 +18,10 @@ public class RestClient {
                 .resource(getResource);
         WebResource postWebResource = client
                 .resource(postResource);
+        long start = System.currentTimeMillis();
         ClientResponse getResponse = getWebResource.accept("application/json")
                 .get(ClientResponse.class);
+        LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
         if (getResponse.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : "
                     + getResponse.getStatus() + ", error message: "

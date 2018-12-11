@@ -14,6 +14,9 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import java.util.concurrent.*;
+
+import io.grpc.netty.NettyChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +31,8 @@ public class RpcClient {
 
     public RpcClient(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port).usePlaintext(true));
+//        this(NettyChannelBuilder.forAddress(host, port).usePlaintext(true)
+//                .directExecutor().maxMessageSize(Integer.MAX_VALUE));
     }
 
     /** Construct client for accessing prediction service server using the existing channel. */
@@ -68,6 +73,25 @@ public class RpcClient {
         GetModelStatusRequest statusRequest = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build();
         // Request gRPC server
         try {
+            /*StreamObserver<PredictResponse> responseStreamObserver = new StreamObserver<PredictResponse>() {
+                @Override
+                public void onNext(PredictResponse value) {
+                    java.util.Map<String, TensorProto> outputs = value.getOutputsMap();
+                    LOG.info(outputs.toString());
+                }
+
+                @Override
+                public void onError(Throwable t) {
+
+                }
+
+                @Override
+                public void onCompleted() {
+                    LOG.info("finished.");
+                }
+            };
+            asyncStub.predict(request, responseStreamObserver);
+            LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));*/
             long start = System.currentTimeMillis();
             PredictResponse response = blockingStub.predict(request);
             LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));
