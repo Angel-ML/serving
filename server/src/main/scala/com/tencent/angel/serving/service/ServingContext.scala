@@ -9,6 +9,7 @@ import com.tencent.angel.serving.core.ServerCore.{SourceAdapters, getPlatform}
 import com.tencent.angel.serving.core.{DynamicSourceRouter, ServerRequestLogger, StoragePath, _}
 import com.tencent.angel.serving.serving.ModelServerConfig
 import com.tencent.angel.serving.sources.FileSystemStoragePathSource
+import org.apache.hadoop.conf.Configuration
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.JavaConverters._
@@ -101,7 +102,7 @@ class ServingContext(eventBus: EventBus[ServableState],
     }
 
     val adapterConfig = platformConfig.get.getSourceAdapterConfig
-    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny[StoragePathSourceAdapter](adapterConfig)
+    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny[StoragePathSourceAdapter](modelPlatform, adapterConfig)
     adapter
   }
 
@@ -208,5 +209,7 @@ class ServingContext(eventBus: EventBus[ServableState],
 object ServingContext {
 
   case class StoragePathSourceAndRouter(source: FileSystemStoragePathSource, router: DynamicSourceRouter[StoragePath])
+
+  var hadoopConfig: Configuration = null
 
 }

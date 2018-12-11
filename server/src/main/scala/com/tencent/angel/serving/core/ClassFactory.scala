@@ -5,7 +5,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 import com.google.protobuf.{Descriptors, Message}
 import com.tencent.angel.servable.{SavedModelBundleSourceAdapterConfigProtos, SessionBundleSourceAdapterConfigProtos}
-
+import com.tencent.angel.serving.servables
+import com.tencent.angel.serving.servables.Utils
 
 import scala.reflect.runtime.{universe => ru}
 
@@ -35,7 +36,7 @@ object ClassRegistry {
     ClassRegistrationFactory.create[BaseClass](config, classCreator, "create")
   }
 
-  def createFromAny[BaseClass](anyConfig: com.google.protobuf.Any): BaseClass = {
+  def createFromAny[BaseClass](platform: String, anyConfig: com.google.protobuf.Any): BaseClass = {
     val fullTypeName = parseUrlForAnyType(anyConfig.getTypeUrl)
 //    val descriptor: Descriptors.Descriptor = SavedModelBundleSourceAdapterConfigProtos.getDescriptor.findMessageTypeByName(fullTypeName)
 //    val config: Message = descriptor.getOptions.newBuilderForType().build()
@@ -45,7 +46,7 @@ object ClassRegistry {
     } else if (fullTypeName == "SessionBundleSourceAdapterConfig"){
       config = SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.newBuilder().build()
     }
-    create[BaseClass](config, getClass.getPackage.getName + "." + fullTypeName + "Creator")
+    create[BaseClass](config, Utils.packagePath + "." + platform.toLowerCase() + "." + fullTypeName + "Creator")
   }
 
 

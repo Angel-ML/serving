@@ -41,6 +41,51 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile-first</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>attach-scaladocs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>doc-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                    <recompileMode>incremental</recompileMode>
+                    <useZincServer>true</useZincServer>
+                    <args>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                        <arg>-feature</arg>
+                    </args>
+                    <javacArgs>
+                        <javacArg>-source</javacArg>
+                        <javacArg>${java.version}</javacArg>
+                        <javacArg>-target</javacArg>
+                        <javacArg>${java.version}</javacArg>
+                    </javacArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
