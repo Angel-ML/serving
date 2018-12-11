@@ -45,7 +45,6 @@ object ClassRegistry {
     } else if (fullTypeName == "SessionBundleSourceAdapterConfig"){
       config = SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.newBuilder().build()
     }
-    println(Utils.packagePath)
     create[BaseClass](config, Utils.packagePath + "." + platform.toLowerCase() + "." + fullTypeName + "Creator")
   }
 

@@ -18,20 +18,26 @@ public class RestClient {
                 .resource(getResource);
         WebResource postWebResource = client
                 .resource(postResource);
-        long start = System.currentTimeMillis();
-        ClientResponse getResponse = getWebResource.accept("application/json")
-                .get(ClientResponse.class);
-        LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
-        if (getResponse.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + getResponse.getStatus() + ", error message: "
-                    + getResponse.getEntity(String.class));
+        for(int i = 0; i < 1000; i++) {
+            long start = System.currentTimeMillis();
+            ClientResponse getResponse = getWebResource.accept("application/json")
+                    .get(ClientResponse.class);
+            LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
+            if (getResponse.getStatus() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + getResponse.getStatus() + ", error message: "
+                        + getResponse.getEntity(String.class));
+            }
+            LOG.info(getResponse.getEntity(String.class));
+            LOG.info("status code: " + getResponse.getStatus());
+            String input = "{instances: [{input: [1.0,2.0,3.0,4.0,5.0]}]}";
+            start = System.currentTimeMillis();
+            ClientResponse postResponse = postWebResource.type("application/json")
+                    .post(ClientResponse.class, input);
+            LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));
+            LOG.info(postResponse.getEntity(String.class));
         }
-        LOG.info(getResponse.getEntity(String.class));
-        LOG.info("status code: " + getResponse.getStatus());
-        String input = "{instances: [{input: [1.0,2.0,3.0,4.0,5.0]}]}";
-        ClientResponse postResponse = postWebResource.type("application/json")
-                .post(ClientResponse.class, input);
+
     }
 
 }

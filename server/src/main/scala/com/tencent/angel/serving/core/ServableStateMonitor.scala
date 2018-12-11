@@ -158,7 +158,6 @@ class ServableStateMonitor(bus: EventBus[ServableState], maxLogEvents: Int) {
 
   def waitUntilServablesReachState(servables: List[ServableRequest], goalState: ManagerState): Map[ServableId, ManagerState] = {
     var condFlag = false
-    println("waitUntilServablesReachState:", condFlag)
     var reachedState: Map[ServableId, ManagerState] = null
     val waitLock = new ReentrantLock()
     val waitCond = waitLock.newCondition()

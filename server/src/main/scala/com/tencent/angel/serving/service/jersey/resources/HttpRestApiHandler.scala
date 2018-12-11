@@ -119,7 +119,8 @@ class HttpRestApiHandler {
     val responseBuilder = PredictResponse.newBuilder()
     val runOptions = new RunOptions()
     Predictor.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
-    JSON.toJSONString(responseBuilder.build().getOutputs, SerializerFeature.EMPTY:_*)
+    //JSON.toJSONString(responseBuilder.build().getOutputs, SerializerFeature.EMPTY:_*)
+    responseBuilder.build().getOutputs.toString
   }
 
   def processRegressRequest(): Unit = {
