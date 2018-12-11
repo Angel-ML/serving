@@ -9,20 +9,36 @@ import org.apache.hadoop.conf.Configuration
 import scala.collection.immutable.Set
 import org.apache.hadoop.fs.{FileSystem, Path}
 import scala.util.matching.Regex
+import com.tencent.angel.serving.core.{FailedPreconditions, NotFoundExceptions}
 
 object SystemFileUtils {
   def fileExist(basePath: String, conf: Configuration = null): Boolean ={
     if (basePath.startsWith("hdfs://")){
+      if (conf == null) {
+        throw FailedPreconditions("hadoop configuration has not been set!")
+      }
       val fs = FileSystem.get(URI.create(basePath),conf)
-      fs.isDirectory(new Path(basePath))
+      if (fs.exists(new Path(basePath))) {
+        fs.isDirectory(new Path(basePath))
+      } else {
+        throw NotFoundExceptions(s"the HDFS basePath: ${basePath} is not found!")
+      }
     } else {
       val filePath = new File(basePath)
-      filePath.isDirectory
+      if (filePath.exists()) {
+        filePath.isDirectory
+      } else {
+        throw NotFoundExceptions(s"the FileSystem basePath: ${basePath} is not found!")
+      }
+
     }
   }
 
   def getChildren(basePath: String, conf: Configuration = null):Set[String] = {
     if (basePath.startsWith("hdfs://")){
+      if (conf == null) {
+        throw FailedPreconditions("hadoop configuration has not been set!")
+      }
       getChildrenFromHDFS(basePath, conf)
     } else {
       getChildrenFromLocal(basePath)
@@ -48,7 +64,6 @@ object SystemFileUtils {
   }
 
   def getChildrenFromHDFS(basePath: String, conf: Configuration): Set[String] ={
-//    val basePath = "hdfs://ss-teg-3-v2-nn-2.tencent-distribute.com:9000/user/leleyu/lr_data/"
 //    val conf = new Configuration()
 //    conf.set("hadoop.job.ugi", "angel, angel")
 //    conf.addResource("hdfs-site.xml")
