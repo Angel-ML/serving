@@ -1,6 +1,7 @@
 package com.tencent.angel.serving.service.jersey.resources
 
 import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson.serializer.SerializerFeature
 import com.google.protobuf.Int64Value
 import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
@@ -16,6 +17,7 @@ import javax.ws.rs.core.{MediaType, Response}
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.matching.Regex
+
 
 @Path("/")
 class HttpRestApiHandler {
@@ -117,7 +119,7 @@ class HttpRestApiHandler {
     val responseBuilder = PredictResponse.newBuilder()
     val runOptions = new RunOptions()
     Predictor.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
-    JSON.toJSONString(responseBuilder.build().getOutputs)
+    JSON.toJSONString(responseBuilder.build().getOutputs, SerializerFeature.EMPTY:_*)
   }
 
   def processRegressRequest(): Unit = {

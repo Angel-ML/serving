@@ -111,7 +111,9 @@ public class RpcClient {
         String modelName = "default";
         long modelVersion = 1L;
         try {
-            client.doPredict(modelName, modelVersion);
+            for(int i = 0; i < 1500; i++) {
+                client.doPredict(modelName, modelVersion);
+            }
         } finally {
             client.shutdown();
         }

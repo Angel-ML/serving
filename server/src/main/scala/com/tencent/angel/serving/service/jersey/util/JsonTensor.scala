@@ -160,7 +160,7 @@ object ProcessInputOutput {
     requestBuilder.putAllInputs(tenorMap)
   }
 
-  def fillTensorMapFromInputsMap(inputs: _, infoMap: Map[String, TensorInfo],
+  def fillTensorMapFromInputsMap(inputs: Object, infoMap: Map[String, TensorInfo],
                                  requestBuilder: PredictRequest.Builder): Unit = {
     if(!inputs.isInstanceOf[JSONObject] || isValBase64Object(inputs)) {
       if(infoMap.size > 1) {
@@ -173,7 +173,7 @@ object ProcessInputOutput {
       val tensorShapeBuilder = TensorShapeProto.newBuilder()
       getDenseTensorShape(inputs, tensorShapeBuilder)
       tensorBuilder.setTensorShape(tensorShapeBuilder.build())
-      _ = fillTensorProto(inputs, 0, tensorBuilder.getDtype, 0, tensorBuilder)
+      val unused = fillTensorProto(inputs, 0, tensorBuilder.getDtype, 0, tensorBuilder)
       val tenorMap = new mutable.HashMap[String, TensorProto]()
       tenorMap.put(infoMap.iterator.next()._1, tensorBuilder.build())
       requestBuilder.putAllInputs(tenorMap)
@@ -191,14 +191,14 @@ object ProcessInputOutput {
         val tensorShapeBuilder = TensorShapeProto.newBuilder()
         getDenseTensorShape(item, tensorShapeBuilder)
         tensorBuilder.setTensorShape(tensorShapeBuilder.build())
-        _ = fillTensorProto(item, 0, dtype, 0, tensorBuilder)
+        val unused = fillTensorProto(item, 0, dtype, 0, tensorBuilder)
         tenorMap.put(name, tensorBuilder.build())
       }
       requestBuilder.putAllInputs(tenorMap)
     }
   }
 
-  def isValBase64Object(value: _): Boolean ={
+  def isValBase64Object(value: Object): Boolean ={
     value match {
       case nObject: JSONObject =>
         val base64String = nObject.getString(kBase64Key)
@@ -210,7 +210,7 @@ object ProcessInputOutput {
     false
   }
 
-  def addInstanceItem(value: _, name: String, tensorInfoMap: Map[String, TensorInfo],
+  def addInstanceItem(value: Object, name: String, tensorInfoMap: Map[String, TensorInfo],
                       sizeMap: mutable.HashMap[String, Int],
                       shapeMap: mutable.HashMap[String, TensorShapeProto],
                       tensorMap: mutable.HashMap[String, TensorProto.Builder]): Unit ={
@@ -238,7 +238,7 @@ object ProcessInputOutput {
     }
   }
 
-  def getDenseTensorShape(value: _, tensorShapeProtoBuilder: TensorShapeProto.Builder): Unit = {
+  def getDenseTensorShape(value: Object, tensorShapeProtoBuilder: TensorShapeProto.Builder): Unit = {
     if(!value.isInstanceOf[JSONArray]) return
     val size = value.asInstanceOf[JSONArray].size()
     tensorShapeProtoBuilder.addDim(TensorShapeProto.Dim.newBuilder.setSize(size).build)
@@ -247,7 +247,7 @@ object ProcessInputOutput {
     }
   }
 
-  def fillTensorProto(value: _, level: Int, dtype: DataType,
+  def fillTensorProto(value: Object, level: Int, dtype: DataType,
                       size: Int, tensorProtoBuilder: TensorProto.Builder): Int ={
     val rank = tensorProtoBuilder.getTensorShape.getDimCount
     var valueCount = size
@@ -293,7 +293,7 @@ object ProcessInputOutput {
     valueCount
   }
 
-  def addValueToTensor(value: _, dtype: DataType, tensorProtoBuilder: TensorProto.Builder): Unit ={
+  def addValueToTensor(value: Object, dtype: DataType, tensorProtoBuilder: TensorProto.Builder): Unit ={
     dtype match {
       case DT_FLOAT =>
         tensorProtoBuilder.addFloatVal(TypeUtils.castToFloat(value))

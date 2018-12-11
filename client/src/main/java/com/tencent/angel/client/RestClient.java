@@ -12,7 +12,7 @@ public class RestClient {
 
     public static void main(String[] args) {
         String getResource = "http://localhost:8501/angelServing/v1.0/models/default/versions/1";
-        String postResource = "";
+        String postResource = "http://localhost:8501/angelServing/v1.0/models/default/versions/1:predict";
         Client client = Client.create();
         WebResource getWebResource = client
                 .resource(getResource);
@@ -29,9 +29,9 @@ public class RestClient {
         }
         LOG.info(getResponse.getEntity(String.class));
         LOG.info("status code: " + getResponse.getStatus());
-        //String input = "";
-        //ClientResponse postResponse = postWebResource.type("application/json")
-        //        .post(ClientResponse.class, input);
+        String input = "{instances: [{input: [1.0,2.0,3.0,4.0,5.0]}]}";
+        ClientResponse postResponse = postWebResource.type("application/json")
+                .post(ClientResponse.class, input);
     }
 
 }
