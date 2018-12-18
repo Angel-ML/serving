@@ -143,12 +143,12 @@ class AspiredVersionsManager (
     basicManager.availableServableIds
   }
 
-  override def availableServableHandles[Loader]: Map[ServableId, ServableHandle[Loader]] = {
-    basicManager.availableServableHandles[Loader]
+  override def availableServableHandles[T]: Map[ServableId, ServableHandle[T]] = {
+    basicManager.availableServableHandles[T]
   }
 
-  override def servableHandle[Loader](request: ServableRequest): ServableHandle[Loader] = {
-    basicManager.servableHandle[Loader](request)
+  override def servableHandle[T](request: ServableRequest): ServableHandle[T] = {
+    basicManager.servableHandle[T](request)
   }
 
   override def untypedServableHandle(request: ServableRequest): UntypedServableHandle = {

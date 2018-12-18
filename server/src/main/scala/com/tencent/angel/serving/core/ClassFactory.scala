@@ -26,10 +26,6 @@ object ClassRegistrationFactory{
 
 object ClassRegistry {
 
-  private val globalMapLock = new ReentrantReadWriteLock()
-  private val globalMapReadLock: ReentrantReadWriteLock.ReadLock = globalMapLock.readLock()
-  private val globalMapWriteLock: ReentrantReadWriteLock.WriteLock = globalMapLock.writeLock()
-
   //create an instance of BaseClass based on a config proto
   def create[BaseClass](config: Message, classCreator:String): BaseClass = {
     ClassRegistrationFactory.create[BaseClass](config, classCreator, "create")

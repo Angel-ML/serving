@@ -8,17 +8,32 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <serving.version>0.1.0-SNAPSHOT</serving.version>
+        <angel.mllib.version>2.0.0</angel.mllib.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>common</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <version>${serving.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.scopt</groupId>
             <artifactId>scopt_2.10</artifactId>
             <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tencent.angel</groupId>
+            <artifactId>angel-ps-mllib</artifactId>
+            <version>${angel.mllib.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

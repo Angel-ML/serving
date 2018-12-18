@@ -1,18 +1,17 @@
 package com.tencent.angel.serving.core
+
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 
 import scala.collection.mutable
 
-class SimpleLoader[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation
-                                ) extends Loader {
+class SimpleLoader[ServableType](creator: Unit => ServableType,
+                                 resourceEstimate: Unit => ResourceAllocation) extends Loader {
 
-  private var postLoadResourceEstimate: Unit => ResourceAllocation = null
-  private val creator_ : Unit => ServableType = creator
-  private val resourceEstimate_ : Unit => ResourceAllocation = resourceEstimate
-  private var memorizedResourceEstimator: ResourceAllocation = null
-  private var resourceUtil: ResourceUtil = null
-  private var ramResource: Resource = null
-  private var servable_ : ServableType = null.asInstanceOf[ServableType]
+  private var postLoadResourceEstimate: Unit => ResourceAllocation = _
+  private var memorizedResourceEstimator: ResourceAllocation = _
+  private var resourceUtil: ResourceUtil = _
+  // private var ramResource: Resource = null
+  private var servable_ : ServableType = _
 
 
   override def estimateResources(): ResourceAllocation = {
@@ -22,26 +21,26 @@ class SimpleLoader[ServableType](creator: Unit => ServableType, resourceEstimate
   }
 
   override def load(): Unit = {
-    servable_ = creator_()
-    if (postLoadResourceEstimate != null){
-      var duringLoadResourceEstimate: ResourceAllocation = estimateResources()
+    servable_ = creator()
+    if (postLoadResourceEstimate != null) {
+      // var duringLoadResourceEstimate: ResourceAllocation = estimateResources()
       memorizedResourceEstimator = postLoadResourceEstimate()
       //todo: Release any transient memory used only during load to the OS
     }
   }
 
   override def unload(): Unit = {
-    val resourceEstimate = estimateResources()
+    // val resourceEstimate = estimateResources()
     servable_ = null.asInstanceOf[ServableType]
     //todo: release resource
   }
 
-  override def servable(): Any = {servable_}
+  override def servable(): Any = servable_
 }
 
-object SimpleLoader{
+object SimpleLoader {
   def apply[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation
-                         ): SimpleLoader[ServableType] ={
+                         ): SimpleLoader[ServableType] = {
     val loader = new SimpleLoader[ServableType](creator, resourceEstimate)
     val resourceOptions = ResourceOptions(mutable.Map(DeviceType.kMain -> 1))
     loader.resourceUtil = new ResourceUtil(resourceOptions)
@@ -50,7 +49,7 @@ object SimpleLoader{
   }
 
   def apply[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation,
-            postLoadResourceEstimate: Unit => ResourceAllocation): SimpleLoader[ServableType] ={
+                          postLoadResourceEstimate: Unit => ResourceAllocation): SimpleLoader[ServableType] = {
     val loader = SimpleLoader(creator, resourceEstimate)
     loader.postLoadResourceEstimate = postLoadResourceEstimate
     loader
