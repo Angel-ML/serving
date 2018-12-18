@@ -1,0 +1,27 @@
+18/12/11 10:04:57 INFO client.RpcClient : Finished prediction with 634 ms
+18/12/11 10:04:57 INFO client.RpcClient : {inputsResult=dtype: DT_FLOAT
+tensor_shape {
+  dim {
+    size: 1
+  }
+  dim {
+    size: 10
+  }
+}
+float_val: -0.515738
+float_val: 0.545345
+float_val: -1.020538
+float_val: 0.89946
+float_val: -0.397207
+float_val: -0.504616
+float_val: 0.435321
+float_val: -1.351367
+float_val: 0.70564
+float_val: -0.003322
+}
+18/12/11 10:04:57 INFO client.RpcClient : Finished get model status with 12 ms
+18/12/11 10:04:57 INFO client.RpcClient : model_version_status {
+  version: 1
+  state: AVAILABLE
+}
+

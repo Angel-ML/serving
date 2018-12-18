@@ -9,12 +9,13 @@ import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}
-import com.tencent.angel.serving.servables.angel.AngelPredictor
-import com.tencent.angel.serving.serving.{BatchingParameters, ModelServerConfig}
+import com.tencent.angel.serving.serving.ModelServerConfig
 import org.eclipse.jetty.servlet.ServletContextHandler
 import com.sun.jersey.spi.container.servlet.ServletContainer
 import com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig
 import com.tencent.angel.servable.SessionBundleConfigProtos.{BatchingParameters, SessionBundleConfig}
+import com.tencent.angel.serving.service.common.{ModelServiceImpl, PredictionServiceImpl}
+import com.tencent.angel.serving.service.util.{Options, PlatformConfigUtil}
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
 
@@ -102,7 +103,7 @@ class ModelServer {
     serverCore = new ServerCore(servingContext)
     serverCore.reloadConfig(modelServerConfig)
 
-    predictionServiceImpl = new PredictionServiceImpl(serverCore, new AngelPredictor())
+    predictionServiceImpl = new PredictionServiceImpl(serverCore)
     modelServiceImpl = new ModelServiceImpl(serverCore)
     val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]] = ServerBuilder.forPort(serverOptions.grpc_port)
     serverBuilder.addService(predictionServiceImpl)
@@ -112,6 +113,7 @@ class ModelServer {
       LOG.info("Failed to BuildAndStart gRPC server.")
       return
     }
+    grpcServerStart()
     LOG.info("Running gRPC ModelServer at " + serverOptions.grpc_port)
 
     if(serverOptions.http_port != 0) {
@@ -127,11 +129,20 @@ class ModelServer {
         httpServer.setHandler(servletContextHandler)
         val servletHolder = servletContextHandler.addServlet(classOf[ServletContainer], "/*")
         servletHolder.setInitOrder(0)
+        servletHolder.setInitParameter("com.sun.jersey.config.property.resourceConfigClass", "com.sun.jersey.api.core.PackagesResourceConfig")
+        servletHolder.setInitParameter("com.sun.jersey.config.property.packages", "com.tencent.angel.serving.service.jersey")
         servletHolder.setInitParameter("jersey.config.server.provider.packages", "com.tencent.angel.serving.service.jersey.resources")
         // 自动将对象映射成json返回
         servletHolder.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true")
         if(httpServer != null) {
-          LOG.info("Exporting HTTP/REST API at: " + serverOptions.http_port)
+          try {
+            httpServer.start()
+            LOG.info("Exporting HTTP/REST API at: " + serverOptions.http_port)
+            httpServer.join()
+          }
+          catch {
+            case ex: Exception => LOG.info("Error occurred while starting Jetty")
+          }
         } else {
           LOG.info("Failed to start HTTP Server at " + serverOptions.http_port)
         }
@@ -141,7 +152,7 @@ class ModelServer {
           "Skipped exporting HTTP/REST API.")
       }
     }
-    start()
+
   }
 
   def waitForTermination(): Unit = {
@@ -150,7 +161,7 @@ class ModelServer {
 
   /** Start serving requests. */
   @throws[IOException]
-  private def start(): Unit = {
+  private def grpcServerStart(): Unit = {
     grpcServer.start
     Runtime.getRuntime.addShutdownHook(new Thread() {
       override def run(): Unit = { // Use stderr here since the logger may has been reset by its JVM shutdown hook.
@@ -159,13 +170,6 @@ class ModelServer {
         LOG.info("*** server shut down")
       }
     })
-    try {
-      httpServer.start()
-      httpServer.join()
-    }
-    catch {
-      case ex: Exception => LOG.info("Error occurred while starting Jetty")
-    }
   }
 
   /** Stop serving requests and shutdown resources. */

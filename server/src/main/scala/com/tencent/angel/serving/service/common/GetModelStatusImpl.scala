@@ -1,11 +1,15 @@
-package com.tencent.angel.serving.service
+package com.tencent.angel.serving.service.common
 
+import com.google.protobuf.Int64Value
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse, ModelVersionStatus}
 import com.tencent.angel.serving.core.ManagerState.ManagerState
 import com.tencent.angel.serving.core.{ManagerState, ServableId, ServableState, ServerCore}
+import org.slf4j.{Logger, LoggerFactory}
 
 object GetModelStatusImpl {
+
+  private val LOG: Logger = LoggerFactory.getLogger(getClass)
 
   def managerStateToStateProtoEnum(managerState: ManagerState): ModelVersionStatus.State = {
     managerState match {
@@ -26,7 +30,7 @@ object GetModelStatusImpl {
   def getModelStatus(core: ServerCore, request: GetModelStatusRequest,
                      builder: GetModelStatusResponse.Builder): Unit = {
     if(!request.hasModelSpec) {
-      System.err.print("Missing ModelSpec")
+      LOG.info("Missing ModelSpec")
       return
     }
     getModelStatusWithModelSpec(core, request.getModelSpec, request, builder)
@@ -36,19 +40,19 @@ object GetModelStatusImpl {
                                   builder: GetModelStatusResponse.Builder): Unit ={
     val modelName = modelSpec.getName
     val monitor = core.getServableStateMonitor
-    if(modelSpec.getVersion.getValue.isInstanceOf[Long]) {
+    if(modelSpec.getVersion != Int64Value.getDefaultInstance) {
       val version = modelSpec.getVersion.getValue
       val id = ServableId(modelName, version)
       val servableState = monitor.getState(id)
       if(servableState.isEmpty) {
-        System.out.print("Could not find version " + version + " of model " + modelName)
+        LOG.info("Could not find version " + version + " of model " + modelName)
         return
       }
       addModelVersionStatusToResponse(version, servableState.get, builder)
     } else {
       val versionsAndStates = monitor.getVersionStates(modelName)
       if(versionsAndStates.isEmpty) {
-        System.out.print("Could not find any versions of model " + modelName)
+        LOG.info("Could not find any versions of model " + modelName)
         return
       }
       for((version, servableState) <- versionsAndStates) {

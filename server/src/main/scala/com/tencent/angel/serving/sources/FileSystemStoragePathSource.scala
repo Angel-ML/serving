@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.PolicyChoiceCase
 import com.tencent.angel.serving.serving.{FileSystemStoragePathSourceConfig, ServableToMonitor}
 import com.tencent.angel.serving.core._
+import com.tencent.angel.serving.service.ServingContext
 import org.apache.commons.io.FilenameUtils
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -140,12 +141,12 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def pollFileSystemForServable(servable: ServableToMonitor): List[ServableData[StoragePath]] = {
-    if (!SystemFileUtils.fileExist(servable.getBasePath)) {
+    if (!SystemFileUtils.fileExist(servable.getBasePath, ServingContext.hadoopConfig)) {
       throw new Exception(s"Could not find base path ${servable.getBasePath} for servable ${servable.getServableName}")
     }
 
     //Retrieve a list of base-path children from the file system.
-    val children = SystemFileUtils.getChildren(servable.getBasePath)
+    val children = SystemFileUtils.getChildren(servable.getBasePath, ServingContext.hadoopConfig)
     if (children.isEmpty) {
       throw InvalidArguments("The base path " + servable.getBasePath + " for servable " +
         servable.getServableName + "has not children")
@@ -193,7 +194,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     var atLeastOneVersionFound = false
     children.foreach{ child =>
       val versionNumber = parseVersionNumber(child)
-      if (versionNumber > 0) {
+      if (versionNumber >= 0) {
         versions += AspireVersions(servable, child, versionNumber)
         atLeastOneVersionFound = true
       }

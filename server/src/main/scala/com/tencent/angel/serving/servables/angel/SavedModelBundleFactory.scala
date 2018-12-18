@@ -1,7 +1,7 @@
-package com.tencent.angel.serving.core
+package com.tencent.angel.serving.servables.angel
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
-import com.tencent.angel.serving.servables.angel.SavedModelBundle
+import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.serving.SessionBundleConfig
 
 class SavedModelBundleFactory(config: SessionBundleConfig) {

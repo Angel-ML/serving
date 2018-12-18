@@ -1,0 +1,6 @@
+18/12/05 10:47:42 INFO client.RestClient : model_version_status {
+  version: 1
+  state: AVAILABLE
+}
+
+18/12/05 10:47:42 INFO client.RestClient : status code: 200
