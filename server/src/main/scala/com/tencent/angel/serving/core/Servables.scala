@@ -275,7 +275,7 @@ case class UntypedServableHandle(id: ServableId, loader: Loader) {
 }
 
 
-case class ServableHandle[T](untypedHandle: UntypedServableHandle) {
+case class ServableHandle[+T](untypedHandle: UntypedServableHandle) {
   def id: ServableId = untypedHandle.id
 
   def servable: T = untypedHandle.servable.asInstanceOf[T]

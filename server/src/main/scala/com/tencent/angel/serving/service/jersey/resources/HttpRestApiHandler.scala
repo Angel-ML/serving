@@ -1,14 +1,12 @@
 package com.tencent.angel.serving.service.jersey.resources
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.serializer.SerializerFeature
 import com.google.protobuf.Int64Value
 import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
 import com.tencent.angel.serving.apis.prediction.PredictProtos.{PredictRequest, PredictResponse}
 import com.tencent.angel.serving.servables.angel.RunOptions
-import com.tencent.angel.serving.servables.common.Predictor
+import com.tencent.angel.serving.servables.common.ServiceImpl
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
 import com.tencent.angel.serving.service.jersey.util.ProcessInputOutput
@@ -118,7 +116,7 @@ class HttpRestApiHandler {
     val format =ProcessInputOutput.fillPredictRequestFromJson(requestBody, requestBuilder, modelSpecBuilder)
     val responseBuilder = PredictResponse.newBuilder()
     val runOptions = new RunOptions()
-    Predictor.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
+    ServiceImpl.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
     //JSON.toJSONString(responseBuilder.build().getOutputs, SerializerFeature.EMPTY:_*)
     responseBuilder.build().getOutputs.toString
   }

@@ -4,10 +4,10 @@ import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 
 import scala.collection.mutable
 
-class SimpleLoader[ServableType](creator: Unit => ServableType,
-                                 resourceEstimate: Unit => ResourceAllocation) extends Loader {
+class SimpleLoader[ServableType](creator: () => ServableType,
+                                 resourceEstimate: () => ResourceAllocation) extends Loader {
 
-  private var postLoadResourceEstimate: Unit => ResourceAllocation = _
+  private var postLoadResourceEstimate: () => ResourceAllocation = _
   private var memorizedResourceEstimator: ResourceAllocation = _
   private var resourceUtil: ResourceUtil = _
   // private var ramResource: Resource = null
@@ -39,7 +39,7 @@ class SimpleLoader[ServableType](creator: Unit => ServableType,
 }
 
 object SimpleLoader {
-  def apply[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation
+  def apply[ServableType](creator: () => ServableType, resourceEstimate: () => ResourceAllocation
                          ): SimpleLoader[ServableType] = {
     val loader = new SimpleLoader[ServableType](creator, resourceEstimate)
     val resourceOptions = ResourceOptions(mutable.Map(DeviceType.kMain -> 1))
@@ -48,8 +48,8 @@ object SimpleLoader {
     loader
   }
 
-  def apply[ServableType](creator: Unit => ServableType, resourceEstimate: Unit => ResourceAllocation,
-                          postLoadResourceEstimate: Unit => ResourceAllocation): SimpleLoader[ServableType] = {
+  def apply[ServableType](creator: () => ServableType, resourceEstimate: () => ResourceAllocation,
+                          postLoadResourceEstimate: () => ResourceAllocation): SimpleLoader[ServableType] = {
     val loader = SimpleLoader(creator, resourceEstimate)
     loader.postLoadResourceEstimate = postLoadResourceEstimate
     loader

@@ -27,7 +27,7 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
     val runOptions = new RunOptions()
     val responseBuilder = PredictResponse.newBuilder()
     val start = System.currentTimeMillis
-    Predictor.predict(runOptions, serverCore, request, responseBuilder)
+    ServiceImpl.predict(runOptions, serverCore, request, responseBuilder)
     val predictResponse = responseBuilder.build()
     responseObserver.onNext(predictResponse)
     responseObserver.onCompleted()
@@ -37,7 +37,7 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
   override def classify(request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {
     val runOptions = new RunOptions()
     val responseBuilder = ClassificationResponse.newBuilder()
-    ClassificationServiceImpl.classify(runOptions, serverCore, request, responseBuilder)
+    ServiceImpl.classify(runOptions, serverCore, request, responseBuilder)
     val classificationResponse = responseBuilder.build()
     responseObserver.onNext(classificationResponse)
     responseObserver.onCompleted()
@@ -46,7 +46,7 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
   override def regress(request: RegressionRequest, responseObserver: StreamObserver[RegressionResponse]): Unit = {
     val runOptions = new RunOptions()
     val responseBuilder = RegressionResponse.newBuilder()
-    RegressionServiceImpl.regress(runOptions, serverCore, request, responseBuilder)
+    ServiceImpl.regress(runOptions, serverCore, request, responseBuilder)
     val regressionResponse = responseBuilder.build()
     responseObserver.onNext(regressionResponse)
     responseObserver.onCompleted()
@@ -55,7 +55,7 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
   override def multiInference(request: MultiInferenceRequest, responseObserver: StreamObserver[MultiInferenceResponse]): Unit = {
     val runOptions = new RunOptions()
     val responseBuilder = MultiInferenceResponse.newBuilder()
-    MultiInferenceHelper.runMultiInferenceWithServerCore(runOptions, serverCore, request, responseBuilder)
+    ServiceImpl.multiInference(runOptions, serverCore, request, responseBuilder)
     val multiInferenceResponse = responseBuilder.build()
     responseObserver.onNext(multiInferenceResponse)
     responseObserver.onCompleted()
@@ -63,7 +63,7 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
 
   override def getModelMetadata(request: GetModelMetadataRequest, responseObserver: StreamObserver[GetModelMetadataResponse]): Unit = {
     val responseBuilder = GetModelMetadataResponse.newBuilder()
-    GetModelMetadataImpl.getModelMetaData(serverCore, request, responseBuilder)
+    ServiceImpl.modelMetaData(serverCore, request, responseBuilder)
     val getModelMetadataResponse = responseBuilder.build()
     responseObserver.onNext(getModelMetadataResponse)
     responseObserver.onCompleted()

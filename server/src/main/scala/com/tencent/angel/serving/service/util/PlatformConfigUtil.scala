@@ -9,16 +9,21 @@ import com.tencent.angel.serving.serving.SessionBundleConfig
 object PlatformConfigUtil {
   def createAngelPlatformConfigMap(sessionBundleConfig: SessionBundleConfig,
                                    useSavedModel:Boolean): PlatformConfigMap = {
-    var sourceAdapterConfig: Any = null
-    if(useSavedModel) {
-      val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig
-        .newBuilder().setLegacyConfig(sessionBundleConfig).build()
-      sourceAdapterConfig = Any.pack(savedModelBundleSourceAdapterConfig)
+    val sourceAdapterConfig: Any = if(useSavedModel) {
+      val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig.newBuilder()
+        .setAdapterClassName("com.tencent.angel.serving.servables.angel.SavedModelBundleSourceAdapter")
+        .setLegacyConfig(sessionBundleConfig)
+        .build()
+      Any.pack(savedModelBundleSourceAdapterConfig)
     } else {
-      val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig
-        .newBuilder().setConfig(sessionBundleConfig).build()
-      sourceAdapterConfig = Any.pack(sessionBundleSourceAdapterConfig)
+      val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
+        .setAdapterClassName("com.tencent.angel.serving.servables.angel.SavedModelBundleSourceAdapter")
+        .setConfig(sessionBundleConfig)
+        .build()
+
+      Any.pack(sessionBundleSourceAdapterConfig)
     }
+
     PlatformConfigMap.newBuilder()
       .putPlatformConfigs("Angel", PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
       .build()

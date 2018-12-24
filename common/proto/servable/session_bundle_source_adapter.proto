@@ -9,5 +9,6 @@ import "servable/session_bundle_config.proto";
 
 // Config proto for SessionBundleSourceAdapter.
 message SessionBundleSourceAdapterConfig {
+    string adapter_class_name = 100;
     SessionBundleConfig config = 1;
 }

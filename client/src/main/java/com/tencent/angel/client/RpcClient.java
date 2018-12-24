@@ -1,8 +1,7 @@
 package com.tencent.angel.client;
 
+import com.google.protobuf.Int64Value;
 import com.tencent.angel.core.graph.TensorProtos.TensorProto;
-import com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto;
-import com.tencent.angel.core.graph.TypesProtos;
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse;
@@ -14,13 +13,10 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.tencent.angel.utils.ProtoUtils;
+import java.util.*;
 import java.util.concurrent.*;
 
-import io.grpc.netty.NettyChannelBuilder;
-import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,25 +49,20 @@ public class RpcClient {
     }
 
     public void doPredict(String modelName, long modelVersion) {
-        float inputs[] = new float[] {-0.515738f, 0.545345f, -1.020538f, 0.89946f, -0.397207f,
-                -0.504616f, 0.435321f, -1.351367f, 0.70564f, -0.003322f};
-        //build input tensor
-        TensorProto.Builder featuresTensorBuilder = TensorProto.newBuilder();
-        for (int j = 0; j < inputs.length; ++j) {
-            featuresTensorBuilder.addFloatVal(inputs[j]);
-        }
-        TensorShapeProto.Dim featuresDim1 = TensorShapeProto.Dim.newBuilder().setSize(1).build();
-        TensorShapeProto.Dim featuresDim2 = TensorShapeProto.Dim.newBuilder().setSize(inputs.length).build();
-        TensorShapeProto featuresShape = TensorShapeProto.newBuilder().addDim(featuresDim1).addDim(featuresDim2)
-                .build();
-        featuresTensorBuilder.setDtype(TypesProtos.DataType.DT_FLOAT).setTensorShape(featuresShape);
-        TensorProto featuresTensorProto = featuresTensorBuilder.build();
+        List<Integer> keys = new ArrayList<Integer>();
+        List<Float> values = new ArrayList<Float>();
+        long dim = 123;
 
+        //build input tensor
+        Random rand = new Random();
+        for (int j = 0; j < 13; j++) {
+            keys.add(rand.nextInt((int)dim));
+            values.add(rand.nextFloat());
+        }
+
+        TensorProto featuresTensorProto = ProtoUtils.toTensorProto(dim, keys, values);
         // Generate gRPC request, signature inputs name should be correct or exceptions
-        com.google.protobuf.Int64Value version = com.google.protobuf.Int64Value.newBuilder().setValue(modelVersion)
-                .build();
-        ModelSpec modelSpec = ModelSpec.newBuilder().setName(modelName).setVersion(version)
-                .setSignatureName("predict").build();
+        ModelSpec modelSpec = ProtoUtils.getModelSpec(modelName, modelVersion, "predict");
         PredictRequest request = PredictRequest.newBuilder().setModelSpec(modelSpec)
                 .putInputs("inputs", featuresTensorProto).build();
         GetModelStatusRequest statusRequest = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build();
@@ -118,7 +109,7 @@ public class RpcClient {
                 public String call() throws Exception {
                     LOG.info("Now in thread.");
                     RpcClient client = new RpcClient("localhost", 8500);
-                    String modelName = "default";
+                    String modelName = "lr";
                     long modelVersion = 1L;
                     try {
                         for(int i = 0; i < 1000; i++) {
