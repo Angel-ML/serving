@@ -1,9 +1,9 @@
 package com.tencent.angel.serving.service
 
 import io.grpc.ServerBuilder
-import java.io.{FileInputStream, IOException}
+import java.io.{FileInputStream, FileReader, IOException}
 
-import com.google.protobuf.StringValue
+import com.google.protobuf.{StringValue, TextFormat}
 import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
@@ -198,26 +198,34 @@ object ModelServer {
 
   @throws[IOException]
   def readPlatformConfigFile(platformConfigFile: String): PlatformConfigMap = {
-    val is = new FileInputStream(platformConfigFile)
-    PlatformConfigMap.parseFrom(is)
+    val fileReader = new FileReader(platformConfigFile)
+    val platformConfigMapBuilder = PlatformConfigMap.newBuilder()
+    TextFormat.merge(fileReader, platformConfigMapBuilder)
+    platformConfigMapBuilder.build()
   }
 
   @throws[IOException]
   def readModelConfigFile(modelConfigFile: String): ModelServerConfig = {
-    val is = new FileInputStream(modelConfigFile)
-    ModelServerConfig.parseFrom(is)
+    val fileReader = new FileReader(modelConfigFile)
+    val modelServerConfigBuilder = ModelServerConfig.newBuilder()
+    TextFormat.merge(fileReader, modelServerConfigBuilder)
+    modelServerConfigBuilder.build()
   }
 
   @throws[IOException]
   def readBatchingParametersFile(batchingParametersFile: String): BatchingParameters = {
-    val is = new FileInputStream(batchingParametersFile)
-    BatchingParameters.parseFrom(is)
+    val fileReader = new FileReader(batchingParametersFile)
+    val batchingParametersBuilder = BatchingParameters.newBuilder()
+    TextFormat.merge(fileReader, batchingParametersBuilder)
+    batchingParametersBuilder.build()
   }
 
   @throws[IOException]
   def readMonitoringConfigFile(monitoringConfigFile: String): MonitoringConfig = {
-    val is = new FileInputStream(monitoringConfigFile)
-    MonitoringConfig.parseFrom(is)
+    val fileReader = new FileReader(monitoringConfigFile)
+    val monitoringConfigBuilder = MonitoringConfig.newBuilder()
+    TextFormat.merge(fileReader, monitoringConfigBuilder)
+    monitoringConfigBuilder.build()
   }
 
   def defaultResourceAllocation(): ResourceAllocation = {

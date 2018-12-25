@@ -11,10 +11,10 @@ import scala.collection.mutable
 
 class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSummary: Boolean,
                             metricSummaryWaitSeconds: Int = 0) extends MetricsManager {
-  private var _metricsCollector: MetricsCollector = metricsCollector
+  private val _metricsCollector: MetricsCollector = metricsCollector
   private val _metricsMap = new mutable.HashMap[ServableId, PredictMetric]()
   private val _summaryMetrics = new mutable.HashMap[String, PredictMetricSummary]()
-  private var _metricSummaryWaitSeconds: Int = metricSummaryWaitSeconds
+  private val _metricSummaryWaitSeconds: Int = metricSummaryWaitSeconds
   private val _summaryThreadRunning = new AtomicBoolean(true)
   private val executorService = Executors.newSingleThreadExecutor()
   if(enableMetricSummary) {
