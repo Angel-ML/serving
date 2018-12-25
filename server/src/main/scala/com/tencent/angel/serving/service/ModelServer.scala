@@ -33,11 +33,11 @@ class ModelServer {
   var grpcServer: io.grpc.Server = _
   var httpServer: org.eclipse.jetty.server.Server = _
 
-  def buildSingleModelConfig(modelName : String, modelBasePath: String): ModelServerConfig ={
+  def buildSingleModelConfig(modelName : String, platform: String, modelBasePath: String): ModelServerConfig ={
     LOG.info("Building single Angel model file config: " +
       "model_name: " + modelName + " model_base_path: " + modelBasePath)
     val singelModel: ModelConfig = ModelConfig.newBuilder().setName(modelName)
-      .setBasePath(modelBasePath).setModelPlatform("Angel").build()
+      .setBasePath(modelBasePath).setModelPlatform(platform).build()
     val modelServerConfig = ModelServerConfig.newBuilder().setModelConfigList(ModelConfigList.newBuilder().addConfig(singelModel)).build()
     modelServerConfig
   }
@@ -57,7 +57,7 @@ class ModelServer {
 
     var modelServerConfig: ModelServerConfig = null
     if(serverOptions.model_config_file.isEmpty){
-      modelServerConfig = buildSingleModelConfig(serverOptions.model_name,
+      modelServerConfig = buildSingleModelConfig(serverOptions.model_name, "Angel",
         serverOptions.model_base_path)
     } else {
       modelServerConfig = readModelConfigFile(serverOptions.model_config_file)

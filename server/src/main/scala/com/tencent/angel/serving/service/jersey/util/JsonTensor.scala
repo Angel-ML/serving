@@ -11,7 +11,7 @@ import com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest
 import com.tencent.angel.serving.core.{ServableHandle, ServableRequest, ServerCore}
-import com.tencent.angel.serving.servables.angel.SavedModelBundle
+import com.tencent.angel.serving.servables.common.SavedModelBundle
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.jersey.util.JsonPredictRequestFormat.JsonPredictRequestFormat
 import org.slf4j.{Logger, LoggerFactory}

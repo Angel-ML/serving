@@ -172,8 +172,8 @@ class ServerCore(val context: CoreContext) extends Manager {
     manager.availableServableHandles
   }
 
-  override def servableHandle[Loader](request: ServableRequest): ServableHandle[Loader] = {
-    manager.servableHandle(request)
+  override def servableHandle[T](request: ServableRequest): ServableHandle[T] = {
+    manager.servableHandle[T](request)
   }
 
   override def untypedServableHandle(request: ServableRequest): UntypedServableHandle = {

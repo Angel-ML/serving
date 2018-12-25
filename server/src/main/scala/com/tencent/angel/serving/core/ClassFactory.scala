@@ -1,55 +1,36 @@
 package com.tencent.angel.serving.core
 
 
-import java.util.concurrent.locks.ReentrantReadWriteLock
+import com.google.protobuf.Message
+import com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig
+import com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig
 
-import com.google.protobuf.{Descriptors, Message}
-import com.tencent.angel.servable.{SavedModelBundleSourceAdapterConfigProtos, SessionBundleSourceAdapterConfigProtos}
-import com.tencent.angel.serving.servables.Utils
+object ClassFactory {
 
-import scala.reflect.runtime.{universe => ru}
+  //create an instance of BaseClass based on a config proto
+  def create[BaseClass](config: Message, classCreator: String, methodName: String="apply"): BaseClass = {
+    val cls = Class.forName(classCreator)
+    val result = config match {
+      case savedConf: SavedModelBundleSourceAdapterConfig =>
+        val method = cls.getDeclaredMethod(methodName, classOf[SavedModelBundleSourceAdapterConfig])
+        method.invoke(null, savedConf)
+      case sessionConf: SessionBundleSourceAdapterConfig =>
+        val method = cls.getDeclaredMethod(methodName, classOf[SessionBundleSourceAdapterConfig])
+        method.invoke(null, sessionConf)
+    }
 
-
-object ClassRegistrationFactory{
-
-  def create[BaseClass](config: Message, classCreator: String, methodName: String): BaseClass = {
-    val classMirror = ru.runtimeMirror(getClass.getClassLoader)
-    val classInstance = classMirror.staticModule(classCreator)
-    val methods = classMirror.reflectModule(classInstance)
-    val objMirror = classMirror.reflect(methods.instance)
-    val method = methods.symbol.typeSignature.member(ru.TermName(methodName)).asMethod
-    val result = objMirror.reflectMethod(method)(config)
     result.asInstanceOf[BaseClass]
   }
 
-}
-
-object ClassRegistry {
-
-  private val globalMapLock = new ReentrantReadWriteLock()
-  private val globalMapReadLock: ReentrantReadWriteLock.ReadLock = globalMapLock.readLock()
-  private val globalMapWriteLock: ReentrantReadWriteLock.WriteLock = globalMapLock.writeLock()
-
-  //create an instance of BaseClass based on a config proto
-  def create[BaseClass](config: Message, classCreator:String): BaseClass = {
-    ClassRegistrationFactory.create[BaseClass](config, classCreator, "create")
-  }
-
   def createFromAny[BaseClass](platform: String, anyConfig: com.google.protobuf.Any): BaseClass = {
-    val fullTypeName = parseUrlForAnyType(anyConfig.getTypeUrl)
-//    val descriptor: Descriptors.Descriptor = SavedModelBundleSourceAdapterConfigProtos.getDescriptor.findMessageTypeByName(fullTypeName)
-//    val config: Message = descriptor.getOptions.newBuilderForType().build()
-    var config: Message = null
-    if (fullTypeName == "SavedModelBundleSourceAdapterConfig"){
-      config = SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig.newBuilder().build()
-    } else if (fullTypeName == "SessionBundleSourceAdapterConfig"){
-      config = SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.newBuilder().build()
+    val (config, fullTypeName) = if (anyConfig.is(classOf[SavedModelBundleSourceAdapterConfig])) {
+      val congObj = anyConfig.unpack(classOf[SavedModelBundleSourceAdapterConfig])
+      congObj -> congObj.getAdapterClassName
+    } else {
+      val congObj = anyConfig.unpack(classOf[SessionBundleSourceAdapterConfig])
+      congObj -> congObj.getAdapterClassName
     }
-    create[BaseClass](config, Utils.packagePath + "." + platform.toLowerCase() + "." + fullTypeName + "Creator")
-  }
 
-
-  private def parseUrlForAnyType(typeUrl: String): String ={
-    typeUrl.substring(typeUrl.lastIndexOf(".")+1)
+    create[BaseClass](config, fullTypeName)
   }
 }

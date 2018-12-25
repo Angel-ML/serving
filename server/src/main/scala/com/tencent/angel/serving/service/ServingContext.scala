@@ -102,7 +102,7 @@ class ServingContext(eventBus: EventBus[ServableState],
     }
 
     val adapterConfig = platformConfig.get.getSourceAdapterConfig
-    val adapter: StoragePathSourceAdapter = ClassRegistry.createFromAny[StoragePathSourceAdapter](modelPlatform, adapterConfig)
+    val adapter: StoragePathSourceAdapter = ClassFactory.createFromAny[StoragePathSourceAdapter](modelPlatform, adapterConfig)
     adapter
   }
 

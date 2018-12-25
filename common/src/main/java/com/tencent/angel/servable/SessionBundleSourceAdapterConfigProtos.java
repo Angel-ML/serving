@@ -19,6 +19,16 @@ public final class SessionBundleSourceAdapterConfigProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <code>optional string adapter_class_name = 100;</code>
+     */
+    java.lang.String getAdapterClassName();
+    /**
+     * <code>optional string adapter_class_name = 100;</code>
+     */
+    com.google.protobuf.ByteString
+        getAdapterClassNameBytes();
+
+    /**
      * <code>optional .angel.SessionBundleConfig config = 1;</code>
      */
     boolean hasConfig();
@@ -47,6 +57,7 @@ public final class SessionBundleSourceAdapterConfigProtos {
       super(builder);
     }
     private SessionBundleSourceAdapterConfig() {
+      adapterClassName_ = "";
     }
 
     @java.lang.Override
@@ -87,6 +98,12 @@ public final class SessionBundleSourceAdapterConfigProtos {
 
               break;
             }
+            case 802: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              adapterClassName_ = s;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -108,6 +125,40 @@ public final class SessionBundleSourceAdapterConfigProtos {
       return com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.internal_static_angel_SessionBundleSourceAdapterConfig_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.class, com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.Builder.class);
+    }
+
+    public static final int ADAPTER_CLASS_NAME_FIELD_NUMBER = 100;
+    private volatile java.lang.Object adapterClassName_;
+    /**
+     * <code>optional string adapter_class_name = 100;</code>
+     */
+    public java.lang.String getAdapterClassName() {
+      java.lang.Object ref = adapterClassName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        adapterClassName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string adapter_class_name = 100;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAdapterClassNameBytes() {
+      java.lang.Object ref = adapterClassName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        adapterClassName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int CONFIG_FIELD_NUMBER = 1;
@@ -146,6 +197,9 @@ public final class SessionBundleSourceAdapterConfigProtos {
       if (config_ != null) {
         output.writeMessage(1, getConfig());
       }
+      if (!getAdapterClassNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 100, adapterClassName_);
+      }
     }
 
     public int getSerializedSize() {
@@ -156,6 +210,9 @@ public final class SessionBundleSourceAdapterConfigProtos {
       if (config_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getConfig());
+      }
+      if (!getAdapterClassNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(100, adapterClassName_);
       }
       memoizedSize = size;
       return size;
@@ -173,6 +230,8 @@ public final class SessionBundleSourceAdapterConfigProtos {
       com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig other = (com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig) obj;
 
       boolean result = true;
+      result = result && getAdapterClassName()
+          .equals(other.getAdapterClassName());
       result = result && (hasConfig() == other.hasConfig());
       if (hasConfig()) {
         result = result && getConfig()
@@ -188,6 +247,8 @@ public final class SessionBundleSourceAdapterConfigProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + ADAPTER_CLASS_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getAdapterClassName().hashCode();
       if (hasConfig()) {
         hash = (37 * hash) + CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getConfig().hashCode();
@@ -314,6 +375,8 @@ public final class SessionBundleSourceAdapterConfigProtos {
       }
       public Builder clear() {
         super.clear();
+        adapterClassName_ = "";
+
         if (configBuilder_ == null) {
           config_ = null;
         } else {
@@ -342,6 +405,7 @@ public final class SessionBundleSourceAdapterConfigProtos {
 
       public com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig buildPartial() {
         com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig result = new com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig(this);
+        result.adapterClassName_ = adapterClassName_;
         if (configBuilder_ == null) {
           result.config_ = config_;
         } else {
@@ -388,6 +452,10 @@ public final class SessionBundleSourceAdapterConfigProtos {
 
       public Builder mergeFrom(com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig other) {
         if (other == com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.SessionBundleSourceAdapterConfig.getDefaultInstance()) return this;
+        if (!other.getAdapterClassName().isEmpty()) {
+          adapterClassName_ = other.adapterClassName_;
+          onChanged();
+        }
         if (other.hasConfig()) {
           mergeConfig(other.getConfig());
         }
@@ -414,6 +482,75 @@ public final class SessionBundleSourceAdapterConfigProtos {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+
+      private java.lang.Object adapterClassName_ = "";
+      /**
+       * <code>optional string adapter_class_name = 100;</code>
+       */
+      public java.lang.String getAdapterClassName() {
+        java.lang.Object ref = adapterClassName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          adapterClassName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string adapter_class_name = 100;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAdapterClassNameBytes() {
+        java.lang.Object ref = adapterClassName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          adapterClassName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string adapter_class_name = 100;</code>
+       */
+      public Builder setAdapterClassName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        adapterClassName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string adapter_class_name = 100;</code>
+       */
+      public Builder clearAdapterClassName() {
+        
+        adapterClassName_ = getDefaultInstance().getAdapterClassName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string adapter_class_name = 100;</code>
+       */
+      public Builder setAdapterClassNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        adapterClassName_ = value;
+        onChanged();
         return this;
       }
 
@@ -598,11 +735,11 @@ public final class SessionBundleSourceAdapterConfigProtos {
     java.lang.String[] descriptorData = {
       "\n,servable/session_bundle_source_adapter" +
       ".proto\022\005angel\032$servable/session_bundle_c" +
-      "onfig.proto\"N\n SessionBundleSourceAdapte" +
-      "rConfig\022*\n\006config\030\001 \001(\0132\032.angel.SessionB" +
-      "undleConfigBF\n\032com.tencent.angel.servabl" +
-      "eB&SessionBundleSourceAdapterConfigProto" +
-      "sP\000b\006proto3"
+      "onfig.proto\"j\n SessionBundleSourceAdapte" +
+      "rConfig\022\032\n\022adapter_class_name\030d \001(\t\022*\n\006c" +
+      "onfig\030\001 \001(\0132\032.angel.SessionBundleConfigB" +
+      "F\n\032com.tencent.angel.servableB&SessionBu" +
+      "ndleSourceAdapterConfigProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -622,7 +759,7 @@ public final class SessionBundleSourceAdapterConfigProtos {
     internal_static_angel_SessionBundleSourceAdapterConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_angel_SessionBundleSourceAdapterConfig_descriptor,
-        new java.lang.String[] { "Config", });
+        new java.lang.String[] { "AdapterClassName", "Config", });
     com.tencent.angel.servable.SessionBundleConfigProtos.getDescriptor();
   }
 
