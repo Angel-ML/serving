@@ -26,12 +26,10 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
   override def predict(request: PredictRequest, responseObserver: StreamObserver[PredictResponse]): Unit = {
     val runOptions = new RunOptions()
     val responseBuilder = PredictResponse.newBuilder()
-    val start = System.currentTimeMillis
     Predictor.predict(runOptions, serverCore, request, responseBuilder)
     val predictResponse = responseBuilder.build()
     responseObserver.onNext(predictResponse)
     responseObserver.onCompleted()
-    LOG.info("Finished prediction with {} ms", System.currentTimeMillis - start)
   }
 
   override def classify(request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {

@@ -85,6 +85,17 @@ object Main {
         .text("If non-empty, read an ascii MonitoringConfig protobuf from " +
           "the supplied file name")
         .action((x, c) => c.copy(monitoring_config_file = x))
+      opt[String]("metric_implementation")
+        .text("Defines the implementation of the metrics to be used (logger, " +
+          "syslog ...). ")
+        .action((x, c) => c.copy(target_publishing_metric = x))
+      opt[Boolean]("enable_metric_summary")
+        .text("Enable summary for metrics, launch an async task.")
+        .action((x, c) => c.copy(enable_metric_summary = x))
+      opt[Int]("metric_summary_wait_seconds")
+        .text("Interval in seconds between each summary of metrics." +
+          "(Ignored if --enable_metric_summary=false)")
+        .action((x, c) => c.copy(metric_summary_wait_seconds = x))
     }
     parser.parse(args, defaultOptions).map { options =>
       run(options)

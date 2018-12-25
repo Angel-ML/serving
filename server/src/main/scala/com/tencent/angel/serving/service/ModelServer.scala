@@ -16,6 +16,7 @@ import com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig
 import com.tencent.angel.servable.SessionBundleConfigProtos.{BatchingParameters, SessionBundleConfig}
 import com.tencent.angel.serving.service.common.{ModelServiceImpl, PredictionServiceImpl}
 import com.tencent.angel.serving.service.util.{Options, PlatformConfigUtil}
+import io.grpc.services.ChannelzService
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
 
@@ -99,6 +100,9 @@ class ModelServer {
     servingContext.loadRetryIntervalMicros = serverOptions.load_retry_interval_micros
     servingContext.fileSystemPollWaitSeconds = serverOptions.file_system_poll_wait_seconds
     servingContext.flushFilesystemCaches = serverOptions.flush_filesystem_caches
+    servingContext.targetPublishingMetric = serverOptions.target_publishing_metric
+    servingContext.enableMetricSummary = serverOptions.enable_metric_summary
+    servingContext.metricSummaryWaitSeconds = serverOptions.metric_summary_wait_seconds
 
     serverCore = new ServerCore(servingContext)
     serverCore.reloadConfig(modelServerConfig)
@@ -108,6 +112,7 @@ class ModelServer {
     val serverBuilder: ServerBuilder[_ <: ServerBuilder[_]] = ServerBuilder.forPort(serverOptions.grpc_port)
     serverBuilder.addService(predictionServiceImpl)
     serverBuilder.addService(modelServiceImpl)
+    serverBuilder.addService(ChannelzService.newInstance(100))
     grpcServer = serverBuilder.build()
     if(grpcServer == null) {
       LOG.info("Failed to BuildAndStart gRPC server.")

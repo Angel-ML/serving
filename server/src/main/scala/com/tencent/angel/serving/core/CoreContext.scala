@@ -5,6 +5,7 @@ import com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig.ConfigCase
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
 import com.tencent.angel.serving.core.ServerCore.SourceAdapters
+import com.tencent.angel.serving.core.metrics.MetricsManager
 import com.tencent.angel.serving.serving.ModelServerConfig
 import org.apache.commons.io.FilenameUtils
 
@@ -32,6 +33,11 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   val aspiredVersionPolicy: AspiredVersionPolicy = AspiredVersionPolicy(policyClassName)
 
   var manager: AspiredVersionsManager = _
+
+  var metricSummaryWaitSeconds: Int = 30
+  var enableMetricSummary: Boolean = false
+  var targetPublishingMetric: String = "logger"
+  var metricsManager: MetricsManager = _
 
   def addModelsViaModelConfigList(config: ModelServerConfig): Unit
 

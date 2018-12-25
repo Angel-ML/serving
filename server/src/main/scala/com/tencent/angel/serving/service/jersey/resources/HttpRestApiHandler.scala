@@ -64,6 +64,14 @@ class HttpRestApiHandler {
     }
   }
 
+  @GET
+  @Path("/angelServing/v1.0/monitoring/metrics")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def processMetricsRequest(): Response = {
+
+    Response.status(200).entity("ok").build()
+  }
+
   @POST
   @Path("/angelServing/v1.0/models/{requestPath:([^/:]+)(?:/versions/(\\d+))?:(classify|regress|predict)}")
   @Consumes(Array(MediaType.APPLICATION_JSON))
