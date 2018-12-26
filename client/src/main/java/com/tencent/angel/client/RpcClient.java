@@ -17,6 +17,11 @@ import com.tencent.angel.utils.ProtoUtils;
 import java.util.*;
 import java.util.concurrent.*;
 
+import io.grpc.channelz.v1.ChannelzGrpc;
+import io.grpc.channelz.v1.GetChannelRequest;
+import io.grpc.channelz.v1.GetServersRequest;
+import io.grpc.netty.NettyChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +33,7 @@ public class RpcClient {
     private final PredictionServiceGrpc.PredictionServiceStub asyncStub;
     private final ModelServiceGrpc.ModelServiceBlockingStub modelServiceBlockingStub;
     private final ModelServiceGrpc.ModelServiceStub modelServiceStub;
+    private final ChannelzGrpc.ChannelzBlockingStub channelzBlockingStub;
 
     public RpcClient(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port).usePlaintext(true));
@@ -42,6 +48,7 @@ public class RpcClient {
         asyncStub = PredictionServiceGrpc.newStub(channel);
         modelServiceBlockingStub = ModelServiceGrpc.newBlockingStub(channel);
         modelServiceStub = ModelServiceGrpc.newStub(channel);
+        channelzBlockingStub = ChannelzGrpc.newBlockingStub(channel);
     }
 
     public void shutdown() throws InterruptedException {
@@ -96,6 +103,7 @@ public class RpcClient {
             GetModelStatusResponse statusResponse = modelServiceBlockingStub.getModelStatus(statusRequest);
             LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
             LOG.info(statusResponse.toString());
+            //LOG.info(channelzBlockingStub.getServers(GetServersRequest.newBuilder().build()).toString());
         } catch (StatusRuntimeException e) {
             e.printStackTrace();
         }
@@ -104,7 +112,7 @@ public class RpcClient {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Set<Callable<String>> callables = new HashSet<Callable<String>>();
-        for(int i=0; i<30; i++) {
+        for(int i=0; i<10; i++) {
             callables.add(new Callable<String>() {
                 public String call() throws Exception {
                     LOG.info("Now in thread.");
@@ -112,7 +120,7 @@ public class RpcClient {
                     String modelName = "lr";
                     long modelVersion = 1L;
                     try {
-                        for(int i = 0; i < 1000; i++) {
+                        for(int i = 0; i < 10; i++) {
                             client.doPredict(modelName, modelVersion);
                         }
                     } finally {

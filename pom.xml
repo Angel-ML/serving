@@ -24,8 +24,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <main.basedir>${project.basedir}</main.basedir>
-        <grpc.version>1.0.1</grpc.version>
-        <protobuf.version>3.0.0</protobuf.version>
+        <grpc.version>1.17.1</grpc.version>
+        <protobuf.version>3.5.1</protobuf.version>
         <logback.version>1.2.3</logback.version>
     </properties>
 
@@ -101,7 +101,12 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-core</artifactId>
-            <version>1.0.1</version>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-services</artifactId>
+            <version>${grpc.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

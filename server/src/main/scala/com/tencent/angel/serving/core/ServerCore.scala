@@ -3,9 +3,12 @@ package com.tencent.angel.serving.core
 import java.net.URI
 import java.util.concurrent.locks.ReentrantLock
 
+import com.google.protobuf.Int64Value
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.serving.core.ServableStateMonitor.VersionMap
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
+import com.tencent.angel.serving.core.ManagerState.ManagerState
+import com.tencent.angel.serving.core.metrics.{MetricsManager, PredictMetricsManager}
 import org.apache.commons.io.FilenameUtils
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -30,7 +33,11 @@ class ServerCore(val context: CoreContext) extends Manager {
   private val configLock = new ReentrantLock()
   private var config: ModelServerConfig = ModelServerConfig.newBuilder().build()
 
+  private val metricsManager = (new MetricsManager).create(context.targetPublishingMetric,
+    context.enableMetricSummary, context.metricSummaryWaitSeconds)
+
   context.manager = manager
+  context.metricsManager = metricsManager
 
   //-------------------------------------------------------------------------Server Setup and Initialization
   def reloadConfig(newConfig: ModelServerConfig): Unit = {
@@ -245,8 +252,28 @@ class ServerCore(val context: CoreContext) extends Manager {
   def getServableStateMonitor: ServableStateMonitor ={
     servableStateMonitor
   }
-}
 
+  //---------------------------------------------------------------------------metrics manager
+  def getModelNameAndVersion(modelSpec: ModelSpec): (String, Long) ={
+    val modelName = modelSpec.getName
+    var modelVersion: Long = 0
+    if(modelSpec.getVersion != Int64Value.getDefaultInstance) {
+      modelVersion = modelSpec.getVersion.getValue
+    }
+    (modelName, modelVersion)
+  }
+
+  def createMetricEvent(eventName: String, eventVersion: Long, eventState: ManagerState,
+                        elapsedPredictTime: Long, resultStatus: String, modelSpec: ModelSpec): Unit = {
+    val eventServableState = new ServableState(ServableId(eventName, eventVersion), eventState)
+    val (modelName, modelVersion) = getModelNameAndVersion(modelSpec)
+    val notifierFn = metricsManager.createNotifier(elapsedPredictTime, resultStatus, modelName, modelVersion)
+    val servables: List[ServableRequest] = List(ServableRequest.fromId(ServableId(eventName, eventVersion)))
+    servableStateMonitor.notifyWhenServablesReachState(servables, eventState, notifierFn)
+    context.eventBus.publish(eventServableState)
+  }
+
+}
 
 object ServerCore {
 
