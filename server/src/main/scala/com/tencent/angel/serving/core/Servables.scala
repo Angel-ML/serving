@@ -5,6 +5,7 @@ import java.util.concurrent.locks.ReentrantLock
 import com.tencent.angel.serving.core.EventBus.EventAndTime
 import com.tencent.angel.serving.core.ManagerState.ManagerState
 import com.tencent.angel.serving.core.LoadOrUnloadRequest.Kind.Kind
+import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy
 import com.tencent.angel.serving.core.ServableRequest.AutoVersionPolicy.{AutoVersionPolicy, kLatest}
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -227,6 +228,17 @@ class ServableRequest(val name: String, val version: Option[Long] = None, val au
     }
 
     other.name == this.name && version
+  }
+
+  def debugString(): String ={
+    if(version.nonEmpty) {
+      "Specific(name: " + name + ", " + "version: " + version.get +")"
+    } else {
+      autoVersionPolicy match {
+        case AutoVersionPolicy.kEarliest => "Earliest(name: " + name + ")"
+        case AutoVersionPolicy.kLatest => "Latest(name: " + name + ")"
+      }
+    }
   }
 }
 

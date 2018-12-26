@@ -79,8 +79,7 @@ object ServiceImpl {
   private def getServableHandle[T](request: T, core: ServerCore): ServableHandle[SavedModelBundle] = {
     val modelSpec = getModelSpecFromRequest[T](request)
     LOG.info(s"modelSpec: ${modelSpec.getName}, ${modelSpec.getVersion}")
-    val servableRequest = ServableRequest.specific(modelSpec.getName, modelSpec.getVersion.getValue)
-
+    val servableRequest = core.servableRequestFromModelSpec(modelSpec)
     core.servableHandle(servableRequest)
   }
 

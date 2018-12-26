@@ -170,7 +170,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     ServableData[StoragePath](servableId, fullPath)
   }
 
-  def AspireLastestVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
+  def AspireLastestVersions(servable: ServableToMonitor, childrenByVersion: mutable.LinkedHashMap[Long, String]
                             ): List[ServableData[StoragePath]]= {
     val numServableVersionsToServe = math.max(servable.getServableVersionPolicy.getLatest.getNumVersions, 1)
     val versions = ListBuffer[ServableData[StoragePath]]()
@@ -206,7 +206,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
 
-  def AspireSpecificVersions(servable: ServableToMonitor, childrenByVersion: Map[Long, String]
+  def AspireSpecificVersions(servable: ServableToMonitor, childrenByVersion: mutable.LinkedHashMap[Long, String]
                              ): List[ServableData[StoragePath]] = {
     val versions = ListBuffer[ServableData[StoragePath]]()
     val versionsToServe = servable.getServableVersionPolicy.getSpecific.getVersionsList
@@ -238,7 +238,7 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
     version.toLong
   }
 
-  def indexChildrenByVersion(children: Set[String]): Map[Long, String] = {
+  def indexChildrenByVersion(children: Set[String]): mutable.LinkedHashMap[Long, String] = {
     val childrenByVersion = mutable.Map[Long, String]()
     children.foreach { child =>
       val versionNumber = parseVersionNumber(child)
@@ -246,6 +246,6 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
         childrenByVersion += (versionNumber -> child)
       }
     }
-    childrenByVersion.toList.sortBy(_._1).toMap
+    mutable.LinkedHashMap(childrenByVersion.toSeq.sortBy(_._1).reverse:_*)
   }
 }
