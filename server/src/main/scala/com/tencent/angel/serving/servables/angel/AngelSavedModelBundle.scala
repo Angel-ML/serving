@@ -44,7 +44,6 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       val value = entry.getValue
 
       val res: PredictResult = model.predict(new LabeledData(ProtoUtils.toVector(value), 0.0))
-
       LOG.info(s"res: ${res.getText}")
       responseBuilder.putOutputs(key, predictResult2TensorProto(res))
     }

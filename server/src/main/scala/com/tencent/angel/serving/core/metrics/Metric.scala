@@ -23,13 +23,13 @@ class PredictMetric(metricName: String, metricVersion: Long, predictTimeMs: Long
   }
 }
 
-class PredictMetricSummary(metricName: String, predictionCount: Long = 0, averagePredictTimesMs: Long = 0,
+class PredictMetricSummary(metricName: String, predictionCount: Long = 0, averagePredictTimesMs: Double = 0,
                            modelName: String, modelVersion: Long, isSucess: Boolean = false,
                            summaryPeriod: Int = 30, accumuPredictTimesMs: Long = 0)
   extends Metric(metricName, 0, modelName, modelVersion) {
   var _predictionCount: Long = predictionCount
   var _summaryPeriod: Int = summaryPeriod
-  var _averagePredictTimeMs: Long = averagePredictTimesMs
+  var _averagePredictTimeMs: Double = averagePredictTimesMs
   var _isSucess: Boolean = isSucess
   var _accumuPredictTimesMs: Long = accumuPredictTimesMs
 
