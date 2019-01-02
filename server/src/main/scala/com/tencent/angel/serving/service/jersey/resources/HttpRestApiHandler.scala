@@ -66,8 +66,8 @@ class HttpRestApiHandler {
   @Path("/angelServing/v1.0/monitoring/metrics")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processMetricsRequest(): Response = {
-
-    Response.status(200).entity("ok").build()
+    val result =  ModelServer.getServerCore.context.metricsManager.getMetricsResult()
+    Response.status(200).entity(result).build()
   }
 
   @POST
