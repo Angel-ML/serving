@@ -23,7 +23,7 @@ public final class AttrValueProtos {
      * "string"
      * </pre>
      *
-     * <code>optional bytes s = 2;</code>
+     * <code>bytes s = 2;</code>
      */
     com.google.protobuf.ByteString getS();
 
@@ -32,7 +32,7 @@ public final class AttrValueProtos {
      * "int"
      * </pre>
      *
-     * <code>optional int64 i = 3;</code>
+     * <code>int64 i = 3;</code>
      */
     long getI();
 
@@ -41,7 +41,7 @@ public final class AttrValueProtos {
      * "float"
      * </pre>
      *
-     * <code>optional float f = 4;</code>
+     * <code>float f = 4;</code>
      */
     float getF();
 
@@ -50,7 +50,7 @@ public final class AttrValueProtos {
      * "bool"
      * </pre>
      *
-     * <code>optional bool b = 5;</code>
+     * <code>bool b = 5;</code>
      */
     boolean getB();
 
@@ -59,7 +59,7 @@ public final class AttrValueProtos {
      * "type"
      * </pre>
      *
-     * <code>optional .angel.DataType type = 6;</code>
+     * <code>.angel.DataType type = 6;</code>
      */
     int getTypeValue();
     /**
@@ -67,7 +67,7 @@ public final class AttrValueProtos {
      * "type"
      * </pre>
      *
-     * <code>optional .angel.DataType type = 6;</code>
+     * <code>.angel.DataType type = 6;</code>
      */
     com.tencent.angel.core.graph.TypesProtos.DataType getType();
 
@@ -76,7 +76,15 @@ public final class AttrValueProtos {
      * "shape"
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 7;</code>
+     * <code>.angel.TensorShapeProto shape = 7;</code>
+     */
+    boolean hasShape();
+    /**
+     * <pre>
+     * "shape"
+     * </pre>
+     *
+     * <code>.angel.TensorShapeProto shape = 7;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape();
     /**
@@ -84,7 +92,7 @@ public final class AttrValueProtos {
      * "shape"
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 7;</code>
+     * <code>.angel.TensorShapeProto shape = 7;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder();
 
@@ -93,7 +101,15 @@ public final class AttrValueProtos {
      * "tensor"
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 8;</code>
+     * <code>.angel.TensorProto tensor = 8;</code>
+     */
+    boolean hasTensor();
+    /**
+     * <pre>
+     * "tensor"
+     * </pre>
+     *
+     * <code>.angel.TensorProto tensor = 8;</code>
      */
     com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor();
     /**
@@ -101,7 +117,7 @@ public final class AttrValueProtos {
      * "tensor"
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 8;</code>
+     * <code>.angel.TensorProto tensor = 8;</code>
      */
     com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder();
 
@@ -110,7 +126,15 @@ public final class AttrValueProtos {
      * any "list(...)"
      * </pre>
      *
-     * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
+     */
+    boolean hasList();
+    /**
+     * <pre>
+     * any "list(...)"
+     * </pre>
+     *
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
      */
     com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue getList();
     /**
@@ -118,7 +142,7 @@ public final class AttrValueProtos {
      * any "list(...)"
      * </pre>
      *
-     * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
      */
     com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValueOrBuilder getListOrBuilder();
 
@@ -130,7 +154,18 @@ public final class AttrValueProtos {
      * that attr in the instantiation.
      * </pre>
      *
-     * <code>optional .angel.NameAttrList func = 10;</code>
+     * <code>.angel.NameAttrList func = 10;</code>
+     */
+    boolean hasFunc();
+    /**
+     * <pre>
+     * "func" represents a function. func.name is a function's name or
+     * a primitive op's name. func.attr.first is the name of an attr
+     * defined for that function. func.attr.second is the value for
+     * that attr in the instantiation.
+     * </pre>
+     *
+     * <code>.angel.NameAttrList func = 10;</code>
      */
     com.tencent.angel.core.graph.AttrValueProtos.NameAttrList getFunc();
     /**
@@ -141,7 +176,7 @@ public final class AttrValueProtos {
      * that attr in the instantiation.
      * </pre>
      *
-     * <code>optional .angel.NameAttrList func = 10;</code>
+     * <code>.angel.NameAttrList func = 10;</code>
      */
     com.tencent.angel.core.graph.AttrValueProtos.NameAttrListOrBuilder getFuncOrBuilder();
 
@@ -156,7 +191,7 @@ public final class AttrValueProtos {
      * given the value "bar".
      * </pre>
      *
-     * <code>optional string placeholder = 9;</code>
+     * <code>string placeholder = 9;</code>
      */
     java.lang.String getPlaceholder();
     /**
@@ -170,7 +205,7 @@ public final class AttrValueProtos {
      * given the value "bar".
      * </pre>
      *
-     * <code>optional string placeholder = 9;</code>
+     * <code>string placeholder = 9;</code>
      */
     com.google.protobuf.ByteString
         getPlaceholderBytes();
@@ -190,6 +225,7 @@ public final class AttrValueProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.AttrValue)
       AttrValueOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AttrValue.newBuilder() to construct.
     private AttrValue(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -200,14 +236,19 @@ public final class AttrValueProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AttrValue(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -217,7 +258,8 @@ public final class AttrValueProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -318,6 +360,7 @@ public final class AttrValueProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -622,6 +665,7 @@ public final class AttrValueProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.AttrValue.ListValue)
         ListValueOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use ListValue.newBuilder() to construct.
       private ListValue(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -640,14 +684,19 @@ public final class AttrValueProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private ListValue(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -657,7 +706,8 @@ public final class AttrValueProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -815,6 +865,7 @@ public final class AttrValueProtos {
           if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
             func_ = java.util.Collections.unmodifiableList(func_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -1252,6 +1303,7 @@ public final class AttrValueProtos {
         for (int i = 0; i < func_.size(); i++) {
           output.writeMessage(9, func_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -1328,11 +1380,11 @@ public final class AttrValueProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(9, func_.get(i));
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1359,6 +1411,7 @@ public final class AttrValueProtos {
             .equals(other.getTensorList());
         result = result && getFuncList()
             .equals(other.getFuncList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1368,7 +1421,7 @@ public final class AttrValueProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getSCount() > 0) {
           hash = (37 * hash) + S_FIELD_NUMBER;
           hash = (53 * hash) + getSList().hashCode();
@@ -1406,6 +1459,17 @@ public final class AttrValueProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1638,7 +1702,7 @@ public final class AttrValueProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -1651,12 +1715,12 @@ public final class AttrValueProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1798,6 +1862,7 @@ public final class AttrValueProtos {
               }
             }
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -3310,12 +3375,12 @@ public final class AttrValueProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -3338,7 +3403,7 @@ public final class AttrValueProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new ListValue(input, extensionRegistry);
+          return new ListValue(input, extensionRegistry);
         }
       };
 
@@ -3417,7 +3482,7 @@ public final class AttrValueProtos {
      * "string"
      * </pre>
      *
-     * <code>optional bytes s = 2;</code>
+     * <code>bytes s = 2;</code>
      */
     public com.google.protobuf.ByteString getS() {
       if (valueCase_ == 2) {
@@ -3432,7 +3497,7 @@ public final class AttrValueProtos {
      * "int"
      * </pre>
      *
-     * <code>optional int64 i = 3;</code>
+     * <code>int64 i = 3;</code>
      */
     public long getI() {
       if (valueCase_ == 3) {
@@ -3447,7 +3512,7 @@ public final class AttrValueProtos {
      * "float"
      * </pre>
      *
-     * <code>optional float f = 4;</code>
+     * <code>float f = 4;</code>
      */
     public float getF() {
       if (valueCase_ == 4) {
@@ -3462,7 +3527,7 @@ public final class AttrValueProtos {
      * "bool"
      * </pre>
      *
-     * <code>optional bool b = 5;</code>
+     * <code>bool b = 5;</code>
      */
     public boolean getB() {
       if (valueCase_ == 5) {
@@ -3477,7 +3542,7 @@ public final class AttrValueProtos {
      * "type"
      * </pre>
      *
-     * <code>optional .angel.DataType type = 6;</code>
+     * <code>.angel.DataType type = 6;</code>
      */
     public int getTypeValue() {
       if (valueCase_ == 6) {
@@ -3490,7 +3555,7 @@ public final class AttrValueProtos {
      * "type"
      * </pre>
      *
-     * <code>optional .angel.DataType type = 6;</code>
+     * <code>.angel.DataType type = 6;</code>
      */
     public com.tencent.angel.core.graph.TypesProtos.DataType getType() {
       if (valueCase_ == 6) {
@@ -3507,7 +3572,17 @@ public final class AttrValueProtos {
      * "shape"
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 7;</code>
+     * <code>.angel.TensorShapeProto shape = 7;</code>
+     */
+    public boolean hasShape() {
+      return valueCase_ == 7;
+    }
+    /**
+     * <pre>
+     * "shape"
+     * </pre>
+     *
+     * <code>.angel.TensorShapeProto shape = 7;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
       if (valueCase_ == 7) {
@@ -3520,7 +3595,7 @@ public final class AttrValueProtos {
      * "shape"
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 7;</code>
+     * <code>.angel.TensorShapeProto shape = 7;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
       if (valueCase_ == 7) {
@@ -3535,7 +3610,17 @@ public final class AttrValueProtos {
      * "tensor"
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 8;</code>
+     * <code>.angel.TensorProto tensor = 8;</code>
+     */
+    public boolean hasTensor() {
+      return valueCase_ == 8;
+    }
+    /**
+     * <pre>
+     * "tensor"
+     * </pre>
+     *
+     * <code>.angel.TensorProto tensor = 8;</code>
      */
     public com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor() {
       if (valueCase_ == 8) {
@@ -3548,7 +3633,7 @@ public final class AttrValueProtos {
      * "tensor"
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 8;</code>
+     * <code>.angel.TensorProto tensor = 8;</code>
      */
     public com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder() {
       if (valueCase_ == 8) {
@@ -3563,7 +3648,17 @@ public final class AttrValueProtos {
      * any "list(...)"
      * </pre>
      *
-     * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
+     */
+    public boolean hasList() {
+      return valueCase_ == 1;
+    }
+    /**
+     * <pre>
+     * any "list(...)"
+     * </pre>
+     *
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
      */
     public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue getList() {
       if (valueCase_ == 1) {
@@ -3576,7 +3671,7 @@ public final class AttrValueProtos {
      * any "list(...)"
      * </pre>
      *
-     * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+     * <code>.angel.AttrValue.ListValue list = 1;</code>
      */
     public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValueOrBuilder getListOrBuilder() {
       if (valueCase_ == 1) {
@@ -3594,7 +3689,20 @@ public final class AttrValueProtos {
      * that attr in the instantiation.
      * </pre>
      *
-     * <code>optional .angel.NameAttrList func = 10;</code>
+     * <code>.angel.NameAttrList func = 10;</code>
+     */
+    public boolean hasFunc() {
+      return valueCase_ == 10;
+    }
+    /**
+     * <pre>
+     * "func" represents a function. func.name is a function's name or
+     * a primitive op's name. func.attr.first is the name of an attr
+     * defined for that function. func.attr.second is the value for
+     * that attr in the instantiation.
+     * </pre>
+     *
+     * <code>.angel.NameAttrList func = 10;</code>
      */
     public com.tencent.angel.core.graph.AttrValueProtos.NameAttrList getFunc() {
       if (valueCase_ == 10) {
@@ -3610,7 +3718,7 @@ public final class AttrValueProtos {
      * that attr in the instantiation.
      * </pre>
      *
-     * <code>optional .angel.NameAttrList func = 10;</code>
+     * <code>.angel.NameAttrList func = 10;</code>
      */
     public com.tencent.angel.core.graph.AttrValueProtos.NameAttrListOrBuilder getFuncOrBuilder() {
       if (valueCase_ == 10) {
@@ -3631,7 +3739,7 @@ public final class AttrValueProtos {
      * given the value "bar".
      * </pre>
      *
-     * <code>optional string placeholder = 9;</code>
+     * <code>string placeholder = 9;</code>
      */
     public java.lang.String getPlaceholder() {
       java.lang.Object ref = "";
@@ -3661,7 +3769,7 @@ public final class AttrValueProtos {
      * given the value "bar".
      * </pre>
      *
-     * <code>optional string placeholder = 9;</code>
+     * <code>string placeholder = 9;</code>
      */
     public com.google.protobuf.ByteString
         getPlaceholderBytes() {
@@ -3699,7 +3807,7 @@ public final class AttrValueProtos {
       }
       if (valueCase_ == 2) {
         output.writeBytes(
-            2, (com.google.protobuf.ByteString)((com.google.protobuf.ByteString) value_));
+            2, (com.google.protobuf.ByteString) value_);
       }
       if (valueCase_ == 3) {
         output.writeInt64(
@@ -3728,6 +3836,7 @@ public final class AttrValueProtos {
       if (valueCase_ == 10) {
         output.writeMessage(10, (com.tencent.angel.core.graph.AttrValueProtos.NameAttrList) value_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3742,7 +3851,7 @@ public final class AttrValueProtos {
       if (valueCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(
-              2, (com.google.protobuf.ByteString)((com.google.protobuf.ByteString) value_));
+              2, (com.google.protobuf.ByteString) value_);
       }
       if (valueCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
@@ -3778,11 +3887,11 @@ public final class AttrValueProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, (com.tencent.angel.core.graph.AttrValueProtos.NameAttrList) value_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3843,6 +3952,7 @@ public final class AttrValueProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3852,7 +3962,7 @@ public final class AttrValueProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       switch (valueCase_) {
         case 2:
           hash = (37 * hash) + S_FIELD_NUMBER;
@@ -3905,6 +4015,17 @@ public final class AttrValueProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.AttrValueProtos.AttrValue parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4104,7 +4225,7 @@ public final class AttrValueProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4117,12 +4238,12 @@ public final class AttrValueProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4183,6 +4304,7 @@ public final class AttrValueProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4229,7 +4351,7 @@ public final class AttrValueProtos {
        * "string"
        * </pre>
        *
-       * <code>optional bytes s = 2;</code>
+       * <code>bytes s = 2;</code>
        */
       public com.google.protobuf.ByteString getS() {
         if (valueCase_ == 2) {
@@ -4242,7 +4364,7 @@ public final class AttrValueProtos {
        * "string"
        * </pre>
        *
-       * <code>optional bytes s = 2;</code>
+       * <code>bytes s = 2;</code>
        */
       public Builder setS(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -4258,7 +4380,7 @@ public final class AttrValueProtos {
        * "string"
        * </pre>
        *
-       * <code>optional bytes s = 2;</code>
+       * <code>bytes s = 2;</code>
        */
       public Builder clearS() {
         if (valueCase_ == 2) {
@@ -4274,7 +4396,7 @@ public final class AttrValueProtos {
        * "int"
        * </pre>
        *
-       * <code>optional int64 i = 3;</code>
+       * <code>int64 i = 3;</code>
        */
       public long getI() {
         if (valueCase_ == 3) {
@@ -4287,7 +4409,7 @@ public final class AttrValueProtos {
        * "int"
        * </pre>
        *
-       * <code>optional int64 i = 3;</code>
+       * <code>int64 i = 3;</code>
        */
       public Builder setI(long value) {
         valueCase_ = 3;
@@ -4300,7 +4422,7 @@ public final class AttrValueProtos {
        * "int"
        * </pre>
        *
-       * <code>optional int64 i = 3;</code>
+       * <code>int64 i = 3;</code>
        */
       public Builder clearI() {
         if (valueCase_ == 3) {
@@ -4316,7 +4438,7 @@ public final class AttrValueProtos {
        * "float"
        * </pre>
        *
-       * <code>optional float f = 4;</code>
+       * <code>float f = 4;</code>
        */
       public float getF() {
         if (valueCase_ == 4) {
@@ -4329,7 +4451,7 @@ public final class AttrValueProtos {
        * "float"
        * </pre>
        *
-       * <code>optional float f = 4;</code>
+       * <code>float f = 4;</code>
        */
       public Builder setF(float value) {
         valueCase_ = 4;
@@ -4342,7 +4464,7 @@ public final class AttrValueProtos {
        * "float"
        * </pre>
        *
-       * <code>optional float f = 4;</code>
+       * <code>float f = 4;</code>
        */
       public Builder clearF() {
         if (valueCase_ == 4) {
@@ -4358,7 +4480,7 @@ public final class AttrValueProtos {
        * "bool"
        * </pre>
        *
-       * <code>optional bool b = 5;</code>
+       * <code>bool b = 5;</code>
        */
       public boolean getB() {
         if (valueCase_ == 5) {
@@ -4371,7 +4493,7 @@ public final class AttrValueProtos {
        * "bool"
        * </pre>
        *
-       * <code>optional bool b = 5;</code>
+       * <code>bool b = 5;</code>
        */
       public Builder setB(boolean value) {
         valueCase_ = 5;
@@ -4384,7 +4506,7 @@ public final class AttrValueProtos {
        * "bool"
        * </pre>
        *
-       * <code>optional bool b = 5;</code>
+       * <code>bool b = 5;</code>
        */
       public Builder clearB() {
         if (valueCase_ == 5) {
@@ -4400,7 +4522,7 @@ public final class AttrValueProtos {
        * "type"
        * </pre>
        *
-       * <code>optional .angel.DataType type = 6;</code>
+       * <code>.angel.DataType type = 6;</code>
        */
       public int getTypeValue() {
         if (valueCase_ == 6) {
@@ -4413,7 +4535,7 @@ public final class AttrValueProtos {
        * "type"
        * </pre>
        *
-       * <code>optional .angel.DataType type = 6;</code>
+       * <code>.angel.DataType type = 6;</code>
        */
       public Builder setTypeValue(int value) {
         valueCase_ = 6;
@@ -4426,7 +4548,7 @@ public final class AttrValueProtos {
        * "type"
        * </pre>
        *
-       * <code>optional .angel.DataType type = 6;</code>
+       * <code>.angel.DataType type = 6;</code>
        */
       public com.tencent.angel.core.graph.TypesProtos.DataType getType() {
         if (valueCase_ == 6) {
@@ -4441,7 +4563,7 @@ public final class AttrValueProtos {
        * "type"
        * </pre>
        *
-       * <code>optional .angel.DataType type = 6;</code>
+       * <code>.angel.DataType type = 6;</code>
        */
       public Builder setType(com.tencent.angel.core.graph.TypesProtos.DataType value) {
         if (value == null) {
@@ -4457,7 +4579,7 @@ public final class AttrValueProtos {
        * "type"
        * </pre>
        *
-       * <code>optional .angel.DataType type = 6;</code>
+       * <code>.angel.DataType type = 6;</code>
        */
       public Builder clearType() {
         if (valueCase_ == 6) {
@@ -4475,7 +4597,17 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
+       */
+      public boolean hasShape() {
+        return valueCase_ == 7;
+      }
+      /**
+       * <pre>
+       * "shape"
+       * </pre>
+       *
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
         if (shapeBuilder_ == null) {
@@ -4495,7 +4627,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public Builder setShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (shapeBuilder_ == null) {
@@ -4515,7 +4647,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public Builder setShape(
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
@@ -4533,7 +4665,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public Builder mergeShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (shapeBuilder_ == null) {
@@ -4559,7 +4691,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public Builder clearShape() {
         if (shapeBuilder_ == null) {
@@ -4582,7 +4714,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder getShapeBuilder() {
         return getShapeFieldBuilder().getBuilder();
@@ -4592,7 +4724,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
         if ((valueCase_ == 7) && (shapeBuilder_ != null)) {
@@ -4609,7 +4741,7 @@ public final class AttrValueProtos {
        * "shape"
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 7;</code>
+       * <code>.angel.TensorShapeProto shape = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> 
@@ -4637,7 +4769,17 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
+       */
+      public boolean hasTensor() {
+        return valueCase_ == 8;
+      }
+      /**
+       * <pre>
+       * "tensor"
+       * </pre>
+       *
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor() {
         if (tensorBuilder_ == null) {
@@ -4657,7 +4799,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public Builder setTensor(com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (tensorBuilder_ == null) {
@@ -4677,7 +4819,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public Builder setTensor(
           com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder builderForValue) {
@@ -4695,7 +4837,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public Builder mergeTensor(com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (tensorBuilder_ == null) {
@@ -4721,7 +4863,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public Builder clearTensor() {
         if (tensorBuilder_ == null) {
@@ -4744,7 +4886,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder getTensorBuilder() {
         return getTensorFieldBuilder().getBuilder();
@@ -4754,7 +4896,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder() {
         if ((valueCase_ == 8) && (tensorBuilder_ != null)) {
@@ -4771,7 +4913,7 @@ public final class AttrValueProtos {
        * "tensor"
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 8;</code>
+       * <code>.angel.TensorProto tensor = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.TensorProtos.TensorProto, com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder, com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder> 
@@ -4799,7 +4941,17 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
+       */
+      public boolean hasList() {
+        return valueCase_ == 1;
+      }
+      /**
+       * <pre>
+       * any "list(...)"
+       * </pre>
+       *
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue getList() {
         if (listBuilder_ == null) {
@@ -4819,7 +4971,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public Builder setList(com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue value) {
         if (listBuilder_ == null) {
@@ -4839,7 +4991,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public Builder setList(
           com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue.Builder builderForValue) {
@@ -4857,7 +5009,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public Builder mergeList(com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue value) {
         if (listBuilder_ == null) {
@@ -4883,7 +5035,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public Builder clearList() {
         if (listBuilder_ == null) {
@@ -4906,7 +5058,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue.Builder getListBuilder() {
         return getListFieldBuilder().getBuilder();
@@ -4916,7 +5068,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValueOrBuilder getListOrBuilder() {
         if ((valueCase_ == 1) && (listBuilder_ != null)) {
@@ -4933,7 +5085,7 @@ public final class AttrValueProtos {
        * any "list(...)"
        * </pre>
        *
-       * <code>optional .angel.AttrValue.ListValue list = 1;</code>
+       * <code>.angel.AttrValue.ListValue list = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue, com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValue.Builder, com.tencent.angel.core.graph.AttrValueProtos.AttrValue.ListValueOrBuilder> 
@@ -4964,7 +5116,20 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
+       */
+      public boolean hasFunc() {
+        return valueCase_ == 10;
+      }
+      /**
+       * <pre>
+       * "func" represents a function. func.name is a function's name or
+       * a primitive op's name. func.attr.first is the name of an attr
+       * defined for that function. func.attr.second is the value for
+       * that attr in the instantiation.
+       * </pre>
+       *
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.NameAttrList getFunc() {
         if (funcBuilder_ == null) {
@@ -4987,7 +5152,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public Builder setFunc(com.tencent.angel.core.graph.AttrValueProtos.NameAttrList value) {
         if (funcBuilder_ == null) {
@@ -5010,7 +5175,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public Builder setFunc(
           com.tencent.angel.core.graph.AttrValueProtos.NameAttrList.Builder builderForValue) {
@@ -5031,7 +5196,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public Builder mergeFunc(com.tencent.angel.core.graph.AttrValueProtos.NameAttrList value) {
         if (funcBuilder_ == null) {
@@ -5060,7 +5225,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public Builder clearFunc() {
         if (funcBuilder_ == null) {
@@ -5086,7 +5251,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.NameAttrList.Builder getFuncBuilder() {
         return getFuncFieldBuilder().getBuilder();
@@ -5099,7 +5264,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.NameAttrListOrBuilder getFuncOrBuilder() {
         if ((valueCase_ == 10) && (funcBuilder_ != null)) {
@@ -5119,7 +5284,7 @@ public final class AttrValueProtos {
        * that attr in the instantiation.
        * </pre>
        *
-       * <code>optional .angel.NameAttrList func = 10;</code>
+       * <code>.angel.NameAttrList func = 10;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.AttrValueProtos.NameAttrList, com.tencent.angel.core.graph.AttrValueProtos.NameAttrList.Builder, com.tencent.angel.core.graph.AttrValueProtos.NameAttrListOrBuilder> 
@@ -5151,7 +5316,7 @@ public final class AttrValueProtos {
        * given the value "bar".
        * </pre>
        *
-       * <code>optional string placeholder = 9;</code>
+       * <code>string placeholder = 9;</code>
        */
       public java.lang.String getPlaceholder() {
         java.lang.Object ref = "";
@@ -5181,7 +5346,7 @@ public final class AttrValueProtos {
        * given the value "bar".
        * </pre>
        *
-       * <code>optional string placeholder = 9;</code>
+       * <code>string placeholder = 9;</code>
        */
       public com.google.protobuf.ByteString
           getPlaceholderBytes() {
@@ -5212,7 +5377,7 @@ public final class AttrValueProtos {
        * given the value "bar".
        * </pre>
        *
-       * <code>optional string placeholder = 9;</code>
+       * <code>string placeholder = 9;</code>
        */
       public Builder setPlaceholder(
           java.lang.String value) {
@@ -5235,7 +5400,7 @@ public final class AttrValueProtos {
        * given the value "bar".
        * </pre>
        *
-       * <code>optional string placeholder = 9;</code>
+       * <code>string placeholder = 9;</code>
        */
       public Builder clearPlaceholder() {
         if (valueCase_ == 9) {
@@ -5256,7 +5421,7 @@ public final class AttrValueProtos {
        * given the value "bar".
        * </pre>
        *
-       * <code>optional string placeholder = 9;</code>
+       * <code>string placeholder = 9;</code>
        */
       public Builder setPlaceholderBytes(
           com.google.protobuf.ByteString value) {
@@ -5271,12 +5436,12 @@ public final class AttrValueProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5299,7 +5464,7 @@ public final class AttrValueProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AttrValue(input, extensionRegistry);
+        return new AttrValue(input, extensionRegistry);
       }
     };
 
@@ -5323,11 +5488,11 @@ public final class AttrValueProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -5378,6 +5543,7 @@ public final class AttrValueProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.NameAttrList)
       NameAttrListOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NameAttrList.newBuilder() to construct.
     private NameAttrList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5389,14 +5555,19 @@ public final class AttrValueProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NameAttrList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5406,7 +5577,8 @@ public final class AttrValueProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -5424,9 +5596,10 @@ public final class AttrValueProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-              attr = input.readMessage(
+              attr__ = input.readMessage(
                   AttrDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              attr_.getMutableMap().put(attr.getKey(), attr.getValue());
+              attr_.getMutableMap().put(
+                  attr__.getKey(), attr__.getValue());
               break;
             }
           }
@@ -5437,6 +5610,7 @@ public final class AttrValueProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5467,7 +5641,7 @@ public final class AttrValueProtos {
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -5482,7 +5656,7 @@ public final class AttrValueProtos {
       }
     }
     /**
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -5589,15 +5763,13 @@ public final class AttrValueProtos {
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
-           : internalGetAttr().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(2, attr);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAttr(),
+          AttrDefaultEntryHolder.defaultEntry,
+          2);
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -5611,18 +5783,18 @@ public final class AttrValueProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
            : internalGetAttr().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
+        attr__ = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, attr);
+            .computeMessageSize(2, attr__);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -5638,6 +5810,7 @@ public final class AttrValueProtos {
           .equals(other.getName());
       result = result && internalGetAttr().equals(
           other.internalGetAttr());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -5647,7 +5820,7 @@ public final class AttrValueProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       if (!internalGetAttr().getMap().isEmpty()) {
@@ -5659,6 +5832,17 @@ public final class AttrValueProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.AttrValueProtos.NameAttrList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.AttrValueProtos.NameAttrList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.AttrValueProtos.NameAttrList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5839,7 +6023,7 @@ public final class AttrValueProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -5852,12 +6036,12 @@ public final class AttrValueProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5877,6 +6061,7 @@ public final class AttrValueProtos {
         }
         internalGetMutableAttr().mergeFrom(
             other.internalGetAttr());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -5906,7 +6091,7 @@ public final class AttrValueProtos {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -5921,7 +6106,7 @@ public final class AttrValueProtos {
         }
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -5937,7 +6122,7 @@ public final class AttrValueProtos {
         }
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -5950,7 +6135,7 @@ public final class AttrValueProtos {
         return this;
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -5959,7 +6144,7 @@ public final class AttrValueProtos {
         return this;
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -6050,7 +6235,8 @@ public final class AttrValueProtos {
       }
 
       public Builder clearAttr() {
-        getMutableAttr().clear();
+        internalGetMutableAttr().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -6060,7 +6246,8 @@ public final class AttrValueProtos {
       public Builder removeAttr(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().remove(key);
+        internalGetMutableAttr().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -6079,7 +6266,8 @@ public final class AttrValueProtos {
           com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().put(key, value);
+        internalGetMutableAttr().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -6088,17 +6276,18 @@ public final class AttrValueProtos {
 
       public Builder putAllAttr(
           java.util.Map<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> values) {
-        getMutableAttr().putAll(values);
+        internalGetMutableAttr().getMutableMap()
+            .putAll(values);
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6121,7 +6310,7 @@ public final class AttrValueProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NameAttrList(input, extensionRegistry);
+        return new NameAttrList(input, extensionRegistry);
       }
     };
 
@@ -6178,7 +6367,7 @@ public final class AttrValueProtos {
       "ensorShapeProtoH\000\022$\n\006tensor\030\010 \001(\0132\022.ange" +
       "l.TensorProtoH\000\022*\n\004list\030\001 \001(\0132\032.angel.At" +
       "trValue.ListValueH\000\022#\n\004func\030\n \001(\0132\023.ange" +
-      "l.NameAttrListH\000\022\025\n\013placeholder\030\t \001(\tH\000\032",
+      "l.NameAttrListH\000\022\025\n\013placeholder\030\t \001(\tH\000\032" +
       "\325\001\n\tListValue\022\t\n\001s\030\002 \003(\014\022\r\n\001i\030\003 \003(\003B\002\020\001\022" +
       "\r\n\001f\030\004 \003(\002B\002\020\001\022\r\n\001b\030\005 \003(\010B\002\020\001\022!\n\004type\030\006 " +
       "\003(\0162\017.angel.DataTypeB\002\020\001\022&\n\005shape\030\007 \003(\0132" +
@@ -6188,7 +6377,7 @@ public final class AttrValueProtos {
       "t\022\014\n\004name\030\001 \001(\t\022+\n\004attr\030\002 \003(\0132\035.angel.Na" +
       "meAttrList.AttrEntry\032=\n\tAttrEntry\022\013\n\003key" +
       "\030\001 \001(\t\022\037\n\005value\030\002 \001(\0132\020.angel.AttrValue:" +
-      "\0028\001B1\n\034com.tencent.angel.core.graphB\017Att",
+      "\0028\001B1\n\034com.tencent.angel.core.graphB\017Att" +
       "rValueProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

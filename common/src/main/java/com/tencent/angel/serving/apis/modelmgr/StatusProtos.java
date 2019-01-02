@@ -23,7 +23,7 @@ public final class StatusProtos {
      * Error code.
      * </pre>
      *
-     * <code>optional .angel.serving.Code error_code = 1;</code>
+     * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
      */
     int getErrorCodeValue();
     /**
@@ -31,7 +31,7 @@ public final class StatusProtos {
      * Error code.
      * </pre>
      *
-     * <code>optional .angel.serving.Code error_code = 1;</code>
+     * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
      */
     com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code getErrorCode();
 
@@ -40,7 +40,7 @@ public final class StatusProtos {
      * Error message. Will only be set if an error was encountered.
      * </pre>
      *
-     * <code>optional string error_message = 2;</code>
+     * <code>string error_message = 2[json_name = "error_message"];</code>
      */
     java.lang.String getErrorMessage();
     /**
@@ -48,7 +48,7 @@ public final class StatusProtos {
      * Error message. Will only be set if an error was encountered.
      * </pre>
      *
-     * <code>optional string error_message = 2;</code>
+     * <code>string error_message = 2[json_name = "error_message"];</code>
      */
     com.google.protobuf.ByteString
         getErrorMessageBytes();
@@ -65,6 +65,7 @@ public final class StatusProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.StatusProto)
       StatusProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use StatusProto.newBuilder() to construct.
     private StatusProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -77,14 +78,19 @@ public final class StatusProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private StatusProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -94,7 +100,8 @@ public final class StatusProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -119,6 +126,7 @@ public final class StatusProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -141,7 +149,7 @@ public final class StatusProtos {
      * Error code.
      * </pre>
      *
-     * <code>optional .angel.serving.Code error_code = 1;</code>
+     * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
      */
     public int getErrorCodeValue() {
       return errorCode_;
@@ -151,7 +159,7 @@ public final class StatusProtos {
      * Error code.
      * </pre>
      *
-     * <code>optional .angel.serving.Code error_code = 1;</code>
+     * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code getErrorCode() {
       com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code result = com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code.valueOf(errorCode_);
@@ -165,7 +173,7 @@ public final class StatusProtos {
      * Error message. Will only be set if an error was encountered.
      * </pre>
      *
-     * <code>optional string error_message = 2;</code>
+     * <code>string error_message = 2[json_name = "error_message"];</code>
      */
     public java.lang.String getErrorMessage() {
       java.lang.Object ref = errorMessage_;
@@ -184,7 +192,7 @@ public final class StatusProtos {
      * Error message. Will only be set if an error was encountered.
      * </pre>
      *
-     * <code>optional string error_message = 2;</code>
+     * <code>string error_message = 2[json_name = "error_message"];</code>
      */
     public com.google.protobuf.ByteString
         getErrorMessageBytes() {
@@ -218,6 +226,7 @@ public final class StatusProtos {
       if (!getErrorMessageBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, errorMessage_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -232,11 +241,11 @@ public final class StatusProtos {
       if (!getErrorMessageBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, errorMessage_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -251,6 +260,7 @@ public final class StatusProtos {
       result = result && errorCode_ == other.errorCode_;
       result = result && getErrorMessage()
           .equals(other.getErrorMessage());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -260,7 +270,7 @@ public final class StatusProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ERROR_CODE_FIELD_NUMBER;
       hash = (53 * hash) + errorCode_;
       hash = (37 * hash) + ERROR_MESSAGE_FIELD_NUMBER;
@@ -270,6 +280,17 @@ public final class StatusProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -425,7 +446,7 @@ public final class StatusProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -438,12 +459,12 @@ public final class StatusProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -464,6 +485,7 @@ public final class StatusProtos {
           errorMessage_ = other.errorMessage_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -496,7 +518,7 @@ public final class StatusProtos {
        * Error code.
        * </pre>
        *
-       * <code>optional .angel.serving.Code error_code = 1;</code>
+       * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
        */
       public int getErrorCodeValue() {
         return errorCode_;
@@ -506,7 +528,7 @@ public final class StatusProtos {
        * Error code.
        * </pre>
        *
-       * <code>optional .angel.serving.Code error_code = 1;</code>
+       * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
        */
       public Builder setErrorCodeValue(int value) {
         errorCode_ = value;
@@ -518,7 +540,7 @@ public final class StatusProtos {
        * Error code.
        * </pre>
        *
-       * <code>optional .angel.serving.Code error_code = 1;</code>
+       * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code getErrorCode() {
         com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code result = com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code.valueOf(errorCode_);
@@ -529,7 +551,7 @@ public final class StatusProtos {
        * Error code.
        * </pre>
        *
-       * <code>optional .angel.serving.Code error_code = 1;</code>
+       * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
        */
       public Builder setErrorCode(com.tencent.angel.serving.apis.modelmgr.ErrorCodesProtos.Code value) {
         if (value == null) {
@@ -545,7 +567,7 @@ public final class StatusProtos {
        * Error code.
        * </pre>
        *
-       * <code>optional .angel.serving.Code error_code = 1;</code>
+       * <code>.angel.serving.Code error_code = 1[json_name = "error_code"];</code>
        */
       public Builder clearErrorCode() {
         
@@ -560,7 +582,7 @@ public final class StatusProtos {
        * Error message. Will only be set if an error was encountered.
        * </pre>
        *
-       * <code>optional string error_message = 2;</code>
+       * <code>string error_message = 2[json_name = "error_message"];</code>
        */
       public java.lang.String getErrorMessage() {
         java.lang.Object ref = errorMessage_;
@@ -579,7 +601,7 @@ public final class StatusProtos {
        * Error message. Will only be set if an error was encountered.
        * </pre>
        *
-       * <code>optional string error_message = 2;</code>
+       * <code>string error_message = 2[json_name = "error_message"];</code>
        */
       public com.google.protobuf.ByteString
           getErrorMessageBytes() {
@@ -599,7 +621,7 @@ public final class StatusProtos {
        * Error message. Will only be set if an error was encountered.
        * </pre>
        *
-       * <code>optional string error_message = 2;</code>
+       * <code>string error_message = 2[json_name = "error_message"];</code>
        */
       public Builder setErrorMessage(
           java.lang.String value) {
@@ -616,7 +638,7 @@ public final class StatusProtos {
        * Error message. Will only be set if an error was encountered.
        * </pre>
        *
-       * <code>optional string error_message = 2;</code>
+       * <code>string error_message = 2[json_name = "error_message"];</code>
        */
       public Builder clearErrorMessage() {
         
@@ -629,7 +651,7 @@ public final class StatusProtos {
        * Error message. Will only be set if an error was encountered.
        * </pre>
        *
-       * <code>optional string error_message = 2;</code>
+       * <code>string error_message = 2[json_name = "error_message"];</code>
        */
       public Builder setErrorMessageBytes(
           com.google.protobuf.ByteString value) {
@@ -644,12 +666,12 @@ public final class StatusProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -672,7 +694,7 @@ public final class StatusProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StatusProto(input, extensionRegistry);
+        return new StatusProto(input, extensionRegistry);
       }
     };
 

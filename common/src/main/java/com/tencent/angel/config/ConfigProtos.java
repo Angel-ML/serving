@@ -19,11 +19,11 @@ public final class ConfigProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+     * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
      */
     int getTraceLevelValue();
     /**
-     * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+     * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel getTraceLevel();
 
@@ -32,7 +32,7 @@ public final class ConfigProtos {
      * Time to wait for operation to complete in milliseconds.
      * </pre>
      *
-     * <code>optional int64 timeout_in_ms = 2;</code>
+     * <code>int64 timeout_in_ms = 2;</code>
      */
     long getTimeoutInMs();
 
@@ -46,7 +46,7 @@ public final class ConfigProtos {
      * comparable with the overhead of Session::Run().
      * </pre>
      *
-     * <code>optional int32 inter_op_thread_pool = 3;</code>
+     * <code>int32 inter_op_thread_pool = 3;</code>
      */
     int getInterOpThreadPool();
 
@@ -56,7 +56,7 @@ public final class ConfigProtos {
      * outputted via RunMetadata.
      * </pre>
      *
-     * <code>optional bool output_partition_graphs = 5;</code>
+     * <code>bool output_partition_graphs = 5;</code>
      */
     boolean getOutputPartitionGraphs();
 
@@ -65,7 +65,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     boolean hasDebugOptions();
     /**
@@ -73,7 +73,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     com.tencent.angel.core.DebugProtos.DebugOptions getDebugOptions();
     /**
@@ -81,7 +81,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     com.tencent.angel.core.DebugProtos.DebugOptionsOrBuilder getDebugOptionsOrBuilder();
 
@@ -93,20 +93,20 @@ public final class ConfigProtos {
      * Enabling this option can slow down the Run() call.
      * </pre>
      *
-     * <code>optional bool report_tensor_allocations_upon_oom = 7;</code>
+     * <code>bool report_tensor_allocations_upon_oom = 7;</code>
      */
     boolean getReportTensorAllocationsUponOom();
 
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     boolean hasExperimental();
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunOptions.Experimental getExperimental();
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunOptions.ExperimentalOrBuilder getExperimentalOrBuilder();
   }
@@ -121,6 +121,7 @@ public final class ConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.RunOptions)
       RunOptionsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RunOptions.newBuilder() to construct.
     private RunOptions(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -136,14 +137,19 @@ public final class ConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RunOptions(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -153,7 +159,8 @@ public final class ConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -218,6 +225,7 @@ public final class ConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -366,7 +374,7 @@ public final class ConfigProtos {
        * run disjoint graphs).
        * </pre>
        *
-       * <code>optional int64 collective_graph_key = 1;</code>
+       * <code>int64 collective_graph_key = 1;</code>
        */
       long getCollectiveGraphKey();
     }
@@ -383,6 +391,7 @@ public final class ConfigProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.RunOptions.Experimental)
         ExperimentalOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Experimental.newBuilder() to construct.
       private Experimental(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -394,14 +403,19 @@ public final class ConfigProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Experimental(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -411,7 +425,8 @@ public final class ConfigProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -429,6 +444,7 @@ public final class ConfigProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -454,7 +470,7 @@ public final class ConfigProtos {
        * run disjoint graphs).
        * </pre>
        *
-       * <code>optional int64 collective_graph_key = 1;</code>
+       * <code>int64 collective_graph_key = 1;</code>
        */
       public long getCollectiveGraphKey() {
         return collectiveGraphKey_;
@@ -475,6 +491,7 @@ public final class ConfigProtos {
         if (collectiveGraphKey_ != 0L) {
           output.writeInt64(1, collectiveGraphKey_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -486,11 +503,11 @@ public final class ConfigProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(1, collectiveGraphKey_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -504,6 +521,7 @@ public final class ConfigProtos {
         boolean result = true;
         result = result && (getCollectiveGraphKey()
             == other.getCollectiveGraphKey());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -513,7 +531,7 @@ public final class ConfigProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + COLLECTIVE_GRAPH_KEY_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getCollectiveGraphKey());
@@ -522,6 +540,17 @@ public final class ConfigProtos {
         return hash;
       }
 
+      public static com.tencent.angel.config.ConfigProtos.RunOptions.Experimental parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.config.ConfigProtos.RunOptions.Experimental parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.config.ConfigProtos.RunOptions.Experimental parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -675,7 +704,7 @@ public final class ConfigProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -688,12 +717,12 @@ public final class ConfigProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -710,6 +739,7 @@ public final class ConfigProtos {
           if (other.getCollectiveGraphKey() != 0L) {
             setCollectiveGraphKey(other.getCollectiveGraphKey());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -745,7 +775,7 @@ public final class ConfigProtos {
          * run disjoint graphs).
          * </pre>
          *
-         * <code>optional int64 collective_graph_key = 1;</code>
+         * <code>int64 collective_graph_key = 1;</code>
          */
         public long getCollectiveGraphKey() {
           return collectiveGraphKey_;
@@ -758,7 +788,7 @@ public final class ConfigProtos {
          * run disjoint graphs).
          * </pre>
          *
-         * <code>optional int64 collective_graph_key = 1;</code>
+         * <code>int64 collective_graph_key = 1;</code>
          */
         public Builder setCollectiveGraphKey(long value) {
           
@@ -774,7 +804,7 @@ public final class ConfigProtos {
          * run disjoint graphs).
          * </pre>
          *
-         * <code>optional int64 collective_graph_key = 1;</code>
+         * <code>int64 collective_graph_key = 1;</code>
          */
         public Builder clearCollectiveGraphKey() {
           
@@ -784,12 +814,12 @@ public final class ConfigProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -812,7 +842,7 @@ public final class ConfigProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Experimental(input, extensionRegistry);
+          return new Experimental(input, extensionRegistry);
         }
       };
 
@@ -834,13 +864,13 @@ public final class ConfigProtos {
     public static final int TRACE_LEVEL_FIELD_NUMBER = 1;
     private int traceLevel_;
     /**
-     * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+     * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
      */
     public int getTraceLevelValue() {
       return traceLevel_;
     }
     /**
-     * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+     * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel getTraceLevel() {
       com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel result = com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel.valueOf(traceLevel_);
@@ -854,7 +884,7 @@ public final class ConfigProtos {
      * Time to wait for operation to complete in milliseconds.
      * </pre>
      *
-     * <code>optional int64 timeout_in_ms = 2;</code>
+     * <code>int64 timeout_in_ms = 2;</code>
      */
     public long getTimeoutInMs() {
       return timeoutInMs_;
@@ -872,7 +902,7 @@ public final class ConfigProtos {
      * comparable with the overhead of Session::Run().
      * </pre>
      *
-     * <code>optional int32 inter_op_thread_pool = 3;</code>
+     * <code>int32 inter_op_thread_pool = 3;</code>
      */
     public int getInterOpThreadPool() {
       return interOpThreadPool_;
@@ -886,7 +916,7 @@ public final class ConfigProtos {
      * outputted via RunMetadata.
      * </pre>
      *
-     * <code>optional bool output_partition_graphs = 5;</code>
+     * <code>bool output_partition_graphs = 5;</code>
      */
     public boolean getOutputPartitionGraphs() {
       return outputPartitionGraphs_;
@@ -899,7 +929,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     public boolean hasDebugOptions() {
       return debugOptions_ != null;
@@ -909,7 +939,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     public com.tencent.angel.core.DebugProtos.DebugOptions getDebugOptions() {
       return debugOptions_ == null ? com.tencent.angel.core.DebugProtos.DebugOptions.getDefaultInstance() : debugOptions_;
@@ -919,7 +949,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
      * </pre>
      *
-     * <code>optional .angel.DebugOptions debug_options = 6;</code>
+     * <code>.angel.DebugOptions debug_options = 6;</code>
      */
     public com.tencent.angel.core.DebugProtos.DebugOptionsOrBuilder getDebugOptionsOrBuilder() {
       return getDebugOptions();
@@ -935,7 +965,7 @@ public final class ConfigProtos {
      * Enabling this option can slow down the Run() call.
      * </pre>
      *
-     * <code>optional bool report_tensor_allocations_upon_oom = 7;</code>
+     * <code>bool report_tensor_allocations_upon_oom = 7;</code>
      */
     public boolean getReportTensorAllocationsUponOom() {
       return reportTensorAllocationsUponOom_;
@@ -944,19 +974,19 @@ public final class ConfigProtos {
     public static final int EXPERIMENTAL_FIELD_NUMBER = 8;
     private com.tencent.angel.config.ConfigProtos.RunOptions.Experimental experimental_;
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     public boolean hasExperimental() {
       return experimental_ != null;
     }
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunOptions.Experimental getExperimental() {
       return experimental_ == null ? com.tencent.angel.config.ConfigProtos.RunOptions.Experimental.getDefaultInstance() : experimental_;
     }
     /**
-     * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+     * <code>.angel.RunOptions.Experimental experimental = 8;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunOptions.ExperimentalOrBuilder getExperimentalOrBuilder() {
       return getExperimental();
@@ -995,6 +1025,7 @@ public final class ConfigProtos {
       if (experimental_ != null) {
         output.writeMessage(8, getExperimental());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1030,11 +1061,11 @@ public final class ConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, getExperimental());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1065,6 +1096,7 @@ public final class ConfigProtos {
         result = result && getExperimental()
             .equals(other.getExperimental());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1074,7 +1106,7 @@ public final class ConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TRACE_LEVEL_FIELD_NUMBER;
       hash = (53 * hash) + traceLevel_;
       hash = (37 * hash) + TIMEOUT_IN_MS_FIELD_NUMBER;
@@ -1101,6 +1133,17 @@ public final class ConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ConfigProtos.RunOptions parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ConfigProtos.RunOptions parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ConfigProtos.RunOptions parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1286,7 +1329,7 @@ public final class ConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1299,12 +1342,12 @@ public final class ConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1339,6 +1382,7 @@ public final class ConfigProtos {
         if (other.hasExperimental()) {
           mergeExperimental(other.getExperimental());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1367,13 +1411,13 @@ public final class ConfigProtos {
 
       private int traceLevel_ = 0;
       /**
-       * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+       * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
        */
       public int getTraceLevelValue() {
         return traceLevel_;
       }
       /**
-       * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+       * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
        */
       public Builder setTraceLevelValue(int value) {
         traceLevel_ = value;
@@ -1381,14 +1425,14 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+       * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel getTraceLevel() {
         com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel result = com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel.valueOf(traceLevel_);
         return result == null ? com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+       * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
        */
       public Builder setTraceLevel(com.tencent.angel.config.ConfigProtos.RunOptions.TraceLevel value) {
         if (value == null) {
@@ -1400,7 +1444,7 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.TraceLevel trace_level = 1;</code>
+       * <code>.angel.RunOptions.TraceLevel trace_level = 1;</code>
        */
       public Builder clearTraceLevel() {
         
@@ -1415,7 +1459,7 @@ public final class ConfigProtos {
        * Time to wait for operation to complete in milliseconds.
        * </pre>
        *
-       * <code>optional int64 timeout_in_ms = 2;</code>
+       * <code>int64 timeout_in_ms = 2;</code>
        */
       public long getTimeoutInMs() {
         return timeoutInMs_;
@@ -1425,7 +1469,7 @@ public final class ConfigProtos {
        * Time to wait for operation to complete in milliseconds.
        * </pre>
        *
-       * <code>optional int64 timeout_in_ms = 2;</code>
+       * <code>int64 timeout_in_ms = 2;</code>
        */
       public Builder setTimeoutInMs(long value) {
         
@@ -1438,7 +1482,7 @@ public final class ConfigProtos {
        * Time to wait for operation to complete in milliseconds.
        * </pre>
        *
-       * <code>optional int64 timeout_in_ms = 2;</code>
+       * <code>int64 timeout_in_ms = 2;</code>
        */
       public Builder clearTimeoutInMs() {
         
@@ -1458,7 +1502,7 @@ public final class ConfigProtos {
        * comparable with the overhead of Session::Run().
        * </pre>
        *
-       * <code>optional int32 inter_op_thread_pool = 3;</code>
+       * <code>int32 inter_op_thread_pool = 3;</code>
        */
       public int getInterOpThreadPool() {
         return interOpThreadPool_;
@@ -1473,7 +1517,7 @@ public final class ConfigProtos {
        * comparable with the overhead of Session::Run().
        * </pre>
        *
-       * <code>optional int32 inter_op_thread_pool = 3;</code>
+       * <code>int32 inter_op_thread_pool = 3;</code>
        */
       public Builder setInterOpThreadPool(int value) {
         
@@ -1491,7 +1535,7 @@ public final class ConfigProtos {
        * comparable with the overhead of Session::Run().
        * </pre>
        *
-       * <code>optional int32 inter_op_thread_pool = 3;</code>
+       * <code>int32 inter_op_thread_pool = 3;</code>
        */
       public Builder clearInterOpThreadPool() {
         
@@ -1507,7 +1551,7 @@ public final class ConfigProtos {
        * outputted via RunMetadata.
        * </pre>
        *
-       * <code>optional bool output_partition_graphs = 5;</code>
+       * <code>bool output_partition_graphs = 5;</code>
        */
       public boolean getOutputPartitionGraphs() {
         return outputPartitionGraphs_;
@@ -1518,7 +1562,7 @@ public final class ConfigProtos {
        * outputted via RunMetadata.
        * </pre>
        *
-       * <code>optional bool output_partition_graphs = 5;</code>
+       * <code>bool output_partition_graphs = 5;</code>
        */
       public Builder setOutputPartitionGraphs(boolean value) {
         
@@ -1532,7 +1576,7 @@ public final class ConfigProtos {
        * outputted via RunMetadata.
        * </pre>
        *
-       * <code>optional bool output_partition_graphs = 5;</code>
+       * <code>bool output_partition_graphs = 5;</code>
        */
       public Builder clearOutputPartitionGraphs() {
         
@@ -1549,7 +1593,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public boolean hasDebugOptions() {
         return debugOptionsBuilder_ != null || debugOptions_ != null;
@@ -1559,7 +1603,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public com.tencent.angel.core.DebugProtos.DebugOptions getDebugOptions() {
         if (debugOptionsBuilder_ == null) {
@@ -1573,7 +1617,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public Builder setDebugOptions(com.tencent.angel.core.DebugProtos.DebugOptions value) {
         if (debugOptionsBuilder_ == null) {
@@ -1593,7 +1637,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public Builder setDebugOptions(
           com.tencent.angel.core.DebugProtos.DebugOptions.Builder builderForValue) {
@@ -1611,7 +1655,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public Builder mergeDebugOptions(com.tencent.angel.core.DebugProtos.DebugOptions value) {
         if (debugOptionsBuilder_ == null) {
@@ -1633,7 +1677,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public Builder clearDebugOptions() {
         if (debugOptionsBuilder_ == null) {
@@ -1651,7 +1695,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public com.tencent.angel.core.DebugProtos.DebugOptions.Builder getDebugOptionsBuilder() {
         
@@ -1663,7 +1707,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       public com.tencent.angel.core.DebugProtos.DebugOptionsOrBuilder getDebugOptionsOrBuilder() {
         if (debugOptionsBuilder_ != null) {
@@ -1678,7 +1722,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL.  Options used to initialize DebuggerState, if enabled.
        * </pre>
        *
-       * <code>optional .angel.DebugOptions debug_options = 6;</code>
+       * <code>.angel.DebugOptions debug_options = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.DebugProtos.DebugOptions, com.tencent.angel.core.DebugProtos.DebugOptions.Builder, com.tencent.angel.core.DebugProtos.DebugOptionsOrBuilder> 
@@ -1703,7 +1747,7 @@ public final class ConfigProtos {
        * Enabling this option can slow down the Run() call.
        * </pre>
        *
-       * <code>optional bool report_tensor_allocations_upon_oom = 7;</code>
+       * <code>bool report_tensor_allocations_upon_oom = 7;</code>
        */
       public boolean getReportTensorAllocationsUponOom() {
         return reportTensorAllocationsUponOom_;
@@ -1716,7 +1760,7 @@ public final class ConfigProtos {
        * Enabling this option can slow down the Run() call.
        * </pre>
        *
-       * <code>optional bool report_tensor_allocations_upon_oom = 7;</code>
+       * <code>bool report_tensor_allocations_upon_oom = 7;</code>
        */
       public Builder setReportTensorAllocationsUponOom(boolean value) {
         
@@ -1732,7 +1776,7 @@ public final class ConfigProtos {
        * Enabling this option can slow down the Run() call.
        * </pre>
        *
-       * <code>optional bool report_tensor_allocations_upon_oom = 7;</code>
+       * <code>bool report_tensor_allocations_upon_oom = 7;</code>
        */
       public Builder clearReportTensorAllocationsUponOom() {
         
@@ -1745,13 +1789,13 @@ public final class ConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ConfigProtos.RunOptions.Experimental, com.tencent.angel.config.ConfigProtos.RunOptions.Experimental.Builder, com.tencent.angel.config.ConfigProtos.RunOptions.ExperimentalOrBuilder> experimentalBuilder_;
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public boolean hasExperimental() {
         return experimentalBuilder_ != null || experimental_ != null;
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions.Experimental getExperimental() {
         if (experimentalBuilder_ == null) {
@@ -1761,7 +1805,7 @@ public final class ConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public Builder setExperimental(com.tencent.angel.config.ConfigProtos.RunOptions.Experimental value) {
         if (experimentalBuilder_ == null) {
@@ -1777,7 +1821,7 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public Builder setExperimental(
           com.tencent.angel.config.ConfigProtos.RunOptions.Experimental.Builder builderForValue) {
@@ -1791,7 +1835,7 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public Builder mergeExperimental(com.tencent.angel.config.ConfigProtos.RunOptions.Experimental value) {
         if (experimentalBuilder_ == null) {
@@ -1809,7 +1853,7 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public Builder clearExperimental() {
         if (experimentalBuilder_ == null) {
@@ -1823,7 +1867,7 @@ public final class ConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions.Experimental.Builder getExperimentalBuilder() {
         
@@ -1831,7 +1875,7 @@ public final class ConfigProtos {
         return getExperimentalFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions.ExperimentalOrBuilder getExperimentalOrBuilder() {
         if (experimentalBuilder_ != null) {
@@ -1842,7 +1886,7 @@ public final class ConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.RunOptions.Experimental experimental = 8;</code>
+       * <code>.angel.RunOptions.Experimental experimental = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ConfigProtos.RunOptions.Experimental, com.tencent.angel.config.ConfigProtos.RunOptions.Experimental.Builder, com.tencent.angel.config.ConfigProtos.RunOptions.ExperimentalOrBuilder> 
@@ -1859,12 +1903,12 @@ public final class ConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1887,7 +1931,7 @@ public final class ConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RunOptions(input, extensionRegistry);
+        return new RunOptions(input, extensionRegistry);
       }
     };
 
@@ -1917,7 +1961,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     boolean hasStepStats();
     /**
@@ -1927,7 +1971,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     com.tencent.angel.core.stats.StepStatsProtos.StepStats getStepStats();
     /**
@@ -1937,7 +1981,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     com.tencent.angel.core.stats.StepStatsProtos.StepStatsOrBuilder getStepStatsOrBuilder();
 
@@ -1946,7 +1990,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     boolean hasCostGraph();
     /**
@@ -1954,7 +1998,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef getCostGraph();
     /**
@@ -1962,7 +2006,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     com.tencent.angel.core.graph.CostGraphProtos.CostGraphDefOrBuilder getCostGraphOrBuilder();
 
@@ -2021,6 +2065,7 @@ public final class ConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.RunMetadata)
       RunMetadataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RunMetadata.newBuilder() to construct.
     private RunMetadata(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2032,14 +2077,19 @@ public final class ConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RunMetadata(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2049,7 +2099,8 @@ public final class ConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2100,6 +2151,7 @@ public final class ConfigProtos {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           partitionGraphs_ = java.util.Collections.unmodifiableList(partitionGraphs_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2125,7 +2177,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     public boolean hasStepStats() {
       return stepStats_ != null;
@@ -2137,7 +2189,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     public com.tencent.angel.core.stats.StepStatsProtos.StepStats getStepStats() {
       return stepStats_ == null ? com.tencent.angel.core.stats.StepStatsProtos.StepStats.getDefaultInstance() : stepStats_;
@@ -2149,7 +2201,7 @@ public final class ConfigProtos {
      * EXPERIMENTAL: The format and set of events may change in future versions.
      * </pre>
      *
-     * <code>optional .angel.StepStats step_stats = 1;</code>
+     * <code>.angel.StepStats step_stats = 1;</code>
      */
     public com.tencent.angel.core.stats.StepStatsProtos.StepStatsOrBuilder getStepStatsOrBuilder() {
       return getStepStats();
@@ -2162,7 +2214,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     public boolean hasCostGraph() {
       return costGraph_ != null;
@@ -2172,7 +2224,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     public com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef getCostGraph() {
       return costGraph_ == null ? com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.getDefaultInstance() : costGraph_;
@@ -2182,7 +2234,7 @@ public final class ConfigProtos {
      * The cost graph for the computation defined by the run call.
      * </pre>
      *
-     * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+     * <code>.angel.CostGraphDef cost_graph = 2;</code>
      */
     public com.tencent.angel.core.graph.CostGraphProtos.CostGraphDefOrBuilder getCostGraphOrBuilder() {
       return getCostGraph();
@@ -2264,6 +2316,7 @@ public final class ConfigProtos {
       for (int i = 0; i < partitionGraphs_.size(); i++) {
         output.writeMessage(3, partitionGraphs_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2283,11 +2336,11 @@ public final class ConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, partitionGraphs_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2311,6 +2364,7 @@ public final class ConfigProtos {
       }
       result = result && getPartitionGraphsList()
           .equals(other.getPartitionGraphsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2320,7 +2374,7 @@ public final class ConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasStepStats()) {
         hash = (37 * hash) + STEP_STATS_FIELD_NUMBER;
         hash = (53 * hash) + getStepStats().hashCode();
@@ -2338,6 +2392,17 @@ public final class ConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ConfigProtos.RunMetadata parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ConfigProtos.RunMetadata parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ConfigProtos.RunMetadata parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2527,7 +2592,7 @@ public final class ConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2540,12 +2605,12 @@ public final class ConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2591,6 +2656,7 @@ public final class ConfigProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2628,7 +2694,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public boolean hasStepStats() {
         return stepStatsBuilder_ != null || stepStats_ != null;
@@ -2640,7 +2706,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.StepStats getStepStats() {
         if (stepStatsBuilder_ == null) {
@@ -2656,7 +2722,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public Builder setStepStats(com.tencent.angel.core.stats.StepStatsProtos.StepStats value) {
         if (stepStatsBuilder_ == null) {
@@ -2678,7 +2744,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public Builder setStepStats(
           com.tencent.angel.core.stats.StepStatsProtos.StepStats.Builder builderForValue) {
@@ -2698,7 +2764,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public Builder mergeStepStats(com.tencent.angel.core.stats.StepStatsProtos.StepStats value) {
         if (stepStatsBuilder_ == null) {
@@ -2722,7 +2788,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public Builder clearStepStats() {
         if (stepStatsBuilder_ == null) {
@@ -2742,7 +2808,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.StepStats.Builder getStepStatsBuilder() {
         
@@ -2756,7 +2822,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.StepStatsOrBuilder getStepStatsOrBuilder() {
         if (stepStatsBuilder_ != null) {
@@ -2773,7 +2839,7 @@ public final class ConfigProtos {
        * EXPERIMENTAL: The format and set of events may change in future versions.
        * </pre>
        *
-       * <code>optional .angel.StepStats step_stats = 1;</code>
+       * <code>.angel.StepStats step_stats = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.StepStatsProtos.StepStats, com.tencent.angel.core.stats.StepStatsProtos.StepStats.Builder, com.tencent.angel.core.stats.StepStatsProtos.StepStatsOrBuilder> 
@@ -2797,7 +2863,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public boolean hasCostGraph() {
         return costGraphBuilder_ != null || costGraph_ != null;
@@ -2807,7 +2873,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef getCostGraph() {
         if (costGraphBuilder_ == null) {
@@ -2821,7 +2887,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public Builder setCostGraph(com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef value) {
         if (costGraphBuilder_ == null) {
@@ -2841,7 +2907,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public Builder setCostGraph(
           com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Builder builderForValue) {
@@ -2859,7 +2925,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public Builder mergeCostGraph(com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef value) {
         if (costGraphBuilder_ == null) {
@@ -2881,7 +2947,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public Builder clearCostGraph() {
         if (costGraphBuilder_ == null) {
@@ -2899,7 +2965,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Builder getCostGraphBuilder() {
         
@@ -2911,7 +2977,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       public com.tencent.angel.core.graph.CostGraphProtos.CostGraphDefOrBuilder getCostGraphOrBuilder() {
         if (costGraphBuilder_ != null) {
@@ -2926,7 +2992,7 @@ public final class ConfigProtos {
        * The cost graph for the computation defined by the run call.
        * </pre>
        *
-       * <code>optional .angel.CostGraphDef cost_graph = 2;</code>
+       * <code>.angel.CostGraphDef cost_graph = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef, com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Builder, com.tencent.angel.core.graph.CostGraphProtos.CostGraphDefOrBuilder> 
@@ -3255,12 +3321,12 @@ public final class ConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3283,7 +3349,7 @@ public final class ConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RunMetadata(input, extensionRegistry);
+        return new RunMetadata(input, extensionRegistry);
       }
     };
 
@@ -3335,7 +3401,7 @@ public final class ConfigProtos {
       "l\030\003 \001(\005\022\037\n\027output_partition_graphs\030\005 \001(\010" +
       "\022*\n\rdebug_options\030\006 \001(\0132\023.angel.DebugOpt" +
       "ions\022*\n\"report_tensor_allocations_upon_o" +
-      "om\030\007 \001(\010\0224\n\014experimental\030\010 \001(\0132\036.angel.R",
+      "om\030\007 \001(\010\0224\n\014experimental\030\010 \001(\0132\036.angel.R" +
       "unOptions.Experimental\032,\n\014Experimental\022\034" +
       "\n\024collective_graph_key\030\001 \001(\003\"R\n\nTraceLev" +
       "el\022\014\n\010NO_TRACE\020\000\022\022\n\016SOFTWARE_TRACE\020\001\022\022\n\016" +

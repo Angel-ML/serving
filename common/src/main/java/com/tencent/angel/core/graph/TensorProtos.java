@@ -19,11 +19,11 @@ public final class TensorProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     int getDtypeValue();
     /**
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     com.tencent.angel.core.graph.TypesProtos.DataType getDtype();
 
@@ -32,7 +32,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     boolean hasTensorShape();
     /**
@@ -40,7 +40,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape();
     /**
@@ -48,7 +48,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder();
 
@@ -60,7 +60,7 @@ public final class TensorProtos {
      * to represent a constant Tensor with a single value.
      * </pre>
      *
-     * <code>optional int32 version_number = 3;</code>
+     * <code>int32 version_number = 3;</code>
      */
     int getVersionNumber();
 
@@ -73,7 +73,7 @@ public final class TensorProtos {
      * many repeated small items.
      * </pre>
      *
-     * <code>optional bytes tensor_content = 4;</code>
+     * <code>bytes tensor_content = 4;</code>
      */
     com.google.protobuf.ByteString getTensorContent();
 
@@ -460,6 +460,7 @@ public final class TensorProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.TensorProto)
       TensorProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TensorProto.newBuilder() to construct.
     private TensorProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -486,14 +487,19 @@ public final class TensorProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TensorProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -503,7 +509,8 @@ public final class TensorProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -820,6 +827,7 @@ public final class TensorProtos {
         if (((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
           uint64Val_ = java.util.Collections.unmodifiableList(uint64Val_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -839,13 +847,13 @@ public final class TensorProtos {
     public static final int DTYPE_FIELD_NUMBER = 1;
     private int dtype_;
     /**
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     public int getDtypeValue() {
       return dtype_;
     }
     /**
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
       com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
@@ -859,7 +867,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     public boolean hasTensorShape() {
       return tensorShape_ != null;
@@ -869,7 +877,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape() {
       return tensorShape_ == null ? com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
@@ -879,7 +887,7 @@ public final class TensorProtos {
      * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
       return getTensorShape();
@@ -895,7 +903,7 @@ public final class TensorProtos {
      * to represent a constant Tensor with a single value.
      * </pre>
      *
-     * <code>optional int32 version_number = 3;</code>
+     * <code>int32 version_number = 3;</code>
      */
     public int getVersionNumber() {
       return versionNumber_;
@@ -912,7 +920,7 @@ public final class TensorProtos {
      * many repeated small items.
      * </pre>
      *
-     * <code>optional bytes tensor_content = 4;</code>
+     * <code>bytes tensor_content = 4;</code>
      */
     public com.google.protobuf.ByteString getTensorContent() {
       return tensorContent_;
@@ -1525,6 +1533,7 @@ public final class TensorProtos {
       for (int i = 0; i < uint64Val_.size(); i++) {
         output.writeUInt64NoTag(uint64Val_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1690,11 +1699,11 @@ public final class TensorProtos {
         }
         uint64ValMemoizedSerializedSize = dataSize;
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1742,6 +1751,7 @@ public final class TensorProtos {
           .equals(other.getUint32ValList());
       result = result && getUint64ValList()
           .equals(other.getUint64ValList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1751,7 +1761,7 @@ public final class TensorProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DTYPE_FIELD_NUMBER;
       hash = (53 * hash) + dtype_;
       if (hasTensorShape()) {
@@ -1819,6 +1829,17 @@ public final class TensorProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.TensorProtos.TensorProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.TensorProtos.TensorProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.TensorProtos.TensorProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2099,7 +2120,7 @@ public final class TensorProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2112,12 +2133,12 @@ public final class TensorProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2305,6 +2326,7 @@ public final class TensorProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2334,13 +2356,13 @@ public final class TensorProtos {
 
       private int dtype_ = 0;
       /**
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public int getDtypeValue() {
         return dtype_;
       }
       /**
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder setDtypeValue(int value) {
         dtype_ = value;
@@ -2348,14 +2370,14 @@ public final class TensorProtos {
         return this;
       }
       /**
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
         com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
         return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder setDtype(com.tencent.angel.core.graph.TypesProtos.DataType value) {
         if (value == null) {
@@ -2367,7 +2389,7 @@ public final class TensorProtos {
         return this;
       }
       /**
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder clearDtype() {
         
@@ -2384,7 +2406,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public boolean hasTensorShape() {
         return tensorShapeBuilder_ != null || tensorShape_ != null;
@@ -2394,7 +2416,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape() {
         if (tensorShapeBuilder_ == null) {
@@ -2408,7 +2430,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public Builder setTensorShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (tensorShapeBuilder_ == null) {
@@ -2428,7 +2450,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public Builder setTensorShape(
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
@@ -2446,7 +2468,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public Builder mergeTensorShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (tensorShapeBuilder_ == null) {
@@ -2468,7 +2490,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public Builder clearTensorShape() {
         if (tensorShapeBuilder_ == null) {
@@ -2486,7 +2508,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder getTensorShapeBuilder() {
         
@@ -2498,7 +2520,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
         if (tensorShapeBuilder_ != null) {
@@ -2513,7 +2535,7 @@ public final class TensorProtos {
        * Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 2;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> 
@@ -2538,7 +2560,7 @@ public final class TensorProtos {
        * to represent a constant Tensor with a single value.
        * </pre>
        *
-       * <code>optional int32 version_number = 3;</code>
+       * <code>int32 version_number = 3;</code>
        */
       public int getVersionNumber() {
         return versionNumber_;
@@ -2551,7 +2573,7 @@ public final class TensorProtos {
        * to represent a constant Tensor with a single value.
        * </pre>
        *
-       * <code>optional int32 version_number = 3;</code>
+       * <code>int32 version_number = 3;</code>
        */
       public Builder setVersionNumber(int value) {
         
@@ -2567,7 +2589,7 @@ public final class TensorProtos {
        * to represent a constant Tensor with a single value.
        * </pre>
        *
-       * <code>optional int32 version_number = 3;</code>
+       * <code>int32 version_number = 3;</code>
        */
       public Builder clearVersionNumber() {
         
@@ -2586,7 +2608,7 @@ public final class TensorProtos {
        * many repeated small items.
        * </pre>
        *
-       * <code>optional bytes tensor_content = 4;</code>
+       * <code>bytes tensor_content = 4;</code>
        */
       public com.google.protobuf.ByteString getTensorContent() {
         return tensorContent_;
@@ -2600,7 +2622,7 @@ public final class TensorProtos {
        * many repeated small items.
        * </pre>
        *
-       * <code>optional bytes tensor_content = 4;</code>
+       * <code>bytes tensor_content = 4;</code>
        */
       public Builder setTensorContent(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -2620,7 +2642,7 @@ public final class TensorProtos {
        * many repeated small items.
        * </pre>
        *
-       * <code>optional bytes tensor_content = 4;</code>
+       * <code>bytes tensor_content = 4;</code>
        */
       public Builder clearTensorContent() {
         
@@ -4315,12 +4337,12 @@ public final class TensorProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4343,7 +4365,7 @@ public final class TensorProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TensorProto(input, extensionRegistry);
+        return new TensorProto(input, extensionRegistry);
       }
     };
 
@@ -4371,7 +4393,7 @@ public final class TensorProtos {
      * Name of the type of objects being serialized.
      * </pre>
      *
-     * <code>optional string type_name = 1;</code>
+     * <code>string type_name = 1;</code>
      */
     java.lang.String getTypeName();
     /**
@@ -4379,7 +4401,7 @@ public final class TensorProtos {
      * Name of the type of objects being serialized.
      * </pre>
      *
-     * <code>optional string type_name = 1;</code>
+     * <code>string type_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getTypeNameBytes();
@@ -4389,7 +4411,7 @@ public final class TensorProtos {
      * Portions of the object that are not Tensors.
      * </pre>
      *
-     * <code>optional bytes metadata = 2;</code>
+     * <code>bytes metadata = 2;</code>
      */
     com.google.protobuf.ByteString getMetadata();
 
@@ -4448,6 +4470,7 @@ public final class TensorProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.VariantTensorDataProto)
       VariantTensorDataProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use VariantTensorDataProto.newBuilder() to construct.
     private VariantTensorDataProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4461,14 +4484,19 @@ public final class TensorProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private VariantTensorDataProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4478,7 +4506,8 @@ public final class TensorProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -4514,6 +4543,7 @@ public final class TensorProtos {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           tensors_ = java.util.Collections.unmodifiableList(tensors_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4537,7 +4567,7 @@ public final class TensorProtos {
      * Name of the type of objects being serialized.
      * </pre>
      *
-     * <code>optional string type_name = 1;</code>
+     * <code>string type_name = 1;</code>
      */
     public java.lang.String getTypeName() {
       java.lang.Object ref = typeName_;
@@ -4556,7 +4586,7 @@ public final class TensorProtos {
      * Name of the type of objects being serialized.
      * </pre>
      *
-     * <code>optional string type_name = 1;</code>
+     * <code>string type_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getTypeNameBytes() {
@@ -4579,7 +4609,7 @@ public final class TensorProtos {
      * Portions of the object that are not Tensors.
      * </pre>
      *
-     * <code>optional bytes metadata = 2;</code>
+     * <code>bytes metadata = 2;</code>
      */
     public com.google.protobuf.ByteString getMetadata() {
       return metadata_;
@@ -4661,6 +4691,7 @@ public final class TensorProtos {
       for (int i = 0; i < tensors_.size(); i++) {
         output.writeMessage(3, tensors_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4679,11 +4710,11 @@ public final class TensorProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, tensors_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4701,6 +4732,7 @@ public final class TensorProtos {
           .equals(other.getMetadata());
       result = result && getTensorsList()
           .equals(other.getTensorsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4710,7 +4742,7 @@ public final class TensorProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TYPE_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getTypeName().hashCode();
       hash = (37 * hash) + METADATA_FIELD_NUMBER;
@@ -4724,6 +4756,17 @@ public final class TensorProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.TensorProtos.VariantTensorDataProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.TensorProtos.VariantTensorDataProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.TensorProtos.VariantTensorDataProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4897,7 +4940,7 @@ public final class TensorProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4910,12 +4953,12 @@ public final class TensorProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4962,6 +5005,7 @@ public final class TensorProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4995,7 +5039,7 @@ public final class TensorProtos {
        * Name of the type of objects being serialized.
        * </pre>
        *
-       * <code>optional string type_name = 1;</code>
+       * <code>string type_name = 1;</code>
        */
       public java.lang.String getTypeName() {
         java.lang.Object ref = typeName_;
@@ -5014,7 +5058,7 @@ public final class TensorProtos {
        * Name of the type of objects being serialized.
        * </pre>
        *
-       * <code>optional string type_name = 1;</code>
+       * <code>string type_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeNameBytes() {
@@ -5034,7 +5078,7 @@ public final class TensorProtos {
        * Name of the type of objects being serialized.
        * </pre>
        *
-       * <code>optional string type_name = 1;</code>
+       * <code>string type_name = 1;</code>
        */
       public Builder setTypeName(
           java.lang.String value) {
@@ -5051,7 +5095,7 @@ public final class TensorProtos {
        * Name of the type of objects being serialized.
        * </pre>
        *
-       * <code>optional string type_name = 1;</code>
+       * <code>string type_name = 1;</code>
        */
       public Builder clearTypeName() {
         
@@ -5064,7 +5108,7 @@ public final class TensorProtos {
        * Name of the type of objects being serialized.
        * </pre>
        *
-       * <code>optional string type_name = 1;</code>
+       * <code>string type_name = 1;</code>
        */
       public Builder setTypeNameBytes(
           com.google.protobuf.ByteString value) {
@@ -5084,7 +5128,7 @@ public final class TensorProtos {
        * Portions of the object that are not Tensors.
        * </pre>
        *
-       * <code>optional bytes metadata = 2;</code>
+       * <code>bytes metadata = 2;</code>
        */
       public com.google.protobuf.ByteString getMetadata() {
         return metadata_;
@@ -5094,7 +5138,7 @@ public final class TensorProtos {
        * Portions of the object that are not Tensors.
        * </pre>
        *
-       * <code>optional bytes metadata = 2;</code>
+       * <code>bytes metadata = 2;</code>
        */
       public Builder setMetadata(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -5110,7 +5154,7 @@ public final class TensorProtos {
        * Portions of the object that are not Tensors.
        * </pre>
        *
-       * <code>optional bytes metadata = 2;</code>
+       * <code>bytes metadata = 2;</code>
        */
       public Builder clearMetadata() {
         
@@ -5432,12 +5476,12 @@ public final class TensorProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5460,7 +5504,7 @@ public final class TensorProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new VariantTensorDataProto(input, extensionRegistry);
+        return new VariantTensorDataProto(input, extensionRegistry);
       }
     };
 
@@ -5507,7 +5551,7 @@ public final class TensorProtos {
       "\022\026\n\016tensor_content\030\004 \001(\014\022\024\n\010half_val\030\r \003" +
       "(\005B\002\020\001\022\025\n\tfloat_val\030\005 \003(\002B\002\020\001\022\026\n\ndouble_" +
       "val\030\006 \003(\001B\002\020\001\022\023\n\007int_val\030\007 \003(\005B\002\020\001\022\022\n\nst" +
-      "ring_val\030\010 \003(\014\022\030\n\014scomplex_val\030\t \003(\002B\002\020\001",
+      "ring_val\030\010 \003(\014\022\030\n\014scomplex_val\030\t \003(\002B\002\020\001" +
       "\022\025\n\tint64_val\030\n \003(\003B\002\020\001\022\024\n\010bool_val\030\013 \003(" +
       "\010B\002\020\001\022\030\n\014dcomplex_val\030\014 \003(\001B\002\020\001\0227\n\023resou" +
       "rce_handle_val\030\016 \003(\0132\032.angel.ResourceHan" +

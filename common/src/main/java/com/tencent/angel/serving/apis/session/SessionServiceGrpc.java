@@ -1,19 +1,19 @@
 package com.tencent.angel.serving.apis.session;
 
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
@@ -24,24 +24,46 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.0.1)",
+    value = "by gRPC proto compiler (version 1.17.1)",
     comments = "Source: apis/session/session_service.proto")
-public class SessionServiceGrpc {
+public final class SessionServiceGrpc {
 
   private SessionServiceGrpc() {}
 
   public static final String SERVICE_NAME = "angel.serving.SessionService";
 
   // Static method descriptors that strictly reflect the proto.
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest,
-      com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> METHOD_SESSION_RUN =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.SessionService", "SessionRun"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.getDefaultInstance()));
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest,
+      com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> getSessionRunMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SessionRun",
+      requestType = com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.class,
+      responseType = com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest,
+      com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> getSessionRunMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> getSessionRunMethod;
+    if ((getSessionRunMethod = SessionServiceGrpc.getSessionRunMethod) == null) {
+      synchronized (SessionServiceGrpc.class) {
+        if ((getSessionRunMethod = SessionServiceGrpc.getSessionRunMethod) == null) {
+          SessionServiceGrpc.getSessionRunMethod = getSessionRunMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.SessionService", "SessionRun"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new SessionServiceMethodDescriptorSupplier("SessionRun"))
+                  .build();
+          }
+        }
+     }
+     return getSessionRunMethod;
+  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -59,7 +81,7 @@ public class SessionServiceGrpc {
   }
 
   /**
-   * Creates a new ListenableFuture-style stub that supports unary and streaming output calls on the service
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
   public static SessionServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
@@ -83,13 +105,13 @@ public class SessionServiceGrpc {
      */
     public void sessionRun(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_SESSION_RUN, responseObserver);
+      asyncUnimplementedUnaryCall(getSessionRunMethod(), responseObserver);
     }
 
-    @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            METHOD_SESSION_RUN,
+            getSessionRunMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest,
@@ -131,7 +153,7 @@ public class SessionServiceGrpc {
     public void sessionRun(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_SESSION_RUN, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getSessionRunMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -166,7 +188,7 @@ public class SessionServiceGrpc {
      */
     public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse sessionRun(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_SESSION_RUN, getCallOptions(), request);
+          getChannel(), getSessionRunMethod(), getCallOptions(), request);
     }
   }
 
@@ -202,13 +224,13 @@ public class SessionServiceGrpc {
     public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse> sessionRun(
         com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_SESSION_RUN, getCallOptions()), request);
+          getChannel().newCall(getSessionRunMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_SESSION_RUN = 0;
 
-  private static class MethodHandlers<Req, Resp> implements
+  private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
@@ -216,7 +238,7 @@ public class SessionServiceGrpc {
     private final SessionServiceImplBase serviceImpl;
     private final int methodId;
 
-    public MethodHandlers(SessionServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(SessionServiceImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -245,9 +267,56 @@ public class SessionServiceGrpc {
     }
   }
 
-  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
-    return new io.grpc.ServiceDescriptor(SERVICE_NAME,
-        METHOD_SESSION_RUN);
+  private static abstract class SessionServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    SessionServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return com.tencent.angel.serving.apis.session.SessionServiceProtos.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("SessionService");
+    }
   }
 
+  private static final class SessionServiceFileDescriptorSupplier
+      extends SessionServiceBaseDescriptorSupplier {
+    SessionServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class SessionServiceMethodDescriptorSupplier
+      extends SessionServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    SessionServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (SessionServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new SessionServiceFileDescriptorSupplier())
+              .addMethod(getSessionRunMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
 }

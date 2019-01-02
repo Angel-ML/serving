@@ -24,7 +24,7 @@ public final class SamplingConfigProtos {
      * range: [0, 1.0].
      * </pre>
      *
-     * <code>optional double sampling_rate = 1;</code>
+     * <code>double sampling_rate = 1;</code>
      */
     double getSamplingRate();
   }
@@ -35,6 +35,7 @@ public final class SamplingConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SamplingConfig)
       SamplingConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SamplingConfig.newBuilder() to construct.
     private SamplingConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -46,14 +47,19 @@ public final class SamplingConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SamplingConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -63,7 +69,8 @@ public final class SamplingConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -81,6 +88,7 @@ public final class SamplingConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -104,7 +112,7 @@ public final class SamplingConfigProtos {
      * range: [0, 1.0].
      * </pre>
      *
-     * <code>optional double sampling_rate = 1;</code>
+     * <code>double sampling_rate = 1;</code>
      */
     public double getSamplingRate() {
       return samplingRate_;
@@ -125,6 +133,7 @@ public final class SamplingConfigProtos {
       if (samplingRate_ != 0D) {
         output.writeDouble(1, samplingRate_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -136,11 +145,11 @@ public final class SamplingConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(1, samplingRate_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -156,6 +165,7 @@ public final class SamplingConfigProtos {
           java.lang.Double.doubleToLongBits(getSamplingRate())
           == java.lang.Double.doubleToLongBits(
               other.getSamplingRate()));
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -165,7 +175,7 @@ public final class SamplingConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SAMPLING_RATE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getSamplingRate()));
@@ -174,6 +184,17 @@ public final class SamplingConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.SamplingConfigProtos.SamplingConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.SamplingConfigProtos.SamplingConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.SamplingConfigProtos.SamplingConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -321,7 +342,7 @@ public final class SamplingConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -334,12 +355,12 @@ public final class SamplingConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -356,6 +377,7 @@ public final class SamplingConfigProtos {
         if (other.getSamplingRate() != 0D) {
           setSamplingRate(other.getSamplingRate());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -389,7 +411,7 @@ public final class SamplingConfigProtos {
        * range: [0, 1.0].
        * </pre>
        *
-       * <code>optional double sampling_rate = 1;</code>
+       * <code>double sampling_rate = 1;</code>
        */
       public double getSamplingRate() {
         return samplingRate_;
@@ -400,7 +422,7 @@ public final class SamplingConfigProtos {
        * range: [0, 1.0].
        * </pre>
        *
-       * <code>optional double sampling_rate = 1;</code>
+       * <code>double sampling_rate = 1;</code>
        */
       public Builder setSamplingRate(double value) {
         
@@ -414,7 +436,7 @@ public final class SamplingConfigProtos {
        * range: [0, 1.0].
        * </pre>
        *
-       * <code>optional double sampling_rate = 1;</code>
+       * <code>double sampling_rate = 1;</code>
        */
       public Builder clearSamplingRate() {
         
@@ -424,12 +446,12 @@ public final class SamplingConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -452,7 +474,7 @@ public final class SamplingConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SamplingConfig(input, extensionRegistry);
+        return new SamplingConfig(input, extensionRegistry);
       }
     };
 
@@ -476,28 +498,28 @@ public final class SamplingConfigProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     boolean hasLogCollectorConfig();
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig getLogCollectorConfig();
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfigOrBuilder getLogCollectorConfigOrBuilder();
 
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     boolean hasSamplingConfig();
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig();
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder();
   }
@@ -512,6 +534,7 @@ public final class SamplingConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.LoggingConfig)
       LoggingConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use LoggingConfig.newBuilder() to construct.
     private LoggingConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -522,14 +545,19 @@ public final class SamplingConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private LoggingConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -539,7 +567,8 @@ public final class SamplingConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -578,6 +607,7 @@ public final class SamplingConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -596,19 +626,19 @@ public final class SamplingConfigProtos {
     public static final int LOG_COLLECTOR_CONFIG_FIELD_NUMBER = 1;
     private com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig logCollectorConfig_;
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     public boolean hasLogCollectorConfig() {
       return logCollectorConfig_ != null;
     }
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     public com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig getLogCollectorConfig() {
       return logCollectorConfig_ == null ? com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig.getDefaultInstance() : logCollectorConfig_;
     }
     /**
-     * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+     * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
      */
     public com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfigOrBuilder getLogCollectorConfigOrBuilder() {
       return getLogCollectorConfig();
@@ -617,19 +647,19 @@ public final class SamplingConfigProtos {
     public static final int SAMPLING_CONFIG_FIELD_NUMBER = 2;
     private com.tencent.angel.config.SamplingConfigProtos.SamplingConfig samplingConfig_;
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public boolean hasSamplingConfig() {
       return samplingConfig_ != null;
     }
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig() {
       return samplingConfig_ == null ? com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.getDefaultInstance() : samplingConfig_;
     }
     /**
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder() {
       return getSamplingConfig();
@@ -653,6 +683,7 @@ public final class SamplingConfigProtos {
       if (samplingConfig_ != null) {
         output.writeMessage(2, getSamplingConfig());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -668,11 +699,11 @@ public final class SamplingConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getSamplingConfig());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -694,6 +725,7 @@ public final class SamplingConfigProtos {
         result = result && getSamplingConfig()
             .equals(other.getSamplingConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -703,7 +735,7 @@ public final class SamplingConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasLogCollectorConfig()) {
         hash = (37 * hash) + LOG_COLLECTOR_CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getLogCollectorConfig().hashCode();
@@ -717,6 +749,17 @@ public final class SamplingConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.SamplingConfigProtos.LoggingConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.SamplingConfigProtos.LoggingConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.SamplingConfigProtos.LoggingConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -887,7 +930,7 @@ public final class SamplingConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -900,12 +943,12 @@ public final class SamplingConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -925,6 +968,7 @@ public final class SamplingConfigProtos {
         if (other.hasSamplingConfig()) {
           mergeSamplingConfig(other.getSamplingConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -955,13 +999,13 @@ public final class SamplingConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig, com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig.Builder, com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfigOrBuilder> logCollectorConfigBuilder_;
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public boolean hasLogCollectorConfig() {
         return logCollectorConfigBuilder_ != null || logCollectorConfig_ != null;
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig getLogCollectorConfig() {
         if (logCollectorConfigBuilder_ == null) {
@@ -971,7 +1015,7 @@ public final class SamplingConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public Builder setLogCollectorConfig(com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig value) {
         if (logCollectorConfigBuilder_ == null) {
@@ -987,7 +1031,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public Builder setLogCollectorConfig(
           com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig.Builder builderForValue) {
@@ -1001,7 +1045,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public Builder mergeLogCollectorConfig(com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig value) {
         if (logCollectorConfigBuilder_ == null) {
@@ -1019,7 +1063,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public Builder clearLogCollectorConfig() {
         if (logCollectorConfigBuilder_ == null) {
@@ -1033,7 +1077,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig.Builder getLogCollectorConfigBuilder() {
         
@@ -1041,7 +1085,7 @@ public final class SamplingConfigProtos {
         return getLogCollectorConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       public com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfigOrBuilder getLogCollectorConfigOrBuilder() {
         if (logCollectorConfigBuilder_ != null) {
@@ -1052,7 +1096,7 @@ public final class SamplingConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.LogCollectorConfig log_collector_config = 1;</code>
+       * <code>.angel.LogCollectorConfig log_collector_config = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig, com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig.Builder, com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfigOrBuilder> 
@@ -1072,13 +1116,13 @@ public final class SamplingConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.SamplingConfigProtos.SamplingConfig, com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder, com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder> samplingConfigBuilder_;
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public boolean hasSamplingConfig() {
         return samplingConfigBuilder_ != null || samplingConfig_ != null;
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig() {
         if (samplingConfigBuilder_ == null) {
@@ -1088,7 +1132,7 @@ public final class SamplingConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder setSamplingConfig(com.tencent.angel.config.SamplingConfigProtos.SamplingConfig value) {
         if (samplingConfigBuilder_ == null) {
@@ -1104,7 +1148,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder setSamplingConfig(
           com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder builderForValue) {
@@ -1118,7 +1162,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder mergeSamplingConfig(com.tencent.angel.config.SamplingConfigProtos.SamplingConfig value) {
         if (samplingConfigBuilder_ == null) {
@@ -1136,7 +1180,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder clearSamplingConfig() {
         if (samplingConfigBuilder_ == null) {
@@ -1150,7 +1194,7 @@ public final class SamplingConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder getSamplingConfigBuilder() {
         
@@ -1158,7 +1202,7 @@ public final class SamplingConfigProtos {
         return getSamplingConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder() {
         if (samplingConfigBuilder_ != null) {
@@ -1169,7 +1213,7 @@ public final class SamplingConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.SamplingConfigProtos.SamplingConfig, com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder, com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder> 
@@ -1186,12 +1230,12 @@ public final class SamplingConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1214,7 +1258,7 @@ public final class SamplingConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LoggingConfig(input, extensionRegistry);
+        return new LoggingConfig(input, extensionRegistry);
       }
     };
 

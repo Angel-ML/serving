@@ -24,7 +24,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -33,7 +33,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -42,7 +42,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -187,6 +187,7 @@ public final class PredictProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.PredictRequest)
       PredictRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PredictRequest.newBuilder() to construct.
     private PredictRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -198,14 +199,19 @@ public final class PredictProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PredictRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -215,7 +221,8 @@ public final class PredictProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -240,9 +247,10 @@ public final class PredictProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-              inputs = input.readMessage(
+              inputs__ = input.readMessage(
                   InputsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              inputs_.getMutableMap().put(inputs.getKey(), inputs.getValue());
+              inputs_.getMutableMap().put(
+                  inputs__.getKey(), inputs__.getValue());
               break;
             }
             case 26: {
@@ -265,6 +273,7 @@ public final class PredictProtos {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           outputFilter_ = outputFilter_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -300,7 +309,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -311,7 +320,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -322,7 +331,7 @@ public final class PredictProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -516,18 +525,16 @@ public final class PredictProtos {
       if (modelSpec_ != null) {
         output.writeMessage(1, getModelSpec());
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> entry
-           : internalGetInputs().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-        inputs = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(2, inputs);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetInputs(),
+          InputsDefaultEntryHolder.defaultEntry,
+          2);
       for (int i = 0; i < outputFilter_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, outputFilter_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -542,12 +549,12 @@ public final class PredictProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> entry
            : internalGetInputs().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-        inputs = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        inputs__ = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, inputs);
+            .computeMessageSize(2, inputs__);
       }
       {
         int dataSize = 0;
@@ -557,11 +564,11 @@ public final class PredictProtos {
         size += dataSize;
         size += 1 * getOutputFilterList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -582,6 +589,7 @@ public final class PredictProtos {
           other.internalGetInputs());
       result = result && getOutputFilterList()
           .equals(other.getOutputFilterList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -591,7 +599,7 @@ public final class PredictProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -609,6 +617,17 @@ public final class PredictProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -805,7 +824,7 @@ public final class PredictProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -818,12 +837,12 @@ public final class PredictProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -852,6 +871,7 @@ public final class PredictProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -888,7 +908,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -899,7 +919,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -914,7 +934,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -935,7 +955,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -954,7 +974,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -977,7 +997,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -996,7 +1016,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -1009,7 +1029,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -1025,7 +1045,7 @@ public final class PredictProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -1146,7 +1166,8 @@ public final class PredictProtos {
       }
 
       public Builder clearInputs() {
-        getMutableInputs().clear();
+        internalGetMutableInputs().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -1163,7 +1184,8 @@ public final class PredictProtos {
       public Builder removeInputs(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableInputs().remove(key);
+        internalGetMutableInputs().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -1189,7 +1211,8 @@ public final class PredictProtos {
           com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableInputs().put(key, value);
+        internalGetMutableInputs().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -1205,7 +1228,8 @@ public final class PredictProtos {
 
       public Builder putAllInputs(
           java.util.Map<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> values) {
-        getMutableInputs().putAll(values);
+        internalGetMutableInputs().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -1394,12 +1418,12 @@ public final class PredictProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1422,7 +1446,7 @@ public final class PredictProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PredictRequest(input, extensionRegistry);
+        return new PredictRequest(input, extensionRegistry);
       }
     };
 
@@ -1450,7 +1474,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     boolean hasModelSpec();
     /**
@@ -1458,7 +1482,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -1466,7 +1490,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -1535,6 +1559,7 @@ public final class PredictProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.PredictResponse)
       PredictResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PredictResponse.newBuilder() to construct.
     private PredictResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1545,14 +1570,19 @@ public final class PredictProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PredictResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1562,7 +1592,8 @@ public final class PredictProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1574,9 +1605,10 @@ public final class PredictProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-              outputs = input.readMessage(
+              outputs__ = input.readMessage(
                   OutputsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              outputs_.getMutableMap().put(outputs.getKey(), outputs.getValue());
+              outputs_.getMutableMap().put(
+                  outputs__.getKey(), outputs__.getValue());
               break;
             }
             case 18: {
@@ -1600,6 +1632,7 @@ public final class PredictProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1634,7 +1667,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -1644,7 +1677,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -1654,7 +1687,7 @@ public final class PredictProtos {
      * Effective Model Specification used to process PredictRequest.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -1764,18 +1797,16 @@ public final class PredictProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> entry
-           : internalGetOutputs().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-        outputs = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(1, outputs);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetOutputs(),
+          OutputsDefaultEntryHolder.defaultEntry,
+          1);
       if (modelSpec_ != null) {
         output.writeMessage(2, getModelSpec());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1786,22 +1817,22 @@ public final class PredictProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> entry
            : internalGetOutputs().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto>
-        outputs = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        outputs__ = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, outputs);
+            .computeMessageSize(1, outputs__);
       }
       if (modelSpec_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getModelSpec());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1820,6 +1851,7 @@ public final class PredictProtos {
       }
       result = result && internalGetOutputs().equals(
           other.internalGetOutputs());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1829,7 +1861,7 @@ public final class PredictProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -1843,6 +1875,17 @@ public final class PredictProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2030,7 +2073,7 @@ public final class PredictProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2043,12 +2086,12 @@ public final class PredictProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2067,6 +2110,7 @@ public final class PredictProtos {
         }
         internalGetMutableOutputs().mergeFrom(
             other.internalGetOutputs());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2102,7 +2146,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -2112,7 +2156,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2126,7 +2170,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2146,7 +2190,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -2164,7 +2208,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2186,7 +2230,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2204,7 +2248,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -2216,7 +2260,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -2231,7 +2275,7 @@ public final class PredictProtos {
        * Effective Model Specification used to process PredictRequest.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -2340,7 +2384,8 @@ public final class PredictProtos {
       }
 
       public Builder clearOutputs() {
-        getMutableOutputs().clear();
+        internalGetMutableOutputs().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -2354,7 +2399,8 @@ public final class PredictProtos {
       public Builder removeOutputs(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableOutputs().remove(key);
+        internalGetMutableOutputs().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -2377,7 +2423,8 @@ public final class PredictProtos {
           com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableOutputs().put(key, value);
+        internalGetMutableOutputs().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -2390,17 +2437,18 @@ public final class PredictProtos {
 
       public Builder putAllOutputs(
           java.util.Map<java.lang.String, com.tencent.angel.core.graph.TensorProtos.TensorProto> values) {
-        getMutableOutputs().putAll(values);
+        internalGetMutableOutputs().getMutableMap()
+            .putAll(values);
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2423,7 +2471,7 @@ public final class PredictProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PredictResponse(input, extensionRegistry);
+        return new PredictResponse(input, extensionRegistry);
       }
     };
 
@@ -2480,7 +2528,7 @@ public final class PredictProtos {
       "\003(\t\032A\n\013InputsEntry\022\013\n\003key\030\001 \001(\t\022!\n\005value" +
       "\030\002 \001(\0132\022.angel.TensorProto:\0028\001\"\301\001\n\017Predi" +
       "ctResponse\022,\n\nmodel_spec\030\002 \001(\0132\030.angel.s" +
-      "erving.ModelSpec\022<\n\007outputs\030\001 \003(\0132+.ange",
+      "erving.ModelSpec\022<\n\007outputs\030\001 \003(\0132+.ange" +
       "l.serving.PredictResponse.OutputsEntry\032B" +
       "\n\014OutputsEntry\022\013\n\003key\030\001 \001(\t\022!\n\005value\030\002 \001" +
       "(\0132\022.angel.TensorProto:\0028\001B<\n)com.tencen" +

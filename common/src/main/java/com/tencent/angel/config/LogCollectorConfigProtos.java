@@ -23,7 +23,7 @@ public final class LogCollectorConfigProtos {
      * Identifies the type of the LogCollector we will use to collect these logs.
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     java.lang.String getType();
     /**
@@ -31,7 +31,7 @@ public final class LogCollectorConfigProtos {
      * Identifies the type of the LogCollector we will use to collect these logs.
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     com.google.protobuf.ByteString
         getTypeBytes();
@@ -41,7 +41,7 @@ public final class LogCollectorConfigProtos {
      * The prefix to use for the filenames of the logs.
      * </pre>
      *
-     * <code>optional string filename_prefix = 2;</code>
+     * <code>string filename_prefix = 2;</code>
      */
     java.lang.String getFilenamePrefix();
     /**
@@ -49,7 +49,7 @@ public final class LogCollectorConfigProtos {
      * The prefix to use for the filenames of the logs.
      * </pre>
      *
-     * <code>optional string filename_prefix = 2;</code>
+     * <code>string filename_prefix = 2;</code>
      */
     com.google.protobuf.ByteString
         getFilenamePrefixBytes();
@@ -61,6 +61,7 @@ public final class LogCollectorConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.LogCollectorConfig)
       LogCollectorConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use LogCollectorConfig.newBuilder() to construct.
     private LogCollectorConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -73,14 +74,19 @@ public final class LogCollectorConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private LogCollectorConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -90,7 +96,8 @@ public final class LogCollectorConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -115,6 +122,7 @@ public final class LogCollectorConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -137,7 +145,7 @@ public final class LogCollectorConfigProtos {
      * Identifies the type of the LogCollector we will use to collect these logs.
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public java.lang.String getType() {
       java.lang.Object ref = type_;
@@ -156,7 +164,7 @@ public final class LogCollectorConfigProtos {
      * Identifies the type of the LogCollector we will use to collect these logs.
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public com.google.protobuf.ByteString
         getTypeBytes() {
@@ -179,7 +187,7 @@ public final class LogCollectorConfigProtos {
      * The prefix to use for the filenames of the logs.
      * </pre>
      *
-     * <code>optional string filename_prefix = 2;</code>
+     * <code>string filename_prefix = 2;</code>
      */
     public java.lang.String getFilenamePrefix() {
       java.lang.Object ref = filenamePrefix_;
@@ -198,7 +206,7 @@ public final class LogCollectorConfigProtos {
      * The prefix to use for the filenames of the logs.
      * </pre>
      *
-     * <code>optional string filename_prefix = 2;</code>
+     * <code>string filename_prefix = 2;</code>
      */
     public com.google.protobuf.ByteString
         getFilenamePrefixBytes() {
@@ -232,6 +240,7 @@ public final class LogCollectorConfigProtos {
       if (!getFilenamePrefixBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, filenamePrefix_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -245,11 +254,11 @@ public final class LogCollectorConfigProtos {
       if (!getFilenamePrefixBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, filenamePrefix_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -265,6 +274,7 @@ public final class LogCollectorConfigProtos {
           .equals(other.getType());
       result = result && getFilenamePrefix()
           .equals(other.getFilenamePrefix());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -274,7 +284,7 @@ public final class LogCollectorConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getType().hashCode();
       hash = (37 * hash) + FILENAME_PREFIX_FIELD_NUMBER;
@@ -284,6 +294,17 @@ public final class LogCollectorConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.LogCollectorConfigProtos.LogCollectorConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -434,7 +455,7 @@ public final class LogCollectorConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -447,12 +468,12 @@ public final class LogCollectorConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -474,6 +495,7 @@ public final class LogCollectorConfigProtos {
           filenamePrefix_ = other.filenamePrefix_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -506,7 +528,7 @@ public final class LogCollectorConfigProtos {
        * Identifies the type of the LogCollector we will use to collect these logs.
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -525,7 +547,7 @@ public final class LogCollectorConfigProtos {
        * Identifies the type of the LogCollector we will use to collect these logs.
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -545,7 +567,7 @@ public final class LogCollectorConfigProtos {
        * Identifies the type of the LogCollector we will use to collect these logs.
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setType(
           java.lang.String value) {
@@ -562,7 +584,7 @@ public final class LogCollectorConfigProtos {
        * Identifies the type of the LogCollector we will use to collect these logs.
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder clearType() {
         
@@ -575,7 +597,7 @@ public final class LogCollectorConfigProtos {
        * Identifies the type of the LogCollector we will use to collect these logs.
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setTypeBytes(
           com.google.protobuf.ByteString value) {
@@ -595,7 +617,7 @@ public final class LogCollectorConfigProtos {
        * The prefix to use for the filenames of the logs.
        * </pre>
        *
-       * <code>optional string filename_prefix = 2;</code>
+       * <code>string filename_prefix = 2;</code>
        */
       public java.lang.String getFilenamePrefix() {
         java.lang.Object ref = filenamePrefix_;
@@ -614,7 +636,7 @@ public final class LogCollectorConfigProtos {
        * The prefix to use for the filenames of the logs.
        * </pre>
        *
-       * <code>optional string filename_prefix = 2;</code>
+       * <code>string filename_prefix = 2;</code>
        */
       public com.google.protobuf.ByteString
           getFilenamePrefixBytes() {
@@ -634,7 +656,7 @@ public final class LogCollectorConfigProtos {
        * The prefix to use for the filenames of the logs.
        * </pre>
        *
-       * <code>optional string filename_prefix = 2;</code>
+       * <code>string filename_prefix = 2;</code>
        */
       public Builder setFilenamePrefix(
           java.lang.String value) {
@@ -651,7 +673,7 @@ public final class LogCollectorConfigProtos {
        * The prefix to use for the filenames of the logs.
        * </pre>
        *
-       * <code>optional string filename_prefix = 2;</code>
+       * <code>string filename_prefix = 2;</code>
        */
       public Builder clearFilenamePrefix() {
         
@@ -664,7 +686,7 @@ public final class LogCollectorConfigProtos {
        * The prefix to use for the filenames of the logs.
        * </pre>
        *
-       * <code>optional string filename_prefix = 2;</code>
+       * <code>string filename_prefix = 2;</code>
        */
       public Builder setFilenamePrefixBytes(
           com.google.protobuf.ByteString value) {
@@ -679,12 +701,12 @@ public final class LogCollectorConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -707,7 +729,7 @@ public final class LogCollectorConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LogCollectorConfig(input, extensionRegistry);
+        return new LogCollectorConfig(input, extensionRegistry);
       }
     };
 

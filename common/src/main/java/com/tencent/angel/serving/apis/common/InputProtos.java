@@ -55,6 +55,7 @@ public final class InputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ExampleList)
       ExampleListOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ExampleList.newBuilder() to construct.
     private ExampleList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -66,14 +67,19 @@ public final class InputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ExampleList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -83,7 +89,8 @@ public final class InputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -108,6 +115,7 @@ public final class InputProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           examples_ = java.util.Collections.unmodifiableList(examples_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -173,6 +181,7 @@ public final class InputProtos {
       for (int i = 0; i < examples_.size(); i++) {
         output.writeMessage(1, examples_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -184,11 +193,11 @@ public final class InputProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, examples_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -202,6 +211,7 @@ public final class InputProtos {
       boolean result = true;
       result = result && getExamplesList()
           .equals(other.getExamplesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -211,7 +221,7 @@ public final class InputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getExamplesCount() > 0) {
         hash = (37 * hash) + EXAMPLES_FIELD_NUMBER;
         hash = (53 * hash) + getExamplesList().hashCode();
@@ -221,6 +231,17 @@ public final class InputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.InputProtos.ExampleList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.InputProtos.ExampleList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.InputProtos.ExampleList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -388,7 +409,7 @@ public final class InputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -401,12 +422,12 @@ public final class InputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -446,6 +467,7 @@ public final class InputProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -714,12 +736,12 @@ public final class InputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -742,7 +764,7 @@ public final class InputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ExampleList(input, extensionRegistry);
+        return new ExampleList(input, extensionRegistry);
       }
     };
 
@@ -790,15 +812,15 @@ public final class InputProtos {
         int index);
 
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     boolean hasContext();
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ExampleProtos.Example getContext();
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ExampleProtos.ExampleOrBuilder getContextOrBuilder();
   }
@@ -854,6 +876,7 @@ public final class InputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ExampleListWithContext)
       ExampleListWithContextOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ExampleListWithContext.newBuilder() to construct.
     private ExampleListWithContext(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -865,14 +888,19 @@ public final class InputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ExampleListWithContext(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -882,7 +910,8 @@ public final class InputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -920,6 +949,7 @@ public final class InputProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           examples_ = java.util.Collections.unmodifiableList(examples_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -974,19 +1004,19 @@ public final class InputProtos {
     public static final int CONTEXT_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.common.ExampleProtos.Example context_;
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     public boolean hasContext() {
       return context_ != null;
     }
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ExampleProtos.Example getContext() {
       return context_ == null ? com.tencent.angel.serving.apis.common.ExampleProtos.Example.getDefaultInstance() : context_;
     }
     /**
-     * <code>optional .angel.serving.Example context = 2;</code>
+     * <code>.angel.serving.Example context = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ExampleProtos.ExampleOrBuilder getContextOrBuilder() {
       return getContext();
@@ -1010,6 +1040,7 @@ public final class InputProtos {
       if (context_ != null) {
         output.writeMessage(2, getContext());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1025,11 +1056,11 @@ public final class InputProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getContext());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1048,6 +1079,7 @@ public final class InputProtos {
         result = result && getContext()
             .equals(other.getContext());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1057,7 +1089,7 @@ public final class InputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getExamplesCount() > 0) {
         hash = (37 * hash) + EXAMPLES_FIELD_NUMBER;
         hash = (53 * hash) + getExamplesList().hashCode();
@@ -1071,6 +1103,17 @@ public final class InputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1290,7 +1333,7 @@ public final class InputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1303,12 +1346,12 @@ public final class InputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1351,6 +1394,7 @@ public final class InputProtos {
         if (other.hasContext()) {
           mergeContext(other.getContext());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1622,13 +1666,13 @@ public final class InputProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ExampleProtos.Example, com.tencent.angel.serving.apis.common.ExampleProtos.Example.Builder, com.tencent.angel.serving.apis.common.ExampleProtos.ExampleOrBuilder> contextBuilder_;
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public boolean hasContext() {
         return contextBuilder_ != null || context_ != null;
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ExampleProtos.Example getContext() {
         if (contextBuilder_ == null) {
@@ -1638,7 +1682,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public Builder setContext(com.tencent.angel.serving.apis.common.ExampleProtos.Example value) {
         if (contextBuilder_ == null) {
@@ -1654,7 +1698,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public Builder setContext(
           com.tencent.angel.serving.apis.common.ExampleProtos.Example.Builder builderForValue) {
@@ -1668,7 +1712,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public Builder mergeContext(com.tencent.angel.serving.apis.common.ExampleProtos.Example value) {
         if (contextBuilder_ == null) {
@@ -1686,7 +1730,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public Builder clearContext() {
         if (contextBuilder_ == null) {
@@ -1700,7 +1744,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ExampleProtos.Example.Builder getContextBuilder() {
         
@@ -1708,7 +1752,7 @@ public final class InputProtos {
         return getContextFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ExampleProtos.ExampleOrBuilder getContextOrBuilder() {
         if (contextBuilder_ != null) {
@@ -1719,7 +1763,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Example context = 2;</code>
+       * <code>.angel.serving.Example context = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ExampleProtos.Example, com.tencent.angel.serving.apis.common.ExampleProtos.Example.Builder, com.tencent.angel.serving.apis.common.ExampleProtos.ExampleOrBuilder> 
@@ -1736,12 +1780,12 @@ public final class InputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1764,7 +1808,7 @@ public final class InputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ExampleListWithContext(input, extensionRegistry);
+        return new ExampleListWithContext(input, extensionRegistry);
       }
     };
 
@@ -1788,20 +1832,28 @@ public final class InputProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     */
+    boolean hasExampleList();
+    /**
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.ExampleList getExampleList();
     /**
-     * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.ExampleListOrBuilder getExampleListOrBuilder();
 
     /**
-     * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     */
+    boolean hasExampleListWithContext();
+    /**
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext getExampleListWithContext();
     /**
-     * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContextOrBuilder getExampleListWithContextOrBuilder();
 
@@ -1814,6 +1866,7 @@ public final class InputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.Input)
       InputOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Input.newBuilder() to construct.
     private Input(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1824,14 +1877,19 @@ public final class InputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Input(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1841,7 +1899,8 @@ public final class InputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1882,6 +1941,7 @@ public final class InputProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1937,7 +1997,13 @@ public final class InputProtos {
 
     public static final int EXAMPLE_LIST_FIELD_NUMBER = 1;
     /**
-     * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     */
+    public boolean hasExampleList() {
+      return kindCase_ == 1;
+    }
+    /**
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.ExampleList getExampleList() {
       if (kindCase_ == 1) {
@@ -1946,7 +2012,7 @@ public final class InputProtos {
       return com.tencent.angel.serving.apis.common.InputProtos.ExampleList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+     * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.ExampleListOrBuilder getExampleListOrBuilder() {
       if (kindCase_ == 1) {
@@ -1957,7 +2023,13 @@ public final class InputProtos {
 
     public static final int EXAMPLE_LIST_WITH_CONTEXT_FIELD_NUMBER = 2;
     /**
-     * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     */
+    public boolean hasExampleListWithContext() {
+      return kindCase_ == 2;
+    }
+    /**
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext getExampleListWithContext() {
       if (kindCase_ == 2) {
@@ -1966,7 +2038,7 @@ public final class InputProtos {
       return com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+     * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContextOrBuilder getExampleListWithContextOrBuilder() {
       if (kindCase_ == 2) {
@@ -1993,6 +2065,7 @@ public final class InputProtos {
       if (kindCase_ == 2) {
         output.writeMessage(2, (com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext) kind_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2008,11 +2081,11 @@ public final class InputProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext) kind_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2039,6 +2112,7 @@ public final class InputProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2048,7 +2122,7 @@ public final class InputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       switch (kindCase_) {
         case 1:
           hash = (37 * hash) + EXAMPLE_LIST_FIELD_NUMBER;
@@ -2066,6 +2140,17 @@ public final class InputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.InputProtos.Input parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.InputProtos.Input parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.InputProtos.Input parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2227,7 +2312,7 @@ public final class InputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2240,12 +2325,12 @@ public final class InputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2272,6 +2357,7 @@ public final class InputProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2316,7 +2402,13 @@ public final class InputProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.ExampleList, com.tencent.angel.serving.apis.common.InputProtos.ExampleList.Builder, com.tencent.angel.serving.apis.common.InputProtos.ExampleListOrBuilder> exampleListBuilder_;
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       */
+      public boolean hasExampleList() {
+        return kindCase_ == 1;
+      }
+      /**
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleList getExampleList() {
         if (exampleListBuilder_ == null) {
@@ -2332,7 +2424,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public Builder setExampleList(com.tencent.angel.serving.apis.common.InputProtos.ExampleList value) {
         if (exampleListBuilder_ == null) {
@@ -2348,7 +2440,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public Builder setExampleList(
           com.tencent.angel.serving.apis.common.InputProtos.ExampleList.Builder builderForValue) {
@@ -2362,7 +2454,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public Builder mergeExampleList(com.tencent.angel.serving.apis.common.InputProtos.ExampleList value) {
         if (exampleListBuilder_ == null) {
@@ -2384,7 +2476,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public Builder clearExampleList() {
         if (exampleListBuilder_ == null) {
@@ -2403,13 +2495,13 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleList.Builder getExampleListBuilder() {
         return getExampleListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleListOrBuilder getExampleListOrBuilder() {
         if ((kindCase_ == 1) && (exampleListBuilder_ != null)) {
@@ -2422,7 +2514,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ExampleList example_list = 1 [lazy = true];</code>
+       * <code>.angel.serving.ExampleList example_list = 1 [lazy = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.ExampleList, com.tencent.angel.serving.apis.common.InputProtos.ExampleList.Builder, com.tencent.angel.serving.apis.common.InputProtos.ExampleListOrBuilder> 
@@ -2446,7 +2538,13 @@ public final class InputProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext, com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext.Builder, com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContextOrBuilder> exampleListWithContextBuilder_;
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       */
+      public boolean hasExampleListWithContext() {
+        return kindCase_ == 2;
+      }
+      /**
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext getExampleListWithContext() {
         if (exampleListWithContextBuilder_ == null) {
@@ -2462,7 +2560,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public Builder setExampleListWithContext(com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext value) {
         if (exampleListWithContextBuilder_ == null) {
@@ -2478,7 +2576,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public Builder setExampleListWithContext(
           com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext.Builder builderForValue) {
@@ -2492,7 +2590,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public Builder mergeExampleListWithContext(com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext value) {
         if (exampleListWithContextBuilder_ == null) {
@@ -2514,7 +2612,7 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public Builder clearExampleListWithContext() {
         if (exampleListWithContextBuilder_ == null) {
@@ -2533,13 +2631,13 @@ public final class InputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext.Builder getExampleListWithContextBuilder() {
         return getExampleListWithContextFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContextOrBuilder getExampleListWithContextOrBuilder() {
         if ((kindCase_ == 2) && (exampleListWithContextBuilder_ != null)) {
@@ -2552,7 +2650,7 @@ public final class InputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
+       * <code>.angel.serving.ExampleListWithContext example_list_with_context = 2 [lazy = true];</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext, com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContext.Builder, com.tencent.angel.serving.apis.common.InputProtos.ExampleListWithContextOrBuilder> 
@@ -2574,12 +2672,12 @@ public final class InputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2602,7 +2700,7 @@ public final class InputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Input(input, extensionRegistry);
+        return new Input(input, extensionRegistry);
       }
     };
 
@@ -2654,7 +2752,7 @@ public final class InputProtos {
       "put\0226\n\014example_list\030\001 \001(\0132\032.angel.servin" +
       "g.ExampleListB\002(\001H\000\022N\n\031example_list_with" +
       "_context\030\002 \001(\0132%.angel.serving.ExampleLi" +
-      "stWithContextB\002(\001H\000B\006\n\004kindB6\n%com.tence",
+      "stWithContextB\002(\001H\000B\006\n\004kindB6\n%com.tence" +
       "nt.angel.serving.apis.commonB\013InputProto" +
       "sP\000b\006proto3"
     };

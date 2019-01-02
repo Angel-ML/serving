@@ -19,15 +19,15 @@ public final class ExampleProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     boolean hasFeatures();
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.Features getFeatures();
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getFeaturesOrBuilder();
   }
@@ -38,6 +38,7 @@ public final class ExampleProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.Example)
       ExampleOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Example.newBuilder() to construct.
     private Example(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -48,14 +49,19 @@ public final class ExampleProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Example(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -65,7 +71,8 @@ public final class ExampleProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -91,6 +98,7 @@ public final class ExampleProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -109,19 +117,19 @@ public final class ExampleProtos {
     public static final int FEATURES_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.common.FeatureProtos.Features features_;
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     public boolean hasFeatures() {
       return features_ != null;
     }
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.Features getFeatures() {
       return features_ == null ? com.tencent.angel.serving.apis.common.FeatureProtos.Features.getDefaultInstance() : features_;
     }
     /**
-     * <code>optional .angel.serving.Features features = 1;</code>
+     * <code>.angel.serving.Features features = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getFeaturesOrBuilder() {
       return getFeatures();
@@ -142,6 +150,7 @@ public final class ExampleProtos {
       if (features_ != null) {
         output.writeMessage(1, getFeatures());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -153,11 +162,11 @@ public final class ExampleProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getFeatures());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -174,6 +183,7 @@ public final class ExampleProtos {
         result = result && getFeatures()
             .equals(other.getFeatures());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -183,7 +193,7 @@ public final class ExampleProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasFeatures()) {
         hash = (37 * hash) + FEATURES_FIELD_NUMBER;
         hash = (53 * hash) + getFeatures().hashCode();
@@ -193,6 +203,17 @@ public final class ExampleProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.ExampleProtos.Example parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.ExampleProtos.Example parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.ExampleProtos.Example parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -348,7 +369,7 @@ public final class ExampleProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -361,12 +382,12 @@ public final class ExampleProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -383,6 +404,7 @@ public final class ExampleProtos {
         if (other.hasFeatures()) {
           mergeFeatures(other.getFeatures());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -413,13 +435,13 @@ public final class ExampleProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.Features, com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder> featuresBuilder_;
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public boolean hasFeatures() {
         return featuresBuilder_ != null || features_ != null;
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.Features getFeatures() {
         if (featuresBuilder_ == null) {
@@ -429,7 +451,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public Builder setFeatures(com.tencent.angel.serving.apis.common.FeatureProtos.Features value) {
         if (featuresBuilder_ == null) {
@@ -445,7 +467,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public Builder setFeatures(
           com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder builderForValue) {
@@ -459,7 +481,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public Builder mergeFeatures(com.tencent.angel.serving.apis.common.FeatureProtos.Features value) {
         if (featuresBuilder_ == null) {
@@ -477,7 +499,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public Builder clearFeatures() {
         if (featuresBuilder_ == null) {
@@ -491,7 +513,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder getFeaturesBuilder() {
         
@@ -499,7 +521,7 @@ public final class ExampleProtos {
         return getFeaturesFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getFeaturesOrBuilder() {
         if (featuresBuilder_ != null) {
@@ -510,7 +532,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Features features = 1;</code>
+       * <code>.angel.serving.Features features = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.Features, com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder> 
@@ -527,12 +549,12 @@ public final class ExampleProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -555,7 +577,7 @@ public final class ExampleProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Example(input, extensionRegistry);
+        return new Example(input, extensionRegistry);
       }
     };
 
@@ -579,28 +601,28 @@ public final class ExampleProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     boolean hasContext();
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.Features getContext();
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getContextOrBuilder();
 
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     boolean hasFeatureLists();
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists getFeatureLists();
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     com.tencent.angel.serving.apis.common.FeatureProtos.FeatureListsOrBuilder getFeatureListsOrBuilder();
   }
@@ -611,6 +633,7 @@ public final class ExampleProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.SequenceExample)
       SequenceExampleOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SequenceExample.newBuilder() to construct.
     private SequenceExample(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -621,14 +644,19 @@ public final class ExampleProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SequenceExample(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -638,7 +666,8 @@ public final class ExampleProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -677,6 +706,7 @@ public final class ExampleProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -695,19 +725,19 @@ public final class ExampleProtos {
     public static final int CONTEXT_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.common.FeatureProtos.Features context_;
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     public boolean hasContext() {
       return context_ != null;
     }
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.Features getContext() {
       return context_ == null ? com.tencent.angel.serving.apis.common.FeatureProtos.Features.getDefaultInstance() : context_;
     }
     /**
-     * <code>optional .angel.serving.Features context = 1;</code>
+     * <code>.angel.serving.Features context = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getContextOrBuilder() {
       return getContext();
@@ -716,19 +746,19 @@ public final class ExampleProtos {
     public static final int FEATURE_LISTS_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists featureLists_;
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     public boolean hasFeatureLists() {
       return featureLists_ != null;
     }
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists getFeatureLists() {
       return featureLists_ == null ? com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists.getDefaultInstance() : featureLists_;
     }
     /**
-     * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+     * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.FeatureProtos.FeatureListsOrBuilder getFeatureListsOrBuilder() {
       return getFeatureLists();
@@ -752,6 +782,7 @@ public final class ExampleProtos {
       if (featureLists_ != null) {
         output.writeMessage(2, getFeatureLists());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -767,11 +798,11 @@ public final class ExampleProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getFeatureLists());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -793,6 +824,7 @@ public final class ExampleProtos {
         result = result && getFeatureLists()
             .equals(other.getFeatureLists());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -802,7 +834,7 @@ public final class ExampleProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasContext()) {
         hash = (37 * hash) + CONTEXT_FIELD_NUMBER;
         hash = (53 * hash) + getContext().hashCode();
@@ -816,6 +848,17 @@ public final class ExampleProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.ExampleProtos.SequenceExample parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.ExampleProtos.SequenceExample parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.ExampleProtos.SequenceExample parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -982,7 +1025,7 @@ public final class ExampleProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -995,12 +1038,12 @@ public final class ExampleProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1020,6 +1063,7 @@ public final class ExampleProtos {
         if (other.hasFeatureLists()) {
           mergeFeatureLists(other.getFeatureLists());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1050,13 +1094,13 @@ public final class ExampleProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.Features, com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder> contextBuilder_;
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public boolean hasContext() {
         return contextBuilder_ != null || context_ != null;
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.Features getContext() {
         if (contextBuilder_ == null) {
@@ -1066,7 +1110,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public Builder setContext(com.tencent.angel.serving.apis.common.FeatureProtos.Features value) {
         if (contextBuilder_ == null) {
@@ -1082,7 +1126,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public Builder setContext(
           com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder builderForValue) {
@@ -1096,7 +1140,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public Builder mergeContext(com.tencent.angel.serving.apis.common.FeatureProtos.Features value) {
         if (contextBuilder_ == null) {
@@ -1114,7 +1158,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public Builder clearContext() {
         if (contextBuilder_ == null) {
@@ -1128,7 +1172,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder getContextBuilder() {
         
@@ -1136,7 +1180,7 @@ public final class ExampleProtos {
         return getContextFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder getContextOrBuilder() {
         if (contextBuilder_ != null) {
@@ -1147,7 +1191,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.Features context = 1;</code>
+       * <code>.angel.serving.Features context = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.Features, com.tencent.angel.serving.apis.common.FeatureProtos.Features.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeaturesOrBuilder> 
@@ -1167,13 +1211,13 @@ public final class ExampleProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists, com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeatureListsOrBuilder> featureListsBuilder_;
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public boolean hasFeatureLists() {
         return featureListsBuilder_ != null || featureLists_ != null;
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists getFeatureLists() {
         if (featureListsBuilder_ == null) {
@@ -1183,7 +1227,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public Builder setFeatureLists(com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists value) {
         if (featureListsBuilder_ == null) {
@@ -1199,7 +1243,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public Builder setFeatureLists(
           com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists.Builder builderForValue) {
@@ -1213,7 +1257,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public Builder mergeFeatureLists(com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists value) {
         if (featureListsBuilder_ == null) {
@@ -1231,7 +1275,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public Builder clearFeatureLists() {
         if (featureListsBuilder_ == null) {
@@ -1245,7 +1289,7 @@ public final class ExampleProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists.Builder getFeatureListsBuilder() {
         
@@ -1253,7 +1297,7 @@ public final class ExampleProtos {
         return getFeatureListsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.FeatureProtos.FeatureListsOrBuilder getFeatureListsOrBuilder() {
         if (featureListsBuilder_ != null) {
@@ -1264,7 +1308,7 @@ public final class ExampleProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.FeatureLists feature_lists = 2;</code>
+       * <code>.angel.serving.FeatureLists feature_lists = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists, com.tencent.angel.serving.apis.common.FeatureProtos.FeatureLists.Builder, com.tencent.angel.serving.apis.common.FeatureProtos.FeatureListsOrBuilder> 
@@ -1281,12 +1325,12 @@ public final class ExampleProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1309,7 +1353,7 @@ public final class ExampleProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SequenceExample(input, extensionRegistry);
+        return new SequenceExample(input, extensionRegistry);
       }
     };
 

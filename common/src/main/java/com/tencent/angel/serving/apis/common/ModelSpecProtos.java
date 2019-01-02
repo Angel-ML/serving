@@ -23,7 +23,7 @@ public final class ModelSpecProtos {
      * Required servable name.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -31,7 +31,7 @@ public final class ModelSpecProtos {
      * Required servable name.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -41,7 +41,15 @@ public final class ModelSpecProtos {
      * Use this specific version number.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value version = 2;</code>
+     * <code>.google.protobuf.Int64Value version = 2;</code>
+     */
+    boolean hasVersion();
+    /**
+     * <pre>
+     * Use this specific version number.
+     * </pre>
+     *
+     * <code>.google.protobuf.Int64Value version = 2;</code>
      */
     com.google.protobuf.Int64Value getVersion();
     /**
@@ -49,7 +57,7 @@ public final class ModelSpecProtos {
      * Use this specific version number.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value version = 2;</code>
+     * <code>.google.protobuf.Int64Value version = 2;</code>
      */
     com.google.protobuf.Int64ValueOrBuilder getVersionOrBuilder();
 
@@ -59,7 +67,7 @@ public final class ModelSpecProtos {
      * EXPERIMENTAL. DO NOT USE AT THIS TIME.
      * </pre>
      *
-     * <code>optional string version_label = 4;</code>
+     * <code>string version_label = 4;</code>
      */
     java.lang.String getVersionLabel();
     /**
@@ -68,7 +76,7 @@ public final class ModelSpecProtos {
      * EXPERIMENTAL. DO NOT USE AT THIS TIME.
      * </pre>
      *
-     * <code>optional string version_label = 4;</code>
+     * <code>string version_label = 4;</code>
      */
     com.google.protobuf.ByteString
         getVersionLabelBytes();
@@ -78,7 +86,7 @@ public final class ModelSpecProtos {
      * A named signature to evaluate. If unspecified, the default signature will be used.
      * </pre>
      *
-     * <code>optional string signature_name = 3;</code>
+     * <code>string signature_name = 3;</code>
      */
     java.lang.String getSignatureName();
     /**
@@ -86,7 +94,7 @@ public final class ModelSpecProtos {
      * A named signature to evaluate. If unspecified, the default signature will be used.
      * </pre>
      *
-     * <code>optional string signature_name = 3;</code>
+     * <code>string signature_name = 3;</code>
      */
     com.google.protobuf.ByteString
         getSignatureNameBytes();
@@ -104,6 +112,7 @@ public final class ModelSpecProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ModelSpec)
       ModelSpecOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ModelSpec.newBuilder() to construct.
     private ModelSpec(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -116,14 +125,19 @@ public final class ModelSpecProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ModelSpec(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -133,7 +147,8 @@ public final class ModelSpecProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -178,6 +193,7 @@ public final class ModelSpecProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -238,7 +254,7 @@ public final class ModelSpecProtos {
      * Required servable name.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -257,7 +273,7 @@ public final class ModelSpecProtos {
      * Required servable name.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -279,7 +295,17 @@ public final class ModelSpecProtos {
      * Use this specific version number.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value version = 2;</code>
+     * <code>.google.protobuf.Int64Value version = 2;</code>
+     */
+    public boolean hasVersion() {
+      return versionChoiceCase_ == 2;
+    }
+    /**
+     * <pre>
+     * Use this specific version number.
+     * </pre>
+     *
+     * <code>.google.protobuf.Int64Value version = 2;</code>
      */
     public com.google.protobuf.Int64Value getVersion() {
       if (versionChoiceCase_ == 2) {
@@ -292,7 +318,7 @@ public final class ModelSpecProtos {
      * Use this specific version number.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value version = 2;</code>
+     * <code>.google.protobuf.Int64Value version = 2;</code>
      */
     public com.google.protobuf.Int64ValueOrBuilder getVersionOrBuilder() {
       if (versionChoiceCase_ == 2) {
@@ -308,7 +334,7 @@ public final class ModelSpecProtos {
      * EXPERIMENTAL. DO NOT USE AT THIS TIME.
      * </pre>
      *
-     * <code>optional string version_label = 4;</code>
+     * <code>string version_label = 4;</code>
      */
     public java.lang.String getVersionLabel() {
       java.lang.Object ref = "";
@@ -333,7 +359,7 @@ public final class ModelSpecProtos {
      * EXPERIMENTAL. DO NOT USE AT THIS TIME.
      * </pre>
      *
-     * <code>optional string version_label = 4;</code>
+     * <code>string version_label = 4;</code>
      */
     public com.google.protobuf.ByteString
         getVersionLabelBytes() {
@@ -361,7 +387,7 @@ public final class ModelSpecProtos {
      * A named signature to evaluate. If unspecified, the default signature will be used.
      * </pre>
      *
-     * <code>optional string signature_name = 3;</code>
+     * <code>string signature_name = 3;</code>
      */
     public java.lang.String getSignatureName() {
       java.lang.Object ref = signatureName_;
@@ -380,7 +406,7 @@ public final class ModelSpecProtos {
      * A named signature to evaluate. If unspecified, the default signature will be used.
      * </pre>
      *
-     * <code>optional string signature_name = 3;</code>
+     * <code>string signature_name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getSignatureNameBytes() {
@@ -420,6 +446,7 @@ public final class ModelSpecProtos {
       if (versionChoiceCase_ == 4) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, versionChoice_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -440,11 +467,11 @@ public final class ModelSpecProtos {
       if (versionChoiceCase_ == 4) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, versionChoice_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -475,6 +502,7 @@ public final class ModelSpecProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -484,7 +512,7 @@ public final class ModelSpecProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + SIGNATURE_NAME_FIELD_NUMBER;
@@ -506,6 +534,17 @@ public final class ModelSpecProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -673,7 +712,7 @@ public final class ModelSpecProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -686,12 +725,12 @@ public final class ModelSpecProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -728,6 +767,7 @@ public final class ModelSpecProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -775,7 +815,7 @@ public final class ModelSpecProtos {
        * Required servable name.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -794,7 +834,7 @@ public final class ModelSpecProtos {
        * Required servable name.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -814,7 +854,7 @@ public final class ModelSpecProtos {
        * Required servable name.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -831,7 +871,7 @@ public final class ModelSpecProtos {
        * Required servable name.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -844,7 +884,7 @@ public final class ModelSpecProtos {
        * Required servable name.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -865,7 +905,17 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
+       */
+      public boolean hasVersion() {
+        return versionChoiceCase_ == 2;
+      }
+      /**
+       * <pre>
+       * Use this specific version number.
+       * </pre>
+       *
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public com.google.protobuf.Int64Value getVersion() {
         if (versionBuilder_ == null) {
@@ -885,7 +935,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public Builder setVersion(com.google.protobuf.Int64Value value) {
         if (versionBuilder_ == null) {
@@ -905,7 +955,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public Builder setVersion(
           com.google.protobuf.Int64Value.Builder builderForValue) {
@@ -923,7 +973,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public Builder mergeVersion(com.google.protobuf.Int64Value value) {
         if (versionBuilder_ == null) {
@@ -949,7 +999,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public Builder clearVersion() {
         if (versionBuilder_ == null) {
@@ -972,7 +1022,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public com.google.protobuf.Int64Value.Builder getVersionBuilder() {
         return getVersionFieldBuilder().getBuilder();
@@ -982,7 +1032,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       public com.google.protobuf.Int64ValueOrBuilder getVersionOrBuilder() {
         if ((versionChoiceCase_ == 2) && (versionBuilder_ != null)) {
@@ -999,7 +1049,7 @@ public final class ModelSpecProtos {
        * Use this specific version number.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value version = 2;</code>
+       * <code>.google.protobuf.Int64Value version = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
@@ -1026,7 +1076,7 @@ public final class ModelSpecProtos {
        * EXPERIMENTAL. DO NOT USE AT THIS TIME.
        * </pre>
        *
-       * <code>optional string version_label = 4;</code>
+       * <code>string version_label = 4;</code>
        */
       public java.lang.String getVersionLabel() {
         java.lang.Object ref = "";
@@ -1051,7 +1101,7 @@ public final class ModelSpecProtos {
        * EXPERIMENTAL. DO NOT USE AT THIS TIME.
        * </pre>
        *
-       * <code>optional string version_label = 4;</code>
+       * <code>string version_label = 4;</code>
        */
       public com.google.protobuf.ByteString
           getVersionLabelBytes() {
@@ -1077,7 +1127,7 @@ public final class ModelSpecProtos {
        * EXPERIMENTAL. DO NOT USE AT THIS TIME.
        * </pre>
        *
-       * <code>optional string version_label = 4;</code>
+       * <code>string version_label = 4;</code>
        */
       public Builder setVersionLabel(
           java.lang.String value) {
@@ -1095,7 +1145,7 @@ public final class ModelSpecProtos {
        * EXPERIMENTAL. DO NOT USE AT THIS TIME.
        * </pre>
        *
-       * <code>optional string version_label = 4;</code>
+       * <code>string version_label = 4;</code>
        */
       public Builder clearVersionLabel() {
         if (versionChoiceCase_ == 4) {
@@ -1111,7 +1161,7 @@ public final class ModelSpecProtos {
        * EXPERIMENTAL. DO NOT USE AT THIS TIME.
        * </pre>
        *
-       * <code>optional string version_label = 4;</code>
+       * <code>string version_label = 4;</code>
        */
       public Builder setVersionLabelBytes(
           com.google.protobuf.ByteString value) {
@@ -1131,7 +1181,7 @@ public final class ModelSpecProtos {
        * A named signature to evaluate. If unspecified, the default signature will be used.
        * </pre>
        *
-       * <code>optional string signature_name = 3;</code>
+       * <code>string signature_name = 3;</code>
        */
       public java.lang.String getSignatureName() {
         java.lang.Object ref = signatureName_;
@@ -1150,7 +1200,7 @@ public final class ModelSpecProtos {
        * A named signature to evaluate. If unspecified, the default signature will be used.
        * </pre>
        *
-       * <code>optional string signature_name = 3;</code>
+       * <code>string signature_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getSignatureNameBytes() {
@@ -1170,7 +1220,7 @@ public final class ModelSpecProtos {
        * A named signature to evaluate. If unspecified, the default signature will be used.
        * </pre>
        *
-       * <code>optional string signature_name = 3;</code>
+       * <code>string signature_name = 3;</code>
        */
       public Builder setSignatureName(
           java.lang.String value) {
@@ -1187,7 +1237,7 @@ public final class ModelSpecProtos {
        * A named signature to evaluate. If unspecified, the default signature will be used.
        * </pre>
        *
-       * <code>optional string signature_name = 3;</code>
+       * <code>string signature_name = 3;</code>
        */
       public Builder clearSignatureName() {
         
@@ -1200,7 +1250,7 @@ public final class ModelSpecProtos {
        * A named signature to evaluate. If unspecified, the default signature will be used.
        * </pre>
        *
-       * <code>optional string signature_name = 3;</code>
+       * <code>string signature_name = 3;</code>
        */
       public Builder setSignatureNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1215,12 +1265,12 @@ public final class ModelSpecProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1243,7 +1293,7 @@ public final class ModelSpecProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelSpec(input, extensionRegistry);
+        return new ModelSpec(input, extensionRegistry);
       }
     };
 

@@ -23,7 +23,7 @@ public final class VersionsProtos {
      * The version of the code that produced this data.
      * </pre>
      *
-     * <code>optional int32 producer = 1;</code>
+     * <code>int32 producer = 1;</code>
      */
     int getProducer();
 
@@ -32,7 +32,7 @@ public final class VersionsProtos {
      * Any consumer below this version is not allowed to consume this data.
      * </pre>
      *
-     * <code>optional int32 min_consumer = 2;</code>
+     * <code>int32 min_consumer = 2;</code>
      */
     int getMinConsumer();
 
@@ -80,6 +80,7 @@ public final class VersionsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.VersionDef)
       VersionDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use VersionDef.newBuilder() to construct.
     private VersionDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -93,14 +94,19 @@ public final class VersionsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private VersionDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -110,7 +116,8 @@ public final class VersionsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -157,6 +164,7 @@ public final class VersionsProtos {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           badConsumers_ = java.util.Collections.unmodifiableList(badConsumers_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -180,7 +188,7 @@ public final class VersionsProtos {
      * The version of the code that produced this data.
      * </pre>
      *
-     * <code>optional int32 producer = 1;</code>
+     * <code>int32 producer = 1;</code>
      */
     public int getProducer() {
       return producer_;
@@ -193,7 +201,7 @@ public final class VersionsProtos {
      * Any consumer below this version is not allowed to consume this data.
      * </pre>
      *
-     * <code>optional int32 min_consumer = 2;</code>
+     * <code>int32 min_consumer = 2;</code>
      */
     public int getMinConsumer() {
       return minConsumer_;
@@ -260,6 +268,7 @@ public final class VersionsProtos {
       for (int i = 0; i < badConsumers_.size(); i++) {
         output.writeInt32NoTag(badConsumers_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -289,11 +298,11 @@ public final class VersionsProtos {
         }
         badConsumersMemoizedSerializedSize = dataSize;
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -311,6 +320,7 @@ public final class VersionsProtos {
           == other.getMinConsumer());
       result = result && getBadConsumersList()
           .equals(other.getBadConsumersList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -320,7 +330,7 @@ public final class VersionsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + PRODUCER_FIELD_NUMBER;
       hash = (53 * hash) + getProducer();
       hash = (37 * hash) + MIN_CONSUMER_FIELD_NUMBER;
@@ -334,6 +344,17 @@ public final class VersionsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.VersionsProtos.VersionDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.VersionsProtos.VersionDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.VersionsProtos.VersionDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -506,7 +527,7 @@ public final class VersionsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -519,12 +540,12 @@ public final class VersionsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -554,6 +575,7 @@ public final class VersionsProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -587,7 +609,7 @@ public final class VersionsProtos {
        * The version of the code that produced this data.
        * </pre>
        *
-       * <code>optional int32 producer = 1;</code>
+       * <code>int32 producer = 1;</code>
        */
       public int getProducer() {
         return producer_;
@@ -597,7 +619,7 @@ public final class VersionsProtos {
        * The version of the code that produced this data.
        * </pre>
        *
-       * <code>optional int32 producer = 1;</code>
+       * <code>int32 producer = 1;</code>
        */
       public Builder setProducer(int value) {
         
@@ -610,7 +632,7 @@ public final class VersionsProtos {
        * The version of the code that produced this data.
        * </pre>
        *
-       * <code>optional int32 producer = 1;</code>
+       * <code>int32 producer = 1;</code>
        */
       public Builder clearProducer() {
         
@@ -625,7 +647,7 @@ public final class VersionsProtos {
        * Any consumer below this version is not allowed to consume this data.
        * </pre>
        *
-       * <code>optional int32 min_consumer = 2;</code>
+       * <code>int32 min_consumer = 2;</code>
        */
       public int getMinConsumer() {
         return minConsumer_;
@@ -635,7 +657,7 @@ public final class VersionsProtos {
        * Any consumer below this version is not allowed to consume this data.
        * </pre>
        *
-       * <code>optional int32 min_consumer = 2;</code>
+       * <code>int32 min_consumer = 2;</code>
        */
       public Builder setMinConsumer(int value) {
         
@@ -648,7 +670,7 @@ public final class VersionsProtos {
        * Any consumer below this version is not allowed to consume this data.
        * </pre>
        *
-       * <code>optional int32 min_consumer = 2;</code>
+       * <code>int32 min_consumer = 2;</code>
        */
       public Builder clearMinConsumer() {
         
@@ -752,12 +774,12 @@ public final class VersionsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -780,7 +802,7 @@ public final class VersionsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new VersionDef(input, extensionRegistry);
+        return new VersionDef(input, extensionRegistry);
       }
     };
 

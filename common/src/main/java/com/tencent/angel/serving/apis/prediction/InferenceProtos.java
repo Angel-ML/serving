@@ -24,7 +24,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -33,7 +33,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -42,7 +42,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -53,7 +53,7 @@ public final class InferenceProtos {
      * e.g. "tensorflow/serving/classify".
      * </pre>
      *
-     * <code>optional string method_name = 2;</code>
+     * <code>string method_name = 2;</code>
      */
     java.lang.String getMethodName();
     /**
@@ -63,7 +63,7 @@ public final class InferenceProtos {
      * e.g. "tensorflow/serving/classify".
      * </pre>
      *
-     * <code>optional string method_name = 2;</code>
+     * <code>string method_name = 2;</code>
      */
     com.google.protobuf.ByteString
         getMethodNameBytes();
@@ -79,6 +79,7 @@ public final class InferenceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.InferenceTask)
       InferenceTaskOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use InferenceTask.newBuilder() to construct.
     private InferenceTask(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -90,14 +91,19 @@ public final class InferenceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private InferenceTask(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -107,7 +113,8 @@ public final class InferenceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -139,6 +146,7 @@ public final class InferenceProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -162,7 +170,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -173,7 +181,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -184,7 +192,7 @@ public final class InferenceProtos {
      * All ModelSpecs in a MultiInferenceRequest must access the same model name.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -199,7 +207,7 @@ public final class InferenceProtos {
      * e.g. "tensorflow/serving/classify".
      * </pre>
      *
-     * <code>optional string method_name = 2;</code>
+     * <code>string method_name = 2;</code>
      */
     public java.lang.String getMethodName() {
       java.lang.Object ref = methodName_;
@@ -220,7 +228,7 @@ public final class InferenceProtos {
      * e.g. "tensorflow/serving/classify".
      * </pre>
      *
-     * <code>optional string method_name = 2;</code>
+     * <code>string method_name = 2;</code>
      */
     public com.google.protobuf.ByteString
         getMethodNameBytes() {
@@ -254,6 +262,7 @@ public final class InferenceProtos {
       if (!getMethodNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, methodName_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -268,11 +277,11 @@ public final class InferenceProtos {
       if (!getMethodNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, methodName_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -291,6 +300,7 @@ public final class InferenceProtos {
       }
       result = result && getMethodName()
           .equals(other.getMethodName());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -300,7 +310,7 @@ public final class InferenceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -312,6 +322,17 @@ public final class InferenceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceTask parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceTask parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceTask parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -474,7 +495,7 @@ public final class InferenceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -487,12 +508,12 @@ public final class InferenceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -513,6 +534,7 @@ public final class InferenceProtos {
           methodName_ = other.methodName_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -548,7 +570,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -559,7 +581,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -574,7 +596,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -595,7 +617,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -614,7 +636,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -637,7 +659,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -656,7 +678,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -669,7 +691,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -685,7 +707,7 @@ public final class InferenceProtos {
        * All ModelSpecs in a MultiInferenceRequest must access the same model name.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -709,7 +731,7 @@ public final class InferenceProtos {
        * e.g. "tensorflow/serving/classify".
        * </pre>
        *
-       * <code>optional string method_name = 2;</code>
+       * <code>string method_name = 2;</code>
        */
       public java.lang.String getMethodName() {
         java.lang.Object ref = methodName_;
@@ -730,7 +752,7 @@ public final class InferenceProtos {
        * e.g. "tensorflow/serving/classify".
        * </pre>
        *
-       * <code>optional string method_name = 2;</code>
+       * <code>string method_name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getMethodNameBytes() {
@@ -752,7 +774,7 @@ public final class InferenceProtos {
        * e.g. "tensorflow/serving/classify".
        * </pre>
        *
-       * <code>optional string method_name = 2;</code>
+       * <code>string method_name = 2;</code>
        */
       public Builder setMethodName(
           java.lang.String value) {
@@ -771,7 +793,7 @@ public final class InferenceProtos {
        * e.g. "tensorflow/serving/classify".
        * </pre>
        *
-       * <code>optional string method_name = 2;</code>
+       * <code>string method_name = 2;</code>
        */
       public Builder clearMethodName() {
         
@@ -786,7 +808,7 @@ public final class InferenceProtos {
        * e.g. "tensorflow/serving/classify".
        * </pre>
        *
-       * <code>optional string method_name = 2;</code>
+       * <code>string method_name = 2;</code>
        */
       public Builder setMethodNameBytes(
           com.google.protobuf.ByteString value) {
@@ -801,12 +823,12 @@ public final class InferenceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -829,7 +851,7 @@ public final class InferenceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new InferenceTask(input, extensionRegistry);
+        return new InferenceTask(input, extensionRegistry);
       }
     };
 
@@ -853,33 +875,41 @@ public final class InferenceProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
     /**
-     * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
+     */
+    boolean hasClassificationResult();
+    /**
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getClassificationResult();
     /**
-     * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getClassificationResultOrBuilder();
 
     /**
-     * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
+     */
+    boolean hasRegressionResult();
+    /**
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getRegressionResult();
     /**
-     * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getRegressionResultOrBuilder();
 
@@ -896,6 +926,7 @@ public final class InferenceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.InferenceResult)
       InferenceResultOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use InferenceResult.newBuilder() to construct.
     private InferenceResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -906,14 +937,19 @@ public final class InferenceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private InferenceResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -923,7 +959,8 @@ public final class InferenceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -977,6 +1014,7 @@ public final class InferenceProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1033,19 +1071,19 @@ public final class InferenceProtos {
     public static final int MODEL_SPEC_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec modelSpec_;
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
     }
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
     }
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -1053,7 +1091,13 @@ public final class InferenceProtos {
 
     public static final int CLASSIFICATION_RESULT_FIELD_NUMBER = 2;
     /**
-     * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
+     */
+    public boolean hasClassificationResult() {
+      return resultCase_ == 2;
+    }
+    /**
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getClassificationResult() {
       if (resultCase_ == 2) {
@@ -1062,7 +1106,7 @@ public final class InferenceProtos {
       return com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+     * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getClassificationResultOrBuilder() {
       if (resultCase_ == 2) {
@@ -1073,7 +1117,13 @@ public final class InferenceProtos {
 
     public static final int REGRESSION_RESULT_FIELD_NUMBER = 3;
     /**
-     * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
+     */
+    public boolean hasRegressionResult() {
+      return resultCase_ == 3;
+    }
+    /**
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getRegressionResult() {
       if (resultCase_ == 3) {
@@ -1082,7 +1132,7 @@ public final class InferenceProtos {
       return com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+     * <code>.angel.serving.RegressionResult regression_result = 3;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getRegressionResultOrBuilder() {
       if (resultCase_ == 3) {
@@ -1112,6 +1162,7 @@ public final class InferenceProtos {
       if (resultCase_ == 3) {
         output.writeMessage(3, (com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult) result_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1131,11 +1182,11 @@ public final class InferenceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, (com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult) result_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1167,6 +1218,7 @@ public final class InferenceProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1176,7 +1228,7 @@ public final class InferenceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -1198,6 +1250,17 @@ public final class InferenceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.InferenceProtos.InferenceResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1374,7 +1437,7 @@ public final class InferenceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1387,12 +1450,12 @@ public final class InferenceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1422,6 +1485,7 @@ public final class InferenceProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1467,13 +1531,13 @@ public final class InferenceProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> modelSpecBuilder_;
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1483,7 +1547,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1499,7 +1563,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -1513,7 +1577,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1531,7 +1595,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1545,7 +1609,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -1553,7 +1617,7 @@ public final class InferenceProtos {
         return getModelSpecFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -1564,7 +1628,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -1583,7 +1647,13 @@ public final class InferenceProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder> classificationResultBuilder_;
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
+       */
+      public boolean hasClassificationResult() {
+        return resultCase_ == 2;
+      }
+      /**
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getClassificationResult() {
         if (classificationResultBuilder_ == null) {
@@ -1599,7 +1669,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public Builder setClassificationResult(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult value) {
         if (classificationResultBuilder_ == null) {
@@ -1615,7 +1685,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public Builder setClassificationResult(
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder builderForValue) {
@@ -1629,7 +1699,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public Builder mergeClassificationResult(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult value) {
         if (classificationResultBuilder_ == null) {
@@ -1651,7 +1721,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public Builder clearClassificationResult() {
         if (classificationResultBuilder_ == null) {
@@ -1670,13 +1740,13 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder getClassificationResultBuilder() {
         return getClassificationResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getClassificationResultOrBuilder() {
         if ((resultCase_ == 2) && (classificationResultBuilder_ != null)) {
@@ -1689,7 +1759,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationResult classification_result = 2;</code>
+       * <code>.angel.serving.ClassificationResult classification_result = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder> 
@@ -1713,7 +1783,13 @@ public final class InferenceProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder> regressionResultBuilder_;
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
+       */
+      public boolean hasRegressionResult() {
+        return resultCase_ == 3;
+      }
+      /**
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getRegressionResult() {
         if (regressionResultBuilder_ == null) {
@@ -1729,7 +1805,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public Builder setRegressionResult(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult value) {
         if (regressionResultBuilder_ == null) {
@@ -1745,7 +1821,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public Builder setRegressionResult(
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder builderForValue) {
@@ -1759,7 +1835,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public Builder mergeRegressionResult(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult value) {
         if (regressionResultBuilder_ == null) {
@@ -1781,7 +1857,7 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public Builder clearRegressionResult() {
         if (regressionResultBuilder_ == null) {
@@ -1800,13 +1876,13 @@ public final class InferenceProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder getRegressionResultBuilder() {
         return getRegressionResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getRegressionResultOrBuilder() {
         if ((resultCase_ == 3) && (regressionResultBuilder_ != null)) {
@@ -1819,7 +1895,7 @@ public final class InferenceProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResult regression_result = 3;</code>
+       * <code>.angel.serving.RegressionResult regression_result = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder> 
@@ -1841,12 +1917,12 @@ public final class InferenceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1869,7 +1945,7 @@ public final class InferenceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new InferenceResult(input, extensionRegistry);
+        return new InferenceResult(input, extensionRegistry);
       }
     };
 
@@ -1941,7 +2017,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     boolean hasInput();
     /**
@@ -1949,7 +2025,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.Input getInput();
     /**
@@ -1957,7 +2033,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder();
   }
@@ -1972,6 +2048,7 @@ public final class InferenceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.MultiInferenceRequest)
       MultiInferenceRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MultiInferenceRequest.newBuilder() to construct.
     private MultiInferenceRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1983,14 +2060,19 @@ public final class InferenceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MultiInferenceRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2000,7 +2082,8 @@ public final class InferenceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2038,6 +2121,7 @@ public final class InferenceProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           tasks_ = java.util.Collections.unmodifiableList(tasks_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2116,7 +2200,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public boolean hasInput() {
       return input_ != null;
@@ -2126,7 +2210,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
       return input_ == null ? com.tencent.angel.serving.apis.common.InputProtos.Input.getDefaultInstance() : input_;
@@ -2136,7 +2220,7 @@ public final class InferenceProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
       return getInput();
@@ -2160,6 +2244,7 @@ public final class InferenceProtos {
       if (input_ != null) {
         output.writeMessage(2, getInput());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2175,11 +2260,11 @@ public final class InferenceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getInput());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2198,6 +2283,7 @@ public final class InferenceProtos {
         result = result && getInput()
             .equals(other.getInput());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2207,7 +2293,7 @@ public final class InferenceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getTasksCount() > 0) {
         hash = (37 * hash) + TASKS_FIELD_NUMBER;
         hash = (53 * hash) + getTasksList().hashCode();
@@ -2221,6 +2307,17 @@ public final class InferenceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2399,7 +2496,7 @@ public final class InferenceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2412,12 +2509,12 @@ public final class InferenceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2460,6 +2557,7 @@ public final class InferenceProtos {
         if (other.hasInput()) {
           mergeInput(other.getInput());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2807,7 +2905,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public boolean hasInput() {
         return inputBuilder_ != null || input_ != null;
@@ -2817,7 +2915,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
         if (inputBuilder_ == null) {
@@ -2831,7 +2929,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -2851,7 +2949,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(
           com.tencent.angel.serving.apis.common.InputProtos.Input.Builder builderForValue) {
@@ -2869,7 +2967,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder mergeInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -2891,7 +2989,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder clearInput() {
         if (inputBuilder_ == null) {
@@ -2909,7 +3007,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input.Builder getInputBuilder() {
         
@@ -2921,7 +3019,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
         if (inputBuilder_ != null) {
@@ -2936,7 +3034,7 @@ public final class InferenceProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.Input, com.tencent.angel.serving.apis.common.InputProtos.Input.Builder, com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder> 
@@ -2953,12 +3051,12 @@ public final class InferenceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2981,7 +3079,7 @@ public final class InferenceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MultiInferenceRequest(input, extensionRegistry);
+        return new MultiInferenceRequest(input, extensionRegistry);
       }
     };
 
@@ -3064,6 +3162,7 @@ public final class InferenceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.MultiInferenceResponse)
       MultiInferenceResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MultiInferenceResponse.newBuilder() to construct.
     private MultiInferenceResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3075,14 +3174,19 @@ public final class InferenceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MultiInferenceResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3092,7 +3196,8 @@ public final class InferenceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3117,6 +3222,7 @@ public final class InferenceProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           results_ = java.util.Collections.unmodifiableList(results_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3207,6 +3313,7 @@ public final class InferenceProtos {
       for (int i = 0; i < results_.size(); i++) {
         output.writeMessage(1, results_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3218,11 +3325,11 @@ public final class InferenceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, results_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3236,6 +3343,7 @@ public final class InferenceProtos {
       boolean result = true;
       result = result && getResultsList()
           .equals(other.getResultsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3245,7 +3353,7 @@ public final class InferenceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getResultsCount() > 0) {
         hash = (37 * hash) + RESULTS_FIELD_NUMBER;
         hash = (53 * hash) + getResultsList().hashCode();
@@ -3255,6 +3363,17 @@ public final class InferenceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3420,7 +3539,7 @@ public final class InferenceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3433,12 +3552,12 @@ public final class InferenceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3478,6 +3597,7 @@ public final class InferenceProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3836,12 +3956,12 @@ public final class InferenceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3864,7 +3984,7 @@ public final class InferenceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MultiInferenceResponse(input, extensionRegistry);
+        return new MultiInferenceResponse(input, extensionRegistry);
       }
     };
 
@@ -3921,7 +4041,7 @@ public final class InferenceProtos {
       "hod_name\030\002 \001(\t\"\315\001\n\017InferenceResult\022,\n\nmo" +
       "del_spec\030\001 \001(\0132\030.angel.serving.ModelSpec" +
       "\022D\n\025classification_result\030\002 \001(\0132#.angel." +
-      "serving.ClassificationResultH\000\022<\n\021regres",
+      "serving.ClassificationResultH\000\022<\n\021regres" +
       "sion_result\030\003 \001(\0132\037.angel.serving.Regres" +
       "sionResultH\000B\010\n\006result\"i\n\025MultiInference" +
       "Request\022+\n\005tasks\030\001 \003(\0132\034.angel.serving.I" +

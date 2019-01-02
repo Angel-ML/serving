@@ -32,7 +32,7 @@ public final class ModelServiceProtos {
       "\n\031HandleReloadConfigRequest\022\".angel.serv" +
       "ing.ReloadConfigRequest\032#.angel.serving." +
       "ReloadConfigResponseB?\n\'com.tencent.ange" +
-      "l.serving.apis.modelmgrB\022ModelServicePro",
+      "l.serving.apis.modelmgrB\022ModelServicePro" +
       "tosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

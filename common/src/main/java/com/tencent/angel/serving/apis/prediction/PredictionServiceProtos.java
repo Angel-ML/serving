@@ -32,7 +32,7 @@ public final class PredictionServiceProtos {
       "PredictionService\022W\n\010Classify\022$.angel.se" +
       "rving.ClassificationRequest\032%.angel.serv" +
       "ing.ClassificationResponse\022N\n\007Regress\022 ." +
-      "angel.serving.RegressionRequest\032!.angel.",
+      "angel.serving.RegressionRequest\032!.angel." +
       "serving.RegressionResponse\022H\n\007Predict\022\035." +
       "angel.serving.PredictRequest\032\036.angel.ser" +
       "ving.PredictResponse\022]\n\016MultiInference\022$" +

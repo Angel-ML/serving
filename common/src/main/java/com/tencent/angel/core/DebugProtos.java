@@ -23,7 +23,7 @@ public final class DebugProtos {
      * Name of the node to watch.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     java.lang.String getNodeName();
     /**
@@ -31,7 +31,7 @@ public final class DebugProtos {
      * Name of the node to watch.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNodeNameBytes();
@@ -45,7 +45,7 @@ public final class DebugProtos {
      * TODO(cais): Implement this semantics.
      * </pre>
      *
-     * <code>optional int32 output_slot = 2;</code>
+     * <code>int32 output_slot = 2;</code>
      */
     int getOutputSlot();
 
@@ -197,7 +197,7 @@ public final class DebugProtos {
      * incompatibility). Instead, just log the failure.
      * </pre>
      *
-     * <code>optional bool tolerate_debug_op_creation_failures = 5;</code>
+     * <code>bool tolerate_debug_op_creation_failures = 5;</code>
      */
     boolean getTolerateDebugOpCreationFailures();
   }
@@ -212,6 +212,7 @@ public final class DebugProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.DebugTensorWatch)
       DebugTensorWatchOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DebugTensorWatch.newBuilder() to construct.
     private DebugTensorWatch(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -227,14 +228,19 @@ public final class DebugProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private DebugTensorWatch(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -244,7 +250,8 @@ public final class DebugProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -297,6 +304,7 @@ public final class DebugProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           debugUrls_ = debugUrls_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -320,7 +328,7 @@ public final class DebugProtos {
      * Name of the node to watch.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     public java.lang.String getNodeName() {
       java.lang.Object ref = nodeName_;
@@ -339,7 +347,7 @@ public final class DebugProtos {
      * Name of the node to watch.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNodeNameBytes() {
@@ -366,7 +374,7 @@ public final class DebugProtos {
      * TODO(cais): Implement this semantics.
      * </pre>
      *
-     * <code>optional int32 output_slot = 2;</code>
+     * <code>int32 output_slot = 2;</code>
      */
     public int getOutputSlot() {
       return outputSlot_;
@@ -542,7 +550,7 @@ public final class DebugProtos {
      * incompatibility). Instead, just log the failure.
      * </pre>
      *
-     * <code>optional bool tolerate_debug_op_creation_failures = 5;</code>
+     * <code>bool tolerate_debug_op_creation_failures = 5;</code>
      */
     public boolean getTolerateDebugOpCreationFailures() {
       return tolerateDebugOpCreationFailures_;
@@ -575,6 +583,7 @@ public final class DebugProtos {
       if (tolerateDebugOpCreationFailures_ != false) {
         output.writeBool(5, tolerateDebugOpCreationFailures_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -609,11 +618,11 @@ public final class DebugProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, tolerateDebugOpCreationFailures_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -635,6 +644,7 @@ public final class DebugProtos {
           .equals(other.getDebugUrlsList());
       result = result && (getTolerateDebugOpCreationFailures()
           == other.getTolerateDebugOpCreationFailures());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -644,7 +654,7 @@ public final class DebugProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NODE_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getNodeName().hashCode();
       hash = (37 * hash) + OUTPUT_SLOT_FIELD_NUMBER;
@@ -665,6 +675,17 @@ public final class DebugProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.DebugProtos.DebugTensorWatch parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.DebugProtos.DebugTensorWatch parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.DebugProtos.DebugTensorWatch parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -839,7 +860,7 @@ public final class DebugProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -852,12 +873,12 @@ public final class DebugProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -901,6 +922,7 @@ public final class DebugProtos {
         if (other.getTolerateDebugOpCreationFailures() != false) {
           setTolerateDebugOpCreationFailures(other.getTolerateDebugOpCreationFailures());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -934,7 +956,7 @@ public final class DebugProtos {
        * Name of the node to watch.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public java.lang.String getNodeName() {
         java.lang.Object ref = nodeName_;
@@ -953,7 +975,7 @@ public final class DebugProtos {
        * Name of the node to watch.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNodeNameBytes() {
@@ -973,7 +995,7 @@ public final class DebugProtos {
        * Name of the node to watch.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder setNodeName(
           java.lang.String value) {
@@ -990,7 +1012,7 @@ public final class DebugProtos {
        * Name of the node to watch.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder clearNodeName() {
         
@@ -1003,7 +1025,7 @@ public final class DebugProtos {
        * Name of the node to watch.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder setNodeNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1027,7 +1049,7 @@ public final class DebugProtos {
        * TODO(cais): Implement this semantics.
        * </pre>
        *
-       * <code>optional int32 output_slot = 2;</code>
+       * <code>int32 output_slot = 2;</code>
        */
       public int getOutputSlot() {
         return outputSlot_;
@@ -1041,7 +1063,7 @@ public final class DebugProtos {
        * TODO(cais): Implement this semantics.
        * </pre>
        *
-       * <code>optional int32 output_slot = 2;</code>
+       * <code>int32 output_slot = 2;</code>
        */
       public Builder setOutputSlot(int value) {
         
@@ -1058,7 +1080,7 @@ public final class DebugProtos {
        * TODO(cais): Implement this semantics.
        * </pre>
        *
-       * <code>optional int32 output_slot = 2;</code>
+       * <code>int32 output_slot = 2;</code>
        */
       public Builder clearOutputSlot() {
         
@@ -1496,7 +1518,7 @@ public final class DebugProtos {
        * incompatibility). Instead, just log the failure.
        * </pre>
        *
-       * <code>optional bool tolerate_debug_op_creation_failures = 5;</code>
+       * <code>bool tolerate_debug_op_creation_failures = 5;</code>
        */
       public boolean getTolerateDebugOpCreationFailures() {
         return tolerateDebugOpCreationFailures_;
@@ -1507,7 +1529,7 @@ public final class DebugProtos {
        * incompatibility). Instead, just log the failure.
        * </pre>
        *
-       * <code>optional bool tolerate_debug_op_creation_failures = 5;</code>
+       * <code>bool tolerate_debug_op_creation_failures = 5;</code>
        */
       public Builder setTolerateDebugOpCreationFailures(boolean value) {
         
@@ -1521,7 +1543,7 @@ public final class DebugProtos {
        * incompatibility). Instead, just log the failure.
        * </pre>
        *
-       * <code>optional bool tolerate_debug_op_creation_failures = 5;</code>
+       * <code>bool tolerate_debug_op_creation_failures = 5;</code>
        */
       public Builder clearTolerateDebugOpCreationFailures() {
         
@@ -1531,12 +1553,12 @@ public final class DebugProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1559,7 +1581,7 @@ public final class DebugProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DebugTensorWatch(input, extensionRegistry);
+        return new DebugTensorWatch(input, extensionRegistry);
       }
     };
 
@@ -1633,7 +1655,7 @@ public final class DebugProtos {
      * step count.
      * </pre>
      *
-     * <code>optional int64 global_step = 10;</code>
+     * <code>int64 global_step = 10;</code>
      */
     long getGlobalStep();
 
@@ -1645,7 +1667,7 @@ public final class DebugProtos {
      * are cleaned up from the disk after each Session.run.
      * </pre>
      *
-     * <code>optional bool reset_disk_byte_usage = 11;</code>
+     * <code>bool reset_disk_byte_usage = 11;</code>
      */
     boolean getResetDiskByteUsage();
   }
@@ -1660,6 +1682,7 @@ public final class DebugProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.DebugOptions)
       DebugOptionsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DebugOptions.newBuilder() to construct.
     private DebugOptions(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1673,14 +1696,19 @@ public final class DebugProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private DebugOptions(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1690,7 +1718,8 @@ public final class DebugProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1725,6 +1754,7 @@ public final class DebugProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           debugTensorWatchOpts_ = java.util.Collections.unmodifiableList(debugTensorWatchOpts_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1805,7 +1835,7 @@ public final class DebugProtos {
      * step count.
      * </pre>
      *
-     * <code>optional int64 global_step = 10;</code>
+     * <code>int64 global_step = 10;</code>
      */
     public long getGlobalStep() {
       return globalStep_;
@@ -1821,7 +1851,7 @@ public final class DebugProtos {
      * are cleaned up from the disk after each Session.run.
      * </pre>
      *
-     * <code>optional bool reset_disk_byte_usage = 11;</code>
+     * <code>bool reset_disk_byte_usage = 11;</code>
      */
     public boolean getResetDiskByteUsage() {
       return resetDiskByteUsage_;
@@ -1848,6 +1878,7 @@ public final class DebugProtos {
       if (resetDiskByteUsage_ != false) {
         output.writeBool(11, resetDiskByteUsage_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1867,11 +1898,11 @@ public final class DebugProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(11, resetDiskByteUsage_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1889,6 +1920,7 @@ public final class DebugProtos {
           == other.getGlobalStep());
       result = result && (getResetDiskByteUsage()
           == other.getResetDiskByteUsage());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1898,7 +1930,7 @@ public final class DebugProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getDebugTensorWatchOptsCount() > 0) {
         hash = (37 * hash) + DEBUG_TENSOR_WATCH_OPTS_FIELD_NUMBER;
         hash = (53 * hash) + getDebugTensorWatchOptsList().hashCode();
@@ -1914,6 +1946,17 @@ public final class DebugProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.DebugProtos.DebugOptions parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.DebugProtos.DebugOptions parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.DebugProtos.DebugOptions parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2087,7 +2130,7 @@ public final class DebugProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2100,12 +2143,12 @@ public final class DebugProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2151,6 +2194,7 @@ public final class DebugProtos {
         if (other.getResetDiskByteUsage() != false) {
           setResetDiskByteUsage(other.getResetDiskByteUsage());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2498,7 +2542,7 @@ public final class DebugProtos {
        * step count.
        * </pre>
        *
-       * <code>optional int64 global_step = 10;</code>
+       * <code>int64 global_step = 10;</code>
        */
       public long getGlobalStep() {
         return globalStep_;
@@ -2510,7 +2554,7 @@ public final class DebugProtos {
        * step count.
        * </pre>
        *
-       * <code>optional int64 global_step = 10;</code>
+       * <code>int64 global_step = 10;</code>
        */
       public Builder setGlobalStep(long value) {
         
@@ -2525,7 +2569,7 @@ public final class DebugProtos {
        * step count.
        * </pre>
        *
-       * <code>optional int64 global_step = 10;</code>
+       * <code>int64 global_step = 10;</code>
        */
       public Builder clearGlobalStep() {
         
@@ -2543,7 +2587,7 @@ public final class DebugProtos {
        * are cleaned up from the disk after each Session.run.
        * </pre>
        *
-       * <code>optional bool reset_disk_byte_usage = 11;</code>
+       * <code>bool reset_disk_byte_usage = 11;</code>
        */
       public boolean getResetDiskByteUsage() {
         return resetDiskByteUsage_;
@@ -2556,7 +2600,7 @@ public final class DebugProtos {
        * are cleaned up from the disk after each Session.run.
        * </pre>
        *
-       * <code>optional bool reset_disk_byte_usage = 11;</code>
+       * <code>bool reset_disk_byte_usage = 11;</code>
        */
       public Builder setResetDiskByteUsage(boolean value) {
         
@@ -2572,7 +2616,7 @@ public final class DebugProtos {
        * are cleaned up from the disk after each Session.run.
        * </pre>
        *
-       * <code>optional bool reset_disk_byte_usage = 11;</code>
+       * <code>bool reset_disk_byte_usage = 11;</code>
        */
       public Builder clearResetDiskByteUsage() {
         
@@ -2582,12 +2626,12 @@ public final class DebugProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2610,7 +2654,7 @@ public final class DebugProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DebugOptions(input, extensionRegistry);
+        return new DebugOptions(input, extensionRegistry);
       }
     };
 
@@ -2638,7 +2682,7 @@ public final class DebugProtos {
      * The host name on which a source code file is located.
      * </pre>
      *
-     * <code>optional string host = 1;</code>
+     * <code>string host = 1;</code>
      */
     java.lang.String getHost();
     /**
@@ -2646,7 +2690,7 @@ public final class DebugProtos {
      * The host name on which a source code file is located.
      * </pre>
      *
-     * <code>optional string host = 1;</code>
+     * <code>string host = 1;</code>
      */
     com.google.protobuf.ByteString
         getHostBytes();
@@ -2656,7 +2700,7 @@ public final class DebugProtos {
      * Path to the source code file.
      * </pre>
      *
-     * <code>optional string file_path = 2;</code>
+     * <code>string file_path = 2;</code>
      */
     java.lang.String getFilePath();
     /**
@@ -2664,7 +2708,7 @@ public final class DebugProtos {
      * Path to the source code file.
      * </pre>
      *
-     * <code>optional string file_path = 2;</code>
+     * <code>string file_path = 2;</code>
      */
     com.google.protobuf.ByteString
         getFilePathBytes();
@@ -2674,7 +2718,7 @@ public final class DebugProtos {
      * The timestamp at which the source code file is last modified.
      * </pre>
      *
-     * <code>optional int64 last_modified = 3;</code>
+     * <code>int64 last_modified = 3;</code>
      */
     long getLastModified();
 
@@ -2683,7 +2727,7 @@ public final class DebugProtos {
      * Byte size of the file.
      * </pre>
      *
-     * <code>optional int64 bytes = 4;</code>
+     * <code>int64 bytes = 4;</code>
      */
     long getBytes();
 
@@ -2729,6 +2773,7 @@ public final class DebugProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.DebuggedSourceFile)
       DebuggedSourceFileOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DebuggedSourceFile.newBuilder() to construct.
     private DebuggedSourceFile(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2744,14 +2789,19 @@ public final class DebugProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private DebuggedSourceFile(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2761,7 +2811,8 @@ public final class DebugProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2808,6 +2859,7 @@ public final class DebugProtos {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           lines_ = lines_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2831,7 +2883,7 @@ public final class DebugProtos {
      * The host name on which a source code file is located.
      * </pre>
      *
-     * <code>optional string host = 1;</code>
+     * <code>string host = 1;</code>
      */
     public java.lang.String getHost() {
       java.lang.Object ref = host_;
@@ -2850,7 +2902,7 @@ public final class DebugProtos {
      * The host name on which a source code file is located.
      * </pre>
      *
-     * <code>optional string host = 1;</code>
+     * <code>string host = 1;</code>
      */
     public com.google.protobuf.ByteString
         getHostBytes() {
@@ -2873,7 +2925,7 @@ public final class DebugProtos {
      * Path to the source code file.
      * </pre>
      *
-     * <code>optional string file_path = 2;</code>
+     * <code>string file_path = 2;</code>
      */
     public java.lang.String getFilePath() {
       java.lang.Object ref = filePath_;
@@ -2892,7 +2944,7 @@ public final class DebugProtos {
      * Path to the source code file.
      * </pre>
      *
-     * <code>optional string file_path = 2;</code>
+     * <code>string file_path = 2;</code>
      */
     public com.google.protobuf.ByteString
         getFilePathBytes() {
@@ -2915,7 +2967,7 @@ public final class DebugProtos {
      * The timestamp at which the source code file is last modified.
      * </pre>
      *
-     * <code>optional int64 last_modified = 3;</code>
+     * <code>int64 last_modified = 3;</code>
      */
     public long getLastModified() {
       return lastModified_;
@@ -2928,7 +2980,7 @@ public final class DebugProtos {
      * Byte size of the file.
      * </pre>
      *
-     * <code>optional int64 bytes = 4;</code>
+     * <code>int64 bytes = 4;</code>
      */
     public long getBytes() {
       return bytes_;
@@ -3006,6 +3058,7 @@ public final class DebugProtos {
       for (int i = 0; i < lines_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, lines_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3035,11 +3088,11 @@ public final class DebugProtos {
         size += dataSize;
         size += 1 * getLinesList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3061,6 +3114,7 @@ public final class DebugProtos {
           == other.getBytes());
       result = result && getLinesList()
           .equals(other.getLinesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3070,7 +3124,7 @@ public final class DebugProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + HOST_FIELD_NUMBER;
       hash = (53 * hash) + getHost().hashCode();
       hash = (37 * hash) + FILE_PATH_FIELD_NUMBER;
@@ -3090,6 +3144,17 @@ public final class DebugProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.DebugProtos.DebuggedSourceFile parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.DebugProtos.DebuggedSourceFile parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.DebugProtos.DebuggedSourceFile parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3256,7 +3321,7 @@ public final class DebugProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3269,12 +3334,12 @@ public final class DebugProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3312,6 +3377,7 @@ public final class DebugProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3345,7 +3411,7 @@ public final class DebugProtos {
        * The host name on which a source code file is located.
        * </pre>
        *
-       * <code>optional string host = 1;</code>
+       * <code>string host = 1;</code>
        */
       public java.lang.String getHost() {
         java.lang.Object ref = host_;
@@ -3364,7 +3430,7 @@ public final class DebugProtos {
        * The host name on which a source code file is located.
        * </pre>
        *
-       * <code>optional string host = 1;</code>
+       * <code>string host = 1;</code>
        */
       public com.google.protobuf.ByteString
           getHostBytes() {
@@ -3384,7 +3450,7 @@ public final class DebugProtos {
        * The host name on which a source code file is located.
        * </pre>
        *
-       * <code>optional string host = 1;</code>
+       * <code>string host = 1;</code>
        */
       public Builder setHost(
           java.lang.String value) {
@@ -3401,7 +3467,7 @@ public final class DebugProtos {
        * The host name on which a source code file is located.
        * </pre>
        *
-       * <code>optional string host = 1;</code>
+       * <code>string host = 1;</code>
        */
       public Builder clearHost() {
         
@@ -3414,7 +3480,7 @@ public final class DebugProtos {
        * The host name on which a source code file is located.
        * </pre>
        *
-       * <code>optional string host = 1;</code>
+       * <code>string host = 1;</code>
        */
       public Builder setHostBytes(
           com.google.protobuf.ByteString value) {
@@ -3434,7 +3500,7 @@ public final class DebugProtos {
        * Path to the source code file.
        * </pre>
        *
-       * <code>optional string file_path = 2;</code>
+       * <code>string file_path = 2;</code>
        */
       public java.lang.String getFilePath() {
         java.lang.Object ref = filePath_;
@@ -3453,7 +3519,7 @@ public final class DebugProtos {
        * Path to the source code file.
        * </pre>
        *
-       * <code>optional string file_path = 2;</code>
+       * <code>string file_path = 2;</code>
        */
       public com.google.protobuf.ByteString
           getFilePathBytes() {
@@ -3473,7 +3539,7 @@ public final class DebugProtos {
        * Path to the source code file.
        * </pre>
        *
-       * <code>optional string file_path = 2;</code>
+       * <code>string file_path = 2;</code>
        */
       public Builder setFilePath(
           java.lang.String value) {
@@ -3490,7 +3556,7 @@ public final class DebugProtos {
        * Path to the source code file.
        * </pre>
        *
-       * <code>optional string file_path = 2;</code>
+       * <code>string file_path = 2;</code>
        */
       public Builder clearFilePath() {
         
@@ -3503,7 +3569,7 @@ public final class DebugProtos {
        * Path to the source code file.
        * </pre>
        *
-       * <code>optional string file_path = 2;</code>
+       * <code>string file_path = 2;</code>
        */
       public Builder setFilePathBytes(
           com.google.protobuf.ByteString value) {
@@ -3523,7 +3589,7 @@ public final class DebugProtos {
        * The timestamp at which the source code file is last modified.
        * </pre>
        *
-       * <code>optional int64 last_modified = 3;</code>
+       * <code>int64 last_modified = 3;</code>
        */
       public long getLastModified() {
         return lastModified_;
@@ -3533,7 +3599,7 @@ public final class DebugProtos {
        * The timestamp at which the source code file is last modified.
        * </pre>
        *
-       * <code>optional int64 last_modified = 3;</code>
+       * <code>int64 last_modified = 3;</code>
        */
       public Builder setLastModified(long value) {
         
@@ -3546,7 +3612,7 @@ public final class DebugProtos {
        * The timestamp at which the source code file is last modified.
        * </pre>
        *
-       * <code>optional int64 last_modified = 3;</code>
+       * <code>int64 last_modified = 3;</code>
        */
       public Builder clearLastModified() {
         
@@ -3561,7 +3627,7 @@ public final class DebugProtos {
        * Byte size of the file.
        * </pre>
        *
-       * <code>optional int64 bytes = 4;</code>
+       * <code>int64 bytes = 4;</code>
        */
       public long getBytes() {
         return bytes_;
@@ -3571,7 +3637,7 @@ public final class DebugProtos {
        * Byte size of the file.
        * </pre>
        *
-       * <code>optional int64 bytes = 4;</code>
+       * <code>int64 bytes = 4;</code>
        */
       public Builder setBytes(long value) {
         
@@ -3584,7 +3650,7 @@ public final class DebugProtos {
        * Byte size of the file.
        * </pre>
        *
-       * <code>optional int64 bytes = 4;</code>
+       * <code>int64 bytes = 4;</code>
        */
       public Builder clearBytes() {
         
@@ -3724,12 +3790,12 @@ public final class DebugProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3752,7 +3818,7 @@ public final class DebugProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DebuggedSourceFile(input, extensionRegistry);
+        return new DebuggedSourceFile(input, extensionRegistry);
       }
     };
 
@@ -3826,6 +3892,7 @@ public final class DebugProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.DebuggedSourceFiles)
       DebuggedSourceFilesOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DebuggedSourceFiles.newBuilder() to construct.
     private DebuggedSourceFiles(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3837,14 +3904,19 @@ public final class DebugProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private DebuggedSourceFiles(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3854,7 +3926,8 @@ public final class DebugProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3879,6 +3952,7 @@ public final class DebugProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           sourceFiles_ = java.util.Collections.unmodifiableList(sourceFiles_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3964,6 +4038,7 @@ public final class DebugProtos {
       for (int i = 0; i < sourceFiles_.size(); i++) {
         output.writeMessage(1, sourceFiles_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3975,11 +4050,11 @@ public final class DebugProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sourceFiles_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3993,6 +4068,7 @@ public final class DebugProtos {
       boolean result = true;
       result = result && getSourceFilesList()
           .equals(other.getSourceFilesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4002,7 +4078,7 @@ public final class DebugProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getSourceFilesCount() > 0) {
         hash = (37 * hash) + SOURCE_FILES_FIELD_NUMBER;
         hash = (53 * hash) + getSourceFilesList().hashCode();
@@ -4012,6 +4088,17 @@ public final class DebugProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.DebugProtos.DebuggedSourceFiles parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.DebugProtos.DebuggedSourceFiles parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.DebugProtos.DebuggedSourceFiles parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4173,7 +4260,7 @@ public final class DebugProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4186,12 +4273,12 @@ public final class DebugProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4231,6 +4318,7 @@ public final class DebugProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4571,12 +4659,12 @@ public final class DebugProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4599,7 +4687,7 @@ public final class DebugProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DebuggedSourceFiles(input, extensionRegistry);
+        return new DebuggedSourceFiles(input, extensionRegistry);
       }
     };
 
@@ -4656,7 +4744,7 @@ public final class DebugProtos {
       "atch\022\023\n\013global_step\030\n \001(\003\022\035\n\025reset_disk_" +
       "byte_usage\030\013 \001(\010\"j\n\022DebuggedSourceFile\022\014" +
       "\n\004host\030\001 \001(\t\022\021\n\tfile_path\030\002 \001(\t\022\025\n\rlast_" +
-      "modified\030\003 \001(\003\022\r\n\005bytes\030\004 \001(\003\022\r\n\005lines\030\005",
+      "modified\030\003 \001(\003\022\r\n\005bytes\030\004 \001(\003\022\r\n\005lines\030\005" +
       " \003(\t\"F\n\023DebuggedSourceFiles\022/\n\014source_fi" +
       "les\030\001 \003(\0132\031.angel.DebuggedSourceFileB\'\n\026" +
       "com.tencent.angel.coreB\013DebugProtosP\000b\006p" +

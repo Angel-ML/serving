@@ -19,7 +19,7 @@ public final class RegressionProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional float value = 1;</code>
+     * <code>float value = 1;</code>
      */
     float getValue();
   }
@@ -34,6 +34,7 @@ public final class RegressionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.Regression)
       RegressionOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Regression.newBuilder() to construct.
     private Regression(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -45,14 +46,19 @@ public final class RegressionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Regression(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -62,7 +68,8 @@ public final class RegressionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -80,6 +87,7 @@ public final class RegressionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -98,7 +106,7 @@ public final class RegressionProtos {
     public static final int VALUE_FIELD_NUMBER = 1;
     private float value_;
     /**
-     * <code>optional float value = 1;</code>
+     * <code>float value = 1;</code>
      */
     public float getValue() {
       return value_;
@@ -119,6 +127,7 @@ public final class RegressionProtos {
       if (value_ != 0F) {
         output.writeFloat(1, value_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -130,11 +139,11 @@ public final class RegressionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(1, value_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -150,6 +159,7 @@ public final class RegressionProtos {
           java.lang.Float.floatToIntBits(getValue())
           == java.lang.Float.floatToIntBits(
               other.getValue()));
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -159,7 +169,7 @@ public final class RegressionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getValue());
@@ -168,6 +178,17 @@ public final class RegressionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.Regression parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.Regression parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.RegressionProtos.Regression parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -319,7 +340,7 @@ public final class RegressionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -332,12 +353,12 @@ public final class RegressionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -354,6 +375,7 @@ public final class RegressionProtos {
         if (other.getValue() != 0F) {
           setValue(other.getValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -382,13 +404,13 @@ public final class RegressionProtos {
 
       private float value_ ;
       /**
-       * <code>optional float value = 1;</code>
+       * <code>float value = 1;</code>
        */
       public float getValue() {
         return value_;
       }
       /**
-       * <code>optional float value = 1;</code>
+       * <code>float value = 1;</code>
        */
       public Builder setValue(float value) {
         
@@ -397,7 +419,7 @@ public final class RegressionProtos {
         return this;
       }
       /**
-       * <code>optional float value = 1;</code>
+       * <code>float value = 1;</code>
        */
       public Builder clearValue() {
         
@@ -407,12 +429,12 @@ public final class RegressionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -435,7 +457,7 @@ public final class RegressionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Regression(input, extensionRegistry);
+        return new Regression(input, extensionRegistry);
       }
     };
 
@@ -494,6 +516,7 @@ public final class RegressionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.RegressionResult)
       RegressionResultOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RegressionResult.newBuilder() to construct.
     private RegressionResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -505,14 +528,19 @@ public final class RegressionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RegressionResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -522,7 +550,8 @@ public final class RegressionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -547,6 +576,7 @@ public final class RegressionProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           regressions_ = java.util.Collections.unmodifiableList(regressions_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -612,6 +642,7 @@ public final class RegressionProtos {
       for (int i = 0; i < regressions_.size(); i++) {
         output.writeMessage(1, regressions_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -623,11 +654,11 @@ public final class RegressionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, regressions_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -641,6 +672,7 @@ public final class RegressionProtos {
       boolean result = true;
       result = result && getRegressionsList()
           .equals(other.getRegressionsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -650,7 +682,7 @@ public final class RegressionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getRegressionsCount() > 0) {
         hash = (37 * hash) + REGRESSIONS_FIELD_NUMBER;
         hash = (53 * hash) + getRegressionsList().hashCode();
@@ -660,6 +692,17 @@ public final class RegressionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -826,7 +869,7 @@ public final class RegressionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -839,12 +882,12 @@ public final class RegressionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -884,6 +927,7 @@ public final class RegressionProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1152,12 +1196,12 @@ public final class RegressionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1180,7 +1224,7 @@ public final class RegressionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RegressionResult(input, extensionRegistry);
+        return new RegressionResult(input, extensionRegistry);
       }
     };
 
@@ -1209,7 +1253,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -1218,7 +1262,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -1227,7 +1271,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -1236,7 +1280,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     boolean hasInput();
     /**
@@ -1244,7 +1288,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.Input getInput();
     /**
@@ -1252,7 +1296,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder();
   }
@@ -1263,6 +1307,7 @@ public final class RegressionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.RegressionRequest)
       RegressionRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RegressionRequest.newBuilder() to construct.
     private RegressionRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1273,14 +1318,19 @@ public final class RegressionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RegressionRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1290,7 +1340,8 @@ public final class RegressionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1329,6 +1380,7 @@ public final class RegressionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1352,7 +1404,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -1363,7 +1415,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -1374,7 +1426,7 @@ public final class RegressionProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -1387,7 +1439,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public boolean hasInput() {
       return input_ != null;
@@ -1397,7 +1449,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
       return input_ == null ? com.tencent.angel.serving.apis.common.InputProtos.Input.getDefaultInstance() : input_;
@@ -1407,7 +1459,7 @@ public final class RegressionProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
       return getInput();
@@ -1431,6 +1483,7 @@ public final class RegressionProtos {
       if (input_ != null) {
         output.writeMessage(2, getInput());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1446,11 +1499,11 @@ public final class RegressionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getInput());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1472,6 +1525,7 @@ public final class RegressionProtos {
         result = result && getInput()
             .equals(other.getInput());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1481,7 +1535,7 @@ public final class RegressionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -1495,6 +1549,17 @@ public final class RegressionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1661,7 +1726,7 @@ public final class RegressionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1674,12 +1739,12 @@ public final class RegressionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1699,6 +1764,7 @@ public final class RegressionProtos {
         if (other.hasInput()) {
           mergeInput(other.getInput());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1734,7 +1800,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -1745,7 +1811,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1760,7 +1826,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1781,7 +1847,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -1800,7 +1866,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1823,7 +1889,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1842,7 +1908,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -1855,7 +1921,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -1871,7 +1937,7 @@ public final class RegressionProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -1895,7 +1961,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public boolean hasInput() {
         return inputBuilder_ != null || input_ != null;
@@ -1905,7 +1971,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
         if (inputBuilder_ == null) {
@@ -1919,7 +1985,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -1939,7 +2005,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(
           com.tencent.angel.serving.apis.common.InputProtos.Input.Builder builderForValue) {
@@ -1957,7 +2023,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder mergeInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -1979,7 +2045,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder clearInput() {
         if (inputBuilder_ == null) {
@@ -1997,7 +2063,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input.Builder getInputBuilder() {
         
@@ -2009,7 +2075,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
         if (inputBuilder_ != null) {
@@ -2024,7 +2090,7 @@ public final class RegressionProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.Input, com.tencent.angel.serving.apis.common.InputProtos.Input.Builder, com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder> 
@@ -2041,12 +2107,12 @@ public final class RegressionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2069,7 +2135,7 @@ public final class RegressionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RegressionRequest(input, extensionRegistry);
+        return new RegressionRequest(input, extensionRegistry);
       }
     };
 
@@ -2097,7 +2163,7 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     boolean hasModelSpec();
     /**
@@ -2105,7 +2171,7 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -2113,20 +2179,20 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     boolean hasResult();
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getResult();
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getResultOrBuilder();
   }
@@ -2137,6 +2203,7 @@ public final class RegressionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.RegressionResponse)
       RegressionResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RegressionResponse.newBuilder() to construct.
     private RegressionResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2147,14 +2214,19 @@ public final class RegressionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RegressionResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2164,7 +2236,8 @@ public final class RegressionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2203,6 +2276,7 @@ public final class RegressionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2225,7 +2299,7 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -2235,7 +2309,7 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -2245,7 +2319,7 @@ public final class RegressionProtos {
      * Effective Model Specification used for regression.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -2254,19 +2328,19 @@ public final class RegressionProtos {
     public static final int RESULT_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult result_;
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     public boolean hasResult() {
       return result_ != null;
     }
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getResult() {
       return result_ == null ? com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.getDefaultInstance() : result_;
     }
     /**
-     * <code>optional .angel.serving.RegressionResult result = 1;</code>
+     * <code>.angel.serving.RegressionResult result = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getResultOrBuilder() {
       return getResult();
@@ -2290,6 +2364,7 @@ public final class RegressionProtos {
       if (modelSpec_ != null) {
         output.writeMessage(2, getModelSpec());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2305,11 +2380,11 @@ public final class RegressionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getModelSpec());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2331,6 +2406,7 @@ public final class RegressionProtos {
         result = result && getResult()
             .equals(other.getResult());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2340,7 +2416,7 @@ public final class RegressionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -2354,6 +2430,17 @@ public final class RegressionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2520,7 +2607,7 @@ public final class RegressionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2533,12 +2620,12 @@ public final class RegressionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2558,6 +2645,7 @@ public final class RegressionProtos {
         if (other.hasResult()) {
           mergeResult(other.getResult());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2592,7 +2680,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -2602,7 +2690,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2616,7 +2704,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2636,7 +2724,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -2654,7 +2742,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2676,7 +2764,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2694,7 +2782,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -2706,7 +2794,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -2721,7 +2809,7 @@ public final class RegressionProtos {
        * Effective Model Specification used for regression.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -2741,13 +2829,13 @@ public final class RegressionProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder> resultBuilder_;
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public boolean hasResult() {
         return resultBuilder_ != null || result_ != null;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult getResult() {
         if (resultBuilder_ == null) {
@@ -2757,7 +2845,7 @@ public final class RegressionProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public Builder setResult(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult value) {
         if (resultBuilder_ == null) {
@@ -2773,7 +2861,7 @@ public final class RegressionProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public Builder setResult(
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder builderForValue) {
@@ -2787,7 +2875,7 @@ public final class RegressionProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public Builder mergeResult(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult value) {
         if (resultBuilder_ == null) {
@@ -2805,7 +2893,7 @@ public final class RegressionProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public Builder clearResult() {
         if (resultBuilder_ == null) {
@@ -2819,7 +2907,7 @@ public final class RegressionProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder getResultBuilder() {
         
@@ -2827,7 +2915,7 @@ public final class RegressionProtos {
         return getResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder getResultOrBuilder() {
         if (resultBuilder_ != null) {
@@ -2838,7 +2926,7 @@ public final class RegressionProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResult result = 1;</code>
+       * <code>.angel.serving.RegressionResult result = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResult.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResultOrBuilder> 
@@ -2855,12 +2943,12 @@ public final class RegressionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2883,7 +2971,7 @@ public final class RegressionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RegressionResponse(input, extensionRegistry);
+        return new RegressionResponse(input, extensionRegistry);
       }
     };
 
@@ -2940,7 +3028,7 @@ public final class RegressionProtos {
       "angel.serving.ModelSpec\022#\n\005input\030\002 \001(\0132\024" +
       ".angel.serving.Input\"s\n\022RegressionRespon" +
       "se\022,\n\nmodel_spec\030\002 \001(\0132\030.angel.serving.M" +
-      "odelSpec\022/\n\006result\030\001 \001(\0132\037.angel.serving",
+      "odelSpec\022/\n\006result\030\001 \001(\0132\037.angel.serving" +
       ".RegressionResultB?\n)com.tencent.angel.s" +
       "erving.apis.predictionB\020RegressionProtos" +
       "P\000b\006proto3"

@@ -319,7 +319,7 @@ object BasicManager {
       LOG.info(s"manage servable: ${servable.id.toString}")
       try {
         val harnessOpt = getHarnessInternal(servable.id)
-        if (harnessOpt == null) {
+        if (harnessOpt == null || harnessOpt.isEmpty) {
           val harness = LoaderHarness(servable.id, servable.data, maxNumLoadRetries, loadRetryIntervalMicros)
           harness.setAspired(aspired)
           managedMap.addBinding(servable.id.name, harness)

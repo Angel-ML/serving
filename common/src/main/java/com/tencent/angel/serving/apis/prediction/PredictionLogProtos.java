@@ -19,28 +19,28 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     boolean hasRequest();
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest getRequest();
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     boolean hasResponse();
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse getResponse();
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponseOrBuilder getResponseOrBuilder();
   }
@@ -51,6 +51,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ClassifyLog)
       ClassifyLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ClassifyLog.newBuilder() to construct.
     private ClassifyLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -61,14 +62,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ClassifyLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -78,7 +84,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -117,6 +124,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -135,19 +143,19 @@ public final class PredictionLogProtos {
     public static final int REQUEST_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest request_;
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     public boolean hasRequest() {
       return request_ != null;
     }
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest getRequest() {
       return request_ == null ? com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.getDefaultInstance() : request_;
     }
     /**
-     * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+     * <code>.angel.serving.ClassificationRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequestOrBuilder getRequestOrBuilder() {
       return getRequest();
@@ -156,19 +164,19 @@ public final class PredictionLogProtos {
     public static final int RESPONSE_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse response_;
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     public boolean hasResponse() {
       return response_ != null;
     }
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse getResponse() {
       return response_ == null ? com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.getDefaultInstance() : response_;
     }
     /**
-     * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+     * <code>.angel.serving.ClassificationResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponseOrBuilder getResponseOrBuilder() {
       return getResponse();
@@ -192,6 +200,7 @@ public final class PredictionLogProtos {
       if (response_ != null) {
         output.writeMessage(2, getResponse());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -207,11 +216,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getResponse());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -233,6 +242,7 @@ public final class PredictionLogProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -242,7 +252,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasRequest()) {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
@@ -256,6 +266,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -422,7 +443,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -435,12 +456,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -460,6 +481,7 @@ public final class PredictionLogProtos {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -490,13 +512,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public boolean hasRequest() {
         return requestBuilder_ != null || request_ != null;
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest getRequest() {
         if (requestBuilder_ == null) {
@@ -506,7 +528,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public Builder setRequest(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest value) {
         if (requestBuilder_ == null) {
@@ -522,7 +544,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public Builder setRequest(
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.Builder builderForValue) {
@@ -536,7 +558,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public Builder mergeRequest(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest value) {
         if (requestBuilder_ == null) {
@@ -554,7 +576,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public Builder clearRequest() {
         if (requestBuilder_ == null) {
@@ -568,7 +590,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.Builder getRequestBuilder() {
         
@@ -576,7 +598,7 @@ public final class PredictionLogProtos {
         return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequestOrBuilder getRequestOrBuilder() {
         if (requestBuilder_ != null) {
@@ -587,7 +609,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationRequest request = 1;</code>
+       * <code>.angel.serving.ClassificationRequest request = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequestOrBuilder> 
@@ -607,13 +629,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponseOrBuilder> responseBuilder_;
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public boolean hasResponse() {
         return responseBuilder_ != null || response_ != null;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse getResponse() {
         if (responseBuilder_ == null) {
@@ -623,7 +645,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public Builder setResponse(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse value) {
         if (responseBuilder_ == null) {
@@ -639,7 +661,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public Builder setResponse(
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.Builder builderForValue) {
@@ -653,7 +675,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public Builder mergeResponse(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse value) {
         if (responseBuilder_ == null) {
@@ -671,7 +693,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
@@ -685,7 +707,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.Builder getResponseBuilder() {
         
@@ -693,7 +715,7 @@ public final class PredictionLogProtos {
         return getResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponseOrBuilder getResponseOrBuilder() {
         if (responseBuilder_ != null) {
@@ -704,7 +726,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassificationResponse response = 2;</code>
+       * <code>.angel.serving.ClassificationResponse response = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponseOrBuilder> 
@@ -721,12 +743,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -749,7 +771,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ClassifyLog(input, extensionRegistry);
+        return new ClassifyLog(input, extensionRegistry);
       }
     };
 
@@ -773,28 +795,28 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     boolean hasRequest();
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest getRequest();
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     boolean hasResponse();
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse getResponse();
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponseOrBuilder getResponseOrBuilder();
   }
@@ -805,6 +827,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.RegressLog)
       RegressLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RegressLog.newBuilder() to construct.
     private RegressLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -815,14 +838,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RegressLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -832,7 +860,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -871,6 +900,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -889,19 +919,19 @@ public final class PredictionLogProtos {
     public static final int REQUEST_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest request_;
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     public boolean hasRequest() {
       return request_ != null;
     }
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest getRequest() {
       return request_ == null ? com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.getDefaultInstance() : request_;
     }
     /**
-     * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+     * <code>.angel.serving.RegressionRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequestOrBuilder getRequestOrBuilder() {
       return getRequest();
@@ -910,19 +940,19 @@ public final class PredictionLogProtos {
     public static final int RESPONSE_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse response_;
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     public boolean hasResponse() {
       return response_ != null;
     }
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse getResponse() {
       return response_ == null ? com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.getDefaultInstance() : response_;
     }
     /**
-     * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+     * <code>.angel.serving.RegressionResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponseOrBuilder getResponseOrBuilder() {
       return getResponse();
@@ -946,6 +976,7 @@ public final class PredictionLogProtos {
       if (response_ != null) {
         output.writeMessage(2, getResponse());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -961,11 +992,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getResponse());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -987,6 +1018,7 @@ public final class PredictionLogProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -996,7 +1028,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasRequest()) {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
@@ -1010,6 +1042,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1176,7 +1219,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1189,12 +1232,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1214,6 +1257,7 @@ public final class PredictionLogProtos {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1244,13 +1288,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public boolean hasRequest() {
         return requestBuilder_ != null || request_ != null;
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest getRequest() {
         if (requestBuilder_ == null) {
@@ -1260,7 +1304,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public Builder setRequest(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest value) {
         if (requestBuilder_ == null) {
@@ -1276,7 +1320,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public Builder setRequest(
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.Builder builderForValue) {
@@ -1290,7 +1334,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public Builder mergeRequest(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest value) {
         if (requestBuilder_ == null) {
@@ -1308,7 +1352,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public Builder clearRequest() {
         if (requestBuilder_ == null) {
@@ -1322,7 +1366,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.Builder getRequestBuilder() {
         
@@ -1330,7 +1374,7 @@ public final class PredictionLogProtos {
         return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequestOrBuilder getRequestOrBuilder() {
         if (requestBuilder_ != null) {
@@ -1341,7 +1385,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionRequest request = 1;</code>
+       * <code>.angel.serving.RegressionRequest request = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequestOrBuilder> 
@@ -1361,13 +1405,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponseOrBuilder> responseBuilder_;
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public boolean hasResponse() {
         return responseBuilder_ != null || response_ != null;
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse getResponse() {
         if (responseBuilder_ == null) {
@@ -1377,7 +1421,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public Builder setResponse(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse value) {
         if (responseBuilder_ == null) {
@@ -1393,7 +1437,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public Builder setResponse(
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.Builder builderForValue) {
@@ -1407,7 +1451,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public Builder mergeResponse(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse value) {
         if (responseBuilder_ == null) {
@@ -1425,7 +1469,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
@@ -1439,7 +1483,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.Builder getResponseBuilder() {
         
@@ -1447,7 +1491,7 @@ public final class PredictionLogProtos {
         return getResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponseOrBuilder getResponseOrBuilder() {
         if (responseBuilder_ != null) {
@@ -1458,7 +1502,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressionResponse response = 2;</code>
+       * <code>.angel.serving.RegressionResponse response = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.Builder, com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponseOrBuilder> 
@@ -1475,12 +1519,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1503,7 +1547,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RegressLog(input, extensionRegistry);
+        return new RegressLog(input, extensionRegistry);
       }
     };
 
@@ -1527,28 +1571,28 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     boolean hasRequest();
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest getRequest();
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     boolean hasResponse();
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse getResponse();
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponseOrBuilder getResponseOrBuilder();
   }
@@ -1559,6 +1603,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.PredictLog)
       PredictLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PredictLog.newBuilder() to construct.
     private PredictLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1569,14 +1614,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PredictLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1586,7 +1636,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1625,6 +1676,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1643,19 +1695,19 @@ public final class PredictionLogProtos {
     public static final int REQUEST_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest request_;
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     public boolean hasRequest() {
       return request_ != null;
     }
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest getRequest() {
       return request_ == null ? com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.getDefaultInstance() : request_;
     }
     /**
-     * <code>optional .angel.serving.PredictRequest request = 1;</code>
+     * <code>.angel.serving.PredictRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequestOrBuilder getRequestOrBuilder() {
       return getRequest();
@@ -1664,19 +1716,19 @@ public final class PredictionLogProtos {
     public static final int RESPONSE_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse response_;
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     public boolean hasResponse() {
       return response_ != null;
     }
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse getResponse() {
       return response_ == null ? com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.getDefaultInstance() : response_;
     }
     /**
-     * <code>optional .angel.serving.PredictResponse response = 2;</code>
+     * <code>.angel.serving.PredictResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponseOrBuilder getResponseOrBuilder() {
       return getResponse();
@@ -1700,6 +1752,7 @@ public final class PredictionLogProtos {
       if (response_ != null) {
         output.writeMessage(2, getResponse());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1715,11 +1768,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getResponse());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1741,6 +1794,7 @@ public final class PredictionLogProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1750,7 +1804,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasRequest()) {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
@@ -1764,6 +1818,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1930,7 +1995,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1943,12 +2008,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1968,6 +2033,7 @@ public final class PredictionLogProtos {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1998,13 +2064,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.Builder, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public boolean hasRequest() {
         return requestBuilder_ != null || request_ != null;
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest getRequest() {
         if (requestBuilder_ == null) {
@@ -2014,7 +2080,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public Builder setRequest(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest value) {
         if (requestBuilder_ == null) {
@@ -2030,7 +2096,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public Builder setRequest(
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.Builder builderForValue) {
@@ -2044,7 +2110,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public Builder mergeRequest(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest value) {
         if (requestBuilder_ == null) {
@@ -2062,7 +2128,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public Builder clearRequest() {
         if (requestBuilder_ == null) {
@@ -2076,7 +2142,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.Builder getRequestBuilder() {
         
@@ -2084,7 +2150,7 @@ public final class PredictionLogProtos {
         return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequestOrBuilder getRequestOrBuilder() {
         if (requestBuilder_ != null) {
@@ -2095,7 +2161,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictRequest request = 1;</code>
+       * <code>.angel.serving.PredictRequest request = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.Builder, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequestOrBuilder> 
@@ -2115,13 +2181,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.Builder, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponseOrBuilder> responseBuilder_;
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public boolean hasResponse() {
         return responseBuilder_ != null || response_ != null;
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse getResponse() {
         if (responseBuilder_ == null) {
@@ -2131,7 +2197,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public Builder setResponse(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse value) {
         if (responseBuilder_ == null) {
@@ -2147,7 +2213,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public Builder setResponse(
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.Builder builderForValue) {
@@ -2161,7 +2227,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public Builder mergeResponse(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse value) {
         if (responseBuilder_ == null) {
@@ -2179,7 +2245,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
@@ -2193,7 +2259,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.Builder getResponseBuilder() {
         
@@ -2201,7 +2267,7 @@ public final class PredictionLogProtos {
         return getResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponseOrBuilder getResponseOrBuilder() {
         if (responseBuilder_ != null) {
@@ -2212,7 +2278,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictResponse response = 2;</code>
+       * <code>.angel.serving.PredictResponse response = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.Builder, com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponseOrBuilder> 
@@ -2229,12 +2295,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2257,7 +2323,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PredictLog(input, extensionRegistry);
+        return new PredictLog(input, extensionRegistry);
       }
     };
 
@@ -2281,28 +2347,28 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     boolean hasRequest();
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest getRequest();
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     boolean hasResponse();
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse getResponse();
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponseOrBuilder getResponseOrBuilder();
   }
@@ -2313,6 +2379,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.MultiInferenceLog)
       MultiInferenceLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MultiInferenceLog.newBuilder() to construct.
     private MultiInferenceLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2323,14 +2390,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MultiInferenceLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2340,7 +2412,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2379,6 +2452,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2397,19 +2471,19 @@ public final class PredictionLogProtos {
     public static final int REQUEST_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest request_;
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     public boolean hasRequest() {
       return request_ != null;
     }
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest getRequest() {
       return request_ == null ? com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.getDefaultInstance() : request_;
     }
     /**
-     * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+     * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequestOrBuilder getRequestOrBuilder() {
       return getRequest();
@@ -2418,19 +2492,19 @@ public final class PredictionLogProtos {
     public static final int RESPONSE_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse response_;
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     public boolean hasResponse() {
       return response_ != null;
     }
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse getResponse() {
       return response_ == null ? com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.getDefaultInstance() : response_;
     }
     /**
-     * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+     * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponseOrBuilder getResponseOrBuilder() {
       return getResponse();
@@ -2454,6 +2528,7 @@ public final class PredictionLogProtos {
       if (response_ != null) {
         output.writeMessage(2, getResponse());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2469,11 +2544,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getResponse());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2495,6 +2570,7 @@ public final class PredictionLogProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2504,7 +2580,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasRequest()) {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
@@ -2518,6 +2594,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2684,7 +2771,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2697,12 +2784,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2722,6 +2809,7 @@ public final class PredictionLogProtos {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2752,13 +2840,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.Builder, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public boolean hasRequest() {
         return requestBuilder_ != null || request_ != null;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest getRequest() {
         if (requestBuilder_ == null) {
@@ -2768,7 +2856,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public Builder setRequest(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest value) {
         if (requestBuilder_ == null) {
@@ -2784,7 +2872,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public Builder setRequest(
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.Builder builderForValue) {
@@ -2798,7 +2886,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public Builder mergeRequest(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest value) {
         if (requestBuilder_ == null) {
@@ -2816,7 +2904,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public Builder clearRequest() {
         if (requestBuilder_ == null) {
@@ -2830,7 +2918,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.Builder getRequestBuilder() {
         
@@ -2838,7 +2926,7 @@ public final class PredictionLogProtos {
         return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequestOrBuilder getRequestOrBuilder() {
         if (requestBuilder_ != null) {
@@ -2849,7 +2937,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceRequest request = 1;</code>
+       * <code>.angel.serving.MultiInferenceRequest request = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.Builder, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequestOrBuilder> 
@@ -2869,13 +2957,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.Builder, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponseOrBuilder> responseBuilder_;
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public boolean hasResponse() {
         return responseBuilder_ != null || response_ != null;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse getResponse() {
         if (responseBuilder_ == null) {
@@ -2885,7 +2973,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public Builder setResponse(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse value) {
         if (responseBuilder_ == null) {
@@ -2901,7 +2989,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public Builder setResponse(
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.Builder builderForValue) {
@@ -2915,7 +3003,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public Builder mergeResponse(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse value) {
         if (responseBuilder_ == null) {
@@ -2933,7 +3021,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
@@ -2947,7 +3035,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.Builder getResponseBuilder() {
         
@@ -2955,7 +3043,7 @@ public final class PredictionLogProtos {
         return getResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponseOrBuilder getResponseOrBuilder() {
         if (responseBuilder_ != null) {
@@ -2966,7 +3054,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceResponse response = 2;</code>
+       * <code>.angel.serving.MultiInferenceResponse response = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.Builder, com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponseOrBuilder> 
@@ -2983,12 +3071,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3011,7 +3099,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MultiInferenceLog(input, extensionRegistry);
+        return new MultiInferenceLog(input, extensionRegistry);
       }
     };
 
@@ -3035,28 +3123,28 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     boolean hasRequest();
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest getRequest();
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     boolean hasResponse();
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse getResponse();
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponseOrBuilder getResponseOrBuilder();
   }
@@ -3067,6 +3155,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.SessionRunLog)
       SessionRunLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SessionRunLog.newBuilder() to construct.
     private SessionRunLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3077,14 +3166,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SessionRunLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3094,7 +3188,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3133,6 +3228,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3151,19 +3247,19 @@ public final class PredictionLogProtos {
     public static final int REQUEST_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest request_;
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     public boolean hasRequest() {
       return request_ != null;
     }
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest getRequest() {
       return request_ == null ? com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.getDefaultInstance() : request_;
     }
     /**
-     * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+     * <code>.angel.serving.SessionRunRequest request = 1;</code>
      */
     public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequestOrBuilder getRequestOrBuilder() {
       return getRequest();
@@ -3172,19 +3268,19 @@ public final class PredictionLogProtos {
     public static final int RESPONSE_FIELD_NUMBER = 2;
     private com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse response_;
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     public boolean hasResponse() {
       return response_ != null;
     }
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse getResponse() {
       return response_ == null ? com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.getDefaultInstance() : response_;
     }
     /**
-     * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+     * <code>.angel.serving.SessionRunResponse response = 2;</code>
      */
     public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponseOrBuilder getResponseOrBuilder() {
       return getResponse();
@@ -3208,6 +3304,7 @@ public final class PredictionLogProtos {
       if (response_ != null) {
         output.writeMessage(2, getResponse());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3223,11 +3320,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getResponse());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3249,6 +3346,7 @@ public final class PredictionLogProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3258,7 +3356,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasRequest()) {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
@@ -3272,6 +3370,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3438,7 +3547,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3451,12 +3560,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3476,6 +3585,7 @@ public final class PredictionLogProtos {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3506,13 +3616,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.Builder, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequestOrBuilder> requestBuilder_;
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public boolean hasRequest() {
         return requestBuilder_ != null || request_ != null;
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest getRequest() {
         if (requestBuilder_ == null) {
@@ -3522,7 +3632,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public Builder setRequest(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest value) {
         if (requestBuilder_ == null) {
@@ -3538,7 +3648,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public Builder setRequest(
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.Builder builderForValue) {
@@ -3552,7 +3662,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public Builder mergeRequest(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest value) {
         if (requestBuilder_ == null) {
@@ -3570,7 +3680,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public Builder clearRequest() {
         if (requestBuilder_ == null) {
@@ -3584,7 +3694,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.Builder getRequestBuilder() {
         
@@ -3592,7 +3702,7 @@ public final class PredictionLogProtos {
         return getRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequestOrBuilder getRequestOrBuilder() {
         if (requestBuilder_ != null) {
@@ -3603,7 +3713,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunRequest request = 1;</code>
+       * <code>.angel.serving.SessionRunRequest request = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest.Builder, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequestOrBuilder> 
@@ -3623,13 +3733,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.Builder, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponseOrBuilder> responseBuilder_;
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public boolean hasResponse() {
         return responseBuilder_ != null || response_ != null;
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse getResponse() {
         if (responseBuilder_ == null) {
@@ -3639,7 +3749,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public Builder setResponse(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse value) {
         if (responseBuilder_ == null) {
@@ -3655,7 +3765,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public Builder setResponse(
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.Builder builderForValue) {
@@ -3669,7 +3779,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public Builder mergeResponse(com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse value) {
         if (responseBuilder_ == null) {
@@ -3687,7 +3797,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
@@ -3701,7 +3811,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.Builder getResponseBuilder() {
         
@@ -3709,7 +3819,7 @@ public final class PredictionLogProtos {
         return getResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       public com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponseOrBuilder getResponseOrBuilder() {
         if (responseBuilder_ != null) {
@@ -3720,7 +3830,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunResponse response = 2;</code>
+       * <code>.angel.serving.SessionRunResponse response = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse.Builder, com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponseOrBuilder> 
@@ -3737,12 +3847,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3765,7 +3875,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SessionRunLog(input, extensionRegistry);
+        return new SessionRunLog(input, extensionRegistry);
       }
     };
 
@@ -3789,60 +3899,80 @@ public final class PredictionLogProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     boolean hasLogMetadata();
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     com.tencent.angel.core.LoggingProtos.LogMetadata getLogMetadata();
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     com.tencent.angel.core.LoggingProtos.LogMetadataOrBuilder getLogMetadataOrBuilder();
 
     /**
-     * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
+     */
+    boolean hasClassifyLog();
+    /**
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog getClassifyLog();
     /**
-     * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLogOrBuilder getClassifyLogOrBuilder();
 
     /**
-     * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
+     */
+    boolean hasRegressLog();
+    /**
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog getRegressLog();
     /**
-     * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLogOrBuilder getRegressLogOrBuilder();
 
     /**
-     * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
+     */
+    boolean hasPredictLog();
+    /**
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog getPredictLog();
     /**
-     * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLogOrBuilder getPredictLogOrBuilder();
 
     /**
-     * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     */
+    boolean hasMultiInferenceLog();
+    /**
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog getMultiInferenceLog();
     /**
-     * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLogOrBuilder getMultiInferenceLogOrBuilder();
 
     /**
-     * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
+     */
+    boolean hasSessionRunLog();
+    /**
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog getSessionRunLog();
     /**
-     * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
      */
     com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLogOrBuilder getSessionRunLogOrBuilder();
 
@@ -3859,6 +3989,7 @@ public final class PredictionLogProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.PredictionLog)
       PredictionLogOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PredictionLog.newBuilder() to construct.
     private PredictionLog(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3869,14 +4000,19 @@ public final class PredictionLogProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PredictionLog(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3886,7 +4022,8 @@ public final class PredictionLogProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3982,6 +4119,7 @@ public final class PredictionLogProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4044,19 +4182,19 @@ public final class PredictionLogProtos {
     public static final int LOG_METADATA_FIELD_NUMBER = 1;
     private com.tencent.angel.core.LoggingProtos.LogMetadata logMetadata_;
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     public boolean hasLogMetadata() {
       return logMetadata_ != null;
     }
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     public com.tencent.angel.core.LoggingProtos.LogMetadata getLogMetadata() {
       return logMetadata_ == null ? com.tencent.angel.core.LoggingProtos.LogMetadata.getDefaultInstance() : logMetadata_;
     }
     /**
-     * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+     * <code>.angel.LogMetadata log_metadata = 1;</code>
      */
     public com.tencent.angel.core.LoggingProtos.LogMetadataOrBuilder getLogMetadataOrBuilder() {
       return getLogMetadata();
@@ -4064,7 +4202,13 @@ public final class PredictionLogProtos {
 
     public static final int CLASSIFY_LOG_FIELD_NUMBER = 2;
     /**
-     * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
+     */
+    public boolean hasClassifyLog() {
+      return logTypeCase_ == 2;
+    }
+    /**
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog getClassifyLog() {
       if (logTypeCase_ == 2) {
@@ -4073,7 +4217,7 @@ public final class PredictionLogProtos {
       return com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+     * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLogOrBuilder getClassifyLogOrBuilder() {
       if (logTypeCase_ == 2) {
@@ -4084,7 +4228,13 @@ public final class PredictionLogProtos {
 
     public static final int REGRESS_LOG_FIELD_NUMBER = 3;
     /**
-     * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
+     */
+    public boolean hasRegressLog() {
+      return logTypeCase_ == 3;
+    }
+    /**
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog getRegressLog() {
       if (logTypeCase_ == 3) {
@@ -4093,7 +4243,7 @@ public final class PredictionLogProtos {
       return com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+     * <code>.angel.serving.RegressLog regress_log = 3;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLogOrBuilder getRegressLogOrBuilder() {
       if (logTypeCase_ == 3) {
@@ -4104,7 +4254,13 @@ public final class PredictionLogProtos {
 
     public static final int PREDICT_LOG_FIELD_NUMBER = 6;
     /**
-     * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
+     */
+    public boolean hasPredictLog() {
+      return logTypeCase_ == 6;
+    }
+    /**
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog getPredictLog() {
       if (logTypeCase_ == 6) {
@@ -4113,7 +4269,7 @@ public final class PredictionLogProtos {
       return com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+     * <code>.angel.serving.PredictLog predict_log = 6;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLogOrBuilder getPredictLogOrBuilder() {
       if (logTypeCase_ == 6) {
@@ -4124,7 +4280,13 @@ public final class PredictionLogProtos {
 
     public static final int MULTI_INFERENCE_LOG_FIELD_NUMBER = 4;
     /**
-     * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     */
+    public boolean hasMultiInferenceLog() {
+      return logTypeCase_ == 4;
+    }
+    /**
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog getMultiInferenceLog() {
       if (logTypeCase_ == 4) {
@@ -4133,7 +4295,7 @@ public final class PredictionLogProtos {
       return com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+     * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLogOrBuilder getMultiInferenceLogOrBuilder() {
       if (logTypeCase_ == 4) {
@@ -4144,7 +4306,13 @@ public final class PredictionLogProtos {
 
     public static final int SESSION_RUN_LOG_FIELD_NUMBER = 5;
     /**
-     * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
+     */
+    public boolean hasSessionRunLog() {
+      return logTypeCase_ == 5;
+    }
+    /**
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog getSessionRunLog() {
       if (logTypeCase_ == 5) {
@@ -4153,7 +4321,7 @@ public final class PredictionLogProtos {
       return com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+     * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
      */
     public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLogOrBuilder getSessionRunLogOrBuilder() {
       if (logTypeCase_ == 5) {
@@ -4192,6 +4360,7 @@ public final class PredictionLogProtos {
       if (logTypeCase_ == 6) {
         output.writeMessage(6, (com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog) logType_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4223,11 +4392,11 @@ public final class PredictionLogProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, (com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog) logType_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4271,6 +4440,7 @@ public final class PredictionLogProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4280,7 +4450,7 @@ public final class PredictionLogProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasLogMetadata()) {
         hash = (37 * hash) + LOG_METADATA_FIELD_NUMBER;
         hash = (53 * hash) + getLogMetadata().hashCode();
@@ -4314,6 +4484,17 @@ public final class PredictionLogProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictionLog parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictionLog parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictionLog parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4511,7 +4692,7 @@ public final class PredictionLogProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4524,12 +4705,12 @@ public final class PredictionLogProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4571,6 +4752,7 @@ public final class PredictionLogProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4616,13 +4798,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.LoggingProtos.LogMetadata, com.tencent.angel.core.LoggingProtos.LogMetadata.Builder, com.tencent.angel.core.LoggingProtos.LogMetadataOrBuilder> logMetadataBuilder_;
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public boolean hasLogMetadata() {
         return logMetadataBuilder_ != null || logMetadata_ != null;
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public com.tencent.angel.core.LoggingProtos.LogMetadata getLogMetadata() {
         if (logMetadataBuilder_ == null) {
@@ -4632,7 +4814,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public Builder setLogMetadata(com.tencent.angel.core.LoggingProtos.LogMetadata value) {
         if (logMetadataBuilder_ == null) {
@@ -4648,7 +4830,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public Builder setLogMetadata(
           com.tencent.angel.core.LoggingProtos.LogMetadata.Builder builderForValue) {
@@ -4662,7 +4844,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public Builder mergeLogMetadata(com.tencent.angel.core.LoggingProtos.LogMetadata value) {
         if (logMetadataBuilder_ == null) {
@@ -4680,7 +4862,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public Builder clearLogMetadata() {
         if (logMetadataBuilder_ == null) {
@@ -4694,7 +4876,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public com.tencent.angel.core.LoggingProtos.LogMetadata.Builder getLogMetadataBuilder() {
         
@@ -4702,7 +4884,7 @@ public final class PredictionLogProtos {
         return getLogMetadataFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       public com.tencent.angel.core.LoggingProtos.LogMetadataOrBuilder getLogMetadataOrBuilder() {
         if (logMetadataBuilder_ != null) {
@@ -4713,7 +4895,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.LogMetadata log_metadata = 1;</code>
+       * <code>.angel.LogMetadata log_metadata = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.LoggingProtos.LogMetadata, com.tencent.angel.core.LoggingProtos.LogMetadata.Builder, com.tencent.angel.core.LoggingProtos.LogMetadataOrBuilder> 
@@ -4732,7 +4914,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLogOrBuilder> classifyLogBuilder_;
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
+       */
+      public boolean hasClassifyLog() {
+        return logTypeCase_ == 2;
+      }
+      /**
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog getClassifyLog() {
         if (classifyLogBuilder_ == null) {
@@ -4748,7 +4936,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public Builder setClassifyLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog value) {
         if (classifyLogBuilder_ == null) {
@@ -4764,7 +4952,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public Builder setClassifyLog(
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog.Builder builderForValue) {
@@ -4778,7 +4966,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public Builder mergeClassifyLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog value) {
         if (classifyLogBuilder_ == null) {
@@ -4800,7 +4988,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public Builder clearClassifyLog() {
         if (classifyLogBuilder_ == null) {
@@ -4819,13 +5007,13 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog.Builder getClassifyLogBuilder() {
         return getClassifyLogFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLogOrBuilder getClassifyLogOrBuilder() {
         if ((logTypeCase_ == 2) && (classifyLogBuilder_ != null)) {
@@ -4838,7 +5026,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ClassifyLog classify_log = 2;</code>
+       * <code>.angel.serving.ClassifyLog classify_log = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.ClassifyLogOrBuilder> 
@@ -4862,7 +5050,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLogOrBuilder> regressLogBuilder_;
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
+       */
+      public boolean hasRegressLog() {
+        return logTypeCase_ == 3;
+      }
+      /**
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog getRegressLog() {
         if (regressLogBuilder_ == null) {
@@ -4878,7 +5072,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public Builder setRegressLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog value) {
         if (regressLogBuilder_ == null) {
@@ -4894,7 +5088,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public Builder setRegressLog(
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog.Builder builderForValue) {
@@ -4908,7 +5102,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public Builder mergeRegressLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog value) {
         if (regressLogBuilder_ == null) {
@@ -4930,7 +5124,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public Builder clearRegressLog() {
         if (regressLogBuilder_ == null) {
@@ -4949,13 +5143,13 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog.Builder getRegressLogBuilder() {
         return getRegressLogFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLogOrBuilder getRegressLogOrBuilder() {
         if ((logTypeCase_ == 3) && (regressLogBuilder_ != null)) {
@@ -4968,7 +5162,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.RegressLog regress_log = 3;</code>
+       * <code>.angel.serving.RegressLog regress_log = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.RegressLogOrBuilder> 
@@ -4992,7 +5186,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLogOrBuilder> predictLogBuilder_;
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
+       */
+      public boolean hasPredictLog() {
+        return logTypeCase_ == 6;
+      }
+      /**
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog getPredictLog() {
         if (predictLogBuilder_ == null) {
@@ -5008,7 +5208,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public Builder setPredictLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog value) {
         if (predictLogBuilder_ == null) {
@@ -5024,7 +5224,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public Builder setPredictLog(
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog.Builder builderForValue) {
@@ -5038,7 +5238,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public Builder mergePredictLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog value) {
         if (predictLogBuilder_ == null) {
@@ -5060,7 +5260,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public Builder clearPredictLog() {
         if (predictLogBuilder_ == null) {
@@ -5079,13 +5279,13 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog.Builder getPredictLogBuilder() {
         return getPredictLogFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLogOrBuilder getPredictLogOrBuilder() {
         if ((logTypeCase_ == 6) && (predictLogBuilder_ != null)) {
@@ -5098,7 +5298,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.PredictLog predict_log = 6;</code>
+       * <code>.angel.serving.PredictLog predict_log = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.PredictLogOrBuilder> 
@@ -5122,7 +5322,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLogOrBuilder> multiInferenceLogBuilder_;
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       */
+      public boolean hasMultiInferenceLog() {
+        return logTypeCase_ == 4;
+      }
+      /**
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog getMultiInferenceLog() {
         if (multiInferenceLogBuilder_ == null) {
@@ -5138,7 +5344,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public Builder setMultiInferenceLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog value) {
         if (multiInferenceLogBuilder_ == null) {
@@ -5154,7 +5360,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public Builder setMultiInferenceLog(
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog.Builder builderForValue) {
@@ -5168,7 +5374,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public Builder mergeMultiInferenceLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog value) {
         if (multiInferenceLogBuilder_ == null) {
@@ -5190,7 +5396,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public Builder clearMultiInferenceLog() {
         if (multiInferenceLogBuilder_ == null) {
@@ -5209,13 +5415,13 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog.Builder getMultiInferenceLogBuilder() {
         return getMultiInferenceLogFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLogOrBuilder getMultiInferenceLogOrBuilder() {
         if ((logTypeCase_ == 4) && (multiInferenceLogBuilder_ != null)) {
@@ -5228,7 +5434,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
+       * <code>.angel.serving.MultiInferenceLog multi_inference_log = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.MultiInferenceLogOrBuilder> 
@@ -5252,7 +5458,13 @@ public final class PredictionLogProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLogOrBuilder> sessionRunLogBuilder_;
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
+       */
+      public boolean hasSessionRunLog() {
+        return logTypeCase_ == 5;
+      }
+      /**
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog getSessionRunLog() {
         if (sessionRunLogBuilder_ == null) {
@@ -5268,7 +5480,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public Builder setSessionRunLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog value) {
         if (sessionRunLogBuilder_ == null) {
@@ -5284,7 +5496,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public Builder setSessionRunLog(
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog.Builder builderForValue) {
@@ -5298,7 +5510,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public Builder mergeSessionRunLog(com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog value) {
         if (sessionRunLogBuilder_ == null) {
@@ -5320,7 +5532,7 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public Builder clearSessionRunLog() {
         if (sessionRunLogBuilder_ == null) {
@@ -5339,13 +5551,13 @@ public final class PredictionLogProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog.Builder getSessionRunLogBuilder() {
         return getSessionRunLogFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       public com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLogOrBuilder getSessionRunLogOrBuilder() {
         if ((logTypeCase_ == 5) && (sessionRunLogBuilder_ != null)) {
@@ -5358,7 +5570,7 @@ public final class PredictionLogProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.SessionRunLog session_run_log = 5;</code>
+       * <code>.angel.serving.SessionRunLog session_run_log = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLog.Builder, com.tencent.angel.serving.apis.prediction.PredictionLogProtos.SessionRunLogOrBuilder> 
@@ -5380,12 +5592,12 @@ public final class PredictionLogProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5408,7 +5620,7 @@ public final class PredictionLogProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PredictionLog(input, extensionRegistry);
+        return new PredictionLog(input, extensionRegistry);
       }
     };
 
@@ -5475,7 +5687,7 @@ public final class PredictionLogProtos {
       "proto\"}\n\013ClassifyLog\0225\n\007request\030\001 \001(\0132$." +
       "angel.serving.ClassificationRequest\0227\n\010r" +
       "esponse\030\002 \001(\0132%.angel.serving.Classifica" +
-      "tionResponse\"t\n\nRegressLog\0221\n\007request\030\001 ",
+      "tionResponse\"t\n\nRegressLog\0221\n\007request\030\001 " +
       "\001(\0132 .angel.serving.RegressionRequest\0223\n" +
       "\010response\030\002 \001(\0132!.angel.serving.Regressi" +
       "onResponse\"n\n\nPredictLog\022.\n\007request\030\001 \001(" +
@@ -5485,7 +5697,7 @@ public final class PredictionLogProtos {
       "\0132$.angel.serving.MultiInferenceRequest\022" +
       "7\n\010response\030\002 \001(\0132%.angel.serving.MultiI" +
       "nferenceResponse\"w\n\rSessionRunLog\0221\n\007req" +
-      "uest\030\001 \001(\0132 .angel.serving.SessionRunReq",
+      "uest\030\001 \001(\0132 .angel.serving.SessionRunReq" +
       "uest\0223\n\010response\030\002 \001(\0132!.angel.serving.S" +
       "essionRunResponse\"\327\002\n\rPredictionLog\022(\n\014l" +
       "og_metadata\030\001 \001(\0132\022.angel.LogMetadata\0222\n" +
@@ -5495,7 +5707,7 @@ public final class PredictionLogProtos {
       "2\031.angel.serving.PredictLogH\000\022?\n\023multi_i" +
       "nference_log\030\004 \001(\0132 .angel.serving.Multi" +
       "InferenceLogH\000\0227\n\017session_run_log\030\005 \001(\0132" +
-      "\034.angel.serving.SessionRunLogH\000B\n\n\010log_t",
+      "\034.angel.serving.SessionRunLogH\000B\n\n\010log_t" +
       "ypeBB\n)com.tencent.angel.serving.apis.pr" +
       "edictionB\023PredictionLogProtosP\000b\006proto3"
     };

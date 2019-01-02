@@ -21,7 +21,7 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   var modelConfigListRootDir: String = ""
   var fileSystemPollWaitSeconds: Int = 30
   var manageStateDelayMicros: Long = 1000
-  var manageStateIntervalMicros: Long = 120000
+  var manageStateIntervalMicros: Long = 60000
   var numLoadThreads: Int = 3
   var numUnloadThreads: Int = 3
   var maxNumLoadRetries: Int = 3

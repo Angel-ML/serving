@@ -23,7 +23,7 @@ public final class TensorDescriptionProtos {
      * Data type of tensor elements
      * </pre>
      *
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     int getDtypeValue();
     /**
@@ -31,7 +31,7 @@ public final class TensorDescriptionProtos {
      * Data type of tensor elements
      * </pre>
      *
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     com.tencent.angel.core.graph.TypesProtos.DataType getDtype();
 
@@ -40,7 +40,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     boolean hasShape();
     /**
@@ -48,7 +48,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape();
     /**
@@ -56,7 +56,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder();
 
@@ -65,7 +65,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     boolean hasAllocationDescription();
     /**
@@ -73,7 +73,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription getAllocationDescription();
     /**
@@ -81,7 +81,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescriptionOrBuilder getAllocationDescriptionOrBuilder();
   }
@@ -92,6 +92,7 @@ public final class TensorDescriptionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.TensorDescription)
       TensorDescriptionOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TensorDescription.newBuilder() to construct.
     private TensorDescription(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -103,14 +104,19 @@ public final class TensorDescriptionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TensorDescription(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -120,7 +126,8 @@ public final class TensorDescriptionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -165,6 +172,7 @@ public final class TensorDescriptionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -187,7 +195,7 @@ public final class TensorDescriptionProtos {
      * Data type of tensor elements
      * </pre>
      *
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     public int getDtypeValue() {
       return dtype_;
@@ -197,7 +205,7 @@ public final class TensorDescriptionProtos {
      * Data type of tensor elements
      * </pre>
      *
-     * <code>optional .angel.DataType dtype = 1;</code>
+     * <code>.angel.DataType dtype = 1;</code>
      */
     public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
       com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
@@ -211,7 +219,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     public boolean hasShape() {
       return shape_ != null;
@@ -221,7 +229,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
       return shape_ == null ? com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : shape_;
@@ -231,7 +239,7 @@ public final class TensorDescriptionProtos {
      * Shape of the tensor.
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto shape = 2;</code>
+     * <code>.angel.TensorShapeProto shape = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
       return getShape();
@@ -244,7 +252,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     public boolean hasAllocationDescription() {
       return allocationDescription_ != null;
@@ -254,7 +262,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     public com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription getAllocationDescription() {
       return allocationDescription_ == null ? com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription.getDefaultInstance() : allocationDescription_;
@@ -264,7 +272,7 @@ public final class TensorDescriptionProtos {
      * Information about the size and allocator used for the data
      * </pre>
      *
-     * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+     * <code>.angel.AllocationDescription allocation_description = 4;</code>
      */
     public com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescriptionOrBuilder getAllocationDescriptionOrBuilder() {
       return getAllocationDescription();
@@ -291,6 +299,7 @@ public final class TensorDescriptionProtos {
       if (allocationDescription_ != null) {
         output.writeMessage(4, getAllocationDescription());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -310,11 +319,11 @@ public final class TensorDescriptionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getAllocationDescription());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -337,6 +346,7 @@ public final class TensorDescriptionProtos {
         result = result && getAllocationDescription()
             .equals(other.getAllocationDescription());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -346,7 +356,7 @@ public final class TensorDescriptionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DTYPE_FIELD_NUMBER;
       hash = (53 * hash) + dtype_;
       if (hasShape()) {
@@ -362,6 +372,17 @@ public final class TensorDescriptionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -531,7 +552,7 @@ public final class TensorDescriptionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -544,12 +565,12 @@ public final class TensorDescriptionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -572,6 +593,7 @@ public final class TensorDescriptionProtos {
         if (other.hasAllocationDescription()) {
           mergeAllocationDescription(other.getAllocationDescription());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -604,7 +626,7 @@ public final class TensorDescriptionProtos {
        * Data type of tensor elements
        * </pre>
        *
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public int getDtypeValue() {
         return dtype_;
@@ -614,7 +636,7 @@ public final class TensorDescriptionProtos {
        * Data type of tensor elements
        * </pre>
        *
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder setDtypeValue(int value) {
         dtype_ = value;
@@ -626,7 +648,7 @@ public final class TensorDescriptionProtos {
        * Data type of tensor elements
        * </pre>
        *
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
         com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
@@ -637,7 +659,7 @@ public final class TensorDescriptionProtos {
        * Data type of tensor elements
        * </pre>
        *
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder setDtype(com.tencent.angel.core.graph.TypesProtos.DataType value) {
         if (value == null) {
@@ -653,7 +675,7 @@ public final class TensorDescriptionProtos {
        * Data type of tensor elements
        * </pre>
        *
-       * <code>optional .angel.DataType dtype = 1;</code>
+       * <code>.angel.DataType dtype = 1;</code>
        */
       public Builder clearDtype() {
         
@@ -670,7 +692,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public boolean hasShape() {
         return shapeBuilder_ != null || shape_ != null;
@@ -680,7 +702,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
         if (shapeBuilder_ == null) {
@@ -694,7 +716,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public Builder setShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (shapeBuilder_ == null) {
@@ -714,7 +736,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public Builder setShape(
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
@@ -732,7 +754,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public Builder mergeShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
         if (shapeBuilder_ == null) {
@@ -754,7 +776,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public Builder clearShape() {
         if (shapeBuilder_ == null) {
@@ -772,7 +794,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder getShapeBuilder() {
         
@@ -784,7 +806,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
         if (shapeBuilder_ != null) {
@@ -799,7 +821,7 @@ public final class TensorDescriptionProtos {
        * Shape of the tensor.
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto shape = 2;</code>
+       * <code>.angel.TensorShapeProto shape = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> 
@@ -823,7 +845,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public boolean hasAllocationDescription() {
         return allocationDescriptionBuilder_ != null || allocationDescription_ != null;
@@ -833,7 +855,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription getAllocationDescription() {
         if (allocationDescriptionBuilder_ == null) {
@@ -847,7 +869,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public Builder setAllocationDescription(com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription value) {
         if (allocationDescriptionBuilder_ == null) {
@@ -867,7 +889,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public Builder setAllocationDescription(
           com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription.Builder builderForValue) {
@@ -885,7 +907,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public Builder mergeAllocationDescription(com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription value) {
         if (allocationDescriptionBuilder_ == null) {
@@ -907,7 +929,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public Builder clearAllocationDescription() {
         if (allocationDescriptionBuilder_ == null) {
@@ -925,7 +947,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription.Builder getAllocationDescriptionBuilder() {
         
@@ -937,7 +959,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       public com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescriptionOrBuilder getAllocationDescriptionOrBuilder() {
         if (allocationDescriptionBuilder_ != null) {
@@ -952,7 +974,7 @@ public final class TensorDescriptionProtos {
        * Information about the size and allocator used for the data
        * </pre>
        *
-       * <code>optional .angel.AllocationDescription allocation_description = 4;</code>
+       * <code>.angel.AllocationDescription allocation_description = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription, com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription.Builder, com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescriptionOrBuilder> 
@@ -969,12 +991,12 @@ public final class TensorDescriptionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -997,7 +1019,7 @@ public final class TensorDescriptionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TensorDescription(input, extensionRegistry);
+        return new TensorDescription(input, extensionRegistry);
       }
     };
 

@@ -24,7 +24,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     boolean hasSourceAdapterConfig();
     /**
@@ -33,7 +33,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     com.google.protobuf.Any getSourceAdapterConfig();
     /**
@@ -42,7 +42,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     com.google.protobuf.AnyOrBuilder getSourceAdapterConfigOrBuilder();
   }
@@ -57,6 +57,7 @@ public final class PlatformConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.PlatformConfig)
       PlatformConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PlatformConfig.newBuilder() to construct.
     private PlatformConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -67,14 +68,19 @@ public final class PlatformConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PlatformConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -84,7 +90,8 @@ public final class PlatformConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -110,6 +117,7 @@ public final class PlatformConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -133,7 +141,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     public boolean hasSourceAdapterConfig() {
       return sourceAdapterConfig_ != null;
@@ -144,7 +152,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     public com.google.protobuf.Any getSourceAdapterConfig() {
       return sourceAdapterConfig_ == null ? com.google.protobuf.Any.getDefaultInstance() : sourceAdapterConfig_;
@@ -155,7 +163,7 @@ public final class PlatformConfigProtos {
      * registry.
      * </pre>
      *
-     * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+     * <code>.google.protobuf.Any source_adapter_config = 1;</code>
      */
     public com.google.protobuf.AnyOrBuilder getSourceAdapterConfigOrBuilder() {
       return getSourceAdapterConfig();
@@ -176,6 +184,7 @@ public final class PlatformConfigProtos {
       if (sourceAdapterConfig_ != null) {
         output.writeMessage(1, getSourceAdapterConfig());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -187,11 +196,11 @@ public final class PlatformConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getSourceAdapterConfig());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -208,6 +217,7 @@ public final class PlatformConfigProtos {
         result = result && getSourceAdapterConfig()
             .equals(other.getSourceAdapterConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -217,7 +227,7 @@ public final class PlatformConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasSourceAdapterConfig()) {
         hash = (37 * hash) + SOURCE_ADAPTER_CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getSourceAdapterConfig().hashCode();
@@ -227,6 +237,17 @@ public final class PlatformConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -386,7 +407,7 @@ public final class PlatformConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -399,12 +420,12 @@ public final class PlatformConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -421,6 +442,7 @@ public final class PlatformConfigProtos {
         if (other.hasSourceAdapterConfig()) {
           mergeSourceAdapterConfig(other.getSourceAdapterConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -456,7 +478,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public boolean hasSourceAdapterConfig() {
         return sourceAdapterConfigBuilder_ != null || sourceAdapterConfig_ != null;
@@ -467,7 +489,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public com.google.protobuf.Any getSourceAdapterConfig() {
         if (sourceAdapterConfigBuilder_ == null) {
@@ -482,7 +504,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public Builder setSourceAdapterConfig(com.google.protobuf.Any value) {
         if (sourceAdapterConfigBuilder_ == null) {
@@ -503,7 +525,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public Builder setSourceAdapterConfig(
           com.google.protobuf.Any.Builder builderForValue) {
@@ -522,7 +544,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public Builder mergeSourceAdapterConfig(com.google.protobuf.Any value) {
         if (sourceAdapterConfigBuilder_ == null) {
@@ -545,7 +567,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public Builder clearSourceAdapterConfig() {
         if (sourceAdapterConfigBuilder_ == null) {
@@ -564,7 +586,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public com.google.protobuf.Any.Builder getSourceAdapterConfigBuilder() {
         
@@ -577,7 +599,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       public com.google.protobuf.AnyOrBuilder getSourceAdapterConfigOrBuilder() {
         if (sourceAdapterConfigBuilder_ != null) {
@@ -593,7 +615,7 @@ public final class PlatformConfigProtos {
        * registry.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any source_adapter_config = 1;</code>
+       * <code>.google.protobuf.Any source_adapter_config = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
@@ -610,12 +632,12 @@ public final class PlatformConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -638,7 +660,7 @@ public final class PlatformConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PlatformConfig(input, extensionRegistry);
+        return new PlatformConfig(input, extensionRegistry);
       }
     };
 
@@ -727,6 +749,7 @@ public final class PlatformConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.PlatformConfigMap)
       PlatformConfigMapOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PlatformConfigMap.newBuilder() to construct.
     private PlatformConfigMap(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -737,14 +760,19 @@ public final class PlatformConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PlatformConfigMap(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -754,7 +782,8 @@ public final class PlatformConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -766,9 +795,10 @@ public final class PlatformConfigProtos {
                 mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig>
-              platformConfigs = input.readMessage(
+              platformConfigs__ = input.readMessage(
                   PlatformConfigsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              platformConfigs_.getMutableMap().put(platformConfigs.getKey(), platformConfigs.getValue());
+              platformConfigs_.getMutableMap().put(
+                  platformConfigs__.getKey(), platformConfigs__.getValue());
               break;
             }
           }
@@ -779,6 +809,7 @@ public final class PlatformConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -913,15 +944,13 @@ public final class PlatformConfigProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig> entry
-           : internalGetPlatformConfigs().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig>
-        platformConfigs = PlatformConfigsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(1, platformConfigs);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetPlatformConfigs(),
+          PlatformConfigsDefaultEntryHolder.defaultEntry,
+          1);
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -932,18 +961,18 @@ public final class PlatformConfigProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig> entry
            : internalGetPlatformConfigs().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig>
-        platformConfigs = PlatformConfigsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        platformConfigs__ = PlatformConfigsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, platformConfigs);
+            .computeMessageSize(1, platformConfigs__);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -957,6 +986,7 @@ public final class PlatformConfigProtos {
       boolean result = true;
       result = result && internalGetPlatformConfigs().equals(
           other.internalGetPlatformConfigs());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -966,7 +996,7 @@ public final class PlatformConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (!internalGetPlatformConfigs().getMap().isEmpty()) {
         hash = (37 * hash) + PLATFORM_CONFIGS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetPlatformConfigs().hashCode();
@@ -976,6 +1006,17 @@ public final class PlatformConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1146,7 +1187,7 @@ public final class PlatformConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1159,12 +1200,12 @@ public final class PlatformConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1180,6 +1221,7 @@ public final class PlatformConfigProtos {
         if (other == com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap.getDefaultInstance()) return this;
         internalGetMutablePlatformConfigs().mergeFrom(
             other.internalGetPlatformConfigs());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1304,7 +1346,8 @@ public final class PlatformConfigProtos {
       }
 
       public Builder clearPlatformConfigs() {
-        getMutablePlatformConfigs().clear();
+        internalGetMutablePlatformConfigs().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -1319,7 +1362,8 @@ public final class PlatformConfigProtos {
       public Builder removePlatformConfigs(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutablePlatformConfigs().remove(key);
+        internalGetMutablePlatformConfigs().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -1343,7 +1387,8 @@ public final class PlatformConfigProtos {
           com.tencent.angel.config.PlatformConfigProtos.PlatformConfig value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutablePlatformConfigs().put(key, value);
+        internalGetMutablePlatformConfigs().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -1357,17 +1402,18 @@ public final class PlatformConfigProtos {
 
       public Builder putAllPlatformConfigs(
           java.util.Map<java.lang.String, com.tencent.angel.config.PlatformConfigProtos.PlatformConfig> values) {
-        getMutablePlatformConfigs().putAll(values);
+        internalGetMutablePlatformConfigs().getMutableMap()
+            .putAll(values);
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1390,7 +1436,7 @@ public final class PlatformConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PlatformConfigMap(input, extensionRegistry);
+        return new PlatformConfigMap(input, extensionRegistry);
       }
     };
 

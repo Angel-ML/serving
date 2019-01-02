@@ -113,7 +113,7 @@ public final class TensorShapeProtos {
      * If true, "dim.size()" must be 0.
      * </pre>
      *
-     * <code>optional bool unknown_rank = 3;</code>
+     * <code>bool unknown_rank = 3;</code>
      */
     boolean getUnknownRank();
   }
@@ -128,6 +128,7 @@ public final class TensorShapeProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.TensorShapeProto)
       TensorShapeProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TensorShapeProto.newBuilder() to construct.
     private TensorShapeProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -140,14 +141,19 @@ public final class TensorShapeProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TensorShapeProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -157,7 +163,8 @@ public final class TensorShapeProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -187,6 +194,7 @@ public final class TensorShapeProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           dim_ = java.util.Collections.unmodifiableList(dim_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -215,7 +223,7 @@ public final class TensorShapeProtos {
        * a TensorShapeProto containing a dim value of -1.
        * </pre>
        *
-       * <code>optional int64 size = 1;</code>
+       * <code>int64 size = 1;</code>
        */
       long getSize();
 
@@ -224,7 +232,7 @@ public final class TensorShapeProtos {
        * Optional name of the tensor dimension.
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       java.lang.String getName();
       /**
@@ -232,7 +240,7 @@ public final class TensorShapeProtos {
        * Optional name of the tensor dimension.
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -248,6 +256,7 @@ public final class TensorShapeProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.TensorShapeProto.Dim)
         DimOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Dim.newBuilder() to construct.
       private Dim(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -260,14 +269,19 @@ public final class TensorShapeProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Dim(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -277,7 +291,8 @@ public final class TensorShapeProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -301,6 +316,7 @@ public final class TensorShapeProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -327,7 +343,7 @@ public final class TensorShapeProtos {
        * a TensorShapeProto containing a dim value of -1.
        * </pre>
        *
-       * <code>optional int64 size = 1;</code>
+       * <code>int64 size = 1;</code>
        */
       public long getSize() {
         return size_;
@@ -340,7 +356,7 @@ public final class TensorShapeProtos {
        * Optional name of the tensor dimension.
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -359,7 +375,7 @@ public final class TensorShapeProtos {
        * Optional name of the tensor dimension.
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -393,6 +409,7 @@ public final class TensorShapeProtos {
         if (!getNameBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -407,11 +424,11 @@ public final class TensorShapeProtos {
         if (!getNameBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -427,6 +444,7 @@ public final class TensorShapeProtos {
             == other.getSize());
         result = result && getName()
             .equals(other.getName());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -436,7 +454,7 @@ public final class TensorShapeProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + SIZE_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getSize());
@@ -447,6 +465,17 @@ public final class TensorShapeProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Dim parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Dim parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Dim parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -601,7 +630,7 @@ public final class TensorShapeProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -614,12 +643,12 @@ public final class TensorShapeProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -640,6 +669,7 @@ public final class TensorShapeProtos {
             name_ = other.name_;
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -676,7 +706,7 @@ public final class TensorShapeProtos {
          * a TensorShapeProto containing a dim value of -1.
          * </pre>
          *
-         * <code>optional int64 size = 1;</code>
+         * <code>int64 size = 1;</code>
          */
         public long getSize() {
           return size_;
@@ -690,7 +720,7 @@ public final class TensorShapeProtos {
          * a TensorShapeProto containing a dim value of -1.
          * </pre>
          *
-         * <code>optional int64 size = 1;</code>
+         * <code>int64 size = 1;</code>
          */
         public Builder setSize(long value) {
           
@@ -707,7 +737,7 @@ public final class TensorShapeProtos {
          * a TensorShapeProto containing a dim value of -1.
          * </pre>
          *
-         * <code>optional int64 size = 1;</code>
+         * <code>int64 size = 1;</code>
          */
         public Builder clearSize() {
           
@@ -722,7 +752,7 @@ public final class TensorShapeProtos {
          * Optional name of the tensor dimension.
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -741,7 +771,7 @@ public final class TensorShapeProtos {
          * Optional name of the tensor dimension.
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -761,7 +791,7 @@ public final class TensorShapeProtos {
          * Optional name of the tensor dimension.
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -778,7 +808,7 @@ public final class TensorShapeProtos {
          * Optional name of the tensor dimension.
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder clearName() {
           
@@ -791,7 +821,7 @@ public final class TensorShapeProtos {
          * Optional name of the tensor dimension.
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -806,12 +836,12 @@ public final class TensorShapeProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -834,7 +864,7 @@ public final class TensorShapeProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Dim(input, extensionRegistry);
+          return new Dim(input, extensionRegistry);
         }
       };
 
@@ -962,7 +992,7 @@ public final class TensorShapeProtos {
      * If true, "dim.size()" must be 0.
      * </pre>
      *
-     * <code>optional bool unknown_rank = 3;</code>
+     * <code>bool unknown_rank = 3;</code>
      */
     public boolean getUnknownRank() {
       return unknownRank_;
@@ -986,6 +1016,7 @@ public final class TensorShapeProtos {
       if (unknownRank_ != false) {
         output.writeBool(3, unknownRank_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1001,11 +1032,11 @@ public final class TensorShapeProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, unknownRank_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1021,6 +1052,7 @@ public final class TensorShapeProtos {
           .equals(other.getDimList());
       result = result && (getUnknownRank()
           == other.getUnknownRank());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1030,7 +1062,7 @@ public final class TensorShapeProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getDimCount() > 0) {
         hash = (37 * hash) + DIM_FIELD_NUMBER;
         hash = (53 * hash) + getDimList().hashCode();
@@ -1043,6 +1075,17 @@ public final class TensorShapeProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1213,7 +1256,7 @@ public final class TensorShapeProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1226,12 +1269,12 @@ public final class TensorShapeProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1274,6 +1317,7 @@ public final class TensorShapeProtos {
         if (other.getUnknownRank() != false) {
           setUnknownRank(other.getUnknownRank());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1782,7 +1826,7 @@ public final class TensorShapeProtos {
        * If true, "dim.size()" must be 0.
        * </pre>
        *
-       * <code>optional bool unknown_rank = 3;</code>
+       * <code>bool unknown_rank = 3;</code>
        */
       public boolean getUnknownRank() {
         return unknownRank_;
@@ -1793,7 +1837,7 @@ public final class TensorShapeProtos {
        * If true, "dim.size()" must be 0.
        * </pre>
        *
-       * <code>optional bool unknown_rank = 3;</code>
+       * <code>bool unknown_rank = 3;</code>
        */
       public Builder setUnknownRank(boolean value) {
         
@@ -1807,7 +1851,7 @@ public final class TensorShapeProtos {
        * If true, "dim.size()" must be 0.
        * </pre>
        *
-       * <code>optional bool unknown_rank = 3;</code>
+       * <code>bool unknown_rank = 3;</code>
        */
       public Builder clearUnknownRank() {
         
@@ -1817,12 +1861,12 @@ public final class TensorShapeProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1845,7 +1889,7 @@ public final class TensorShapeProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TensorShapeProto(input, extensionRegistry);
+        return new TensorShapeProto(input, extensionRegistry);
       }
     };
 

@@ -23,7 +23,7 @@ public final class ClassificationProtos {
      * Label or name of the class.
      * </pre>
      *
-     * <code>optional string label = 1;</code>
+     * <code>string label = 1;</code>
      */
     java.lang.String getLabel();
     /**
@@ -31,7 +31,7 @@ public final class ClassificationProtos {
      * Label or name of the class.
      * </pre>
      *
-     * <code>optional string label = 1;</code>
+     * <code>string label = 1;</code>
      */
     com.google.protobuf.ByteString
         getLabelBytes();
@@ -41,7 +41,7 @@ public final class ClassificationProtos {
      * Score for this class (e.g., the probability the item belongs to this class).
      * </pre>
      *
-     * <code>optional float score = 2;</code>
+     * <code>float score = 2;</code>
      */
     float getScore();
   }
@@ -56,6 +56,7 @@ public final class ClassificationProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.Class)
       ClassOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Class.newBuilder() to construct.
     private Class(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -68,14 +69,19 @@ public final class ClassificationProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Class(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -85,7 +91,8 @@ public final class ClassificationProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -109,6 +116,7 @@ public final class ClassificationProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -131,7 +139,7 @@ public final class ClassificationProtos {
      * Label or name of the class.
      * </pre>
      *
-     * <code>optional string label = 1;</code>
+     * <code>string label = 1;</code>
      */
     public java.lang.String getLabel() {
       java.lang.Object ref = label_;
@@ -150,7 +158,7 @@ public final class ClassificationProtos {
      * Label or name of the class.
      * </pre>
      *
-     * <code>optional string label = 1;</code>
+     * <code>string label = 1;</code>
      */
     public com.google.protobuf.ByteString
         getLabelBytes() {
@@ -173,7 +181,7 @@ public final class ClassificationProtos {
      * Score for this class (e.g., the probability the item belongs to this class).
      * </pre>
      *
-     * <code>optional float score = 2;</code>
+     * <code>float score = 2;</code>
      */
     public float getScore() {
       return score_;
@@ -197,6 +205,7 @@ public final class ClassificationProtos {
       if (score_ != 0F) {
         output.writeFloat(2, score_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -211,11 +220,11 @@ public final class ClassificationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(2, score_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -233,6 +242,7 @@ public final class ClassificationProtos {
           java.lang.Float.floatToIntBits(getScore())
           == java.lang.Float.floatToIntBits(
               other.getScore()));
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -242,7 +252,7 @@ public final class ClassificationProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + LABEL_FIELD_NUMBER;
       hash = (53 * hash) + getLabel().hashCode();
       hash = (37 * hash) + SCORE_FIELD_NUMBER;
@@ -253,6 +263,17 @@ public final class ClassificationProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Class parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Class parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Class parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -407,7 +428,7 @@ public final class ClassificationProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -420,12 +441,12 @@ public final class ClassificationProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -446,6 +467,7 @@ public final class ClassificationProtos {
         if (other.getScore() != 0F) {
           setScore(other.getScore());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -478,7 +500,7 @@ public final class ClassificationProtos {
        * Label or name of the class.
        * </pre>
        *
-       * <code>optional string label = 1;</code>
+       * <code>string label = 1;</code>
        */
       public java.lang.String getLabel() {
         java.lang.Object ref = label_;
@@ -497,7 +519,7 @@ public final class ClassificationProtos {
        * Label or name of the class.
        * </pre>
        *
-       * <code>optional string label = 1;</code>
+       * <code>string label = 1;</code>
        */
       public com.google.protobuf.ByteString
           getLabelBytes() {
@@ -517,7 +539,7 @@ public final class ClassificationProtos {
        * Label or name of the class.
        * </pre>
        *
-       * <code>optional string label = 1;</code>
+       * <code>string label = 1;</code>
        */
       public Builder setLabel(
           java.lang.String value) {
@@ -534,7 +556,7 @@ public final class ClassificationProtos {
        * Label or name of the class.
        * </pre>
        *
-       * <code>optional string label = 1;</code>
+       * <code>string label = 1;</code>
        */
       public Builder clearLabel() {
         
@@ -547,7 +569,7 @@ public final class ClassificationProtos {
        * Label or name of the class.
        * </pre>
        *
-       * <code>optional string label = 1;</code>
+       * <code>string label = 1;</code>
        */
       public Builder setLabelBytes(
           com.google.protobuf.ByteString value) {
@@ -567,7 +589,7 @@ public final class ClassificationProtos {
        * Score for this class (e.g., the probability the item belongs to this class).
        * </pre>
        *
-       * <code>optional float score = 2;</code>
+       * <code>float score = 2;</code>
        */
       public float getScore() {
         return score_;
@@ -577,7 +599,7 @@ public final class ClassificationProtos {
        * Score for this class (e.g., the probability the item belongs to this class).
        * </pre>
        *
-       * <code>optional float score = 2;</code>
+       * <code>float score = 2;</code>
        */
       public Builder setScore(float value) {
         
@@ -590,7 +612,7 @@ public final class ClassificationProtos {
        * Score for this class (e.g., the probability the item belongs to this class).
        * </pre>
        *
-       * <code>optional float score = 2;</code>
+       * <code>float score = 2;</code>
        */
       public Builder clearScore() {
         
@@ -600,12 +622,12 @@ public final class ClassificationProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -628,7 +650,7 @@ public final class ClassificationProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Class(input, extensionRegistry);
+        return new Class(input, extensionRegistry);
       }
     };
 
@@ -686,6 +708,7 @@ public final class ClassificationProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.Classifications)
       ClassificationsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Classifications.newBuilder() to construct.
     private Classifications(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -697,14 +720,19 @@ public final class ClassificationProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Classifications(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -714,7 +742,8 @@ public final class ClassificationProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -739,6 +768,7 @@ public final class ClassificationProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           classes_ = java.util.Collections.unmodifiableList(classes_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -804,6 +834,7 @@ public final class ClassificationProtos {
       for (int i = 0; i < classes_.size(); i++) {
         output.writeMessage(1, classes_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -815,11 +846,11 @@ public final class ClassificationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, classes_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -833,6 +864,7 @@ public final class ClassificationProtos {
       boolean result = true;
       result = result && getClassesList()
           .equals(other.getClassesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -842,7 +874,7 @@ public final class ClassificationProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getClassesCount() > 0) {
         hash = (37 * hash) + CLASSES_FIELD_NUMBER;
         hash = (53 * hash) + getClassesList().hashCode();
@@ -852,6 +884,17 @@ public final class ClassificationProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Classifications parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Classifications parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.Classifications parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1017,7 +1060,7 @@ public final class ClassificationProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1030,12 +1073,12 @@ public final class ClassificationProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1075,6 +1118,7 @@ public final class ClassificationProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1343,12 +1387,12 @@ public final class ClassificationProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1371,7 +1415,7 @@ public final class ClassificationProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Classifications(input, extensionRegistry);
+        return new Classifications(input, extensionRegistry);
       }
     };
 
@@ -1430,6 +1474,7 @@ public final class ClassificationProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ClassificationResult)
       ClassificationResultOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ClassificationResult.newBuilder() to construct.
     private ClassificationResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1441,14 +1486,19 @@ public final class ClassificationProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ClassificationResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1458,7 +1508,8 @@ public final class ClassificationProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1483,6 +1534,7 @@ public final class ClassificationProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           classifications_ = java.util.Collections.unmodifiableList(classifications_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1548,6 +1600,7 @@ public final class ClassificationProtos {
       for (int i = 0; i < classifications_.size(); i++) {
         output.writeMessage(1, classifications_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1559,11 +1612,11 @@ public final class ClassificationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, classifications_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1577,6 +1630,7 @@ public final class ClassificationProtos {
       boolean result = true;
       result = result && getClassificationsList()
           .equals(other.getClassificationsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1586,7 +1640,7 @@ public final class ClassificationProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getClassificationsCount() > 0) {
         hash = (37 * hash) + CLASSIFICATIONS_FIELD_NUMBER;
         hash = (53 * hash) + getClassificationsList().hashCode();
@@ -1596,6 +1650,17 @@ public final class ClassificationProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1762,7 +1827,7 @@ public final class ClassificationProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1775,12 +1840,12 @@ public final class ClassificationProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1820,6 +1885,7 @@ public final class ClassificationProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2088,12 +2154,12 @@ public final class ClassificationProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2116,7 +2182,7 @@ public final class ClassificationProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ClassificationResult(input, extensionRegistry);
+        return new ClassificationResult(input, extensionRegistry);
       }
     };
 
@@ -2144,7 +2210,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -2152,7 +2218,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -2160,7 +2226,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -2169,7 +2235,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     boolean hasInput();
     /**
@@ -2177,7 +2243,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.Input getInput();
     /**
@@ -2185,7 +2251,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder();
   }
@@ -2196,6 +2262,7 @@ public final class ClassificationProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ClassificationRequest)
       ClassificationRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ClassificationRequest.newBuilder() to construct.
     private ClassificationRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2206,14 +2273,19 @@ public final class ClassificationProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ClassificationRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2223,7 +2295,8 @@ public final class ClassificationProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2262,6 +2335,7 @@ public final class ClassificationProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2284,7 +2358,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -2294,7 +2368,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -2304,7 +2378,7 @@ public final class ClassificationProtos {
      * Model Specification. If version is not specified, will use the latest (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -2317,7 +2391,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public boolean hasInput() {
       return input_ != null;
@@ -2327,7 +2401,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
       return input_ == null ? com.tencent.angel.serving.apis.common.InputProtos.Input.getDefaultInstance() : input_;
@@ -2337,7 +2411,7 @@ public final class ClassificationProtos {
      * Input data.
      * </pre>
      *
-     * <code>optional .angel.serving.Input input = 2;</code>
+     * <code>.angel.serving.Input input = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
       return getInput();
@@ -2361,6 +2435,7 @@ public final class ClassificationProtos {
       if (input_ != null) {
         output.writeMessage(2, getInput());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2376,11 +2451,11 @@ public final class ClassificationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getInput());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2402,6 +2477,7 @@ public final class ClassificationProtos {
         result = result && getInput()
             .equals(other.getInput());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2411,7 +2487,7 @@ public final class ClassificationProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -2425,6 +2501,17 @@ public final class ClassificationProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2591,7 +2678,7 @@ public final class ClassificationProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2604,12 +2691,12 @@ public final class ClassificationProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2629,6 +2716,7 @@ public final class ClassificationProtos {
         if (other.hasInput()) {
           mergeInput(other.getInput());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2663,7 +2751,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -2673,7 +2761,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2687,7 +2775,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2707,7 +2795,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -2725,7 +2813,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -2747,7 +2835,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -2765,7 +2853,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -2777,7 +2865,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -2792,7 +2880,7 @@ public final class ClassificationProtos {
        * Model Specification. If version is not specified, will use the latest (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -2816,7 +2904,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public boolean hasInput() {
         return inputBuilder_ != null || input_ != null;
@@ -2826,7 +2914,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input getInput() {
         if (inputBuilder_ == null) {
@@ -2840,7 +2928,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -2860,7 +2948,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder setInput(
           com.tencent.angel.serving.apis.common.InputProtos.Input.Builder builderForValue) {
@@ -2878,7 +2966,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder mergeInput(com.tencent.angel.serving.apis.common.InputProtos.Input value) {
         if (inputBuilder_ == null) {
@@ -2900,7 +2988,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public Builder clearInput() {
         if (inputBuilder_ == null) {
@@ -2918,7 +3006,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.Input.Builder getInputBuilder() {
         
@@ -2930,7 +3018,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder getInputOrBuilder() {
         if (inputBuilder_ != null) {
@@ -2945,7 +3033,7 @@ public final class ClassificationProtos {
        * Input data.
        * </pre>
        *
-       * <code>optional .angel.serving.Input input = 2;</code>
+       * <code>.angel.serving.Input input = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.InputProtos.Input, com.tencent.angel.serving.apis.common.InputProtos.Input.Builder, com.tencent.angel.serving.apis.common.InputProtos.InputOrBuilder> 
@@ -2962,12 +3050,12 @@ public final class ClassificationProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2990,7 +3078,7 @@ public final class ClassificationProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ClassificationRequest(input, extensionRegistry);
+        return new ClassificationRequest(input, extensionRegistry);
       }
     };
 
@@ -3018,7 +3106,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     boolean hasResult();
     /**
@@ -3026,7 +3114,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getResult();
     /**
@@ -3034,7 +3122,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getResultOrBuilder();
 
@@ -3043,7 +3131,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     boolean hasModelSpec();
     /**
@@ -3051,7 +3139,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -3059,7 +3147,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
   }
@@ -3070,6 +3158,7 @@ public final class ClassificationProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ClassificationResponse)
       ClassificationResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ClassificationResponse.newBuilder() to construct.
     private ClassificationResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3080,14 +3169,19 @@ public final class ClassificationProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ClassificationResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3097,7 +3191,8 @@ public final class ClassificationProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3136,6 +3231,7 @@ public final class ClassificationProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3158,7 +3254,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     public boolean hasResult() {
       return result_ != null;
@@ -3168,7 +3264,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getResult() {
       return result_ == null ? com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.getDefaultInstance() : result_;
@@ -3178,7 +3274,7 @@ public final class ClassificationProtos {
      * Result of the classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+     * <code>.angel.serving.ClassificationResult result = 1;</code>
      */
     public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getResultOrBuilder() {
       return getResult();
@@ -3191,7 +3287,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -3201,7 +3297,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -3211,7 +3307,7 @@ public final class ClassificationProtos {
      * Effective Model Specification used for classification.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 2;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -3235,6 +3331,7 @@ public final class ClassificationProtos {
       if (modelSpec_ != null) {
         output.writeMessage(2, getModelSpec());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3250,11 +3347,11 @@ public final class ClassificationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getModelSpec());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3276,6 +3373,7 @@ public final class ClassificationProtos {
         result = result && getModelSpec()
             .equals(other.getModelSpec());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3285,7 +3383,7 @@ public final class ClassificationProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasResult()) {
         hash = (37 * hash) + RESULT_FIELD_NUMBER;
         hash = (53 * hash) + getResult().hashCode();
@@ -3299,6 +3397,17 @@ public final class ClassificationProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3465,7 +3574,7 @@ public final class ClassificationProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3478,12 +3587,12 @@ public final class ClassificationProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3503,6 +3612,7 @@ public final class ClassificationProtos {
         if (other.hasModelSpec()) {
           mergeModelSpec(other.getModelSpec());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3537,7 +3647,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public boolean hasResult() {
         return resultBuilder_ != null || result_ != null;
@@ -3547,7 +3657,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult getResult() {
         if (resultBuilder_ == null) {
@@ -3561,7 +3671,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public Builder setResult(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult value) {
         if (resultBuilder_ == null) {
@@ -3581,7 +3691,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public Builder setResult(
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder builderForValue) {
@@ -3599,7 +3709,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public Builder mergeResult(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult value) {
         if (resultBuilder_ == null) {
@@ -3621,7 +3731,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public Builder clearResult() {
         if (resultBuilder_ == null) {
@@ -3639,7 +3749,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder getResultBuilder() {
         
@@ -3651,7 +3761,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder getResultOrBuilder() {
         if (resultBuilder_ != null) {
@@ -3666,7 +3776,7 @@ public final class ClassificationProtos {
        * Result of the classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ClassificationResult result = 1;</code>
+       * <code>.angel.serving.ClassificationResult result = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResult.Builder, com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResultOrBuilder> 
@@ -3690,7 +3800,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -3700,7 +3810,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -3714,7 +3824,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -3734,7 +3844,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -3752,7 +3862,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -3774,7 +3884,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -3792,7 +3902,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -3804,7 +3914,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -3819,7 +3929,7 @@ public final class ClassificationProtos {
        * Effective Model Specification used for classification.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 2;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -3836,12 +3946,12 @@ public final class ClassificationProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3864,7 +3974,7 @@ public final class ClassificationProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ClassificationResponse(input, extensionRegistry);
+        return new ClassificationResponse(input, extensionRegistry);
       }
     };
 
@@ -3926,7 +4036,7 @@ public final class ClassificationProtos {
       "ons\030\001 \003(\0132\036.angel.serving.Classification" +
       "s\"j\n\025ClassificationRequest\022,\n\nmodel_spec" +
       "\030\001 \001(\0132\030.angel.serving.ModelSpec\022#\n\005inpu" +
-      "t\030\002 \001(\0132\024.angel.serving.Input\"{\n\026Classif",
+      "t\030\002 \001(\0132\024.angel.serving.Input\"{\n\026Classif" +
       "icationResponse\0223\n\006result\030\001 \001(\0132#.angel." +
       "serving.ClassificationResult\022,\n\nmodel_sp" +
       "ec\030\002 \001(\0132\030.angel.serving.ModelSpecBC\n)co" +

@@ -38,6 +38,7 @@ public final class SerializedInputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.internal.SerializedExampleList)
       SerializedExampleListOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SerializedExampleList.newBuilder() to construct.
     private SerializedExampleList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -49,14 +50,19 @@ public final class SerializedInputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SerializedExampleList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -66,7 +72,8 @@ public final class SerializedInputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -90,6 +97,7 @@ public final class SerializedInputProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           examples_ = java.util.Collections.unmodifiableList(examples_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -142,6 +150,7 @@ public final class SerializedInputProtos {
       for (int i = 0; i < examples_.size(); i++) {
         output.writeBytes(1, examples_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -158,11 +167,11 @@ public final class SerializedInputProtos {
         size += dataSize;
         size += 1 * getExamplesList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -176,6 +185,7 @@ public final class SerializedInputProtos {
       boolean result = true;
       result = result && getExamplesList()
           .equals(other.getExamplesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -185,7 +195,7 @@ public final class SerializedInputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getExamplesCount() > 0) {
         hash = (37 * hash) + EXAMPLES_FIELD_NUMBER;
         hash = (53 * hash) + getExamplesList().hashCode();
@@ -195,6 +205,17 @@ public final class SerializedInputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -347,7 +368,7 @@ public final class SerializedInputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -360,12 +381,12 @@ public final class SerializedInputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -389,6 +410,7 @@ public final class SerializedInputProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -489,12 +511,12 @@ public final class SerializedInputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -517,7 +539,7 @@ public final class SerializedInputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SerializedExampleList(input, extensionRegistry);
+        return new SerializedExampleList(input, extensionRegistry);
       }
     };
 
@@ -554,7 +576,7 @@ public final class SerializedInputProtos {
     com.google.protobuf.ByteString getExamples(int index);
 
     /**
-     * <code>optional bytes context = 2;</code>
+     * <code>bytes context = 2;</code>
      */
     com.google.protobuf.ByteString getContext();
   }
@@ -565,6 +587,7 @@ public final class SerializedInputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.internal.SerializedExampleListWithContext)
       SerializedExampleListWithContextOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SerializedExampleListWithContext.newBuilder() to construct.
     private SerializedExampleListWithContext(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -577,14 +600,19 @@ public final class SerializedInputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SerializedExampleListWithContext(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -594,7 +622,8 @@ public final class SerializedInputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -623,6 +652,7 @@ public final class SerializedInputProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           examples_ = java.util.Collections.unmodifiableList(examples_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -664,7 +694,7 @@ public final class SerializedInputProtos {
     public static final int CONTEXT_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString context_;
     /**
-     * <code>optional bytes context = 2;</code>
+     * <code>bytes context = 2;</code>
      */
     public com.google.protobuf.ByteString getContext() {
       return context_;
@@ -688,6 +718,7 @@ public final class SerializedInputProtos {
       if (!context_.isEmpty()) {
         output.writeBytes(2, context_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -708,11 +739,11 @@ public final class SerializedInputProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, context_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -728,6 +759,7 @@ public final class SerializedInputProtos {
           .equals(other.getExamplesList());
       result = result && getContext()
           .equals(other.getContext());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -737,7 +769,7 @@ public final class SerializedInputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getExamplesCount() > 0) {
         hash = (37 * hash) + EXAMPLES_FIELD_NUMBER;
         hash = (53 * hash) + getExamplesList().hashCode();
@@ -749,6 +781,17 @@ public final class SerializedInputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -906,7 +949,7 @@ public final class SerializedInputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -919,12 +962,12 @@ public final class SerializedInputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -951,6 +994,7 @@ public final class SerializedInputProtos {
         if (other.getContext() != com.google.protobuf.ByteString.EMPTY) {
           setContext(other.getContext());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1052,13 +1096,13 @@ public final class SerializedInputProtos {
 
       private com.google.protobuf.ByteString context_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes context = 2;</code>
+       * <code>bytes context = 2;</code>
        */
       public com.google.protobuf.ByteString getContext() {
         return context_;
       }
       /**
-       * <code>optional bytes context = 2;</code>
+       * <code>bytes context = 2;</code>
        */
       public Builder setContext(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1070,7 +1114,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional bytes context = 2;</code>
+       * <code>bytes context = 2;</code>
        */
       public Builder clearContext() {
         
@@ -1080,12 +1124,12 @@ public final class SerializedInputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1108,7 +1152,7 @@ public final class SerializedInputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SerializedExampleListWithContext(input, extensionRegistry);
+        return new SerializedExampleListWithContext(input, extensionRegistry);
       }
     };
 
@@ -1132,20 +1176,28 @@ public final class SerializedInputProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     */
+    boolean hasExampleList();
+    /**
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
      */
     com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList getExampleList();
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
      */
     com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListOrBuilder getExampleListOrBuilder();
 
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     */
+    boolean hasExampleListWithContext();
+    /**
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
      */
     com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext getExampleListWithContext();
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
      */
     com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContextOrBuilder getExampleListWithContextOrBuilder();
 
@@ -1158,6 +1210,7 @@ public final class SerializedInputProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.internal.SerializedInput)
       SerializedInputOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SerializedInput.newBuilder() to construct.
     private SerializedInput(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1168,14 +1221,19 @@ public final class SerializedInputProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SerializedInput(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1185,7 +1243,8 @@ public final class SerializedInputProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1226,6 +1285,7 @@ public final class SerializedInputProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1281,7 +1341,13 @@ public final class SerializedInputProtos {
 
     public static final int EXAMPLE_LIST_FIELD_NUMBER = 1;
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     */
+    public boolean hasExampleList() {
+      return kindCase_ == 1;
+    }
+    /**
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
      */
     public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList getExampleList() {
       if (kindCase_ == 1) {
@@ -1290,7 +1356,7 @@ public final class SerializedInputProtos {
       return com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+     * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
      */
     public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListOrBuilder getExampleListOrBuilder() {
       if (kindCase_ == 1) {
@@ -1301,7 +1367,13 @@ public final class SerializedInputProtos {
 
     public static final int EXAMPLE_LIST_WITH_CONTEXT_FIELD_NUMBER = 2;
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     */
+    public boolean hasExampleListWithContext() {
+      return kindCase_ == 2;
+    }
+    /**
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
      */
     public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext getExampleListWithContext() {
       if (kindCase_ == 2) {
@@ -1310,7 +1382,7 @@ public final class SerializedInputProtos {
       return com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+     * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
      */
     public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContextOrBuilder getExampleListWithContextOrBuilder() {
       if (kindCase_ == 2) {
@@ -1337,6 +1409,7 @@ public final class SerializedInputProtos {
       if (kindCase_ == 2) {
         output.writeMessage(2, (com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext) kind_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1352,11 +1425,11 @@ public final class SerializedInputProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext) kind_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1383,6 +1456,7 @@ public final class SerializedInputProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1392,7 +1466,7 @@ public final class SerializedInputProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       switch (kindCase_) {
         case 1:
           hash = (37 * hash) + EXAMPLE_LIST_FIELD_NUMBER;
@@ -1410,6 +1484,17 @@ public final class SerializedInputProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedInput parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedInput parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedInput parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1571,7 +1656,7 @@ public final class SerializedInputProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1584,12 +1669,12 @@ public final class SerializedInputProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1616,6 +1701,7 @@ public final class SerializedInputProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1660,7 +1746,13 @@ public final class SerializedInputProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList.Builder, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListOrBuilder> exampleListBuilder_;
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       */
+      public boolean hasExampleList() {
+        return kindCase_ == 1;
+      }
+      /**
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList getExampleList() {
         if (exampleListBuilder_ == null) {
@@ -1676,7 +1768,7 @@ public final class SerializedInputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public Builder setExampleList(com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList value) {
         if (exampleListBuilder_ == null) {
@@ -1692,7 +1784,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public Builder setExampleList(
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList.Builder builderForValue) {
@@ -1706,7 +1798,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public Builder mergeExampleList(com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList value) {
         if (exampleListBuilder_ == null) {
@@ -1728,7 +1820,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public Builder clearExampleList() {
         if (exampleListBuilder_ == null) {
@@ -1747,13 +1839,13 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList.Builder getExampleListBuilder() {
         return getExampleListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListOrBuilder getExampleListOrBuilder() {
         if ((kindCase_ == 1) && (exampleListBuilder_ != null)) {
@@ -1766,7 +1858,7 @@ public final class SerializedInputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleList example_list = 1;</code>
+       * <code>.angel.serving.internal.SerializedExampleList example_list = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleList.Builder, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListOrBuilder> 
@@ -1790,7 +1882,13 @@ public final class SerializedInputProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext.Builder, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContextOrBuilder> exampleListWithContextBuilder_;
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       */
+      public boolean hasExampleListWithContext() {
+        return kindCase_ == 2;
+      }
+      /**
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext getExampleListWithContext() {
         if (exampleListWithContextBuilder_ == null) {
@@ -1806,7 +1904,7 @@ public final class SerializedInputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public Builder setExampleListWithContext(com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext value) {
         if (exampleListWithContextBuilder_ == null) {
@@ -1822,7 +1920,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public Builder setExampleListWithContext(
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext.Builder builderForValue) {
@@ -1836,7 +1934,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public Builder mergeExampleListWithContext(com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext value) {
         if (exampleListWithContextBuilder_ == null) {
@@ -1858,7 +1956,7 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public Builder clearExampleListWithContext() {
         if (exampleListWithContextBuilder_ == null) {
@@ -1877,13 +1975,13 @@ public final class SerializedInputProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext.Builder getExampleListWithContextBuilder() {
         return getExampleListWithContextFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       public com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContextOrBuilder getExampleListWithContextOrBuilder() {
         if ((kindCase_ == 2) && (exampleListWithContextBuilder_ != null)) {
@@ -1896,7 +1994,7 @@ public final class SerializedInputProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
+       * <code>.angel.serving.internal.SerializedExampleListWithContext example_list_with_context = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContext.Builder, com.tencent.angel.serving.apis.internal.SerializedInputProtos.SerializedExampleListWithContextOrBuilder> 
@@ -1918,12 +2016,12 @@ public final class SerializedInputProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1946,7 +2044,7 @@ public final class SerializedInputProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SerializedInput(input, extensionRegistry);
+        return new SerializedInput(input, extensionRegistry);
       }
     };
 
@@ -1998,7 +2096,7 @@ public final class SerializedInputProtos {
       "nal.SerializedExampleListH\000\022]\n\031example_l" +
       "ist_with_context\030\002 \001(\01328.angel.serving.i" +
       "nternal.SerializedExampleListWithContext" +
-      "H\000B\006\n\004kindBB\n\'com.tencent.angel.serving.",
+      "H\000B\006\n\004kindBB\n\'com.tencent.angel.serving." +
       "apis.internalB\025SerializedInputProtosP\000b\006" +
       "proto3"
     };

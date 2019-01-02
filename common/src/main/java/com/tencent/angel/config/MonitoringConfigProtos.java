@@ -23,7 +23,7 @@ public final class MonitoringConfigProtos {
      * Whether to expose Prometheus metrics.
      * </pre>
      *
-     * <code>optional bool enable = 1;</code>
+     * <code>bool enable = 1;</code>
      */
     boolean getEnable();
 
@@ -33,7 +33,7 @@ public final class MonitoringConfigProtos {
      * If not specified, PrometheusExporter::kPrometheusPath value is used.
      * </pre>
      *
-     * <code>optional string path = 2;</code>
+     * <code>string path = 2;</code>
      */
     java.lang.String getPath();
     /**
@@ -42,7 +42,7 @@ public final class MonitoringConfigProtos {
      * If not specified, PrometheusExporter::kPrometheusPath value is used.
      * </pre>
      *
-     * <code>optional string path = 2;</code>
+     * <code>string path = 2;</code>
      */
     com.google.protobuf.ByteString
         getPathBytes();
@@ -58,6 +58,7 @@ public final class MonitoringConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.PrometheusConfig)
       PrometheusConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use PrometheusConfig.newBuilder() to construct.
     private PrometheusConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -70,14 +71,19 @@ public final class MonitoringConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private PrometheusConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -87,7 +93,8 @@ public final class MonitoringConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -111,6 +118,7 @@ public final class MonitoringConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -133,7 +141,7 @@ public final class MonitoringConfigProtos {
      * Whether to expose Prometheus metrics.
      * </pre>
      *
-     * <code>optional bool enable = 1;</code>
+     * <code>bool enable = 1;</code>
      */
     public boolean getEnable() {
       return enable_;
@@ -147,7 +155,7 @@ public final class MonitoringConfigProtos {
      * If not specified, PrometheusExporter::kPrometheusPath value is used.
      * </pre>
      *
-     * <code>optional string path = 2;</code>
+     * <code>string path = 2;</code>
      */
     public java.lang.String getPath() {
       java.lang.Object ref = path_;
@@ -167,7 +175,7 @@ public final class MonitoringConfigProtos {
      * If not specified, PrometheusExporter::kPrometheusPath value is used.
      * </pre>
      *
-     * <code>optional string path = 2;</code>
+     * <code>string path = 2;</code>
      */
     public com.google.protobuf.ByteString
         getPathBytes() {
@@ -201,6 +209,7 @@ public final class MonitoringConfigProtos {
       if (!getPathBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, path_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -215,11 +224,11 @@ public final class MonitoringConfigProtos {
       if (!getPathBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, path_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -235,6 +244,7 @@ public final class MonitoringConfigProtos {
           == other.getEnable());
       result = result && getPath()
           .equals(other.getPath());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -244,7 +254,7 @@ public final class MonitoringConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ENABLE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getEnable());
@@ -255,6 +265,17 @@ public final class MonitoringConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -409,7 +430,7 @@ public final class MonitoringConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -422,12 +443,12 @@ public final class MonitoringConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -448,6 +469,7 @@ public final class MonitoringConfigProtos {
           path_ = other.path_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -480,7 +502,7 @@ public final class MonitoringConfigProtos {
        * Whether to expose Prometheus metrics.
        * </pre>
        *
-       * <code>optional bool enable = 1;</code>
+       * <code>bool enable = 1;</code>
        */
       public boolean getEnable() {
         return enable_;
@@ -490,7 +512,7 @@ public final class MonitoringConfigProtos {
        * Whether to expose Prometheus metrics.
        * </pre>
        *
-       * <code>optional bool enable = 1;</code>
+       * <code>bool enable = 1;</code>
        */
       public Builder setEnable(boolean value) {
         
@@ -503,7 +525,7 @@ public final class MonitoringConfigProtos {
        * Whether to expose Prometheus metrics.
        * </pre>
        *
-       * <code>optional bool enable = 1;</code>
+       * <code>bool enable = 1;</code>
        */
       public Builder clearEnable() {
         
@@ -519,7 +541,7 @@ public final class MonitoringConfigProtos {
        * If not specified, PrometheusExporter::kPrometheusPath value is used.
        * </pre>
        *
-       * <code>optional string path = 2;</code>
+       * <code>string path = 2;</code>
        */
       public java.lang.String getPath() {
         java.lang.Object ref = path_;
@@ -539,7 +561,7 @@ public final class MonitoringConfigProtos {
        * If not specified, PrometheusExporter::kPrometheusPath value is used.
        * </pre>
        *
-       * <code>optional string path = 2;</code>
+       * <code>string path = 2;</code>
        */
       public com.google.protobuf.ByteString
           getPathBytes() {
@@ -560,7 +582,7 @@ public final class MonitoringConfigProtos {
        * If not specified, PrometheusExporter::kPrometheusPath value is used.
        * </pre>
        *
-       * <code>optional string path = 2;</code>
+       * <code>string path = 2;</code>
        */
       public Builder setPath(
           java.lang.String value) {
@@ -578,7 +600,7 @@ public final class MonitoringConfigProtos {
        * If not specified, PrometheusExporter::kPrometheusPath value is used.
        * </pre>
        *
-       * <code>optional string path = 2;</code>
+       * <code>string path = 2;</code>
        */
       public Builder clearPath() {
         
@@ -592,7 +614,7 @@ public final class MonitoringConfigProtos {
        * If not specified, PrometheusExporter::kPrometheusPath value is used.
        * </pre>
        *
-       * <code>optional string path = 2;</code>
+       * <code>string path = 2;</code>
        */
       public Builder setPathBytes(
           com.google.protobuf.ByteString value) {
@@ -607,12 +629,12 @@ public final class MonitoringConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -635,7 +657,7 @@ public final class MonitoringConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PrometheusConfig(input, extensionRegistry);
+        return new PrometheusConfig(input, extensionRegistry);
       }
     };
 
@@ -659,15 +681,15 @@ public final class MonitoringConfigProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     boolean hasPrometheusConfig();
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig getPrometheusConfig();
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfigOrBuilder getPrometheusConfigOrBuilder();
   }
@@ -682,6 +704,7 @@ public final class MonitoringConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.MonitoringConfig)
       MonitoringConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MonitoringConfig.newBuilder() to construct.
     private MonitoringConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -692,14 +715,19 @@ public final class MonitoringConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MonitoringConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -709,7 +737,8 @@ public final class MonitoringConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -735,6 +764,7 @@ public final class MonitoringConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -753,19 +783,19 @@ public final class MonitoringConfigProtos {
     public static final int PROMETHEUS_CONFIG_FIELD_NUMBER = 1;
     private com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig prometheusConfig_;
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     public boolean hasPrometheusConfig() {
       return prometheusConfig_ != null;
     }
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     public com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig getPrometheusConfig() {
       return prometheusConfig_ == null ? com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig.getDefaultInstance() : prometheusConfig_;
     }
     /**
-     * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+     * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
      */
     public com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfigOrBuilder getPrometheusConfigOrBuilder() {
       return getPrometheusConfig();
@@ -786,6 +816,7 @@ public final class MonitoringConfigProtos {
       if (prometheusConfig_ != null) {
         output.writeMessage(1, getPrometheusConfig());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -797,11 +828,11 @@ public final class MonitoringConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getPrometheusConfig());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -818,6 +849,7 @@ public final class MonitoringConfigProtos {
         result = result && getPrometheusConfig()
             .equals(other.getPrometheusConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -827,7 +859,7 @@ public final class MonitoringConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasPrometheusConfig()) {
         hash = (37 * hash) + PROMETHEUS_CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getPrometheusConfig().hashCode();
@@ -837,6 +869,17 @@ public final class MonitoringConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -996,7 +1039,7 @@ public final class MonitoringConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1009,12 +1052,12 @@ public final class MonitoringConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1031,6 +1074,7 @@ public final class MonitoringConfigProtos {
         if (other.hasPrometheusConfig()) {
           mergePrometheusConfig(other.getPrometheusConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1061,13 +1105,13 @@ public final class MonitoringConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig, com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig.Builder, com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfigOrBuilder> prometheusConfigBuilder_;
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public boolean hasPrometheusConfig() {
         return prometheusConfigBuilder_ != null || prometheusConfig_ != null;
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig getPrometheusConfig() {
         if (prometheusConfigBuilder_ == null) {
@@ -1077,7 +1121,7 @@ public final class MonitoringConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public Builder setPrometheusConfig(com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig value) {
         if (prometheusConfigBuilder_ == null) {
@@ -1093,7 +1137,7 @@ public final class MonitoringConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public Builder setPrometheusConfig(
           com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig.Builder builderForValue) {
@@ -1107,7 +1151,7 @@ public final class MonitoringConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public Builder mergePrometheusConfig(com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig value) {
         if (prometheusConfigBuilder_ == null) {
@@ -1125,7 +1169,7 @@ public final class MonitoringConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public Builder clearPrometheusConfig() {
         if (prometheusConfigBuilder_ == null) {
@@ -1139,7 +1183,7 @@ public final class MonitoringConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig.Builder getPrometheusConfigBuilder() {
         
@@ -1147,7 +1191,7 @@ public final class MonitoringConfigProtos {
         return getPrometheusConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       public com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfigOrBuilder getPrometheusConfigOrBuilder() {
         if (prometheusConfigBuilder_ != null) {
@@ -1158,7 +1202,7 @@ public final class MonitoringConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.PrometheusConfig prometheus_config = 1;</code>
+       * <code>.angel.PrometheusConfig prometheus_config = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig, com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfig.Builder, com.tencent.angel.config.MonitoringConfigProtos.PrometheusConfigOrBuilder> 
@@ -1175,12 +1219,12 @@ public final class MonitoringConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1203,7 +1247,7 @@ public final class MonitoringConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MonitoringConfig(input, extensionRegistry);
+        return new MonitoringConfig(input, extensionRegistry);
       }
     };
 

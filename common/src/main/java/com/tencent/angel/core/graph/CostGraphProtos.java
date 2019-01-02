@@ -49,6 +49,7 @@ public final class CostGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.CostGraphDef)
       CostGraphDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use CostGraphDef.newBuilder() to construct.
     private CostGraphDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -60,14 +61,19 @@ public final class CostGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private CostGraphDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -77,7 +83,8 @@ public final class CostGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -102,6 +109,7 @@ public final class CostGraphProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           node_ = java.util.Collections.unmodifiableList(node_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -126,7 +134,7 @@ public final class CostGraphProtos {
        * The name of the node. Names are globally unique.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       java.lang.String getName();
       /**
@@ -134,7 +142,7 @@ public final class CostGraphProtos {
        * The name of the node. Names are globally unique.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -145,7 +153,7 @@ public final class CostGraphProtos {
        * default partition or partitioning hasn't been run yet.
        * </pre>
        *
-       * <code>optional string device = 2;</code>
+       * <code>string device = 2;</code>
        */
       java.lang.String getDevice();
       /**
@@ -154,7 +162,7 @@ public final class CostGraphProtos {
        * default partition or partitioning hasn't been run yet.
        * </pre>
        *
-       * <code>optional string device = 2;</code>
+       * <code>string device = 2;</code>
        */
       com.google.protobuf.ByteString
           getDeviceBytes();
@@ -164,7 +172,7 @@ public final class CostGraphProtos {
        * The id of the node. Node ids are only unique inside a partition.
        * </pre>
        *
-       * <code>optional int32 id = 3;</code>
+       * <code>int32 id = 3;</code>
        */
       int getId();
 
@@ -221,7 +229,7 @@ public final class CostGraphProtos {
        * Temporary memory used by this node.
        * </pre>
        *
-       * <code>optional int64 temporary_memory_size = 6;</code>
+       * <code>int64 temporary_memory_size = 6;</code>
        */
       long getTemporaryMemorySize();
 
@@ -230,22 +238,22 @@ public final class CostGraphProtos {
        * Persistent memory used by this node.
        * </pre>
        *
-       * <code>optional int64 persistent_memory_size = 12;</code>
+       * <code>int64 persistent_memory_size = 12;</code>
        */
       long getPersistentMemorySize();
 
       /**
-       * <code>optional int64 host_temp_memory_size = 10 [deprecated = true];</code>
+       * <code>int64 host_temp_memory_size = 10 [deprecated = true];</code>
        */
       @java.lang.Deprecated long getHostTempMemorySize();
 
       /**
-       * <code>optional int64 device_temp_memory_size = 11 [deprecated = true];</code>
+       * <code>int64 device_temp_memory_size = 11 [deprecated = true];</code>
        */
       @java.lang.Deprecated long getDeviceTempMemorySize();
 
       /**
-       * <code>optional int64 device_persistent_memory_size = 16 [deprecated = true];</code>
+       * <code>int64 device_persistent_memory_size = 16 [deprecated = true];</code>
        */
       @java.lang.Deprecated long getDevicePersistentMemorySize();
 
@@ -254,7 +262,7 @@ public final class CostGraphProtos {
        * Estimate of the computational cost of this node, in microseconds.
        * </pre>
        *
-       * <code>optional int64 compute_cost = 9;</code>
+       * <code>int64 compute_cost = 9;</code>
        */
       long getComputeCost();
 
@@ -264,7 +272,7 @@ public final class CostGraphProtos {
        * microseconds.
        * </pre>
        *
-       * <code>optional int64 compute_time = 14;</code>
+       * <code>int64 compute_time = 14;</code>
        */
       long getComputeTime();
 
@@ -274,7 +282,7 @@ public final class CostGraphProtos {
        * microseconds.
        * </pre>
        *
-       * <code>optional int64 memory_time = 15;</code>
+       * <code>int64 memory_time = 15;</code>
        */
       long getMemoryTime();
 
@@ -284,7 +292,7 @@ public final class CostGraphProtos {
        * node is part of the "final output". Nodes may depend on final nodes.
        * </pre>
        *
-       * <code>optional bool is_final = 7;</code>
+       * <code>bool is_final = 7;</code>
        */
       boolean getIsFinal();
 
@@ -318,7 +326,7 @@ public final class CostGraphProtos {
        * Are the costs inaccurate?
        * </pre>
        *
-       * <code>optional bool inaccurate = 17;</code>
+       * <code>bool inaccurate = 17;</code>
        */
       boolean getInaccurate();
     }
@@ -329,6 +337,7 @@ public final class CostGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CostGraphDef.Node)
         NodeOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Node.newBuilder() to construct.
       private Node(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -355,14 +364,19 @@ public final class CostGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Node(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -372,7 +386,8 @@ public final class CostGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -500,6 +515,7 @@ public final class CostGraphProtos {
           if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
             controlInput_ = java.util.Collections.unmodifiableList(controlInput_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -520,12 +536,12 @@ public final class CostGraphProtos {
           com.google.protobuf.MessageOrBuilder {
 
         /**
-         * <code>optional int32 preceding_node = 1;</code>
+         * <code>int32 preceding_node = 1;</code>
          */
         int getPrecedingNode();
 
         /**
-         * <code>optional int32 preceding_port = 2;</code>
+         * <code>int32 preceding_port = 2;</code>
          */
         int getPrecedingPort();
       }
@@ -542,6 +558,7 @@ public final class CostGraphProtos {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:angel.CostGraphDef.Node.InputInfo)
           InputInfoOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use InputInfo.newBuilder() to construct.
         private InputInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -554,14 +571,19 @@ public final class CostGraphProtos {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private InputInfo(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -571,7 +593,8 @@ public final class CostGraphProtos {
                   done = true;
                   break;
                 default: {
-                  if (!input.skipField(tag)) {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
                     done = true;
                   }
                   break;
@@ -594,6 +617,7 @@ public final class CostGraphProtos {
             throw new com.google.protobuf.InvalidProtocolBufferException(
                 e).setUnfinishedMessage(this);
           } finally {
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -612,7 +636,7 @@ public final class CostGraphProtos {
         public static final int PRECEDING_NODE_FIELD_NUMBER = 1;
         private int precedingNode_;
         /**
-         * <code>optional int32 preceding_node = 1;</code>
+         * <code>int32 preceding_node = 1;</code>
          */
         public int getPrecedingNode() {
           return precedingNode_;
@@ -621,7 +645,7 @@ public final class CostGraphProtos {
         public static final int PRECEDING_PORT_FIELD_NUMBER = 2;
         private int precedingPort_;
         /**
-         * <code>optional int32 preceding_port = 2;</code>
+         * <code>int32 preceding_port = 2;</code>
          */
         public int getPrecedingPort() {
           return precedingPort_;
@@ -645,6 +669,7 @@ public final class CostGraphProtos {
           if (precedingPort_ != 0) {
             output.writeInt32(2, precedingPort_);
           }
+          unknownFields.writeTo(output);
         }
 
         public int getSerializedSize() {
@@ -660,11 +685,11 @@ public final class CostGraphProtos {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(2, precedingPort_);
           }
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -680,6 +705,7 @@ public final class CostGraphProtos {
               == other.getPrecedingNode());
           result = result && (getPrecedingPort()
               == other.getPrecedingPort());
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -689,7 +715,7 @@ public final class CostGraphProtos {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           hash = (37 * hash) + PRECEDING_NODE_FIELD_NUMBER;
           hash = (53 * hash) + getPrecedingNode();
           hash = (37 * hash) + PRECEDING_PORT_FIELD_NUMBER;
@@ -699,6 +725,17 @@ public final class CostGraphProtos {
           return hash;
         }
 
+        public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.InputInfo parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.InputInfo parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.InputInfo parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -855,7 +892,7 @@ public final class CostGraphProtos {
           }
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
           public Builder clearField(
@@ -868,12 +905,12 @@ public final class CostGraphProtos {
           }
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
           public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -893,6 +930,7 @@ public final class CostGraphProtos {
             if (other.getPrecedingPort() != 0) {
               setPrecedingPort(other.getPrecedingPort());
             }
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
@@ -921,13 +959,13 @@ public final class CostGraphProtos {
 
           private int precedingNode_ ;
           /**
-           * <code>optional int32 preceding_node = 1;</code>
+           * <code>int32 preceding_node = 1;</code>
            */
           public int getPrecedingNode() {
             return precedingNode_;
           }
           /**
-           * <code>optional int32 preceding_node = 1;</code>
+           * <code>int32 preceding_node = 1;</code>
            */
           public Builder setPrecedingNode(int value) {
             
@@ -936,7 +974,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional int32 preceding_node = 1;</code>
+           * <code>int32 preceding_node = 1;</code>
            */
           public Builder clearPrecedingNode() {
             
@@ -947,13 +985,13 @@ public final class CostGraphProtos {
 
           private int precedingPort_ ;
           /**
-           * <code>optional int32 preceding_port = 2;</code>
+           * <code>int32 preceding_port = 2;</code>
            */
           public int getPrecedingPort() {
             return precedingPort_;
           }
           /**
-           * <code>optional int32 preceding_port = 2;</code>
+           * <code>int32 preceding_port = 2;</code>
            */
           public Builder setPrecedingPort(int value) {
             
@@ -962,7 +1000,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional int32 preceding_port = 2;</code>
+           * <code>int32 preceding_port = 2;</code>
            */
           public Builder clearPrecedingPort() {
             
@@ -972,12 +1010,12 @@ public final class CostGraphProtos {
           }
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -1000,7 +1038,7 @@ public final class CostGraphProtos {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new InputInfo(input, extensionRegistry);
+            return new InputInfo(input, extensionRegistry);
           }
         };
 
@@ -1024,7 +1062,7 @@ public final class CostGraphProtos {
           com.google.protobuf.MessageOrBuilder {
 
         /**
-         * <code>optional int64 size = 1;</code>
+         * <code>int64 size = 1;</code>
          */
         long getSize();
 
@@ -1035,29 +1073,29 @@ public final class CostGraphProtos {
          * those pointers.
          * </pre>
          *
-         * <code>optional int64 alias_input_port = 2;</code>
+         * <code>int64 alias_input_port = 2;</code>
          */
         long getAliasInputPort();
 
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         boolean hasShape();
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape();
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder();
 
         /**
-         * <code>optional .angel.DataType dtype = 4;</code>
+         * <code>.angel.DataType dtype = 4;</code>
          */
         int getDtypeValue();
         /**
-         * <code>optional .angel.DataType dtype = 4;</code>
+         * <code>.angel.DataType dtype = 4;</code>
          */
         com.tencent.angel.core.graph.TypesProtos.DataType getDtype();
       }
@@ -1072,6 +1110,7 @@ public final class CostGraphProtos {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:angel.CostGraphDef.Node.OutputInfo)
           OutputInfoOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use OutputInfo.newBuilder() to construct.
         private OutputInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -1085,14 +1124,19 @@ public final class CostGraphProtos {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private OutputInfo(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -1102,7 +1146,8 @@ public final class CostGraphProtos {
                   done = true;
                   break;
                 default: {
-                  if (!input.skipField(tag)) {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
                     done = true;
                   }
                   break;
@@ -1144,6 +1189,7 @@ public final class CostGraphProtos {
             throw new com.google.protobuf.InvalidProtocolBufferException(
                 e).setUnfinishedMessage(this);
           } finally {
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -1162,7 +1208,7 @@ public final class CostGraphProtos {
         public static final int SIZE_FIELD_NUMBER = 1;
         private long size_;
         /**
-         * <code>optional int64 size = 1;</code>
+         * <code>int64 size = 1;</code>
          */
         public long getSize() {
           return size_;
@@ -1177,7 +1223,7 @@ public final class CostGraphProtos {
          * those pointers.
          * </pre>
          *
-         * <code>optional int64 alias_input_port = 2;</code>
+         * <code>int64 alias_input_port = 2;</code>
          */
         public long getAliasInputPort() {
           return aliasInputPort_;
@@ -1186,19 +1232,19 @@ public final class CostGraphProtos {
         public static final int SHAPE_FIELD_NUMBER = 3;
         private com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto shape_;
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         public boolean hasShape() {
           return shape_ != null;
         }
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
           return shape_ == null ? com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : shape_;
         }
         /**
-         * <code>optional .angel.TensorShapeProto shape = 3;</code>
+         * <code>.angel.TensorShapeProto shape = 3;</code>
          */
         public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
           return getShape();
@@ -1207,13 +1253,13 @@ public final class CostGraphProtos {
         public static final int DTYPE_FIELD_NUMBER = 4;
         private int dtype_;
         /**
-         * <code>optional .angel.DataType dtype = 4;</code>
+         * <code>.angel.DataType dtype = 4;</code>
          */
         public int getDtypeValue() {
           return dtype_;
         }
         /**
-         * <code>optional .angel.DataType dtype = 4;</code>
+         * <code>.angel.DataType dtype = 4;</code>
          */
         public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
           com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
@@ -1244,6 +1290,7 @@ public final class CostGraphProtos {
           if (dtype_ != com.tencent.angel.core.graph.TypesProtos.DataType.DT_INVALID.getNumber()) {
             output.writeEnum(4, dtype_);
           }
+          unknownFields.writeTo(output);
         }
 
         public int getSerializedSize() {
@@ -1267,11 +1314,11 @@ public final class CostGraphProtos {
             size += com.google.protobuf.CodedOutputStream
               .computeEnumSize(4, dtype_);
           }
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -1293,6 +1340,7 @@ public final class CostGraphProtos {
                 .equals(other.getShape());
           }
           result = result && dtype_ == other.dtype_;
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -1302,7 +1350,7 @@ public final class CostGraphProtos {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           hash = (37 * hash) + SIZE_FIELD_NUMBER;
           hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
               getSize());
@@ -1320,6 +1368,17 @@ public final class CostGraphProtos {
           return hash;
         }
 
+        public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.OutputInfo parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.OutputInfo parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node.OutputInfo parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1488,7 +1547,7 @@ public final class CostGraphProtos {
           }
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
           public Builder clearField(
@@ -1501,12 +1560,12 @@ public final class CostGraphProtos {
           }
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
           public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1532,6 +1591,7 @@ public final class CostGraphProtos {
             if (other.dtype_ != 0) {
               setDtypeValue(other.getDtypeValue());
             }
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
@@ -1560,13 +1620,13 @@ public final class CostGraphProtos {
 
           private long size_ ;
           /**
-           * <code>optional int64 size = 1;</code>
+           * <code>int64 size = 1;</code>
            */
           public long getSize() {
             return size_;
           }
           /**
-           * <code>optional int64 size = 1;</code>
+           * <code>int64 size = 1;</code>
            */
           public Builder setSize(long value) {
             
@@ -1575,7 +1635,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional int64 size = 1;</code>
+           * <code>int64 size = 1;</code>
            */
           public Builder clearSize() {
             
@@ -1592,7 +1652,7 @@ public final class CostGraphProtos {
            * those pointers.
            * </pre>
            *
-           * <code>optional int64 alias_input_port = 2;</code>
+           * <code>int64 alias_input_port = 2;</code>
            */
           public long getAliasInputPort() {
             return aliasInputPort_;
@@ -1604,7 +1664,7 @@ public final class CostGraphProtos {
            * those pointers.
            * </pre>
            *
-           * <code>optional int64 alias_input_port = 2;</code>
+           * <code>int64 alias_input_port = 2;</code>
            */
           public Builder setAliasInputPort(long value) {
             
@@ -1619,7 +1679,7 @@ public final class CostGraphProtos {
            * those pointers.
            * </pre>
            *
-           * <code>optional int64 alias_input_port = 2;</code>
+           * <code>int64 alias_input_port = 2;</code>
            */
           public Builder clearAliasInputPort() {
             
@@ -1632,13 +1692,13 @@ public final class CostGraphProtos {
           private com.google.protobuf.SingleFieldBuilderV3<
               com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> shapeBuilder_;
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public boolean hasShape() {
             return shapeBuilder_ != null || shape_ != null;
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getShape() {
             if (shapeBuilder_ == null) {
@@ -1648,7 +1708,7 @@ public final class CostGraphProtos {
             }
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public Builder setShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
             if (shapeBuilder_ == null) {
@@ -1664,7 +1724,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public Builder setShape(
               com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
@@ -1678,7 +1738,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public Builder mergeShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
             if (shapeBuilder_ == null) {
@@ -1696,7 +1756,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public Builder clearShape() {
             if (shapeBuilder_ == null) {
@@ -1710,7 +1770,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder getShapeBuilder() {
             
@@ -1718,7 +1778,7 @@ public final class CostGraphProtos {
             return getShapeFieldBuilder().getBuilder();
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getShapeOrBuilder() {
             if (shapeBuilder_ != null) {
@@ -1729,7 +1789,7 @@ public final class CostGraphProtos {
             }
           }
           /**
-           * <code>optional .angel.TensorShapeProto shape = 3;</code>
+           * <code>.angel.TensorShapeProto shape = 3;</code>
            */
           private com.google.protobuf.SingleFieldBuilderV3<
               com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> 
@@ -1747,13 +1807,13 @@ public final class CostGraphProtos {
 
           private int dtype_ = 0;
           /**
-           * <code>optional .angel.DataType dtype = 4;</code>
+           * <code>.angel.DataType dtype = 4;</code>
            */
           public int getDtypeValue() {
             return dtype_;
           }
           /**
-           * <code>optional .angel.DataType dtype = 4;</code>
+           * <code>.angel.DataType dtype = 4;</code>
            */
           public Builder setDtypeValue(int value) {
             dtype_ = value;
@@ -1761,14 +1821,14 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.DataType dtype = 4;</code>
+           * <code>.angel.DataType dtype = 4;</code>
            */
           public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
             com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
             return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
           }
           /**
-           * <code>optional .angel.DataType dtype = 4;</code>
+           * <code>.angel.DataType dtype = 4;</code>
            */
           public Builder setDtype(com.tencent.angel.core.graph.TypesProtos.DataType value) {
             if (value == null) {
@@ -1780,7 +1840,7 @@ public final class CostGraphProtos {
             return this;
           }
           /**
-           * <code>optional .angel.DataType dtype = 4;</code>
+           * <code>.angel.DataType dtype = 4;</code>
            */
           public Builder clearDtype() {
             
@@ -1790,12 +1850,12 @@ public final class CostGraphProtos {
           }
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -1818,7 +1878,7 @@ public final class CostGraphProtos {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new OutputInfo(input, extensionRegistry);
+            return new OutputInfo(input, extensionRegistry);
           }
         };
 
@@ -1845,7 +1905,7 @@ public final class CostGraphProtos {
        * The name of the node. Names are globally unique.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1864,7 +1924,7 @@ public final class CostGraphProtos {
        * The name of the node. Names are globally unique.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1888,7 +1948,7 @@ public final class CostGraphProtos {
        * default partition or partitioning hasn't been run yet.
        * </pre>
        *
-       * <code>optional string device = 2;</code>
+       * <code>string device = 2;</code>
        */
       public java.lang.String getDevice() {
         java.lang.Object ref = device_;
@@ -1908,7 +1968,7 @@ public final class CostGraphProtos {
        * default partition or partitioning hasn't been run yet.
        * </pre>
        *
-       * <code>optional string device = 2;</code>
+       * <code>string device = 2;</code>
        */
       public com.google.protobuf.ByteString
           getDeviceBytes() {
@@ -1931,7 +1991,7 @@ public final class CostGraphProtos {
        * The id of the node. Node ids are only unique inside a partition.
        * </pre>
        *
-       * <code>optional int32 id = 3;</code>
+       * <code>int32 id = 3;</code>
        */
       public int getId() {
         return id_;
@@ -2014,7 +2074,7 @@ public final class CostGraphProtos {
        * Temporary memory used by this node.
        * </pre>
        *
-       * <code>optional int64 temporary_memory_size = 6;</code>
+       * <code>int64 temporary_memory_size = 6;</code>
        */
       public long getTemporaryMemorySize() {
         return temporaryMemorySize_;
@@ -2027,7 +2087,7 @@ public final class CostGraphProtos {
        * Persistent memory used by this node.
        * </pre>
        *
-       * <code>optional int64 persistent_memory_size = 12;</code>
+       * <code>int64 persistent_memory_size = 12;</code>
        */
       public long getPersistentMemorySize() {
         return persistentMemorySize_;
@@ -2036,7 +2096,7 @@ public final class CostGraphProtos {
       public static final int HOST_TEMP_MEMORY_SIZE_FIELD_NUMBER = 10;
       private long hostTempMemorySize_;
       /**
-       * <code>optional int64 host_temp_memory_size = 10 [deprecated = true];</code>
+       * <code>int64 host_temp_memory_size = 10 [deprecated = true];</code>
        */
       @java.lang.Deprecated public long getHostTempMemorySize() {
         return hostTempMemorySize_;
@@ -2045,7 +2105,7 @@ public final class CostGraphProtos {
       public static final int DEVICE_TEMP_MEMORY_SIZE_FIELD_NUMBER = 11;
       private long deviceTempMemorySize_;
       /**
-       * <code>optional int64 device_temp_memory_size = 11 [deprecated = true];</code>
+       * <code>int64 device_temp_memory_size = 11 [deprecated = true];</code>
        */
       @java.lang.Deprecated public long getDeviceTempMemorySize() {
         return deviceTempMemorySize_;
@@ -2054,7 +2114,7 @@ public final class CostGraphProtos {
       public static final int DEVICE_PERSISTENT_MEMORY_SIZE_FIELD_NUMBER = 16;
       private long devicePersistentMemorySize_;
       /**
-       * <code>optional int64 device_persistent_memory_size = 16 [deprecated = true];</code>
+       * <code>int64 device_persistent_memory_size = 16 [deprecated = true];</code>
        */
       @java.lang.Deprecated public long getDevicePersistentMemorySize() {
         return devicePersistentMemorySize_;
@@ -2067,7 +2127,7 @@ public final class CostGraphProtos {
        * Estimate of the computational cost of this node, in microseconds.
        * </pre>
        *
-       * <code>optional int64 compute_cost = 9;</code>
+       * <code>int64 compute_cost = 9;</code>
        */
       public long getComputeCost() {
         return computeCost_;
@@ -2081,7 +2141,7 @@ public final class CostGraphProtos {
        * microseconds.
        * </pre>
        *
-       * <code>optional int64 compute_time = 14;</code>
+       * <code>int64 compute_time = 14;</code>
        */
       public long getComputeTime() {
         return computeTime_;
@@ -2095,7 +2155,7 @@ public final class CostGraphProtos {
        * microseconds.
        * </pre>
        *
-       * <code>optional int64 memory_time = 15;</code>
+       * <code>int64 memory_time = 15;</code>
        */
       public long getMemoryTime() {
         return memoryTime_;
@@ -2109,7 +2169,7 @@ public final class CostGraphProtos {
        * node is part of the "final output". Nodes may depend on final nodes.
        * </pre>
        *
-       * <code>optional bool is_final = 7;</code>
+       * <code>bool is_final = 7;</code>
        */
       public boolean getIsFinal() {
         return isFinal_;
@@ -2157,7 +2217,7 @@ public final class CostGraphProtos {
        * Are the costs inaccurate?
        * </pre>
        *
-       * <code>optional bool inaccurate = 17;</code>
+       * <code>bool inaccurate = 17;</code>
        */
       public boolean getInaccurate() {
         return inaccurate_;
@@ -2228,6 +2288,7 @@ public final class CostGraphProtos {
         if (inaccurate_ != false) {
           output.writeBool(17, inaccurate_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -2307,11 +2368,11 @@ public final class CostGraphProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(17, inaccurate_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -2355,6 +2416,7 @@ public final class CostGraphProtos {
             .equals(other.getControlInputList());
         result = result && (getInaccurate()
             == other.getInaccurate());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -2364,7 +2426,7 @@ public final class CostGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
         hash = (37 * hash) + DEVICE_FIELD_NUMBER;
@@ -2418,6 +2480,17 @@ public final class CostGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef.Node parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2643,7 +2716,7 @@ public final class CostGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -2656,12 +2729,12 @@ public final class CostGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2778,6 +2851,7 @@ public final class CostGraphProtos {
           if (other.getInaccurate() != false) {
             setInaccurate(other.getInaccurate());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -2811,7 +2885,7 @@ public final class CostGraphProtos {
          * The name of the node. Names are globally unique.
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -2830,7 +2904,7 @@ public final class CostGraphProtos {
          * The name of the node. Names are globally unique.
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -2850,7 +2924,7 @@ public final class CostGraphProtos {
          * The name of the node. Names are globally unique.
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -2867,7 +2941,7 @@ public final class CostGraphProtos {
          * The name of the node. Names are globally unique.
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder clearName() {
           
@@ -2880,7 +2954,7 @@ public final class CostGraphProtos {
          * The name of the node. Names are globally unique.
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -2901,7 +2975,7 @@ public final class CostGraphProtos {
          * default partition or partitioning hasn't been run yet.
          * </pre>
          *
-         * <code>optional string device = 2;</code>
+         * <code>string device = 2;</code>
          */
         public java.lang.String getDevice() {
           java.lang.Object ref = device_;
@@ -2921,7 +2995,7 @@ public final class CostGraphProtos {
          * default partition or partitioning hasn't been run yet.
          * </pre>
          *
-         * <code>optional string device = 2;</code>
+         * <code>string device = 2;</code>
          */
         public com.google.protobuf.ByteString
             getDeviceBytes() {
@@ -2942,7 +3016,7 @@ public final class CostGraphProtos {
          * default partition or partitioning hasn't been run yet.
          * </pre>
          *
-         * <code>optional string device = 2;</code>
+         * <code>string device = 2;</code>
          */
         public Builder setDevice(
             java.lang.String value) {
@@ -2960,7 +3034,7 @@ public final class CostGraphProtos {
          * default partition or partitioning hasn't been run yet.
          * </pre>
          *
-         * <code>optional string device = 2;</code>
+         * <code>string device = 2;</code>
          */
         public Builder clearDevice() {
           
@@ -2974,7 +3048,7 @@ public final class CostGraphProtos {
          * default partition or partitioning hasn't been run yet.
          * </pre>
          *
-         * <code>optional string device = 2;</code>
+         * <code>string device = 2;</code>
          */
         public Builder setDeviceBytes(
             com.google.protobuf.ByteString value) {
@@ -2994,7 +3068,7 @@ public final class CostGraphProtos {
          * The id of the node. Node ids are only unique inside a partition.
          * </pre>
          *
-         * <code>optional int32 id = 3;</code>
+         * <code>int32 id = 3;</code>
          */
         public int getId() {
           return id_;
@@ -3004,7 +3078,7 @@ public final class CostGraphProtos {
          * The id of the node. Node ids are only unique inside a partition.
          * </pre>
          *
-         * <code>optional int32 id = 3;</code>
+         * <code>int32 id = 3;</code>
          */
         public Builder setId(int value) {
           
@@ -3017,7 +3091,7 @@ public final class CostGraphProtos {
          * The id of the node. Node ids are only unique inside a partition.
          * </pre>
          *
-         * <code>optional int32 id = 3;</code>
+         * <code>int32 id = 3;</code>
          */
         public Builder clearId() {
           
@@ -3512,7 +3586,7 @@ public final class CostGraphProtos {
          * Temporary memory used by this node.
          * </pre>
          *
-         * <code>optional int64 temporary_memory_size = 6;</code>
+         * <code>int64 temporary_memory_size = 6;</code>
          */
         public long getTemporaryMemorySize() {
           return temporaryMemorySize_;
@@ -3522,7 +3596,7 @@ public final class CostGraphProtos {
          * Temporary memory used by this node.
          * </pre>
          *
-         * <code>optional int64 temporary_memory_size = 6;</code>
+         * <code>int64 temporary_memory_size = 6;</code>
          */
         public Builder setTemporaryMemorySize(long value) {
           
@@ -3535,7 +3609,7 @@ public final class CostGraphProtos {
          * Temporary memory used by this node.
          * </pre>
          *
-         * <code>optional int64 temporary_memory_size = 6;</code>
+         * <code>int64 temporary_memory_size = 6;</code>
          */
         public Builder clearTemporaryMemorySize() {
           
@@ -3550,7 +3624,7 @@ public final class CostGraphProtos {
          * Persistent memory used by this node.
          * </pre>
          *
-         * <code>optional int64 persistent_memory_size = 12;</code>
+         * <code>int64 persistent_memory_size = 12;</code>
          */
         public long getPersistentMemorySize() {
           return persistentMemorySize_;
@@ -3560,7 +3634,7 @@ public final class CostGraphProtos {
          * Persistent memory used by this node.
          * </pre>
          *
-         * <code>optional int64 persistent_memory_size = 12;</code>
+         * <code>int64 persistent_memory_size = 12;</code>
          */
         public Builder setPersistentMemorySize(long value) {
           
@@ -3573,7 +3647,7 @@ public final class CostGraphProtos {
          * Persistent memory used by this node.
          * </pre>
          *
-         * <code>optional int64 persistent_memory_size = 12;</code>
+         * <code>int64 persistent_memory_size = 12;</code>
          */
         public Builder clearPersistentMemorySize() {
           
@@ -3584,13 +3658,13 @@ public final class CostGraphProtos {
 
         private long hostTempMemorySize_ ;
         /**
-         * <code>optional int64 host_temp_memory_size = 10 [deprecated = true];</code>
+         * <code>int64 host_temp_memory_size = 10 [deprecated = true];</code>
          */
         @java.lang.Deprecated public long getHostTempMemorySize() {
           return hostTempMemorySize_;
         }
         /**
-         * <code>optional int64 host_temp_memory_size = 10 [deprecated = true];</code>
+         * <code>int64 host_temp_memory_size = 10 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder setHostTempMemorySize(long value) {
           
@@ -3599,7 +3673,7 @@ public final class CostGraphProtos {
           return this;
         }
         /**
-         * <code>optional int64 host_temp_memory_size = 10 [deprecated = true];</code>
+         * <code>int64 host_temp_memory_size = 10 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder clearHostTempMemorySize() {
           
@@ -3610,13 +3684,13 @@ public final class CostGraphProtos {
 
         private long deviceTempMemorySize_ ;
         /**
-         * <code>optional int64 device_temp_memory_size = 11 [deprecated = true];</code>
+         * <code>int64 device_temp_memory_size = 11 [deprecated = true];</code>
          */
         @java.lang.Deprecated public long getDeviceTempMemorySize() {
           return deviceTempMemorySize_;
         }
         /**
-         * <code>optional int64 device_temp_memory_size = 11 [deprecated = true];</code>
+         * <code>int64 device_temp_memory_size = 11 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder setDeviceTempMemorySize(long value) {
           
@@ -3625,7 +3699,7 @@ public final class CostGraphProtos {
           return this;
         }
         /**
-         * <code>optional int64 device_temp_memory_size = 11 [deprecated = true];</code>
+         * <code>int64 device_temp_memory_size = 11 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder clearDeviceTempMemorySize() {
           
@@ -3636,13 +3710,13 @@ public final class CostGraphProtos {
 
         private long devicePersistentMemorySize_ ;
         /**
-         * <code>optional int64 device_persistent_memory_size = 16 [deprecated = true];</code>
+         * <code>int64 device_persistent_memory_size = 16 [deprecated = true];</code>
          */
         @java.lang.Deprecated public long getDevicePersistentMemorySize() {
           return devicePersistentMemorySize_;
         }
         /**
-         * <code>optional int64 device_persistent_memory_size = 16 [deprecated = true];</code>
+         * <code>int64 device_persistent_memory_size = 16 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder setDevicePersistentMemorySize(long value) {
           
@@ -3651,7 +3725,7 @@ public final class CostGraphProtos {
           return this;
         }
         /**
-         * <code>optional int64 device_persistent_memory_size = 16 [deprecated = true];</code>
+         * <code>int64 device_persistent_memory_size = 16 [deprecated = true];</code>
          */
         @java.lang.Deprecated public Builder clearDevicePersistentMemorySize() {
           
@@ -3666,7 +3740,7 @@ public final class CostGraphProtos {
          * Estimate of the computational cost of this node, in microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_cost = 9;</code>
+         * <code>int64 compute_cost = 9;</code>
          */
         public long getComputeCost() {
           return computeCost_;
@@ -3676,7 +3750,7 @@ public final class CostGraphProtos {
          * Estimate of the computational cost of this node, in microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_cost = 9;</code>
+         * <code>int64 compute_cost = 9;</code>
          */
         public Builder setComputeCost(long value) {
           
@@ -3689,7 +3763,7 @@ public final class CostGraphProtos {
          * Estimate of the computational cost of this node, in microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_cost = 9;</code>
+         * <code>int64 compute_cost = 9;</code>
          */
         public Builder clearComputeCost() {
           
@@ -3705,7 +3779,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_time = 14;</code>
+         * <code>int64 compute_time = 14;</code>
          */
         public long getComputeTime() {
           return computeTime_;
@@ -3716,7 +3790,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_time = 14;</code>
+         * <code>int64 compute_time = 14;</code>
          */
         public Builder setComputeTime(long value) {
           
@@ -3730,7 +3804,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 compute_time = 14;</code>
+         * <code>int64 compute_time = 14;</code>
          */
         public Builder clearComputeTime() {
           
@@ -3746,7 +3820,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 memory_time = 15;</code>
+         * <code>int64 memory_time = 15;</code>
          */
         public long getMemoryTime() {
           return memoryTime_;
@@ -3757,7 +3831,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 memory_time = 15;</code>
+         * <code>int64 memory_time = 15;</code>
          */
         public Builder setMemoryTime(long value) {
           
@@ -3771,7 +3845,7 @@ public final class CostGraphProtos {
          * microseconds.
          * </pre>
          *
-         * <code>optional int64 memory_time = 15;</code>
+         * <code>int64 memory_time = 15;</code>
          */
         public Builder clearMemoryTime() {
           
@@ -3787,7 +3861,7 @@ public final class CostGraphProtos {
          * node is part of the "final output". Nodes may depend on final nodes.
          * </pre>
          *
-         * <code>optional bool is_final = 7;</code>
+         * <code>bool is_final = 7;</code>
          */
         public boolean getIsFinal() {
           return isFinal_;
@@ -3798,7 +3872,7 @@ public final class CostGraphProtos {
          * node is part of the "final output". Nodes may depend on final nodes.
          * </pre>
          *
-         * <code>optional bool is_final = 7;</code>
+         * <code>bool is_final = 7;</code>
          */
         public Builder setIsFinal(boolean value) {
           
@@ -3812,7 +3886,7 @@ public final class CostGraphProtos {
          * node is part of the "final output". Nodes may depend on final nodes.
          * </pre>
          *
-         * <code>optional bool is_final = 7;</code>
+         * <code>bool is_final = 7;</code>
          */
         public Builder clearIsFinal() {
           
@@ -3921,7 +3995,7 @@ public final class CostGraphProtos {
          * Are the costs inaccurate?
          * </pre>
          *
-         * <code>optional bool inaccurate = 17;</code>
+         * <code>bool inaccurate = 17;</code>
          */
         public boolean getInaccurate() {
           return inaccurate_;
@@ -3931,7 +4005,7 @@ public final class CostGraphProtos {
          * Are the costs inaccurate?
          * </pre>
          *
-         * <code>optional bool inaccurate = 17;</code>
+         * <code>bool inaccurate = 17;</code>
          */
         public Builder setInaccurate(boolean value) {
           
@@ -3944,7 +4018,7 @@ public final class CostGraphProtos {
          * Are the costs inaccurate?
          * </pre>
          *
-         * <code>optional bool inaccurate = 17;</code>
+         * <code>bool inaccurate = 17;</code>
          */
         public Builder clearInaccurate() {
           
@@ -3954,12 +4028,12 @@ public final class CostGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -3982,7 +4056,7 @@ public final class CostGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Node(input, extensionRegistry);
+          return new Node(input, extensionRegistry);
         }
       };
 
@@ -4051,6 +4125,7 @@ public final class CostGraphProtos {
       for (int i = 0; i < node_.size(); i++) {
         output.writeMessage(1, node_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4062,11 +4137,11 @@ public final class CostGraphProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, node_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4080,6 +4155,7 @@ public final class CostGraphProtos {
       boolean result = true;
       result = result && getNodeList()
           .equals(other.getNodeList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4089,7 +4165,7 @@ public final class CostGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getNodeCount() > 0) {
         hash = (37 * hash) + NODE_FIELD_NUMBER;
         hash = (53 * hash) + getNodeList().hashCode();
@@ -4099,6 +4175,17 @@ public final class CostGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.CostGraphProtos.CostGraphDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4260,7 +4347,7 @@ public final class CostGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4273,12 +4360,12 @@ public final class CostGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4318,6 +4405,7 @@ public final class CostGraphProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4586,12 +4674,12 @@ public final class CostGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4614,7 +4702,7 @@ public final class CostGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CostGraphDef(input, extensionRegistry);
+        return new CostGraphDef(input, extensionRegistry);
       }
     };
 
@@ -4671,7 +4759,7 @@ public final class CostGraphProtos {
       ".Node.InputInfo\0228\n\013output_info\030\005 \003(\0132#.a" +
       "ngel.CostGraphDef.Node.OutputInfo\022\035\n\025tem" +
       "porary_memory_size\030\006 \001(\003\022\036\n\026persistent_m" +
-      "emory_size\030\014 \001(\003\022!\n\025host_temp_memory_siz",
+      "emory_size\030\014 \001(\003\022!\n\025host_temp_memory_siz" +
       "e\030\n \001(\003B\002\030\001\022#\n\027device_temp_memory_size\030\013" +
       " \001(\003B\002\030\001\022)\n\035device_persistent_memory_siz" +
       "e\030\020 \001(\003B\002\030\001\022\024\n\014compute_cost\030\t \001(\003\022\024\n\014com" +
@@ -4681,7 +4769,7 @@ public final class CostGraphProtos {
       "ing_node\030\001 \001(\005\022\026\n\016preceding_port\030\002 \001(\005\032|" +
       "\n\nOutputInfo\022\014\n\004size\030\001 \001(\003\022\030\n\020alias_inpu" +
       "t_port\030\002 \001(\003\022&\n\005shape\030\003 \001(\0132\027.angel.Tens" +
-      "orShapeProto\022\036\n\005dtype\030\004 \001(\0162\017.angel.Data",
+      "orShapeProto\022\036\n\005dtype\030\004 \001(\0162\017.angel.Data" +
       "TypeB1\n\034com.tencent.angel.core.graphB\017Co" +
       "stGraphProtosP\000b\006proto3"
     };

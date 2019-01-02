@@ -25,7 +25,7 @@ public final class NodeProto {
      * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -35,7 +35,7 @@ public final class NodeProto {
      * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -46,7 +46,7 @@ public final class NodeProto {
      * Op names starting with an underscore are reserved for internal use.
      * </pre>
      *
-     * <code>optional string op = 2;</code>
+     * <code>string op = 2;</code>
      */
     java.lang.String getOp();
     /**
@@ -55,7 +55,7 @@ public final class NodeProto {
      * Op names starting with an underscore are reserved for internal use.
      * </pre>
      *
-     * <code>optional string op = 2;</code>
+     * <code>string op = 2;</code>
      */
     com.google.protobuf.ByteString
         getOpBytes();
@@ -131,7 +131,7 @@ public final class NodeProto {
      * choose a device automatically.
      * </pre>
      *
-     * <code>optional string device = 4;</code>
+     * <code>string device = 4;</code>
      */
     java.lang.String getDevice();
     /**
@@ -154,7 +154,7 @@ public final class NodeProto {
      * choose a device automatically.
      * </pre>
      *
-     * <code>optional string device = 4;</code>
+     * <code>string device = 4;</code>
      */
     com.google.protobuf.ByteString
         getDeviceBytes();
@@ -275,6 +275,7 @@ public final class NodeProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.NodeDef)
       NodeDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NodeDef.newBuilder() to construct.
     private NodeDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -289,14 +290,19 @@ public final class NodeProto {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NodeDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -306,7 +312,8 @@ public final class NodeProto {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -345,9 +352,10 @@ public final class NodeProto {
                 mutable_bitField0_ |= 0x00000010;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-              attr = input.readMessage(
+              attr__ = input.readMessage(
                   AttrDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              attr_.getMutableMap().put(attr.getKey(), attr.getValue());
+              attr_.getMutableMap().put(
+                  attr__.getKey(), attr__.getValue());
               break;
             }
           }
@@ -361,6 +369,7 @@ public final class NodeProto {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           input_ = input_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -397,7 +406,7 @@ public final class NodeProto {
      * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -418,7 +427,7 @@ public final class NodeProto {
      * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -442,7 +451,7 @@ public final class NodeProto {
      * Op names starting with an underscore are reserved for internal use.
      * </pre>
      *
-     * <code>optional string op = 2;</code>
+     * <code>string op = 2;</code>
      */
     public java.lang.String getOp() {
       java.lang.Object ref = op_;
@@ -462,7 +471,7 @@ public final class NodeProto {
      * Op names starting with an underscore are reserved for internal use.
      * </pre>
      *
-     * <code>optional string op = 2;</code>
+     * <code>string op = 2;</code>
      */
     public com.google.protobuf.ByteString
         getOpBytes() {
@@ -561,7 +570,7 @@ public final class NodeProto {
      * choose a device automatically.
      * </pre>
      *
-     * <code>optional string device = 4;</code>
+     * <code>string device = 4;</code>
      */
     public java.lang.String getDevice() {
       java.lang.Object ref = device_;
@@ -595,7 +604,7 @@ public final class NodeProto {
      * choose a device automatically.
      * </pre>
      *
-     * <code>optional string device = 4;</code>
+     * <code>string device = 4;</code>
      */
     public com.google.protobuf.ByteString
         getDeviceBytes() {
@@ -771,15 +780,13 @@ public final class NodeProto {
       if (!getDeviceBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, device_);
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
-           : internalGetAttr().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(5, attr);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAttr(),
+          AttrDefaultEntryHolder.defaultEntry,
+          5);
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -807,18 +814,18 @@ public final class NodeProto {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
            : internalGetAttr().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
+        attr__ = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(5, attr);
+            .computeMessageSize(5, attr__);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -840,6 +847,7 @@ public final class NodeProto {
           .equals(other.getDevice());
       result = result && internalGetAttr().equals(
           other.internalGetAttr());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -849,7 +857,7 @@ public final class NodeProto {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + OP_FIELD_NUMBER;
@@ -869,6 +877,17 @@ public final class NodeProto {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.NodeProto.NodeDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.NodeProto.NodeDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.NodeProto.NodeDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1057,7 +1076,7 @@ public final class NodeProto {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1070,12 +1089,12 @@ public final class NodeProto {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1113,6 +1132,7 @@ public final class NodeProto {
         }
         internalGetMutableAttr().mergeFrom(
             other.internalGetAttr());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1148,7 +1168,7 @@ public final class NodeProto {
        * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1169,7 +1189,7 @@ public final class NodeProto {
        * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1191,7 +1211,7 @@ public final class NodeProto {
        * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -1210,7 +1230,7 @@ public final class NodeProto {
        * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -1225,7 +1245,7 @@ public final class NodeProto {
        * Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_./]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1246,7 +1266,7 @@ public final class NodeProto {
        * Op names starting with an underscore are reserved for internal use.
        * </pre>
        *
-       * <code>optional string op = 2;</code>
+       * <code>string op = 2;</code>
        */
       public java.lang.String getOp() {
         java.lang.Object ref = op_;
@@ -1266,7 +1286,7 @@ public final class NodeProto {
        * Op names starting with an underscore are reserved for internal use.
        * </pre>
        *
-       * <code>optional string op = 2;</code>
+       * <code>string op = 2;</code>
        */
       public com.google.protobuf.ByteString
           getOpBytes() {
@@ -1287,7 +1307,7 @@ public final class NodeProto {
        * Op names starting with an underscore are reserved for internal use.
        * </pre>
        *
-       * <code>optional string op = 2;</code>
+       * <code>string op = 2;</code>
        */
       public Builder setOp(
           java.lang.String value) {
@@ -1305,7 +1325,7 @@ public final class NodeProto {
        * Op names starting with an underscore are reserved for internal use.
        * </pre>
        *
-       * <code>optional string op = 2;</code>
+       * <code>string op = 2;</code>
        */
       public Builder clearOp() {
         
@@ -1319,7 +1339,7 @@ public final class NodeProto {
        * Op names starting with an underscore are reserved for internal use.
        * </pre>
        *
-       * <code>optional string op = 2;</code>
+       * <code>string op = 2;</code>
        */
       public Builder setOpBytes(
           com.google.protobuf.ByteString value) {
@@ -1520,7 +1540,7 @@ public final class NodeProto {
        * choose a device automatically.
        * </pre>
        *
-       * <code>optional string device = 4;</code>
+       * <code>string device = 4;</code>
        */
       public java.lang.String getDevice() {
         java.lang.Object ref = device_;
@@ -1554,7 +1574,7 @@ public final class NodeProto {
        * choose a device automatically.
        * </pre>
        *
-       * <code>optional string device = 4;</code>
+       * <code>string device = 4;</code>
        */
       public com.google.protobuf.ByteString
           getDeviceBytes() {
@@ -1589,7 +1609,7 @@ public final class NodeProto {
        * choose a device automatically.
        * </pre>
        *
-       * <code>optional string device = 4;</code>
+       * <code>string device = 4;</code>
        */
       public Builder setDevice(
           java.lang.String value) {
@@ -1621,7 +1641,7 @@ public final class NodeProto {
        * choose a device automatically.
        * </pre>
        *
-       * <code>optional string device = 4;</code>
+       * <code>string device = 4;</code>
        */
       public Builder clearDevice() {
         
@@ -1649,7 +1669,7 @@ public final class NodeProto {
        * choose a device automatically.
        * </pre>
        *
-       * <code>optional string device = 4;</code>
+       * <code>string device = 4;</code>
        */
       public Builder setDeviceBytes(
           com.google.protobuf.ByteString value) {
@@ -1800,7 +1820,8 @@ public final class NodeProto {
       }
 
       public Builder clearAttr() {
-        getMutableAttr().clear();
+        internalGetMutableAttr().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -1825,7 +1846,8 @@ public final class NodeProto {
       public Builder removeAttr(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().remove(key);
+        internalGetMutableAttr().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -1859,7 +1881,8 @@ public final class NodeProto {
           com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().put(key, value);
+        internalGetMutableAttr().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -1883,17 +1906,18 @@ public final class NodeProto {
 
       public Builder putAllAttr(
           java.util.Map<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> values) {
-        getMutableAttr().putAll(values);
+        internalGetMutableAttr().getMutableMap()
+            .putAll(values);
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1916,7 +1940,7 @@ public final class NodeProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NodeDef(input, extensionRegistry);
+        return new NodeDef(input, extensionRegistry);
       }
     };
 
