@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.PolicyChoiceCase
 import com.tencent.angel.serving.serving.{FileSystemStoragePathSourceConfig, ServableToMonitor}
 import com.tencent.angel.serving.core._
-import com.tencent.angel.serving.service.ServingContext
+import com.tencent.angel.serving.service.{ModelServer, ServingContext}
 import org.apache.commons.io.FilenameUtils
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -141,12 +141,12 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def pollFileSystemForServable(servable: ServableToMonitor): List[ServableData[StoragePath]] = {
-    if (!SystemFileUtils.fileExist(servable.getBasePath, ServingContext.hadoopConfig)) {
+    if (!SystemFileUtils.fileExist(servable.getBasePath, ModelServer.hadoopConf)) {
       throw new Exception(s"Could not find base path ${servable.getBasePath} for servable ${servable.getServableName}")
     }
 
     //Retrieve a list of base-path children from the file system.
-    val children = SystemFileUtils.getChildren(servable.getBasePath, ServingContext.hadoopConfig)
+    val children = SystemFileUtils.getChildren(servable.getBasePath, ModelServer.hadoopConf)
     if (children.isEmpty) {
       throw InvalidArguments("The base path " + servable.getBasePath + " for servable " +
         servable.getServableName + "has not children")

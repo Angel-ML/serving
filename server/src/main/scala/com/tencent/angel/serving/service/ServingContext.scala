@@ -210,6 +210,4 @@ object ServingContext {
 
   case class StoragePathSourceAndRouter(source: FileSystemStoragePathSource, router: DynamicSourceRouter[StoragePath])
 
-  var hadoopConfig: Configuration = null
-
 }
