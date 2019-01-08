@@ -3,11 +3,12 @@ package com.tencent.angel.client;
 import com.google.protobuf.Int64Value;
 import com.tencent.angel.core.graph.TensorProtos.TensorProto;
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec;
+import com.tencent.angel.serving.apis.common.ValueProtos;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse;
 import com.tencent.angel.serving.apis.modelmgr.ModelServiceGrpc;
-import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest;
-import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse;
+import com.tencent.angel.serving.apis.prediction.RequestProtos.Request;
+import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response;
 import com.tencent.angel.serving.apis.prediction.PredictionServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -55,23 +56,20 @@ public class RpcClient {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
 
-    public void doPredict(String modelName, long modelVersion) {
-        List<Integer> keys = new ArrayList<Integer>();
-        List<Float> values = new ArrayList<Float>();
-        long dim = 123;
+    public void doPredict(String modelName, long modelVersion) throws Exception {
+        Map<Integer, Float> values = new HashMap<>();
+        int dim = 123;
 
         //build input tensor
         Random rand = new Random();
         for (int j = 0; j < 13; j++) {
-            keys.add(rand.nextInt((int)dim));
-            values.add(rand.nextFloat());
+            values.put(rand.nextInt(dim), rand.nextFloat());
         }
 
-        TensorProto featuresTensorProto = ProtoUtils.toTensorProto(dim, keys, values);
+        ValueProtos.Instance instance = ProtoUtils.getInstance(dim, values);
         // Generate gRPC request, signature inputs name should be correct or exceptions
         ModelSpec modelSpec = ProtoUtils.getModelSpec(modelName, modelVersion, "predict");
-        PredictRequest request = PredictRequest.newBuilder().setModelSpec(modelSpec)
-                .putInputs("inputs", featuresTensorProto).build();
+        Request request = Request.newBuilder().setModelSpec(modelSpec).addInstances(instance).build();
         GetModelStatusRequest statusRequest = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build();
         // Request gRPC server
         try {
@@ -95,10 +93,10 @@ public class RpcClient {
             asyncStub.predict(request, responseStreamObserver);
             LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));*/
             long start = System.currentTimeMillis();
-            PredictResponse response = blockingStub.predict(request);
+            Response response = blockingStub.predict(request);
             LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));
-            java.util.Map<String, TensorProto> outputs = response.getOutputsMap();
-            LOG.info(outputs.toString());
+            ValueProtos.Instance result = response.getPredictions(0);
+            LOG.info(result.toString());
             start = System.currentTimeMillis();
             GetModelStatusResponse statusResponse = modelServiceBlockingStub.getModelStatus(statusRequest);
             LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));

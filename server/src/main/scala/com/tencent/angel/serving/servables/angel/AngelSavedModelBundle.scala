@@ -11,11 +11,8 @@ import com.tencent.angel.ml.core.conf.{MLConf, SharedConf}
 import com.tencent.angel.ml.core.data.LabeledData
 import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
 import com.tencent.angel.ml.core.utils.JsonUtils
-import com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse
-import com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse
-import com.tencent.angel.serving.apis.prediction.{ClassificationProtos, InferenceProtos, PredictProtos, RegressionProtos}
-import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse
-import com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse
+import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
+import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.servables.common.SavedModelBundle
 import org.slf4j.{Logger, LoggerFactory}
@@ -33,11 +30,12 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
     AngelSavedModelBundle.unLoad()
   }
 
-  override def runClassify(runOptions: RunOptions, request: ClassificationProtos.ClassificationRequest, responseBuilder: ClassificationResponse.Builder): Unit = ???
+  override def runClassify(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def runMultiInference(runOptions: RunOptions, request: InferenceProtos.MultiInferenceRequest, responseBuilder: MultiInferenceResponse.Builder): Unit = ???
+  override def runMultiInference(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def runPredict(runOptions: RunOptions, request: PredictProtos.PredictRequest, responseBuilder: PredictResponse.Builder): Unit = {
+  override def runPredict(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
+    /*
     val modelSpec = request.getModelSpec
     val iter = request.getInputsMap.entrySet().iterator()
 
@@ -52,9 +50,10 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       LOG.info(s"res: ${res.getText}")
       responseBuilder.putOutputs(key, predictResult2TensorProto(res))
     }
+    */
   }
 
-  override def runRegress(runOptions: RunOptions, request: RegressionProtos.RegressionRequest, responseBuilder: RegressionResponse.Builder): Unit = {
+  override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
 
   }
 }

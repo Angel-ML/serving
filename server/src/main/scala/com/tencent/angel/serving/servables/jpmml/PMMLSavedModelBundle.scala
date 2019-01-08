@@ -4,11 +4,8 @@ import java.io.{File, FileInputStream, IOException}
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos
-import com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse
-import com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse
-import com.tencent.angel.serving.apis.prediction.{ClassificationProtos, InferenceProtos, PredictProtos, RegressionProtos}
-import com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse
-import com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse
+import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
+import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.servables.angel
 import com.tencent.angel.serving.servables.common.SavedModelBundle
@@ -25,15 +22,15 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
   override val metaGraphDef: MetaGraphProtos.MetaGraphDef = null
   private val evaluator: Evaluator = ModelEvaluatorFactory.newInstance.newModelEvaluator(pmml)
 
-  override def runClassify(runOptions: angel.RunOptions, request: ClassificationProtos.ClassificationRequest, responseBuilder: ClassificationResponse.Builder): Unit = ???
+  override def runClassify(runOptions: angel.RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def runMultiInference(runOptions: angel.RunOptions, request: InferenceProtos.MultiInferenceRequest, responseBuilder: MultiInferenceResponse.Builder): Unit = ???
+  override def runMultiInference(runOptions: angel.RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def runPredict(runOptions: angel.RunOptions, request: PredictProtos.PredictRequest, responseBuilder: PredictResponse.Builder): Unit = {
+  override def runPredict(runOptions: angel.RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
 
   }
 
-  override def runRegress(runOptions: angel.RunOptions, request: RegressionProtos.RegressionRequest, responseBuilder: RegressionResponse.Builder): Unit = ???
+  override def runRegress(runOptions: angel.RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
   override def unLoad(): Unit = {
     PMMLSavedModelBundle.unLoad()
