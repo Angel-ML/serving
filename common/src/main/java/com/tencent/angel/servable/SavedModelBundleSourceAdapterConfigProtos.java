@@ -25,7 +25,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
      * TODO(b/32248363): Replace this field with the "real" field(s).
      * </pre>
      *
-     * <code>optional string adapter_class_name = 10000;</code>
+     * <code>string adapter_class_name = 10000;</code>
      */
     java.lang.String getAdapterClassName();
     /**
@@ -35,21 +35,21 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
      * TODO(b/32248363): Replace this field with the "real" field(s).
      * </pre>
      *
-     * <code>optional string adapter_class_name = 10000;</code>
+     * <code>string adapter_class_name = 10000;</code>
      */
     com.google.protobuf.ByteString
         getAdapterClassNameBytes();
 
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     boolean hasLegacyConfig();
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig getLegacyConfig();
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfigOrBuilder getLegacyConfigOrBuilder();
   }
@@ -64,6 +64,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SavedModelBundleSourceAdapterConfig)
       SavedModelBundleSourceAdapterConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SavedModelBundleSourceAdapterConfig.newBuilder() to construct.
     private SavedModelBundleSourceAdapterConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -75,14 +76,19 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SavedModelBundleSourceAdapterConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -92,7 +98,8 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -124,6 +131,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -148,7 +156,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
      * TODO(b/32248363): Replace this field with the "real" field(s).
      * </pre>
      *
-     * <code>optional string adapter_class_name = 10000;</code>
+     * <code>string adapter_class_name = 10000;</code>
      */
     public java.lang.String getAdapterClassName() {
       java.lang.Object ref = adapterClassName_;
@@ -169,7 +177,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
      * TODO(b/32248363): Replace this field with the "real" field(s).
      * </pre>
      *
-     * <code>optional string adapter_class_name = 10000;</code>
+     * <code>string adapter_class_name = 10000;</code>
      */
     public com.google.protobuf.ByteString
         getAdapterClassNameBytes() {
@@ -188,19 +196,19 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
     public static final int LEGACY_CONFIG_FIELD_NUMBER = 1000;
     private com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig legacyConfig_;
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     public boolean hasLegacyConfig() {
       return legacyConfig_ != null;
     }
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     public com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig getLegacyConfig() {
       return legacyConfig_ == null ? com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig.getDefaultInstance() : legacyConfig_;
     }
     /**
-     * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+     * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
      */
     public com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfigOrBuilder getLegacyConfigOrBuilder() {
       return getLegacyConfig();
@@ -224,6 +232,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       if (!getAdapterClassNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 10000, adapterClassName_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -238,11 +247,11 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       if (!getAdapterClassNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10000, adapterClassName_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -261,6 +270,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         result = result && getLegacyConfig()
             .equals(other.getLegacyConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -270,7 +280,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ADAPTER_CLASS_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getAdapterClassName().hashCode();
       if (hasLegacyConfig()) {
@@ -282,6 +292,17 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.servable.SavedModelBundleSourceAdapterConfigProtos.SavedModelBundleSourceAdapterConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -444,7 +465,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -457,12 +478,12 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -483,6 +504,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         if (other.hasLegacyConfig()) {
           mergeLegacyConfig(other.getLegacyConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -517,7 +539,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
        * TODO(b/32248363): Replace this field with the "real" field(s).
        * </pre>
        *
-       * <code>optional string adapter_class_name = 10000;</code>
+       * <code>string adapter_class_name = 10000;</code>
        */
       public java.lang.String getAdapterClassName() {
         java.lang.Object ref = adapterClassName_;
@@ -538,7 +560,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
        * TODO(b/32248363): Replace this field with the "real" field(s).
        * </pre>
        *
-       * <code>optional string adapter_class_name = 10000;</code>
+       * <code>string adapter_class_name = 10000;</code>
        */
       public com.google.protobuf.ByteString
           getAdapterClassNameBytes() {
@@ -560,7 +582,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
        * TODO(b/32248363): Replace this field with the "real" field(s).
        * </pre>
        *
-       * <code>optional string adapter_class_name = 10000;</code>
+       * <code>string adapter_class_name = 10000;</code>
        */
       public Builder setAdapterClassName(
           java.lang.String value) {
@@ -579,7 +601,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
        * TODO(b/32248363): Replace this field with the "real" field(s).
        * </pre>
        *
-       * <code>optional string adapter_class_name = 10000;</code>
+       * <code>string adapter_class_name = 10000;</code>
        */
       public Builder clearAdapterClassName() {
         
@@ -594,7 +616,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
        * TODO(b/32248363): Replace this field with the "real" field(s).
        * </pre>
        *
-       * <code>optional string adapter_class_name = 10000;</code>
+       * <code>string adapter_class_name = 10000;</code>
        */
       public Builder setAdapterClassNameBytes(
           com.google.protobuf.ByteString value) {
@@ -612,13 +634,13 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig, com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig.Builder, com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfigOrBuilder> legacyConfigBuilder_;
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public boolean hasLegacyConfig() {
         return legacyConfigBuilder_ != null || legacyConfig_ != null;
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig getLegacyConfig() {
         if (legacyConfigBuilder_ == null) {
@@ -628,7 +650,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public Builder setLegacyConfig(com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig value) {
         if (legacyConfigBuilder_ == null) {
@@ -644,7 +666,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public Builder setLegacyConfig(
           com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig.Builder builderForValue) {
@@ -658,7 +680,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public Builder mergeLegacyConfig(com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig value) {
         if (legacyConfigBuilder_ == null) {
@@ -676,7 +698,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public Builder clearLegacyConfig() {
         if (legacyConfigBuilder_ == null) {
@@ -690,7 +712,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig.Builder getLegacyConfigBuilder() {
         
@@ -698,7 +720,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         return getLegacyConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfigOrBuilder getLegacyConfigOrBuilder() {
         if (legacyConfigBuilder_ != null) {
@@ -709,7 +731,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.SessionBundleConfig legacy_config = 1000;</code>
+       * <code>.angel.SessionBundleConfig legacy_config = 1000;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig, com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig.Builder, com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfigOrBuilder> 
@@ -726,12 +748,12 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -754,7 +776,7 @@ public final class SavedModelBundleSourceAdapterConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SavedModelBundleSourceAdapterConfig(input, extensionRegistry);
+        return new SavedModelBundleSourceAdapterConfig(input, extensionRegistry);
       }
     };
 

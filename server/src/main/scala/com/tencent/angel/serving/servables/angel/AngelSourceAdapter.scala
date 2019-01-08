@@ -9,17 +9,17 @@ import com.tencent.angel.serving.core._
 import com.tencent.angel.serving.servables.common.SavedModelBundle
 
 
-class SavedModelBundleSourceAdapter private() extends UnarySourceAdapter[Loader, StoragePath] {
+class AngelSourceAdapter private() extends UnarySourceAdapter[Loader, StoragePath] {
 
   override def convert(data: ServableData[StoragePath]): ServableData[Loader] = {
     val path = data.data
 
     val servableCreator: () => SavedModelBundle = () => {
-      AngelSavedModelBundle(path)   // load
+      AngelSavedModelBundle.create(path)   // load
     }
 
     val resourceEstimate: () => ResourceAllocation = () => {
-      val estimate = SavedModelBundle.estimateResourceRequirement(path)
+      val estimate = AngelSavedModelBundle.resourceEstimate(path)
       // val options = ResourceOptions(mutable.Map(DeviceType.kMain -> 1))
       //todo: Add experimental_transient_ram_bytes_during_load.
       // val resourceUtil = new ResourceUtil(options)
@@ -27,7 +27,7 @@ class SavedModelBundleSourceAdapter private() extends UnarySourceAdapter[Loader,
     }
 
     val postLoadResourceEdtimate: () => ResourceAllocation = () => {
-      SavedModelBundle.estimateResourceRequirement(path)
+      AngelSavedModelBundle.estimateResourceRequirement(path)
     }
 
     new ServableData[Loader](data.id, SimpleLoader[SavedModelBundle](
@@ -40,15 +40,15 @@ class SavedModelBundleSourceAdapter private() extends UnarySourceAdapter[Loader,
 
 }
 
-object SavedModelBundleSourceAdapter {
-  def apply(config: SavedModelBundleSourceAdapterConfig): SavedModelBundleSourceAdapter = {
+object AngelSourceAdapter {
+  def apply(config: SavedModelBundleSourceAdapterConfig): AngelSourceAdapter = {
     //todo:config.legacy_config()
-    new SavedModelBundleSourceAdapter()
+    new AngelSourceAdapter()
   }
 
-  def apply(config: SessionBundleSourceAdapterConfig): SavedModelBundleSourceAdapter = {
+  def apply(config: SessionBundleSourceAdapterConfig): AngelSourceAdapter = {
     //todo:config.legacy_config()
-    new SavedModelBundleSourceAdapter()
+    new AngelSourceAdapter()
   }
 }
 

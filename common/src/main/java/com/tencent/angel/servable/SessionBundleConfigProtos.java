@@ -27,7 +27,7 @@ public final class SessionBundleConfigProtos {
      * the best isolation currently available across multiple Session servables.
      * </pre>
      *
-     * <code>optional string session_target = 1;</code>
+     * <code>string session_target = 1;</code>
      */
     java.lang.String getSessionTarget();
     /**
@@ -39,7 +39,7 @@ public final class SessionBundleConfigProtos {
      * the best isolation currently available across multiple Session servables.
      * </pre>
      *
-     * <code>optional string session_target = 1;</code>
+     * <code>string session_target = 1;</code>
      */
     com.google.protobuf.ByteString
         getSessionTargetBytes();
@@ -59,7 +59,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     boolean hasBatchingParameters();
     /**
@@ -77,7 +77,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters getBatchingParameters();
     /**
@@ -95,7 +95,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParametersOrBuilder getBatchingParametersOrBuilder();
 
@@ -107,7 +107,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     boolean hasSessionRunLoadThreadpoolIndex();
     /**
@@ -118,7 +118,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     com.google.protobuf.Int32Value getSessionRunLoadThreadpoolIndex();
     /**
@@ -129,7 +129,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     com.google.protobuf.Int32ValueOrBuilder getSessionRunLoadThreadpoolIndexOrBuilder();
 
@@ -143,7 +143,7 @@ public final class SessionBundleConfigProtos {
      * Remove it once resource estimates are moved inside SavedModel.
      * </pre>
      *
-     * <code>optional uint64 experimental_transient_ram_bytes_during_load = 5;</code>
+     * <code>uint64 experimental_transient_ram_bytes_during_load = 5;</code>
      */
     long getExperimentalTransientRamBytesDuringLoad();
 
@@ -240,7 +240,7 @@ public final class SessionBundleConfigProtos {
      * Enables model warmup.
      * </pre>
      *
-     * <code>optional bool enable_model_warmup = 779;</code>
+     * <code>bool enable_model_warmup = 779;</code>
      */
     boolean getEnableModelWarmup();
   }
@@ -255,6 +255,7 @@ public final class SessionBundleConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SessionBundleConfig)
       SessionBundleConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SessionBundleConfig.newBuilder() to construct.
     private SessionBundleConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -270,14 +271,19 @@ public final class SessionBundleConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SessionBundleConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -287,7 +293,8 @@ public final class SessionBundleConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -366,6 +373,7 @@ public final class SessionBundleConfigProtos {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           experimentalFixedInputTensors_ = java.util.Collections.unmodifiableList(experimentalFixedInputTensors_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -393,7 +401,7 @@ public final class SessionBundleConfigProtos {
      * the best isolation currently available across multiple Session servables.
      * </pre>
      *
-     * <code>optional string session_target = 1;</code>
+     * <code>string session_target = 1;</code>
      */
     public java.lang.String getSessionTarget() {
       java.lang.Object ref = sessionTarget_;
@@ -416,7 +424,7 @@ public final class SessionBundleConfigProtos {
      * the best isolation currently available across multiple Session servables.
      * </pre>
      *
-     * <code>optional string session_target = 1;</code>
+     * <code>string session_target = 1;</code>
      */
     public com.google.protobuf.ByteString
         getSessionTargetBytes() {
@@ -449,7 +457,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     public boolean hasBatchingParameters() {
       return batchingParameters_ != null;
@@ -469,7 +477,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     public com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters getBatchingParameters() {
       return batchingParameters_ == null ? com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters.getDefaultInstance() : batchingParameters_;
@@ -489,7 +497,7 @@ public final class SessionBundleConfigProtos {
      * BatchSchedulerRetrier is added on top of each batching session.
      * </pre>
      *
-     * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+     * <code>.angel.BatchingParameters batching_parameters = 3;</code>
      */
     public com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParametersOrBuilder getBatchingParametersOrBuilder() {
       return getBatchingParameters();
@@ -505,7 +513,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     public boolean hasSessionRunLoadThreadpoolIndex() {
       return sessionRunLoadThreadpoolIndex_ != null;
@@ -518,7 +526,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     public com.google.protobuf.Int32Value getSessionRunLoadThreadpoolIndex() {
       return sessionRunLoadThreadpoolIndex_ == null ? com.google.protobuf.Int32Value.getDefaultInstance() : sessionRunLoadThreadpoolIndex_;
@@ -531,7 +539,7 @@ public final class SessionBundleConfigProtos {
      * part of `session_config.session_inter_op_thread_pool`.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+     * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
      */
     public com.google.protobuf.Int32ValueOrBuilder getSessionRunLoadThreadpoolIndexOrBuilder() {
       return getSessionRunLoadThreadpoolIndex();
@@ -549,7 +557,7 @@ public final class SessionBundleConfigProtos {
      * Remove it once resource estimates are moved inside SavedModel.
      * </pre>
      *
-     * <code>optional uint64 experimental_transient_ram_bytes_during_load = 5;</code>
+     * <code>uint64 experimental_transient_ram_bytes_during_load = 5;</code>
      */
     public long getExperimentalTransientRamBytesDuringLoad() {
       return experimentalTransientRamBytesDuringLoad_;
@@ -671,7 +679,7 @@ public final class SessionBundleConfigProtos {
      * Enables model warmup.
      * </pre>
      *
-     * <code>optional bool enable_model_warmup = 779;</code>
+     * <code>bool enable_model_warmup = 779;</code>
      */
     public boolean getEnableModelWarmup() {
       return enableModelWarmup_;
@@ -710,6 +718,7 @@ public final class SessionBundleConfigProtos {
       if (enableModelWarmup_ != false) {
         output.writeBool(779, enableModelWarmup_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -748,11 +757,11 @@ public final class SessionBundleConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(779, enableModelWarmup_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -784,6 +793,7 @@ public final class SessionBundleConfigProtos {
           .equals(other.getExperimentalFixedInputTensorsList());
       result = result && (getEnableModelWarmup()
           == other.getEnableModelWarmup());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -793,7 +803,7 @@ public final class SessionBundleConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SESSION_TARGET_FIELD_NUMBER;
       hash = (53 * hash) + getSessionTarget().hashCode();
       if (hasBatchingParameters()) {
@@ -823,6 +833,17 @@ public final class SessionBundleConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.servable.SessionBundleConfigProtos.SessionBundleConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1028,7 +1049,7 @@ public final class SessionBundleConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1041,12 +1062,12 @@ public final class SessionBundleConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1112,6 +1133,7 @@ public final class SessionBundleConfigProtos {
         if (other.getEnableModelWarmup() != false) {
           setEnableModelWarmup(other.getEnableModelWarmup());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1149,7 +1171,7 @@ public final class SessionBundleConfigProtos {
        * the best isolation currently available across multiple Session servables.
        * </pre>
        *
-       * <code>optional string session_target = 1;</code>
+       * <code>string session_target = 1;</code>
        */
       public java.lang.String getSessionTarget() {
         java.lang.Object ref = sessionTarget_;
@@ -1172,7 +1194,7 @@ public final class SessionBundleConfigProtos {
        * the best isolation currently available across multiple Session servables.
        * </pre>
        *
-       * <code>optional string session_target = 1;</code>
+       * <code>string session_target = 1;</code>
        */
       public com.google.protobuf.ByteString
           getSessionTargetBytes() {
@@ -1196,7 +1218,7 @@ public final class SessionBundleConfigProtos {
        * the best isolation currently available across multiple Session servables.
        * </pre>
        *
-       * <code>optional string session_target = 1;</code>
+       * <code>string session_target = 1;</code>
        */
       public Builder setSessionTarget(
           java.lang.String value) {
@@ -1217,7 +1239,7 @@ public final class SessionBundleConfigProtos {
        * the best isolation currently available across multiple Session servables.
        * </pre>
        *
-       * <code>optional string session_target = 1;</code>
+       * <code>string session_target = 1;</code>
        */
       public Builder clearSessionTarget() {
         
@@ -1234,7 +1256,7 @@ public final class SessionBundleConfigProtos {
        * the best isolation currently available across multiple Session servables.
        * </pre>
        *
-       * <code>optional string session_target = 1;</code>
+       * <code>string session_target = 1;</code>
        */
       public Builder setSessionTargetBytes(
           com.google.protobuf.ByteString value) {
@@ -1266,7 +1288,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public boolean hasBatchingParameters() {
         return batchingParametersBuilder_ != null || batchingParameters_ != null;
@@ -1286,7 +1308,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters getBatchingParameters() {
         if (batchingParametersBuilder_ == null) {
@@ -1310,7 +1332,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public Builder setBatchingParameters(com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters value) {
         if (batchingParametersBuilder_ == null) {
@@ -1340,7 +1362,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public Builder setBatchingParameters(
           com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters.Builder builderForValue) {
@@ -1368,7 +1390,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public Builder mergeBatchingParameters(com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters value) {
         if (batchingParametersBuilder_ == null) {
@@ -1400,7 +1422,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public Builder clearBatchingParameters() {
         if (batchingParametersBuilder_ == null) {
@@ -1428,7 +1450,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters.Builder getBatchingParametersBuilder() {
         
@@ -1450,7 +1472,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       public com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParametersOrBuilder getBatchingParametersOrBuilder() {
         if (batchingParametersBuilder_ != null) {
@@ -1475,7 +1497,7 @@ public final class SessionBundleConfigProtos {
        * BatchSchedulerRetrier is added on top of each batching session.
        * </pre>
        *
-       * <code>optional .angel.BatchingParameters batching_parameters = 3;</code>
+       * <code>.angel.BatchingParameters batching_parameters = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters, com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters.Builder, com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParametersOrBuilder> 
@@ -1502,7 +1524,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public boolean hasSessionRunLoadThreadpoolIndex() {
         return sessionRunLoadThreadpoolIndexBuilder_ != null || sessionRunLoadThreadpoolIndex_ != null;
@@ -1515,7 +1537,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public com.google.protobuf.Int32Value getSessionRunLoadThreadpoolIndex() {
         if (sessionRunLoadThreadpoolIndexBuilder_ == null) {
@@ -1532,7 +1554,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public Builder setSessionRunLoadThreadpoolIndex(com.google.protobuf.Int32Value value) {
         if (sessionRunLoadThreadpoolIndexBuilder_ == null) {
@@ -1555,7 +1577,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public Builder setSessionRunLoadThreadpoolIndex(
           com.google.protobuf.Int32Value.Builder builderForValue) {
@@ -1576,7 +1598,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public Builder mergeSessionRunLoadThreadpoolIndex(com.google.protobuf.Int32Value value) {
         if (sessionRunLoadThreadpoolIndexBuilder_ == null) {
@@ -1601,7 +1623,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public Builder clearSessionRunLoadThreadpoolIndex() {
         if (sessionRunLoadThreadpoolIndexBuilder_ == null) {
@@ -1622,7 +1644,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public com.google.protobuf.Int32Value.Builder getSessionRunLoadThreadpoolIndexBuilder() {
         
@@ -1637,7 +1659,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       public com.google.protobuf.Int32ValueOrBuilder getSessionRunLoadThreadpoolIndexOrBuilder() {
         if (sessionRunLoadThreadpoolIndexBuilder_ != null) {
@@ -1655,7 +1677,7 @@ public final class SessionBundleConfigProtos {
        * part of `session_config.session_inter_op_thread_pool`.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
+       * <code>.google.protobuf.Int32Value session_run_load_threadpool_index = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int32Value, com.google.protobuf.Int32Value.Builder, com.google.protobuf.Int32ValueOrBuilder> 
@@ -1682,7 +1704,7 @@ public final class SessionBundleConfigProtos {
        * Remove it once resource estimates are moved inside SavedModel.
        * </pre>
        *
-       * <code>optional uint64 experimental_transient_ram_bytes_during_load = 5;</code>
+       * <code>uint64 experimental_transient_ram_bytes_during_load = 5;</code>
        */
       public long getExperimentalTransientRamBytesDuringLoad() {
         return experimentalTransientRamBytesDuringLoad_;
@@ -1697,7 +1719,7 @@ public final class SessionBundleConfigProtos {
        * Remove it once resource estimates are moved inside SavedModel.
        * </pre>
        *
-       * <code>optional uint64 experimental_transient_ram_bytes_during_load = 5;</code>
+       * <code>uint64 experimental_transient_ram_bytes_during_load = 5;</code>
        */
       public Builder setExperimentalTransientRamBytesDuringLoad(long value) {
         
@@ -1715,7 +1737,7 @@ public final class SessionBundleConfigProtos {
        * Remove it once resource estimates are moved inside SavedModel.
        * </pre>
        *
-       * <code>optional uint64 experimental_transient_ram_bytes_during_load = 5;</code>
+       * <code>uint64 experimental_transient_ram_bytes_during_load = 5;</code>
        */
       public Builder clearExperimentalTransientRamBytesDuringLoad() {
         
@@ -2199,7 +2221,7 @@ public final class SessionBundleConfigProtos {
        * Enables model warmup.
        * </pre>
        *
-       * <code>optional bool enable_model_warmup = 779;</code>
+       * <code>bool enable_model_warmup = 779;</code>
        */
       public boolean getEnableModelWarmup() {
         return enableModelWarmup_;
@@ -2209,7 +2231,7 @@ public final class SessionBundleConfigProtos {
        * Enables model warmup.
        * </pre>
        *
-       * <code>optional bool enable_model_warmup = 779;</code>
+       * <code>bool enable_model_warmup = 779;</code>
        */
       public Builder setEnableModelWarmup(boolean value) {
         
@@ -2222,7 +2244,7 @@ public final class SessionBundleConfigProtos {
        * Enables model warmup.
        * </pre>
        *
-       * <code>optional bool enable_model_warmup = 779;</code>
+       * <code>bool enable_model_warmup = 779;</code>
        */
       public Builder clearEnableModelWarmup() {
         
@@ -2232,12 +2254,12 @@ public final class SessionBundleConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2260,7 +2282,7 @@ public final class SessionBundleConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SessionBundleConfig(input, extensionRegistry);
+        return new SessionBundleConfig(input, extensionRegistry);
       }
     };
 
@@ -2290,7 +2312,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     boolean hasMaxBatchSize();
     /**
@@ -2300,7 +2322,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     com.google.protobuf.Int64Value getMaxBatchSize();
     /**
@@ -2310,7 +2332,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     com.google.protobuf.Int64ValueOrBuilder getMaxBatchSizeOrBuilder();
 
@@ -2322,7 +2344,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     boolean hasBatchTimeoutMicros();
     /**
@@ -2333,7 +2355,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     com.google.protobuf.Int64Value getBatchTimeoutMicros();
     /**
@@ -2344,7 +2366,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     com.google.protobuf.Int64ValueOrBuilder getBatchTimeoutMicrosOrBuilder();
 
@@ -2355,7 +2377,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     boolean hasMaxEnqueuedBatches();
     /**
@@ -2365,7 +2387,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     com.google.protobuf.Int64Value getMaxEnqueuedBatches();
     /**
@@ -2375,7 +2397,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     com.google.protobuf.Int64ValueOrBuilder getMaxEnqueuedBatchesOrBuilder();
 
@@ -2385,7 +2407,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     boolean hasNumBatchThreads();
     /**
@@ -2394,7 +2416,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     com.google.protobuf.Int64Value getNumBatchThreads();
     /**
@@ -2403,7 +2425,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     com.google.protobuf.Int64ValueOrBuilder getNumBatchThreadsOrBuilder();
 
@@ -2412,7 +2434,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     boolean hasThreadPoolName();
     /**
@@ -2420,7 +2442,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     com.google.protobuf.StringValue getThreadPoolName();
     /**
@@ -2428,7 +2450,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     com.google.protobuf.StringValueOrBuilder getThreadPoolNameOrBuilder();
 
@@ -2471,7 +2493,7 @@ public final class SessionBundleConfigProtos {
      * Whether to pad variable-length inputs when a batch is formed.
      * </pre>
      *
-     * <code>optional bool pad_variable_length_inputs = 7;</code>
+     * <code>bool pad_variable_length_inputs = 7;</code>
      */
     boolean getPadVariableLengthInputs();
   }
@@ -2488,6 +2510,7 @@ public final class SessionBundleConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.BatchingParameters)
       BatchingParametersOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use BatchingParameters.newBuilder() to construct.
     private BatchingParameters(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2500,14 +2523,19 @@ public final class SessionBundleConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private BatchingParameters(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2517,7 +2545,8 @@ public final class SessionBundleConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2624,6 +2653,7 @@ public final class SessionBundleConfigProtos {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           allowedBatchSizes_ = java.util.Collections.unmodifiableList(allowedBatchSizes_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2649,7 +2679,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     public boolean hasMaxBatchSize() {
       return maxBatchSize_ != null;
@@ -2661,7 +2691,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     public com.google.protobuf.Int64Value getMaxBatchSize() {
       return maxBatchSize_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : maxBatchSize_;
@@ -2673,7 +2703,7 @@ public final class SessionBundleConfigProtos {
      * achieve high throughput with batching.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+     * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
      */
     public com.google.protobuf.Int64ValueOrBuilder getMaxBatchSizeOrBuilder() {
       return getMaxBatchSize();
@@ -2689,7 +2719,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     public boolean hasBatchTimeoutMicros() {
       return batchTimeoutMicros_ != null;
@@ -2702,7 +2732,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     public com.google.protobuf.Int64Value getBatchTimeoutMicros() {
       return batchTimeoutMicros_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : batchTimeoutMicros_;
@@ -2715,7 +2745,7 @@ public final class SessionBundleConfigProtos {
      * the batch's size is below 'max_batch_size'.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+     * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
      */
     public com.google.protobuf.Int64ValueOrBuilder getBatchTimeoutMicrosOrBuilder() {
       return getBatchTimeoutMicros();
@@ -2730,7 +2760,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     public boolean hasMaxEnqueuedBatches() {
       return maxEnqueuedBatches_ != null;
@@ -2742,7 +2772,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     public com.google.protobuf.Int64Value getMaxEnqueuedBatches() {
       return maxEnqueuedBatches_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : maxEnqueuedBatches_;
@@ -2754,7 +2784,7 @@ public final class SessionBundleConfigProtos {
      * removed from the queue.)
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+     * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
      */
     public com.google.protobuf.Int64ValueOrBuilder getMaxEnqueuedBatchesOrBuilder() {
       return getMaxEnqueuedBatches();
@@ -2768,7 +2798,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     public boolean hasNumBatchThreads() {
       return numBatchThreads_ != null;
@@ -2779,7 +2809,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     public com.google.protobuf.Int64Value getNumBatchThreads() {
       return numBatchThreads_ == null ? com.google.protobuf.Int64Value.getDefaultInstance() : numBatchThreads_;
@@ -2790,7 +2820,7 @@ public final class SessionBundleConfigProtos {
      * Must be &gt;= 1, and should be tuned carefully.
      * </pre>
      *
-     * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+     * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
      */
     public com.google.protobuf.Int64ValueOrBuilder getNumBatchThreadsOrBuilder() {
       return getNumBatchThreads();
@@ -2803,7 +2833,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     public boolean hasThreadPoolName() {
       return threadPoolName_ != null;
@@ -2813,7 +2843,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     public com.google.protobuf.StringValue getThreadPoolName() {
       return threadPoolName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : threadPoolName_;
@@ -2823,7 +2853,7 @@ public final class SessionBundleConfigProtos {
      * The name to use for the pool of batch threads.
      * </pre>
      *
-     * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+     * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
      */
     public com.google.protobuf.StringValueOrBuilder getThreadPoolNameOrBuilder() {
       return getThreadPoolName();
@@ -2880,7 +2910,7 @@ public final class SessionBundleConfigProtos {
      * Whether to pad variable-length inputs when a batch is formed.
      * </pre>
      *
-     * <code>optional bool pad_variable_length_inputs = 7;</code>
+     * <code>bool pad_variable_length_inputs = 7;</code>
      */
     public boolean getPadVariableLengthInputs() {
       return padVariableLengthInputs_;
@@ -2924,6 +2954,7 @@ public final class SessionBundleConfigProtos {
       if (padVariableLengthInputs_ != false) {
         output.writeBool(7, padVariableLengthInputs_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2969,11 +3000,11 @@ public final class SessionBundleConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, padVariableLengthInputs_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3014,6 +3045,7 @@ public final class SessionBundleConfigProtos {
           .equals(other.getAllowedBatchSizesList());
       result = result && (getPadVariableLengthInputs()
           == other.getPadVariableLengthInputs());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3023,7 +3055,7 @@ public final class SessionBundleConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasMaxBatchSize()) {
         hash = (37 * hash) + MAX_BATCH_SIZE_FIELD_NUMBER;
         hash = (53 * hash) + getMaxBatchSize().hashCode();
@@ -3056,6 +3088,17 @@ public final class SessionBundleConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.servable.SessionBundleConfigProtos.BatchingParameters parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3274,7 +3317,7 @@ public final class SessionBundleConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3287,12 +3330,12 @@ public final class SessionBundleConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3334,6 +3377,7 @@ public final class SessionBundleConfigProtos {
         if (other.getPadVariableLengthInputs() != false) {
           setPadVariableLengthInputs(other.getPadVariableLengthInputs());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3371,7 +3415,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public boolean hasMaxBatchSize() {
         return maxBatchSizeBuilder_ != null || maxBatchSize_ != null;
@@ -3383,7 +3427,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public com.google.protobuf.Int64Value getMaxBatchSize() {
         if (maxBatchSizeBuilder_ == null) {
@@ -3399,7 +3443,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public Builder setMaxBatchSize(com.google.protobuf.Int64Value value) {
         if (maxBatchSizeBuilder_ == null) {
@@ -3421,7 +3465,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public Builder setMaxBatchSize(
           com.google.protobuf.Int64Value.Builder builderForValue) {
@@ -3441,7 +3485,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public Builder mergeMaxBatchSize(com.google.protobuf.Int64Value value) {
         if (maxBatchSizeBuilder_ == null) {
@@ -3465,7 +3509,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public Builder clearMaxBatchSize() {
         if (maxBatchSizeBuilder_ == null) {
@@ -3485,7 +3529,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public com.google.protobuf.Int64Value.Builder getMaxBatchSizeBuilder() {
         
@@ -3499,7 +3543,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       public com.google.protobuf.Int64ValueOrBuilder getMaxBatchSizeOrBuilder() {
         if (maxBatchSizeBuilder_ != null) {
@@ -3516,7 +3560,7 @@ public final class SessionBundleConfigProtos {
        * achieve high throughput with batching.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_batch_size = 1;</code>
+       * <code>.google.protobuf.Int64Value max_batch_size = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
@@ -3543,7 +3587,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public boolean hasBatchTimeoutMicros() {
         return batchTimeoutMicrosBuilder_ != null || batchTimeoutMicros_ != null;
@@ -3556,7 +3600,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public com.google.protobuf.Int64Value getBatchTimeoutMicros() {
         if (batchTimeoutMicrosBuilder_ == null) {
@@ -3573,7 +3617,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public Builder setBatchTimeoutMicros(com.google.protobuf.Int64Value value) {
         if (batchTimeoutMicrosBuilder_ == null) {
@@ -3596,7 +3640,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public Builder setBatchTimeoutMicros(
           com.google.protobuf.Int64Value.Builder builderForValue) {
@@ -3617,7 +3661,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public Builder mergeBatchTimeoutMicros(com.google.protobuf.Int64Value value) {
         if (batchTimeoutMicrosBuilder_ == null) {
@@ -3642,7 +3686,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public Builder clearBatchTimeoutMicros() {
         if (batchTimeoutMicrosBuilder_ == null) {
@@ -3663,7 +3707,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public com.google.protobuf.Int64Value.Builder getBatchTimeoutMicrosBuilder() {
         
@@ -3678,7 +3722,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       public com.google.protobuf.Int64ValueOrBuilder getBatchTimeoutMicrosOrBuilder() {
         if (batchTimeoutMicrosBuilder_ != null) {
@@ -3696,7 +3740,7 @@ public final class SessionBundleConfigProtos {
        * the batch's size is below 'max_batch_size'.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value batch_timeout_micros = 2;</code>
+       * <code>.google.protobuf.Int64Value batch_timeout_micros = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
@@ -3722,7 +3766,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public boolean hasMaxEnqueuedBatches() {
         return maxEnqueuedBatchesBuilder_ != null || maxEnqueuedBatches_ != null;
@@ -3734,7 +3778,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public com.google.protobuf.Int64Value getMaxEnqueuedBatches() {
         if (maxEnqueuedBatchesBuilder_ == null) {
@@ -3750,7 +3794,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public Builder setMaxEnqueuedBatches(com.google.protobuf.Int64Value value) {
         if (maxEnqueuedBatchesBuilder_ == null) {
@@ -3772,7 +3816,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public Builder setMaxEnqueuedBatches(
           com.google.protobuf.Int64Value.Builder builderForValue) {
@@ -3792,7 +3836,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public Builder mergeMaxEnqueuedBatches(com.google.protobuf.Int64Value value) {
         if (maxEnqueuedBatchesBuilder_ == null) {
@@ -3816,7 +3860,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public Builder clearMaxEnqueuedBatches() {
         if (maxEnqueuedBatchesBuilder_ == null) {
@@ -3836,7 +3880,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public com.google.protobuf.Int64Value.Builder getMaxEnqueuedBatchesBuilder() {
         
@@ -3850,7 +3894,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       public com.google.protobuf.Int64ValueOrBuilder getMaxEnqueuedBatchesOrBuilder() {
         if (maxEnqueuedBatchesBuilder_ != null) {
@@ -3867,7 +3911,7 @@ public final class SessionBundleConfigProtos {
        * removed from the queue.)
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value max_enqueued_batches = 3;</code>
+       * <code>.google.protobuf.Int64Value max_enqueued_batches = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
@@ -3892,7 +3936,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public boolean hasNumBatchThreads() {
         return numBatchThreadsBuilder_ != null || numBatchThreads_ != null;
@@ -3903,7 +3947,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public com.google.protobuf.Int64Value getNumBatchThreads() {
         if (numBatchThreadsBuilder_ == null) {
@@ -3918,7 +3962,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public Builder setNumBatchThreads(com.google.protobuf.Int64Value value) {
         if (numBatchThreadsBuilder_ == null) {
@@ -3939,7 +3983,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public Builder setNumBatchThreads(
           com.google.protobuf.Int64Value.Builder builderForValue) {
@@ -3958,7 +4002,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public Builder mergeNumBatchThreads(com.google.protobuf.Int64Value value) {
         if (numBatchThreadsBuilder_ == null) {
@@ -3981,7 +4025,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public Builder clearNumBatchThreads() {
         if (numBatchThreadsBuilder_ == null) {
@@ -4000,7 +4044,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public com.google.protobuf.Int64Value.Builder getNumBatchThreadsBuilder() {
         
@@ -4013,7 +4057,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       public com.google.protobuf.Int64ValueOrBuilder getNumBatchThreadsOrBuilder() {
         if (numBatchThreadsBuilder_ != null) {
@@ -4029,7 +4073,7 @@ public final class SessionBundleConfigProtos {
        * Must be &gt;= 1, and should be tuned carefully.
        * </pre>
        *
-       * <code>optional .google.protobuf.Int64Value num_batch_threads = 4;</code>
+       * <code>.google.protobuf.Int64Value num_batch_threads = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Int64Value, com.google.protobuf.Int64Value.Builder, com.google.protobuf.Int64ValueOrBuilder> 
@@ -4053,7 +4097,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public boolean hasThreadPoolName() {
         return threadPoolNameBuilder_ != null || threadPoolName_ != null;
@@ -4063,7 +4107,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public com.google.protobuf.StringValue getThreadPoolName() {
         if (threadPoolNameBuilder_ == null) {
@@ -4077,7 +4121,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public Builder setThreadPoolName(com.google.protobuf.StringValue value) {
         if (threadPoolNameBuilder_ == null) {
@@ -4097,7 +4141,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public Builder setThreadPoolName(
           com.google.protobuf.StringValue.Builder builderForValue) {
@@ -4115,7 +4159,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public Builder mergeThreadPoolName(com.google.protobuf.StringValue value) {
         if (threadPoolNameBuilder_ == null) {
@@ -4137,7 +4181,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public Builder clearThreadPoolName() {
         if (threadPoolNameBuilder_ == null) {
@@ -4155,7 +4199,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public com.google.protobuf.StringValue.Builder getThreadPoolNameBuilder() {
         
@@ -4167,7 +4211,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       public com.google.protobuf.StringValueOrBuilder getThreadPoolNameOrBuilder() {
         if (threadPoolNameBuilder_ != null) {
@@ -4182,7 +4226,7 @@ public final class SessionBundleConfigProtos {
        * The name to use for the pool of batch threads.
        * </pre>
        *
-       * <code>optional .google.protobuf.StringValue thread_pool_name = 5;</code>
+       * <code>.google.protobuf.StringValue thread_pool_name = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
@@ -4319,7 +4363,7 @@ public final class SessionBundleConfigProtos {
        * Whether to pad variable-length inputs when a batch is formed.
        * </pre>
        *
-       * <code>optional bool pad_variable_length_inputs = 7;</code>
+       * <code>bool pad_variable_length_inputs = 7;</code>
        */
       public boolean getPadVariableLengthInputs() {
         return padVariableLengthInputs_;
@@ -4329,7 +4373,7 @@ public final class SessionBundleConfigProtos {
        * Whether to pad variable-length inputs when a batch is formed.
        * </pre>
        *
-       * <code>optional bool pad_variable_length_inputs = 7;</code>
+       * <code>bool pad_variable_length_inputs = 7;</code>
        */
       public Builder setPadVariableLengthInputs(boolean value) {
         
@@ -4342,7 +4386,7 @@ public final class SessionBundleConfigProtos {
        * Whether to pad variable-length inputs when a batch is formed.
        * </pre>
        *
-       * <code>optional bool pad_variable_length_inputs = 7;</code>
+       * <code>bool pad_variable_length_inputs = 7;</code>
        */
       public Builder clearPadVariableLengthInputs() {
         
@@ -4352,12 +4396,12 @@ public final class SessionBundleConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4380,7 +4424,7 @@ public final class SessionBundleConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new BatchingParameters(input, extensionRegistry);
+        return new BatchingParameters(input, extensionRegistry);
       }
     };
 
@@ -4427,7 +4471,7 @@ public final class SessionBundleConfigProtos {
       "_run_load_threadpool_index\030\004 \001(\0132\033.googl" +
       "e.protobuf.Int32Value\0224\n,experimental_tr" +
       "ansient_ram_bytes_during_load\030\005 \001(\004\022\030\n\020s" +
-      "aved_model_tags\030\006 \003(\t\022B\n experimental_fi",
+      "aved_model_tags\030\006 \003(\t\022B\n experimental_fi" +
       "xed_input_tensors\030\212\006 \003(\0132\027.angel.NamedTe" +
       "nsorProto\022\034\n\023enable_model_warmup\030\213\006 \001(\010\"" +
       "\360\002\n\022BatchingParameters\0223\n\016max_batch_size" +
@@ -4437,7 +4481,7 @@ public final class SessionBundleConfigProtos {
       " \001(\0132\033.google.protobuf.Int64Value\0226\n\021num" +
       "_batch_threads\030\004 \001(\0132\033.google.protobuf.I" +
       "nt64Value\0226\n\020thread_pool_name\030\005 \001(\0132\034.go" +
-      "ogle.protobuf.StringValue\022\033\n\023allowed_bat",
+      "ogle.protobuf.StringValue\022\033\n\023allowed_bat" +
       "ch_sizes\030\006 \003(\003\022\"\n\032pad_variable_length_in" +
       "puts\030\007 \001(\010B9\n\032com.tencent.angel.servable" +
       "B\031SessionBundleConfigProtosP\000b\006proto3"

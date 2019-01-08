@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package angel;
 option java_multiple_files = false;
-option java_package = "com.tencent.angel.core.graph";
+option java_package = "com.tencent.angel.serving.apis.common";
 option java_outer_classname = "TypesProtos";
 
 // LINT.IfChange

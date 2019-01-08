@@ -69,7 +69,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
      * </pre>
      *
-     * <code>optional string servable_name = 1 [deprecated = true];</code>
+     * <code>string servable_name = 1 [deprecated = true];</code>
      */
     @java.lang.Deprecated java.lang.String getServableName();
     /**
@@ -79,17 +79,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
      * </pre>
      *
-     * <code>optional string servable_name = 1 [deprecated = true];</code>
+     * <code>string servable_name = 1 [deprecated = true];</code>
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
         getServableNameBytes();
 
     /**
-     * <code>optional string base_path = 2 [deprecated = true];</code>
+     * <code>string base_path = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated java.lang.String getBasePath();
     /**
-     * <code>optional string base_path = 2 [deprecated = true];</code>
+     * <code>string base_path = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
         getBasePathBytes();
@@ -101,7 +101,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * For testing use only: a negative value disables the polling thread.
      * </pre>
      *
-     * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
+     * <code>int64 file_system_poll_wait_seconds = 3;</code>
      */
     long getFileSystemPollWaitSeconds();
 
@@ -114,7 +114,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * check for a version to appear later.)
      * </pre>
      *
-     * <code>optional bool fail_if_zero_versions_at_startup = 4;</code>
+     * <code>bool fail_if_zero_versions_at_startup = 4;</code>
      */
     boolean getFailIfZeroVersionsAtStartup();
   }
@@ -129,6 +129,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig)
       FileSystemStoragePathSourceConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use FileSystemStoragePathSourceConfig.newBuilder() to construct.
     private FileSystemStoragePathSourceConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -144,14 +145,19 @@ public final class FileSystemStoragePathSourceConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private FileSystemStoragePathSourceConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -161,7 +167,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -208,6 +215,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           servables_ = java.util.Collections.unmodifiableList(servables_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -228,29 +236,41 @@ public final class FileSystemStoragePathSourceConfigProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       */
+      boolean hasLatest();
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest getLatest();
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.LatestOrBuilder getLatestOrBuilder();
 
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       */
+      boolean hasAll();
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All getAll();
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.AllOrBuilder getAllOrBuilder();
 
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       */
+      boolean hasSpecific();
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific getSpecific();
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.SpecificOrBuilder getSpecificOrBuilder();
 
@@ -267,6 +287,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy)
         ServableVersionPolicyOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use ServableVersionPolicy.newBuilder() to construct.
       private ServableVersionPolicy(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -277,14 +298,19 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private ServableVersionPolicy(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -294,7 +320,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -349,6 +376,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -373,7 +401,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * Number of latest versions to serve. (The default is 1.)
          * </pre>
          *
-         * <code>optional uint32 num_versions = 1;</code>
+         * <code>uint32 num_versions = 1;</code>
          */
         int getNumVersions();
       }
@@ -390,6 +418,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest)
           LatestOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use Latest.newBuilder() to construct.
         private Latest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -401,14 +430,19 @@ public final class FileSystemStoragePathSourceConfigProtos {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private Latest(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -418,7 +452,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
                   done = true;
                   break;
                 default: {
-                  if (!input.skipField(tag)) {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
                     done = true;
                   }
                   break;
@@ -436,6 +471,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             throw new com.google.protobuf.InvalidProtocolBufferException(
                 e).setUnfinishedMessage(this);
           } finally {
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -458,7 +494,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * Number of latest versions to serve. (The default is 1.)
          * </pre>
          *
-         * <code>optional uint32 num_versions = 1;</code>
+         * <code>uint32 num_versions = 1;</code>
          */
         public int getNumVersions() {
           return numVersions_;
@@ -479,6 +515,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           if (numVersions_ != 0) {
             output.writeUInt32(1, numVersions_);
           }
+          unknownFields.writeTo(output);
         }
 
         public int getSerializedSize() {
@@ -490,11 +527,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
             size += com.google.protobuf.CodedOutputStream
               .computeUInt32Size(1, numVersions_);
           }
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -508,6 +545,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           boolean result = true;
           result = result && (getNumVersions()
               == other.getNumVersions());
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -517,7 +555,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           hash = (37 * hash) + NUM_VERSIONS_FIELD_NUMBER;
           hash = (53 * hash) + getNumVersions();
           hash = (29 * hash) + unknownFields.hashCode();
@@ -525,6 +563,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return hash;
         }
 
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -678,7 +727,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
           public Builder clearField(
@@ -691,12 +740,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
           public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -713,6 +762,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             if (other.getNumVersions() != 0) {
               setNumVersions(other.getNumVersions());
             }
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
@@ -745,7 +795,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
            * Number of latest versions to serve. (The default is 1.)
            * </pre>
            *
-           * <code>optional uint32 num_versions = 1;</code>
+           * <code>uint32 num_versions = 1;</code>
            */
           public int getNumVersions() {
             return numVersions_;
@@ -755,7 +805,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
            * Number of latest versions to serve. (The default is 1.)
            * </pre>
            *
-           * <code>optional uint32 num_versions = 1;</code>
+           * <code>uint32 num_versions = 1;</code>
            */
           public Builder setNumVersions(int value) {
             
@@ -768,7 +818,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
            * Number of latest versions to serve. (The default is 1.)
            * </pre>
            *
-           * <code>optional uint32 num_versions = 1;</code>
+           * <code>uint32 num_versions = 1;</code>
            */
           public Builder clearNumVersions() {
             
@@ -778,12 +828,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -806,7 +856,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new Latest(input, extensionRegistry);
+            return new Latest(input, extensionRegistry);
           }
         };
 
@@ -840,6 +890,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All)
           AllOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use All.newBuilder() to construct.
         private All(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -850,13 +901,18 @@ public final class FileSystemStoragePathSourceConfigProtos {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private All(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -866,7 +922,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
                   done = true;
                   break;
                 default: {
-                  if (!input.skipField(tag)) {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
                     done = true;
                   }
                   break;
@@ -879,6 +936,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             throw new com.google.protobuf.InvalidProtocolBufferException(
                 e).setUnfinishedMessage(this);
           } finally {
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -906,6 +964,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
         public void writeTo(com.google.protobuf.CodedOutputStream output)
                             throws java.io.IOException {
+          unknownFields.writeTo(output);
         }
 
         public int getSerializedSize() {
@@ -913,11 +972,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
           if (size != -1) return size;
 
           size = 0;
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -929,6 +988,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All other = (com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All) obj;
 
           boolean result = true;
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -938,12 +998,23 @@ public final class FileSystemStoragePathSourceConfigProtos {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           hash = (29 * hash) + unknownFields.hashCode();
           memoizedHashCode = hash;
           return hash;
         }
 
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1092,7 +1163,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
           public Builder clearField(
@@ -1105,12 +1176,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
           public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1124,6 +1195,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
           public Builder mergeFrom(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All other) {
             if (other == com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.getDefaultInstance()) return this;
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
@@ -1151,12 +1223,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -1179,7 +1251,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new All(input, extensionRegistry);
+            return new All(input, extensionRegistry);
           }
         };
 
@@ -1241,6 +1313,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific)
           SpecificOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use Specific.newBuilder() to construct.
         private Specific(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -1252,14 +1325,19 @@ public final class FileSystemStoragePathSourceConfigProtos {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private Specific(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -1269,7 +1347,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
                   done = true;
                   break;
                 default: {
-                  if (!input.skipField(tag)) {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
                     done = true;
                   }
                   break;
@@ -1306,6 +1385,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
               versions_ = java.util.Collections.unmodifiableList(versions_);
             }
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -1376,6 +1456,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           for (int i = 0; i < versions_.size(); i++) {
             output.writeInt64NoTag(versions_.get(i));
           }
+          unknownFields.writeTo(output);
         }
 
         public int getSerializedSize() {
@@ -1397,11 +1478,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
             }
             versionsMemoizedSerializedSize = dataSize;
           }
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -1415,6 +1496,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           boolean result = true;
           result = result && getVersionsList()
               .equals(other.getVersionsList());
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -1424,7 +1506,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           if (getVersionsCount() > 0) {
             hash = (37 * hash) + VERSIONS_FIELD_NUMBER;
             hash = (53 * hash) + getVersionsList().hashCode();
@@ -1434,6 +1516,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return hash;
         }
 
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1593,7 +1686,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
           public Builder clearField(
@@ -1606,12 +1699,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
           public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1635,6 +1728,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
               }
               onChanged();
             }
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
@@ -1757,12 +1851,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -1785,7 +1879,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new Specific(input, extensionRegistry);
+            return new Specific(input, extensionRegistry);
           }
         };
 
@@ -1846,7 +1940,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
       public static final int LATEST_FIELD_NUMBER = 100;
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       */
+      public boolean hasLatest() {
+        return policyChoiceCase_ == 100;
+      }
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest getLatest() {
         if (policyChoiceCase_ == 100) {
@@ -1855,7 +1955,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest.getDefaultInstance();
       }
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.LatestOrBuilder getLatestOrBuilder() {
         if (policyChoiceCase_ == 100) {
@@ -1866,7 +1966,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
       public static final int ALL_FIELD_NUMBER = 101;
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       */
+      public boolean hasAll() {
+        return policyChoiceCase_ == 101;
+      }
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All getAll() {
         if (policyChoiceCase_ == 101) {
@@ -1875,7 +1981,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.getDefaultInstance();
       }
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.AllOrBuilder getAllOrBuilder() {
         if (policyChoiceCase_ == 101) {
@@ -1886,7 +1992,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
       public static final int SPECIFIC_FIELD_NUMBER = 102;
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       */
+      public boolean hasSpecific() {
+        return policyChoiceCase_ == 102;
+      }
+      /**
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific getSpecific() {
         if (policyChoiceCase_ == 102) {
@@ -1895,7 +2007,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific.getDefaultInstance();
       }
       /**
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.SpecificOrBuilder getSpecificOrBuilder() {
         if (policyChoiceCase_ == 102) {
@@ -1925,6 +2037,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         if (policyChoiceCase_ == 102) {
           output.writeMessage(102, (com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific) policyChoice_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -1944,11 +2057,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(102, (com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific) policyChoice_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1979,6 +2092,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           case 0:
           default:
         }
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1988,7 +2102,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         switch (policyChoiceCase_) {
           case 100:
             hash = (37 * hash) + LATEST_FIELD_NUMBER;
@@ -2010,6 +2124,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return hash;
       }
 
+      public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2182,7 +2307,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -2195,12 +2320,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2231,6 +2356,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
               break;
             }
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -2275,7 +2401,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.LatestOrBuilder> latestBuilder_;
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         */
+        public boolean hasLatest() {
+          return policyChoiceCase_ == 100;
+        }
+        /**
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest getLatest() {
           if (latestBuilder_ == null) {
@@ -2291,7 +2423,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public Builder setLatest(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest value) {
           if (latestBuilder_ == null) {
@@ -2307,7 +2439,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public Builder setLatest(
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest.Builder builderForValue) {
@@ -2321,7 +2453,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public Builder mergeLatest(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest value) {
           if (latestBuilder_ == null) {
@@ -2343,7 +2475,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public Builder clearLatest() {
           if (latestBuilder_ == null) {
@@ -2362,13 +2494,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest.Builder getLatestBuilder() {
           return getLatestFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.LatestOrBuilder getLatestOrBuilder() {
           if ((policyChoiceCase_ == 100) && (latestBuilder_ != null)) {
@@ -2381,7 +2513,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest latest = 100;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.LatestOrBuilder> 
@@ -2405,7 +2537,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.AllOrBuilder> allBuilder_;
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         */
+        public boolean hasAll() {
+          return policyChoiceCase_ == 101;
+        }
+        /**
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All getAll() {
           if (allBuilder_ == null) {
@@ -2421,7 +2559,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public Builder setAll(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All value) {
           if (allBuilder_ == null) {
@@ -2437,7 +2575,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public Builder setAll(
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.Builder builderForValue) {
@@ -2451,7 +2589,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public Builder mergeAll(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All value) {
           if (allBuilder_ == null) {
@@ -2473,7 +2611,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public Builder clearAll() {
           if (allBuilder_ == null) {
@@ -2492,13 +2630,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.Builder getAllBuilder() {
           return getAllFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.AllOrBuilder getAllOrBuilder() {
           if ((policyChoiceCase_ == 101) && (allBuilder_ != null)) {
@@ -2511,7 +2649,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All all = 101;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.All.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.AllOrBuilder> 
@@ -2535,7 +2673,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.SpecificOrBuilder> specificBuilder_;
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         */
+        public boolean hasSpecific() {
+          return policyChoiceCase_ == 102;
+        }
+        /**
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific getSpecific() {
           if (specificBuilder_ == null) {
@@ -2551,7 +2695,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public Builder setSpecific(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific value) {
           if (specificBuilder_ == null) {
@@ -2567,7 +2711,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public Builder setSpecific(
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific.Builder builderForValue) {
@@ -2581,7 +2725,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public Builder mergeSpecific(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific value) {
           if (specificBuilder_ == null) {
@@ -2603,7 +2747,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public Builder clearSpecific() {
           if (specificBuilder_ == null) {
@@ -2622,13 +2766,13 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return this;
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific.Builder getSpecificBuilder() {
           return getSpecificFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.SpecificOrBuilder getSpecificOrBuilder() {
           if ((policyChoiceCase_ == 102) && (specificBuilder_ != null)) {
@@ -2641,7 +2785,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           }
         }
         /**
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific specific = 102;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.SpecificOrBuilder> 
@@ -2663,12 +2807,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -2691,7 +2835,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new ServableVersionPolicy(input, extensionRegistry);
+          return new ServableVersionPolicy(input, extensionRegistry);
         }
       };
 
@@ -2720,7 +2864,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * paths of 'base_path' are considered to be versions of this servable.
        * </pre>
        *
-       * <code>optional string servable_name = 1;</code>
+       * <code>string servable_name = 1;</code>
        */
       java.lang.String getServableName();
       /**
@@ -2729,7 +2873,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * paths of 'base_path' are considered to be versions of this servable.
        * </pre>
        *
-       * <code>optional string servable_name = 1;</code>
+       * <code>string servable_name = 1;</code>
        */
       com.google.protobuf.ByteString
           getServableNameBytes();
@@ -2739,7 +2883,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * The path to monitor, i.e. look for child paths of the form base_path/123.
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       java.lang.String getBasePath();
       /**
@@ -2747,7 +2891,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * The path to monitor, i.e. look for child paths of the form base_path/123.
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       com.google.protobuf.ByteString
           getBasePathBytes();
@@ -2758,7 +2902,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       boolean hasServableVersionPolicy();
       /**
@@ -2767,7 +2911,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getServableVersionPolicy();
       /**
@@ -2776,7 +2920,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getServableVersionPolicyOrBuilder();
     }
@@ -2791,6 +2935,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.FileSystemStoragePathSourceConfig.ServableToMonitor)
         ServableToMonitorOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use ServableToMonitor.newBuilder() to construct.
       private ServableToMonitor(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -2803,14 +2948,19 @@ public final class FileSystemStoragePathSourceConfigProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private ServableToMonitor(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -2820,7 +2970,8 @@ public final class FileSystemStoragePathSourceConfigProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -2858,6 +3009,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -2881,7 +3033,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * paths of 'base_path' are considered to be versions of this servable.
        * </pre>
        *
-       * <code>optional string servable_name = 1;</code>
+       * <code>string servable_name = 1;</code>
        */
       public java.lang.String getServableName() {
         java.lang.Object ref = servableName_;
@@ -2901,7 +3053,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * paths of 'base_path' are considered to be versions of this servable.
        * </pre>
        *
-       * <code>optional string servable_name = 1;</code>
+       * <code>string servable_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getServableNameBytes() {
@@ -2924,7 +3076,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * The path to monitor, i.e. look for child paths of the form base_path/123.
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public java.lang.String getBasePath() {
         java.lang.Object ref = basePath_;
@@ -2943,7 +3095,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * The path to monitor, i.e. look for child paths of the form base_path/123.
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public com.google.protobuf.ByteString
           getBasePathBytes() {
@@ -2967,7 +3119,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       public boolean hasServableVersionPolicy() {
         return servableVersionPolicy_ != null;
@@ -2978,7 +3130,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getServableVersionPolicy() {
         return servableVersionPolicy_ == null ? com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.getDefaultInstance() : servableVersionPolicy_;
@@ -2989,7 +3141,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * served at the same time.
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getServableVersionPolicyOrBuilder() {
         return getServableVersionPolicy();
@@ -3016,6 +3168,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         if (servableVersionPolicy_ != null) {
           output.writeMessage(4, getServableVersionPolicy());
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -3033,11 +3186,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(4, getServableVersionPolicy());
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -3058,6 +3211,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           result = result && getServableVersionPolicy()
               .equals(other.getServableVersionPolicy());
         }
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -3067,7 +3221,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + SERVABLE_NAME_FIELD_NUMBER;
         hash = (53 * hash) + getServableName().hashCode();
         hash = (37 * hash) + BASE_PATH_FIELD_NUMBER;
@@ -3081,6 +3235,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return hash;
       }
 
+      public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableToMonitor parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3246,7 +3411,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -3259,12 +3424,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3289,6 +3454,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           if (other.hasServableVersionPolicy()) {
             mergeServableVersionPolicy(other.getServableVersionPolicy());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -3322,7 +3488,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * paths of 'base_path' are considered to be versions of this servable.
          * </pre>
          *
-         * <code>optional string servable_name = 1;</code>
+         * <code>string servable_name = 1;</code>
          */
         public java.lang.String getServableName() {
           java.lang.Object ref = servableName_;
@@ -3342,7 +3508,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * paths of 'base_path' are considered to be versions of this servable.
          * </pre>
          *
-         * <code>optional string servable_name = 1;</code>
+         * <code>string servable_name = 1;</code>
          */
         public com.google.protobuf.ByteString
             getServableNameBytes() {
@@ -3363,7 +3529,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * paths of 'base_path' are considered to be versions of this servable.
          * </pre>
          *
-         * <code>optional string servable_name = 1;</code>
+         * <code>string servable_name = 1;</code>
          */
         public Builder setServableName(
             java.lang.String value) {
@@ -3381,7 +3547,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * paths of 'base_path' are considered to be versions of this servable.
          * </pre>
          *
-         * <code>optional string servable_name = 1;</code>
+         * <code>string servable_name = 1;</code>
          */
         public Builder clearServableName() {
           
@@ -3395,7 +3561,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * paths of 'base_path' are considered to be versions of this servable.
          * </pre>
          *
-         * <code>optional string servable_name = 1;</code>
+         * <code>string servable_name = 1;</code>
          */
         public Builder setServableNameBytes(
             com.google.protobuf.ByteString value) {
@@ -3415,7 +3581,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * The path to monitor, i.e. look for child paths of the form base_path/123.
          * </pre>
          *
-         * <code>optional string base_path = 2;</code>
+         * <code>string base_path = 2;</code>
          */
         public java.lang.String getBasePath() {
           java.lang.Object ref = basePath_;
@@ -3434,7 +3600,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * The path to monitor, i.e. look for child paths of the form base_path/123.
          * </pre>
          *
-         * <code>optional string base_path = 2;</code>
+         * <code>string base_path = 2;</code>
          */
         public com.google.protobuf.ByteString
             getBasePathBytes() {
@@ -3454,7 +3620,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * The path to monitor, i.e. look for child paths of the form base_path/123.
          * </pre>
          *
-         * <code>optional string base_path = 2;</code>
+         * <code>string base_path = 2;</code>
          */
         public Builder setBasePath(
             java.lang.String value) {
@@ -3471,7 +3637,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * The path to monitor, i.e. look for child paths of the form base_path/123.
          * </pre>
          *
-         * <code>optional string base_path = 2;</code>
+         * <code>string base_path = 2;</code>
          */
         public Builder clearBasePath() {
           
@@ -3484,7 +3650,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * The path to monitor, i.e. look for child paths of the form base_path/123.
          * </pre>
          *
-         * <code>optional string base_path = 2;</code>
+         * <code>string base_path = 2;</code>
          */
         public Builder setBasePathBytes(
             com.google.protobuf.ByteString value) {
@@ -3507,7 +3673,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public boolean hasServableVersionPolicy() {
           return servableVersionPolicyBuilder_ != null || servableVersionPolicy_ != null;
@@ -3518,7 +3684,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getServableVersionPolicy() {
           if (servableVersionPolicyBuilder_ == null) {
@@ -3533,7 +3699,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public Builder setServableVersionPolicy(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy value) {
           if (servableVersionPolicyBuilder_ == null) {
@@ -3554,7 +3720,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public Builder setServableVersionPolicy(
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder builderForValue) {
@@ -3573,7 +3739,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public Builder mergeServableVersionPolicy(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy value) {
           if (servableVersionPolicyBuilder_ == null) {
@@ -3596,7 +3762,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public Builder clearServableVersionPolicy() {
           if (servableVersionPolicyBuilder_ == null) {
@@ -3615,7 +3781,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder getServableVersionPolicyBuilder() {
           
@@ -3628,7 +3794,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getServableVersionPolicyOrBuilder() {
           if (servableVersionPolicyBuilder_ != null) {
@@ -3644,7 +3810,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
          * served at the same time.
          * </pre>
          *
-         * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
+         * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy servable_version_policy = 4;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder> 
@@ -3661,12 +3827,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -3689,7 +3855,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new ServableToMonitor(input, extensionRegistry);
+          return new ServableToMonitor(input, extensionRegistry);
         }
       };
 
@@ -3773,7 +3939,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
      * </pre>
      *
-     * <code>optional string servable_name = 1 [deprecated = true];</code>
+     * <code>string servable_name = 1 [deprecated = true];</code>
      */
     @java.lang.Deprecated public java.lang.String getServableName() {
       java.lang.Object ref = servableName_;
@@ -3794,7 +3960,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
      * </pre>
      *
-     * <code>optional string servable_name = 1 [deprecated = true];</code>
+     * <code>string servable_name = 1 [deprecated = true];</code>
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
         getServableNameBytes() {
@@ -3813,7 +3979,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
     public static final int BASE_PATH_FIELD_NUMBER = 2;
     private volatile java.lang.Object basePath_;
     /**
-     * <code>optional string base_path = 2 [deprecated = true];</code>
+     * <code>string base_path = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated public java.lang.String getBasePath() {
       java.lang.Object ref = basePath_;
@@ -3828,7 +3994,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       }
     }
     /**
-     * <code>optional string base_path = 2 [deprecated = true];</code>
+     * <code>string base_path = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
         getBasePathBytes() {
@@ -3853,7 +4019,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * For testing use only: a negative value disables the polling thread.
      * </pre>
      *
-     * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
+     * <code>int64 file_system_poll_wait_seconds = 3;</code>
      */
     public long getFileSystemPollWaitSeconds() {
       return fileSystemPollWaitSeconds_;
@@ -3870,7 +4036,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
      * check for a version to appear later.)
      * </pre>
      *
-     * <code>optional bool fail_if_zero_versions_at_startup = 4;</code>
+     * <code>bool fail_if_zero_versions_at_startup = 4;</code>
      */
     public boolean getFailIfZeroVersionsAtStartup() {
       return failIfZeroVersionsAtStartup_;
@@ -3903,6 +4069,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       for (int i = 0; i < servables_.size(); i++) {
         output.writeMessage(5, servables_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3928,11 +4095,11 @@ public final class FileSystemStoragePathSourceConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, servables_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3954,6 +4121,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           == other.getFileSystemPollWaitSeconds());
       result = result && (getFailIfZeroVersionsAtStartup()
           == other.getFailIfZeroVersionsAtStartup());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3963,7 +4131,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getServablesCount() > 0) {
         hash = (37 * hash) + SERVABLES_FIELD_NUMBER;
         hash = (53 * hash) + getServablesList().hashCode();
@@ -3983,6 +4151,17 @@ public final class FileSystemStoragePathSourceConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4162,7 +4341,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4175,12 +4354,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4234,6 +4413,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         if (other.getFailIfZeroVersionsAtStartup() != false) {
           setFailIfZeroVersionsAtStartup(other.getFailIfZeroVersionsAtStartup());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4581,7 +4761,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
        * </pre>
        *
-       * <code>optional string servable_name = 1 [deprecated = true];</code>
+       * <code>string servable_name = 1 [deprecated = true];</code>
        */
       @java.lang.Deprecated public java.lang.String getServableName() {
         java.lang.Object ref = servableName_;
@@ -4602,7 +4782,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
        * </pre>
        *
-       * <code>optional string servable_name = 1 [deprecated = true];</code>
+       * <code>string servable_name = 1 [deprecated = true];</code>
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
           getServableNameBytes() {
@@ -4624,7 +4804,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
        * </pre>
        *
-       * <code>optional string servable_name = 1 [deprecated = true];</code>
+       * <code>string servable_name = 1 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setServableName(
           java.lang.String value) {
@@ -4643,7 +4823,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
        * </pre>
        *
-       * <code>optional string servable_name = 1 [deprecated = true];</code>
+       * <code>string servable_name = 1 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearServableName() {
         
@@ -4658,7 +4838,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * TODO(b/30898016): Stop using these fields, and ultimately remove them here.
        * </pre>
        *
-       * <code>optional string servable_name = 1 [deprecated = true];</code>
+       * <code>string servable_name = 1 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setServableNameBytes(
           com.google.protobuf.ByteString value) {
@@ -4674,7 +4854,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
 
       private java.lang.Object basePath_ = "";
       /**
-       * <code>optional string base_path = 2 [deprecated = true];</code>
+       * <code>string base_path = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public java.lang.String getBasePath() {
         java.lang.Object ref = basePath_;
@@ -4689,7 +4869,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
       }
       /**
-       * <code>optional string base_path = 2 [deprecated = true];</code>
+       * <code>string base_path = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
           getBasePathBytes() {
@@ -4705,7 +4885,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         }
       }
       /**
-       * <code>optional string base_path = 2 [deprecated = true];</code>
+       * <code>string base_path = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setBasePath(
           java.lang.String value) {
@@ -4718,7 +4898,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return this;
       }
       /**
-       * <code>optional string base_path = 2 [deprecated = true];</code>
+       * <code>string base_path = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearBasePath() {
         
@@ -4727,7 +4907,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
         return this;
       }
       /**
-       * <code>optional string base_path = 2 [deprecated = true];</code>
+       * <code>string base_path = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setBasePathBytes(
           com.google.protobuf.ByteString value) {
@@ -4749,7 +4929,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * For testing use only: a negative value disables the polling thread.
        * </pre>
        *
-       * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
+       * <code>int64 file_system_poll_wait_seconds = 3;</code>
        */
       public long getFileSystemPollWaitSeconds() {
         return fileSystemPollWaitSeconds_;
@@ -4761,7 +4941,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * For testing use only: a negative value disables the polling thread.
        * </pre>
        *
-       * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
+       * <code>int64 file_system_poll_wait_seconds = 3;</code>
        */
       public Builder setFileSystemPollWaitSeconds(long value) {
         
@@ -4776,7 +4956,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * For testing use only: a negative value disables the polling thread.
        * </pre>
        *
-       * <code>optional int64 file_system_poll_wait_seconds = 3;</code>
+       * <code>int64 file_system_poll_wait_seconds = 3;</code>
        */
       public Builder clearFileSystemPollWaitSeconds() {
         
@@ -4795,7 +4975,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * check for a version to appear later.)
        * </pre>
        *
-       * <code>optional bool fail_if_zero_versions_at_startup = 4;</code>
+       * <code>bool fail_if_zero_versions_at_startup = 4;</code>
        */
       public boolean getFailIfZeroVersionsAtStartup() {
         return failIfZeroVersionsAtStartup_;
@@ -4809,7 +4989,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * check for a version to appear later.)
        * </pre>
        *
-       * <code>optional bool fail_if_zero_versions_at_startup = 4;</code>
+       * <code>bool fail_if_zero_versions_at_startup = 4;</code>
        */
       public Builder setFailIfZeroVersionsAtStartup(boolean value) {
         
@@ -4826,7 +5006,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
        * check for a version to appear later.)
        * </pre>
        *
-       * <code>optional bool fail_if_zero_versions_at_startup = 4;</code>
+       * <code>bool fail_if_zero_versions_at_startup = 4;</code>
        */
       public Builder clearFailIfZeroVersionsAtStartup() {
         
@@ -4836,12 +5016,12 @@ public final class FileSystemStoragePathSourceConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4864,7 +5044,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new FileSystemStoragePathSourceConfig(input, extensionRegistry);
+        return new FileSystemStoragePathSourceConfig(input, extensionRegistry);
       }
     };
 
@@ -4931,7 +5111,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       "_wait_seconds\030\003 \001(\003\022(\n fail_if_zero_vers" +
       "ions_at_startup\030\004 \001(\010\032\366\002\n\025ServableVersio" +
       "nPolicy\022W\n\006latest\030d \001(\0132E.angel.FileSyst" +
-      "emStoragePathSourceConfig.ServableVersio",
+      "emStoragePathSourceConfig.ServableVersio" +
       "nPolicy.LatestH\000\022Q\n\003all\030e \001(\0132B.angel.Fi" +
       "leSystemStoragePathSourceConfig.Servable" +
       "VersionPolicy.AllH\000\022[\n\010specific\030f \001(\0132G." +
@@ -4941,7 +5121,7 @@ public final class FileSystemStoragePathSourceConfigProtos {
       "fic\022\020\n\010versions\030\001 \003(\003B\017\n\rpolicy_choice\032\244" +
       "\001\n\021ServableToMonitor\022\025\n\rservable_name\030\001 " +
       "\001(\t\022\021\n\tbase_path\030\002 \001(\t\022_\n\027servable_versi" +
-      "on_policy\030\004 \001(\0132>.angel.FileSystemStorag",
+      "on_policy\030\004 \001(\0132>.angel.FileSystemStorag" +
       "ePathSourceConfig.ServableVersionPolicyJ" +
       "\004\010\003\020\004BE\n\030com.tencent.angel.configB\'FileS" +
       "ystemStoragePathSourceConfigProtosP\000b\006pr" +

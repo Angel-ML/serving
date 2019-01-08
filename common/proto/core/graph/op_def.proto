@@ -6,7 +6,7 @@ option java_package = "com.tencent.angel.core.graph";
 option java_outer_classname = "OpDefProtos";
 
 import "core/graph/attr_value.proto";
-import "core/graph/types.proto";
+import "apis/common/types.proto";
 
 // Defines an operation. A NodeDef in a GraphDef specifies an Op by
 // using the "op" field which should match the name of a OpDef.

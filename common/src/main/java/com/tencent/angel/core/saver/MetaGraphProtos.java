@@ -19,15 +19,15 @@ public final class MetaGraphProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     boolean hasMetaInfoDef();
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef getMetaInfoDef();
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDefOrBuilder getMetaInfoDefOrBuilder();
 
@@ -36,7 +36,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     boolean hasGraphDef();
     /**
@@ -44,7 +44,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     com.tencent.angel.core.graph.GraphProtos.GraphDef getGraphDef();
     /**
@@ -52,7 +52,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     com.tencent.angel.core.graph.GraphProtos.GraphDefOrBuilder getGraphDefOrBuilder();
 
@@ -61,7 +61,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     boolean hasSaverDef();
     /**
@@ -69,7 +69,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     com.tencent.angel.core.saver.SaverProtos.SaverDef getSaverDef();
     /**
@@ -77,7 +77,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     com.tencent.angel.core.saver.SaverProtos.SaverDefOrBuilder getSaverDefOrBuilder();
 
@@ -261,6 +261,7 @@ public final class MetaGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.MetaGraphDef)
       MetaGraphDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MetaGraphDef.newBuilder() to construct.
     private MetaGraphDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -272,14 +273,19 @@ public final class MetaGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MetaGraphDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -289,7 +295,8 @@ public final class MetaGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -340,9 +347,10 @@ public final class MetaGraphProtos {
                 mutable_bitField0_ |= 0x00000008;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef>
-              collectionDef = input.readMessage(
+              collectionDef__ = input.readMessage(
                   CollectionDefDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              collectionDef_.getMutableMap().put(collectionDef.getKey(), collectionDef.getValue());
+              collectionDef_.getMutableMap().put(
+                  collectionDef__.getKey(), collectionDef__.getValue());
               break;
             }
             case 42: {
@@ -352,9 +360,10 @@ public final class MetaGraphProtos {
                 mutable_bitField0_ |= 0x00000010;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef>
-              signatureDef = input.readMessage(
+              signatureDef__ = input.readMessage(
                   SignatureDefDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              signatureDef_.getMutableMap().put(signatureDef.getKey(), signatureDef.getValue());
+              signatureDef_.getMutableMap().put(
+                  signatureDef__.getKey(), signatureDef__.getValue());
               break;
             }
             case 50: {
@@ -377,6 +386,7 @@ public final class MetaGraphProtos {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           assetFileDef_ = java.util.Collections.unmodifiableList(assetFileDef_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -415,7 +425,7 @@ public final class MetaGraphProtos {
        * steps this model has been trained to, etc.
        * </pre>
        *
-       * <code>optional string meta_graph_version = 1;</code>
+       * <code>string meta_graph_version = 1;</code>
        */
       java.lang.String getMetaGraphVersion();
       /**
@@ -424,7 +434,7 @@ public final class MetaGraphProtos {
        * steps this model has been trained to, etc.
        * </pre>
        *
-       * <code>optional string meta_graph_version = 1;</code>
+       * <code>string meta_graph_version = 1;</code>
        */
       com.google.protobuf.ByteString
           getMetaGraphVersionBytes();
@@ -435,7 +445,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       boolean hasStrippedOpList();
       /**
@@ -444,7 +454,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       com.tencent.angel.core.graph.OpDefProtos.OpList getStrippedOpList();
       /**
@@ -453,7 +463,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       com.tencent.angel.core.graph.OpDefProtos.OpListOrBuilder getStrippedOpListOrBuilder();
 
@@ -463,7 +473,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       boolean hasAnyInfo();
       /**
@@ -472,7 +482,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       com.google.protobuf.Any getAnyInfo();
       /**
@@ -481,7 +491,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       com.google.protobuf.AnyOrBuilder getAnyInfoOrBuilder();
 
@@ -543,7 +553,7 @@ public final class MetaGraphProtos {
        * supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_version = 5;</code>
+       * <code>string tensorflow_version = 5;</code>
        */
       java.lang.String getTensorflowVersion();
       /**
@@ -553,7 +563,7 @@ public final class MetaGraphProtos {
        * supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_version = 5;</code>
+       * <code>string tensorflow_version = 5;</code>
        */
       com.google.protobuf.ByteString
           getTensorflowVersionBytes();
@@ -565,7 +575,7 @@ public final class MetaGraphProtos {
        * user supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_git_version = 6;</code>
+       * <code>string tensorflow_git_version = 6;</code>
        */
       java.lang.String getTensorflowGitVersion();
       /**
@@ -575,7 +585,7 @@ public final class MetaGraphProtos {
        * user supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_git_version = 6;</code>
+       * <code>string tensorflow_git_version = 6;</code>
        */
       com.google.protobuf.ByteString
           getTensorflowGitVersionBytes();
@@ -586,7 +596,7 @@ public final class MetaGraphProtos {
        * the nodes in this graph_def.
        * </pre>
        *
-       * <code>optional bool stripped_default_attrs = 7;</code>
+       * <code>bool stripped_default_attrs = 7;</code>
        */
       boolean getStrippedDefaultAttrs();
     }
@@ -602,6 +612,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.MetaGraphDef.MetaInfoDef)
         MetaInfoDefOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use MetaInfoDef.newBuilder() to construct.
       private MetaInfoDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -617,14 +628,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private MetaInfoDef(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -634,7 +650,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -708,6 +725,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
             tags_ = tags_.getUnmodifiableView();
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -732,7 +750,7 @@ public final class MetaGraphProtos {
        * steps this model has been trained to, etc.
        * </pre>
        *
-       * <code>optional string meta_graph_version = 1;</code>
+       * <code>string meta_graph_version = 1;</code>
        */
       public java.lang.String getMetaGraphVersion() {
         java.lang.Object ref = metaGraphVersion_;
@@ -752,7 +770,7 @@ public final class MetaGraphProtos {
        * steps this model has been trained to, etc.
        * </pre>
        *
-       * <code>optional string meta_graph_version = 1;</code>
+       * <code>string meta_graph_version = 1;</code>
        */
       public com.google.protobuf.ByteString
           getMetaGraphVersionBytes() {
@@ -776,7 +794,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       public boolean hasStrippedOpList() {
         return strippedOpList_ != null;
@@ -787,7 +805,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpList getStrippedOpList() {
         return strippedOpList_ == null ? com.tencent.angel.core.graph.OpDefProtos.OpList.getDefaultInstance() : strippedOpList_;
@@ -798,7 +816,7 @@ public final class MetaGraphProtos {
        * Descriptions and Ops not used in graph_def are stripped out.
        * </pre>
        *
-       * <code>optional .angel.OpList stripped_op_list = 2;</code>
+       * <code>.angel.OpList stripped_op_list = 2;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpListOrBuilder getStrippedOpListOrBuilder() {
         return getStrippedOpList();
@@ -812,7 +830,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       public boolean hasAnyInfo() {
         return anyInfo_ != null;
@@ -823,7 +841,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       public com.google.protobuf.Any getAnyInfo() {
         return anyInfo_ == null ? com.google.protobuf.Any.getDefaultInstance() : anyInfo_;
@@ -834,7 +852,7 @@ public final class MetaGraphProtos {
        * modified, or name of the model.
        * </pre>
        *
-       * <code>optional .google.protobuf.Any any_info = 3;</code>
+       * <code>.google.protobuf.Any any_info = 3;</code>
        */
       public com.google.protobuf.AnyOrBuilder getAnyInfoOrBuilder() {
         return getAnyInfo();
@@ -910,7 +928,7 @@ public final class MetaGraphProtos {
        * supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_version = 5;</code>
+       * <code>string tensorflow_version = 5;</code>
        */
       public java.lang.String getTensorflowVersion() {
         java.lang.Object ref = tensorflowVersion_;
@@ -931,7 +949,7 @@ public final class MetaGraphProtos {
        * supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_version = 5;</code>
+       * <code>string tensorflow_version = 5;</code>
        */
       public com.google.protobuf.ByteString
           getTensorflowVersionBytes() {
@@ -956,7 +974,7 @@ public final class MetaGraphProtos {
        * user supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_git_version = 6;</code>
+       * <code>string tensorflow_git_version = 6;</code>
        */
       public java.lang.String getTensorflowGitVersion() {
         java.lang.Object ref = tensorflowGitVersion_;
@@ -977,7 +995,7 @@ public final class MetaGraphProtos {
        * user supplied value.
        * </pre>
        *
-       * <code>optional string tensorflow_git_version = 6;</code>
+       * <code>string tensorflow_git_version = 6;</code>
        */
       public com.google.protobuf.ByteString
           getTensorflowGitVersionBytes() {
@@ -1001,7 +1019,7 @@ public final class MetaGraphProtos {
        * the nodes in this graph_def.
        * </pre>
        *
-       * <code>optional bool stripped_default_attrs = 7;</code>
+       * <code>bool stripped_default_attrs = 7;</code>
        */
       public boolean getStrippedDefaultAttrs() {
         return strippedDefaultAttrs_;
@@ -1040,6 +1058,7 @@ public final class MetaGraphProtos {
         if (strippedDefaultAttrs_ != false) {
           output.writeBool(7, strippedDefaultAttrs_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -1076,11 +1095,11 @@ public final class MetaGraphProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(7, strippedDefaultAttrs_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1112,6 +1131,7 @@ public final class MetaGraphProtos {
             .equals(other.getTensorflowGitVersion());
         result = result && (getStrippedDefaultAttrs()
             == other.getStrippedDefaultAttrs());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1121,7 +1141,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + META_GRAPH_VERSION_FIELD_NUMBER;
         hash = (53 * hash) + getMetaGraphVersion().hashCode();
         if (hasStrippedOpList()) {
@@ -1148,6 +1168,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1341,7 +1372,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -1354,12 +1385,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1404,6 +1435,7 @@ public final class MetaGraphProtos {
           if (other.getStrippedDefaultAttrs() != false) {
             setStrippedDefaultAttrs(other.getStrippedDefaultAttrs());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -1438,7 +1470,7 @@ public final class MetaGraphProtos {
          * steps this model has been trained to, etc.
          * </pre>
          *
-         * <code>optional string meta_graph_version = 1;</code>
+         * <code>string meta_graph_version = 1;</code>
          */
         public java.lang.String getMetaGraphVersion() {
           java.lang.Object ref = metaGraphVersion_;
@@ -1458,7 +1490,7 @@ public final class MetaGraphProtos {
          * steps this model has been trained to, etc.
          * </pre>
          *
-         * <code>optional string meta_graph_version = 1;</code>
+         * <code>string meta_graph_version = 1;</code>
          */
         public com.google.protobuf.ByteString
             getMetaGraphVersionBytes() {
@@ -1479,7 +1511,7 @@ public final class MetaGraphProtos {
          * steps this model has been trained to, etc.
          * </pre>
          *
-         * <code>optional string meta_graph_version = 1;</code>
+         * <code>string meta_graph_version = 1;</code>
          */
         public Builder setMetaGraphVersion(
             java.lang.String value) {
@@ -1497,7 +1529,7 @@ public final class MetaGraphProtos {
          * steps this model has been trained to, etc.
          * </pre>
          *
-         * <code>optional string meta_graph_version = 1;</code>
+         * <code>string meta_graph_version = 1;</code>
          */
         public Builder clearMetaGraphVersion() {
           
@@ -1511,7 +1543,7 @@ public final class MetaGraphProtos {
          * steps this model has been trained to, etc.
          * </pre>
          *
-         * <code>optional string meta_graph_version = 1;</code>
+         * <code>string meta_graph_version = 1;</code>
          */
         public Builder setMetaGraphVersionBytes(
             com.google.protobuf.ByteString value) {
@@ -1534,7 +1566,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public boolean hasStrippedOpList() {
           return strippedOpListBuilder_ != null || strippedOpList_ != null;
@@ -1545,7 +1577,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public com.tencent.angel.core.graph.OpDefProtos.OpList getStrippedOpList() {
           if (strippedOpListBuilder_ == null) {
@@ -1560,7 +1592,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public Builder setStrippedOpList(com.tencent.angel.core.graph.OpDefProtos.OpList value) {
           if (strippedOpListBuilder_ == null) {
@@ -1581,7 +1613,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public Builder setStrippedOpList(
             com.tencent.angel.core.graph.OpDefProtos.OpList.Builder builderForValue) {
@@ -1600,7 +1632,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public Builder mergeStrippedOpList(com.tencent.angel.core.graph.OpDefProtos.OpList value) {
           if (strippedOpListBuilder_ == null) {
@@ -1623,7 +1655,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public Builder clearStrippedOpList() {
           if (strippedOpListBuilder_ == null) {
@@ -1642,7 +1674,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public com.tencent.angel.core.graph.OpDefProtos.OpList.Builder getStrippedOpListBuilder() {
           
@@ -1655,7 +1687,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         public com.tencent.angel.core.graph.OpDefProtos.OpListOrBuilder getStrippedOpListOrBuilder() {
           if (strippedOpListBuilder_ != null) {
@@ -1671,7 +1703,7 @@ public final class MetaGraphProtos {
          * Descriptions and Ops not used in graph_def are stripped out.
          * </pre>
          *
-         * <code>optional .angel.OpList stripped_op_list = 2;</code>
+         * <code>.angel.OpList stripped_op_list = 2;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.core.graph.OpDefProtos.OpList, com.tencent.angel.core.graph.OpDefProtos.OpList.Builder, com.tencent.angel.core.graph.OpDefProtos.OpListOrBuilder> 
@@ -1696,7 +1728,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public boolean hasAnyInfo() {
           return anyInfoBuilder_ != null || anyInfo_ != null;
@@ -1707,7 +1739,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public com.google.protobuf.Any getAnyInfo() {
           if (anyInfoBuilder_ == null) {
@@ -1722,7 +1754,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public Builder setAnyInfo(com.google.protobuf.Any value) {
           if (anyInfoBuilder_ == null) {
@@ -1743,7 +1775,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public Builder setAnyInfo(
             com.google.protobuf.Any.Builder builderForValue) {
@@ -1762,7 +1794,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public Builder mergeAnyInfo(com.google.protobuf.Any value) {
           if (anyInfoBuilder_ == null) {
@@ -1785,7 +1817,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public Builder clearAnyInfo() {
           if (anyInfoBuilder_ == null) {
@@ -1804,7 +1836,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public com.google.protobuf.Any.Builder getAnyInfoBuilder() {
           
@@ -1817,7 +1849,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         public com.google.protobuf.AnyOrBuilder getAnyInfoOrBuilder() {
           if (anyInfoBuilder_ != null) {
@@ -1833,7 +1865,7 @@ public final class MetaGraphProtos {
          * modified, or name of the model.
          * </pre>
          *
-         * <code>optional .google.protobuf.Any any_info = 3;</code>
+         * <code>.google.protobuf.Any any_info = 3;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
@@ -2023,7 +2055,7 @@ public final class MetaGraphProtos {
          * supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_version = 5;</code>
+         * <code>string tensorflow_version = 5;</code>
          */
         public java.lang.String getTensorflowVersion() {
           java.lang.Object ref = tensorflowVersion_;
@@ -2044,7 +2076,7 @@ public final class MetaGraphProtos {
          * supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_version = 5;</code>
+         * <code>string tensorflow_version = 5;</code>
          */
         public com.google.protobuf.ByteString
             getTensorflowVersionBytes() {
@@ -2066,7 +2098,7 @@ public final class MetaGraphProtos {
          * supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_version = 5;</code>
+         * <code>string tensorflow_version = 5;</code>
          */
         public Builder setTensorflowVersion(
             java.lang.String value) {
@@ -2085,7 +2117,7 @@ public final class MetaGraphProtos {
          * supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_version = 5;</code>
+         * <code>string tensorflow_version = 5;</code>
          */
         public Builder clearTensorflowVersion() {
           
@@ -2100,7 +2132,7 @@ public final class MetaGraphProtos {
          * supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_version = 5;</code>
+         * <code>string tensorflow_version = 5;</code>
          */
         public Builder setTensorflowVersionBytes(
             com.google.protobuf.ByteString value) {
@@ -2122,7 +2154,7 @@ public final class MetaGraphProtos {
          * user supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_git_version = 6;</code>
+         * <code>string tensorflow_git_version = 6;</code>
          */
         public java.lang.String getTensorflowGitVersion() {
           java.lang.Object ref = tensorflowGitVersion_;
@@ -2143,7 +2175,7 @@ public final class MetaGraphProtos {
          * user supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_git_version = 6;</code>
+         * <code>string tensorflow_git_version = 6;</code>
          */
         public com.google.protobuf.ByteString
             getTensorflowGitVersionBytes() {
@@ -2165,7 +2197,7 @@ public final class MetaGraphProtos {
          * user supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_git_version = 6;</code>
+         * <code>string tensorflow_git_version = 6;</code>
          */
         public Builder setTensorflowGitVersion(
             java.lang.String value) {
@@ -2184,7 +2216,7 @@ public final class MetaGraphProtos {
          * user supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_git_version = 6;</code>
+         * <code>string tensorflow_git_version = 6;</code>
          */
         public Builder clearTensorflowGitVersion() {
           
@@ -2199,7 +2231,7 @@ public final class MetaGraphProtos {
          * user supplied value.
          * </pre>
          *
-         * <code>optional string tensorflow_git_version = 6;</code>
+         * <code>string tensorflow_git_version = 6;</code>
          */
         public Builder setTensorflowGitVersionBytes(
             com.google.protobuf.ByteString value) {
@@ -2220,7 +2252,7 @@ public final class MetaGraphProtos {
          * the nodes in this graph_def.
          * </pre>
          *
-         * <code>optional bool stripped_default_attrs = 7;</code>
+         * <code>bool stripped_default_attrs = 7;</code>
          */
         public boolean getStrippedDefaultAttrs() {
           return strippedDefaultAttrs_;
@@ -2231,7 +2263,7 @@ public final class MetaGraphProtos {
          * the nodes in this graph_def.
          * </pre>
          *
-         * <code>optional bool stripped_default_attrs = 7;</code>
+         * <code>bool stripped_default_attrs = 7;</code>
          */
         public Builder setStrippedDefaultAttrs(boolean value) {
           
@@ -2245,7 +2277,7 @@ public final class MetaGraphProtos {
          * the nodes in this graph_def.
          * </pre>
          *
-         * <code>optional bool stripped_default_attrs = 7;</code>
+         * <code>bool stripped_default_attrs = 7;</code>
          */
         public Builder clearStrippedDefaultAttrs() {
           
@@ -2255,12 +2287,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -2283,7 +2315,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new MetaInfoDef(input, extensionRegistry);
+          return new MetaInfoDef(input, extensionRegistry);
         }
       };
 
@@ -2306,19 +2338,19 @@ public final class MetaGraphProtos {
     public static final int META_INFO_DEF_FIELD_NUMBER = 1;
     private com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef metaInfoDef_;
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     public boolean hasMetaInfoDef() {
       return metaInfoDef_ != null;
     }
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef getMetaInfoDef() {
       return metaInfoDef_ == null ? com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef.getDefaultInstance() : metaInfoDef_;
     }
     /**
-     * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+     * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDefOrBuilder getMetaInfoDefOrBuilder() {
       return getMetaInfoDef();
@@ -2331,7 +2363,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     public boolean hasGraphDef() {
       return graphDef_ != null;
@@ -2341,7 +2373,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     public com.tencent.angel.core.graph.GraphProtos.GraphDef getGraphDef() {
       return graphDef_ == null ? com.tencent.angel.core.graph.GraphProtos.GraphDef.getDefaultInstance() : graphDef_;
@@ -2351,7 +2383,7 @@ public final class MetaGraphProtos {
      * GraphDef.
      * </pre>
      *
-     * <code>optional .angel.GraphDef graph_def = 2;</code>
+     * <code>.angel.GraphDef graph_def = 2;</code>
      */
     public com.tencent.angel.core.graph.GraphProtos.GraphDefOrBuilder getGraphDefOrBuilder() {
       return getGraphDef();
@@ -2364,7 +2396,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     public boolean hasSaverDef() {
       return saverDef_ != null;
@@ -2374,7 +2406,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     public com.tencent.angel.core.saver.SaverProtos.SaverDef getSaverDef() {
       return saverDef_ == null ? com.tencent.angel.core.saver.SaverProtos.SaverDef.getDefaultInstance() : saverDef_;
@@ -2384,7 +2416,7 @@ public final class MetaGraphProtos {
      * SaverDef.
      * </pre>
      *
-     * <code>optional .angel.SaverDef saver_def = 3;</code>
+     * <code>.angel.SaverDef saver_def = 3;</code>
      */
     public com.tencent.angel.core.saver.SaverProtos.SaverDefOrBuilder getSaverDefOrBuilder() {
       return getSaverDef();
@@ -2654,27 +2686,22 @@ public final class MetaGraphProtos {
       if (saverDef_ != null) {
         output.writeMessage(3, getSaverDef());
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef> entry
-           : internalGetCollectionDef().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef>
-        collectionDef = CollectionDefDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(4, collectionDef);
-      }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef> entry
-           : internalGetSignatureDef().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef>
-        signatureDef = SignatureDefDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(5, signatureDef);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetCollectionDef(),
+          CollectionDefDefaultEntryHolder.defaultEntry,
+          4);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetSignatureDef(),
+          SignatureDefDefaultEntryHolder.defaultEntry,
+          5);
       for (int i = 0; i < assetFileDef_.size(); i++) {
         output.writeMessage(6, assetFileDef_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2697,32 +2724,32 @@ public final class MetaGraphProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef> entry
            : internalGetCollectionDef().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef>
-        collectionDef = CollectionDefDefaultEntryHolder.defaultEntry.newBuilderForType()
+        collectionDef__ = CollectionDefDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(4, collectionDef);
+            .computeMessageSize(4, collectionDef__);
       }
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef> entry
            : internalGetSignatureDef().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef>
-        signatureDef = SignatureDefDefaultEntryHolder.defaultEntry.newBuilderForType()
+        signatureDef__ = SignatureDefDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(5, signatureDef);
+            .computeMessageSize(5, signatureDef__);
       }
       for (int i = 0; i < assetFileDef_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, assetFileDef_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2755,6 +2782,7 @@ public final class MetaGraphProtos {
           other.internalGetSignatureDef());
       result = result && getAssetFileDefList()
           .equals(other.getAssetFileDefList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2764,7 +2792,7 @@ public final class MetaGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasMetaInfoDef()) {
         hash = (37 * hash) + META_INFO_DEF_FIELD_NUMBER;
         hash = (53 * hash) + getMetaInfoDef().hashCode();
@@ -2794,6 +2822,17 @@ public final class MetaGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3038,7 +3077,7 @@ public final class MetaGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3051,12 +3090,12 @@ public final class MetaGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3109,6 +3148,7 @@ public final class MetaGraphProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3140,13 +3180,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef, com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef.Builder, com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDefOrBuilder> metaInfoDefBuilder_;
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public boolean hasMetaInfoDef() {
         return metaInfoDefBuilder_ != null || metaInfoDef_ != null;
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef getMetaInfoDef() {
         if (metaInfoDefBuilder_ == null) {
@@ -3156,7 +3196,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public Builder setMetaInfoDef(com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef value) {
         if (metaInfoDefBuilder_ == null) {
@@ -3172,7 +3212,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public Builder setMetaInfoDef(
           com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef.Builder builderForValue) {
@@ -3186,7 +3226,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public Builder mergeMetaInfoDef(com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef value) {
         if (metaInfoDefBuilder_ == null) {
@@ -3204,7 +3244,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public Builder clearMetaInfoDef() {
         if (metaInfoDefBuilder_ == null) {
@@ -3218,7 +3258,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef.Builder getMetaInfoDefBuilder() {
         
@@ -3226,7 +3266,7 @@ public final class MetaGraphProtos {
         return getMetaInfoDefFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDefOrBuilder getMetaInfoDefOrBuilder() {
         if (metaInfoDefBuilder_ != null) {
@@ -3237,7 +3277,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
+       * <code>.angel.MetaGraphDef.MetaInfoDef meta_info_def = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef, com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDef.Builder, com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef.MetaInfoDefOrBuilder> 
@@ -3261,7 +3301,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public boolean hasGraphDef() {
         return graphDefBuilder_ != null || graphDef_ != null;
@@ -3271,7 +3311,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public com.tencent.angel.core.graph.GraphProtos.GraphDef getGraphDef() {
         if (graphDefBuilder_ == null) {
@@ -3285,7 +3325,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public Builder setGraphDef(com.tencent.angel.core.graph.GraphProtos.GraphDef value) {
         if (graphDefBuilder_ == null) {
@@ -3305,7 +3345,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public Builder setGraphDef(
           com.tencent.angel.core.graph.GraphProtos.GraphDef.Builder builderForValue) {
@@ -3323,7 +3363,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public Builder mergeGraphDef(com.tencent.angel.core.graph.GraphProtos.GraphDef value) {
         if (graphDefBuilder_ == null) {
@@ -3345,7 +3385,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public Builder clearGraphDef() {
         if (graphDefBuilder_ == null) {
@@ -3363,7 +3403,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public com.tencent.angel.core.graph.GraphProtos.GraphDef.Builder getGraphDefBuilder() {
         
@@ -3375,7 +3415,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       public com.tencent.angel.core.graph.GraphProtos.GraphDefOrBuilder getGraphDefOrBuilder() {
         if (graphDefBuilder_ != null) {
@@ -3390,7 +3430,7 @@ public final class MetaGraphProtos {
        * GraphDef.
        * </pre>
        *
-       * <code>optional .angel.GraphDef graph_def = 2;</code>
+       * <code>.angel.GraphDef graph_def = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.GraphProtos.GraphDef, com.tencent.angel.core.graph.GraphProtos.GraphDef.Builder, com.tencent.angel.core.graph.GraphProtos.GraphDefOrBuilder> 
@@ -3414,7 +3454,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public boolean hasSaverDef() {
         return saverDefBuilder_ != null || saverDef_ != null;
@@ -3424,7 +3464,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public com.tencent.angel.core.saver.SaverProtos.SaverDef getSaverDef() {
         if (saverDefBuilder_ == null) {
@@ -3438,7 +3478,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public Builder setSaverDef(com.tencent.angel.core.saver.SaverProtos.SaverDef value) {
         if (saverDefBuilder_ == null) {
@@ -3458,7 +3498,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public Builder setSaverDef(
           com.tencent.angel.core.saver.SaverProtos.SaverDef.Builder builderForValue) {
@@ -3476,7 +3516,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public Builder mergeSaverDef(com.tencent.angel.core.saver.SaverProtos.SaverDef value) {
         if (saverDefBuilder_ == null) {
@@ -3498,7 +3538,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public Builder clearSaverDef() {
         if (saverDefBuilder_ == null) {
@@ -3516,7 +3556,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public com.tencent.angel.core.saver.SaverProtos.SaverDef.Builder getSaverDefBuilder() {
         
@@ -3528,7 +3568,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       public com.tencent.angel.core.saver.SaverProtos.SaverDefOrBuilder getSaverDefOrBuilder() {
         if (saverDefBuilder_ != null) {
@@ -3543,7 +3583,7 @@ public final class MetaGraphProtos {
        * SaverDef.
        * </pre>
        *
-       * <code>optional .angel.SaverDef saver_def = 3;</code>
+       * <code>.angel.SaverDef saver_def = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.SaverProtos.SaverDef, com.tencent.angel.core.saver.SaverProtos.SaverDef.Builder, com.tencent.angel.core.saver.SaverProtos.SaverDefOrBuilder> 
@@ -3656,7 +3696,8 @@ public final class MetaGraphProtos {
       }
 
       public Builder clearCollectionDef() {
-        getMutableCollectionDef().clear();
+        internalGetMutableCollectionDef().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -3671,7 +3712,8 @@ public final class MetaGraphProtos {
       public Builder removeCollectionDef(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableCollectionDef().remove(key);
+        internalGetMutableCollectionDef().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -3695,7 +3737,8 @@ public final class MetaGraphProtos {
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableCollectionDef().put(key, value);
+        internalGetMutableCollectionDef().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -3709,7 +3752,8 @@ public final class MetaGraphProtos {
 
       public Builder putAllCollectionDef(
           java.util.Map<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef> values) {
-        getMutableCollectionDef().putAll(values);
+        internalGetMutableCollectionDef().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -3806,7 +3850,8 @@ public final class MetaGraphProtos {
       }
 
       public Builder clearSignatureDef() {
-        getMutableSignatureDef().clear();
+        internalGetMutableSignatureDef().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -3820,7 +3865,8 @@ public final class MetaGraphProtos {
       public Builder removeSignatureDef(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableSignatureDef().remove(key);
+        internalGetMutableSignatureDef().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -3843,7 +3889,8 @@ public final class MetaGraphProtos {
           com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableSignatureDef().put(key, value);
+        internalGetMutableSignatureDef().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -3856,7 +3903,8 @@ public final class MetaGraphProtos {
 
       public Builder putAllSignatureDef(
           java.util.Map<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef> values) {
-        getMutableSignatureDef().putAll(values);
+        internalGetMutableSignatureDef().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -4173,12 +4221,12 @@ public final class MetaGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4201,7 +4249,7 @@ public final class MetaGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MetaGraphDef(input, extensionRegistry);
+        return new MetaGraphDef(input, extensionRegistry);
       }
     };
 
@@ -4225,47 +4273,67 @@ public final class MetaGraphProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
+     */
+    boolean hasNodeList();
+    /**
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList getNodeList();
     /**
-     * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeListOrBuilder getNodeListOrBuilder();
 
     /**
-     * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
+     */
+    boolean hasBytesList();
+    /**
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList getBytesList();
     /**
-     * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesListOrBuilder getBytesListOrBuilder();
 
     /**
-     * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
+     */
+    boolean hasInt64List();
+    /**
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List getInt64List();
     /**
-     * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64ListOrBuilder getInt64ListOrBuilder();
 
     /**
-     * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
+     */
+    boolean hasFloatList();
+    /**
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList getFloatList();
     /**
-     * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatListOrBuilder getFloatListOrBuilder();
 
     /**
-     * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
+     */
+    boolean hasAnyList();
+    /**
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList getAnyList();
     /**
-     * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyListOrBuilder getAnyListOrBuilder();
 
@@ -4334,6 +4402,7 @@ public final class MetaGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.CollectionDef)
       CollectionDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use CollectionDef.newBuilder() to construct.
     private CollectionDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4344,14 +4413,19 @@ public final class MetaGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private CollectionDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4361,7 +4435,8 @@ public final class MetaGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -4444,6 +4519,7 @@ public final class MetaGraphProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4502,6 +4578,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CollectionDef.NodeList)
         NodeListOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use NodeList.newBuilder() to construct.
       private NodeList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -4513,14 +4590,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private NodeList(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -4530,7 +4612,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -4555,6 +4638,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
             value_ = value_.getUnmodifiableView();
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -4614,6 +4698,7 @@ public final class MetaGraphProtos {
         for (int i = 0; i < value_.size(); i++) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 1, value_.getRaw(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -4629,11 +4714,11 @@ public final class MetaGraphProtos {
           size += dataSize;
           size += 1 * getValueList().size();
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -4647,6 +4732,7 @@ public final class MetaGraphProtos {
         boolean result = true;
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -4656,7 +4742,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getValueCount() > 0) {
           hash = (37 * hash) + VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getValueList().hashCode();
@@ -4666,6 +4752,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4831,7 +4928,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -4844,12 +4941,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4873,6 +4970,7 @@ public final class MetaGraphProtos {
             }
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -4995,12 +5093,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -5023,7 +5121,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new NodeList(input, extensionRegistry);
+          return new NodeList(input, extensionRegistry);
         }
       };
 
@@ -5082,6 +5180,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CollectionDef.BytesList)
         BytesListOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use BytesList.newBuilder() to construct.
       private BytesList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -5093,14 +5192,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private BytesList(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -5110,7 +5214,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -5134,6 +5239,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
             value_ = java.util.Collections.unmodifiableList(value_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -5186,6 +5292,7 @@ public final class MetaGraphProtos {
         for (int i = 0; i < value_.size(); i++) {
           output.writeBytes(1, value_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -5202,11 +5309,11 @@ public final class MetaGraphProtos {
           size += dataSize;
           size += 1 * getValueList().size();
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -5220,6 +5327,7 @@ public final class MetaGraphProtos {
         boolean result = true;
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -5229,7 +5337,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getValueCount() > 0) {
           hash = (37 * hash) + VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getValueList().hashCode();
@@ -5239,6 +5347,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5407,7 +5526,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -5420,12 +5539,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5449,6 +5568,7 @@ public final class MetaGraphProtos {
             }
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -5549,12 +5669,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -5577,7 +5697,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new BytesList(input, extensionRegistry);
+          return new BytesList(input, extensionRegistry);
         }
       };
 
@@ -5624,6 +5744,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CollectionDef.Int64List)
         Int64ListOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Int64List.newBuilder() to construct.
       private Int64List(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -5635,14 +5756,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Int64List(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -5652,7 +5778,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -5689,6 +5816,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
             value_ = java.util.Collections.unmodifiableList(value_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -5747,6 +5875,7 @@ public final class MetaGraphProtos {
         for (int i = 0; i < value_.size(); i++) {
           output.writeInt64NoTag(value_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -5768,11 +5897,11 @@ public final class MetaGraphProtos {
           }
           valueMemoizedSerializedSize = dataSize;
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -5786,6 +5915,7 @@ public final class MetaGraphProtos {
         boolean result = true;
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -5795,7 +5925,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getValueCount() > 0) {
           hash = (37 * hash) + VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getValueList().hashCode();
@@ -5805,6 +5935,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5961,7 +6102,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -5974,12 +6115,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6003,6 +6144,7 @@ public final class MetaGraphProtos {
             }
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -6097,12 +6239,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -6125,7 +6267,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Int64List(input, extensionRegistry);
+          return new Int64List(input, extensionRegistry);
         }
       };
 
@@ -6172,6 +6314,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CollectionDef.FloatList)
         FloatListOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use FloatList.newBuilder() to construct.
       private FloatList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -6183,14 +6326,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private FloatList(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -6200,7 +6348,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -6237,6 +6386,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
             value_ = java.util.Collections.unmodifiableList(value_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -6295,6 +6445,7 @@ public final class MetaGraphProtos {
         for (int i = 0; i < value_.size(); i++) {
           output.writeFloatNoTag(value_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -6313,11 +6464,11 @@ public final class MetaGraphProtos {
           }
           valueMemoizedSerializedSize = dataSize;
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -6331,6 +6482,7 @@ public final class MetaGraphProtos {
         boolean result = true;
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -6340,7 +6492,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getValueCount() > 0) {
           hash = (37 * hash) + VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getValueList().hashCode();
@@ -6350,6 +6502,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6506,7 +6669,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -6519,12 +6682,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6548,6 +6711,7 @@ public final class MetaGraphProtos {
             }
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -6642,12 +6806,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -6670,7 +6834,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new FloatList(input, extensionRegistry);
+          return new FloatList(input, extensionRegistry);
         }
       };
 
@@ -6728,6 +6892,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.CollectionDef.AnyList)
         AnyListOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use AnyList.newBuilder() to construct.
       private AnyList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -6739,14 +6904,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private AnyList(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -6756,7 +6926,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -6781,6 +6952,7 @@ public final class MetaGraphProtos {
           if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
             value_ = java.util.Collections.unmodifiableList(value_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -6846,6 +7018,7 @@ public final class MetaGraphProtos {
         for (int i = 0; i < value_.size(); i++) {
           output.writeMessage(1, value_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -6857,11 +7030,11 @@ public final class MetaGraphProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(1, value_.get(i));
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -6875,6 +7048,7 @@ public final class MetaGraphProtos {
         boolean result = true;
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -6884,7 +7058,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (getValueCount() > 0) {
           hash = (37 * hash) + VALUE_FIELD_NUMBER;
           hash = (53 * hash) + getValueList().hashCode();
@@ -6894,6 +7068,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7059,7 +7244,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -7072,12 +7257,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7117,6 +7302,7 @@ public final class MetaGraphProtos {
               }
             }
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -7385,12 +7571,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -7413,7 +7599,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new AnyList(input, extensionRegistry);
+          return new AnyList(input, extensionRegistry);
         }
       };
 
@@ -7478,7 +7664,13 @@ public final class MetaGraphProtos {
 
     public static final int NODE_LIST_FIELD_NUMBER = 1;
     /**
-     * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
+     */
+    public boolean hasNodeList() {
+      return kindCase_ == 1;
+    }
+    /**
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList getNodeList() {
       if (kindCase_ == 1) {
@@ -7487,7 +7679,7 @@ public final class MetaGraphProtos {
       return com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+     * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeListOrBuilder getNodeListOrBuilder() {
       if (kindCase_ == 1) {
@@ -7498,7 +7690,13 @@ public final class MetaGraphProtos {
 
     public static final int BYTES_LIST_FIELD_NUMBER = 2;
     /**
-     * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
+     */
+    public boolean hasBytesList() {
+      return kindCase_ == 2;
+    }
+    /**
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList getBytesList() {
       if (kindCase_ == 2) {
@@ -7507,7 +7705,7 @@ public final class MetaGraphProtos {
       return com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+     * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesListOrBuilder getBytesListOrBuilder() {
       if (kindCase_ == 2) {
@@ -7518,7 +7716,13 @@ public final class MetaGraphProtos {
 
     public static final int INT64_LIST_FIELD_NUMBER = 3;
     /**
-     * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
+     */
+    public boolean hasInt64List() {
+      return kindCase_ == 3;
+    }
+    /**
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List getInt64List() {
       if (kindCase_ == 3) {
@@ -7527,7 +7731,7 @@ public final class MetaGraphProtos {
       return com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+     * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64ListOrBuilder getInt64ListOrBuilder() {
       if (kindCase_ == 3) {
@@ -7538,7 +7742,13 @@ public final class MetaGraphProtos {
 
     public static final int FLOAT_LIST_FIELD_NUMBER = 4;
     /**
-     * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
+     */
+    public boolean hasFloatList() {
+      return kindCase_ == 4;
+    }
+    /**
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList getFloatList() {
       if (kindCase_ == 4) {
@@ -7547,7 +7757,7 @@ public final class MetaGraphProtos {
       return com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+     * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatListOrBuilder getFloatListOrBuilder() {
       if (kindCase_ == 4) {
@@ -7558,7 +7768,13 @@ public final class MetaGraphProtos {
 
     public static final int ANY_LIST_FIELD_NUMBER = 5;
     /**
-     * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
+     */
+    public boolean hasAnyList() {
+      return kindCase_ == 5;
+    }
+    /**
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList getAnyList() {
       if (kindCase_ == 5) {
@@ -7567,7 +7783,7 @@ public final class MetaGraphProtos {
       return com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+     * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyListOrBuilder getAnyListOrBuilder() {
       if (kindCase_ == 5) {
@@ -7603,6 +7819,7 @@ public final class MetaGraphProtos {
       if (kindCase_ == 5) {
         output.writeMessage(5, (com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList) kind_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -7630,11 +7847,11 @@ public final class MetaGraphProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, (com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList) kind_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -7673,6 +7890,7 @@ public final class MetaGraphProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -7682,7 +7900,7 @@ public final class MetaGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       switch (kindCase_) {
         case 1:
           hash = (37 * hash) + NODE_LIST_FIELD_NUMBER;
@@ -7712,6 +7930,17 @@ public final class MetaGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7950,7 +8179,7 @@ public final class MetaGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -7963,12 +8192,12 @@ public final class MetaGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -8007,6 +8236,7 @@ public final class MetaGraphProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -8051,7 +8281,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeListOrBuilder> nodeListBuilder_;
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
+       */
+      public boolean hasNodeList() {
+        return kindCase_ == 1;
+      }
+      /**
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList getNodeList() {
         if (nodeListBuilder_ == null) {
@@ -8067,7 +8303,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public Builder setNodeList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList value) {
         if (nodeListBuilder_ == null) {
@@ -8083,7 +8319,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public Builder setNodeList(
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList.Builder builderForValue) {
@@ -8097,7 +8333,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public Builder mergeNodeList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList value) {
         if (nodeListBuilder_ == null) {
@@ -8119,7 +8355,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public Builder clearNodeList() {
         if (nodeListBuilder_ == null) {
@@ -8138,13 +8374,13 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList.Builder getNodeListBuilder() {
         return getNodeListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeListOrBuilder getNodeListOrBuilder() {
         if ((kindCase_ == 1) && (nodeListBuilder_ != null)) {
@@ -8157,7 +8393,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.NodeList node_list = 1;</code>
+       * <code>.angel.CollectionDef.NodeList node_list = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.NodeListOrBuilder> 
@@ -8181,7 +8417,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesListOrBuilder> bytesListBuilder_;
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
+       */
+      public boolean hasBytesList() {
+        return kindCase_ == 2;
+      }
+      /**
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList getBytesList() {
         if (bytesListBuilder_ == null) {
@@ -8197,7 +8439,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public Builder setBytesList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList value) {
         if (bytesListBuilder_ == null) {
@@ -8213,7 +8455,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public Builder setBytesList(
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList.Builder builderForValue) {
@@ -8227,7 +8469,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public Builder mergeBytesList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList value) {
         if (bytesListBuilder_ == null) {
@@ -8249,7 +8491,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public Builder clearBytesList() {
         if (bytesListBuilder_ == null) {
@@ -8268,13 +8510,13 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList.Builder getBytesListBuilder() {
         return getBytesListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesListOrBuilder getBytesListOrBuilder() {
         if ((kindCase_ == 2) && (bytesListBuilder_ != null)) {
@@ -8287,7 +8529,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.BytesList bytes_list = 2;</code>
+       * <code>.angel.CollectionDef.BytesList bytes_list = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.BytesListOrBuilder> 
@@ -8311,7 +8553,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64ListOrBuilder> int64ListBuilder_;
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
+       */
+      public boolean hasInt64List() {
+        return kindCase_ == 3;
+      }
+      /**
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List getInt64List() {
         if (int64ListBuilder_ == null) {
@@ -8327,7 +8575,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public Builder setInt64List(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List value) {
         if (int64ListBuilder_ == null) {
@@ -8343,7 +8591,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public Builder setInt64List(
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List.Builder builderForValue) {
@@ -8357,7 +8605,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public Builder mergeInt64List(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List value) {
         if (int64ListBuilder_ == null) {
@@ -8379,7 +8627,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public Builder clearInt64List() {
         if (int64ListBuilder_ == null) {
@@ -8398,13 +8646,13 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List.Builder getInt64ListBuilder() {
         return getInt64ListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64ListOrBuilder getInt64ListOrBuilder() {
         if ((kindCase_ == 3) && (int64ListBuilder_ != null)) {
@@ -8417,7 +8665,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.Int64List int64_list = 3;</code>
+       * <code>.angel.CollectionDef.Int64List int64_list = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64List.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.Int64ListOrBuilder> 
@@ -8441,7 +8689,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatListOrBuilder> floatListBuilder_;
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
+       */
+      public boolean hasFloatList() {
+        return kindCase_ == 4;
+      }
+      /**
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList getFloatList() {
         if (floatListBuilder_ == null) {
@@ -8457,7 +8711,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public Builder setFloatList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList value) {
         if (floatListBuilder_ == null) {
@@ -8473,7 +8727,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public Builder setFloatList(
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList.Builder builderForValue) {
@@ -8487,7 +8741,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public Builder mergeFloatList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList value) {
         if (floatListBuilder_ == null) {
@@ -8509,7 +8763,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public Builder clearFloatList() {
         if (floatListBuilder_ == null) {
@@ -8528,13 +8782,13 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList.Builder getFloatListBuilder() {
         return getFloatListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatListOrBuilder getFloatListOrBuilder() {
         if ((kindCase_ == 4) && (floatListBuilder_ != null)) {
@@ -8547,7 +8801,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.FloatList float_list = 4;</code>
+       * <code>.angel.CollectionDef.FloatList float_list = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.FloatListOrBuilder> 
@@ -8571,7 +8825,13 @@ public final class MetaGraphProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyListOrBuilder> anyListBuilder_;
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
+       */
+      public boolean hasAnyList() {
+        return kindCase_ == 5;
+      }
+      /**
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList getAnyList() {
         if (anyListBuilder_ == null) {
@@ -8587,7 +8847,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public Builder setAnyList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList value) {
         if (anyListBuilder_ == null) {
@@ -8603,7 +8863,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public Builder setAnyList(
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList.Builder builderForValue) {
@@ -8617,7 +8877,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public Builder mergeAnyList(com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList value) {
         if (anyListBuilder_ == null) {
@@ -8639,7 +8899,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public Builder clearAnyList() {
         if (anyListBuilder_ == null) {
@@ -8658,13 +8918,13 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList.Builder getAnyListBuilder() {
         return getAnyListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyListOrBuilder getAnyListOrBuilder() {
         if ((kindCase_ == 5) && (anyListBuilder_ != null)) {
@@ -8677,7 +8937,7 @@ public final class MetaGraphProtos {
         }
       }
       /**
-       * <code>optional .angel.CollectionDef.AnyList any_list = 5;</code>
+       * <code>.angel.CollectionDef.AnyList any_list = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyList.Builder, com.tencent.angel.core.saver.MetaGraphProtos.CollectionDef.AnyListOrBuilder> 
@@ -8699,12 +8959,12 @@ public final class MetaGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -8727,7 +8987,7 @@ public final class MetaGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CollectionDef(input, extensionRegistry);
+        return new CollectionDef(input, extensionRegistry);
       }
     };
 
@@ -8755,7 +9015,7 @@ public final class MetaGraphProtos {
      * For dense `Tensor`s, the name of the tensor in the graph.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -8763,7 +9023,7 @@ public final class MetaGraphProtos {
      * For dense `Tensor`s, the name of the tensor in the graph.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -8776,7 +9036,18 @@ public final class MetaGraphProtos {
      * SparseTensor Python class.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     */
+    boolean hasCooSparse();
+    /**
+     * <pre>
+     * There are many possible encodings of sparse matrices
+     * (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
+     * uses only the COO encoding.  This is supported and documented in the
+     * SparseTensor Python class.
+     * </pre>
+     *
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse getCooSparse();
     /**
@@ -8787,18 +9058,18 @@ public final class MetaGraphProtos {
      * SparseTensor Python class.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparseOrBuilder getCooSparseOrBuilder();
 
     /**
-     * <code>optional .angel.DataType dtype = 2;</code>
+     * <code>.angel.DataType dtype = 2;</code>
      */
     int getDtypeValue();
     /**
-     * <code>optional .angel.DataType dtype = 2;</code>
+     * <code>.angel.DataType dtype = 2;</code>
      */
-    com.tencent.angel.core.graph.TypesProtos.DataType getDtype();
+    com.tencent.angel.serving.apis.common.TypesProtos.DataType getDtype();
 
     /**
      * <pre>
@@ -8807,7 +9078,7 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
     boolean hasTensorShape();
     /**
@@ -8817,9 +9088,9 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
-    com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape();
+    com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto getTensorShape();
     /**
      * <pre>
      * The static shape should be recorded here, to the extent that it can
@@ -8827,9 +9098,9 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
-    com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder();
+    com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder();
 
     public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.EncodingCase getEncodingCase();
   }
@@ -8844,6 +9115,7 @@ public final class MetaGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.TensorInfo)
       TensorInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TensorInfo.newBuilder() to construct.
     private TensorInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -8855,14 +9127,19 @@ public final class MetaGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TensorInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -8872,7 +9149,8 @@ public final class MetaGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -8890,11 +9168,11 @@ public final class MetaGraphProtos {
               break;
             }
             case 26: {
-              com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder subBuilder = null;
+              com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder subBuilder = null;
               if (tensorShape_ != null) {
                 subBuilder = tensorShape_.toBuilder();
               }
-              tensorShape_ = input.readMessage(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.parser(), extensionRegistry);
+              tensorShape_ = input.readMessage(com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(tensorShape_);
                 tensorShape_ = subBuilder.buildPartial();
@@ -8924,6 +9202,7 @@ public final class MetaGraphProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -8949,7 +9228,7 @@ public final class MetaGraphProtos {
        * the SparseTensor as a whole, given in the enclosing TensorInfo.
        * </pre>
        *
-       * <code>optional string values_tensor_name = 1;</code>
+       * <code>string values_tensor_name = 1;</code>
        */
       java.lang.String getValuesTensorName();
       /**
@@ -8958,7 +9237,7 @@ public final class MetaGraphProtos {
        * the SparseTensor as a whole, given in the enclosing TensorInfo.
        * </pre>
        *
-       * <code>optional string values_tensor_name = 1;</code>
+       * <code>string values_tensor_name = 1;</code>
        */
       com.google.protobuf.ByteString
           getValuesTensorNameBytes();
@@ -8968,7 +9247,7 @@ public final class MetaGraphProtos {
        * The indices Tensor must have dtype int64 and shape [?, ?].
        * </pre>
        *
-       * <code>optional string indices_tensor_name = 2;</code>
+       * <code>string indices_tensor_name = 2;</code>
        */
       java.lang.String getIndicesTensorName();
       /**
@@ -8976,7 +9255,7 @@ public final class MetaGraphProtos {
        * The indices Tensor must have dtype int64 and shape [?, ?].
        * </pre>
        *
-       * <code>optional string indices_tensor_name = 2;</code>
+       * <code>string indices_tensor_name = 2;</code>
        */
       com.google.protobuf.ByteString
           getIndicesTensorNameBytes();
@@ -8987,7 +9266,7 @@ public final class MetaGraphProtos {
        * the Tensor referenced here.  It must have dtype int64 and shape [?].
        * </pre>
        *
-       * <code>optional string dense_shape_tensor_name = 3;</code>
+       * <code>string dense_shape_tensor_name = 3;</code>
        */
       java.lang.String getDenseShapeTensorName();
       /**
@@ -8996,7 +9275,7 @@ public final class MetaGraphProtos {
        * the Tensor referenced here.  It must have dtype int64 and shape [?].
        * </pre>
        *
-       * <code>optional string dense_shape_tensor_name = 3;</code>
+       * <code>string dense_shape_tensor_name = 3;</code>
        */
       com.google.protobuf.ByteString
           getDenseShapeTensorNameBytes();
@@ -9013,6 +9292,7 @@ public final class MetaGraphProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.TensorInfo.CooSparse)
         CooSparseOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use CooSparse.newBuilder() to construct.
       private CooSparse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -9026,14 +9306,19 @@ public final class MetaGraphProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private CooSparse(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -9043,7 +9328,8 @@ public final class MetaGraphProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -9074,6 +9360,7 @@ public final class MetaGraphProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -9097,7 +9384,7 @@ public final class MetaGraphProtos {
        * the SparseTensor as a whole, given in the enclosing TensorInfo.
        * </pre>
        *
-       * <code>optional string values_tensor_name = 1;</code>
+       * <code>string values_tensor_name = 1;</code>
        */
       public java.lang.String getValuesTensorName() {
         java.lang.Object ref = valuesTensorName_;
@@ -9117,7 +9404,7 @@ public final class MetaGraphProtos {
        * the SparseTensor as a whole, given in the enclosing TensorInfo.
        * </pre>
        *
-       * <code>optional string values_tensor_name = 1;</code>
+       * <code>string values_tensor_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getValuesTensorNameBytes() {
@@ -9140,7 +9427,7 @@ public final class MetaGraphProtos {
        * The indices Tensor must have dtype int64 and shape [?, ?].
        * </pre>
        *
-       * <code>optional string indices_tensor_name = 2;</code>
+       * <code>string indices_tensor_name = 2;</code>
        */
       public java.lang.String getIndicesTensorName() {
         java.lang.Object ref = indicesTensorName_;
@@ -9159,7 +9446,7 @@ public final class MetaGraphProtos {
        * The indices Tensor must have dtype int64 and shape [?, ?].
        * </pre>
        *
-       * <code>optional string indices_tensor_name = 2;</code>
+       * <code>string indices_tensor_name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getIndicesTensorNameBytes() {
@@ -9183,7 +9470,7 @@ public final class MetaGraphProtos {
        * the Tensor referenced here.  It must have dtype int64 and shape [?].
        * </pre>
        *
-       * <code>optional string dense_shape_tensor_name = 3;</code>
+       * <code>string dense_shape_tensor_name = 3;</code>
        */
       public java.lang.String getDenseShapeTensorName() {
         java.lang.Object ref = denseShapeTensorName_;
@@ -9203,7 +9490,7 @@ public final class MetaGraphProtos {
        * the Tensor referenced here.  It must have dtype int64 and shape [?].
        * </pre>
        *
-       * <code>optional string dense_shape_tensor_name = 3;</code>
+       * <code>string dense_shape_tensor_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getDenseShapeTensorNameBytes() {
@@ -9240,6 +9527,7 @@ public final class MetaGraphProtos {
         if (!getDenseShapeTensorNameBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 3, denseShapeTensorName_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -9256,11 +9544,11 @@ public final class MetaGraphProtos {
         if (!getDenseShapeTensorNameBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, denseShapeTensorName_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -9278,6 +9566,7 @@ public final class MetaGraphProtos {
             .equals(other.getIndicesTensorName());
         result = result && getDenseShapeTensorName()
             .equals(other.getDenseShapeTensorName());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -9287,7 +9576,7 @@ public final class MetaGraphProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + VALUES_TENSOR_NAME_FIELD_NUMBER;
         hash = (53 * hash) + getValuesTensorName().hashCode();
         hash = (37 * hash) + INDICES_TENSOR_NAME_FIELD_NUMBER;
@@ -9299,6 +9588,17 @@ public final class MetaGraphProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -9457,7 +9757,7 @@ public final class MetaGraphProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -9470,12 +9770,12 @@ public final class MetaGraphProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -9501,6 +9801,7 @@ public final class MetaGraphProtos {
             denseShapeTensorName_ = other.denseShapeTensorName_;
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -9534,7 +9835,7 @@ public final class MetaGraphProtos {
          * the SparseTensor as a whole, given in the enclosing TensorInfo.
          * </pre>
          *
-         * <code>optional string values_tensor_name = 1;</code>
+         * <code>string values_tensor_name = 1;</code>
          */
         public java.lang.String getValuesTensorName() {
           java.lang.Object ref = valuesTensorName_;
@@ -9554,7 +9855,7 @@ public final class MetaGraphProtos {
          * the SparseTensor as a whole, given in the enclosing TensorInfo.
          * </pre>
          *
-         * <code>optional string values_tensor_name = 1;</code>
+         * <code>string values_tensor_name = 1;</code>
          */
         public com.google.protobuf.ByteString
             getValuesTensorNameBytes() {
@@ -9575,7 +9876,7 @@ public final class MetaGraphProtos {
          * the SparseTensor as a whole, given in the enclosing TensorInfo.
          * </pre>
          *
-         * <code>optional string values_tensor_name = 1;</code>
+         * <code>string values_tensor_name = 1;</code>
          */
         public Builder setValuesTensorName(
             java.lang.String value) {
@@ -9593,7 +9894,7 @@ public final class MetaGraphProtos {
          * the SparseTensor as a whole, given in the enclosing TensorInfo.
          * </pre>
          *
-         * <code>optional string values_tensor_name = 1;</code>
+         * <code>string values_tensor_name = 1;</code>
          */
         public Builder clearValuesTensorName() {
           
@@ -9607,7 +9908,7 @@ public final class MetaGraphProtos {
          * the SparseTensor as a whole, given in the enclosing TensorInfo.
          * </pre>
          *
-         * <code>optional string values_tensor_name = 1;</code>
+         * <code>string values_tensor_name = 1;</code>
          */
         public Builder setValuesTensorNameBytes(
             com.google.protobuf.ByteString value) {
@@ -9627,7 +9928,7 @@ public final class MetaGraphProtos {
          * The indices Tensor must have dtype int64 and shape [?, ?].
          * </pre>
          *
-         * <code>optional string indices_tensor_name = 2;</code>
+         * <code>string indices_tensor_name = 2;</code>
          */
         public java.lang.String getIndicesTensorName() {
           java.lang.Object ref = indicesTensorName_;
@@ -9646,7 +9947,7 @@ public final class MetaGraphProtos {
          * The indices Tensor must have dtype int64 and shape [?, ?].
          * </pre>
          *
-         * <code>optional string indices_tensor_name = 2;</code>
+         * <code>string indices_tensor_name = 2;</code>
          */
         public com.google.protobuf.ByteString
             getIndicesTensorNameBytes() {
@@ -9666,7 +9967,7 @@ public final class MetaGraphProtos {
          * The indices Tensor must have dtype int64 and shape [?, ?].
          * </pre>
          *
-         * <code>optional string indices_tensor_name = 2;</code>
+         * <code>string indices_tensor_name = 2;</code>
          */
         public Builder setIndicesTensorName(
             java.lang.String value) {
@@ -9683,7 +9984,7 @@ public final class MetaGraphProtos {
          * The indices Tensor must have dtype int64 and shape [?, ?].
          * </pre>
          *
-         * <code>optional string indices_tensor_name = 2;</code>
+         * <code>string indices_tensor_name = 2;</code>
          */
         public Builder clearIndicesTensorName() {
           
@@ -9696,7 +9997,7 @@ public final class MetaGraphProtos {
          * The indices Tensor must have dtype int64 and shape [?, ?].
          * </pre>
          *
-         * <code>optional string indices_tensor_name = 2;</code>
+         * <code>string indices_tensor_name = 2;</code>
          */
         public Builder setIndicesTensorNameBytes(
             com.google.protobuf.ByteString value) {
@@ -9717,7 +10018,7 @@ public final class MetaGraphProtos {
          * the Tensor referenced here.  It must have dtype int64 and shape [?].
          * </pre>
          *
-         * <code>optional string dense_shape_tensor_name = 3;</code>
+         * <code>string dense_shape_tensor_name = 3;</code>
          */
         public java.lang.String getDenseShapeTensorName() {
           java.lang.Object ref = denseShapeTensorName_;
@@ -9737,7 +10038,7 @@ public final class MetaGraphProtos {
          * the Tensor referenced here.  It must have dtype int64 and shape [?].
          * </pre>
          *
-         * <code>optional string dense_shape_tensor_name = 3;</code>
+         * <code>string dense_shape_tensor_name = 3;</code>
          */
         public com.google.protobuf.ByteString
             getDenseShapeTensorNameBytes() {
@@ -9758,7 +10059,7 @@ public final class MetaGraphProtos {
          * the Tensor referenced here.  It must have dtype int64 and shape [?].
          * </pre>
          *
-         * <code>optional string dense_shape_tensor_name = 3;</code>
+         * <code>string dense_shape_tensor_name = 3;</code>
          */
         public Builder setDenseShapeTensorName(
             java.lang.String value) {
@@ -9776,7 +10077,7 @@ public final class MetaGraphProtos {
          * the Tensor referenced here.  It must have dtype int64 and shape [?].
          * </pre>
          *
-         * <code>optional string dense_shape_tensor_name = 3;</code>
+         * <code>string dense_shape_tensor_name = 3;</code>
          */
         public Builder clearDenseShapeTensorName() {
           
@@ -9790,7 +10091,7 @@ public final class MetaGraphProtos {
          * the Tensor referenced here.  It must have dtype int64 and shape [?].
          * </pre>
          *
-         * <code>optional string dense_shape_tensor_name = 3;</code>
+         * <code>string dense_shape_tensor_name = 3;</code>
          */
         public Builder setDenseShapeTensorNameBytes(
             com.google.protobuf.ByteString value) {
@@ -9805,12 +10106,12 @@ public final class MetaGraphProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -9833,7 +10134,7 @@ public final class MetaGraphProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new CooSparse(input, extensionRegistry);
+          return new CooSparse(input, extensionRegistry);
         }
       };
 
@@ -9896,7 +10197,7 @@ public final class MetaGraphProtos {
      * For dense `Tensor`s, the name of the tensor in the graph.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = "";
@@ -9920,7 +10221,7 @@ public final class MetaGraphProtos {
      * For dense `Tensor`s, the name of the tensor in the graph.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -9950,7 +10251,20 @@ public final class MetaGraphProtos {
      * SparseTensor Python class.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     */
+    public boolean hasCooSparse() {
+      return encodingCase_ == 4;
+    }
+    /**
+     * <pre>
+     * There are many possible encodings of sparse matrices
+     * (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
+     * uses only the COO encoding.  This is supported and documented in the
+     * SparseTensor Python class.
+     * </pre>
+     *
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse getCooSparse() {
       if (encodingCase_ == 4) {
@@ -9966,7 +10280,7 @@ public final class MetaGraphProtos {
      * SparseTensor Python class.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+     * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparseOrBuilder getCooSparseOrBuilder() {
       if (encodingCase_ == 4) {
@@ -9978,21 +10292,21 @@ public final class MetaGraphProtos {
     public static final int DTYPE_FIELD_NUMBER = 2;
     private int dtype_;
     /**
-     * <code>optional .angel.DataType dtype = 2;</code>
+     * <code>.angel.DataType dtype = 2;</code>
      */
     public int getDtypeValue() {
       return dtype_;
     }
     /**
-     * <code>optional .angel.DataType dtype = 2;</code>
+     * <code>.angel.DataType dtype = 2;</code>
      */
-    public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
-      com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
-      return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
+    public com.tencent.angel.serving.apis.common.TypesProtos.DataType getDtype() {
+      com.tencent.angel.serving.apis.common.TypesProtos.DataType result = com.tencent.angel.serving.apis.common.TypesProtos.DataType.valueOf(dtype_);
+      return result == null ? com.tencent.angel.serving.apis.common.TypesProtos.DataType.UNRECOGNIZED : result;
     }
 
     public static final int TENSOR_SHAPE_FIELD_NUMBER = 3;
-    private com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto tensorShape_;
+    private com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto tensorShape_;
     /**
      * <pre>
      * The static shape should be recorded here, to the extent that it can
@@ -10000,7 +10314,7 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
     public boolean hasTensorShape() {
       return tensorShape_ != null;
@@ -10012,10 +10326,10 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
-    public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape() {
-      return tensorShape_ == null ? com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
+    public com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto getTensorShape() {
+      return tensorShape_ == null ? com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
     }
     /**
      * <pre>
@@ -10024,9 +10338,9 @@ public final class MetaGraphProtos {
      * the logical shape of the represented tensor (aka dense_shape).
      * </pre>
      *
-     * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+     * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
      */
-    public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
+    public com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
       return getTensorShape();
     }
 
@@ -10045,7 +10359,7 @@ public final class MetaGraphProtos {
       if (encodingCase_ == 1) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, encoding_);
       }
-      if (dtype_ != com.tencent.angel.core.graph.TypesProtos.DataType.DT_INVALID.getNumber()) {
+      if (dtype_ != com.tencent.angel.serving.apis.common.TypesProtos.DataType.DT_INVALID.getNumber()) {
         output.writeEnum(2, dtype_);
       }
       if (tensorShape_ != null) {
@@ -10054,6 +10368,7 @@ public final class MetaGraphProtos {
       if (encodingCase_ == 4) {
         output.writeMessage(4, (com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse) encoding_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -10064,7 +10379,7 @@ public final class MetaGraphProtos {
       if (encodingCase_ == 1) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, encoding_);
       }
-      if (dtype_ != com.tencent.angel.core.graph.TypesProtos.DataType.DT_INVALID.getNumber()) {
+      if (dtype_ != com.tencent.angel.serving.apis.common.TypesProtos.DataType.DT_INVALID.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, dtype_);
       }
@@ -10076,11 +10391,11 @@ public final class MetaGraphProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, (com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse) encoding_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -10113,6 +10428,7 @@ public final class MetaGraphProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -10122,7 +10438,7 @@ public final class MetaGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DTYPE_FIELD_NUMBER;
       hash = (53 * hash) + dtype_;
       if (hasTensorShape()) {
@@ -10146,6 +10462,17 @@ public final class MetaGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -10321,7 +10648,7 @@ public final class MetaGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -10334,12 +10661,12 @@ public final class MetaGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -10374,6 +10701,7 @@ public final class MetaGraphProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -10420,7 +10748,7 @@ public final class MetaGraphProtos {
        * For dense `Tensor`s, the name of the tensor in the graph.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = "";
@@ -10444,7 +10772,7 @@ public final class MetaGraphProtos {
        * For dense `Tensor`s, the name of the tensor in the graph.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -10469,7 +10797,7 @@ public final class MetaGraphProtos {
        * For dense `Tensor`s, the name of the tensor in the graph.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -10486,7 +10814,7 @@ public final class MetaGraphProtos {
        * For dense `Tensor`s, the name of the tensor in the graph.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         if (encodingCase_ == 1) {
@@ -10501,7 +10829,7 @@ public final class MetaGraphProtos {
        * For dense `Tensor`s, the name of the tensor in the graph.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -10525,7 +10853,20 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       */
+      public boolean hasCooSparse() {
+        return encodingCase_ == 4;
+      }
+      /**
+       * <pre>
+       * There are many possible encodings of sparse matrices
+       * (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
+       * uses only the COO encoding.  This is supported and documented in the
+       * SparseTensor Python class.
+       * </pre>
+       *
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse getCooSparse() {
         if (cooSparseBuilder_ == null) {
@@ -10548,7 +10889,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public Builder setCooSparse(com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse value) {
         if (cooSparseBuilder_ == null) {
@@ -10571,7 +10912,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public Builder setCooSparse(
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse.Builder builderForValue) {
@@ -10592,7 +10933,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public Builder mergeCooSparse(com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse value) {
         if (cooSparseBuilder_ == null) {
@@ -10621,7 +10962,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public Builder clearCooSparse() {
         if (cooSparseBuilder_ == null) {
@@ -10647,7 +10988,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse.Builder getCooSparseBuilder() {
         return getCooSparseFieldBuilder().getBuilder();
@@ -10660,7 +11001,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparseOrBuilder getCooSparseOrBuilder() {
         if ((encodingCase_ == 4) && (cooSparseBuilder_ != null)) {
@@ -10680,7 +11021,7 @@ public final class MetaGraphProtos {
        * SparseTensor Python class.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo.CooSparse coo_sparse = 4;</code>
+       * <code>.angel.TensorInfo.CooSparse coo_sparse = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparse.Builder, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.CooSparseOrBuilder> 
@@ -10703,13 +11044,13 @@ public final class MetaGraphProtos {
 
       private int dtype_ = 0;
       /**
-       * <code>optional .angel.DataType dtype = 2;</code>
+       * <code>.angel.DataType dtype = 2;</code>
        */
       public int getDtypeValue() {
         return dtype_;
       }
       /**
-       * <code>optional .angel.DataType dtype = 2;</code>
+       * <code>.angel.DataType dtype = 2;</code>
        */
       public Builder setDtypeValue(int value) {
         dtype_ = value;
@@ -10717,16 +11058,16 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.DataType dtype = 2;</code>
+       * <code>.angel.DataType dtype = 2;</code>
        */
-      public com.tencent.angel.core.graph.TypesProtos.DataType getDtype() {
-        com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(dtype_);
-        return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
+      public com.tencent.angel.serving.apis.common.TypesProtos.DataType getDtype() {
+        com.tencent.angel.serving.apis.common.TypesProtos.DataType result = com.tencent.angel.serving.apis.common.TypesProtos.DataType.valueOf(dtype_);
+        return result == null ? com.tencent.angel.serving.apis.common.TypesProtos.DataType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .angel.DataType dtype = 2;</code>
+       * <code>.angel.DataType dtype = 2;</code>
        */
-      public Builder setDtype(com.tencent.angel.core.graph.TypesProtos.DataType value) {
+      public Builder setDtype(com.tencent.angel.serving.apis.common.TypesProtos.DataType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -10736,7 +11077,7 @@ public final class MetaGraphProtos {
         return this;
       }
       /**
-       * <code>optional .angel.DataType dtype = 2;</code>
+       * <code>.angel.DataType dtype = 2;</code>
        */
       public Builder clearDtype() {
         
@@ -10745,9 +11086,9 @@ public final class MetaGraphProtos {
         return this;
       }
 
-      private com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto tensorShape_ = null;
+      private com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto tensorShape_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> tensorShapeBuilder_;
+          com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder> tensorShapeBuilder_;
       /**
        * <pre>
        * The static shape should be recorded here, to the extent that it can
@@ -10755,7 +11096,7 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
       public boolean hasTensorShape() {
         return tensorShapeBuilder_ != null || tensorShape_ != null;
@@ -10767,11 +11108,11 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
-      public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto getTensorShape() {
+      public com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto getTensorShape() {
         if (tensorShapeBuilder_ == null) {
-          return tensorShape_ == null ? com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
+          return tensorShape_ == null ? com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
         } else {
           return tensorShapeBuilder_.getMessage();
         }
@@ -10783,9 +11124,9 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
-      public Builder setTensorShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
+      public Builder setTensorShape(com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto value) {
         if (tensorShapeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10805,10 +11146,10 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
       public Builder setTensorShape(
-          com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder builderForValue) {
         if (tensorShapeBuilder_ == null) {
           tensorShape_ = builderForValue.build();
           onChanged();
@@ -10825,13 +11166,13 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
-      public Builder mergeTensorShape(com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto value) {
+      public Builder mergeTensorShape(com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto value) {
         if (tensorShapeBuilder_ == null) {
           if (tensorShape_ != null) {
             tensorShape_ =
-              com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.newBuilder(tensorShape_).mergeFrom(value).buildPartial();
+              com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.newBuilder(tensorShape_).mergeFrom(value).buildPartial();
           } else {
             tensorShape_ = value;
           }
@@ -10849,7 +11190,7 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
       public Builder clearTensorShape() {
         if (tensorShapeBuilder_ == null) {
@@ -10869,9 +11210,9 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
-      public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder getTensorShapeBuilder() {
+      public com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder getTensorShapeBuilder() {
         
         onChanged();
         return getTensorShapeFieldBuilder().getBuilder();
@@ -10883,14 +11224,14 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
-      public com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
+      public com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder getTensorShapeOrBuilder() {
         if (tensorShapeBuilder_ != null) {
           return tensorShapeBuilder_.getMessageOrBuilder();
         } else {
           return tensorShape_ == null ?
-              com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
+              com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.getDefaultInstance() : tensorShape_;
         }
       }
       /**
@@ -10900,14 +11241,14 @@ public final class MetaGraphProtos {
        * the logical shape of the represented tensor (aka dense_shape).
        * </pre>
        *
-       * <code>optional .angel.TensorShapeProto tensor_shape = 3;</code>
+       * <code>.angel.TensorShapeProto tensor_shape = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder> 
+          com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder> 
           getTensorShapeFieldBuilder() {
         if (tensorShapeBuilder_ == null) {
           tensorShapeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.core.graph.TensorShapeProtos.TensorShapeProtoOrBuilder>(
+              com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto.Builder, com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProtoOrBuilder>(
                   getTensorShape(),
                   getParentForChildren(),
                   isClean());
@@ -10917,12 +11258,12 @@ public final class MetaGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -10945,7 +11286,7 @@ public final class MetaGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TensorInfo(input, extensionRegistry);
+        return new TensorInfo(input, extensionRegistry);
       }
     };
 
@@ -11087,7 +11428,7 @@ public final class MetaGraphProtos {
      * where a single graph computation may return multiple results.
      * </pre>
      *
-     * <code>optional string method_name = 3;</code>
+     * <code>string method_name = 3;</code>
      */
     java.lang.String getMethodName();
     /**
@@ -11101,7 +11442,7 @@ public final class MetaGraphProtos {
      * where a single graph computation may return multiple results.
      * </pre>
      *
-     * <code>optional string method_name = 3;</code>
+     * <code>string method_name = 3;</code>
      */
     com.google.protobuf.ByteString
         getMethodNameBytes();
@@ -11169,6 +11510,7 @@ public final class MetaGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SignatureDef)
       SignatureDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SignatureDef.newBuilder() to construct.
     private SignatureDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -11180,14 +11522,19 @@ public final class MetaGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SignatureDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -11197,7 +11544,8 @@ public final class MetaGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -11209,9 +11557,10 @@ public final class MetaGraphProtos {
                 mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-              inputs = input.readMessage(
+              inputs__ = input.readMessage(
                   InputsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              inputs_.getMutableMap().put(inputs.getKey(), inputs.getValue());
+              inputs_.getMutableMap().put(
+                  inputs__.getKey(), inputs__.getValue());
               break;
             }
             case 18: {
@@ -11221,9 +11570,10 @@ public final class MetaGraphProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-              outputs = input.readMessage(
+              outputs__ = input.readMessage(
                   OutputsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              outputs_.getMutableMap().put(outputs.getKey(), outputs.getValue());
+              outputs_.getMutableMap().put(
+                  outputs__.getKey(), outputs__.getValue());
               break;
             }
             case 26: {
@@ -11240,6 +11590,7 @@ public final class MetaGraphProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -11466,7 +11817,7 @@ public final class MetaGraphProtos {
      * where a single graph computation may return multiple results.
      * </pre>
      *
-     * <code>optional string method_name = 3;</code>
+     * <code>string method_name = 3;</code>
      */
     public java.lang.String getMethodName() {
       java.lang.Object ref = methodName_;
@@ -11491,7 +11842,7 @@ public final class MetaGraphProtos {
      * where a single graph computation may return multiple results.
      * </pre>
      *
-     * <code>optional string method_name = 3;</code>
+     * <code>string method_name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getMethodNameBytes() {
@@ -11519,27 +11870,22 @@ public final class MetaGraphProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> entry
-           : internalGetInputs().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-        inputs = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(1, inputs);
-      }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> entry
-           : internalGetOutputs().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-        outputs = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(2, outputs);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetInputs(),
+          InputsDefaultEntryHolder.defaultEntry,
+          1);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetOutputs(),
+          OutputsDefaultEntryHolder.defaultEntry,
+          2);
       if (!getMethodNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, methodName_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -11550,31 +11896,31 @@ public final class MetaGraphProtos {
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> entry
            : internalGetInputs().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-        inputs = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        inputs__ = InputsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, inputs);
+            .computeMessageSize(1, inputs__);
       }
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> entry
            : internalGetOutputs().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo>
-        outputs = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        outputs__ = OutputsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, outputs);
+            .computeMessageSize(2, outputs__);
       }
       if (!getMethodNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, methodName_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -11592,6 +11938,7 @@ public final class MetaGraphProtos {
           other.internalGetOutputs());
       result = result && getMethodName()
           .equals(other.getMethodName());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -11601,7 +11948,7 @@ public final class MetaGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (!internalGetInputs().getMap().isEmpty()) {
         hash = (37 * hash) + INPUTS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetInputs().hashCode();
@@ -11617,6 +11964,17 @@ public final class MetaGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.MetaGraphProtos.SignatureDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -11855,7 +12213,7 @@ public final class MetaGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -11868,12 +12226,12 @@ public final class MetaGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -11895,6 +12253,7 @@ public final class MetaGraphProtos {
           methodName_ = other.methodName_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -12015,7 +12374,8 @@ public final class MetaGraphProtos {
       }
 
       public Builder clearInputs() {
-        getMutableInputs().clear();
+        internalGetMutableInputs().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -12029,7 +12389,8 @@ public final class MetaGraphProtos {
       public Builder removeInputs(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableInputs().remove(key);
+        internalGetMutableInputs().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -12052,7 +12413,8 @@ public final class MetaGraphProtos {
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableInputs().put(key, value);
+        internalGetMutableInputs().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -12065,7 +12427,8 @@ public final class MetaGraphProtos {
 
       public Builder putAllInputs(
           java.util.Map<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> values) {
-        getMutableInputs().putAll(values);
+        internalGetMutableInputs().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -12162,7 +12525,8 @@ public final class MetaGraphProtos {
       }
 
       public Builder clearOutputs() {
-        getMutableOutputs().clear();
+        internalGetMutableOutputs().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -12176,7 +12540,8 @@ public final class MetaGraphProtos {
       public Builder removeOutputs(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableOutputs().remove(key);
+        internalGetMutableOutputs().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -12199,7 +12564,8 @@ public final class MetaGraphProtos {
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableOutputs().put(key, value);
+        internalGetMutableOutputs().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -12212,7 +12578,8 @@ public final class MetaGraphProtos {
 
       public Builder putAllOutputs(
           java.util.Map<java.lang.String, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo> values) {
-        getMutableOutputs().putAll(values);
+        internalGetMutableOutputs().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -12228,7 +12595,7 @@ public final class MetaGraphProtos {
        * where a single graph computation may return multiple results.
        * </pre>
        *
-       * <code>optional string method_name = 3;</code>
+       * <code>string method_name = 3;</code>
        */
       public java.lang.String getMethodName() {
         java.lang.Object ref = methodName_;
@@ -12253,7 +12620,7 @@ public final class MetaGraphProtos {
        * where a single graph computation may return multiple results.
        * </pre>
        *
-       * <code>optional string method_name = 3;</code>
+       * <code>string method_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getMethodNameBytes() {
@@ -12279,7 +12646,7 @@ public final class MetaGraphProtos {
        * where a single graph computation may return multiple results.
        * </pre>
        *
-       * <code>optional string method_name = 3;</code>
+       * <code>string method_name = 3;</code>
        */
       public Builder setMethodName(
           java.lang.String value) {
@@ -12302,7 +12669,7 @@ public final class MetaGraphProtos {
        * where a single graph computation may return multiple results.
        * </pre>
        *
-       * <code>optional string method_name = 3;</code>
+       * <code>string method_name = 3;</code>
        */
       public Builder clearMethodName() {
         
@@ -12321,7 +12688,7 @@ public final class MetaGraphProtos {
        * where a single graph computation may return multiple results.
        * </pre>
        *
-       * <code>optional string method_name = 3;</code>
+       * <code>string method_name = 3;</code>
        */
       public Builder setMethodNameBytes(
           com.google.protobuf.ByteString value) {
@@ -12336,12 +12703,12 @@ public final class MetaGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -12364,7 +12731,7 @@ public final class MetaGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SignatureDef(input, extensionRegistry);
+        return new SignatureDef(input, extensionRegistry);
       }
     };
 
@@ -12392,7 +12759,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     boolean hasTensorInfo();
     /**
@@ -12400,7 +12767,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo getTensorInfo();
     /**
@@ -12408,7 +12775,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     com.tencent.angel.core.saver.MetaGraphProtos.TensorInfoOrBuilder getTensorInfoOrBuilder();
 
@@ -12419,7 +12786,7 @@ public final class MetaGraphProtos {
      * would be "vocab.txt".
      * </pre>
      *
-     * <code>optional string filename = 2;</code>
+     * <code>string filename = 2;</code>
      */
     java.lang.String getFilename();
     /**
@@ -12429,7 +12796,7 @@ public final class MetaGraphProtos {
      * would be "vocab.txt".
      * </pre>
      *
-     * <code>optional string filename = 2;</code>
+     * <code>string filename = 2;</code>
      */
     com.google.protobuf.ByteString
         getFilenameBytes();
@@ -12446,6 +12813,7 @@ public final class MetaGraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.AssetFileDef)
       AssetFileDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AssetFileDef.newBuilder() to construct.
     private AssetFileDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -12457,14 +12825,19 @@ public final class MetaGraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AssetFileDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -12474,7 +12847,8 @@ public final class MetaGraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -12506,6 +12880,7 @@ public final class MetaGraphProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -12528,7 +12903,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     public boolean hasTensorInfo() {
       return tensorInfo_ != null;
@@ -12538,7 +12913,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo getTensorInfo() {
       return tensorInfo_ == null ? com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.getDefaultInstance() : tensorInfo_;
@@ -12548,7 +12923,7 @@ public final class MetaGraphProtos {
      * The tensor to bind the asset filename to.
      * </pre>
      *
-     * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+     * <code>.angel.TensorInfo tensor_info = 1;</code>
      */
     public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfoOrBuilder getTensorInfoOrBuilder() {
       return getTensorInfo();
@@ -12563,7 +12938,7 @@ public final class MetaGraphProtos {
      * would be "vocab.txt".
      * </pre>
      *
-     * <code>optional string filename = 2;</code>
+     * <code>string filename = 2;</code>
      */
     public java.lang.String getFilename() {
       java.lang.Object ref = filename_;
@@ -12584,7 +12959,7 @@ public final class MetaGraphProtos {
      * would be "vocab.txt".
      * </pre>
      *
-     * <code>optional string filename = 2;</code>
+     * <code>string filename = 2;</code>
      */
     public com.google.protobuf.ByteString
         getFilenameBytes() {
@@ -12618,6 +12993,7 @@ public final class MetaGraphProtos {
       if (!getFilenameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, filename_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -12632,11 +13008,11 @@ public final class MetaGraphProtos {
       if (!getFilenameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, filename_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -12655,6 +13031,7 @@ public final class MetaGraphProtos {
       }
       result = result && getFilename()
           .equals(other.getFilename());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -12664,7 +13041,7 @@ public final class MetaGraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasTensorInfo()) {
         hash = (37 * hash) + TENSOR_INFO_FIELD_NUMBER;
         hash = (53 * hash) + getTensorInfo().hashCode();
@@ -12676,6 +13053,17 @@ public final class MetaGraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.MetaGraphProtos.AssetFileDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.MetaGraphProtos.AssetFileDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.MetaGraphProtos.AssetFileDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -12839,7 +13227,7 @@ public final class MetaGraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -12852,12 +13240,12 @@ public final class MetaGraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -12878,6 +13266,7 @@ public final class MetaGraphProtos {
           filename_ = other.filename_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -12912,7 +13301,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public boolean hasTensorInfo() {
         return tensorInfoBuilder_ != null || tensorInfo_ != null;
@@ -12922,7 +13311,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo getTensorInfo() {
         if (tensorInfoBuilder_ == null) {
@@ -12936,7 +13325,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public Builder setTensorInfo(com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo value) {
         if (tensorInfoBuilder_ == null) {
@@ -12956,7 +13345,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public Builder setTensorInfo(
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.Builder builderForValue) {
@@ -12974,7 +13363,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public Builder mergeTensorInfo(com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo value) {
         if (tensorInfoBuilder_ == null) {
@@ -12996,7 +13385,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public Builder clearTensorInfo() {
         if (tensorInfoBuilder_ == null) {
@@ -13014,7 +13403,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.Builder getTensorInfoBuilder() {
         
@@ -13026,7 +13415,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       public com.tencent.angel.core.saver.MetaGraphProtos.TensorInfoOrBuilder getTensorInfoOrBuilder() {
         if (tensorInfoBuilder_ != null) {
@@ -13041,7 +13430,7 @@ public final class MetaGraphProtos {
        * The tensor to bind the asset filename to.
        * </pre>
        *
-       * <code>optional .angel.TensorInfo tensor_info = 1;</code>
+       * <code>.angel.TensorInfo tensor_info = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfo.Builder, com.tencent.angel.core.saver.MetaGraphProtos.TensorInfoOrBuilder> 
@@ -13065,7 +13454,7 @@ public final class MetaGraphProtos {
        * would be "vocab.txt".
        * </pre>
        *
-       * <code>optional string filename = 2;</code>
+       * <code>string filename = 2;</code>
        */
       public java.lang.String getFilename() {
         java.lang.Object ref = filename_;
@@ -13086,7 +13475,7 @@ public final class MetaGraphProtos {
        * would be "vocab.txt".
        * </pre>
        *
-       * <code>optional string filename = 2;</code>
+       * <code>string filename = 2;</code>
        */
       public com.google.protobuf.ByteString
           getFilenameBytes() {
@@ -13108,7 +13497,7 @@ public final class MetaGraphProtos {
        * would be "vocab.txt".
        * </pre>
        *
-       * <code>optional string filename = 2;</code>
+       * <code>string filename = 2;</code>
        */
       public Builder setFilename(
           java.lang.String value) {
@@ -13127,7 +13516,7 @@ public final class MetaGraphProtos {
        * would be "vocab.txt".
        * </pre>
        *
-       * <code>optional string filename = 2;</code>
+       * <code>string filename = 2;</code>
        */
       public Builder clearFilename() {
         
@@ -13142,7 +13531,7 @@ public final class MetaGraphProtos {
        * would be "vocab.txt".
        * </pre>
        *
-       * <code>optional string filename = 2;</code>
+       * <code>string filename = 2;</code>
        */
       public Builder setFilenameBytes(
           com.google.protobuf.ByteString value) {
@@ -13157,12 +13546,12 @@ public final class MetaGraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -13185,7 +13574,7 @@ public final class MetaGraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AssetFileDef(input, extensionRegistry);
+        return new AssetFileDef(input, extensionRegistry);
       }
     };
 
@@ -13295,55 +13684,55 @@ public final class MetaGraphProtos {
     java.lang.String[] descriptorData = {
       "\n\033core/saver/meta_graph.proto\022\005angel\032\031go" +
       "ogle/protobuf/any.proto\032\026core/graph/grap" +
-      "h.proto\032\027core/graph/op_def.proto\032\035core/g" +
-      "raph/tensor_shape.proto\032\026core/graph/type" +
-      "s.proto\032\026core/saver/saver.proto\"\266\005\n\014Meta" +
-      "GraphDef\0226\n\rmeta_info_def\030\001 \001(\0132\037.angel." +
-      "MetaGraphDef.MetaInfoDef\022\"\n\tgraph_def\030\002 " +
-      "\001(\0132\017.angel.GraphDef\022\"\n\tsaver_def\030\003 \001(\0132" +
-      "\017.angel.SaverDef\022>\n\016collection_def\030\004 \003(\013" +
-      "2&.angel.MetaGraphDef.CollectionDefEntry",
-      "\022<\n\rsignature_def\030\005 \003(\0132%.angel.MetaGrap" +
-      "hDef.SignatureDefEntry\022+\n\016asset_file_def" +
-      "\030\006 \003(\0132\023.angel.AssetFileDef\032\344\001\n\013MetaInfo" +
-      "Def\022\032\n\022meta_graph_version\030\001 \001(\t\022\'\n\020strip" +
-      "ped_op_list\030\002 \001(\0132\r.angel.OpList\022&\n\010any_" +
-      "info\030\003 \001(\0132\024.google.protobuf.Any\022\014\n\004tags" +
-      "\030\004 \003(\t\022\032\n\022tensorflow_version\030\005 \001(\t\022\036\n\026te" +
-      "nsorflow_git_version\030\006 \001(\t\022\036\n\026stripped_d" +
-      "efault_attrs\030\007 \001(\010\032J\n\022CollectionDefEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022#\n\005value\030\002 \001(\0132\024.angel.Col",
-      "lectionDef:\0028\001\032H\n\021SignatureDefEntry\022\013\n\003k" +
-      "ey\030\001 \001(\t\022\"\n\005value\030\002 \001(\0132\023.angel.Signatur" +
-      "eDef:\0028\001\"\306\003\n\rCollectionDef\0222\n\tnode_list\030" +
-      "\001 \001(\0132\035.angel.CollectionDef.NodeListH\000\0224" +
-      "\n\nbytes_list\030\002 \001(\0132\036.angel.CollectionDef" +
-      ".BytesListH\000\0224\n\nint64_list\030\003 \001(\0132\036.angel" +
-      ".CollectionDef.Int64ListH\000\0224\n\nfloat_list" +
-      "\030\004 \001(\0132\036.angel.CollectionDef.FloatListH\000" +
-      "\0220\n\010any_list\030\005 \001(\0132\034.angel.CollectionDef" +
-      ".AnyListH\000\032\031\n\010NodeList\022\r\n\005value\030\001 \003(\t\032\032\n",
-      "\tBytesList\022\r\n\005value\030\001 \003(\014\032\036\n\tInt64List\022\021" +
-      "\n\005value\030\001 \003(\003B\002\020\001\032\036\n\tFloatList\022\021\n\005value\030" +
-      "\001 \003(\002B\002\020\001\032.\n\007AnyList\022#\n\005value\030\001 \003(\0132\024.go" +
-      "ogle.protobuf.AnyB\006\n\004kind\"\221\002\n\nTensorInfo" +
-      "\022\016\n\004name\030\001 \001(\tH\000\0221\n\ncoo_sparse\030\004 \001(\0132\033.a" +
-      "ngel.TensorInfo.CooSparseH\000\022\036\n\005dtype\030\002 \001" +
-      "(\0162\017.angel.DataType\022-\n\014tensor_shape\030\003 \001(" +
-      "\0132\027.angel.TensorShapeProto\032e\n\tCooSparse\022" +
-      "\032\n\022values_tensor_name\030\001 \001(\t\022\033\n\023indices_t" +
-      "ensor_name\030\002 \001(\t\022\037\n\027dense_shape_tensor_n",
-      "ame\030\003 \001(\tB\n\n\010encoding\"\214\002\n\014SignatureDef\022/" +
-      "\n\006inputs\030\001 \003(\0132\037.angel.SignatureDef.Inpu" +
-      "tsEntry\0221\n\007outputs\030\002 \003(\0132 .angel.Signatu" +
-      "reDef.OutputsEntry\022\023\n\013method_name\030\003 \001(\t\032" +
-      "@\n\013InputsEntry\022\013\n\003key\030\001 \001(\t\022 \n\005value\030\002 \001" +
-      "(\0132\021.angel.TensorInfo:\0028\001\032A\n\014OutputsEntr" +
-      "y\022\013\n\003key\030\001 \001(\t\022 \n\005value\030\002 \001(\0132\021.angel.Te" +
-      "nsorInfo:\0028\001\"H\n\014AssetFileDef\022&\n\013tensor_i" +
-      "nfo\030\001 \001(\0132\021.angel.TensorInfo\022\020\n\010filename" +
-      "\030\002 \001(\tB1\n\034com.tencent.angel.core.saverB\017",
-      "MetaGraphProtosP\000b\006proto3"
+      "h.proto\032\027core/graph/op_def.proto\032\036apis/c" +
+      "ommon/tensor_shape.proto\032\027apis/common/ty" +
+      "pes.proto\032\026core/saver/saver.proto\"\266\005\n\014Me" +
+      "taGraphDef\0226\n\rmeta_info_def\030\001 \001(\0132\037.ange" +
+      "l.MetaGraphDef.MetaInfoDef\022\"\n\tgraph_def\030" +
+      "\002 \001(\0132\017.angel.GraphDef\022\"\n\tsaver_def\030\003 \001(" +
+      "\0132\017.angel.SaverDef\022>\n\016collection_def\030\004 \003" +
+      "(\0132&.angel.MetaGraphDef.CollectionDefEnt" +
+      "ry\022<\n\rsignature_def\030\005 \003(\0132%.angel.MetaGr" +
+      "aphDef.SignatureDefEntry\022+\n\016asset_file_d" +
+      "ef\030\006 \003(\0132\023.angel.AssetFileDef\032\344\001\n\013MetaIn" +
+      "foDef\022\032\n\022meta_graph_version\030\001 \001(\t\022\'\n\020str" +
+      "ipped_op_list\030\002 \001(\0132\r.angel.OpList\022&\n\010an" +
+      "y_info\030\003 \001(\0132\024.google.protobuf.Any\022\014\n\004ta" +
+      "gs\030\004 \003(\t\022\032\n\022tensorflow_version\030\005 \001(\t\022\036\n\026" +
+      "tensorflow_git_version\030\006 \001(\t\022\036\n\026stripped" +
+      "_default_attrs\030\007 \001(\010\032J\n\022CollectionDefEnt" +
+      "ry\022\013\n\003key\030\001 \001(\t\022#\n\005value\030\002 \001(\0132\024.angel.C" +
+      "ollectionDef:\0028\001\032H\n\021SignatureDefEntry\022\013\n" +
+      "\003key\030\001 \001(\t\022\"\n\005value\030\002 \001(\0132\023.angel.Signat" +
+      "ureDef:\0028\001\"\306\003\n\rCollectionDef\0222\n\tnode_lis" +
+      "t\030\001 \001(\0132\035.angel.CollectionDef.NodeListH\000" +
+      "\0224\n\nbytes_list\030\002 \001(\0132\036.angel.CollectionD" +
+      "ef.BytesListH\000\0224\n\nint64_list\030\003 \001(\0132\036.ang" +
+      "el.CollectionDef.Int64ListH\000\0224\n\nfloat_li" +
+      "st\030\004 \001(\0132\036.angel.CollectionDef.FloatList" +
+      "H\000\0220\n\010any_list\030\005 \001(\0132\034.angel.CollectionD" +
+      "ef.AnyListH\000\032\031\n\010NodeList\022\r\n\005value\030\001 \003(\t\032" +
+      "\032\n\tBytesList\022\r\n\005value\030\001 \003(\014\032\036\n\tInt64List" +
+      "\022\021\n\005value\030\001 \003(\003B\002\020\001\032\036\n\tFloatList\022\021\n\005valu" +
+      "e\030\001 \003(\002B\002\020\001\032.\n\007AnyList\022#\n\005value\030\001 \003(\0132\024." +
+      "google.protobuf.AnyB\006\n\004kind\"\221\002\n\nTensorIn" +
+      "fo\022\016\n\004name\030\001 \001(\tH\000\0221\n\ncoo_sparse\030\004 \001(\0132\033" +
+      ".angel.TensorInfo.CooSparseH\000\022\036\n\005dtype\030\002" +
+      " \001(\0162\017.angel.DataType\022-\n\014tensor_shape\030\003 " +
+      "\001(\0132\027.angel.TensorShapeProto\032e\n\tCooSpars" +
+      "e\022\032\n\022values_tensor_name\030\001 \001(\t\022\033\n\023indices" +
+      "_tensor_name\030\002 \001(\t\022\037\n\027dense_shape_tensor" +
+      "_name\030\003 \001(\tB\n\n\010encoding\"\214\002\n\014SignatureDef" +
+      "\022/\n\006inputs\030\001 \003(\0132\037.angel.SignatureDef.In" +
+      "putsEntry\0221\n\007outputs\030\002 \003(\0132 .angel.Signa" +
+      "tureDef.OutputsEntry\022\023\n\013method_name\030\003 \001(" +
+      "\t\032@\n\013InputsEntry\022\013\n\003key\030\001 \001(\t\022 \n\005value\030\002" +
+      " \001(\0132\021.angel.TensorInfo:\0028\001\032A\n\014OutputsEn" +
+      "try\022\013\n\003key\030\001 \001(\t\022 \n\005value\030\002 \001(\0132\021.angel." +
+      "TensorInfo:\0028\001\"H\n\014AssetFileDef\022&\n\013tensor" +
+      "_info\030\001 \001(\0132\021.angel.TensorInfo\022\020\n\010filena" +
+      "me\030\002 \001(\tB1\n\034com.tencent.angel.core.saver" +
+      "B\017MetaGraphProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13359,8 +13748,8 @@ public final class MetaGraphProtos {
           com.google.protobuf.AnyProto.getDescriptor(),
           com.tencent.angel.core.graph.GraphProtos.getDescriptor(),
           com.tencent.angel.core.graph.OpDefProtos.getDescriptor(),
-          com.tencent.angel.core.graph.TensorShapeProtos.getDescriptor(),
-          com.tencent.angel.core.graph.TypesProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.TensorShapeProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor(),
           com.tencent.angel.core.saver.SaverProtos.getDescriptor(),
         }, assigner);
     internal_static_angel_MetaGraphDef_descriptor =
@@ -13462,8 +13851,8 @@ public final class MetaGraphProtos {
     com.google.protobuf.AnyProto.getDescriptor();
     com.tencent.angel.core.graph.GraphProtos.getDescriptor();
     com.tencent.angel.core.graph.OpDefProtos.getDescriptor();
-    com.tencent.angel.core.graph.TensorShapeProtos.getDescriptor();
-    com.tencent.angel.core.graph.TypesProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.TensorShapeProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor();
     com.tencent.angel.core.saver.SaverProtos.getDescriptor();
   }
 

@@ -9,8 +9,8 @@ option java_outer_classname = "MetaGraphProtos";
 import "google/protobuf/any.proto";
 import "core/graph/graph.proto";
 import "core/graph/op_def.proto";
-import "core/graph/tensor_shape.proto";
-import "core/graph/types.proto";
+import "apis/common/tensor_shape.proto";
+import "apis/common/types.proto";
 import "core/saver/saver.proto";
 
 // NOTE: This protocol buffer is evolving, and will go through revisions in the

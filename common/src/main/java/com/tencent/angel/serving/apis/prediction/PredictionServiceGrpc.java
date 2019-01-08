@@ -1,19 +1,19 @@
 package com.tencent.angel.serving.apis.prediction;
 
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
@@ -23,60 +23,174 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.0.1)",
+    value = "by gRPC proto compiler (version 1.17.1)",
     comments = "Source: apis/prediction/prediction_service.proto")
-public class PredictionServiceGrpc {
+public final class PredictionServiceGrpc {
 
   private PredictionServiceGrpc() {}
 
   public static final String SERVICE_NAME = "angel.serving.PredictionService";
 
   // Static method descriptors that strictly reflect the proto.
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest,
-      com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse> METHOD_CLASSIFY =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.PredictionService", "Classify"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest,
-      com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse> METHOD_REGRESS =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.PredictionService", "Regress"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest,
-      com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse> METHOD_PREDICT =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.PredictionService", "Predict"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest,
-      com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse> METHOD_MULTI_INFERENCE =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.PredictionService", "MultiInference"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest,
-      com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> METHOD_GET_MODEL_METADATA =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.PredictionService", "GetModelMetadata"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse.getDefaultInstance()));
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getClassifyMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Classify",
+      requestType = com.tencent.angel.serving.apis.prediction.RequestProtos.Request.class,
+      responseType = com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getClassifyMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getClassifyMethod;
+    if ((getClassifyMethod = PredictionServiceGrpc.getClassifyMethod) == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        if ((getClassifyMethod = PredictionServiceGrpc.getClassifyMethod) == null) {
+          PredictionServiceGrpc.getClassifyMethod = getClassifyMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.PredictionService", "Classify"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.RequestProtos.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("Classify"))
+                  .build();
+          }
+        }
+     }
+     return getClassifyMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getRegressMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Regress",
+      requestType = com.tencent.angel.serving.apis.prediction.RequestProtos.Request.class,
+      responseType = com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getRegressMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getRegressMethod;
+    if ((getRegressMethod = PredictionServiceGrpc.getRegressMethod) == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        if ((getRegressMethod = PredictionServiceGrpc.getRegressMethod) == null) {
+          PredictionServiceGrpc.getRegressMethod = getRegressMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.PredictionService", "Regress"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.RequestProtos.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("Regress"))
+                  .build();
+          }
+        }
+     }
+     return getRegressMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getPredictMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Predict",
+      requestType = com.tencent.angel.serving.apis.prediction.RequestProtos.Request.class,
+      responseType = com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getPredictMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getPredictMethod;
+    if ((getPredictMethod = PredictionServiceGrpc.getPredictMethod) == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        if ((getPredictMethod = PredictionServiceGrpc.getPredictMethod) == null) {
+          PredictionServiceGrpc.getPredictMethod = getPredictMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.PredictionService", "Predict"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.RequestProtos.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("Predict"))
+                  .build();
+          }
+        }
+     }
+     return getPredictMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getMultiInferenceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "MultiInference",
+      requestType = com.tencent.angel.serving.apis.prediction.RequestProtos.Request.class,
+      responseType = com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+      com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getMultiInferenceMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> getMultiInferenceMethod;
+    if ((getMultiInferenceMethod = PredictionServiceGrpc.getMultiInferenceMethod) == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        if ((getMultiInferenceMethod = PredictionServiceGrpc.getMultiInferenceMethod) == null) {
+          PredictionServiceGrpc.getMultiInferenceMethod = getMultiInferenceMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.prediction.RequestProtos.Request, com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.PredictionService", "MultiInference"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.RequestProtos.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.ResponseProtos.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("MultiInference"))
+                  .build();
+          }
+        }
+     }
+     return getMultiInferenceMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest,
+      com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> getGetModelMetadataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetModelMetadata",
+      requestType = com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest.class,
+      responseType = com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest,
+      com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> getGetModelMetadataMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest, com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> getGetModelMetadataMethod;
+    if ((getGetModelMetadataMethod = PredictionServiceGrpc.getGetModelMetadataMethod) == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        if ((getGetModelMetadataMethod = PredictionServiceGrpc.getGetModelMetadataMethod) == null) {
+          PredictionServiceGrpc.getGetModelMetadataMethod = getGetModelMetadataMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest, com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.PredictionService", "GetModelMetadata"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("GetModelMetadata"))
+                  .build();
+          }
+        }
+     }
+     return getGetModelMetadataMethod;
+  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -94,7 +208,7 @@ public class PredictionServiceGrpc {
   }
 
   /**
-   * Creates a new ListenableFuture-style stub that supports unary and streaming output calls on the service
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
   public static PredictionServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
@@ -115,9 +229,9 @@ public class PredictionServiceGrpc {
      * Classify.
      * </pre>
      */
-    public void classify(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_CLASSIFY, responseObserver);
+    public void classify(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getClassifyMethod(), responseObserver);
     }
 
     /**
@@ -125,9 +239,9 @@ public class PredictionServiceGrpc {
      * Regress.
      * </pre>
      */
-    public void regress(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_REGRESS, responseObserver);
+    public void regress(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getRegressMethod(), responseObserver);
     }
 
     /**
@@ -135,9 +249,9 @@ public class PredictionServiceGrpc {
      * Predict -- provides access to loaded TensorFlow model.
      * </pre>
      */
-    public void predict(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_PREDICT, responseObserver);
+    public void predict(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getPredictMethod(), responseObserver);
     }
 
     /**
@@ -145,9 +259,9 @@ public class PredictionServiceGrpc {
      * MultiInference API for multi-headed models.
      * </pre>
      */
-    public void multiInference(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_MULTI_INFERENCE, responseObserver);
+    public void multiInference(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getMultiInferenceMethod(), responseObserver);
     }
 
     /**
@@ -157,41 +271,41 @@ public class PredictionServiceGrpc {
      */
     public void getModelMetadata(com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_MODEL_METADATA, responseObserver);
+      asyncUnimplementedUnaryCall(getGetModelMetadataMethod(), responseObserver);
     }
 
-    @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            METHOD_CLASSIFY,
+            getClassifyMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest,
-                com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse>(
+                com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+                com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>(
                   this, METHODID_CLASSIFY)))
           .addMethod(
-            METHOD_REGRESS,
+            getRegressMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest,
-                com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse>(
+                com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+                com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>(
                   this, METHODID_REGRESS)))
           .addMethod(
-            METHOD_PREDICT,
+            getPredictMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest,
-                com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse>(
+                com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+                com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>(
                   this, METHODID_PREDICT)))
           .addMethod(
-            METHOD_MULTI_INFERENCE,
+            getMultiInferenceMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest,
-                com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse>(
+                com.tencent.angel.serving.apis.prediction.RequestProtos.Request,
+                com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>(
                   this, METHODID_MULTI_INFERENCE)))
           .addMethod(
-            METHOD_GET_MODEL_METADATA,
+            getGetModelMetadataMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest,
@@ -229,10 +343,10 @@ public class PredictionServiceGrpc {
      * Classify.
      * </pre>
      */
-    public void classify(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse> responseObserver) {
+    public void classify(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_CLASSIFY, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getClassifyMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -240,10 +354,10 @@ public class PredictionServiceGrpc {
      * Regress.
      * </pre>
      */
-    public void regress(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse> responseObserver) {
+    public void regress(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_REGRESS, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getRegressMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -251,10 +365,10 @@ public class PredictionServiceGrpc {
      * Predict -- provides access to loaded TensorFlow model.
      * </pre>
      */
-    public void predict(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse> responseObserver) {
+    public void predict(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_PREDICT, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getPredictMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -262,10 +376,10 @@ public class PredictionServiceGrpc {
      * MultiInference API for multi-headed models.
      * </pre>
      */
-    public void multiInference(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest request,
-        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse> responseObserver) {
+    public void multiInference(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request,
+        io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_MULTI_INFERENCE, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getMultiInferenceMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -276,7 +390,7 @@ public class PredictionServiceGrpc {
     public void getModelMetadata(com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_MODEL_METADATA, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetModelMetadataMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -308,9 +422,9 @@ public class PredictionServiceGrpc {
      * Classify.
      * </pre>
      */
-    public com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse classify(com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest request) {
+    public com.tencent.angel.serving.apis.prediction.ResponseProtos.Response classify(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_CLASSIFY, getCallOptions(), request);
+          getChannel(), getClassifyMethod(), getCallOptions(), request);
     }
 
     /**
@@ -318,9 +432,9 @@ public class PredictionServiceGrpc {
      * Regress.
      * </pre>
      */
-    public com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse regress(com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest request) {
+    public com.tencent.angel.serving.apis.prediction.ResponseProtos.Response regress(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_REGRESS, getCallOptions(), request);
+          getChannel(), getRegressMethod(), getCallOptions(), request);
     }
 
     /**
@@ -328,9 +442,9 @@ public class PredictionServiceGrpc {
      * Predict -- provides access to loaded TensorFlow model.
      * </pre>
      */
-    public com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse predict(com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest request) {
+    public com.tencent.angel.serving.apis.prediction.ResponseProtos.Response predict(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_PREDICT, getCallOptions(), request);
+          getChannel(), getPredictMethod(), getCallOptions(), request);
     }
 
     /**
@@ -338,9 +452,9 @@ public class PredictionServiceGrpc {
      * MultiInference API for multi-headed models.
      * </pre>
      */
-    public com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse multiInference(com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest request) {
+    public com.tencent.angel.serving.apis.prediction.ResponseProtos.Response multiInference(com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_MULTI_INFERENCE, getCallOptions(), request);
+          getChannel(), getMultiInferenceMethod(), getCallOptions(), request);
     }
 
     /**
@@ -350,7 +464,7 @@ public class PredictionServiceGrpc {
      */
     public com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse getModelMetadata(com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_MODEL_METADATA, getCallOptions(), request);
+          getChannel(), getGetModelMetadataMethod(), getCallOptions(), request);
     }
   }
 
@@ -382,10 +496,10 @@ public class PredictionServiceGrpc {
      * Classify.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse> classify(
-        com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> classify(
+        com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_CLASSIFY, getCallOptions()), request);
+          getChannel().newCall(getClassifyMethod(), getCallOptions()), request);
     }
 
     /**
@@ -393,10 +507,10 @@ public class PredictionServiceGrpc {
      * Regress.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse> regress(
-        com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> regress(
+        com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_REGRESS, getCallOptions()), request);
+          getChannel().newCall(getRegressMethod(), getCallOptions()), request);
     }
 
     /**
@@ -404,10 +518,10 @@ public class PredictionServiceGrpc {
      * Predict -- provides access to loaded TensorFlow model.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse> predict(
-        com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> predict(
+        com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_PREDICT, getCallOptions()), request);
+          getChannel().newCall(getPredictMethod(), getCallOptions()), request);
     }
 
     /**
@@ -415,10 +529,10 @@ public class PredictionServiceGrpc {
      * MultiInference API for multi-headed models.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse> multiInference(
-        com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response> multiInference(
+        com.tencent.angel.serving.apis.prediction.RequestProtos.Request request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_MULTI_INFERENCE, getCallOptions()), request);
+          getChannel().newCall(getMultiInferenceMethod(), getCallOptions()), request);
     }
 
     /**
@@ -429,7 +543,7 @@ public class PredictionServiceGrpc {
     public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataResponse> getModelMetadata(
         com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_MODEL_METADATA, getCallOptions()), request);
+          getChannel().newCall(getGetModelMetadataMethod(), getCallOptions()), request);
     }
   }
 
@@ -439,7 +553,7 @@ public class PredictionServiceGrpc {
   private static final int METHODID_MULTI_INFERENCE = 3;
   private static final int METHODID_GET_MODEL_METADATA = 4;
 
-  private static class MethodHandlers<Req, Resp> implements
+  private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
@@ -447,7 +561,7 @@ public class PredictionServiceGrpc {
     private final PredictionServiceImplBase serviceImpl;
     private final int methodId;
 
-    public MethodHandlers(PredictionServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(PredictionServiceImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -457,20 +571,20 @@ public class PredictionServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_CLASSIFY:
-          serviceImpl.classify((com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationRequest) request,
-              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ClassificationProtos.ClassificationResponse>) responseObserver);
+          serviceImpl.classify((com.tencent.angel.serving.apis.prediction.RequestProtos.Request) request,
+              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>) responseObserver);
           break;
         case METHODID_REGRESS:
-          serviceImpl.regress((com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionRequest) request,
-              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResponse>) responseObserver);
+          serviceImpl.regress((com.tencent.angel.serving.apis.prediction.RequestProtos.Request) request,
+              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>) responseObserver);
           break;
         case METHODID_PREDICT:
-          serviceImpl.predict((com.tencent.angel.serving.apis.prediction.PredictProtos.PredictRequest) request,
-              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.PredictProtos.PredictResponse>) responseObserver);
+          serviceImpl.predict((com.tencent.angel.serving.apis.prediction.RequestProtos.Request) request,
+              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>) responseObserver);
           break;
         case METHODID_MULTI_INFERENCE:
-          serviceImpl.multiInference((com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceRequest) request,
-              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.InferenceProtos.MultiInferenceResponse>) responseObserver);
+          serviceImpl.multiInference((com.tencent.angel.serving.apis.prediction.RequestProtos.Request) request,
+              (io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.prediction.ResponseProtos.Response>) responseObserver);
           break;
         case METHODID_GET_MODEL_METADATA:
           serviceImpl.getModelMetadata((com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.GetModelMetadataRequest) request,
@@ -492,13 +606,60 @@ public class PredictionServiceGrpc {
     }
   }
 
-  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
-    return new io.grpc.ServiceDescriptor(SERVICE_NAME,
-        METHOD_CLASSIFY,
-        METHOD_REGRESS,
-        METHOD_PREDICT,
-        METHOD_MULTI_INFERENCE,
-        METHOD_GET_MODEL_METADATA);
+  private static abstract class PredictionServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    PredictionServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return com.tencent.angel.serving.apis.prediction.PredictionServiceProtos.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("PredictionService");
+    }
   }
 
+  private static final class PredictionServiceFileDescriptorSupplier
+      extends PredictionServiceBaseDescriptorSupplier {
+    PredictionServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class PredictionServiceMethodDescriptorSupplier
+      extends PredictionServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    PredictionServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (PredictionServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new PredictionServiceFileDescriptorSupplier())
+              .addMethod(getClassifyMethod())
+              .addMethod(getRegressMethod())
+              .addMethod(getPredictMethod())
+              .addMethod(getMultiInferenceMethod())
+              .addMethod(getGetModelMetadataMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
 }

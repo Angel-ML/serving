@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.common";
+option java_outer_classname = "ValueProtos";
+
+
+import "apis/common/types.proto";
+import "apis/common/tensor_shape.proto";
+
+message ListValue {
+    repeated bytes bs = 1;
+    repeated int32 i = 2;
+    repeated int64 l = 3;
+    repeated float f = 4;
+    repeated double d = 5;
+    repeated bool b = 6;
+    repeated string s = 7;
+    repeated ListValue vlist = 8;
+    repeated MapValue mlist = 9;
+}
+
+message MapValue {
+    map<string, bytes> s2bs_map = 1;
+    map<string, int32> s2i_map = 2;
+    map<string, int64> s2l_map = 3;
+    map<string, float> s2f_map = 4;
+    map<string, double> s2d_map = 5;
+    map<string, bool> s2b_map = 6;
+    map<string, string> s2s_map = 7;
+    map<string, ListValue> s2list_map = 8;
+    map<string, MapValue> s2map_map = 9;
+
+    map<int32, bytes> i2bs_map = 11;
+    map<int32, int32> i2i_map = 12;
+    map<int32, int64> i2l_map = 13;
+    map<int32, float> i2f_map = 14;
+    map<int32, double> i2d_map = 15;
+    map<int32, bool> i2b_map = 16;
+    map<int32, string> i2s_map = 17;
+    map<int32, ListValue> i2list_map = 18;
+    map<int32, MapValue> i2map_map = 19;
+
+    map<int64, bytes> l2bs_map = 21;
+    map<int64, int32> l2i_map = 22;
+    map<int64, int64> l2l_map = 23;
+    map<int64, float> l2f_map = 24;
+    map<int64, double> l2d_map = 25;
+    map<int64, bool> l2b_map = 26;
+    map<int64, string> l2s_map = 27;
+    map<int64, ListValue> l2list_map = 28;
+    map<int64, MapValue> l2map_map = 29;
+}
+
+message Instance {
+
+    DataType dType = 1;
+
+    string name = 2;
+
+    int32 flag = 3;
+
+    TensorShapeProto shape = 4;
+
+    oneof value {
+        bytes bs = 5;
+        int32 i = 6;
+        int64 l = 7;
+        float f = 8;
+        double d = 9;
+        bool b = 10;
+        string s = 11;
+        ListValue lv = 12;
+        MapValue mv = 13;
+    }
+}
+
+
+

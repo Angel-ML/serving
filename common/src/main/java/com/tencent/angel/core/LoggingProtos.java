@@ -19,15 +19,15 @@ public final class LoggingProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -36,7 +36,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     boolean hasSamplingConfig();
     /**
@@ -44,7 +44,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig();
     /**
@@ -52,7 +52,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder();
   }
@@ -67,6 +67,7 @@ public final class LoggingProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.LogMetadata)
       LogMetadataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use LogMetadata.newBuilder() to construct.
     private LogMetadata(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -77,14 +78,19 @@ public final class LoggingProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private LogMetadata(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -94,7 +100,8 @@ public final class LoggingProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -133,6 +140,7 @@ public final class LoggingProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -151,19 +159,19 @@ public final class LoggingProtos {
     public static final int MODEL_SPEC_FIELD_NUMBER = 1;
     private com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec modelSpec_;
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
     }
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
     }
     /**
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -176,7 +184,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public boolean hasSamplingConfig() {
       return samplingConfig_ != null;
@@ -186,7 +194,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig() {
       return samplingConfig_ == null ? com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.getDefaultInstance() : samplingConfig_;
@@ -196,7 +204,7 @@ public final class LoggingProtos {
      * TODO(b/33279154): Add more metadata as mentioned in the bug.
      * </pre>
      *
-     * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+     * <code>.angel.SamplingConfig sampling_config = 2;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder() {
       return getSamplingConfig();
@@ -220,6 +228,7 @@ public final class LoggingProtos {
       if (samplingConfig_ != null) {
         output.writeMessage(2, getSamplingConfig());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -235,11 +244,11 @@ public final class LoggingProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getSamplingConfig());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -261,6 +270,7 @@ public final class LoggingProtos {
         result = result && getSamplingConfig()
             .equals(other.getSamplingConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -270,7 +280,7 @@ public final class LoggingProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -284,6 +294,17 @@ public final class LoggingProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.LoggingProtos.LogMetadata parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.LoggingProtos.LogMetadata parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.LoggingProtos.LogMetadata parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -454,7 +475,7 @@ public final class LoggingProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -467,12 +488,12 @@ public final class LoggingProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -492,6 +513,7 @@ public final class LoggingProtos {
         if (other.hasSamplingConfig()) {
           mergeSamplingConfig(other.getSamplingConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -522,13 +544,13 @@ public final class LoggingProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> modelSpecBuilder_;
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -538,7 +560,7 @@ public final class LoggingProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -554,7 +576,7 @@ public final class LoggingProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -568,7 +590,7 @@ public final class LoggingProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -586,7 +608,7 @@ public final class LoggingProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -600,7 +622,7 @@ public final class LoggingProtos {
         return this;
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -608,7 +630,7 @@ public final class LoggingProtos {
         return getModelSpecFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -619,7 +641,7 @@ public final class LoggingProtos {
         }
       }
       /**
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -643,7 +665,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public boolean hasSamplingConfig() {
         return samplingConfigBuilder_ != null || samplingConfig_ != null;
@@ -653,7 +675,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig getSamplingConfig() {
         if (samplingConfigBuilder_ == null) {
@@ -667,7 +689,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder setSamplingConfig(com.tencent.angel.config.SamplingConfigProtos.SamplingConfig value) {
         if (samplingConfigBuilder_ == null) {
@@ -687,7 +709,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder setSamplingConfig(
           com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder builderForValue) {
@@ -705,7 +727,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder mergeSamplingConfig(com.tencent.angel.config.SamplingConfigProtos.SamplingConfig value) {
         if (samplingConfigBuilder_ == null) {
@@ -727,7 +749,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public Builder clearSamplingConfig() {
         if (samplingConfigBuilder_ == null) {
@@ -745,7 +767,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder getSamplingConfigBuilder() {
         
@@ -757,7 +779,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder getSamplingConfigOrBuilder() {
         if (samplingConfigBuilder_ != null) {
@@ -772,7 +794,7 @@ public final class LoggingProtos {
        * TODO(b/33279154): Add more metadata as mentioned in the bug.
        * </pre>
        *
-       * <code>optional .angel.SamplingConfig sampling_config = 2;</code>
+       * <code>.angel.SamplingConfig sampling_config = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.SamplingConfigProtos.SamplingConfig, com.tencent.angel.config.SamplingConfigProtos.SamplingConfig.Builder, com.tencent.angel.config.SamplingConfigProtos.SamplingConfigOrBuilder> 
@@ -789,12 +811,12 @@ public final class LoggingProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -817,7 +839,7 @@ public final class LoggingProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LogMetadata(input, extensionRegistry);
+        return new LogMetadata(input, extensionRegistry);
       }
     };
 

@@ -23,7 +23,7 @@ public final class StepStatsProtos {
      * The timestamp of the operation.
      * </pre>
      *
-     * <code>optional int64 alloc_micros = 1;</code>
+     * <code>int64 alloc_micros = 1;</code>
      */
     long getAllocMicros();
 
@@ -32,7 +32,7 @@ public final class StepStatsProtos {
      * Number of bytes allocated, or de-allocated if negative.
      * </pre>
      *
-     * <code>optional int64 alloc_bytes = 2;</code>
+     * <code>int64 alloc_bytes = 2;</code>
      */
     long getAllocBytes();
   }
@@ -47,6 +47,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.AllocationRecord)
       AllocationRecordOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AllocationRecord.newBuilder() to construct.
     private AllocationRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -59,14 +60,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AllocationRecord(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -76,7 +82,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -99,6 +106,7 @@ public final class StepStatsProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -121,7 +129,7 @@ public final class StepStatsProtos {
      * The timestamp of the operation.
      * </pre>
      *
-     * <code>optional int64 alloc_micros = 1;</code>
+     * <code>int64 alloc_micros = 1;</code>
      */
     public long getAllocMicros() {
       return allocMicros_;
@@ -134,7 +142,7 @@ public final class StepStatsProtos {
      * Number of bytes allocated, or de-allocated if negative.
      * </pre>
      *
-     * <code>optional int64 alloc_bytes = 2;</code>
+     * <code>int64 alloc_bytes = 2;</code>
      */
     public long getAllocBytes() {
       return allocBytes_;
@@ -158,6 +166,7 @@ public final class StepStatsProtos {
       if (allocBytes_ != 0L) {
         output.writeInt64(2, allocBytes_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -173,11 +182,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, allocBytes_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -193,6 +202,7 @@ public final class StepStatsProtos {
           == other.getAllocMicros());
       result = result && (getAllocBytes()
           == other.getAllocBytes());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -202,7 +212,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ALLOC_MICROS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAllocMicros());
@@ -214,6 +224,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.AllocationRecord parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.AllocationRecord parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.AllocationRecord parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -368,7 +389,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -381,12 +402,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -406,6 +427,7 @@ public final class StepStatsProtos {
         if (other.getAllocBytes() != 0L) {
           setAllocBytes(other.getAllocBytes());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -438,7 +460,7 @@ public final class StepStatsProtos {
        * The timestamp of the operation.
        * </pre>
        *
-       * <code>optional int64 alloc_micros = 1;</code>
+       * <code>int64 alloc_micros = 1;</code>
        */
       public long getAllocMicros() {
         return allocMicros_;
@@ -448,7 +470,7 @@ public final class StepStatsProtos {
        * The timestamp of the operation.
        * </pre>
        *
-       * <code>optional int64 alloc_micros = 1;</code>
+       * <code>int64 alloc_micros = 1;</code>
        */
       public Builder setAllocMicros(long value) {
         
@@ -461,7 +483,7 @@ public final class StepStatsProtos {
        * The timestamp of the operation.
        * </pre>
        *
-       * <code>optional int64 alloc_micros = 1;</code>
+       * <code>int64 alloc_micros = 1;</code>
        */
       public Builder clearAllocMicros() {
         
@@ -476,7 +498,7 @@ public final class StepStatsProtos {
        * Number of bytes allocated, or de-allocated if negative.
        * </pre>
        *
-       * <code>optional int64 alloc_bytes = 2;</code>
+       * <code>int64 alloc_bytes = 2;</code>
        */
       public long getAllocBytes() {
         return allocBytes_;
@@ -486,7 +508,7 @@ public final class StepStatsProtos {
        * Number of bytes allocated, or de-allocated if negative.
        * </pre>
        *
-       * <code>optional int64 alloc_bytes = 2;</code>
+       * <code>int64 alloc_bytes = 2;</code>
        */
       public Builder setAllocBytes(long value) {
         
@@ -499,7 +521,7 @@ public final class StepStatsProtos {
        * Number of bytes allocated, or de-allocated if negative.
        * </pre>
        *
-       * <code>optional int64 alloc_bytes = 2;</code>
+       * <code>int64 alloc_bytes = 2;</code>
        */
       public Builder clearAllocBytes() {
         
@@ -509,12 +531,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -537,7 +559,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AllocationRecord(input, extensionRegistry);
+        return new AllocationRecord(input, extensionRegistry);
       }
     };
 
@@ -561,11 +583,11 @@ public final class StepStatsProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string allocator_name = 1;</code>
+     * <code>string allocator_name = 1;</code>
      */
     java.lang.String getAllocatorName();
     /**
-     * <code>optional string allocator_name = 1;</code>
+     * <code>string allocator_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getAllocatorNameBytes();
@@ -575,12 +597,12 @@ public final class StepStatsProtos {
      * These are per-node allocator memory stats.
      * </pre>
      *
-     * <code>optional int64 total_bytes = 2;</code>
+     * <code>int64 total_bytes = 2;</code>
      */
     long getTotalBytes();
 
     /**
-     * <code>optional int64 peak_bytes = 3;</code>
+     * <code>int64 peak_bytes = 3;</code>
      */
     long getPeakBytes();
 
@@ -589,7 +611,7 @@ public final class StepStatsProtos {
      * The bytes that are not deallocated.
      * </pre>
      *
-     * <code>optional int64 live_bytes = 4;</code>
+     * <code>int64 live_bytes = 4;</code>
      */
     long getLiveBytes();
 
@@ -643,7 +665,7 @@ public final class StepStatsProtos {
      * The number of live bytes currently allocated by the allocator.
      * </pre>
      *
-     * <code>optional int64 allocator_bytes_in_use = 5;</code>
+     * <code>int64 allocator_bytes_in_use = 5;</code>
      */
     long getAllocatorBytesInUse();
   }
@@ -654,6 +676,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.AllocatorMemoryUsed)
       AllocatorMemoryUsedOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AllocatorMemoryUsed.newBuilder() to construct.
     private AllocatorMemoryUsed(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -670,14 +693,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AllocatorMemoryUsed(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -687,7 +715,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -738,6 +767,7 @@ public final class StepStatsProtos {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           allocationRecords_ = java.util.Collections.unmodifiableList(allocationRecords_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -757,7 +787,7 @@ public final class StepStatsProtos {
     public static final int ALLOCATOR_NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object allocatorName_;
     /**
-     * <code>optional string allocator_name = 1;</code>
+     * <code>string allocator_name = 1;</code>
      */
     public java.lang.String getAllocatorName() {
       java.lang.Object ref = allocatorName_;
@@ -772,7 +802,7 @@ public final class StepStatsProtos {
       }
     }
     /**
-     * <code>optional string allocator_name = 1;</code>
+     * <code>string allocator_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getAllocatorNameBytes() {
@@ -795,7 +825,7 @@ public final class StepStatsProtos {
      * These are per-node allocator memory stats.
      * </pre>
      *
-     * <code>optional int64 total_bytes = 2;</code>
+     * <code>int64 total_bytes = 2;</code>
      */
     public long getTotalBytes() {
       return totalBytes_;
@@ -804,7 +834,7 @@ public final class StepStatsProtos {
     public static final int PEAK_BYTES_FIELD_NUMBER = 3;
     private long peakBytes_;
     /**
-     * <code>optional int64 peak_bytes = 3;</code>
+     * <code>int64 peak_bytes = 3;</code>
      */
     public long getPeakBytes() {
       return peakBytes_;
@@ -817,7 +847,7 @@ public final class StepStatsProtos {
      * The bytes that are not deallocated.
      * </pre>
      *
-     * <code>optional int64 live_bytes = 4;</code>
+     * <code>int64 live_bytes = 4;</code>
      */
     public long getLiveBytes() {
       return liveBytes_;
@@ -886,7 +916,7 @@ public final class StepStatsProtos {
      * The number of live bytes currently allocated by the allocator.
      * </pre>
      *
-     * <code>optional int64 allocator_bytes_in_use = 5;</code>
+     * <code>int64 allocator_bytes_in_use = 5;</code>
      */
     public long getAllocatorBytesInUse() {
       return allocatorBytesInUse_;
@@ -922,6 +952,7 @@ public final class StepStatsProtos {
       for (int i = 0; i < allocationRecords_.size(); i++) {
         output.writeMessage(6, allocationRecords_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -952,11 +983,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, allocationRecords_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -980,6 +1011,7 @@ public final class StepStatsProtos {
           .equals(other.getAllocationRecordsList());
       result = result && (getAllocatorBytesInUse()
           == other.getAllocatorBytesInUse());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -989,7 +1021,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ALLOCATOR_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getAllocatorName().hashCode();
       hash = (37 * hash) + TOTAL_BYTES_FIELD_NUMBER;
@@ -1013,6 +1045,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.AllocatorMemoryUsed parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.AllocatorMemoryUsed parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.AllocatorMemoryUsed parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1191,7 +1234,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1204,12 +1247,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1265,6 +1308,7 @@ public final class StepStatsProtos {
         if (other.getAllocatorBytesInUse() != 0L) {
           setAllocatorBytesInUse(other.getAllocatorBytesInUse());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1294,7 +1338,7 @@ public final class StepStatsProtos {
 
       private java.lang.Object allocatorName_ = "";
       /**
-       * <code>optional string allocator_name = 1;</code>
+       * <code>string allocator_name = 1;</code>
        */
       public java.lang.String getAllocatorName() {
         java.lang.Object ref = allocatorName_;
@@ -1309,7 +1353,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string allocator_name = 1;</code>
+       * <code>string allocator_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getAllocatorNameBytes() {
@@ -1325,7 +1369,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string allocator_name = 1;</code>
+       * <code>string allocator_name = 1;</code>
        */
       public Builder setAllocatorName(
           java.lang.String value) {
@@ -1338,7 +1382,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string allocator_name = 1;</code>
+       * <code>string allocator_name = 1;</code>
        */
       public Builder clearAllocatorName() {
         
@@ -1347,7 +1391,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string allocator_name = 1;</code>
+       * <code>string allocator_name = 1;</code>
        */
       public Builder setAllocatorNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1367,7 +1411,7 @@ public final class StepStatsProtos {
        * These are per-node allocator memory stats.
        * </pre>
        *
-       * <code>optional int64 total_bytes = 2;</code>
+       * <code>int64 total_bytes = 2;</code>
        */
       public long getTotalBytes() {
         return totalBytes_;
@@ -1377,7 +1421,7 @@ public final class StepStatsProtos {
        * These are per-node allocator memory stats.
        * </pre>
        *
-       * <code>optional int64 total_bytes = 2;</code>
+       * <code>int64 total_bytes = 2;</code>
        */
       public Builder setTotalBytes(long value) {
         
@@ -1390,7 +1434,7 @@ public final class StepStatsProtos {
        * These are per-node allocator memory stats.
        * </pre>
        *
-       * <code>optional int64 total_bytes = 2;</code>
+       * <code>int64 total_bytes = 2;</code>
        */
       public Builder clearTotalBytes() {
         
@@ -1401,13 +1445,13 @@ public final class StepStatsProtos {
 
       private long peakBytes_ ;
       /**
-       * <code>optional int64 peak_bytes = 3;</code>
+       * <code>int64 peak_bytes = 3;</code>
        */
       public long getPeakBytes() {
         return peakBytes_;
       }
       /**
-       * <code>optional int64 peak_bytes = 3;</code>
+       * <code>int64 peak_bytes = 3;</code>
        */
       public Builder setPeakBytes(long value) {
         
@@ -1416,7 +1460,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 peak_bytes = 3;</code>
+       * <code>int64 peak_bytes = 3;</code>
        */
       public Builder clearPeakBytes() {
         
@@ -1431,7 +1475,7 @@ public final class StepStatsProtos {
        * The bytes that are not deallocated.
        * </pre>
        *
-       * <code>optional int64 live_bytes = 4;</code>
+       * <code>int64 live_bytes = 4;</code>
        */
       public long getLiveBytes() {
         return liveBytes_;
@@ -1441,7 +1485,7 @@ public final class StepStatsProtos {
        * The bytes that are not deallocated.
        * </pre>
        *
-       * <code>optional int64 live_bytes = 4;</code>
+       * <code>int64 live_bytes = 4;</code>
        */
       public Builder setLiveBytes(long value) {
         
@@ -1454,7 +1498,7 @@ public final class StepStatsProtos {
        * The bytes that are not deallocated.
        * </pre>
        *
-       * <code>optional int64 live_bytes = 4;</code>
+       * <code>int64 live_bytes = 4;</code>
        */
       public Builder clearLiveBytes() {
         
@@ -1782,7 +1826,7 @@ public final class StepStatsProtos {
        * The number of live bytes currently allocated by the allocator.
        * </pre>
        *
-       * <code>optional int64 allocator_bytes_in_use = 5;</code>
+       * <code>int64 allocator_bytes_in_use = 5;</code>
        */
       public long getAllocatorBytesInUse() {
         return allocatorBytesInUse_;
@@ -1793,7 +1837,7 @@ public final class StepStatsProtos {
        * The number of live bytes currently allocated by the allocator.
        * </pre>
        *
-       * <code>optional int64 allocator_bytes_in_use = 5;</code>
+       * <code>int64 allocator_bytes_in_use = 5;</code>
        */
       public Builder setAllocatorBytesInUse(long value) {
         
@@ -1807,7 +1851,7 @@ public final class StepStatsProtos {
        * The number of live bytes currently allocated by the allocator.
        * </pre>
        *
-       * <code>optional int64 allocator_bytes_in_use = 5;</code>
+       * <code>int64 allocator_bytes_in_use = 5;</code>
        */
       public Builder clearAllocatorBytesInUse() {
         
@@ -1817,12 +1861,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1845,7 +1889,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AllocatorMemoryUsed(input, extensionRegistry);
+        return new AllocatorMemoryUsed(input, extensionRegistry);
       }
     };
 
@@ -1869,20 +1913,20 @@ public final class StepStatsProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 slot = 1;</code>
+     * <code>int32 slot = 1;</code>
      */
     int getSlot();
 
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     boolean hasTensorDescription();
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription getTensorDescription();
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescriptionOrBuilder getTensorDescriptionOrBuilder();
   }
@@ -1897,6 +1941,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.NodeOutput)
       NodeOutputOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NodeOutput.newBuilder() to construct.
     private NodeOutput(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1908,14 +1953,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NodeOutput(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1925,7 +1975,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1956,6 +2007,7 @@ public final class StepStatsProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1974,7 +2026,7 @@ public final class StepStatsProtos {
     public static final int SLOT_FIELD_NUMBER = 1;
     private int slot_;
     /**
-     * <code>optional int32 slot = 1;</code>
+     * <code>int32 slot = 1;</code>
      */
     public int getSlot() {
       return slot_;
@@ -1983,19 +2035,19 @@ public final class StepStatsProtos {
     public static final int TENSOR_DESCRIPTION_FIELD_NUMBER = 3;
     private com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription tensorDescription_;
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     public boolean hasTensorDescription() {
       return tensorDescription_ != null;
     }
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     public com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription getTensorDescription() {
       return tensorDescription_ == null ? com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription.getDefaultInstance() : tensorDescription_;
     }
     /**
-     * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+     * <code>.angel.TensorDescription tensor_description = 3;</code>
      */
     public com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescriptionOrBuilder getTensorDescriptionOrBuilder() {
       return getTensorDescription();
@@ -2019,6 +2071,7 @@ public final class StepStatsProtos {
       if (tensorDescription_ != null) {
         output.writeMessage(3, getTensorDescription());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2034,11 +2087,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getTensorDescription());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2057,6 +2110,7 @@ public final class StepStatsProtos {
         result = result && getTensorDescription()
             .equals(other.getTensorDescription());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2066,7 +2120,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SLOT_FIELD_NUMBER;
       hash = (53 * hash) + getSlot();
       if (hasTensorDescription()) {
@@ -2078,6 +2132,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.NodeOutput parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.NodeOutput parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.NodeOutput parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2240,7 +2305,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2253,12 +2318,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2278,6 +2343,7 @@ public final class StepStatsProtos {
         if (other.hasTensorDescription()) {
           mergeTensorDescription(other.getTensorDescription());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2306,13 +2372,13 @@ public final class StepStatsProtos {
 
       private int slot_ ;
       /**
-       * <code>optional int32 slot = 1;</code>
+       * <code>int32 slot = 1;</code>
        */
       public int getSlot() {
         return slot_;
       }
       /**
-       * <code>optional int32 slot = 1;</code>
+       * <code>int32 slot = 1;</code>
        */
       public Builder setSlot(int value) {
         
@@ -2321,7 +2387,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int32 slot = 1;</code>
+       * <code>int32 slot = 1;</code>
        */
       public Builder clearSlot() {
         
@@ -2334,13 +2400,13 @@ public final class StepStatsProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription, com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription.Builder, com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescriptionOrBuilder> tensorDescriptionBuilder_;
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public boolean hasTensorDescription() {
         return tensorDescriptionBuilder_ != null || tensorDescription_ != null;
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription getTensorDescription() {
         if (tensorDescriptionBuilder_ == null) {
@@ -2350,7 +2416,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public Builder setTensorDescription(com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription value) {
         if (tensorDescriptionBuilder_ == null) {
@@ -2366,7 +2432,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public Builder setTensorDescription(
           com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription.Builder builderForValue) {
@@ -2380,7 +2446,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public Builder mergeTensorDescription(com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription value) {
         if (tensorDescriptionBuilder_ == null) {
@@ -2398,7 +2464,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public Builder clearTensorDescription() {
         if (tensorDescriptionBuilder_ == null) {
@@ -2412,7 +2478,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription.Builder getTensorDescriptionBuilder() {
         
@@ -2420,7 +2486,7 @@ public final class StepStatsProtos {
         return getTensorDescriptionFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       public com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescriptionOrBuilder getTensorDescriptionOrBuilder() {
         if (tensorDescriptionBuilder_ != null) {
@@ -2431,7 +2497,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional .angel.TensorDescription tensor_description = 3;</code>
+       * <code>.angel.TensorDescription tensor_description = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription, com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescription.Builder, com.tencent.angel.core.stats.TensorDescriptionProtos.TensorDescriptionOrBuilder> 
@@ -2448,12 +2514,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2476,7 +2542,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NodeOutput(input, extensionRegistry);
+        return new NodeOutput(input, extensionRegistry);
       }
     };
 
@@ -2500,12 +2566,12 @@ public final class StepStatsProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 temp_memory_size = 1;</code>
+     * <code>int64 temp_memory_size = 1;</code>
      */
     long getTempMemorySize();
 
     /**
-     * <code>optional int64 persistent_memory_size = 3;</code>
+     * <code>int64 persistent_memory_size = 3;</code>
      */
     long getPersistentMemorySize();
 
@@ -2523,12 +2589,12 @@ public final class StepStatsProtos {
     long getPersistentTensorAllocIds(int index);
 
     /**
-     * <code>optional int64 device_temp_memory_size = 2 [deprecated = true];</code>
+     * <code>int64 device_temp_memory_size = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated long getDeviceTempMemorySize();
 
     /**
-     * <code>optional int64 device_persistent_memory_size = 4 [deprecated = true];</code>
+     * <code>int64 device_persistent_memory_size = 4 [deprecated = true];</code>
      */
     @java.lang.Deprecated long getDevicePersistentMemorySize();
 
@@ -2556,6 +2622,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.MemoryStats)
       MemoryStatsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MemoryStats.newBuilder() to construct.
     private MemoryStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2572,14 +2639,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MemoryStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2589,7 +2661,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2670,6 +2743,7 @@ public final class StepStatsProtos {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           devicePersistentTensorAllocIds_ = java.util.Collections.unmodifiableList(devicePersistentTensorAllocIds_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2689,7 +2763,7 @@ public final class StepStatsProtos {
     public static final int TEMP_MEMORY_SIZE_FIELD_NUMBER = 1;
     private long tempMemorySize_;
     /**
-     * <code>optional int64 temp_memory_size = 1;</code>
+     * <code>int64 temp_memory_size = 1;</code>
      */
     public long getTempMemorySize() {
       return tempMemorySize_;
@@ -2698,7 +2772,7 @@ public final class StepStatsProtos {
     public static final int PERSISTENT_MEMORY_SIZE_FIELD_NUMBER = 3;
     private long persistentMemorySize_;
     /**
-     * <code>optional int64 persistent_memory_size = 3;</code>
+     * <code>int64 persistent_memory_size = 3;</code>
      */
     public long getPersistentMemorySize() {
       return persistentMemorySize_;
@@ -2730,7 +2804,7 @@ public final class StepStatsProtos {
     public static final int DEVICE_TEMP_MEMORY_SIZE_FIELD_NUMBER = 2;
     private long deviceTempMemorySize_;
     /**
-     * <code>optional int64 device_temp_memory_size = 2 [deprecated = true];</code>
+     * <code>int64 device_temp_memory_size = 2 [deprecated = true];</code>
      */
     @java.lang.Deprecated public long getDeviceTempMemorySize() {
       return deviceTempMemorySize_;
@@ -2739,7 +2813,7 @@ public final class StepStatsProtos {
     public static final int DEVICE_PERSISTENT_MEMORY_SIZE_FIELD_NUMBER = 4;
     private long devicePersistentMemorySize_;
     /**
-     * <code>optional int64 device_persistent_memory_size = 4 [deprecated = true];</code>
+     * <code>int64 device_persistent_memory_size = 4 [deprecated = true];</code>
      */
     @java.lang.Deprecated public long getDevicePersistentMemorySize() {
       return devicePersistentMemorySize_;
@@ -2807,6 +2881,7 @@ public final class StepStatsProtos {
       for (int i = 0; i < devicePersistentTensorAllocIds_.size(); i++) {
         output.writeInt64NoTag(devicePersistentTensorAllocIds_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2858,11 +2933,11 @@ public final class StepStatsProtos {
         }
         devicePersistentTensorAllocIdsMemoizedSerializedSize = dataSize;
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2886,6 +2961,7 @@ public final class StepStatsProtos {
           == other.getDevicePersistentMemorySize());
       result = result && getDevicePersistentTensorAllocIdsList()
           .equals(other.getDevicePersistentTensorAllocIdsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2895,7 +2971,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TEMP_MEMORY_SIZE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTempMemorySize());
@@ -2921,6 +2997,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.MemoryStats parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.MemoryStats parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.MemoryStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3098,7 +3185,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3111,12 +3198,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3162,6 +3249,7 @@ public final class StepStatsProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3191,13 +3279,13 @@ public final class StepStatsProtos {
 
       private long tempMemorySize_ ;
       /**
-       * <code>optional int64 temp_memory_size = 1;</code>
+       * <code>int64 temp_memory_size = 1;</code>
        */
       public long getTempMemorySize() {
         return tempMemorySize_;
       }
       /**
-       * <code>optional int64 temp_memory_size = 1;</code>
+       * <code>int64 temp_memory_size = 1;</code>
        */
       public Builder setTempMemorySize(long value) {
         
@@ -3206,7 +3294,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 temp_memory_size = 1;</code>
+       * <code>int64 temp_memory_size = 1;</code>
        */
       public Builder clearTempMemorySize() {
         
@@ -3217,13 +3305,13 @@ public final class StepStatsProtos {
 
       private long persistentMemorySize_ ;
       /**
-       * <code>optional int64 persistent_memory_size = 3;</code>
+       * <code>int64 persistent_memory_size = 3;</code>
        */
       public long getPersistentMemorySize() {
         return persistentMemorySize_;
       }
       /**
-       * <code>optional int64 persistent_memory_size = 3;</code>
+       * <code>int64 persistent_memory_size = 3;</code>
        */
       public Builder setPersistentMemorySize(long value) {
         
@@ -3232,7 +3320,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 persistent_memory_size = 3;</code>
+       * <code>int64 persistent_memory_size = 3;</code>
        */
       public Builder clearPersistentMemorySize() {
         
@@ -3309,13 +3397,13 @@ public final class StepStatsProtos {
 
       private long deviceTempMemorySize_ ;
       /**
-       * <code>optional int64 device_temp_memory_size = 2 [deprecated = true];</code>
+       * <code>int64 device_temp_memory_size = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public long getDeviceTempMemorySize() {
         return deviceTempMemorySize_;
       }
       /**
-       * <code>optional int64 device_temp_memory_size = 2 [deprecated = true];</code>
+       * <code>int64 device_temp_memory_size = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setDeviceTempMemorySize(long value) {
         
@@ -3324,7 +3412,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 device_temp_memory_size = 2 [deprecated = true];</code>
+       * <code>int64 device_temp_memory_size = 2 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearDeviceTempMemorySize() {
         
@@ -3335,13 +3423,13 @@ public final class StepStatsProtos {
 
       private long devicePersistentMemorySize_ ;
       /**
-       * <code>optional int64 device_persistent_memory_size = 4 [deprecated = true];</code>
+       * <code>int64 device_persistent_memory_size = 4 [deprecated = true];</code>
        */
       @java.lang.Deprecated public long getDevicePersistentMemorySize() {
         return devicePersistentMemorySize_;
       }
       /**
-       * <code>optional int64 device_persistent_memory_size = 4 [deprecated = true];</code>
+       * <code>int64 device_persistent_memory_size = 4 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setDevicePersistentMemorySize(long value) {
         
@@ -3350,7 +3438,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 device_persistent_memory_size = 4 [deprecated = true];</code>
+       * <code>int64 device_persistent_memory_size = 4 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearDevicePersistentMemorySize() {
         
@@ -3426,12 +3514,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3454,7 +3542,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MemoryStats(input, extensionRegistry);
+        return new MemoryStats(input, extensionRegistry);
       }
     };
 
@@ -3485,7 +3573,7 @@ public final class StepStatsProtos {
      * the name.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     java.lang.String getNodeName();
     /**
@@ -3496,28 +3584,28 @@ public final class StepStatsProtos {
      * the name.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNodeNameBytes();
 
     /**
-     * <code>optional int64 all_start_micros = 2;</code>
+     * <code>int64 all_start_micros = 2;</code>
      */
     long getAllStartMicros();
 
     /**
-     * <code>optional int64 op_start_rel_micros = 3;</code>
+     * <code>int64 op_start_rel_micros = 3;</code>
      */
     long getOpStartRelMicros();
 
     /**
-     * <code>optional int64 op_end_rel_micros = 4;</code>
+     * <code>int64 op_end_rel_micros = 4;</code>
      */
     long getOpEndRelMicros();
 
     /**
-     * <code>optional int64 all_end_rel_micros = 5;</code>
+     * <code>int64 all_end_rel_micros = 5;</code>
      */
     long getAllEndRelMicros();
 
@@ -3570,22 +3658,22 @@ public final class StepStatsProtos {
         int index);
 
     /**
-     * <code>optional string timeline_label = 8;</code>
+     * <code>string timeline_label = 8;</code>
      */
     java.lang.String getTimelineLabel();
     /**
-     * <code>optional string timeline_label = 8;</code>
+     * <code>string timeline_label = 8;</code>
      */
     com.google.protobuf.ByteString
         getTimelineLabelBytes();
 
     /**
-     * <code>optional int64 scheduled_micros = 9;</code>
+     * <code>int64 scheduled_micros = 9;</code>
      */
     long getScheduledMicros();
 
     /**
-     * <code>optional uint32 thread_id = 10;</code>
+     * <code>uint32 thread_id = 10;</code>
      */
     int getThreadId();
 
@@ -3614,40 +3702,40 @@ public final class StepStatsProtos {
         int index);
 
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     boolean hasMemoryStats();
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     com.tencent.angel.core.stats.StepStatsProtos.MemoryStats getMemoryStats();
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     com.tencent.angel.core.stats.StepStatsProtos.MemoryStatsOrBuilder getMemoryStatsOrBuilder();
 
     /**
-     * <code>optional int64 all_start_nanos = 13;</code>
+     * <code>int64 all_start_nanos = 13;</code>
      */
     long getAllStartNanos();
 
     /**
-     * <code>optional int64 op_start_rel_nanos = 14;</code>
+     * <code>int64 op_start_rel_nanos = 14;</code>
      */
     long getOpStartRelNanos();
 
     /**
-     * <code>optional int64 op_end_rel_nanos = 15;</code>
+     * <code>int64 op_end_rel_nanos = 15;</code>
      */
     long getOpEndRelNanos();
 
     /**
-     * <code>optional int64 all_end_rel_nanos = 16;</code>
+     * <code>int64 all_end_rel_nanos = 16;</code>
      */
     long getAllEndRelNanos();
 
     /**
-     * <code>optional int64 scheduled_nanos = 17;</code>
+     * <code>int64 scheduled_nanos = 17;</code>
      */
     long getScheduledNanos();
   }
@@ -3662,6 +3750,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.NodeExecStats)
       NodeExecStatsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NodeExecStats.newBuilder() to construct.
     private NodeExecStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3688,14 +3777,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NodeExecStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3705,7 +3799,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3834,6 +3929,7 @@ public final class StepStatsProtos {
         if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           referencedTensor_ = java.util.Collections.unmodifiableList(referencedTensor_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3860,7 +3956,7 @@ public final class StepStatsProtos {
      * the name.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     public java.lang.String getNodeName() {
       java.lang.Object ref = nodeName_;
@@ -3882,7 +3978,7 @@ public final class StepStatsProtos {
      * the name.
      * </pre>
      *
-     * <code>optional string node_name = 1;</code>
+     * <code>string node_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNodeNameBytes() {
@@ -3901,7 +3997,7 @@ public final class StepStatsProtos {
     public static final int ALL_START_MICROS_FIELD_NUMBER = 2;
     private long allStartMicros_;
     /**
-     * <code>optional int64 all_start_micros = 2;</code>
+     * <code>int64 all_start_micros = 2;</code>
      */
     public long getAllStartMicros() {
       return allStartMicros_;
@@ -3910,7 +4006,7 @@ public final class StepStatsProtos {
     public static final int OP_START_REL_MICROS_FIELD_NUMBER = 3;
     private long opStartRelMicros_;
     /**
-     * <code>optional int64 op_start_rel_micros = 3;</code>
+     * <code>int64 op_start_rel_micros = 3;</code>
      */
     public long getOpStartRelMicros() {
       return opStartRelMicros_;
@@ -3919,7 +4015,7 @@ public final class StepStatsProtos {
     public static final int OP_END_REL_MICROS_FIELD_NUMBER = 4;
     private long opEndRelMicros_;
     /**
-     * <code>optional int64 op_end_rel_micros = 4;</code>
+     * <code>int64 op_end_rel_micros = 4;</code>
      */
     public long getOpEndRelMicros() {
       return opEndRelMicros_;
@@ -3928,7 +4024,7 @@ public final class StepStatsProtos {
     public static final int ALL_END_REL_MICROS_FIELD_NUMBER = 5;
     private long allEndRelMicros_;
     /**
-     * <code>optional int64 all_end_rel_micros = 5;</code>
+     * <code>int64 all_end_rel_micros = 5;</code>
      */
     public long getAllEndRelMicros() {
       return allEndRelMicros_;
@@ -4007,7 +4103,7 @@ public final class StepStatsProtos {
     public static final int TIMELINE_LABEL_FIELD_NUMBER = 8;
     private volatile java.lang.Object timelineLabel_;
     /**
-     * <code>optional string timeline_label = 8;</code>
+     * <code>string timeline_label = 8;</code>
      */
     public java.lang.String getTimelineLabel() {
       java.lang.Object ref = timelineLabel_;
@@ -4022,7 +4118,7 @@ public final class StepStatsProtos {
       }
     }
     /**
-     * <code>optional string timeline_label = 8;</code>
+     * <code>string timeline_label = 8;</code>
      */
     public com.google.protobuf.ByteString
         getTimelineLabelBytes() {
@@ -4041,7 +4137,7 @@ public final class StepStatsProtos {
     public static final int SCHEDULED_MICROS_FIELD_NUMBER = 9;
     private long scheduledMicros_;
     /**
-     * <code>optional int64 scheduled_micros = 9;</code>
+     * <code>int64 scheduled_micros = 9;</code>
      */
     public long getScheduledMicros() {
       return scheduledMicros_;
@@ -4050,7 +4146,7 @@ public final class StepStatsProtos {
     public static final int THREAD_ID_FIELD_NUMBER = 10;
     private int threadId_;
     /**
-     * <code>optional uint32 thread_id = 10;</code>
+     * <code>uint32 thread_id = 10;</code>
      */
     public int getThreadId() {
       return threadId_;
@@ -4094,19 +4190,19 @@ public final class StepStatsProtos {
     public static final int MEMORY_STATS_FIELD_NUMBER = 12;
     private com.tencent.angel.core.stats.StepStatsProtos.MemoryStats memoryStats_;
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     public boolean hasMemoryStats() {
       return memoryStats_ != null;
     }
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     public com.tencent.angel.core.stats.StepStatsProtos.MemoryStats getMemoryStats() {
       return memoryStats_ == null ? com.tencent.angel.core.stats.StepStatsProtos.MemoryStats.getDefaultInstance() : memoryStats_;
     }
     /**
-     * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+     * <code>.angel.MemoryStats memory_stats = 12;</code>
      */
     public com.tencent.angel.core.stats.StepStatsProtos.MemoryStatsOrBuilder getMemoryStatsOrBuilder() {
       return getMemoryStats();
@@ -4115,7 +4211,7 @@ public final class StepStatsProtos {
     public static final int ALL_START_NANOS_FIELD_NUMBER = 13;
     private long allStartNanos_;
     /**
-     * <code>optional int64 all_start_nanos = 13;</code>
+     * <code>int64 all_start_nanos = 13;</code>
      */
     public long getAllStartNanos() {
       return allStartNanos_;
@@ -4124,7 +4220,7 @@ public final class StepStatsProtos {
     public static final int OP_START_REL_NANOS_FIELD_NUMBER = 14;
     private long opStartRelNanos_;
     /**
-     * <code>optional int64 op_start_rel_nanos = 14;</code>
+     * <code>int64 op_start_rel_nanos = 14;</code>
      */
     public long getOpStartRelNanos() {
       return opStartRelNanos_;
@@ -4133,7 +4229,7 @@ public final class StepStatsProtos {
     public static final int OP_END_REL_NANOS_FIELD_NUMBER = 15;
     private long opEndRelNanos_;
     /**
-     * <code>optional int64 op_end_rel_nanos = 15;</code>
+     * <code>int64 op_end_rel_nanos = 15;</code>
      */
     public long getOpEndRelNanos() {
       return opEndRelNanos_;
@@ -4142,7 +4238,7 @@ public final class StepStatsProtos {
     public static final int ALL_END_REL_NANOS_FIELD_NUMBER = 16;
     private long allEndRelNanos_;
     /**
-     * <code>optional int64 all_end_rel_nanos = 16;</code>
+     * <code>int64 all_end_rel_nanos = 16;</code>
      */
     public long getAllEndRelNanos() {
       return allEndRelNanos_;
@@ -4151,7 +4247,7 @@ public final class StepStatsProtos {
     public static final int SCHEDULED_NANOS_FIELD_NUMBER = 17;
     private long scheduledNanos_;
     /**
-     * <code>optional int64 scheduled_nanos = 17;</code>
+     * <code>int64 scheduled_nanos = 17;</code>
      */
     public long getScheduledNanos() {
       return scheduledNanos_;
@@ -4220,6 +4316,7 @@ public final class StepStatsProtos {
       if (scheduledNanos_ != 0L) {
         output.writeInt64(17, scheduledNanos_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4293,11 +4390,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(17, scheduledNanos_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4346,6 +4443,7 @@ public final class StepStatsProtos {
           == other.getAllEndRelNanos());
       result = result && (getScheduledNanos()
           == other.getScheduledNanos());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4355,7 +4453,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NODE_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getNodeName().hashCode();
       hash = (37 * hash) + ALL_START_MICROS_FIELD_NUMBER;
@@ -4413,6 +4511,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.NodeExecStats parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.NodeExecStats parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.NodeExecStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4662,7 +4771,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4675,12 +4784,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4816,6 +4925,7 @@ public final class StepStatsProtos {
         if (other.getScheduledNanos() != 0L) {
           setScheduledNanos(other.getScheduledNanos());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4852,7 +4962,7 @@ public final class StepStatsProtos {
        * the name.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public java.lang.String getNodeName() {
         java.lang.Object ref = nodeName_;
@@ -4874,7 +4984,7 @@ public final class StepStatsProtos {
        * the name.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNodeNameBytes() {
@@ -4897,7 +5007,7 @@ public final class StepStatsProtos {
        * the name.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder setNodeName(
           java.lang.String value) {
@@ -4917,7 +5027,7 @@ public final class StepStatsProtos {
        * the name.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder clearNodeName() {
         
@@ -4933,7 +5043,7 @@ public final class StepStatsProtos {
        * the name.
        * </pre>
        *
-       * <code>optional string node_name = 1;</code>
+       * <code>string node_name = 1;</code>
        */
       public Builder setNodeNameBytes(
           com.google.protobuf.ByteString value) {
@@ -4949,13 +5059,13 @@ public final class StepStatsProtos {
 
       private long allStartMicros_ ;
       /**
-       * <code>optional int64 all_start_micros = 2;</code>
+       * <code>int64 all_start_micros = 2;</code>
        */
       public long getAllStartMicros() {
         return allStartMicros_;
       }
       /**
-       * <code>optional int64 all_start_micros = 2;</code>
+       * <code>int64 all_start_micros = 2;</code>
        */
       public Builder setAllStartMicros(long value) {
         
@@ -4964,7 +5074,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 all_start_micros = 2;</code>
+       * <code>int64 all_start_micros = 2;</code>
        */
       public Builder clearAllStartMicros() {
         
@@ -4975,13 +5085,13 @@ public final class StepStatsProtos {
 
       private long opStartRelMicros_ ;
       /**
-       * <code>optional int64 op_start_rel_micros = 3;</code>
+       * <code>int64 op_start_rel_micros = 3;</code>
        */
       public long getOpStartRelMicros() {
         return opStartRelMicros_;
       }
       /**
-       * <code>optional int64 op_start_rel_micros = 3;</code>
+       * <code>int64 op_start_rel_micros = 3;</code>
        */
       public Builder setOpStartRelMicros(long value) {
         
@@ -4990,7 +5100,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 op_start_rel_micros = 3;</code>
+       * <code>int64 op_start_rel_micros = 3;</code>
        */
       public Builder clearOpStartRelMicros() {
         
@@ -5001,13 +5111,13 @@ public final class StepStatsProtos {
 
       private long opEndRelMicros_ ;
       /**
-       * <code>optional int64 op_end_rel_micros = 4;</code>
+       * <code>int64 op_end_rel_micros = 4;</code>
        */
       public long getOpEndRelMicros() {
         return opEndRelMicros_;
       }
       /**
-       * <code>optional int64 op_end_rel_micros = 4;</code>
+       * <code>int64 op_end_rel_micros = 4;</code>
        */
       public Builder setOpEndRelMicros(long value) {
         
@@ -5016,7 +5126,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 op_end_rel_micros = 4;</code>
+       * <code>int64 op_end_rel_micros = 4;</code>
        */
       public Builder clearOpEndRelMicros() {
         
@@ -5027,13 +5137,13 @@ public final class StepStatsProtos {
 
       private long allEndRelMicros_ ;
       /**
-       * <code>optional int64 all_end_rel_micros = 5;</code>
+       * <code>int64 all_end_rel_micros = 5;</code>
        */
       public long getAllEndRelMicros() {
         return allEndRelMicros_;
       }
       /**
-       * <code>optional int64 all_end_rel_micros = 5;</code>
+       * <code>int64 all_end_rel_micros = 5;</code>
        */
       public Builder setAllEndRelMicros(long value) {
         
@@ -5042,7 +5152,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 all_end_rel_micros = 5;</code>
+       * <code>int64 all_end_rel_micros = 5;</code>
        */
       public Builder clearAllEndRelMicros() {
         
@@ -5533,7 +5643,7 @@ public final class StepStatsProtos {
 
       private java.lang.Object timelineLabel_ = "";
       /**
-       * <code>optional string timeline_label = 8;</code>
+       * <code>string timeline_label = 8;</code>
        */
       public java.lang.String getTimelineLabel() {
         java.lang.Object ref = timelineLabel_;
@@ -5548,7 +5658,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string timeline_label = 8;</code>
+       * <code>string timeline_label = 8;</code>
        */
       public com.google.protobuf.ByteString
           getTimelineLabelBytes() {
@@ -5564,7 +5674,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string timeline_label = 8;</code>
+       * <code>string timeline_label = 8;</code>
        */
       public Builder setTimelineLabel(
           java.lang.String value) {
@@ -5577,7 +5687,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string timeline_label = 8;</code>
+       * <code>string timeline_label = 8;</code>
        */
       public Builder clearTimelineLabel() {
         
@@ -5586,7 +5696,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string timeline_label = 8;</code>
+       * <code>string timeline_label = 8;</code>
        */
       public Builder setTimelineLabelBytes(
           com.google.protobuf.ByteString value) {
@@ -5602,13 +5712,13 @@ public final class StepStatsProtos {
 
       private long scheduledMicros_ ;
       /**
-       * <code>optional int64 scheduled_micros = 9;</code>
+       * <code>int64 scheduled_micros = 9;</code>
        */
       public long getScheduledMicros() {
         return scheduledMicros_;
       }
       /**
-       * <code>optional int64 scheduled_micros = 9;</code>
+       * <code>int64 scheduled_micros = 9;</code>
        */
       public Builder setScheduledMicros(long value) {
         
@@ -5617,7 +5727,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 scheduled_micros = 9;</code>
+       * <code>int64 scheduled_micros = 9;</code>
        */
       public Builder clearScheduledMicros() {
         
@@ -5628,13 +5738,13 @@ public final class StepStatsProtos {
 
       private int threadId_ ;
       /**
-       * <code>optional uint32 thread_id = 10;</code>
+       * <code>uint32 thread_id = 10;</code>
        */
       public int getThreadId() {
         return threadId_;
       }
       /**
-       * <code>optional uint32 thread_id = 10;</code>
+       * <code>uint32 thread_id = 10;</code>
        */
       public Builder setThreadId(int value) {
         
@@ -5643,7 +5753,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional uint32 thread_id = 10;</code>
+       * <code>uint32 thread_id = 10;</code>
        */
       public Builder clearThreadId() {
         
@@ -5896,13 +6006,13 @@ public final class StepStatsProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.StepStatsProtos.MemoryStats, com.tencent.angel.core.stats.StepStatsProtos.MemoryStats.Builder, com.tencent.angel.core.stats.StepStatsProtos.MemoryStatsOrBuilder> memoryStatsBuilder_;
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public boolean hasMemoryStats() {
         return memoryStatsBuilder_ != null || memoryStats_ != null;
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.MemoryStats getMemoryStats() {
         if (memoryStatsBuilder_ == null) {
@@ -5912,7 +6022,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public Builder setMemoryStats(com.tencent.angel.core.stats.StepStatsProtos.MemoryStats value) {
         if (memoryStatsBuilder_ == null) {
@@ -5928,7 +6038,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public Builder setMemoryStats(
           com.tencent.angel.core.stats.StepStatsProtos.MemoryStats.Builder builderForValue) {
@@ -5942,7 +6052,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public Builder mergeMemoryStats(com.tencent.angel.core.stats.StepStatsProtos.MemoryStats value) {
         if (memoryStatsBuilder_ == null) {
@@ -5960,7 +6070,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public Builder clearMemoryStats() {
         if (memoryStatsBuilder_ == null) {
@@ -5974,7 +6084,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.MemoryStats.Builder getMemoryStatsBuilder() {
         
@@ -5982,7 +6092,7 @@ public final class StepStatsProtos {
         return getMemoryStatsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       public com.tencent.angel.core.stats.StepStatsProtos.MemoryStatsOrBuilder getMemoryStatsOrBuilder() {
         if (memoryStatsBuilder_ != null) {
@@ -5993,7 +6103,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional .angel.MemoryStats memory_stats = 12;</code>
+       * <code>.angel.MemoryStats memory_stats = 12;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.stats.StepStatsProtos.MemoryStats, com.tencent.angel.core.stats.StepStatsProtos.MemoryStats.Builder, com.tencent.angel.core.stats.StepStatsProtos.MemoryStatsOrBuilder> 
@@ -6011,13 +6121,13 @@ public final class StepStatsProtos {
 
       private long allStartNanos_ ;
       /**
-       * <code>optional int64 all_start_nanos = 13;</code>
+       * <code>int64 all_start_nanos = 13;</code>
        */
       public long getAllStartNanos() {
         return allStartNanos_;
       }
       /**
-       * <code>optional int64 all_start_nanos = 13;</code>
+       * <code>int64 all_start_nanos = 13;</code>
        */
       public Builder setAllStartNanos(long value) {
         
@@ -6026,7 +6136,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 all_start_nanos = 13;</code>
+       * <code>int64 all_start_nanos = 13;</code>
        */
       public Builder clearAllStartNanos() {
         
@@ -6037,13 +6147,13 @@ public final class StepStatsProtos {
 
       private long opStartRelNanos_ ;
       /**
-       * <code>optional int64 op_start_rel_nanos = 14;</code>
+       * <code>int64 op_start_rel_nanos = 14;</code>
        */
       public long getOpStartRelNanos() {
         return opStartRelNanos_;
       }
       /**
-       * <code>optional int64 op_start_rel_nanos = 14;</code>
+       * <code>int64 op_start_rel_nanos = 14;</code>
        */
       public Builder setOpStartRelNanos(long value) {
         
@@ -6052,7 +6162,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 op_start_rel_nanos = 14;</code>
+       * <code>int64 op_start_rel_nanos = 14;</code>
        */
       public Builder clearOpStartRelNanos() {
         
@@ -6063,13 +6173,13 @@ public final class StepStatsProtos {
 
       private long opEndRelNanos_ ;
       /**
-       * <code>optional int64 op_end_rel_nanos = 15;</code>
+       * <code>int64 op_end_rel_nanos = 15;</code>
        */
       public long getOpEndRelNanos() {
         return opEndRelNanos_;
       }
       /**
-       * <code>optional int64 op_end_rel_nanos = 15;</code>
+       * <code>int64 op_end_rel_nanos = 15;</code>
        */
       public Builder setOpEndRelNanos(long value) {
         
@@ -6078,7 +6188,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 op_end_rel_nanos = 15;</code>
+       * <code>int64 op_end_rel_nanos = 15;</code>
        */
       public Builder clearOpEndRelNanos() {
         
@@ -6089,13 +6199,13 @@ public final class StepStatsProtos {
 
       private long allEndRelNanos_ ;
       /**
-       * <code>optional int64 all_end_rel_nanos = 16;</code>
+       * <code>int64 all_end_rel_nanos = 16;</code>
        */
       public long getAllEndRelNanos() {
         return allEndRelNanos_;
       }
       /**
-       * <code>optional int64 all_end_rel_nanos = 16;</code>
+       * <code>int64 all_end_rel_nanos = 16;</code>
        */
       public Builder setAllEndRelNanos(long value) {
         
@@ -6104,7 +6214,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 all_end_rel_nanos = 16;</code>
+       * <code>int64 all_end_rel_nanos = 16;</code>
        */
       public Builder clearAllEndRelNanos() {
         
@@ -6115,13 +6225,13 @@ public final class StepStatsProtos {
 
       private long scheduledNanos_ ;
       /**
-       * <code>optional int64 scheduled_nanos = 17;</code>
+       * <code>int64 scheduled_nanos = 17;</code>
        */
       public long getScheduledNanos() {
         return scheduledNanos_;
       }
       /**
-       * <code>optional int64 scheduled_nanos = 17;</code>
+       * <code>int64 scheduled_nanos = 17;</code>
        */
       public Builder setScheduledNanos(long value) {
         
@@ -6130,7 +6240,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional int64 scheduled_nanos = 17;</code>
+       * <code>int64 scheduled_nanos = 17;</code>
        */
       public Builder clearScheduledNanos() {
         
@@ -6140,12 +6250,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6168,7 +6278,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NodeExecStats(input, extensionRegistry);
+        return new NodeExecStats(input, extensionRegistry);
       }
     };
 
@@ -6192,11 +6302,11 @@ public final class StepStatsProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     java.lang.String getDevice();
     /**
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     com.google.protobuf.ByteString
         getDeviceBytes();
@@ -6232,6 +6342,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.DeviceStepStats)
       DeviceStepStatsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DeviceStepStats.newBuilder() to construct.
     private DeviceStepStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6244,14 +6355,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private DeviceStepStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6261,7 +6377,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -6292,6 +6409,7 @@ public final class StepStatsProtos {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           nodeStats_ = java.util.Collections.unmodifiableList(nodeStats_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6311,7 +6429,7 @@ public final class StepStatsProtos {
     public static final int DEVICE_FIELD_NUMBER = 1;
     private volatile java.lang.Object device_;
     /**
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public java.lang.String getDevice() {
       java.lang.Object ref = device_;
@@ -6326,7 +6444,7 @@ public final class StepStatsProtos {
       }
     }
     /**
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public com.google.protobuf.ByteString
         getDeviceBytes() {
@@ -6395,6 +6513,7 @@ public final class StepStatsProtos {
       for (int i = 0; i < nodeStats_.size(); i++) {
         output.writeMessage(2, nodeStats_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -6409,11 +6528,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, nodeStats_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6429,6 +6548,7 @@ public final class StepStatsProtos {
           .equals(other.getDevice());
       result = result && getNodeStatsList()
           .equals(other.getNodeStatsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6438,7 +6558,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DEVICE_FIELD_NUMBER;
       hash = (53 * hash) + getDevice().hashCode();
       if (getNodeStatsCount() > 0) {
@@ -6450,6 +6570,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.DeviceStepStats parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.DeviceStepStats parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.DeviceStepStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6616,7 +6747,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -6629,12 +6760,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6678,6 +6809,7 @@ public final class StepStatsProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -6707,7 +6839,7 @@ public final class StepStatsProtos {
 
       private java.lang.Object device_ = "";
       /**
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public java.lang.String getDevice() {
         java.lang.Object ref = device_;
@@ -6722,7 +6854,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public com.google.protobuf.ByteString
           getDeviceBytes() {
@@ -6738,7 +6870,7 @@ public final class StepStatsProtos {
         }
       }
       /**
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDevice(
           java.lang.String value) {
@@ -6751,7 +6883,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder clearDevice() {
         
@@ -6760,7 +6892,7 @@ public final class StepStatsProtos {
         return this;
       }
       /**
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDeviceBytes(
           com.google.protobuf.ByteString value) {
@@ -7015,12 +7147,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7043,7 +7175,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DeviceStepStats(input, extensionRegistry);
+        return new DeviceStepStats(input, extensionRegistry);
       }
     };
 
@@ -7097,6 +7229,7 @@ public final class StepStatsProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.StepStats)
       StepStatsOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use StepStats.newBuilder() to construct.
     private StepStats(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -7108,14 +7241,19 @@ public final class StepStatsProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private StepStats(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -7125,7 +7263,8 @@ public final class StepStatsProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -7150,6 +7289,7 @@ public final class StepStatsProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           devStats_ = java.util.Collections.unmodifiableList(devStats_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -7215,6 +7355,7 @@ public final class StepStatsProtos {
       for (int i = 0; i < devStats_.size(); i++) {
         output.writeMessage(1, devStats_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -7226,11 +7367,11 @@ public final class StepStatsProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, devStats_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -7244,6 +7385,7 @@ public final class StepStatsProtos {
       boolean result = true;
       result = result && getDevStatsList()
           .equals(other.getDevStatsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -7253,7 +7395,7 @@ public final class StepStatsProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getDevStatsCount() > 0) {
         hash = (37 * hash) + DEV_STATS_FIELD_NUMBER;
         hash = (53 * hash) + getDevStatsList().hashCode();
@@ -7263,6 +7405,17 @@ public final class StepStatsProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.StepStatsProtos.StepStats parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.StepStatsProtos.StepStats parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.StepStatsProtos.StepStats parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7424,7 +7577,7 @@ public final class StepStatsProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -7437,12 +7590,12 @@ public final class StepStatsProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7482,6 +7635,7 @@ public final class StepStatsProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -7750,12 +7904,12 @@ public final class StepStatsProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7778,7 +7932,7 @@ public final class StepStatsProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StepStats(input, extensionRegistry);
+        return new StepStats(input, extensionRegistry);
       }
     };
 
@@ -7850,7 +8004,7 @@ public final class StepStatsProtos {
       "\030\002 \001(\003\022\022\n\npeak_bytes\030\003 \001(\003\022\022\n\nlive_bytes" +
       "\030\004 \001(\003\0223\n\022allocation_records\030\006 \003(\0132\027.ang" +
       "el.AllocationRecord\022\036\n\026allocator_bytes_i" +
-      "n_use\030\005 \001(\003\"P\n\nNodeOutput\022\014\n\004slot\030\001 \001(\005\022",
+      "n_use\030\005 \001(\003\"P\n\nNodeOutput\022\014\n\004slot\030\001 \001(\005\022" +
       "4\n\022tensor_description\030\003 \001(\0132\030.angel.Tens" +
       "orDescription\"\354\001\n\013MemoryStats\022\030\n\020temp_me" +
       "mory_size\030\001 \001(\003\022\036\n\026persistent_memory_siz" +
@@ -7860,7 +8014,7 @@ public final class StepStatsProtos {
       "B\002\030\001\022.\n\"device_persistent_tensor_alloc_i" +
       "ds\030\006 \003(\003B\002\030\001\"\212\004\n\rNodeExecStats\022\021\n\tnode_n" +
       "ame\030\001 \001(\t\022\030\n\020all_start_micros\030\002 \001(\003\022\033\n\023o" +
-      "p_start_rel_micros\030\003 \001(\003\022\031\n\021op_end_rel_m",
+      "p_start_rel_micros\030\003 \001(\003\022\031\n\021op_end_rel_m" +
       "icros\030\004 \001(\003\022\032\n\022all_end_rel_micros\030\005 \001(\003\022" +
       "*\n\006memory\030\006 \003(\0132\032.angel.AllocatorMemoryU" +
       "sed\022!\n\006output\030\007 \003(\0132\021.angel.NodeOutput\022\026" +
@@ -7870,7 +8024,7 @@ public final class StepStatsProtos {
       "tion\022(\n\014memory_stats\030\014 \001(\0132\022.angel.Memor" +
       "yStats\022\027\n\017all_start_nanos\030\r \001(\003\022\032\n\022op_st" +
       "art_rel_nanos\030\016 \001(\003\022\030\n\020op_end_rel_nanos\030" +
-      "\017 \001(\003\022\031\n\021all_end_rel_nanos\030\020 \001(\003\022\027\n\017sche",
+      "\017 \001(\003\022\031\n\021all_end_rel_nanos\030\020 \001(\003\022\027\n\017sche" +
       "duled_nanos\030\021 \001(\003\"K\n\017DeviceStepStats\022\016\n\006" +
       "device\030\001 \001(\t\022(\n\nnode_stats\030\002 \003(\0132\024.angel" +
       ".NodeExecStats\"6\n\tStepStats\022)\n\tdev_stats" +

@@ -3,6 +3,7 @@ package com.tencent.angel.serving.servables.angel
 import java.util
 import java.io.File
 
+import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.graph.TensorProtos
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.ml.core.PredictResult
@@ -18,15 +19,19 @@ import com.tencent.angel.serving.apis.prediction.RegressionProtos.RegressionResp
 import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.servables.common.SavedModelBundle
 import org.slf4j.{Logger, LoggerFactory}
-
 import com.tencent.angel.utils.ProtoUtils
 import com.tencent.angel.serving.servables.Utils.predictResult2TensorProto
+import org.ehcache.sizeof.SizeOf
 
 class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   private val LOG = LoggerFactory.getLogger(classOf[AngelSavedModelBundle])
 
   override val session: Session = null
   override val metaGraphDef: MetaGraphDef = null
+
+  override def unLoad(): Unit = {
+    AngelSavedModelBundle.unLoad()
+  }
 
   override def runClassify(runOptions: RunOptions, request: ClassificationProtos.ClassificationRequest, responseBuilder: ClassificationResponse.Builder): Unit = ???
 
@@ -57,8 +62,9 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
 
 object AngelSavedModelBundle {
   private val LOG: Logger = LoggerFactory.getLogger(getClass)
+  private var model: LocalModel = _
 
-  def apply(path: StoragePath): SavedModelBundle = {
+  def create(path: StoragePath): SavedModelBundle = {
     // load
     val graphJsonFile = s"$path${File.separator}graph.json"
     LOG.info(s"the graph file is $graphJsonFile")
@@ -86,5 +92,33 @@ object AngelSavedModelBundle {
     LOG.info(s"model has loaded!")
 
     new AngelSavedModelBundle(model)
+  }
+
+  def resourceEstimate(modelPath: String): ResourceAllocation = {
+    if (modelPath != null) {
+      val modelFile = new File(modelPath)
+      if (modelFile.exists()) {
+        val fileSize = (modelFile.getTotalSpace * 1.2).toLong
+        ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), fileSize)))
+      } else {
+        ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
+      }
+    } else {
+      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
+    }
+  }
+
+  def estimateResourceRequirement(modelPath: String): ResourceAllocation = {
+    if (model != null) {
+      val sizeOf =  SizeOf.newInstance()
+      val size = sizeOf.deepSizeOf(model)
+      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), size)))
+    } else {
+      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
+    }
+  }
+
+  def unLoad(): Unit = {
+    model = null
   }
 }

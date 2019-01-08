@@ -24,7 +24,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -33,7 +33,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -42,7 +42,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
 
@@ -177,7 +177,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     boolean hasOptions();
     /**
@@ -185,7 +185,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunOptions getOptions();
     /**
@@ -193,7 +193,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunOptionsOrBuilder getOptionsOrBuilder();
   }
@@ -204,6 +204,7 @@ public final class SessionServiceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.SessionRunRequest)
       SessionRunRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SessionRunRequest.newBuilder() to construct.
     private SessionRunRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -217,14 +218,19 @@ public final class SessionServiceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SessionRunRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -234,7 +240,8 @@ public final class SessionServiceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -309,6 +316,7 @@ public final class SessionServiceProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           target_ = target_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -333,7 +341,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -344,7 +352,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -355,7 +363,7 @@ public final class SessionServiceProtos {
      * (numerical) version.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -525,7 +533,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     public boolean hasOptions() {
       return options_ != null;
@@ -535,7 +543,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunOptions getOptions() {
       return options_ == null ? com.tencent.angel.config.ConfigProtos.RunOptions.getDefaultInstance() : options_;
@@ -545,7 +553,7 @@ public final class SessionServiceProtos {
      * Options for the run call. **Currently ignored.**
      * </pre>
      *
-     * <code>optional .angel.RunOptions options = 5;</code>
+     * <code>.angel.RunOptions options = 5;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunOptionsOrBuilder getOptionsOrBuilder() {
       return getOptions();
@@ -578,6 +586,7 @@ public final class SessionServiceProtos {
       if (options_ != null) {
         output.writeMessage(5, getOptions());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -613,11 +622,11 @@ public final class SessionServiceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, getOptions());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -645,6 +654,7 @@ public final class SessionServiceProtos {
         result = result && getOptions()
             .equals(other.getOptions());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -654,7 +664,7 @@ public final class SessionServiceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -680,6 +690,17 @@ public final class SessionServiceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -879,7 +900,7 @@ public final class SessionServiceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -892,12 +913,12 @@ public final class SessionServiceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -963,6 +984,7 @@ public final class SessionServiceProtos {
         if (other.hasOptions()) {
           mergeOptions(other.getOptions());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -999,7 +1021,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -1010,7 +1032,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1025,7 +1047,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1046,7 +1068,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -1065,7 +1087,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -1088,7 +1110,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -1107,7 +1129,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -1120,7 +1142,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -1136,7 +1158,7 @@ public final class SessionServiceProtos {
        * (numerical) version.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -1759,7 +1781,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public boolean hasOptions() {
         return optionsBuilder_ != null || options_ != null;
@@ -1769,7 +1791,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions getOptions() {
         if (optionsBuilder_ == null) {
@@ -1783,7 +1805,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public Builder setOptions(com.tencent.angel.config.ConfigProtos.RunOptions value) {
         if (optionsBuilder_ == null) {
@@ -1803,7 +1825,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public Builder setOptions(
           com.tencent.angel.config.ConfigProtos.RunOptions.Builder builderForValue) {
@@ -1821,7 +1843,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public Builder mergeOptions(com.tencent.angel.config.ConfigProtos.RunOptions value) {
         if (optionsBuilder_ == null) {
@@ -1843,7 +1865,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public Builder clearOptions() {
         if (optionsBuilder_ == null) {
@@ -1861,7 +1883,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptions.Builder getOptionsBuilder() {
         
@@ -1873,7 +1895,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunOptionsOrBuilder getOptionsOrBuilder() {
         if (optionsBuilder_ != null) {
@@ -1888,7 +1910,7 @@ public final class SessionServiceProtos {
        * Options for the run call. **Currently ignored.**
        * </pre>
        *
-       * <code>optional .angel.RunOptions options = 5;</code>
+       * <code>.angel.RunOptions options = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ConfigProtos.RunOptions, com.tencent.angel.config.ConfigProtos.RunOptions.Builder, com.tencent.angel.config.ConfigProtos.RunOptionsOrBuilder> 
@@ -1905,12 +1927,12 @@ public final class SessionServiceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1933,7 +1955,7 @@ public final class SessionServiceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SessionRunRequest(input, extensionRegistry);
+        return new SessionRunRequest(input, extensionRegistry);
       }
     };
 
@@ -2010,7 +2032,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     boolean hasMetadata();
     /**
@@ -2018,7 +2040,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunMetadata getMetadata();
     /**
@@ -2026,7 +2048,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     com.tencent.angel.config.ConfigProtos.RunMetadataOrBuilder getMetadataOrBuilder();
   }
@@ -2037,6 +2059,7 @@ public final class SessionServiceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.SessionRunResponse)
       SessionRunResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SessionRunResponse.newBuilder() to construct.
     private SessionRunResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2048,14 +2071,19 @@ public final class SessionServiceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SessionRunResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2065,7 +2093,8 @@ public final class SessionServiceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2103,6 +2132,7 @@ public final class SessionServiceProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           tensor_ = java.util.Collections.unmodifiableList(tensor_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2186,7 +2216,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     public boolean hasMetadata() {
       return metadata_ != null;
@@ -2196,7 +2226,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunMetadata getMetadata() {
       return metadata_ == null ? com.tencent.angel.config.ConfigProtos.RunMetadata.getDefaultInstance() : metadata_;
@@ -2206,7 +2236,7 @@ public final class SessionServiceProtos {
      * Returned metadata if requested in the options.
      * </pre>
      *
-     * <code>optional .angel.RunMetadata metadata = 2;</code>
+     * <code>.angel.RunMetadata metadata = 2;</code>
      */
     public com.tencent.angel.config.ConfigProtos.RunMetadataOrBuilder getMetadataOrBuilder() {
       return getMetadata();
@@ -2230,6 +2260,7 @@ public final class SessionServiceProtos {
       if (metadata_ != null) {
         output.writeMessage(2, getMetadata());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2245,11 +2276,11 @@ public final class SessionServiceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getMetadata());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2268,6 +2299,7 @@ public final class SessionServiceProtos {
         result = result && getMetadata()
             .equals(other.getMetadata());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2277,7 +2309,7 @@ public final class SessionServiceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getTensorCount() > 0) {
         hash = (37 * hash) + TENSOR_FIELD_NUMBER;
         hash = (53 * hash) + getTensorList().hashCode();
@@ -2291,6 +2323,17 @@ public final class SessionServiceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.session.SessionServiceProtos.SessionRunResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2465,7 +2508,7 @@ public final class SessionServiceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2478,12 +2521,12 @@ public final class SessionServiceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2526,6 +2569,7 @@ public final class SessionServiceProtos {
         if (other.hasMetadata()) {
           mergeMetadata(other.getMetadata());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2891,7 +2935,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public boolean hasMetadata() {
         return metadataBuilder_ != null || metadata_ != null;
@@ -2901,7 +2945,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunMetadata getMetadata() {
         if (metadataBuilder_ == null) {
@@ -2915,7 +2959,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public Builder setMetadata(com.tencent.angel.config.ConfigProtos.RunMetadata value) {
         if (metadataBuilder_ == null) {
@@ -2935,7 +2979,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public Builder setMetadata(
           com.tencent.angel.config.ConfigProtos.RunMetadata.Builder builderForValue) {
@@ -2953,7 +2997,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public Builder mergeMetadata(com.tencent.angel.config.ConfigProtos.RunMetadata value) {
         if (metadataBuilder_ == null) {
@@ -2975,7 +3019,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public Builder clearMetadata() {
         if (metadataBuilder_ == null) {
@@ -2993,7 +3037,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunMetadata.Builder getMetadataBuilder() {
         
@@ -3005,7 +3049,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       public com.tencent.angel.config.ConfigProtos.RunMetadataOrBuilder getMetadataOrBuilder() {
         if (metadataBuilder_ != null) {
@@ -3020,7 +3064,7 @@ public final class SessionServiceProtos {
        * Returned metadata if requested in the options.
        * </pre>
        *
-       * <code>optional .angel.RunMetadata metadata = 2;</code>
+       * <code>.angel.RunMetadata metadata = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ConfigProtos.RunMetadata, com.tencent.angel.config.ConfigProtos.RunMetadata.Builder, com.tencent.angel.config.ConfigProtos.RunMetadataOrBuilder> 
@@ -3037,12 +3081,12 @@ public final class SessionServiceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3065,7 +3109,7 @@ public final class SessionServiceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SessionRunResponse(input, extensionRegistry);
+        return new SessionRunResponse(input, extensionRegistry);
       }
     };
 
@@ -3112,7 +3156,7 @@ public final class SessionServiceProtos {
       "\030\003 \003(\t\022\016\n\006target\030\004 \003(\t\022\"\n\007options\030\005 \001(\0132" +
       "\021.angel.RunOptions\"c\n\022SessionRunResponse" +
       "\022\'\n\006tensor\030\001 \003(\0132\027.angel.NamedTensorProt" +
-      "o\022$\n\010metadata\030\002 \001(\0132\022.angel.RunMetadata2",
+      "o\022$\n\010metadata\030\002 \001(\0132\022.angel.RunMetadata2" +
       "c\n\016SessionService\022Q\n\nSessionRun\022 .angel." +
       "serving.SessionRunRequest\032!.angel.servin" +
       "g.SessionRunResponseB@\n&com.tencent.ange" +

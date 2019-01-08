@@ -1,19 +1,19 @@
 package com.tencent.angel.serving.apis.modelmgr;
 
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
@@ -22,33 +22,78 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.0.1)",
+    value = "by gRPC proto compiler (version 1.17.1)",
     comments = "Source: apis/modelmgr/model_service.proto")
-public class ModelServiceGrpc {
+public final class ModelServiceGrpc {
 
   private ModelServiceGrpc() {}
 
   public static final String SERVICE_NAME = "angel.serving.ModelService";
 
   // Static method descriptors that strictly reflect the proto.
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest,
-      com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> METHOD_GET_MODEL_STATUS =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.ModelService", "GetModelStatus"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse.getDefaultInstance()));
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest,
-      com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> METHOD_HANDLE_RELOAD_CONFIG_REQUEST =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "angel.serving.ModelService", "HandleReloadConfigRequest"),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse.getDefaultInstance()));
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest,
+      com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> getGetModelStatusMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetModelStatus",
+      requestType = com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest.class,
+      responseType = com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest,
+      com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> getGetModelStatusMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> getGetModelStatusMethod;
+    if ((getGetModelStatusMethod = ModelServiceGrpc.getGetModelStatusMethod) == null) {
+      synchronized (ModelServiceGrpc.class) {
+        if ((getGetModelStatusMethod = ModelServiceGrpc.getGetModelStatusMethod) == null) {
+          ModelServiceGrpc.getGetModelStatusMethod = getGetModelStatusMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.ModelService", "GetModelStatus"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new ModelServiceMethodDescriptorSupplier("GetModelStatus"))
+                  .build();
+          }
+        }
+     }
+     return getGetModelStatusMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest,
+      com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> getHandleReloadConfigRequestMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "HandleReloadConfigRequest",
+      requestType = com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest.class,
+      responseType = com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest,
+      com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> getHandleReloadConfigRequestMethod() {
+    io.grpc.MethodDescriptor<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest, com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> getHandleReloadConfigRequestMethod;
+    if ((getHandleReloadConfigRequestMethod = ModelServiceGrpc.getHandleReloadConfigRequestMethod) == null) {
+      synchronized (ModelServiceGrpc.class) {
+        if ((getHandleReloadConfigRequestMethod = ModelServiceGrpc.getHandleReloadConfigRequestMethod) == null) {
+          ModelServiceGrpc.getHandleReloadConfigRequestMethod = getHandleReloadConfigRequestMethod = 
+              io.grpc.MethodDescriptor.<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest, com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "angel.serving.ModelService", "HandleReloadConfigRequest"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new ModelServiceMethodDescriptorSupplier("HandleReloadConfigRequest"))
+                  .build();
+          }
+        }
+     }
+     return getHandleReloadConfigRequestMethod;
+  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -66,7 +111,7 @@ public class ModelServiceGrpc {
   }
 
   /**
-   * Creates a new ListenableFuture-style stub that supports unary and streaming output calls on the service
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
   public static ModelServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
@@ -91,7 +136,7 @@ public class ModelServiceGrpc {
      */
     public void getModelStatus(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_GET_MODEL_STATUS, responseObserver);
+      asyncUnimplementedUnaryCall(getGetModelStatusMethod(), responseObserver);
     }
 
     /**
@@ -103,20 +148,20 @@ public class ModelServiceGrpc {
      */
     public void handleReloadConfigRequest(com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(METHOD_HANDLE_RELOAD_CONFIG_REQUEST, responseObserver);
+      asyncUnimplementedUnaryCall(getHandleReloadConfigRequestMethod(), responseObserver);
     }
 
-    @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            METHOD_GET_MODEL_STATUS,
+            getGetModelStatusMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest,
                 com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse>(
                   this, METHODID_GET_MODEL_STATUS)))
           .addMethod(
-            METHOD_HANDLE_RELOAD_CONFIG_REQUEST,
+            getHandleReloadConfigRequestMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest,
@@ -159,7 +204,7 @@ public class ModelServiceGrpc {
     public void getModelStatus(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_MODEL_STATUS, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetModelStatusMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -172,7 +217,7 @@ public class ModelServiceGrpc {
     public void handleReloadConfigRequest(com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest request,
         io.grpc.stub.StreamObserver<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(METHOD_HANDLE_RELOAD_CONFIG_REQUEST, getCallOptions()), request, responseObserver);
+          getChannel().newCall(getHandleReloadConfigRequestMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -208,7 +253,7 @@ public class ModelServiceGrpc {
      */
     public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse getModelStatus(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_GET_MODEL_STATUS, getCallOptions(), request);
+          getChannel(), getGetModelStatusMethod(), getCallOptions(), request);
     }
 
     /**
@@ -220,7 +265,7 @@ public class ModelServiceGrpc {
      */
     public com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse handleReloadConfigRequest(com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest request) {
       return blockingUnaryCall(
-          getChannel(), METHOD_HANDLE_RELOAD_CONFIG_REQUEST, getCallOptions(), request);
+          getChannel(), getHandleReloadConfigRequestMethod(), getCallOptions(), request);
     }
   }
 
@@ -257,7 +302,7 @@ public class ModelServiceGrpc {
     public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse> getModelStatus(
         com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_MODEL_STATUS, getCallOptions()), request);
+          getChannel().newCall(getGetModelStatusMethod(), getCallOptions()), request);
     }
 
     /**
@@ -270,14 +315,14 @@ public class ModelServiceGrpc {
     public com.google.common.util.concurrent.ListenableFuture<com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigResponse> handleReloadConfigRequest(
         com.tencent.angel.serving.apis.modelmgr.ModelManagement.ReloadConfigRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(METHOD_HANDLE_RELOAD_CONFIG_REQUEST, getCallOptions()), request);
+          getChannel().newCall(getHandleReloadConfigRequestMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GET_MODEL_STATUS = 0;
   private static final int METHODID_HANDLE_RELOAD_CONFIG_REQUEST = 1;
 
-  private static class MethodHandlers<Req, Resp> implements
+  private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
@@ -285,7 +330,7 @@ public class ModelServiceGrpc {
     private final ModelServiceImplBase serviceImpl;
     private final int methodId;
 
-    public MethodHandlers(ModelServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(ModelServiceImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -318,10 +363,57 @@ public class ModelServiceGrpc {
     }
   }
 
-  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
-    return new io.grpc.ServiceDescriptor(SERVICE_NAME,
-        METHOD_GET_MODEL_STATUS,
-        METHOD_HANDLE_RELOAD_CONFIG_REQUEST);
+  private static abstract class ModelServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    ModelServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return com.tencent.angel.serving.apis.modelmgr.ModelServiceProtos.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("ModelService");
+    }
   }
 
+  private static final class ModelServiceFileDescriptorSupplier
+      extends ModelServiceBaseDescriptorSupplier {
+    ModelServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class ModelServiceMethodDescriptorSupplier
+      extends ModelServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    ModelServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (ModelServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new ModelServiceFileDescriptorSupplier())
+              .addMethod(getGetModelStatusMethod())
+              .addMethod(getHandleReloadConfigRequestMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
 }

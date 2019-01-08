@@ -23,7 +23,7 @@ public final class AllocationDescriptionProtos {
      * Total number of bytes requested
      * </pre>
      *
-     * <code>optional int64 requested_bytes = 1;</code>
+     * <code>int64 requested_bytes = 1;</code>
      */
     long getRequestedBytes();
 
@@ -32,7 +32,7 @@ public final class AllocationDescriptionProtos {
      * Total number of bytes allocated if known
      * </pre>
      *
-     * <code>optional int64 allocated_bytes = 2;</code>
+     * <code>int64 allocated_bytes = 2;</code>
      */
     long getAllocatedBytes();
 
@@ -41,7 +41,7 @@ public final class AllocationDescriptionProtos {
      * Name of the allocator used
      * </pre>
      *
-     * <code>optional string allocator_name = 3;</code>
+     * <code>string allocator_name = 3;</code>
      */
     java.lang.String getAllocatorName();
     /**
@@ -49,7 +49,7 @@ public final class AllocationDescriptionProtos {
      * Name of the allocator used
      * </pre>
      *
-     * <code>optional string allocator_name = 3;</code>
+     * <code>string allocator_name = 3;</code>
      */
     com.google.protobuf.ByteString
         getAllocatorNameBytes();
@@ -59,7 +59,7 @@ public final class AllocationDescriptionProtos {
      * Identifier of the allocated buffer if known
      * </pre>
      *
-     * <code>optional int64 allocation_id = 4;</code>
+     * <code>int64 allocation_id = 4;</code>
      */
     long getAllocationId();
 
@@ -68,7 +68,7 @@ public final class AllocationDescriptionProtos {
      * Set if this tensor only has one remaining reference
      * </pre>
      *
-     * <code>optional bool has_single_reference = 5;</code>
+     * <code>bool has_single_reference = 5;</code>
      */
     boolean getHasSingleReference();
 
@@ -77,7 +77,7 @@ public final class AllocationDescriptionProtos {
      * Address of the allocation.
      * </pre>
      *
-     * <code>optional uint64 ptr = 6;</code>
+     * <code>uint64 ptr = 6;</code>
      */
     long getPtr();
   }
@@ -88,6 +88,7 @@ public final class AllocationDescriptionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.AllocationDescription)
       AllocationDescriptionOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AllocationDescription.newBuilder() to construct.
     private AllocationDescription(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -104,14 +105,19 @@ public final class AllocationDescriptionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AllocationDescription(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -121,7 +127,8 @@ public final class AllocationDescriptionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -165,6 +172,7 @@ public final class AllocationDescriptionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -187,7 +195,7 @@ public final class AllocationDescriptionProtos {
      * Total number of bytes requested
      * </pre>
      *
-     * <code>optional int64 requested_bytes = 1;</code>
+     * <code>int64 requested_bytes = 1;</code>
      */
     public long getRequestedBytes() {
       return requestedBytes_;
@@ -200,7 +208,7 @@ public final class AllocationDescriptionProtos {
      * Total number of bytes allocated if known
      * </pre>
      *
-     * <code>optional int64 allocated_bytes = 2;</code>
+     * <code>int64 allocated_bytes = 2;</code>
      */
     public long getAllocatedBytes() {
       return allocatedBytes_;
@@ -213,7 +221,7 @@ public final class AllocationDescriptionProtos {
      * Name of the allocator used
      * </pre>
      *
-     * <code>optional string allocator_name = 3;</code>
+     * <code>string allocator_name = 3;</code>
      */
     public java.lang.String getAllocatorName() {
       java.lang.Object ref = allocatorName_;
@@ -232,7 +240,7 @@ public final class AllocationDescriptionProtos {
      * Name of the allocator used
      * </pre>
      *
-     * <code>optional string allocator_name = 3;</code>
+     * <code>string allocator_name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getAllocatorNameBytes() {
@@ -255,7 +263,7 @@ public final class AllocationDescriptionProtos {
      * Identifier of the allocated buffer if known
      * </pre>
      *
-     * <code>optional int64 allocation_id = 4;</code>
+     * <code>int64 allocation_id = 4;</code>
      */
     public long getAllocationId() {
       return allocationId_;
@@ -268,7 +276,7 @@ public final class AllocationDescriptionProtos {
      * Set if this tensor only has one remaining reference
      * </pre>
      *
-     * <code>optional bool has_single_reference = 5;</code>
+     * <code>bool has_single_reference = 5;</code>
      */
     public boolean getHasSingleReference() {
       return hasSingleReference_;
@@ -281,7 +289,7 @@ public final class AllocationDescriptionProtos {
      * Address of the allocation.
      * </pre>
      *
-     * <code>optional uint64 ptr = 6;</code>
+     * <code>uint64 ptr = 6;</code>
      */
     public long getPtr() {
       return ptr_;
@@ -317,6 +325,7 @@ public final class AllocationDescriptionProtos {
       if (ptr_ != 0L) {
         output.writeUInt64(6, ptr_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -347,11 +356,11 @@ public final class AllocationDescriptionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(6, ptr_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -375,6 +384,7 @@ public final class AllocationDescriptionProtos {
           == other.getHasSingleReference());
       result = result && (getPtr()
           == other.getPtr());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -384,7 +394,7 @@ public final class AllocationDescriptionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + REQUESTED_BYTES_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getRequestedBytes());
@@ -407,6 +417,17 @@ public final class AllocationDescriptionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.stats.AllocationDescriptionProtos.AllocationDescription parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -569,7 +590,7 @@ public final class AllocationDescriptionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -582,12 +603,12 @@ public final class AllocationDescriptionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -620,6 +641,7 @@ public final class AllocationDescriptionProtos {
         if (other.getPtr() != 0L) {
           setPtr(other.getPtr());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -652,7 +674,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes requested
        * </pre>
        *
-       * <code>optional int64 requested_bytes = 1;</code>
+       * <code>int64 requested_bytes = 1;</code>
        */
       public long getRequestedBytes() {
         return requestedBytes_;
@@ -662,7 +684,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes requested
        * </pre>
        *
-       * <code>optional int64 requested_bytes = 1;</code>
+       * <code>int64 requested_bytes = 1;</code>
        */
       public Builder setRequestedBytes(long value) {
         
@@ -675,7 +697,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes requested
        * </pre>
        *
-       * <code>optional int64 requested_bytes = 1;</code>
+       * <code>int64 requested_bytes = 1;</code>
        */
       public Builder clearRequestedBytes() {
         
@@ -690,7 +712,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes allocated if known
        * </pre>
        *
-       * <code>optional int64 allocated_bytes = 2;</code>
+       * <code>int64 allocated_bytes = 2;</code>
        */
       public long getAllocatedBytes() {
         return allocatedBytes_;
@@ -700,7 +722,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes allocated if known
        * </pre>
        *
-       * <code>optional int64 allocated_bytes = 2;</code>
+       * <code>int64 allocated_bytes = 2;</code>
        */
       public Builder setAllocatedBytes(long value) {
         
@@ -713,7 +735,7 @@ public final class AllocationDescriptionProtos {
        * Total number of bytes allocated if known
        * </pre>
        *
-       * <code>optional int64 allocated_bytes = 2;</code>
+       * <code>int64 allocated_bytes = 2;</code>
        */
       public Builder clearAllocatedBytes() {
         
@@ -728,7 +750,7 @@ public final class AllocationDescriptionProtos {
        * Name of the allocator used
        * </pre>
        *
-       * <code>optional string allocator_name = 3;</code>
+       * <code>string allocator_name = 3;</code>
        */
       public java.lang.String getAllocatorName() {
         java.lang.Object ref = allocatorName_;
@@ -747,7 +769,7 @@ public final class AllocationDescriptionProtos {
        * Name of the allocator used
        * </pre>
        *
-       * <code>optional string allocator_name = 3;</code>
+       * <code>string allocator_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getAllocatorNameBytes() {
@@ -767,7 +789,7 @@ public final class AllocationDescriptionProtos {
        * Name of the allocator used
        * </pre>
        *
-       * <code>optional string allocator_name = 3;</code>
+       * <code>string allocator_name = 3;</code>
        */
       public Builder setAllocatorName(
           java.lang.String value) {
@@ -784,7 +806,7 @@ public final class AllocationDescriptionProtos {
        * Name of the allocator used
        * </pre>
        *
-       * <code>optional string allocator_name = 3;</code>
+       * <code>string allocator_name = 3;</code>
        */
       public Builder clearAllocatorName() {
         
@@ -797,7 +819,7 @@ public final class AllocationDescriptionProtos {
        * Name of the allocator used
        * </pre>
        *
-       * <code>optional string allocator_name = 3;</code>
+       * <code>string allocator_name = 3;</code>
        */
       public Builder setAllocatorNameBytes(
           com.google.protobuf.ByteString value) {
@@ -817,7 +839,7 @@ public final class AllocationDescriptionProtos {
        * Identifier of the allocated buffer if known
        * </pre>
        *
-       * <code>optional int64 allocation_id = 4;</code>
+       * <code>int64 allocation_id = 4;</code>
        */
       public long getAllocationId() {
         return allocationId_;
@@ -827,7 +849,7 @@ public final class AllocationDescriptionProtos {
        * Identifier of the allocated buffer if known
        * </pre>
        *
-       * <code>optional int64 allocation_id = 4;</code>
+       * <code>int64 allocation_id = 4;</code>
        */
       public Builder setAllocationId(long value) {
         
@@ -840,7 +862,7 @@ public final class AllocationDescriptionProtos {
        * Identifier of the allocated buffer if known
        * </pre>
        *
-       * <code>optional int64 allocation_id = 4;</code>
+       * <code>int64 allocation_id = 4;</code>
        */
       public Builder clearAllocationId() {
         
@@ -855,7 +877,7 @@ public final class AllocationDescriptionProtos {
        * Set if this tensor only has one remaining reference
        * </pre>
        *
-       * <code>optional bool has_single_reference = 5;</code>
+       * <code>bool has_single_reference = 5;</code>
        */
       public boolean getHasSingleReference() {
         return hasSingleReference_;
@@ -865,7 +887,7 @@ public final class AllocationDescriptionProtos {
        * Set if this tensor only has one remaining reference
        * </pre>
        *
-       * <code>optional bool has_single_reference = 5;</code>
+       * <code>bool has_single_reference = 5;</code>
        */
       public Builder setHasSingleReference(boolean value) {
         
@@ -878,7 +900,7 @@ public final class AllocationDescriptionProtos {
        * Set if this tensor only has one remaining reference
        * </pre>
        *
-       * <code>optional bool has_single_reference = 5;</code>
+       * <code>bool has_single_reference = 5;</code>
        */
       public Builder clearHasSingleReference() {
         
@@ -893,7 +915,7 @@ public final class AllocationDescriptionProtos {
        * Address of the allocation.
        * </pre>
        *
-       * <code>optional uint64 ptr = 6;</code>
+       * <code>uint64 ptr = 6;</code>
        */
       public long getPtr() {
         return ptr_;
@@ -903,7 +925,7 @@ public final class AllocationDescriptionProtos {
        * Address of the allocation.
        * </pre>
        *
-       * <code>optional uint64 ptr = 6;</code>
+       * <code>uint64 ptr = 6;</code>
        */
       public Builder setPtr(long value) {
         
@@ -916,7 +938,7 @@ public final class AllocationDescriptionProtos {
        * Address of the allocation.
        * </pre>
        *
-       * <code>optional uint64 ptr = 6;</code>
+       * <code>uint64 ptr = 6;</code>
        */
       public Builder clearPtr() {
         
@@ -926,12 +948,12 @@ public final class AllocationDescriptionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -954,7 +976,7 @@ public final class AllocationDescriptionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AllocationDescription(input, extensionRegistry);
+        return new AllocationDescription(input, extensionRegistry);
       }
     };
 

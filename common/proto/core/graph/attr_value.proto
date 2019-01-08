@@ -7,8 +7,8 @@ option java_outer_classname = "AttrValueProtos";
 
 
 import "core/graph/tensor.proto";
-import "core/graph/tensor_shape.proto";
-import "core/graph/types.proto";
+import "apis/common/tensor_shape.proto";
+import "apis/common/types.proto";
 
 // Protocol buffer representing the value for an attr used to configure an Op.
 // Comment indicates the corresponding attr type.  Only the field matching the

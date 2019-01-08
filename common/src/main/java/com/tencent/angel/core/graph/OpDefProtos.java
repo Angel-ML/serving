@@ -24,7 +24,7 @@ public final class OpDefProtos {
      * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -33,7 +33,7 @@ public final class OpDefProtos {
      * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -155,7 +155,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     boolean hasDeprecation();
     /**
@@ -163,7 +163,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     com.tencent.angel.core.graph.OpDefProtos.OpDeprecation getDeprecation();
     /**
@@ -171,7 +171,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     com.tencent.angel.core.graph.OpDefProtos.OpDeprecationOrBuilder getDeprecationOrBuilder();
 
@@ -180,7 +180,7 @@ public final class OpDefProtos {
      * One-line human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string summary = 5;</code>
+     * <code>string summary = 5;</code>
      */
     java.lang.String getSummary();
     /**
@@ -188,7 +188,7 @@ public final class OpDefProtos {
      * One-line human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string summary = 5;</code>
+     * <code>string summary = 5;</code>
      */
     com.google.protobuf.ByteString
         getSummaryBytes();
@@ -198,7 +198,7 @@ public final class OpDefProtos {
      * Additional, longer human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string description = 6;</code>
+     * <code>string description = 6;</code>
      */
     java.lang.String getDescription();
     /**
@@ -206,7 +206,7 @@ public final class OpDefProtos {
      * Additional, longer human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string description = 6;</code>
+     * <code>string description = 6;</code>
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
@@ -216,7 +216,7 @@ public final class OpDefProtos {
      * True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
      * </pre>
      *
-     * <code>optional bool is_commutative = 18;</code>
+     * <code>bool is_commutative = 18;</code>
      */
     boolean getIsCommutative();
 
@@ -232,7 +232,7 @@ public final class OpDefProtos {
      * TODO(josh11b): Implement that optimization.
      * </pre>
      *
-     * <code>optional bool is_aggregate = 16;</code>
+     * <code>bool is_aggregate = 16;</code>
      */
     boolean getIsAggregate();
 
@@ -250,7 +250,7 @@ public final class OpDefProtos {
      * Subexpression Elimination (CSE).
      * </pre>
      *
-     * <code>optional bool is_stateful = 17;</code>
+     * <code>bool is_stateful = 17;</code>
      */
     boolean getIsStateful();
 
@@ -262,7 +262,7 @@ public final class OpDefProtos {
      * input.
      * </pre>
      *
-     * <code>optional bool allows_uninitialized_input = 19;</code>
+     * <code>bool allows_uninitialized_input = 19;</code>
      */
     boolean getAllowsUninitializedInput();
   }
@@ -279,6 +279,7 @@ public final class OpDefProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.OpDef)
       OpDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use OpDef.newBuilder() to construct.
     private OpDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -299,14 +300,19 @@ public final class OpDefProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private OpDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -316,7 +322,8 @@ public final class OpDefProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -416,6 +423,7 @@ public final class OpDefProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           attr_ = java.util.Collections.unmodifiableList(attr_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -440,7 +448,7 @@ public final class OpDefProtos {
        * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       java.lang.String getName();
       /**
@@ -448,7 +456,7 @@ public final class OpDefProtos {
        * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -458,7 +466,7 @@ public final class OpDefProtos {
        * Human readable description.
        * </pre>
        *
-       * <code>optional string description = 2;</code>
+       * <code>string description = 2;</code>
        */
       java.lang.String getDescription();
       /**
@@ -466,7 +474,7 @@ public final class OpDefProtos {
        * Human readable description.
        * </pre>
        *
-       * <code>optional string description = 2;</code>
+       * <code>string description = 2;</code>
        */
       com.google.protobuf.ByteString
           getDescriptionBytes();
@@ -485,7 +493,7 @@ public final class OpDefProtos {
        *   to the name of an attr with type "list(type)".
        * </pre>
        *
-       * <code>optional .angel.DataType type = 3;</code>
+       * <code>.angel.DataType type = 3;</code>
        */
       int getTypeValue();
       /**
@@ -502,16 +510,16 @@ public final class OpDefProtos {
        *   to the name of an attr with type "list(type)".
        * </pre>
        *
-       * <code>optional .angel.DataType type = 3;</code>
+       * <code>.angel.DataType type = 3;</code>
        */
-      com.tencent.angel.core.graph.TypesProtos.DataType getType();
+      com.tencent.angel.serving.apis.common.TypesProtos.DataType getType();
 
       /**
        * <pre>
        * if specified, attr must have type "type"
        * </pre>
        *
-       * <code>optional string type_attr = 4;</code>
+       * <code>string type_attr = 4;</code>
        */
       java.lang.String getTypeAttr();
       /**
@@ -519,7 +527,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "type"
        * </pre>
        *
-       * <code>optional string type_attr = 4;</code>
+       * <code>string type_attr = 4;</code>
        */
       com.google.protobuf.ByteString
           getTypeAttrBytes();
@@ -529,7 +537,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "int"
        * </pre>
        *
-       * <code>optional string number_attr = 5;</code>
+       * <code>string number_attr = 5;</code>
        */
       java.lang.String getNumberAttr();
       /**
@@ -537,7 +545,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "int"
        * </pre>
        *
-       * <code>optional string number_attr = 5;</code>
+       * <code>string number_attr = 5;</code>
        */
       com.google.protobuf.ByteString
           getNumberAttrBytes();
@@ -548,7 +556,7 @@ public final class OpDefProtos {
        * type, type_attr, and number_attr may be specified.
        * </pre>
        *
-       * <code>optional string type_list_attr = 6;</code>
+       * <code>string type_list_attr = 6;</code>
        */
       java.lang.String getTypeListAttr();
       /**
@@ -557,7 +565,7 @@ public final class OpDefProtos {
        * type, type_attr, and number_attr may be specified.
        * </pre>
        *
-       * <code>optional string type_list_attr = 6;</code>
+       * <code>string type_list_attr = 6;</code>
        */
       com.google.protobuf.ByteString
           getTypeListAttrBytes();
@@ -569,7 +577,7 @@ public final class OpDefProtos {
        * For outputs: if true, outputs are refs, otherwise they are not.
        * </pre>
        *
-       * <code>optional bool is_ref = 16;</code>
+       * <code>bool is_ref = 16;</code>
        */
       boolean getIsRef();
     }
@@ -584,6 +592,7 @@ public final class OpDefProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.OpDef.ArgDef)
         ArgDefOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use ArgDef.newBuilder() to construct.
       private ArgDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -601,14 +610,19 @@ public final class OpDefProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private ArgDef(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -618,7 +632,8 @@ public final class OpDefProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -672,6 +687,7 @@ public final class OpDefProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -694,7 +710,7 @@ public final class OpDefProtos {
        * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -713,7 +729,7 @@ public final class OpDefProtos {
        * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -736,7 +752,7 @@ public final class OpDefProtos {
        * Human readable description.
        * </pre>
        *
-       * <code>optional string description = 2;</code>
+       * <code>string description = 2;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -755,7 +771,7 @@ public final class OpDefProtos {
        * Human readable description.
        * </pre>
        *
-       * <code>optional string description = 2;</code>
+       * <code>string description = 2;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -787,7 +803,7 @@ public final class OpDefProtos {
        *   to the name of an attr with type "list(type)".
        * </pre>
        *
-       * <code>optional .angel.DataType type = 3;</code>
+       * <code>.angel.DataType type = 3;</code>
        */
       public int getTypeValue() {
         return type_;
@@ -806,11 +822,11 @@ public final class OpDefProtos {
        *   to the name of an attr with type "list(type)".
        * </pre>
        *
-       * <code>optional .angel.DataType type = 3;</code>
+       * <code>.angel.DataType type = 3;</code>
        */
-      public com.tencent.angel.core.graph.TypesProtos.DataType getType() {
-        com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(type_);
-        return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
+      public com.tencent.angel.serving.apis.common.TypesProtos.DataType getType() {
+        com.tencent.angel.serving.apis.common.TypesProtos.DataType result = com.tencent.angel.serving.apis.common.TypesProtos.DataType.valueOf(type_);
+        return result == null ? com.tencent.angel.serving.apis.common.TypesProtos.DataType.UNRECOGNIZED : result;
       }
 
       public static final int TYPE_ATTR_FIELD_NUMBER = 4;
@@ -820,7 +836,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "type"
        * </pre>
        *
-       * <code>optional string type_attr = 4;</code>
+       * <code>string type_attr = 4;</code>
        */
       public java.lang.String getTypeAttr() {
         java.lang.Object ref = typeAttr_;
@@ -839,7 +855,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "type"
        * </pre>
        *
-       * <code>optional string type_attr = 4;</code>
+       * <code>string type_attr = 4;</code>
        */
       public com.google.protobuf.ByteString
           getTypeAttrBytes() {
@@ -862,7 +878,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "int"
        * </pre>
        *
-       * <code>optional string number_attr = 5;</code>
+       * <code>string number_attr = 5;</code>
        */
       public java.lang.String getNumberAttr() {
         java.lang.Object ref = numberAttr_;
@@ -881,7 +897,7 @@ public final class OpDefProtos {
        * if specified, attr must have type "int"
        * </pre>
        *
-       * <code>optional string number_attr = 5;</code>
+       * <code>string number_attr = 5;</code>
        */
       public com.google.protobuf.ByteString
           getNumberAttrBytes() {
@@ -905,7 +921,7 @@ public final class OpDefProtos {
        * type, type_attr, and number_attr may be specified.
        * </pre>
        *
-       * <code>optional string type_list_attr = 6;</code>
+       * <code>string type_list_attr = 6;</code>
        */
       public java.lang.String getTypeListAttr() {
         java.lang.Object ref = typeListAttr_;
@@ -925,7 +941,7 @@ public final class OpDefProtos {
        * type, type_attr, and number_attr may be specified.
        * </pre>
        *
-       * <code>optional string type_list_attr = 6;</code>
+       * <code>string type_list_attr = 6;</code>
        */
       public com.google.protobuf.ByteString
           getTypeListAttrBytes() {
@@ -950,7 +966,7 @@ public final class OpDefProtos {
        * For outputs: if true, outputs are refs, otherwise they are not.
        * </pre>
        *
-       * <code>optional bool is_ref = 16;</code>
+       * <code>bool is_ref = 16;</code>
        */
       public boolean getIsRef() {
         return isRef_;
@@ -974,7 +990,7 @@ public final class OpDefProtos {
         if (!getDescriptionBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, description_);
         }
-        if (type_ != com.tencent.angel.core.graph.TypesProtos.DataType.DT_INVALID.getNumber()) {
+        if (type_ != com.tencent.angel.serving.apis.common.TypesProtos.DataType.DT_INVALID.getNumber()) {
           output.writeEnum(3, type_);
         }
         if (!getTypeAttrBytes().isEmpty()) {
@@ -989,6 +1005,7 @@ public final class OpDefProtos {
         if (isRef_ != false) {
           output.writeBool(16, isRef_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -1002,7 +1019,7 @@ public final class OpDefProtos {
         if (!getDescriptionBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, description_);
         }
-        if (type_ != com.tencent.angel.core.graph.TypesProtos.DataType.DT_INVALID.getNumber()) {
+        if (type_ != com.tencent.angel.serving.apis.common.TypesProtos.DataType.DT_INVALID.getNumber()) {
           size += com.google.protobuf.CodedOutputStream
             .computeEnumSize(3, type_);
         }
@@ -1019,11 +1036,11 @@ public final class OpDefProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(16, isRef_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1048,6 +1065,7 @@ public final class OpDefProtos {
             .equals(other.getTypeListAttr());
         result = result && (getIsRef()
             == other.getIsRef());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1057,7 +1075,7 @@ public final class OpDefProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
         hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -1078,6 +1096,17 @@ public final class OpDefProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.graph.OpDefProtos.OpDef.ArgDef parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.graph.OpDefProtos.OpDef.ArgDef parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.graph.OpDefProtos.OpDef.ArgDef parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1247,7 +1276,7 @@ public final class OpDefProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -1260,12 +1289,12 @@ public final class OpDefProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1305,6 +1334,7 @@ public final class OpDefProtos {
           if (other.getIsRef() != false) {
             setIsRef(other.getIsRef());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -1337,7 +1367,7 @@ public final class OpDefProtos {
          * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -1356,7 +1386,7 @@ public final class OpDefProtos {
          * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -1376,7 +1406,7 @@ public final class OpDefProtos {
          * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -1393,7 +1423,7 @@ public final class OpDefProtos {
          * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder clearName() {
           
@@ -1406,7 +1436,7 @@ public final class OpDefProtos {
          * Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -1426,7 +1456,7 @@ public final class OpDefProtos {
          * Human readable description.
          * </pre>
          *
-         * <code>optional string description = 2;</code>
+         * <code>string description = 2;</code>
          */
         public java.lang.String getDescription() {
           java.lang.Object ref = description_;
@@ -1445,7 +1475,7 @@ public final class OpDefProtos {
          * Human readable description.
          * </pre>
          *
-         * <code>optional string description = 2;</code>
+         * <code>string description = 2;</code>
          */
         public com.google.protobuf.ByteString
             getDescriptionBytes() {
@@ -1465,7 +1495,7 @@ public final class OpDefProtos {
          * Human readable description.
          * </pre>
          *
-         * <code>optional string description = 2;</code>
+         * <code>string description = 2;</code>
          */
         public Builder setDescription(
             java.lang.String value) {
@@ -1482,7 +1512,7 @@ public final class OpDefProtos {
          * Human readable description.
          * </pre>
          *
-         * <code>optional string description = 2;</code>
+         * <code>string description = 2;</code>
          */
         public Builder clearDescription() {
           
@@ -1495,7 +1525,7 @@ public final class OpDefProtos {
          * Human readable description.
          * </pre>
          *
-         * <code>optional string description = 2;</code>
+         * <code>string description = 2;</code>
          */
         public Builder setDescriptionBytes(
             com.google.protobuf.ByteString value) {
@@ -1524,7 +1554,7 @@ public final class OpDefProtos {
          *   to the name of an attr with type "list(type)".
          * </pre>
          *
-         * <code>optional .angel.DataType type = 3;</code>
+         * <code>.angel.DataType type = 3;</code>
          */
         public int getTypeValue() {
           return type_;
@@ -1543,7 +1573,7 @@ public final class OpDefProtos {
          *   to the name of an attr with type "list(type)".
          * </pre>
          *
-         * <code>optional .angel.DataType type = 3;</code>
+         * <code>.angel.DataType type = 3;</code>
          */
         public Builder setTypeValue(int value) {
           type_ = value;
@@ -1564,11 +1594,11 @@ public final class OpDefProtos {
          *   to the name of an attr with type "list(type)".
          * </pre>
          *
-         * <code>optional .angel.DataType type = 3;</code>
+         * <code>.angel.DataType type = 3;</code>
          */
-        public com.tencent.angel.core.graph.TypesProtos.DataType getType() {
-          com.tencent.angel.core.graph.TypesProtos.DataType result = com.tencent.angel.core.graph.TypesProtos.DataType.valueOf(type_);
-          return result == null ? com.tencent.angel.core.graph.TypesProtos.DataType.UNRECOGNIZED : result;
+        public com.tencent.angel.serving.apis.common.TypesProtos.DataType getType() {
+          com.tencent.angel.serving.apis.common.TypesProtos.DataType result = com.tencent.angel.serving.apis.common.TypesProtos.DataType.valueOf(type_);
+          return result == null ? com.tencent.angel.serving.apis.common.TypesProtos.DataType.UNRECOGNIZED : result;
         }
         /**
          * <pre>
@@ -1584,9 +1614,9 @@ public final class OpDefProtos {
          *   to the name of an attr with type "list(type)".
          * </pre>
          *
-         * <code>optional .angel.DataType type = 3;</code>
+         * <code>.angel.DataType type = 3;</code>
          */
-        public Builder setType(com.tencent.angel.core.graph.TypesProtos.DataType value) {
+        public Builder setType(com.tencent.angel.serving.apis.common.TypesProtos.DataType value) {
           if (value == null) {
             throw new NullPointerException();
           }
@@ -1609,7 +1639,7 @@ public final class OpDefProtos {
          *   to the name of an attr with type "list(type)".
          * </pre>
          *
-         * <code>optional .angel.DataType type = 3;</code>
+         * <code>.angel.DataType type = 3;</code>
          */
         public Builder clearType() {
           
@@ -1624,7 +1654,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "type"
          * </pre>
          *
-         * <code>optional string type_attr = 4;</code>
+         * <code>string type_attr = 4;</code>
          */
         public java.lang.String getTypeAttr() {
           java.lang.Object ref = typeAttr_;
@@ -1643,7 +1673,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "type"
          * </pre>
          *
-         * <code>optional string type_attr = 4;</code>
+         * <code>string type_attr = 4;</code>
          */
         public com.google.protobuf.ByteString
             getTypeAttrBytes() {
@@ -1663,7 +1693,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "type"
          * </pre>
          *
-         * <code>optional string type_attr = 4;</code>
+         * <code>string type_attr = 4;</code>
          */
         public Builder setTypeAttr(
             java.lang.String value) {
@@ -1680,7 +1710,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "type"
          * </pre>
          *
-         * <code>optional string type_attr = 4;</code>
+         * <code>string type_attr = 4;</code>
          */
         public Builder clearTypeAttr() {
           
@@ -1693,7 +1723,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "type"
          * </pre>
          *
-         * <code>optional string type_attr = 4;</code>
+         * <code>string type_attr = 4;</code>
          */
         public Builder setTypeAttrBytes(
             com.google.protobuf.ByteString value) {
@@ -1713,7 +1743,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "int"
          * </pre>
          *
-         * <code>optional string number_attr = 5;</code>
+         * <code>string number_attr = 5;</code>
          */
         public java.lang.String getNumberAttr() {
           java.lang.Object ref = numberAttr_;
@@ -1732,7 +1762,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "int"
          * </pre>
          *
-         * <code>optional string number_attr = 5;</code>
+         * <code>string number_attr = 5;</code>
          */
         public com.google.protobuf.ByteString
             getNumberAttrBytes() {
@@ -1752,7 +1782,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "int"
          * </pre>
          *
-         * <code>optional string number_attr = 5;</code>
+         * <code>string number_attr = 5;</code>
          */
         public Builder setNumberAttr(
             java.lang.String value) {
@@ -1769,7 +1799,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "int"
          * </pre>
          *
-         * <code>optional string number_attr = 5;</code>
+         * <code>string number_attr = 5;</code>
          */
         public Builder clearNumberAttr() {
           
@@ -1782,7 +1812,7 @@ public final class OpDefProtos {
          * if specified, attr must have type "int"
          * </pre>
          *
-         * <code>optional string number_attr = 5;</code>
+         * <code>string number_attr = 5;</code>
          */
         public Builder setNumberAttrBytes(
             com.google.protobuf.ByteString value) {
@@ -1803,7 +1833,7 @@ public final class OpDefProtos {
          * type, type_attr, and number_attr may be specified.
          * </pre>
          *
-         * <code>optional string type_list_attr = 6;</code>
+         * <code>string type_list_attr = 6;</code>
          */
         public java.lang.String getTypeListAttr() {
           java.lang.Object ref = typeListAttr_;
@@ -1823,7 +1853,7 @@ public final class OpDefProtos {
          * type, type_attr, and number_attr may be specified.
          * </pre>
          *
-         * <code>optional string type_list_attr = 6;</code>
+         * <code>string type_list_attr = 6;</code>
          */
         public com.google.protobuf.ByteString
             getTypeListAttrBytes() {
@@ -1844,7 +1874,7 @@ public final class OpDefProtos {
          * type, type_attr, and number_attr may be specified.
          * </pre>
          *
-         * <code>optional string type_list_attr = 6;</code>
+         * <code>string type_list_attr = 6;</code>
          */
         public Builder setTypeListAttr(
             java.lang.String value) {
@@ -1862,7 +1892,7 @@ public final class OpDefProtos {
          * type, type_attr, and number_attr may be specified.
          * </pre>
          *
-         * <code>optional string type_list_attr = 6;</code>
+         * <code>string type_list_attr = 6;</code>
          */
         public Builder clearTypeListAttr() {
           
@@ -1876,7 +1906,7 @@ public final class OpDefProtos {
          * type, type_attr, and number_attr may be specified.
          * </pre>
          *
-         * <code>optional string type_list_attr = 6;</code>
+         * <code>string type_list_attr = 6;</code>
          */
         public Builder setTypeListAttrBytes(
             com.google.protobuf.ByteString value) {
@@ -1898,7 +1928,7 @@ public final class OpDefProtos {
          * For outputs: if true, outputs are refs, otherwise they are not.
          * </pre>
          *
-         * <code>optional bool is_ref = 16;</code>
+         * <code>bool is_ref = 16;</code>
          */
         public boolean getIsRef() {
           return isRef_;
@@ -1910,7 +1940,7 @@ public final class OpDefProtos {
          * For outputs: if true, outputs are refs, otherwise they are not.
          * </pre>
          *
-         * <code>optional bool is_ref = 16;</code>
+         * <code>bool is_ref = 16;</code>
          */
         public Builder setIsRef(boolean value) {
           
@@ -1925,7 +1955,7 @@ public final class OpDefProtos {
          * For outputs: if true, outputs are refs, otherwise they are not.
          * </pre>
          *
-         * <code>optional bool is_ref = 16;</code>
+         * <code>bool is_ref = 16;</code>
          */
         public Builder clearIsRef() {
           
@@ -1935,12 +1965,12 @@ public final class OpDefProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -1963,7 +1993,7 @@ public final class OpDefProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new ArgDef(input, extensionRegistry);
+          return new ArgDef(input, extensionRegistry);
         }
       };
 
@@ -1993,7 +2023,7 @@ public final class OpDefProtos {
        * the regexp "[a-z][a-z0-9_]+".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       java.lang.String getName();
       /**
@@ -2003,7 +2033,7 @@ public final class OpDefProtos {
        * the regexp "[a-z][a-z0-9_]+".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -2014,7 +2044,7 @@ public final class OpDefProtos {
        * "int", etc.).
        * </pre>
        *
-       * <code>optional string type = 2;</code>
+       * <code>string type = 2;</code>
        */
       java.lang.String getType();
       /**
@@ -2023,7 +2053,7 @@ public final class OpDefProtos {
        * "int", etc.).
        * </pre>
        *
-       * <code>optional string type = 2;</code>
+       * <code>string type = 2;</code>
        */
       com.google.protobuf.ByteString
           getTypeBytes();
@@ -2034,7 +2064,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       boolean hasDefaultValue();
       /**
@@ -2043,7 +2073,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       com.tencent.angel.core.graph.AttrValueProtos.AttrValue getDefaultValue();
       /**
@@ -2052,7 +2082,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getDefaultValueOrBuilder();
 
@@ -2061,7 +2091,7 @@ public final class OpDefProtos {
        * Human-readable description.
        * </pre>
        *
-       * <code>optional string description = 4;</code>
+       * <code>string description = 4;</code>
        */
       java.lang.String getDescription();
       /**
@@ -2069,7 +2099,7 @@ public final class OpDefProtos {
        * Human-readable description.
        * </pre>
        *
-       * <code>optional string description = 4;</code>
+       * <code>string description = 4;</code>
        */
       com.google.protobuf.ByteString
           getDescriptionBytes();
@@ -2080,12 +2110,12 @@ public final class OpDefProtos {
        * types, this is the minimum length.
        * </pre>
        *
-       * <code>optional bool has_minimum = 5;</code>
+       * <code>bool has_minimum = 5;</code>
        */
       boolean getHasMinimum();
 
       /**
-       * <code>optional int64 minimum = 6;</code>
+       * <code>int64 minimum = 6;</code>
        */
       long getMinimum();
 
@@ -2099,7 +2129,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       boolean hasAllowedValues();
       /**
@@ -2112,7 +2142,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       com.tencent.angel.core.graph.AttrValueProtos.AttrValue getAllowedValues();
       /**
@@ -2125,7 +2155,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getAllowedValuesOrBuilder();
     }
@@ -2142,6 +2172,7 @@ public final class OpDefProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.OpDef.AttrDef)
         AttrDefOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use AttrDef.newBuilder() to construct.
       private AttrDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -2157,14 +2188,19 @@ public final class OpDefProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private AttrDef(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -2174,7 +2210,8 @@ public final class OpDefProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -2241,6 +2278,7 @@ public final class OpDefProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -2265,7 +2303,7 @@ public final class OpDefProtos {
        * the regexp "[a-z][a-z0-9_]+".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -2286,7 +2324,7 @@ public final class OpDefProtos {
        * the regexp "[a-z][a-z0-9_]+".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -2310,7 +2348,7 @@ public final class OpDefProtos {
        * "int", etc.).
        * </pre>
        *
-       * <code>optional string type = 2;</code>
+       * <code>string type = 2;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -2330,7 +2368,7 @@ public final class OpDefProtos {
        * "int", etc.).
        * </pre>
        *
-       * <code>optional string type = 2;</code>
+       * <code>string type = 2;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -2354,7 +2392,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       public boolean hasDefaultValue() {
         return defaultValue_ != null;
@@ -2365,7 +2403,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValue getDefaultValue() {
         return defaultValue_ == null ? com.tencent.angel.core.graph.AttrValueProtos.AttrValue.getDefaultInstance() : defaultValue_;
@@ -2376,7 +2414,7 @@ public final class OpDefProtos {
        * a value.  If not specified, the user must supply a value.
        * </pre>
        *
-       * <code>optional .angel.AttrValue default_value = 3;</code>
+       * <code>.angel.AttrValue default_value = 3;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getDefaultValueOrBuilder() {
         return getDefaultValue();
@@ -2389,7 +2427,7 @@ public final class OpDefProtos {
        * Human-readable description.
        * </pre>
        *
-       * <code>optional string description = 4;</code>
+       * <code>string description = 4;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -2408,7 +2446,7 @@ public final class OpDefProtos {
        * Human-readable description.
        * </pre>
        *
-       * <code>optional string description = 4;</code>
+       * <code>string description = 4;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -2432,7 +2470,7 @@ public final class OpDefProtos {
        * types, this is the minimum length.
        * </pre>
        *
-       * <code>optional bool has_minimum = 5;</code>
+       * <code>bool has_minimum = 5;</code>
        */
       public boolean getHasMinimum() {
         return hasMinimum_;
@@ -2441,7 +2479,7 @@ public final class OpDefProtos {
       public static final int MINIMUM_FIELD_NUMBER = 6;
       private long minimum_;
       /**
-       * <code>optional int64 minimum = 6;</code>
+       * <code>int64 minimum = 6;</code>
        */
       public long getMinimum() {
         return minimum_;
@@ -2459,7 +2497,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       public boolean hasAllowedValues() {
         return allowedValues_ != null;
@@ -2474,7 +2512,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValue getAllowedValues() {
         return allowedValues_ == null ? com.tencent.angel.core.graph.AttrValueProtos.AttrValue.getDefaultInstance() : allowedValues_;
@@ -2489,7 +2527,7 @@ public final class OpDefProtos {
        * "allowed_values.list" has the set of allowed strings.
        * </pre>
        *
-       * <code>optional .angel.AttrValue allowed_values = 7;</code>
+       * <code>.angel.AttrValue allowed_values = 7;</code>
        */
       public com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getAllowedValuesOrBuilder() {
         return getAllowedValues();
@@ -2528,6 +2566,7 @@ public final class OpDefProtos {
         if (allowedValues_ != null) {
           output.writeMessage(7, getAllowedValues());
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -2560,11 +2599,11 @@ public final class OpDefProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(7, getAllowedValues());
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -2596,6 +2635,7 @@ public final class OpDefProtos {
           result = result && getAllowedValues()
               .equals(other.getAllowedValues());
         }
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -2605,7 +2645,7 @@ public final class OpDefProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
@@ -2631,6 +2671,17 @@ public final class OpDefProtos {
         return hash;
       }
 
+      public static com.tencent.angel.core.graph.OpDefProtos.OpDef.AttrDef parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.core.graph.OpDefProtos.OpDef.AttrDef parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.core.graph.OpDefProtos.OpDef.AttrDef parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2818,7 +2869,7 @@ public final class OpDefProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -2831,12 +2882,12 @@ public final class OpDefProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2874,6 +2925,7 @@ public final class OpDefProtos {
           if (other.hasAllowedValues()) {
             mergeAllowedValues(other.getAllowedValues());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -2908,7 +2960,7 @@ public final class OpDefProtos {
          * the regexp "[a-z][a-z0-9_]+".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -2929,7 +2981,7 @@ public final class OpDefProtos {
          * the regexp "[a-z][a-z0-9_]+".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -2951,7 +3003,7 @@ public final class OpDefProtos {
          * the regexp "[a-z][a-z0-9_]+".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -2970,7 +3022,7 @@ public final class OpDefProtos {
          * the regexp "[a-z][a-z0-9_]+".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder clearName() {
           
@@ -2985,7 +3037,7 @@ public final class OpDefProtos {
          * the regexp "[a-z][a-z0-9_]+".
          * </pre>
          *
-         * <code>optional string name = 1;</code>
+         * <code>string name = 1;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -3006,7 +3058,7 @@ public final class OpDefProtos {
          * "int", etc.).
          * </pre>
          *
-         * <code>optional string type = 2;</code>
+         * <code>string type = 2;</code>
          */
         public java.lang.String getType() {
           java.lang.Object ref = type_;
@@ -3026,7 +3078,7 @@ public final class OpDefProtos {
          * "int", etc.).
          * </pre>
          *
-         * <code>optional string type = 2;</code>
+         * <code>string type = 2;</code>
          */
         public com.google.protobuf.ByteString
             getTypeBytes() {
@@ -3047,7 +3099,7 @@ public final class OpDefProtos {
          * "int", etc.).
          * </pre>
          *
-         * <code>optional string type = 2;</code>
+         * <code>string type = 2;</code>
          */
         public Builder setType(
             java.lang.String value) {
@@ -3065,7 +3117,7 @@ public final class OpDefProtos {
          * "int", etc.).
          * </pre>
          *
-         * <code>optional string type = 2;</code>
+         * <code>string type = 2;</code>
          */
         public Builder clearType() {
           
@@ -3079,7 +3131,7 @@ public final class OpDefProtos {
          * "int", etc.).
          * </pre>
          *
-         * <code>optional string type = 2;</code>
+         * <code>string type = 2;</code>
          */
         public Builder setTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -3102,7 +3154,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public boolean hasDefaultValue() {
           return defaultValueBuilder_ != null || defaultValue_ != null;
@@ -3113,7 +3165,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValue getDefaultValue() {
           if (defaultValueBuilder_ == null) {
@@ -3128,7 +3180,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public Builder setDefaultValue(com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
           if (defaultValueBuilder_ == null) {
@@ -3149,7 +3201,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public Builder setDefaultValue(
             com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder builderForValue) {
@@ -3168,7 +3220,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public Builder mergeDefaultValue(com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
           if (defaultValueBuilder_ == null) {
@@ -3191,7 +3243,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public Builder clearDefaultValue() {
           if (defaultValueBuilder_ == null) {
@@ -3210,7 +3262,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder getDefaultValueBuilder() {
           
@@ -3223,7 +3275,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getDefaultValueOrBuilder() {
           if (defaultValueBuilder_ != null) {
@@ -3239,7 +3291,7 @@ public final class OpDefProtos {
          * a value.  If not specified, the user must supply a value.
          * </pre>
          *
-         * <code>optional .angel.AttrValue default_value = 3;</code>
+         * <code>.angel.AttrValue default_value = 3;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.core.graph.AttrValueProtos.AttrValue, com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder, com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder> 
@@ -3261,7 +3313,7 @@ public final class OpDefProtos {
          * Human-readable description.
          * </pre>
          *
-         * <code>optional string description = 4;</code>
+         * <code>string description = 4;</code>
          */
         public java.lang.String getDescription() {
           java.lang.Object ref = description_;
@@ -3280,7 +3332,7 @@ public final class OpDefProtos {
          * Human-readable description.
          * </pre>
          *
-         * <code>optional string description = 4;</code>
+         * <code>string description = 4;</code>
          */
         public com.google.protobuf.ByteString
             getDescriptionBytes() {
@@ -3300,7 +3352,7 @@ public final class OpDefProtos {
          * Human-readable description.
          * </pre>
          *
-         * <code>optional string description = 4;</code>
+         * <code>string description = 4;</code>
          */
         public Builder setDescription(
             java.lang.String value) {
@@ -3317,7 +3369,7 @@ public final class OpDefProtos {
          * Human-readable description.
          * </pre>
          *
-         * <code>optional string description = 4;</code>
+         * <code>string description = 4;</code>
          */
         public Builder clearDescription() {
           
@@ -3330,7 +3382,7 @@ public final class OpDefProtos {
          * Human-readable description.
          * </pre>
          *
-         * <code>optional string description = 4;</code>
+         * <code>string description = 4;</code>
          */
         public Builder setDescriptionBytes(
             com.google.protobuf.ByteString value) {
@@ -3351,7 +3403,7 @@ public final class OpDefProtos {
          * types, this is the minimum length.
          * </pre>
          *
-         * <code>optional bool has_minimum = 5;</code>
+         * <code>bool has_minimum = 5;</code>
          */
         public boolean getHasMinimum() {
           return hasMinimum_;
@@ -3362,7 +3414,7 @@ public final class OpDefProtos {
          * types, this is the minimum length.
          * </pre>
          *
-         * <code>optional bool has_minimum = 5;</code>
+         * <code>bool has_minimum = 5;</code>
          */
         public Builder setHasMinimum(boolean value) {
           
@@ -3376,7 +3428,7 @@ public final class OpDefProtos {
          * types, this is the minimum length.
          * </pre>
          *
-         * <code>optional bool has_minimum = 5;</code>
+         * <code>bool has_minimum = 5;</code>
          */
         public Builder clearHasMinimum() {
           
@@ -3387,13 +3439,13 @@ public final class OpDefProtos {
 
         private long minimum_ ;
         /**
-         * <code>optional int64 minimum = 6;</code>
+         * <code>int64 minimum = 6;</code>
          */
         public long getMinimum() {
           return minimum_;
         }
         /**
-         * <code>optional int64 minimum = 6;</code>
+         * <code>int64 minimum = 6;</code>
          */
         public Builder setMinimum(long value) {
           
@@ -3402,7 +3454,7 @@ public final class OpDefProtos {
           return this;
         }
         /**
-         * <code>optional int64 minimum = 6;</code>
+         * <code>int64 minimum = 6;</code>
          */
         public Builder clearMinimum() {
           
@@ -3424,7 +3476,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public boolean hasAllowedValues() {
           return allowedValuesBuilder_ != null || allowedValues_ != null;
@@ -3439,7 +3491,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValue getAllowedValues() {
           if (allowedValuesBuilder_ == null) {
@@ -3458,7 +3510,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public Builder setAllowedValues(com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
           if (allowedValuesBuilder_ == null) {
@@ -3483,7 +3535,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public Builder setAllowedValues(
             com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder builderForValue) {
@@ -3506,7 +3558,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public Builder mergeAllowedValues(com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
           if (allowedValuesBuilder_ == null) {
@@ -3533,7 +3585,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public Builder clearAllowedValues() {
           if (allowedValuesBuilder_ == null) {
@@ -3556,7 +3608,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder getAllowedValuesBuilder() {
           
@@ -3573,7 +3625,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         public com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder getAllowedValuesOrBuilder() {
           if (allowedValuesBuilder_ != null) {
@@ -3593,7 +3645,7 @@ public final class OpDefProtos {
          * "allowed_values.list" has the set of allowed strings.
          * </pre>
          *
-         * <code>optional .angel.AttrValue allowed_values = 7;</code>
+         * <code>.angel.AttrValue allowed_values = 7;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.core.graph.AttrValueProtos.AttrValue, com.tencent.angel.core.graph.AttrValueProtos.AttrValue.Builder, com.tencent.angel.core.graph.AttrValueProtos.AttrValueOrBuilder> 
@@ -3610,12 +3662,12 @@ public final class OpDefProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -3638,7 +3690,7 @@ public final class OpDefProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new AttrDef(input, extensionRegistry);
+          return new AttrDef(input, extensionRegistry);
         }
       };
 
@@ -3666,7 +3718,7 @@ public final class OpDefProtos {
      * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -3686,7 +3738,7 @@ public final class OpDefProtos {
      * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -3854,7 +3906,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     public boolean hasDeprecation() {
       return deprecation_ != null;
@@ -3864,7 +3916,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     public com.tencent.angel.core.graph.OpDefProtos.OpDeprecation getDeprecation() {
       return deprecation_ == null ? com.tencent.angel.core.graph.OpDefProtos.OpDeprecation.getDefaultInstance() : deprecation_;
@@ -3874,7 +3926,7 @@ public final class OpDefProtos {
      * Optional deprecation based on GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+     * <code>.angel.OpDeprecation deprecation = 8;</code>
      */
     public com.tencent.angel.core.graph.OpDefProtos.OpDeprecationOrBuilder getDeprecationOrBuilder() {
       return getDeprecation();
@@ -3887,7 +3939,7 @@ public final class OpDefProtos {
      * One-line human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string summary = 5;</code>
+     * <code>string summary = 5;</code>
      */
     public java.lang.String getSummary() {
       java.lang.Object ref = summary_;
@@ -3906,7 +3958,7 @@ public final class OpDefProtos {
      * One-line human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string summary = 5;</code>
+     * <code>string summary = 5;</code>
      */
     public com.google.protobuf.ByteString
         getSummaryBytes() {
@@ -3929,7 +3981,7 @@ public final class OpDefProtos {
      * Additional, longer human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string description = 6;</code>
+     * <code>string description = 6;</code>
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -3948,7 +4000,7 @@ public final class OpDefProtos {
      * Additional, longer human-readable description of what the Op does.
      * </pre>
      *
-     * <code>optional string description = 6;</code>
+     * <code>string description = 6;</code>
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -3971,7 +4023,7 @@ public final class OpDefProtos {
      * True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
      * </pre>
      *
-     * <code>optional bool is_commutative = 18;</code>
+     * <code>bool is_commutative = 18;</code>
      */
     public boolean getIsCommutative() {
       return isCommutative_;
@@ -3991,7 +4043,7 @@ public final class OpDefProtos {
      * TODO(josh11b): Implement that optimization.
      * </pre>
      *
-     * <code>optional bool is_aggregate = 16;</code>
+     * <code>bool is_aggregate = 16;</code>
      */
     public boolean getIsAggregate() {
       return isAggregate_;
@@ -4013,7 +4065,7 @@ public final class OpDefProtos {
      * Subexpression Elimination (CSE).
      * </pre>
      *
-     * <code>optional bool is_stateful = 17;</code>
+     * <code>bool is_stateful = 17;</code>
      */
     public boolean getIsStateful() {
       return isStateful_;
@@ -4029,7 +4081,7 @@ public final class OpDefProtos {
      * input.
      * </pre>
      *
-     * <code>optional bool allows_uninitialized_input = 19;</code>
+     * <code>bool allows_uninitialized_input = 19;</code>
      */
     public boolean getAllowsUninitializedInput() {
       return allowsUninitializedInput_;
@@ -4080,6 +4132,7 @@ public final class OpDefProtos {
       if (allowsUninitializedInput_ != false) {
         output.writeBool(19, allowsUninitializedInput_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4128,11 +4181,11 @@ public final class OpDefProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(19, allowsUninitializedInput_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4169,6 +4222,7 @@ public final class OpDefProtos {
           == other.getIsStateful());
       result = result && (getAllowsUninitializedInput()
           == other.getAllowsUninitializedInput());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4178,7 +4232,7 @@ public final class OpDefProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       if (getInputArgCount() > 0) {
@@ -4218,6 +4272,17 @@ public final class OpDefProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.OpDefProtos.OpDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.OpDefProtos.OpDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.OpDefProtos.OpDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4451,7 +4516,7 @@ public final class OpDefProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4464,12 +4529,12 @@ public final class OpDefProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4588,6 +4653,7 @@ public final class OpDefProtos {
         if (other.getAllowsUninitializedInput() != false) {
           setAllowsUninitializedInput(other.getAllowsUninitializedInput());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4622,7 +4688,7 @@ public final class OpDefProtos {
        * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -4642,7 +4708,7 @@ public final class OpDefProtos {
        * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -4663,7 +4729,7 @@ public final class OpDefProtos {
        * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -4681,7 +4747,7 @@ public final class OpDefProtos {
        * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -4695,7 +4761,7 @@ public final class OpDefProtos {
        * Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9_]*".
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -5581,7 +5647,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public boolean hasDeprecation() {
         return deprecationBuilder_ != null || deprecation_ != null;
@@ -5591,7 +5657,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDeprecation getDeprecation() {
         if (deprecationBuilder_ == null) {
@@ -5605,7 +5671,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public Builder setDeprecation(com.tencent.angel.core.graph.OpDefProtos.OpDeprecation value) {
         if (deprecationBuilder_ == null) {
@@ -5625,7 +5691,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public Builder setDeprecation(
           com.tencent.angel.core.graph.OpDefProtos.OpDeprecation.Builder builderForValue) {
@@ -5643,7 +5709,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public Builder mergeDeprecation(com.tencent.angel.core.graph.OpDefProtos.OpDeprecation value) {
         if (deprecationBuilder_ == null) {
@@ -5665,7 +5731,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public Builder clearDeprecation() {
         if (deprecationBuilder_ == null) {
@@ -5683,7 +5749,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDeprecation.Builder getDeprecationBuilder() {
         
@@ -5695,7 +5761,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDeprecationOrBuilder getDeprecationOrBuilder() {
         if (deprecationBuilder_ != null) {
@@ -5710,7 +5776,7 @@ public final class OpDefProtos {
        * Optional deprecation based on GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.OpDeprecation deprecation = 8;</code>
+       * <code>.angel.OpDeprecation deprecation = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.OpDefProtos.OpDeprecation, com.tencent.angel.core.graph.OpDefProtos.OpDeprecation.Builder, com.tencent.angel.core.graph.OpDefProtos.OpDeprecationOrBuilder> 
@@ -5732,7 +5798,7 @@ public final class OpDefProtos {
        * One-line human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string summary = 5;</code>
+       * <code>string summary = 5;</code>
        */
       public java.lang.String getSummary() {
         java.lang.Object ref = summary_;
@@ -5751,7 +5817,7 @@ public final class OpDefProtos {
        * One-line human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string summary = 5;</code>
+       * <code>string summary = 5;</code>
        */
       public com.google.protobuf.ByteString
           getSummaryBytes() {
@@ -5771,7 +5837,7 @@ public final class OpDefProtos {
        * One-line human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string summary = 5;</code>
+       * <code>string summary = 5;</code>
        */
       public Builder setSummary(
           java.lang.String value) {
@@ -5788,7 +5854,7 @@ public final class OpDefProtos {
        * One-line human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string summary = 5;</code>
+       * <code>string summary = 5;</code>
        */
       public Builder clearSummary() {
         
@@ -5801,7 +5867,7 @@ public final class OpDefProtos {
        * One-line human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string summary = 5;</code>
+       * <code>string summary = 5;</code>
        */
       public Builder setSummaryBytes(
           com.google.protobuf.ByteString value) {
@@ -5821,7 +5887,7 @@ public final class OpDefProtos {
        * Additional, longer human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string description = 6;</code>
+       * <code>string description = 6;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -5840,7 +5906,7 @@ public final class OpDefProtos {
        * Additional, longer human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string description = 6;</code>
+       * <code>string description = 6;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -5860,7 +5926,7 @@ public final class OpDefProtos {
        * Additional, longer human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string description = 6;</code>
+       * <code>string description = 6;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
@@ -5877,7 +5943,7 @@ public final class OpDefProtos {
        * Additional, longer human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string description = 6;</code>
+       * <code>string description = 6;</code>
        */
       public Builder clearDescription() {
         
@@ -5890,7 +5956,7 @@ public final class OpDefProtos {
        * Additional, longer human-readable description of what the Op does.
        * </pre>
        *
-       * <code>optional string description = 6;</code>
+       * <code>string description = 6;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
@@ -5910,7 +5976,7 @@ public final class OpDefProtos {
        * True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
        * </pre>
        *
-       * <code>optional bool is_commutative = 18;</code>
+       * <code>bool is_commutative = 18;</code>
        */
       public boolean getIsCommutative() {
         return isCommutative_;
@@ -5920,7 +5986,7 @@ public final class OpDefProtos {
        * True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
        * </pre>
        *
-       * <code>optional bool is_commutative = 18;</code>
+       * <code>bool is_commutative = 18;</code>
        */
       public Builder setIsCommutative(boolean value) {
         
@@ -5933,7 +5999,7 @@ public final class OpDefProtos {
        * True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
        * </pre>
        *
-       * <code>optional bool is_commutative = 18;</code>
+       * <code>bool is_commutative = 18;</code>
        */
       public Builder clearIsCommutative() {
         
@@ -5955,7 +6021,7 @@ public final class OpDefProtos {
        * TODO(josh11b): Implement that optimization.
        * </pre>
        *
-       * <code>optional bool is_aggregate = 16;</code>
+       * <code>bool is_aggregate = 16;</code>
        */
       public boolean getIsAggregate() {
         return isAggregate_;
@@ -5972,7 +6038,7 @@ public final class OpDefProtos {
        * TODO(josh11b): Implement that optimization.
        * </pre>
        *
-       * <code>optional bool is_aggregate = 16;</code>
+       * <code>bool is_aggregate = 16;</code>
        */
       public Builder setIsAggregate(boolean value) {
         
@@ -5992,7 +6058,7 @@ public final class OpDefProtos {
        * TODO(josh11b): Implement that optimization.
        * </pre>
        *
-       * <code>optional bool is_aggregate = 16;</code>
+       * <code>bool is_aggregate = 16;</code>
        */
       public Builder clearIsAggregate() {
         
@@ -6016,7 +6082,7 @@ public final class OpDefProtos {
        * Subexpression Elimination (CSE).
        * </pre>
        *
-       * <code>optional bool is_stateful = 17;</code>
+       * <code>bool is_stateful = 17;</code>
        */
       public boolean getIsStateful() {
         return isStateful_;
@@ -6035,7 +6101,7 @@ public final class OpDefProtos {
        * Subexpression Elimination (CSE).
        * </pre>
        *
-       * <code>optional bool is_stateful = 17;</code>
+       * <code>bool is_stateful = 17;</code>
        */
       public Builder setIsStateful(boolean value) {
         
@@ -6057,7 +6123,7 @@ public final class OpDefProtos {
        * Subexpression Elimination (CSE).
        * </pre>
        *
-       * <code>optional bool is_stateful = 17;</code>
+       * <code>bool is_stateful = 17;</code>
        */
       public Builder clearIsStateful() {
         
@@ -6075,7 +6141,7 @@ public final class OpDefProtos {
        * input.
        * </pre>
        *
-       * <code>optional bool allows_uninitialized_input = 19;</code>
+       * <code>bool allows_uninitialized_input = 19;</code>
        */
       public boolean getAllowsUninitializedInput() {
         return allowsUninitializedInput_;
@@ -6088,7 +6154,7 @@ public final class OpDefProtos {
        * input.
        * </pre>
        *
-       * <code>optional bool allows_uninitialized_input = 19;</code>
+       * <code>bool allows_uninitialized_input = 19;</code>
        */
       public Builder setAllowsUninitializedInput(boolean value) {
         
@@ -6104,7 +6170,7 @@ public final class OpDefProtos {
        * input.
        * </pre>
        *
-       * <code>optional bool allows_uninitialized_input = 19;</code>
+       * <code>bool allows_uninitialized_input = 19;</code>
        */
       public Builder clearAllowsUninitializedInput() {
         
@@ -6114,12 +6180,12 @@ public final class OpDefProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6142,7 +6208,7 @@ public final class OpDefProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new OpDef(input, extensionRegistry);
+        return new OpDef(input, extensionRegistry);
       }
     };
 
@@ -6170,7 +6236,7 @@ public final class OpDefProtos {
      * First GraphDef version at which the op is disallowed.
      * </pre>
      *
-     * <code>optional int32 version = 1;</code>
+     * <code>int32 version = 1;</code>
      */
     int getVersion();
 
@@ -6179,7 +6245,7 @@ public final class OpDefProtos {
      * Explanation of why it was deprecated and what to use instead.
      * </pre>
      *
-     * <code>optional string explanation = 2;</code>
+     * <code>string explanation = 2;</code>
      */
     java.lang.String getExplanation();
     /**
@@ -6187,7 +6253,7 @@ public final class OpDefProtos {
      * Explanation of why it was deprecated and what to use instead.
      * </pre>
      *
-     * <code>optional string explanation = 2;</code>
+     * <code>string explanation = 2;</code>
      */
     com.google.protobuf.ByteString
         getExplanationBytes();
@@ -6203,6 +6269,7 @@ public final class OpDefProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.OpDeprecation)
       OpDeprecationOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use OpDeprecation.newBuilder() to construct.
     private OpDeprecation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6215,14 +6282,19 @@ public final class OpDefProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private OpDeprecation(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6232,7 +6304,8 @@ public final class OpDefProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -6256,6 +6329,7 @@ public final class OpDefProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6278,7 +6352,7 @@ public final class OpDefProtos {
      * First GraphDef version at which the op is disallowed.
      * </pre>
      *
-     * <code>optional int32 version = 1;</code>
+     * <code>int32 version = 1;</code>
      */
     public int getVersion() {
       return version_;
@@ -6291,7 +6365,7 @@ public final class OpDefProtos {
      * Explanation of why it was deprecated and what to use instead.
      * </pre>
      *
-     * <code>optional string explanation = 2;</code>
+     * <code>string explanation = 2;</code>
      */
     public java.lang.String getExplanation() {
       java.lang.Object ref = explanation_;
@@ -6310,7 +6384,7 @@ public final class OpDefProtos {
      * Explanation of why it was deprecated and what to use instead.
      * </pre>
      *
-     * <code>optional string explanation = 2;</code>
+     * <code>string explanation = 2;</code>
      */
     public com.google.protobuf.ByteString
         getExplanationBytes() {
@@ -6344,6 +6418,7 @@ public final class OpDefProtos {
       if (!getExplanationBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, explanation_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -6358,11 +6433,11 @@ public final class OpDefProtos {
       if (!getExplanationBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, explanation_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6378,6 +6453,7 @@ public final class OpDefProtos {
           == other.getVersion());
       result = result && getExplanation()
           .equals(other.getExplanation());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6387,7 +6463,7 @@ public final class OpDefProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getVersion();
       hash = (37 * hash) + EXPLANATION_FIELD_NUMBER;
@@ -6397,6 +6473,17 @@ public final class OpDefProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.OpDefProtos.OpDeprecation parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.OpDefProtos.OpDeprecation parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.OpDefProtos.OpDeprecation parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6551,7 +6638,7 @@ public final class OpDefProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -6564,12 +6651,12 @@ public final class OpDefProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6590,6 +6677,7 @@ public final class OpDefProtos {
           explanation_ = other.explanation_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -6622,7 +6710,7 @@ public final class OpDefProtos {
        * First GraphDef version at which the op is disallowed.
        * </pre>
        *
-       * <code>optional int32 version = 1;</code>
+       * <code>int32 version = 1;</code>
        */
       public int getVersion() {
         return version_;
@@ -6632,7 +6720,7 @@ public final class OpDefProtos {
        * First GraphDef version at which the op is disallowed.
        * </pre>
        *
-       * <code>optional int32 version = 1;</code>
+       * <code>int32 version = 1;</code>
        */
       public Builder setVersion(int value) {
         
@@ -6645,7 +6733,7 @@ public final class OpDefProtos {
        * First GraphDef version at which the op is disallowed.
        * </pre>
        *
-       * <code>optional int32 version = 1;</code>
+       * <code>int32 version = 1;</code>
        */
       public Builder clearVersion() {
         
@@ -6660,7 +6748,7 @@ public final class OpDefProtos {
        * Explanation of why it was deprecated and what to use instead.
        * </pre>
        *
-       * <code>optional string explanation = 2;</code>
+       * <code>string explanation = 2;</code>
        */
       public java.lang.String getExplanation() {
         java.lang.Object ref = explanation_;
@@ -6679,7 +6767,7 @@ public final class OpDefProtos {
        * Explanation of why it was deprecated and what to use instead.
        * </pre>
        *
-       * <code>optional string explanation = 2;</code>
+       * <code>string explanation = 2;</code>
        */
       public com.google.protobuf.ByteString
           getExplanationBytes() {
@@ -6699,7 +6787,7 @@ public final class OpDefProtos {
        * Explanation of why it was deprecated and what to use instead.
        * </pre>
        *
-       * <code>optional string explanation = 2;</code>
+       * <code>string explanation = 2;</code>
        */
       public Builder setExplanation(
           java.lang.String value) {
@@ -6716,7 +6804,7 @@ public final class OpDefProtos {
        * Explanation of why it was deprecated and what to use instead.
        * </pre>
        *
-       * <code>optional string explanation = 2;</code>
+       * <code>string explanation = 2;</code>
        */
       public Builder clearExplanation() {
         
@@ -6729,7 +6817,7 @@ public final class OpDefProtos {
        * Explanation of why it was deprecated and what to use instead.
        * </pre>
        *
-       * <code>optional string explanation = 2;</code>
+       * <code>string explanation = 2;</code>
        */
       public Builder setExplanationBytes(
           com.google.protobuf.ByteString value) {
@@ -6744,12 +6832,12 @@ public final class OpDefProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6772,7 +6860,7 @@ public final class OpDefProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new OpDeprecation(input, extensionRegistry);
+        return new OpDeprecation(input, extensionRegistry);
       }
     };
 
@@ -6830,6 +6918,7 @@ public final class OpDefProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.OpList)
       OpListOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use OpList.newBuilder() to construct.
     private OpList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6841,14 +6930,19 @@ public final class OpDefProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private OpList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6858,7 +6952,8 @@ public final class OpDefProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -6883,6 +6978,7 @@ public final class OpDefProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           op_ = java.util.Collections.unmodifiableList(op_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6948,6 +7044,7 @@ public final class OpDefProtos {
       for (int i = 0; i < op_.size(); i++) {
         output.writeMessage(1, op_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -6959,11 +7056,11 @@ public final class OpDefProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, op_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6977,6 +7074,7 @@ public final class OpDefProtos {
       boolean result = true;
       result = result && getOpList()
           .equals(other.getOpList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6986,7 +7084,7 @@ public final class OpDefProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getOpCount() > 0) {
         hash = (37 * hash) + OP_FIELD_NUMBER;
         hash = (53 * hash) + getOpList().hashCode();
@@ -6996,6 +7094,17 @@ public final class OpDefProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.OpDefProtos.OpList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.OpDefProtos.OpList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.OpDefProtos.OpList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7161,7 +7270,7 @@ public final class OpDefProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -7174,12 +7283,12 @@ public final class OpDefProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7219,6 +7328,7 @@ public final class OpDefProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -7487,12 +7597,12 @@ public final class OpDefProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7515,7 +7625,7 @@ public final class OpDefProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new OpList(input, extensionRegistry);
+        return new OpList(input, extensionRegistry);
       }
     };
 
@@ -7569,28 +7679,28 @@ public final class OpDefProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n\027core/graph/op_def.proto\022\005angel\032\033core/g" +
-      "raph/attr_value.proto\032\026core/graph/types." +
-      "proto\"\225\005\n\005OpDef\022\014\n\004name\030\001 \001(\t\022&\n\tinput_a" +
-      "rg\030\002 \003(\0132\023.angel.OpDef.ArgDef\022\'\n\noutput_" +
-      "arg\030\003 \003(\0132\023.angel.OpDef.ArgDef\022\"\n\004attr\030\004" +
-      " \003(\0132\024.angel.OpDef.AttrDef\022)\n\013deprecatio" +
-      "n\030\010 \001(\0132\024.angel.OpDeprecation\022\017\n\007summary" +
-      "\030\005 \001(\t\022\023\n\013description\030\006 \001(\t\022\026\n\016is_commut" +
-      "ative\030\022 \001(\010\022\024\n\014is_aggregate\030\020 \001(\010\022\023\n\013is_" +
-      "stateful\030\021 \001(\010\022\"\n\032allows_uninitialized_i",
-      "nput\030\023 \001(\010\032\232\001\n\006ArgDef\022\014\n\004name\030\001 \001(\t\022\023\n\013d" +
-      "escription\030\002 \001(\t\022\035\n\004type\030\003 \001(\0162\017.angel.D" +
-      "ataType\022\021\n\ttype_attr\030\004 \001(\t\022\023\n\013number_att" +
-      "r\030\005 \001(\t\022\026\n\016type_list_attr\030\006 \001(\t\022\016\n\006is_re" +
-      "f\030\020 \001(\010\032\263\001\n\007AttrDef\022\014\n\004name\030\001 \001(\t\022\014\n\004typ" +
-      "e\030\002 \001(\t\022\'\n\rdefault_value\030\003 \001(\0132\020.angel.A" +
-      "ttrValue\022\023\n\013description\030\004 \001(\t\022\023\n\013has_min" +
-      "imum\030\005 \001(\010\022\017\n\007minimum\030\006 \001(\003\022(\n\016allowed_v" +
-      "alues\030\007 \001(\0132\020.angel.AttrValue\"5\n\rOpDepre" +
-      "cation\022\017\n\007version\030\001 \001(\005\022\023\n\013explanation\030\002",
-      " \001(\t\"\"\n\006OpList\022\030\n\002op\030\001 \003(\0132\014.angel.OpDef" +
-      "B-\n\034com.tencent.angel.core.graphB\013OpDefP" +
-      "rotosP\000b\006proto3"
+      "raph/attr_value.proto\032\027apis/common/types" +
+      ".proto\"\225\005\n\005OpDef\022\014\n\004name\030\001 \001(\t\022&\n\tinput_" +
+      "arg\030\002 \003(\0132\023.angel.OpDef.ArgDef\022\'\n\noutput" +
+      "_arg\030\003 \003(\0132\023.angel.OpDef.ArgDef\022\"\n\004attr\030" +
+      "\004 \003(\0132\024.angel.OpDef.AttrDef\022)\n\013deprecati" +
+      "on\030\010 \001(\0132\024.angel.OpDeprecation\022\017\n\007summar" +
+      "y\030\005 \001(\t\022\023\n\013description\030\006 \001(\t\022\026\n\016is_commu" +
+      "tative\030\022 \001(\010\022\024\n\014is_aggregate\030\020 \001(\010\022\023\n\013is" +
+      "_stateful\030\021 \001(\010\022\"\n\032allows_uninitialized_" +
+      "input\030\023 \001(\010\032\232\001\n\006ArgDef\022\014\n\004name\030\001 \001(\t\022\023\n\013" +
+      "description\030\002 \001(\t\022\035\n\004type\030\003 \001(\0162\017.angel." +
+      "DataType\022\021\n\ttype_attr\030\004 \001(\t\022\023\n\013number_at" +
+      "tr\030\005 \001(\t\022\026\n\016type_list_attr\030\006 \001(\t\022\016\n\006is_r" +
+      "ef\030\020 \001(\010\032\263\001\n\007AttrDef\022\014\n\004name\030\001 \001(\t\022\014\n\004ty" +
+      "pe\030\002 \001(\t\022\'\n\rdefault_value\030\003 \001(\0132\020.angel." +
+      "AttrValue\022\023\n\013description\030\004 \001(\t\022\023\n\013has_mi" +
+      "nimum\030\005 \001(\010\022\017\n\007minimum\030\006 \001(\003\022(\n\016allowed_" +
+      "values\030\007 \001(\0132\020.angel.AttrValue\"5\n\rOpDepr" +
+      "ecation\022\017\n\007version\030\001 \001(\005\022\023\n\013explanation\030" +
+      "\002 \001(\t\"\"\n\006OpList\022\030\n\002op\030\001 \003(\0132\014.angel.OpDe" +
+      "fB-\n\034com.tencent.angel.core.graphB\013OpDef" +
+      "ProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7604,7 +7714,7 @@ public final class OpDefProtos {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.tencent.angel.core.graph.AttrValueProtos.getDescriptor(),
-          com.tencent.angel.core.graph.TypesProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor(),
         }, assigner);
     internal_static_angel_OpDef_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -7637,7 +7747,7 @@ public final class OpDefProtos {
         internal_static_angel_OpList_descriptor,
         new java.lang.String[] { "Op", });
     com.tencent.angel.core.graph.AttrValueProtos.getDescriptor();
-    com.tencent.angel.core.graph.TypesProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -24,7 +24,7 @@ public final class SaverProtos {
      * restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string filename_tensor_name = 1;</code>
+     * <code>string filename_tensor_name = 1;</code>
      */
     java.lang.String getFilenameTensorName();
     /**
@@ -33,7 +33,7 @@ public final class SaverProtos {
      * restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string filename_tensor_name = 1;</code>
+     * <code>string filename_tensor_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getFilenameTensorNameBytes();
@@ -43,7 +43,7 @@ public final class SaverProtos {
      * The operation to run when saving a model checkpoint.
      * </pre>
      *
-     * <code>optional string save_tensor_name = 2;</code>
+     * <code>string save_tensor_name = 2;</code>
      */
     java.lang.String getSaveTensorName();
     /**
@@ -51,7 +51,7 @@ public final class SaverProtos {
      * The operation to run when saving a model checkpoint.
      * </pre>
      *
-     * <code>optional string save_tensor_name = 2;</code>
+     * <code>string save_tensor_name = 2;</code>
      */
     com.google.protobuf.ByteString
         getSaveTensorNameBytes();
@@ -61,7 +61,7 @@ public final class SaverProtos {
      * The operation to run when restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string restore_op_name = 3;</code>
+     * <code>string restore_op_name = 3;</code>
      */
     java.lang.String getRestoreOpName();
     /**
@@ -69,7 +69,7 @@ public final class SaverProtos {
      * The operation to run when restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string restore_op_name = 3;</code>
+     * <code>string restore_op_name = 3;</code>
      */
     com.google.protobuf.ByteString
         getRestoreOpNameBytes();
@@ -79,7 +79,7 @@ public final class SaverProtos {
      * Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
      * </pre>
      *
-     * <code>optional int32 max_to_keep = 4;</code>
+     * <code>int32 max_to_keep = 4;</code>
      */
     int getMaxToKeep();
 
@@ -88,7 +88,7 @@ public final class SaverProtos {
      * Shard the save files, one per device that has Variable nodes.
      * </pre>
      *
-     * <code>optional bool sharded = 5;</code>
+     * <code>bool sharded = 5;</code>
      */
     boolean getSharded();
 
@@ -100,16 +100,16 @@ public final class SaverProtos {
      * for every n hours of training.
      * </pre>
      *
-     * <code>optional float keep_checkpoint_every_n_hours = 6;</code>
+     * <code>float keep_checkpoint_every_n_hours = 6;</code>
      */
     float getKeepCheckpointEveryNHours();
 
     /**
-     * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+     * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
      */
     int getVersionValue();
     /**
-     * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+     * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
      */
     com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion getVersion();
   }
@@ -124,6 +124,7 @@ public final class SaverProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SaverDef)
       SaverDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SaverDef.newBuilder() to construct.
     private SaverDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -141,14 +142,19 @@ public final class SaverProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SaverDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -158,7 +164,8 @@ public final class SaverProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -210,6 +217,7 @@ public final class SaverProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -371,7 +379,7 @@ public final class SaverProtos {
      * restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string filename_tensor_name = 1;</code>
+     * <code>string filename_tensor_name = 1;</code>
      */
     public java.lang.String getFilenameTensorName() {
       java.lang.Object ref = filenameTensorName_;
@@ -391,7 +399,7 @@ public final class SaverProtos {
      * restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string filename_tensor_name = 1;</code>
+     * <code>string filename_tensor_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getFilenameTensorNameBytes() {
@@ -414,7 +422,7 @@ public final class SaverProtos {
      * The operation to run when saving a model checkpoint.
      * </pre>
      *
-     * <code>optional string save_tensor_name = 2;</code>
+     * <code>string save_tensor_name = 2;</code>
      */
     public java.lang.String getSaveTensorName() {
       java.lang.Object ref = saveTensorName_;
@@ -433,7 +441,7 @@ public final class SaverProtos {
      * The operation to run when saving a model checkpoint.
      * </pre>
      *
-     * <code>optional string save_tensor_name = 2;</code>
+     * <code>string save_tensor_name = 2;</code>
      */
     public com.google.protobuf.ByteString
         getSaveTensorNameBytes() {
@@ -456,7 +464,7 @@ public final class SaverProtos {
      * The operation to run when restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string restore_op_name = 3;</code>
+     * <code>string restore_op_name = 3;</code>
      */
     public java.lang.String getRestoreOpName() {
       java.lang.Object ref = restoreOpName_;
@@ -475,7 +483,7 @@ public final class SaverProtos {
      * The operation to run when restoring a model checkpoint.
      * </pre>
      *
-     * <code>optional string restore_op_name = 3;</code>
+     * <code>string restore_op_name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getRestoreOpNameBytes() {
@@ -498,7 +506,7 @@ public final class SaverProtos {
      * Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
      * </pre>
      *
-     * <code>optional int32 max_to_keep = 4;</code>
+     * <code>int32 max_to_keep = 4;</code>
      */
     public int getMaxToKeep() {
       return maxToKeep_;
@@ -511,7 +519,7 @@ public final class SaverProtos {
      * Shard the save files, one per device that has Variable nodes.
      * </pre>
      *
-     * <code>optional bool sharded = 5;</code>
+     * <code>bool sharded = 5;</code>
      */
     public boolean getSharded() {
       return sharded_;
@@ -527,7 +535,7 @@ public final class SaverProtos {
      * for every n hours of training.
      * </pre>
      *
-     * <code>optional float keep_checkpoint_every_n_hours = 6;</code>
+     * <code>float keep_checkpoint_every_n_hours = 6;</code>
      */
     public float getKeepCheckpointEveryNHours() {
       return keepCheckpointEveryNHours_;
@@ -536,13 +544,13 @@ public final class SaverProtos {
     public static final int VERSION_FIELD_NUMBER = 7;
     private int version_;
     /**
-     * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+     * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
      */
     public int getVersionValue() {
       return version_;
     }
     /**
-     * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+     * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
      */
     public com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion getVersion() {
       com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion result = com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion.valueOf(version_);
@@ -582,6 +590,7 @@ public final class SaverProtos {
       if (version_ != com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion.LEGACY.getNumber()) {
         output.writeEnum(7, version_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -614,11 +623,11 @@ public final class SaverProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(7, version_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -645,6 +654,7 @@ public final class SaverProtos {
           == java.lang.Float.floatToIntBits(
               other.getKeepCheckpointEveryNHours()));
       result = result && version_ == other.version_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -654,7 +664,7 @@ public final class SaverProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + FILENAME_TENSOR_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getFilenameTensorName().hashCode();
       hash = (37 * hash) + SAVE_TENSOR_NAME_FIELD_NUMBER;
@@ -676,6 +686,17 @@ public final class SaverProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.SaverProtos.SaverDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.SaverProtos.SaverDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.SaverProtos.SaverDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -845,7 +866,7 @@ public final class SaverProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -858,12 +879,12 @@ public final class SaverProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -901,6 +922,7 @@ public final class SaverProtos {
         if (other.version_ != 0) {
           setVersionValue(other.getVersionValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -934,7 +956,7 @@ public final class SaverProtos {
        * restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string filename_tensor_name = 1;</code>
+       * <code>string filename_tensor_name = 1;</code>
        */
       public java.lang.String getFilenameTensorName() {
         java.lang.Object ref = filenameTensorName_;
@@ -954,7 +976,7 @@ public final class SaverProtos {
        * restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string filename_tensor_name = 1;</code>
+       * <code>string filename_tensor_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getFilenameTensorNameBytes() {
@@ -975,7 +997,7 @@ public final class SaverProtos {
        * restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string filename_tensor_name = 1;</code>
+       * <code>string filename_tensor_name = 1;</code>
        */
       public Builder setFilenameTensorName(
           java.lang.String value) {
@@ -993,7 +1015,7 @@ public final class SaverProtos {
        * restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string filename_tensor_name = 1;</code>
+       * <code>string filename_tensor_name = 1;</code>
        */
       public Builder clearFilenameTensorName() {
         
@@ -1007,7 +1029,7 @@ public final class SaverProtos {
        * restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string filename_tensor_name = 1;</code>
+       * <code>string filename_tensor_name = 1;</code>
        */
       public Builder setFilenameTensorNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1027,7 +1049,7 @@ public final class SaverProtos {
        * The operation to run when saving a model checkpoint.
        * </pre>
        *
-       * <code>optional string save_tensor_name = 2;</code>
+       * <code>string save_tensor_name = 2;</code>
        */
       public java.lang.String getSaveTensorName() {
         java.lang.Object ref = saveTensorName_;
@@ -1046,7 +1068,7 @@ public final class SaverProtos {
        * The operation to run when saving a model checkpoint.
        * </pre>
        *
-       * <code>optional string save_tensor_name = 2;</code>
+       * <code>string save_tensor_name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getSaveTensorNameBytes() {
@@ -1066,7 +1088,7 @@ public final class SaverProtos {
        * The operation to run when saving a model checkpoint.
        * </pre>
        *
-       * <code>optional string save_tensor_name = 2;</code>
+       * <code>string save_tensor_name = 2;</code>
        */
       public Builder setSaveTensorName(
           java.lang.String value) {
@@ -1083,7 +1105,7 @@ public final class SaverProtos {
        * The operation to run when saving a model checkpoint.
        * </pre>
        *
-       * <code>optional string save_tensor_name = 2;</code>
+       * <code>string save_tensor_name = 2;</code>
        */
       public Builder clearSaveTensorName() {
         
@@ -1096,7 +1118,7 @@ public final class SaverProtos {
        * The operation to run when saving a model checkpoint.
        * </pre>
        *
-       * <code>optional string save_tensor_name = 2;</code>
+       * <code>string save_tensor_name = 2;</code>
        */
       public Builder setSaveTensorNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1116,7 +1138,7 @@ public final class SaverProtos {
        * The operation to run when restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string restore_op_name = 3;</code>
+       * <code>string restore_op_name = 3;</code>
        */
       public java.lang.String getRestoreOpName() {
         java.lang.Object ref = restoreOpName_;
@@ -1135,7 +1157,7 @@ public final class SaverProtos {
        * The operation to run when restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string restore_op_name = 3;</code>
+       * <code>string restore_op_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getRestoreOpNameBytes() {
@@ -1155,7 +1177,7 @@ public final class SaverProtos {
        * The operation to run when restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string restore_op_name = 3;</code>
+       * <code>string restore_op_name = 3;</code>
        */
       public Builder setRestoreOpName(
           java.lang.String value) {
@@ -1172,7 +1194,7 @@ public final class SaverProtos {
        * The operation to run when restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string restore_op_name = 3;</code>
+       * <code>string restore_op_name = 3;</code>
        */
       public Builder clearRestoreOpName() {
         
@@ -1185,7 +1207,7 @@ public final class SaverProtos {
        * The operation to run when restoring a model checkpoint.
        * </pre>
        *
-       * <code>optional string restore_op_name = 3;</code>
+       * <code>string restore_op_name = 3;</code>
        */
       public Builder setRestoreOpNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1205,7 +1227,7 @@ public final class SaverProtos {
        * Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
        * </pre>
        *
-       * <code>optional int32 max_to_keep = 4;</code>
+       * <code>int32 max_to_keep = 4;</code>
        */
       public int getMaxToKeep() {
         return maxToKeep_;
@@ -1215,7 +1237,7 @@ public final class SaverProtos {
        * Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
        * </pre>
        *
-       * <code>optional int32 max_to_keep = 4;</code>
+       * <code>int32 max_to_keep = 4;</code>
        */
       public Builder setMaxToKeep(int value) {
         
@@ -1228,7 +1250,7 @@ public final class SaverProtos {
        * Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
        * </pre>
        *
-       * <code>optional int32 max_to_keep = 4;</code>
+       * <code>int32 max_to_keep = 4;</code>
        */
       public Builder clearMaxToKeep() {
         
@@ -1243,7 +1265,7 @@ public final class SaverProtos {
        * Shard the save files, one per device that has Variable nodes.
        * </pre>
        *
-       * <code>optional bool sharded = 5;</code>
+       * <code>bool sharded = 5;</code>
        */
       public boolean getSharded() {
         return sharded_;
@@ -1253,7 +1275,7 @@ public final class SaverProtos {
        * Shard the save files, one per device that has Variable nodes.
        * </pre>
        *
-       * <code>optional bool sharded = 5;</code>
+       * <code>bool sharded = 5;</code>
        */
       public Builder setSharded(boolean value) {
         
@@ -1266,7 +1288,7 @@ public final class SaverProtos {
        * Shard the save files, one per device that has Variable nodes.
        * </pre>
        *
-       * <code>optional bool sharded = 5;</code>
+       * <code>bool sharded = 5;</code>
        */
       public Builder clearSharded() {
         
@@ -1284,7 +1306,7 @@ public final class SaverProtos {
        * for every n hours of training.
        * </pre>
        *
-       * <code>optional float keep_checkpoint_every_n_hours = 6;</code>
+       * <code>float keep_checkpoint_every_n_hours = 6;</code>
        */
       public float getKeepCheckpointEveryNHours() {
         return keepCheckpointEveryNHours_;
@@ -1297,7 +1319,7 @@ public final class SaverProtos {
        * for every n hours of training.
        * </pre>
        *
-       * <code>optional float keep_checkpoint_every_n_hours = 6;</code>
+       * <code>float keep_checkpoint_every_n_hours = 6;</code>
        */
       public Builder setKeepCheckpointEveryNHours(float value) {
         
@@ -1313,7 +1335,7 @@ public final class SaverProtos {
        * for every n hours of training.
        * </pre>
        *
-       * <code>optional float keep_checkpoint_every_n_hours = 6;</code>
+       * <code>float keep_checkpoint_every_n_hours = 6;</code>
        */
       public Builder clearKeepCheckpointEveryNHours() {
         
@@ -1324,13 +1346,13 @@ public final class SaverProtos {
 
       private int version_ = 0;
       /**
-       * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+       * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
        */
       public int getVersionValue() {
         return version_;
       }
       /**
-       * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+       * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
        */
       public Builder setVersionValue(int value) {
         version_ = value;
@@ -1338,14 +1360,14 @@ public final class SaverProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+       * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
        */
       public com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion getVersion() {
         com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion result = com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion.valueOf(version_);
         return result == null ? com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+       * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
        */
       public Builder setVersion(com.tencent.angel.core.saver.SaverProtos.SaverDef.CheckpointFormatVersion value) {
         if (value == null) {
@@ -1357,7 +1379,7 @@ public final class SaverProtos {
         return this;
       }
       /**
-       * <code>optional .angel.SaverDef.CheckpointFormatVersion version = 7;</code>
+       * <code>.angel.SaverDef.CheckpointFormatVersion version = 7;</code>
        */
       public Builder clearVersion() {
         
@@ -1367,12 +1389,12 @@ public final class SaverProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1395,7 +1417,7 @@ public final class SaverProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SaverDef(input, extensionRegistry);
+        return new SaverDef(input, extensionRegistry);
       }
     };
 

@@ -25,7 +25,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     boolean hasModelSpec();
     /**
@@ -35,7 +35,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec();
     /**
@@ -45,7 +45,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder();
   }
@@ -61,6 +61,7 @@ public final class GetModelStatusProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.GetModelStatusRequest)
       GetModelStatusRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GetModelStatusRequest.newBuilder() to construct.
     private GetModelStatusRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -71,14 +72,19 @@ public final class GetModelStatusProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GetModelStatusRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -88,7 +94,8 @@ public final class GetModelStatusProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -114,6 +121,7 @@ public final class GetModelStatusProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -138,7 +146,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public boolean hasModelSpec() {
       return modelSpec_ != null;
@@ -150,7 +158,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
       return modelSpec_ == null ? com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.getDefaultInstance() : modelSpec_;
@@ -162,7 +170,7 @@ public final class GetModelStatusProtos {
      * status of only that version will be returned.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+     * <code>.angel.serving.ModelSpec model_spec = 1;</code>
      */
     public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
       return getModelSpec();
@@ -183,6 +191,7 @@ public final class GetModelStatusProtos {
       if (modelSpec_ != null) {
         output.writeMessage(1, getModelSpec());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -194,11 +203,11 @@ public final class GetModelStatusProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getModelSpec());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -215,6 +224,7 @@ public final class GetModelStatusProtos {
         result = result && getModelSpec()
             .equals(other.getModelSpec());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -224,7 +234,7 @@ public final class GetModelStatusProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasModelSpec()) {
         hash = (37 * hash) + MODEL_SPEC_FIELD_NUMBER;
         hash = (53 * hash) + getModelSpec().hashCode();
@@ -234,6 +244,17 @@ public final class GetModelStatusProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -394,7 +415,7 @@ public final class GetModelStatusProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -407,12 +428,12 @@ public final class GetModelStatusProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -429,6 +450,7 @@ public final class GetModelStatusProtos {
         if (other.hasModelSpec()) {
           mergeModelSpec(other.getModelSpec());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -465,7 +487,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public boolean hasModelSpec() {
         return modelSpecBuilder_ != null || modelSpec_ != null;
@@ -477,7 +499,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec getModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -493,7 +515,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -515,7 +537,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder setModelSpec(
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder builderForValue) {
@@ -535,7 +557,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder mergeModelSpec(com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec value) {
         if (modelSpecBuilder_ == null) {
@@ -559,7 +581,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public Builder clearModelSpec() {
         if (modelSpecBuilder_ == null) {
@@ -579,7 +601,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder getModelSpecBuilder() {
         
@@ -593,7 +615,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       public com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder getModelSpecOrBuilder() {
         if (modelSpecBuilder_ != null) {
@@ -610,7 +632,7 @@ public final class GetModelStatusProtos {
        * status of only that version will be returned.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelSpec model_spec = 1;</code>
+       * <code>.angel.serving.ModelSpec model_spec = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec.Builder, com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpecOrBuilder> 
@@ -627,12 +649,12 @@ public final class GetModelStatusProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -655,7 +677,7 @@ public final class GetModelStatusProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetModelStatusRequest(input, extensionRegistry);
+        return new GetModelStatusRequest(input, extensionRegistry);
       }
     };
 
@@ -683,7 +705,7 @@ public final class GetModelStatusProtos {
      * Model version.
      * </pre>
      *
-     * <code>optional int64 version = 1;</code>
+     * <code>int64 version = 1;</code>
      */
     long getVersion();
 
@@ -692,7 +714,7 @@ public final class GetModelStatusProtos {
      * Model state.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+     * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
      */
     int getStateValue();
     /**
@@ -700,7 +722,7 @@ public final class GetModelStatusProtos {
      * Model state.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+     * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
      */
     com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State getState();
 
@@ -709,7 +731,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     boolean hasStatus();
     /**
@@ -717,7 +739,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto getStatus();
     /**
@@ -725,7 +747,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProtoOrBuilder getStatusOrBuilder();
   }
@@ -740,6 +762,7 @@ public final class GetModelStatusProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.ModelVersionStatus)
       ModelVersionStatusOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ModelVersionStatus.newBuilder() to construct.
     private ModelVersionStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -752,14 +775,19 @@ public final class GetModelStatusProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ModelVersionStatus(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -769,7 +797,8 @@ public final class GetModelStatusProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -806,6 +835,7 @@ public final class GetModelStatusProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1035,7 +1065,7 @@ public final class GetModelStatusProtos {
      * Model version.
      * </pre>
      *
-     * <code>optional int64 version = 1;</code>
+     * <code>int64 version = 1;</code>
      */
     public long getVersion() {
       return version_;
@@ -1048,7 +1078,7 @@ public final class GetModelStatusProtos {
      * Model state.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+     * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
      */
     public int getStateValue() {
       return state_;
@@ -1058,7 +1088,7 @@ public final class GetModelStatusProtos {
      * Model state.
      * </pre>
      *
-     * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+     * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State getState() {
       com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State result = com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State.valueOf(state_);
@@ -1072,7 +1102,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     public boolean hasStatus() {
       return status_ != null;
@@ -1082,7 +1112,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto getStatus() {
       return status_ == null ? com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto.getDefaultInstance() : status_;
@@ -1092,7 +1122,7 @@ public final class GetModelStatusProtos {
      * Model status.
      * </pre>
      *
-     * <code>optional .angel.serving.StatusProto status = 3;</code>
+     * <code>.angel.serving.StatusProto status = 3;</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProtoOrBuilder getStatusOrBuilder() {
       return getStatus();
@@ -1119,6 +1149,7 @@ public final class GetModelStatusProtos {
       if (status_ != null) {
         output.writeMessage(3, getStatus());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1138,11 +1169,11 @@ public final class GetModelStatusProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getStatus());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1162,6 +1193,7 @@ public final class GetModelStatusProtos {
         result = result && getStatus()
             .equals(other.getStatus());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1171,7 +1203,7 @@ public final class GetModelStatusProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VERSION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getVersion());
@@ -1186,6 +1218,17 @@ public final class GetModelStatusProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1351,7 +1394,7 @@ public final class GetModelStatusProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1364,12 +1407,12 @@ public final class GetModelStatusProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1392,6 +1435,7 @@ public final class GetModelStatusProtos {
         if (other.hasStatus()) {
           mergeStatus(other.getStatus());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1424,7 +1468,7 @@ public final class GetModelStatusProtos {
        * Model version.
        * </pre>
        *
-       * <code>optional int64 version = 1;</code>
+       * <code>int64 version = 1;</code>
        */
       public long getVersion() {
         return version_;
@@ -1434,7 +1478,7 @@ public final class GetModelStatusProtos {
        * Model version.
        * </pre>
        *
-       * <code>optional int64 version = 1;</code>
+       * <code>int64 version = 1;</code>
        */
       public Builder setVersion(long value) {
         
@@ -1447,7 +1491,7 @@ public final class GetModelStatusProtos {
        * Model version.
        * </pre>
        *
-       * <code>optional int64 version = 1;</code>
+       * <code>int64 version = 1;</code>
        */
       public Builder clearVersion() {
         
@@ -1462,7 +1506,7 @@ public final class GetModelStatusProtos {
        * Model state.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+       * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
        */
       public int getStateValue() {
         return state_;
@@ -1472,7 +1516,7 @@ public final class GetModelStatusProtos {
        * Model state.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+       * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
        */
       public Builder setStateValue(int value) {
         state_ = value;
@@ -1484,7 +1528,7 @@ public final class GetModelStatusProtos {
        * Model state.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+       * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State getState() {
         com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State result = com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State.valueOf(state_);
@@ -1495,7 +1539,7 @@ public final class GetModelStatusProtos {
        * Model state.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+       * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
        */
       public Builder setState(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.State value) {
         if (value == null) {
@@ -1511,7 +1555,7 @@ public final class GetModelStatusProtos {
        * Model state.
        * </pre>
        *
-       * <code>optional .angel.serving.ModelVersionStatus.State state = 2;</code>
+       * <code>.angel.serving.ModelVersionStatus.State state = 2;</code>
        */
       public Builder clearState() {
         
@@ -1528,7 +1572,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public boolean hasStatus() {
         return statusBuilder_ != null || status_ != null;
@@ -1538,7 +1582,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto getStatus() {
         if (statusBuilder_ == null) {
@@ -1552,7 +1596,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public Builder setStatus(com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto value) {
         if (statusBuilder_ == null) {
@@ -1572,7 +1616,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public Builder setStatus(
           com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto.Builder builderForValue) {
@@ -1590,7 +1634,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public Builder mergeStatus(com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto value) {
         if (statusBuilder_ == null) {
@@ -1612,7 +1656,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public Builder clearStatus() {
         if (statusBuilder_ == null) {
@@ -1630,7 +1674,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto.Builder getStatusBuilder() {
         
@@ -1642,7 +1686,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProtoOrBuilder getStatusOrBuilder() {
         if (statusBuilder_ != null) {
@@ -1657,7 +1701,7 @@ public final class GetModelStatusProtos {
        * Model status.
        * </pre>
        *
-       * <code>optional .angel.serving.StatusProto status = 3;</code>
+       * <code>.angel.serving.StatusProto status = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto, com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto.Builder, com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProtoOrBuilder> 
@@ -1674,12 +1718,12 @@ public final class GetModelStatusProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1702,7 +1746,7 @@ public final class GetModelStatusProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelVersionStatus(input, extensionRegistry);
+        return new ModelVersionStatus(input, extensionRegistry);
       }
     };
 
@@ -1730,7 +1774,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     java.util.List<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus> 
         getModelVersionStatusList();
@@ -1739,7 +1783,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus getModelVersionStatus(int index);
     /**
@@ -1747,7 +1791,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     int getModelVersionStatusCount();
     /**
@@ -1755,7 +1799,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     java.util.List<? extends com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder> 
         getModelVersionStatusOrBuilderList();
@@ -1764,7 +1808,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder getModelVersionStatusOrBuilder(
         int index);
@@ -1780,6 +1824,7 @@ public final class GetModelStatusProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.serving.GetModelStatusResponse)
       GetModelStatusResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GetModelStatusResponse.newBuilder() to construct.
     private GetModelStatusResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1791,14 +1836,19 @@ public final class GetModelStatusProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GetModelStatusResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1808,7 +1858,8 @@ public final class GetModelStatusProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1833,6 +1884,7 @@ public final class GetModelStatusProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           modelVersionStatus_ = java.util.Collections.unmodifiableList(modelVersionStatus_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1855,7 +1907,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     public java.util.List<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus> getModelVersionStatusList() {
       return modelVersionStatus_;
@@ -1865,7 +1917,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     public java.util.List<? extends com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder> 
         getModelVersionStatusOrBuilderList() {
@@ -1876,7 +1928,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     public int getModelVersionStatusCount() {
       return modelVersionStatus_.size();
@@ -1886,7 +1938,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus getModelVersionStatus(int index) {
       return modelVersionStatus_.get(index);
@@ -1896,7 +1948,7 @@ public final class GetModelStatusProtos {
      * Version number and status information for applicable model version(s).
      * </pre>
      *
-     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+     * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
      */
     public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder getModelVersionStatusOrBuilder(
         int index) {
@@ -1918,6 +1970,7 @@ public final class GetModelStatusProtos {
       for (int i = 0; i < modelVersionStatus_.size(); i++) {
         output.writeMessage(1, modelVersionStatus_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1929,11 +1982,11 @@ public final class GetModelStatusProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, modelVersionStatus_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1947,6 +2000,7 @@ public final class GetModelStatusProtos {
       boolean result = true;
       result = result && getModelVersionStatusList()
           .equals(other.getModelVersionStatusList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1956,7 +2010,7 @@ public final class GetModelStatusProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getModelVersionStatusCount() > 0) {
         hash = (37 * hash) + MODEL_VERSION_STATUS_FIELD_NUMBER;
         hash = (53 * hash) + getModelVersionStatusList().hashCode();
@@ -1966,6 +2020,17 @@ public final class GetModelStatusProtos {
       return hash;
     }
 
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2131,7 +2196,7 @@ public final class GetModelStatusProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2144,12 +2209,12 @@ public final class GetModelStatusProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2189,6 +2254,7 @@ public final class GetModelStatusProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2233,7 +2299,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public java.util.List<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus> getModelVersionStatusList() {
         if (modelVersionStatusBuilder_ == null) {
@@ -2247,7 +2313,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public int getModelVersionStatusCount() {
         if (modelVersionStatusBuilder_ == null) {
@@ -2261,7 +2327,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus getModelVersionStatus(int index) {
         if (modelVersionStatusBuilder_ == null) {
@@ -2275,7 +2341,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder setModelVersionStatus(
           int index, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus value) {
@@ -2296,7 +2362,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder setModelVersionStatus(
           int index, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder builderForValue) {
@@ -2314,7 +2380,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder addModelVersionStatus(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus value) {
         if (modelVersionStatusBuilder_ == null) {
@@ -2334,7 +2400,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder addModelVersionStatus(
           int index, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus value) {
@@ -2355,7 +2421,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder addModelVersionStatus(
           com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder builderForValue) {
@@ -2373,7 +2439,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder addModelVersionStatus(
           int index, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder builderForValue) {
@@ -2391,7 +2457,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder addAllModelVersionStatus(
           java.lang.Iterable<? extends com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus> values) {
@@ -2410,7 +2476,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder clearModelVersionStatus() {
         if (modelVersionStatusBuilder_ == null) {
@@ -2427,7 +2493,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public Builder removeModelVersionStatus(int index) {
         if (modelVersionStatusBuilder_ == null) {
@@ -2444,7 +2510,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder getModelVersionStatusBuilder(
           int index) {
@@ -2455,7 +2521,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder getModelVersionStatusOrBuilder(
           int index) {
@@ -2469,7 +2535,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public java.util.List<? extends com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder> 
            getModelVersionStatusOrBuilderList() {
@@ -2484,7 +2550,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder addModelVersionStatusBuilder() {
         return getModelVersionStatusFieldBuilder().addBuilder(
@@ -2495,7 +2561,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder addModelVersionStatusBuilder(
           int index) {
@@ -2507,7 +2573,7 @@ public final class GetModelStatusProtos {
        * Version number and status information for applicable model version(s).
        * </pre>
        *
-       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1;</code>
+       * <code>repeated .angel.serving.ModelVersionStatus model_version_status = 1[json_name = "model_version_status"];</code>
        */
       public java.util.List<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.Builder> 
            getModelVersionStatusBuilderList() {
@@ -2529,12 +2595,12 @@ public final class GetModelStatusProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2557,7 +2623,7 @@ public final class GetModelStatusProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetModelStatusResponse(input, extensionRegistry);
+        return new GetModelStatusResponse(input, extensionRegistry);
       }
     };
 
@@ -2609,7 +2675,7 @@ public final class GetModelStatusProtos {
       ".serving.ModelVersionStatus.State\022*\n\006sta" +
       "tus\030\003 \001(\0132\032.angel.serving.StatusProto\"S\n" +
       "\005State\022\013\n\007UNKNOWN\020\000\022\t\n\005START\020\n\022\013\n\007LOADIN" +
-      "G\020\024\022\r\n\tAVAILABLE\020\036\022\r\n\tUNLOADING\020(\022\007\n\003END",
+      "G\020\024\022\r\n\tAVAILABLE\020\036\022\r\n\tUNLOADING\020(\022\007\n\003END" +
       "\0202\"o\n\026GetModelStatusResponse\022U\n\024model_ve" +
       "rsion_status\030\001 \003(\0132!.angel.serving.Model" +
       "VersionStatusR\024model_version_statusBA\n\'c" +

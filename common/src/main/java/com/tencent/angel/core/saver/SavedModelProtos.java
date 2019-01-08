@@ -25,7 +25,7 @@ public final class SavedModelProtos {
      * at release will be 1.
      * </pre>
      *
-     * <code>optional int64 saved_model_schema_version = 1;</code>
+     * <code>int64 saved_model_schema_version = 1;</code>
      */
     long getSavedModelSchemaVersion();
 
@@ -85,6 +85,7 @@ public final class SavedModelProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.SavedModel)
       SavedModelOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SavedModel.newBuilder() to construct.
     private SavedModel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -97,14 +98,19 @@ public final class SavedModelProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SavedModel(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -114,7 +120,8 @@ public final class SavedModelProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -144,6 +151,7 @@ public final class SavedModelProtos {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           metaGraphs_ = java.util.Collections.unmodifiableList(metaGraphs_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -169,7 +177,7 @@ public final class SavedModelProtos {
      * at release will be 1.
      * </pre>
      *
-     * <code>optional int64 saved_model_schema_version = 1;</code>
+     * <code>int64 saved_model_schema_version = 1;</code>
      */
     public long getSavedModelSchemaVersion() {
       return savedModelSchemaVersion_;
@@ -248,6 +256,7 @@ public final class SavedModelProtos {
       for (int i = 0; i < metaGraphs_.size(); i++) {
         output.writeMessage(2, metaGraphs_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -263,11 +272,11 @@ public final class SavedModelProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, metaGraphs_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -283,6 +292,7 @@ public final class SavedModelProtos {
           == other.getSavedModelSchemaVersion());
       result = result && getMetaGraphsList()
           .equals(other.getMetaGraphsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -292,7 +302,7 @@ public final class SavedModelProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SAVED_MODEL_SCHEMA_VERSION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSavedModelSchemaVersion());
@@ -305,6 +315,17 @@ public final class SavedModelProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.saver.SavedModelProtos.SavedModel parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.saver.SavedModelProtos.SavedModel parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.saver.SavedModelProtos.SavedModel parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -476,7 +497,7 @@ public final class SavedModelProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -489,12 +510,12 @@ public final class SavedModelProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -537,6 +558,7 @@ public final class SavedModelProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -572,7 +594,7 @@ public final class SavedModelProtos {
        * at release will be 1.
        * </pre>
        *
-       * <code>optional int64 saved_model_schema_version = 1;</code>
+       * <code>int64 saved_model_schema_version = 1;</code>
        */
       public long getSavedModelSchemaVersion() {
         return savedModelSchemaVersion_;
@@ -584,7 +606,7 @@ public final class SavedModelProtos {
        * at release will be 1.
        * </pre>
        *
-       * <code>optional int64 saved_model_schema_version = 1;</code>
+       * <code>int64 saved_model_schema_version = 1;</code>
        */
       public Builder setSavedModelSchemaVersion(long value) {
         
@@ -599,7 +621,7 @@ public final class SavedModelProtos {
        * at release will be 1.
        * </pre>
        *
-       * <code>optional int64 saved_model_schema_version = 1;</code>
+       * <code>int64 saved_model_schema_version = 1;</code>
        */
       public Builder clearSavedModelSchemaVersion() {
         
@@ -921,12 +943,12 @@ public final class SavedModelProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -949,7 +971,7 @@ public final class SavedModelProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SavedModel(input, extensionRegistry);
+        return new SavedModel(input, extensionRegistry);
       }
     };
 

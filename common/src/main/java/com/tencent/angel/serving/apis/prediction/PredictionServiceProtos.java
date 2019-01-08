@@ -24,25 +24,21 @@ public final class PredictionServiceProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n(apis/prediction/prediction_service.pro" +
-      "to\022\rangel.serving\032$apis/prediction/class" +
-      "ification.proto\032(apis/prediction/get_mod" +
-      "el_metadata.proto\032\037apis/prediction/infer" +
-      "ence.proto\032\035apis/prediction/predict.prot" +
-      "o\032 apis/prediction/regression.proto2\312\003\n\021" +
-      "PredictionService\022W\n\010Classify\022$.angel.se" +
-      "rving.ClassificationRequest\032%.angel.serv" +
-      "ing.ClassificationResponse\022N\n\007Regress\022 ." +
-      "angel.serving.RegressionRequest\032!.angel.",
-      "serving.RegressionResponse\022H\n\007Predict\022\035." +
-      "angel.serving.PredictRequest\032\036.angel.ser" +
-      "ving.PredictResponse\022]\n\016MultiInference\022$" +
-      ".angel.serving.MultiInferenceRequest\032%.a" +
-      "ngel.serving.MultiInferenceResponse\022c\n\020G" +
-      "etModelMetadata\022&.angel.serving.GetModel" +
-      "MetadataRequest\032\'.angel.serving.GetModel" +
-      "MetadataResponseBF\n)com.tencent.angel.se" +
-      "rving.apis.predictionB\027PredictionService" +
-      "ProtosP\000b\006proto3"
+      "to\022\rangel.serving\032(apis/prediction/get_m" +
+      "odel_metadata.proto\032\035apis/prediction/req" +
+      "uest.proto\032\036apis/prediction/response.pro" +
+      "to2\360\002\n\021PredictionService\022;\n\010Classify\022\026.a" +
+      "ngel.serving.Request\032\027.angel.serving.Res" +
+      "ponse\022:\n\007Regress\022\026.angel.serving.Request" +
+      "\032\027.angel.serving.Response\022:\n\007Predict\022\026.a" +
+      "ngel.serving.Request\032\027.angel.serving.Res" +
+      "ponse\022A\n\016MultiInference\022\026.angel.serving." +
+      "Request\032\027.angel.serving.Response\022c\n\020GetM" +
+      "odelMetadata\022&.angel.serving.GetModelMet" +
+      "adataRequest\032\'.angel.serving.GetModelMet" +
+      "adataResponseBF\n)com.tencent.angel.servi" +
+      "ng.apis.predictionB\027PredictionServicePro" +
+      "tosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -55,17 +51,13 @@ public final class PredictionServiceProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.tencent.angel.serving.apis.prediction.ClassificationProtos.getDescriptor(),
           com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.getDescriptor(),
-          com.tencent.angel.serving.apis.prediction.InferenceProtos.getDescriptor(),
-          com.tencent.angel.serving.apis.prediction.PredictProtos.getDescriptor(),
-          com.tencent.angel.serving.apis.prediction.RegressionProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.prediction.RequestProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.prediction.ResponseProtos.getDescriptor(),
         }, assigner);
-    com.tencent.angel.serving.apis.prediction.ClassificationProtos.getDescriptor();
     com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.getDescriptor();
-    com.tencent.angel.serving.apis.prediction.InferenceProtos.getDescriptor();
-    com.tencent.angel.serving.apis.prediction.PredictProtos.getDescriptor();
-    com.tencent.angel.serving.apis.prediction.RegressionProtos.getDescriptor();
+    com.tencent.angel.serving.apis.prediction.RequestProtos.getDescriptor();
+    com.tencent.angel.serving.apis.prediction.ResponseProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

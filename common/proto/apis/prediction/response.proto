@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.prediction";
+option java_outer_classname = "ResponseProtos";
+
+import "apis/common/instance.proto";
+import "apis/common/model.proto";
+
+message Response {
+    ModelSpec model_spec = 1;
+    repeated Instance predictions = 2;
+    string error = 3;
+}

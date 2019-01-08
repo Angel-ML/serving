@@ -23,7 +23,7 @@ public final class ResourceProtos {
      * The type of device on which the resource resides, e.g. CPU or GPU.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     java.lang.String getDevice();
     /**
@@ -31,7 +31,7 @@ public final class ResourceProtos {
      * The type of device on which the resource resides, e.g. CPU or GPU.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     com.google.protobuf.ByteString
         getDeviceBytes();
@@ -45,7 +45,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     boolean hasDeviceInstance();
     /**
@@ -57,7 +57,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     com.google.protobuf.UInt32Value getDeviceInstance();
     /**
@@ -69,7 +69,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     com.google.protobuf.UInt32ValueOrBuilder getDeviceInstanceOrBuilder();
 
@@ -81,7 +81,7 @@ public final class ResourceProtos {
      * (e.g. bytes or millicores) in this string, as in "ram_bytes".
      * </pre>
      *
-     * <code>optional string kind = 3;</code>
+     * <code>string kind = 3;</code>
      */
     java.lang.String getKind();
     /**
@@ -92,7 +92,7 @@ public final class ResourceProtos {
      * (e.g. bytes or millicores) in this string, as in "ram_bytes".
      * </pre>
      *
-     * <code>optional string kind = 3;</code>
+     * <code>string kind = 3;</code>
      */
     com.google.protobuf.ByteString
         getKindBytes();
@@ -108,6 +108,7 @@ public final class ResourceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.Resource)
       ResourceOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Resource.newBuilder() to construct.
     private Resource(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -120,14 +121,19 @@ public final class ResourceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Resource(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -137,7 +143,8 @@ public final class ResourceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -175,6 +182,7 @@ public final class ResourceProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -197,7 +205,7 @@ public final class ResourceProtos {
      * The type of device on which the resource resides, e.g. CPU or GPU.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public java.lang.String getDevice() {
       java.lang.Object ref = device_;
@@ -216,7 +224,7 @@ public final class ResourceProtos {
      * The type of device on which the resource resides, e.g. CPU or GPU.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public com.google.protobuf.ByteString
         getDeviceBytes() {
@@ -243,7 +251,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     public boolean hasDeviceInstance() {
       return deviceInstance_ != null;
@@ -257,7 +265,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     public com.google.protobuf.UInt32Value getDeviceInstance() {
       return deviceInstance_ == null ? com.google.protobuf.UInt32Value.getDefaultInstance() : deviceInstance_;
@@ -271,7 +279,7 @@ public final class ResourceProtos {
      * resources are not (yet) bound to a specific instance.
      * </pre>
      *
-     * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+     * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
      */
     public com.google.protobuf.UInt32ValueOrBuilder getDeviceInstanceOrBuilder() {
       return getDeviceInstance();
@@ -287,7 +295,7 @@ public final class ResourceProtos {
      * (e.g. bytes or millicores) in this string, as in "ram_bytes".
      * </pre>
      *
-     * <code>optional string kind = 3;</code>
+     * <code>string kind = 3;</code>
      */
     public java.lang.String getKind() {
       java.lang.Object ref = kind_;
@@ -309,7 +317,7 @@ public final class ResourceProtos {
      * (e.g. bytes or millicores) in this string, as in "ram_bytes".
      * </pre>
      *
-     * <code>optional string kind = 3;</code>
+     * <code>string kind = 3;</code>
      */
     public com.google.protobuf.ByteString
         getKindBytes() {
@@ -346,6 +354,7 @@ public final class ResourceProtos {
       if (!getKindBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, kind_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -363,11 +372,11 @@ public final class ResourceProtos {
       if (!getKindBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, kind_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -388,6 +397,7 @@ public final class ResourceProtos {
       }
       result = result && getKind()
           .equals(other.getKind());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -397,7 +407,7 @@ public final class ResourceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DEVICE_FIELD_NUMBER;
       hash = (53 * hash) + getDevice().hashCode();
       if (hasDeviceInstance()) {
@@ -411,6 +421,17 @@ public final class ResourceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ResourceProtos.Resource parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ResourceProtos.Resource parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ResourceProtos.Resource parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -576,7 +597,7 @@ public final class ResourceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -589,12 +610,12 @@ public final class ResourceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -619,6 +640,7 @@ public final class ResourceProtos {
           kind_ = other.kind_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -651,7 +673,7 @@ public final class ResourceProtos {
        * The type of device on which the resource resides, e.g. CPU or GPU.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public java.lang.String getDevice() {
         java.lang.Object ref = device_;
@@ -670,7 +692,7 @@ public final class ResourceProtos {
        * The type of device on which the resource resides, e.g. CPU or GPU.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public com.google.protobuf.ByteString
           getDeviceBytes() {
@@ -690,7 +712,7 @@ public final class ResourceProtos {
        * The type of device on which the resource resides, e.g. CPU or GPU.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDevice(
           java.lang.String value) {
@@ -707,7 +729,7 @@ public final class ResourceProtos {
        * The type of device on which the resource resides, e.g. CPU or GPU.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder clearDevice() {
         
@@ -720,7 +742,7 @@ public final class ResourceProtos {
        * The type of device on which the resource resides, e.g. CPU or GPU.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDeviceBytes(
           com.google.protobuf.ByteString value) {
@@ -746,7 +768,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public boolean hasDeviceInstance() {
         return deviceInstanceBuilder_ != null || deviceInstance_ != null;
@@ -760,7 +782,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public com.google.protobuf.UInt32Value getDeviceInstance() {
         if (deviceInstanceBuilder_ == null) {
@@ -778,7 +800,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public Builder setDeviceInstance(com.google.protobuf.UInt32Value value) {
         if (deviceInstanceBuilder_ == null) {
@@ -802,7 +824,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public Builder setDeviceInstance(
           com.google.protobuf.UInt32Value.Builder builderForValue) {
@@ -824,7 +846,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public Builder mergeDeviceInstance(com.google.protobuf.UInt32Value value) {
         if (deviceInstanceBuilder_ == null) {
@@ -850,7 +872,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public Builder clearDeviceInstance() {
         if (deviceInstanceBuilder_ == null) {
@@ -872,7 +894,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public com.google.protobuf.UInt32Value.Builder getDeviceInstanceBuilder() {
         
@@ -888,7 +910,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       public com.google.protobuf.UInt32ValueOrBuilder getDeviceInstanceOrBuilder() {
         if (deviceInstanceBuilder_ != null) {
@@ -907,7 +929,7 @@ public final class ResourceProtos {
        * resources are not (yet) bound to a specific instance.
        * </pre>
        *
-       * <code>optional .google.protobuf.UInt32Value device_instance = 2;</code>
+       * <code>.google.protobuf.UInt32Value device_instance = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.UInt32Value, com.google.protobuf.UInt32Value.Builder, com.google.protobuf.UInt32ValueOrBuilder> 
@@ -932,7 +954,7 @@ public final class ResourceProtos {
        * (e.g. bytes or millicores) in this string, as in "ram_bytes".
        * </pre>
        *
-       * <code>optional string kind = 3;</code>
+       * <code>string kind = 3;</code>
        */
       public java.lang.String getKind() {
         java.lang.Object ref = kind_;
@@ -954,7 +976,7 @@ public final class ResourceProtos {
        * (e.g. bytes or millicores) in this string, as in "ram_bytes".
        * </pre>
        *
-       * <code>optional string kind = 3;</code>
+       * <code>string kind = 3;</code>
        */
       public com.google.protobuf.ByteString
           getKindBytes() {
@@ -977,7 +999,7 @@ public final class ResourceProtos {
        * (e.g. bytes or millicores) in this string, as in "ram_bytes".
        * </pre>
        *
-       * <code>optional string kind = 3;</code>
+       * <code>string kind = 3;</code>
        */
       public Builder setKind(
           java.lang.String value) {
@@ -997,7 +1019,7 @@ public final class ResourceProtos {
        * (e.g. bytes or millicores) in this string, as in "ram_bytes".
        * </pre>
        *
-       * <code>optional string kind = 3;</code>
+       * <code>string kind = 3;</code>
        */
       public Builder clearKind() {
         
@@ -1013,7 +1035,7 @@ public final class ResourceProtos {
        * (e.g. bytes or millicores) in this string, as in "ram_bytes".
        * </pre>
        *
-       * <code>optional string kind = 3;</code>
+       * <code>string kind = 3;</code>
        */
       public Builder setKindBytes(
           com.google.protobuf.ByteString value) {
@@ -1028,12 +1050,12 @@ public final class ResourceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1056,7 +1078,7 @@ public final class ResourceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Resource(input, extensionRegistry);
+        return new Resource(input, extensionRegistry);
       }
     };
 
@@ -1117,6 +1139,7 @@ public final class ResourceProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.ResourceAllocation)
       ResourceAllocationOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ResourceAllocation.newBuilder() to construct.
     private ResourceAllocation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1128,14 +1151,19 @@ public final class ResourceProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ResourceAllocation(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1145,7 +1173,8 @@ public final class ResourceProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1170,6 +1199,7 @@ public final class ResourceProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           resourceQuantities_ = java.util.Collections.unmodifiableList(resourceQuantities_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1190,20 +1220,20 @@ public final class ResourceProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       boolean hasResource();
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       com.tencent.angel.config.ResourceProtos.Resource getResource();
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       com.tencent.angel.config.ResourceProtos.ResourceOrBuilder getResourceOrBuilder();
 
       /**
-       * <code>optional uint64 quantity = 2;</code>
+       * <code>uint64 quantity = 2;</code>
        */
       long getQuantity();
     }
@@ -1219,6 +1249,7 @@ public final class ResourceProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:angel.ResourceAllocation.Entry)
         EntryOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Entry.newBuilder() to construct.
       private Entry(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -1230,14 +1261,19 @@ public final class ResourceProtos {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Entry(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -1247,7 +1283,8 @@ public final class ResourceProtos {
                 done = true;
                 break;
               default: {
-                if (!input.skipField(tag)) {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
                   done = true;
                 }
                 break;
@@ -1278,6 +1315,7 @@ public final class ResourceProtos {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -1296,19 +1334,19 @@ public final class ResourceProtos {
       public static final int RESOURCE_FIELD_NUMBER = 1;
       private com.tencent.angel.config.ResourceProtos.Resource resource_;
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       public boolean hasResource() {
         return resource_ != null;
       }
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       public com.tencent.angel.config.ResourceProtos.Resource getResource() {
         return resource_ == null ? com.tencent.angel.config.ResourceProtos.Resource.getDefaultInstance() : resource_;
       }
       /**
-       * <code>optional .angel.Resource resource = 1;</code>
+       * <code>.angel.Resource resource = 1;</code>
        */
       public com.tencent.angel.config.ResourceProtos.ResourceOrBuilder getResourceOrBuilder() {
         return getResource();
@@ -1317,7 +1355,7 @@ public final class ResourceProtos {
       public static final int QUANTITY_FIELD_NUMBER = 2;
       private long quantity_;
       /**
-       * <code>optional uint64 quantity = 2;</code>
+       * <code>uint64 quantity = 2;</code>
        */
       public long getQuantity() {
         return quantity_;
@@ -1341,6 +1379,7 @@ public final class ResourceProtos {
         if (quantity_ != 0L) {
           output.writeUInt64(2, quantity_);
         }
+        unknownFields.writeTo(output);
       }
 
       public int getSerializedSize() {
@@ -1356,11 +1395,11 @@ public final class ResourceProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeUInt64Size(2, quantity_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1379,6 +1418,7 @@ public final class ResourceProtos {
         }
         result = result && (getQuantity()
             == other.getQuantity());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1388,7 +1428,7 @@ public final class ResourceProtos {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         if (hasResource()) {
           hash = (37 * hash) + RESOURCE_FIELD_NUMBER;
           hash = (53 * hash) + getResource().hashCode();
@@ -1401,6 +1441,17 @@ public final class ResourceProtos {
         return hash;
       }
 
+      public static com.tencent.angel.config.ResourceProtos.ResourceAllocation.Entry parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.tencent.angel.config.ResourceProtos.ResourceAllocation.Entry parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.tencent.angel.config.ResourceProtos.ResourceAllocation.Entry parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1564,7 +1615,7 @@ public final class ResourceProtos {
         }
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
         public Builder clearField(
@@ -1577,12 +1628,12 @@ public final class ResourceProtos {
         }
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
         public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1602,6 +1653,7 @@ public final class ResourceProtos {
           if (other.getQuantity() != 0L) {
             setQuantity(other.getQuantity());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
@@ -1632,13 +1684,13 @@ public final class ResourceProtos {
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.ResourceProtos.Resource, com.tencent.angel.config.ResourceProtos.Resource.Builder, com.tencent.angel.config.ResourceProtos.ResourceOrBuilder> resourceBuilder_;
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public boolean hasResource() {
           return resourceBuilder_ != null || resource_ != null;
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public com.tencent.angel.config.ResourceProtos.Resource getResource() {
           if (resourceBuilder_ == null) {
@@ -1648,7 +1700,7 @@ public final class ResourceProtos {
           }
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public Builder setResource(com.tencent.angel.config.ResourceProtos.Resource value) {
           if (resourceBuilder_ == null) {
@@ -1664,7 +1716,7 @@ public final class ResourceProtos {
           return this;
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public Builder setResource(
             com.tencent.angel.config.ResourceProtos.Resource.Builder builderForValue) {
@@ -1678,7 +1730,7 @@ public final class ResourceProtos {
           return this;
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public Builder mergeResource(com.tencent.angel.config.ResourceProtos.Resource value) {
           if (resourceBuilder_ == null) {
@@ -1696,7 +1748,7 @@ public final class ResourceProtos {
           return this;
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public Builder clearResource() {
           if (resourceBuilder_ == null) {
@@ -1710,7 +1762,7 @@ public final class ResourceProtos {
           return this;
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public com.tencent.angel.config.ResourceProtos.Resource.Builder getResourceBuilder() {
           
@@ -1718,7 +1770,7 @@ public final class ResourceProtos {
           return getResourceFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         public com.tencent.angel.config.ResourceProtos.ResourceOrBuilder getResourceOrBuilder() {
           if (resourceBuilder_ != null) {
@@ -1729,7 +1781,7 @@ public final class ResourceProtos {
           }
         }
         /**
-         * <code>optional .angel.Resource resource = 1;</code>
+         * <code>.angel.Resource resource = 1;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.tencent.angel.config.ResourceProtos.Resource, com.tencent.angel.config.ResourceProtos.Resource.Builder, com.tencent.angel.config.ResourceProtos.ResourceOrBuilder> 
@@ -1747,13 +1799,13 @@ public final class ResourceProtos {
 
         private long quantity_ ;
         /**
-         * <code>optional uint64 quantity = 2;</code>
+         * <code>uint64 quantity = 2;</code>
          */
         public long getQuantity() {
           return quantity_;
         }
         /**
-         * <code>optional uint64 quantity = 2;</code>
+         * <code>uint64 quantity = 2;</code>
          */
         public Builder setQuantity(long value) {
           
@@ -1762,7 +1814,7 @@ public final class ResourceProtos {
           return this;
         }
         /**
-         * <code>optional uint64 quantity = 2;</code>
+         * <code>uint64 quantity = 2;</code>
          */
         public Builder clearQuantity() {
           
@@ -1772,12 +1824,12 @@ public final class ResourceProtos {
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -1800,7 +1852,7 @@ public final class ResourceProtos {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Entry(input, extensionRegistry);
+          return new Entry(input, extensionRegistry);
         }
       };
 
@@ -1869,6 +1921,7 @@ public final class ResourceProtos {
       for (int i = 0; i < resourceQuantities_.size(); i++) {
         output.writeMessage(1, resourceQuantities_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1880,11 +1933,11 @@ public final class ResourceProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, resourceQuantities_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1898,6 +1951,7 @@ public final class ResourceProtos {
       boolean result = true;
       result = result && getResourceQuantitiesList()
           .equals(other.getResourceQuantitiesList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1907,7 +1961,7 @@ public final class ResourceProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getResourceQuantitiesCount() > 0) {
         hash = (37 * hash) + RESOURCE_QUANTITIES_FIELD_NUMBER;
         hash = (53 * hash) + getResourceQuantitiesList().hashCode();
@@ -1917,6 +1971,17 @@ public final class ResourceProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ResourceProtos.ResourceAllocation parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ResourceProtos.ResourceAllocation parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ResourceProtos.ResourceAllocation parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2085,7 +2150,7 @@ public final class ResourceProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2098,12 +2163,12 @@ public final class ResourceProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2143,6 +2208,7 @@ public final class ResourceProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2411,12 +2477,12 @@ public final class ResourceProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2439,7 +2505,7 @@ public final class ResourceProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResourceAllocation(input, extensionRegistry);
+        return new ResourceAllocation(input, extensionRegistry);
       }
     };
 

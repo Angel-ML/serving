@@ -3,8 +3,9 @@ package com.tencent.angel.serving.core
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 
 import scala.collection.mutable
+import scala.language.reflectiveCalls
 
-class SimpleLoader[ServableType](creator: () => ServableType,
+class SimpleLoader[ServableType <: { def unload(): Unit } ](creator: () => ServableType,
                                  resourceEstimate: () => ResourceAllocation) extends Loader {
 
   private var postLoadResourceEstimate: () => ResourceAllocation = _
@@ -16,7 +17,7 @@ class SimpleLoader[ServableType](creator: () => ServableType,
 
   override def estimateResources(): ResourceAllocation = {
     val run = Runtime.getRuntime
-    val available = (run.totalMemory() * 0.8 * 0.2).toLong
+    val available = (run.totalMemory() * 0.8 * 0.2).toLong  // byte
     ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), available)))
   }
 
@@ -31,6 +32,7 @@ class SimpleLoader[ServableType](creator: () => ServableType,
 
   override def unload(): Unit = {
     // val resourceEstimate = estimateResources()
+    servable_.unload()
     servable_ = null.asInstanceOf[ServableType]
     //todo: release resource
   }

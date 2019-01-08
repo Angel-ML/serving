@@ -84,7 +84,7 @@ class ServingContext(eventBus: EventBus[ServableState],
 
   def setPlatform2RouterPort(platformConfigMap: PlatformConfigMap): Unit = {
     var portNum: Int = 0
-    val platformConfigs = platformConfigMap.getPlatformConfigs.asScala
+    val platformConfigs = platformConfigMap.getPlatformConfigsMap.asScala
     for((platform, _) <- platformConfigs) {
       platform2RouterPort.put(platform, portNum)
       portNum = portNum + 1
@@ -96,12 +96,12 @@ class ServingContext(eventBus: EventBus[ServableState],
   def createResourceTracker(): ResourceTracker = ???
 
   def createAdapter(modelPlatform: String): StoragePathSourceAdapter = {
-    val platformConfig = platformConfigMap.getPlatformConfigsMap.asScala.get(modelPlatform)
-    if (platformConfig.isEmpty){
+    val platformConfig = platformConfigMap.getPlatformConfigsMap.get(modelPlatform)
+    if (platformConfig == null || !platformConfig.isInitialized){
       throw FailedPreconditions(s"PlatformConfigMap has no entry for platform: $modelPlatform")
     }
 
-    val adapterConfig = platformConfig.get.getSourceAdapterConfig
+    val adapterConfig = platformConfig.getSourceAdapterConfig
     val adapter: StoragePathSourceAdapter = ClassFactory.createFromAny[StoragePathSourceAdapter](modelPlatform, adapterConfig)
     adapter
   }

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package angel.serving;
+option java_multiple_files = false;
+option java_package = "com.tencent.angel.serving.apis.prediction";
+option java_outer_classname = "RequestProtos";
+
+
+import "apis/common/instance.proto";
+import "apis/common/model.proto";
+
+message Request {
+    ModelSpec model_spec = 1;
+    string platform = 2;
+    repeated Instance instances = 3;
+}

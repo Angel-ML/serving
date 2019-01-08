@@ -138,7 +138,7 @@ public final class ModelServerConfigProtos {
      * Name of the model.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -146,7 +146,7 @@ public final class ModelServerConfigProtos {
      * Name of the model.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -161,7 +161,7 @@ public final class ModelServerConfigProtos {
      * or new data will be used for model versions currently loaded.)
      * </pre>
      *
-     * <code>optional string base_path = 2;</code>
+     * <code>string base_path = 2;</code>
      */
     java.lang.String getBasePath();
     /**
@@ -174,7 +174,7 @@ public final class ModelServerConfigProtos {
      * or new data will be used for model versions currently loaded.)
      * </pre>
      *
-     * <code>optional string base_path = 2;</code>
+     * <code>string base_path = 2;</code>
      */
     com.google.protobuf.ByteString
         getBasePathBytes();
@@ -185,7 +185,7 @@ public final class ModelServerConfigProtos {
      * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
      * </pre>
      *
-     * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+     * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated int getModelTypeValue();
     /**
@@ -194,7 +194,7 @@ public final class ModelServerConfigProtos {
      * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
      * </pre>
      *
-     * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+     * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated com.tencent.angel.config.ModelServerConfigProtos.ModelType getModelType();
 
@@ -204,7 +204,7 @@ public final class ModelServerConfigProtos {
      * (This cannot be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional string model_platform = 4;</code>
+     * <code>string model_platform = 4;</code>
      */
     java.lang.String getModelPlatform();
     /**
@@ -213,7 +213,7 @@ public final class ModelServerConfigProtos {
      * (This cannot be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional string model_platform = 4;</code>
+     * <code>string model_platform = 4;</code>
      */
     com.google.protobuf.ByteString
         getModelPlatformBytes();
@@ -226,7 +226,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     boolean hasModelVersionPolicy();
     /**
@@ -237,7 +237,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getModelVersionPolicy();
     /**
@@ -248,7 +248,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getModelVersionPolicyOrBuilder();
 
@@ -357,7 +357,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     boolean hasLoggingConfig();
     /**
@@ -366,7 +366,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.LoggingConfig getLoggingConfig();
     /**
@@ -375,7 +375,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     com.tencent.angel.config.SamplingConfigProtos.LoggingConfigOrBuilder getLoggingConfigOrBuilder();
   }
@@ -390,6 +390,7 @@ public final class ModelServerConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.ModelConfig)
       ModelConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ModelConfig.newBuilder() to construct.
     private ModelConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -404,14 +405,19 @@ public final class ModelServerConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ModelConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -421,7 +427,8 @@ public final class ModelServerConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -483,9 +490,10 @@ public final class ModelServerConfigProtos {
                 mutable_bitField0_ |= 0x00000020;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
-              versionLabels = input.readMessage(
+              versionLabels__ = input.readMessage(
                   VersionLabelsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              versionLabels_.getMutableMap().put(versionLabels.getKey(), versionLabels.getValue());
+              versionLabels_.getMutableMap().put(
+                  versionLabels__.getKey(), versionLabels__.getValue());
               break;
             }
           }
@@ -496,6 +504,7 @@ public final class ModelServerConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -530,7 +539,7 @@ public final class ModelServerConfigProtos {
      * Name of the model.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -549,7 +558,7 @@ public final class ModelServerConfigProtos {
      * Name of the model.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -577,7 +586,7 @@ public final class ModelServerConfigProtos {
      * or new data will be used for model versions currently loaded.)
      * </pre>
      *
-     * <code>optional string base_path = 2;</code>
+     * <code>string base_path = 2;</code>
      */
     public java.lang.String getBasePath() {
       java.lang.Object ref = basePath_;
@@ -601,7 +610,7 @@ public final class ModelServerConfigProtos {
      * or new data will be used for model versions currently loaded.)
      * </pre>
      *
-     * <code>optional string base_path = 2;</code>
+     * <code>string base_path = 2;</code>
      */
     public com.google.protobuf.ByteString
         getBasePathBytes() {
@@ -625,7 +634,7 @@ public final class ModelServerConfigProtos {
      * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
      * </pre>
      *
-     * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+     * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated public int getModelTypeValue() {
       return modelType_;
@@ -636,7 +645,7 @@ public final class ModelServerConfigProtos {
      * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
      * </pre>
      *
-     * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+     * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated public com.tencent.angel.config.ModelServerConfigProtos.ModelType getModelType() {
       com.tencent.angel.config.ModelServerConfigProtos.ModelType result = com.tencent.angel.config.ModelServerConfigProtos.ModelType.valueOf(modelType_);
@@ -651,7 +660,7 @@ public final class ModelServerConfigProtos {
      * (This cannot be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional string model_platform = 4;</code>
+     * <code>string model_platform = 4;</code>
      */
     public java.lang.String getModelPlatform() {
       java.lang.Object ref = modelPlatform_;
@@ -671,7 +680,7 @@ public final class ModelServerConfigProtos {
      * (This cannot be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional string model_platform = 4;</code>
+     * <code>string model_platform = 4;</code>
      */
     public com.google.protobuf.ByteString
         getModelPlatformBytes() {
@@ -697,7 +706,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     public boolean hasModelVersionPolicy() {
       return modelVersionPolicy_ != null;
@@ -710,7 +719,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getModelVersionPolicy() {
       return modelVersionPolicy_ == null ? com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.getDefaultInstance() : modelVersionPolicy_;
@@ -723,7 +732,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+     * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
      */
     public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getModelVersionPolicyOrBuilder() {
       return getModelVersionPolicy();
@@ -865,7 +874,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     public boolean hasLoggingConfig() {
       return loggingConfig_ != null;
@@ -876,7 +885,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.LoggingConfig getLoggingConfig() {
       return loggingConfig_ == null ? com.tencent.angel.config.SamplingConfigProtos.LoggingConfig.getDefaultInstance() : loggingConfig_;
@@ -887,7 +896,7 @@ public final class ModelServerConfigProtos {
      * (This can be changed once a model is in serving.)
      * </pre>
      *
-     * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+     * <code>.angel.LoggingConfig logging_config = 6;</code>
      */
     public com.tencent.angel.config.SamplingConfigProtos.LoggingConfigOrBuilder getLoggingConfigOrBuilder() {
       return getLoggingConfig();
@@ -923,15 +932,13 @@ public final class ModelServerConfigProtos {
       if (modelVersionPolicy_ != null) {
         output.writeMessage(7, getModelVersionPolicy());
       }
-      for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry
-           : internalGetVersionLabels().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
-        versionLabels = VersionLabelsDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(8, versionLabels);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetVersionLabels(),
+          VersionLabelsDefaultEntryHolder.defaultEntry,
+          8);
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -963,18 +970,18 @@ public final class ModelServerConfigProtos {
       for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry
            : internalGetVersionLabels().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
-        versionLabels = VersionLabelsDefaultEntryHolder.defaultEntry.newBuilderForType()
+        versionLabels__ = VersionLabelsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(8, versionLabels);
+            .computeMessageSize(8, versionLabels__);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1005,6 +1012,7 @@ public final class ModelServerConfigProtos {
         result = result && getLoggingConfig()
             .equals(other.getLoggingConfig());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1014,7 +1022,7 @@ public final class ModelServerConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + BASE_PATH_FIELD_NUMBER;
@@ -1040,6 +1048,17 @@ public final class ModelServerConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1250,7 +1269,7 @@ public final class ModelServerConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1263,12 +1282,12 @@ public final class ModelServerConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1305,6 +1324,7 @@ public final class ModelServerConfigProtos {
         if (other.hasLoggingConfig()) {
           mergeLoggingConfig(other.getLoggingConfig());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1338,7 +1358,7 @@ public final class ModelServerConfigProtos {
        * Name of the model.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1357,7 +1377,7 @@ public final class ModelServerConfigProtos {
        * Name of the model.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1377,7 +1397,7 @@ public final class ModelServerConfigProtos {
        * Name of the model.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -1394,7 +1414,7 @@ public final class ModelServerConfigProtos {
        * Name of the model.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -1407,7 +1427,7 @@ public final class ModelServerConfigProtos {
        * Name of the model.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1432,7 +1452,7 @@ public final class ModelServerConfigProtos {
        * or new data will be used for model versions currently loaded.)
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public java.lang.String getBasePath() {
         java.lang.Object ref = basePath_;
@@ -1456,7 +1476,7 @@ public final class ModelServerConfigProtos {
        * or new data will be used for model versions currently loaded.)
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public com.google.protobuf.ByteString
           getBasePathBytes() {
@@ -1481,7 +1501,7 @@ public final class ModelServerConfigProtos {
        * or new data will be used for model versions currently loaded.)
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public Builder setBasePath(
           java.lang.String value) {
@@ -1503,7 +1523,7 @@ public final class ModelServerConfigProtos {
        * or new data will be used for model versions currently loaded.)
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public Builder clearBasePath() {
         
@@ -1521,7 +1541,7 @@ public final class ModelServerConfigProtos {
        * or new data will be used for model versions currently loaded.)
        * </pre>
        *
-       * <code>optional string base_path = 2;</code>
+       * <code>string base_path = 2;</code>
        */
       public Builder setBasePathBytes(
           com.google.protobuf.ByteString value) {
@@ -1542,7 +1562,7 @@ public final class ModelServerConfigProtos {
        * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
        * </pre>
        *
-       * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+       * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public int getModelTypeValue() {
         return modelType_;
@@ -1553,7 +1573,7 @@ public final class ModelServerConfigProtos {
        * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
        * </pre>
        *
-       * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+       * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setModelTypeValue(int value) {
         modelType_ = value;
@@ -1566,7 +1586,7 @@ public final class ModelServerConfigProtos {
        * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
        * </pre>
        *
-       * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+       * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public com.tencent.angel.config.ModelServerConfigProtos.ModelType getModelType() {
         com.tencent.angel.config.ModelServerConfigProtos.ModelType result = com.tencent.angel.config.ModelServerConfigProtos.ModelType.valueOf(modelType_);
@@ -1578,7 +1598,7 @@ public final class ModelServerConfigProtos {
        * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
        * </pre>
        *
-       * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+       * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setModelType(com.tencent.angel.config.ModelServerConfigProtos.ModelType value) {
         if (value == null) {
@@ -1595,7 +1615,7 @@ public final class ModelServerConfigProtos {
        * TODO(b/31336131): DEPRECATED. Please use 'model_platform' instead.
        * </pre>
        *
-       * <code>optional .angel.ModelType model_type = 3 [deprecated = true];</code>
+       * <code>.angel.ModelType model_type = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearModelType() {
         
@@ -1611,7 +1631,7 @@ public final class ModelServerConfigProtos {
        * (This cannot be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional string model_platform = 4;</code>
+       * <code>string model_platform = 4;</code>
        */
       public java.lang.String getModelPlatform() {
         java.lang.Object ref = modelPlatform_;
@@ -1631,7 +1651,7 @@ public final class ModelServerConfigProtos {
        * (This cannot be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional string model_platform = 4;</code>
+       * <code>string model_platform = 4;</code>
        */
       public com.google.protobuf.ByteString
           getModelPlatformBytes() {
@@ -1652,7 +1672,7 @@ public final class ModelServerConfigProtos {
        * (This cannot be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional string model_platform = 4;</code>
+       * <code>string model_platform = 4;</code>
        */
       public Builder setModelPlatform(
           java.lang.String value) {
@@ -1670,7 +1690,7 @@ public final class ModelServerConfigProtos {
        * (This cannot be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional string model_platform = 4;</code>
+       * <code>string model_platform = 4;</code>
        */
       public Builder clearModelPlatform() {
         
@@ -1684,7 +1704,7 @@ public final class ModelServerConfigProtos {
        * (This cannot be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional string model_platform = 4;</code>
+       * <code>string model_platform = 4;</code>
        */
       public Builder setModelPlatformBytes(
           com.google.protobuf.ByteString value) {
@@ -1709,7 +1729,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public boolean hasModelVersionPolicy() {
         return modelVersionPolicyBuilder_ != null || modelVersionPolicy_ != null;
@@ -1722,7 +1742,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy getModelVersionPolicy() {
         if (modelVersionPolicyBuilder_ == null) {
@@ -1739,7 +1759,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public Builder setModelVersionPolicy(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy value) {
         if (modelVersionPolicyBuilder_ == null) {
@@ -1762,7 +1782,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public Builder setModelVersionPolicy(
           com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder builderForValue) {
@@ -1783,7 +1803,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public Builder mergeModelVersionPolicy(com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy value) {
         if (modelVersionPolicyBuilder_ == null) {
@@ -1808,7 +1828,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public Builder clearModelVersionPolicy() {
         if (modelVersionPolicyBuilder_ == null) {
@@ -1829,7 +1849,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder getModelVersionPolicyBuilder() {
         
@@ -1844,7 +1864,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       public com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder getModelVersionPolicyOrBuilder() {
         if (modelVersionPolicyBuilder_ != null) {
@@ -1862,7 +1882,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
+       * <code>.angel.FileSystemStoragePathSourceConfig.ServableVersionPolicy model_version_policy = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicy.Builder, com.tencent.angel.config.FileSystemStoragePathSourceConfigProtos.FileSystemStoragePathSourceConfig.ServableVersionPolicyOrBuilder> 
@@ -2007,7 +2027,8 @@ public final class ModelServerConfigProtos {
       }
 
       public Builder clearVersionLabels() {
-        getMutableVersionLabels().clear();
+        internalGetMutableVersionLabels().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -2030,7 +2051,8 @@ public final class ModelServerConfigProtos {
       public Builder removeVersionLabels(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableVersionLabels().remove(key);
+        internalGetMutableVersionLabels().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -2062,7 +2084,8 @@ public final class ModelServerConfigProtos {
           long value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         
-        getMutableVersionLabels().put(key, value);
+        internalGetMutableVersionLabels().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -2084,7 +2107,8 @@ public final class ModelServerConfigProtos {
 
       public Builder putAllVersionLabels(
           java.util.Map<java.lang.String, java.lang.Long> values) {
-        getMutableVersionLabels().putAll(values);
+        internalGetMutableVersionLabels().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -2097,7 +2121,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public boolean hasLoggingConfig() {
         return loggingConfigBuilder_ != null || loggingConfig_ != null;
@@ -2108,7 +2132,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.LoggingConfig getLoggingConfig() {
         if (loggingConfigBuilder_ == null) {
@@ -2123,7 +2147,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public Builder setLoggingConfig(com.tencent.angel.config.SamplingConfigProtos.LoggingConfig value) {
         if (loggingConfigBuilder_ == null) {
@@ -2144,7 +2168,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public Builder setLoggingConfig(
           com.tencent.angel.config.SamplingConfigProtos.LoggingConfig.Builder builderForValue) {
@@ -2163,7 +2187,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public Builder mergeLoggingConfig(com.tencent.angel.config.SamplingConfigProtos.LoggingConfig value) {
         if (loggingConfigBuilder_ == null) {
@@ -2186,7 +2210,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public Builder clearLoggingConfig() {
         if (loggingConfigBuilder_ == null) {
@@ -2205,7 +2229,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.LoggingConfig.Builder getLoggingConfigBuilder() {
         
@@ -2218,7 +2242,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       public com.tencent.angel.config.SamplingConfigProtos.LoggingConfigOrBuilder getLoggingConfigOrBuilder() {
         if (loggingConfigBuilder_ != null) {
@@ -2234,7 +2258,7 @@ public final class ModelServerConfigProtos {
        * (This can be changed once a model is in serving.)
        * </pre>
        *
-       * <code>optional .angel.LoggingConfig logging_config = 6;</code>
+       * <code>.angel.LoggingConfig logging_config = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.SamplingConfigProtos.LoggingConfig, com.tencent.angel.config.SamplingConfigProtos.LoggingConfig.Builder, com.tencent.angel.config.SamplingConfigProtos.LoggingConfigOrBuilder> 
@@ -2251,12 +2275,12 @@ public final class ModelServerConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2279,7 +2303,7 @@ public final class ModelServerConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelConfig(input, extensionRegistry);
+        return new ModelConfig(input, extensionRegistry);
       }
     };
 
@@ -2337,6 +2361,7 @@ public final class ModelServerConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.ModelConfigList)
       ModelConfigListOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ModelConfigList.newBuilder() to construct.
     private ModelConfigList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2348,14 +2373,19 @@ public final class ModelServerConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ModelConfigList(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2365,7 +2395,8 @@ public final class ModelServerConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2390,6 +2421,7 @@ public final class ModelServerConfigProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           config_ = java.util.Collections.unmodifiableList(config_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2455,6 +2487,7 @@ public final class ModelServerConfigProtos {
       for (int i = 0; i < config_.size(); i++) {
         output.writeMessage(1, config_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2466,11 +2499,11 @@ public final class ModelServerConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, config_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2484,6 +2517,7 @@ public final class ModelServerConfigProtos {
       boolean result = true;
       result = result && getConfigList()
           .equals(other.getConfigList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2493,7 +2527,7 @@ public final class ModelServerConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getConfigCount() > 0) {
         hash = (37 * hash) + CONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getConfigList().hashCode();
@@ -2503,6 +2537,17 @@ public final class ModelServerConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2668,7 +2713,7 @@ public final class ModelServerConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2681,12 +2726,12 @@ public final class ModelServerConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2726,6 +2771,7 @@ public final class ModelServerConfigProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2994,12 +3040,12 @@ public final class ModelServerConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3022,7 +3068,7 @@ public final class ModelServerConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelConfigList(input, extensionRegistry);
+        return new ModelConfigList(input, extensionRegistry);
       }
     };
 
@@ -3046,20 +3092,28 @@ public final class ModelServerConfigProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
+     */
+    boolean hasModelConfigList();
+    /**
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
      */
     com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList getModelConfigList();
     /**
-     * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
      */
     com.tencent.angel.config.ModelServerConfigProtos.ModelConfigListOrBuilder getModelConfigListOrBuilder();
 
     /**
-     * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
+     */
+    boolean hasCustomModelConfig();
+    /**
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
      */
     com.google.protobuf.Any getCustomModelConfig();
     /**
-     * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
      */
     com.google.protobuf.AnyOrBuilder getCustomModelConfigOrBuilder();
 
@@ -3076,6 +3130,7 @@ public final class ModelServerConfigProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.ModelServerConfig)
       ModelServerConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ModelServerConfig.newBuilder() to construct.
     private ModelServerConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3086,14 +3141,19 @@ public final class ModelServerConfigProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ModelServerConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3103,7 +3163,8 @@ public final class ModelServerConfigProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3144,6 +3205,7 @@ public final class ModelServerConfigProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3199,7 +3261,13 @@ public final class ModelServerConfigProtos {
 
     public static final int MODEL_CONFIG_LIST_FIELD_NUMBER = 1;
     /**
-     * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
+     */
+    public boolean hasModelConfigList() {
+      return configCase_ == 1;
+    }
+    /**
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
      */
     public com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList getModelConfigList() {
       if (configCase_ == 1) {
@@ -3208,7 +3276,7 @@ public final class ModelServerConfigProtos {
       return com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList.getDefaultInstance();
     }
     /**
-     * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+     * <code>.angel.ModelConfigList model_config_list = 1;</code>
      */
     public com.tencent.angel.config.ModelServerConfigProtos.ModelConfigListOrBuilder getModelConfigListOrBuilder() {
       if (configCase_ == 1) {
@@ -3219,7 +3287,13 @@ public final class ModelServerConfigProtos {
 
     public static final int CUSTOM_MODEL_CONFIG_FIELD_NUMBER = 2;
     /**
-     * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
+     */
+    public boolean hasCustomModelConfig() {
+      return configCase_ == 2;
+    }
+    /**
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
      */
     public com.google.protobuf.Any getCustomModelConfig() {
       if (configCase_ == 2) {
@@ -3228,7 +3302,7 @@ public final class ModelServerConfigProtos {
       return com.google.protobuf.Any.getDefaultInstance();
     }
     /**
-     * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+     * <code>.google.protobuf.Any custom_model_config = 2;</code>
      */
     public com.google.protobuf.AnyOrBuilder getCustomModelConfigOrBuilder() {
       if (configCase_ == 2) {
@@ -3255,6 +3329,7 @@ public final class ModelServerConfigProtos {
       if (configCase_ == 2) {
         output.writeMessage(2, (com.google.protobuf.Any) config_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3270,11 +3345,11 @@ public final class ModelServerConfigProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.google.protobuf.Any) config_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3301,6 +3376,7 @@ public final class ModelServerConfigProtos {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3310,7 +3386,7 @@ public final class ModelServerConfigProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       switch (configCase_) {
         case 1:
           hash = (37 * hash) + MODEL_CONFIG_LIST_FIELD_NUMBER;
@@ -3328,6 +3404,17 @@ public final class ModelServerConfigProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3493,7 +3580,7 @@ public final class ModelServerConfigProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3506,12 +3593,12 @@ public final class ModelServerConfigProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3538,6 +3625,7 @@ public final class ModelServerConfigProtos {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3582,7 +3670,13 @@ public final class ModelServerConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList, com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList.Builder, com.tencent.angel.config.ModelServerConfigProtos.ModelConfigListOrBuilder> modelConfigListBuilder_;
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
+       */
+      public boolean hasModelConfigList() {
+        return configCase_ == 1;
+      }
+      /**
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList getModelConfigList() {
         if (modelConfigListBuilder_ == null) {
@@ -3598,7 +3692,7 @@ public final class ModelServerConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public Builder setModelConfigList(com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList value) {
         if (modelConfigListBuilder_ == null) {
@@ -3614,7 +3708,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public Builder setModelConfigList(
           com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList.Builder builderForValue) {
@@ -3628,7 +3722,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public Builder mergeModelConfigList(com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList value) {
         if (modelConfigListBuilder_ == null) {
@@ -3650,7 +3744,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public Builder clearModelConfigList() {
         if (modelConfigListBuilder_ == null) {
@@ -3669,13 +3763,13 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList.Builder getModelConfigListBuilder() {
         return getModelConfigListFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       public com.tencent.angel.config.ModelServerConfigProtos.ModelConfigListOrBuilder getModelConfigListOrBuilder() {
         if ((configCase_ == 1) && (modelConfigListBuilder_ != null)) {
@@ -3688,7 +3782,7 @@ public final class ModelServerConfigProtos {
         }
       }
       /**
-       * <code>optional .angel.ModelConfigList model_config_list = 1;</code>
+       * <code>.angel.ModelConfigList model_config_list = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList, com.tencent.angel.config.ModelServerConfigProtos.ModelConfigList.Builder, com.tencent.angel.config.ModelServerConfigProtos.ModelConfigListOrBuilder> 
@@ -3712,7 +3806,13 @@ public final class ModelServerConfigProtos {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> customModelConfigBuilder_;
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
+       */
+      public boolean hasCustomModelConfig() {
+        return configCase_ == 2;
+      }
+      /**
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public com.google.protobuf.Any getCustomModelConfig() {
         if (customModelConfigBuilder_ == null) {
@@ -3728,7 +3828,7 @@ public final class ModelServerConfigProtos {
         }
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public Builder setCustomModelConfig(com.google.protobuf.Any value) {
         if (customModelConfigBuilder_ == null) {
@@ -3744,7 +3844,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public Builder setCustomModelConfig(
           com.google.protobuf.Any.Builder builderForValue) {
@@ -3758,7 +3858,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public Builder mergeCustomModelConfig(com.google.protobuf.Any value) {
         if (customModelConfigBuilder_ == null) {
@@ -3780,7 +3880,7 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public Builder clearCustomModelConfig() {
         if (customModelConfigBuilder_ == null) {
@@ -3799,13 +3899,13 @@ public final class ModelServerConfigProtos {
         return this;
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public com.google.protobuf.Any.Builder getCustomModelConfigBuilder() {
         return getCustomModelConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       public com.google.protobuf.AnyOrBuilder getCustomModelConfigOrBuilder() {
         if ((configCase_ == 2) && (customModelConfigBuilder_ != null)) {
@@ -3818,7 +3918,7 @@ public final class ModelServerConfigProtos {
         }
       }
       /**
-       * <code>optional .google.protobuf.Any custom_model_config = 2;</code>
+       * <code>.google.protobuf.Any custom_model_config = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
@@ -3840,12 +3940,12 @@ public final class ModelServerConfigProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3868,7 +3968,7 @@ public final class ModelServerConfigProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelServerConfig(input, extensionRegistry);
+        return new ModelServerConfig(input, extensionRegistry);
       }
     };
 
@@ -3925,7 +4025,7 @@ public final class ModelServerConfigProtos {
       "del_platform\030\004 \001(\t\022\\\n\024model_version_poli" +
       "cy\030\007 \001(\0132>.angel.FileSystemStoragePathSo" +
       "urceConfig.ServableVersionPolicy\022=\n\016vers" +
-      "ion_labels\030\010 \003(\0132%.angel.ModelConfig.Ver",
+      "ion_labels\030\010 \003(\0132%.angel.ModelConfig.Ver" +
       "sionLabelsEntry\022,\n\016logging_config\030\006 \001(\0132" +
       "\024.angel.LoggingConfig\0324\n\022VersionLabelsEn" +
       "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\003:\0028\001J\004\010\005\020" +
@@ -3935,7 +4035,7 @@ public final class ModelServerConfigProtos {
       "onfigListH\000\0223\n\023custom_model_config\030\002 \001(\013" +
       "2\024.google.protobuf.AnyH\000B\010\n\006config*N\n\tMo" +
       "delType\022\036\n\026MODEL_TYPE_UNSPECIFIED\020\000\032\002\010\001\022" +
-      "\022\n\nTENSORFLOW\020\001\032\002\010\001\022\r\n\005OTHER\020\002\032\002\010\001B5\n\030co",
+      "\022\n\nTENSORFLOW\020\001\032\002\010\001\022\r\n\005OTHER\020\002\032\002\010\001B5\n\030co" +
       "m.tencent.angel.configB\027ModelServerConfi" +
       "gProtosP\000b\006proto3"
     };

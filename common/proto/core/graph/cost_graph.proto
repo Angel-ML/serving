@@ -4,8 +4,8 @@ package angel;
 option java_multiple_files = false;
 option java_package = "com.tencent.angel.core.graph";
 option java_outer_classname = "CostGraphProtos";
-import "core/graph/tensor_shape.proto";
-import "core/graph/types.proto";
+import "apis/common/tensor_shape.proto";
+import "apis/common/types.proto";
 
 message CostGraphDef {
     message Node {

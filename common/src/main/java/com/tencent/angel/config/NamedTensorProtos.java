@@ -23,7 +23,7 @@ public final class NamedTensorProtos {
      * Name of the tensor.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -31,7 +31,7 @@ public final class NamedTensorProtos {
      * Name of the tensor.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -45,7 +45,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     boolean hasTensor();
     /**
@@ -57,7 +57,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor();
     /**
@@ -69,7 +69,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder();
   }
@@ -84,6 +84,7 @@ public final class NamedTensorProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.NamedTensorProto)
       NamedTensorProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NamedTensorProto.newBuilder() to construct.
     private NamedTensorProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -95,14 +96,19 @@ public final class NamedTensorProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NamedTensorProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -112,7 +118,8 @@ public final class NamedTensorProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -144,6 +151,7 @@ public final class NamedTensorProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -166,7 +174,7 @@ public final class NamedTensorProtos {
      * Name of the tensor.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -185,7 +193,7 @@ public final class NamedTensorProtos {
      * Name of the tensor.
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -212,7 +220,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     public boolean hasTensor() {
       return tensor_ != null;
@@ -226,7 +234,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor() {
       return tensor_ == null ? com.tencent.angel.core.graph.TensorProtos.TensorProto.getDefaultInstance() : tensor_;
@@ -240,7 +248,7 @@ public final class NamedTensorProtos {
      * compact form in tensor.tensor_content.
      * </pre>
      *
-     * <code>optional .angel.TensorProto tensor = 2;</code>
+     * <code>.angel.TensorProto tensor = 2;</code>
      */
     public com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder() {
       return getTensor();
@@ -264,6 +272,7 @@ public final class NamedTensorProtos {
       if (tensor_ != null) {
         output.writeMessage(2, getTensor());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -278,11 +287,11 @@ public final class NamedTensorProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getTensor());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -301,6 +310,7 @@ public final class NamedTensorProtos {
         result = result && getTensor()
             .equals(other.getTensor());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -310,7 +320,7 @@ public final class NamedTensorProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       if (hasTensor()) {
@@ -322,6 +332,17 @@ public final class NamedTensorProtos {
       return hash;
     }
 
+    public static com.tencent.angel.config.NamedTensorProtos.NamedTensorProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.config.NamedTensorProtos.NamedTensorProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.config.NamedTensorProtos.NamedTensorProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -484,7 +505,7 @@ public final class NamedTensorProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -497,12 +518,12 @@ public final class NamedTensorProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -523,6 +544,7 @@ public final class NamedTensorProtos {
         if (other.hasTensor()) {
           mergeTensor(other.getTensor());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -555,7 +577,7 @@ public final class NamedTensorProtos {
        * Name of the tensor.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -574,7 +596,7 @@ public final class NamedTensorProtos {
        * Name of the tensor.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -594,7 +616,7 @@ public final class NamedTensorProtos {
        * Name of the tensor.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -611,7 +633,7 @@ public final class NamedTensorProtos {
        * Name of the tensor.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -624,7 +646,7 @@ public final class NamedTensorProtos {
        * Name of the tensor.
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -650,7 +672,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public boolean hasTensor() {
         return tensorBuilder_ != null || tensor_ != null;
@@ -664,7 +686,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProto getTensor() {
         if (tensorBuilder_ == null) {
@@ -682,7 +704,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public Builder setTensor(com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (tensorBuilder_ == null) {
@@ -706,7 +728,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public Builder setTensor(
           com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder builderForValue) {
@@ -728,7 +750,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public Builder mergeTensor(com.tencent.angel.core.graph.TensorProtos.TensorProto value) {
         if (tensorBuilder_ == null) {
@@ -754,7 +776,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public Builder clearTensor() {
         if (tensorBuilder_ == null) {
@@ -776,7 +798,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder getTensorBuilder() {
         
@@ -792,7 +814,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       public com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder getTensorOrBuilder() {
         if (tensorBuilder_ != null) {
@@ -811,7 +833,7 @@ public final class NamedTensorProtos {
        * compact form in tensor.tensor_content.
        * </pre>
        *
-       * <code>optional .angel.TensorProto tensor = 2;</code>
+       * <code>.angel.TensorProto tensor = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.TensorProtos.TensorProto, com.tencent.angel.core.graph.TensorProtos.TensorProto.Builder, com.tencent.angel.core.graph.TensorProtos.TensorProtoOrBuilder> 
@@ -828,12 +850,12 @@ public final class NamedTensorProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -856,7 +878,7 @@ public final class NamedTensorProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NamedTensorProto(input, extensionRegistry);
+        return new NamedTensorProto(input, extensionRegistry);
       }
     };
 

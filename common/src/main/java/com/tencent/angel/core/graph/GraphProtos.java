@@ -49,7 +49,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     boolean hasVersions();
     /**
@@ -59,7 +59,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     com.tencent.angel.core.graph.VersionsProtos.VersionDef getVersions();
     /**
@@ -69,7 +69,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     com.tencent.angel.core.graph.VersionsProtos.VersionDefOrBuilder getVersionsOrBuilder();
 
@@ -80,7 +80,7 @@ public final class GraphProtos {
      * compatible, this field is entirely ignored.
      * </pre>
      *
-     * <code>optional int32 version = 3 [deprecated = true];</code>
+     * <code>int32 version = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated int getVersion();
 
@@ -110,7 +110,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     boolean hasLibrary();
     /**
@@ -139,7 +139,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary getLibrary();
     /**
@@ -168,7 +168,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibraryOrBuilder getLibraryOrBuilder();
   }
@@ -183,6 +183,7 @@ public final class GraphProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.GraphDef)
       GraphDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GraphDef.newBuilder() to construct.
     private GraphDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -195,14 +196,19 @@ public final class GraphProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GraphDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -212,7 +218,8 @@ public final class GraphProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -268,6 +275,7 @@ public final class GraphProtos {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           node_ = java.util.Collections.unmodifiableList(node_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -328,7 +336,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     public boolean hasVersions() {
       return versions_ != null;
@@ -340,7 +348,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     public com.tencent.angel.core.graph.VersionsProtos.VersionDef getVersions() {
       return versions_ == null ? com.tencent.angel.core.graph.VersionsProtos.VersionDef.getDefaultInstance() : versions_;
@@ -352,7 +360,7 @@ public final class GraphProtos {
      * each release of TensorFlow will support a range of GraphDef versions.
      * </pre>
      *
-     * <code>optional .angel.VersionDef versions = 4;</code>
+     * <code>.angel.VersionDef versions = 4;</code>
      */
     public com.tencent.angel.core.graph.VersionsProtos.VersionDefOrBuilder getVersionsOrBuilder() {
       return getVersions();
@@ -367,7 +375,7 @@ public final class GraphProtos {
      * compatible, this field is entirely ignored.
      * </pre>
      *
-     * <code>optional int32 version = 3 [deprecated = true];</code>
+     * <code>int32 version = 3 [deprecated = true];</code>
      */
     @java.lang.Deprecated public int getVersion() {
       return version_;
@@ -401,7 +409,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     public boolean hasLibrary() {
       return library_ != null;
@@ -432,7 +440,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     public com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary getLibrary() {
       return library_ == null ? com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary.getDefaultInstance() : library_;
@@ -463,7 +471,7 @@ public final class GraphProtos {
      *     function are ready.
      * </pre>
      *
-     * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+     * <code>.angel.FunctionDefLibrary library = 2;</code>
      */
     public com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibraryOrBuilder getLibraryOrBuilder() {
       return getLibrary();
@@ -493,6 +501,7 @@ public final class GraphProtos {
       if (versions_ != null) {
         output.writeMessage(4, getVersions());
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -516,11 +525,11 @@ public final class GraphProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getVersions());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -546,6 +555,7 @@ public final class GraphProtos {
         result = result && getLibrary()
             .equals(other.getLibrary());
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -555,7 +565,7 @@ public final class GraphProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getNodeCount() > 0) {
         hash = (37 * hash) + NODE_FIELD_NUMBER;
         hash = (53 * hash) + getNodeList().hashCode();
@@ -575,6 +585,17 @@ public final class GraphProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.GraphProtos.GraphDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.GraphProtos.GraphDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.GraphProtos.GraphDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -767,7 +788,7 @@ public final class GraphProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -780,12 +801,12 @@ public final class GraphProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -834,6 +855,7 @@ public final class GraphProtos {
         if (other.hasLibrary()) {
           mergeLibrary(other.getLibrary());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1111,7 +1133,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public boolean hasVersions() {
         return versionsBuilder_ != null || versions_ != null;
@@ -1123,7 +1145,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public com.tencent.angel.core.graph.VersionsProtos.VersionDef getVersions() {
         if (versionsBuilder_ == null) {
@@ -1139,7 +1161,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public Builder setVersions(com.tencent.angel.core.graph.VersionsProtos.VersionDef value) {
         if (versionsBuilder_ == null) {
@@ -1161,7 +1183,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public Builder setVersions(
           com.tencent.angel.core.graph.VersionsProtos.VersionDef.Builder builderForValue) {
@@ -1181,7 +1203,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public Builder mergeVersions(com.tencent.angel.core.graph.VersionsProtos.VersionDef value) {
         if (versionsBuilder_ == null) {
@@ -1205,7 +1227,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public Builder clearVersions() {
         if (versionsBuilder_ == null) {
@@ -1225,7 +1247,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public com.tencent.angel.core.graph.VersionsProtos.VersionDef.Builder getVersionsBuilder() {
         
@@ -1239,7 +1261,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       public com.tencent.angel.core.graph.VersionsProtos.VersionDefOrBuilder getVersionsOrBuilder() {
         if (versionsBuilder_ != null) {
@@ -1256,7 +1278,7 @@ public final class GraphProtos {
        * each release of TensorFlow will support a range of GraphDef versions.
        * </pre>
        *
-       * <code>optional .angel.VersionDef versions = 4;</code>
+       * <code>.angel.VersionDef versions = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.VersionsProtos.VersionDef, com.tencent.angel.core.graph.VersionsProtos.VersionDef.Builder, com.tencent.angel.core.graph.VersionsProtos.VersionDefOrBuilder> 
@@ -1280,7 +1302,7 @@ public final class GraphProtos {
        * compatible, this field is entirely ignored.
        * </pre>
        *
-       * <code>optional int32 version = 3 [deprecated = true];</code>
+       * <code>int32 version = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public int getVersion() {
         return version_;
@@ -1292,7 +1314,7 @@ public final class GraphProtos {
        * compatible, this field is entirely ignored.
        * </pre>
        *
-       * <code>optional int32 version = 3 [deprecated = true];</code>
+       * <code>int32 version = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder setVersion(int value) {
         
@@ -1307,7 +1329,7 @@ public final class GraphProtos {
        * compatible, this field is entirely ignored.
        * </pre>
        *
-       * <code>optional int32 version = 3 [deprecated = true];</code>
+       * <code>int32 version = 3 [deprecated = true];</code>
        */
       @java.lang.Deprecated public Builder clearVersion() {
         
@@ -1345,7 +1367,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public boolean hasLibrary() {
         return libraryBuilder_ != null || library_ != null;
@@ -1376,7 +1398,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary getLibrary() {
         if (libraryBuilder_ == null) {
@@ -1411,7 +1433,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public Builder setLibrary(com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary value) {
         if (libraryBuilder_ == null) {
@@ -1452,7 +1474,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public Builder setLibrary(
           com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary.Builder builderForValue) {
@@ -1491,7 +1513,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public Builder mergeLibrary(com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary value) {
         if (libraryBuilder_ == null) {
@@ -1534,7 +1556,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public Builder clearLibrary() {
         if (libraryBuilder_ == null) {
@@ -1573,7 +1595,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary.Builder getLibraryBuilder() {
         
@@ -1606,7 +1628,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       public com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibraryOrBuilder getLibraryOrBuilder() {
         if (libraryBuilder_ != null) {
@@ -1642,7 +1664,7 @@ public final class GraphProtos {
        *     function are ready.
        * </pre>
        *
-       * <code>optional .angel.FunctionDefLibrary library = 2;</code>
+       * <code>.angel.FunctionDefLibrary library = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary, com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary.Builder, com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibraryOrBuilder> 
@@ -1659,12 +1681,12 @@ public final class GraphProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1687,7 +1709,7 @@ public final class GraphProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GraphDef(input, extensionRegistry);
+        return new GraphDef(input, extensionRegistry);
       }
     };
 

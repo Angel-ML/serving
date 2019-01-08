@@ -23,7 +23,7 @@ public final class ResourceHandleProtos {
      * Unique name for the device containing the resource.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     java.lang.String getDevice();
     /**
@@ -31,7 +31,7 @@ public final class ResourceHandleProtos {
      * Unique name for the device containing the resource.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     com.google.protobuf.ByteString
         getDeviceBytes();
@@ -41,7 +41,7 @@ public final class ResourceHandleProtos {
      * Container in which this resource is placed.
      * </pre>
      *
-     * <code>optional string container = 2;</code>
+     * <code>string container = 2;</code>
      */
     java.lang.String getContainer();
     /**
@@ -49,7 +49,7 @@ public final class ResourceHandleProtos {
      * Container in which this resource is placed.
      * </pre>
      *
-     * <code>optional string container = 2;</code>
+     * <code>string container = 2;</code>
      */
     com.google.protobuf.ByteString
         getContainerBytes();
@@ -59,7 +59,7 @@ public final class ResourceHandleProtos {
      * Unique name of this resource.
      * </pre>
      *
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     java.lang.String getName();
     /**
@@ -67,7 +67,7 @@ public final class ResourceHandleProtos {
      * Unique name of this resource.
      * </pre>
      *
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -78,7 +78,7 @@ public final class ResourceHandleProtos {
      * and in the same execution.
      * </pre>
      *
-     * <code>optional uint64 hash_code = 4;</code>
+     * <code>uint64 hash_code = 4;</code>
      */
     long getHashCode();
 
@@ -88,7 +88,7 @@ public final class ResourceHandleProtos {
      * available.
      * </pre>
      *
-     * <code>optional string maybe_type_name = 5;</code>
+     * <code>string maybe_type_name = 5;</code>
      */
     java.lang.String getMaybeTypeName();
     /**
@@ -97,7 +97,7 @@ public final class ResourceHandleProtos {
      * available.
      * </pre>
      *
-     * <code>optional string maybe_type_name = 5;</code>
+     * <code>string maybe_type_name = 5;</code>
      */
     com.google.protobuf.ByteString
         getMaybeTypeNameBytes();
@@ -115,6 +115,7 @@ public final class ResourceHandleProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.ResourceHandleProto)
       ResourceHandleProtoOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ResourceHandleProto.newBuilder() to construct.
     private ResourceHandleProto(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -130,14 +131,19 @@ public final class ResourceHandleProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ResourceHandleProto(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -147,7 +153,8 @@ public final class ResourceHandleProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -189,6 +196,7 @@ public final class ResourceHandleProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -211,7 +219,7 @@ public final class ResourceHandleProtos {
      * Unique name for the device containing the resource.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public java.lang.String getDevice() {
       java.lang.Object ref = device_;
@@ -230,7 +238,7 @@ public final class ResourceHandleProtos {
      * Unique name for the device containing the resource.
      * </pre>
      *
-     * <code>optional string device = 1;</code>
+     * <code>string device = 1;</code>
      */
     public com.google.protobuf.ByteString
         getDeviceBytes() {
@@ -253,7 +261,7 @@ public final class ResourceHandleProtos {
      * Container in which this resource is placed.
      * </pre>
      *
-     * <code>optional string container = 2;</code>
+     * <code>string container = 2;</code>
      */
     public java.lang.String getContainer() {
       java.lang.Object ref = container_;
@@ -272,7 +280,7 @@ public final class ResourceHandleProtos {
      * Container in which this resource is placed.
      * </pre>
      *
-     * <code>optional string container = 2;</code>
+     * <code>string container = 2;</code>
      */
     public com.google.protobuf.ByteString
         getContainerBytes() {
@@ -295,7 +303,7 @@ public final class ResourceHandleProtos {
      * Unique name of this resource.
      * </pre>
      *
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -314,7 +322,7 @@ public final class ResourceHandleProtos {
      * Unique name of this resource.
      * </pre>
      *
-     * <code>optional string name = 3;</code>
+     * <code>string name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -338,7 +346,7 @@ public final class ResourceHandleProtos {
      * and in the same execution.
      * </pre>
      *
-     * <code>optional uint64 hash_code = 4;</code>
+     * <code>uint64 hash_code = 4;</code>
      */
     public long getHashCode() {
       return hashCode_;
@@ -352,7 +360,7 @@ public final class ResourceHandleProtos {
      * available.
      * </pre>
      *
-     * <code>optional string maybe_type_name = 5;</code>
+     * <code>string maybe_type_name = 5;</code>
      */
     public java.lang.String getMaybeTypeName() {
       java.lang.Object ref = maybeTypeName_;
@@ -372,7 +380,7 @@ public final class ResourceHandleProtos {
      * available.
      * </pre>
      *
-     * <code>optional string maybe_type_name = 5;</code>
+     * <code>string maybe_type_name = 5;</code>
      */
     public com.google.protobuf.ByteString
         getMaybeTypeNameBytes() {
@@ -415,6 +423,7 @@ public final class ResourceHandleProtos {
       if (!getMaybeTypeNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, maybeTypeName_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -438,11 +447,11 @@ public final class ResourceHandleProtos {
       if (!getMaybeTypeNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, maybeTypeName_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -464,6 +473,7 @@ public final class ResourceHandleProtos {
           == other.getHashCode());
       result = result && getMaybeTypeName()
           .equals(other.getMaybeTypeName());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -473,7 +483,7 @@ public final class ResourceHandleProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DEVICE_FIELD_NUMBER;
       hash = (53 * hash) + getDevice().hashCode();
       hash = (37 * hash) + CONTAINER_FIELD_NUMBER;
@@ -490,6 +500,17 @@ public final class ResourceHandleProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.ResourceHandleProtos.ResourceHandleProto parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.ResourceHandleProtos.ResourceHandleProto parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.ResourceHandleProtos.ResourceHandleProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -655,7 +676,7 @@ public final class ResourceHandleProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -668,12 +689,12 @@ public final class ResourceHandleProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -706,6 +727,7 @@ public final class ResourceHandleProtos {
           maybeTypeName_ = other.maybeTypeName_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -738,7 +760,7 @@ public final class ResourceHandleProtos {
        * Unique name for the device containing the resource.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public java.lang.String getDevice() {
         java.lang.Object ref = device_;
@@ -757,7 +779,7 @@ public final class ResourceHandleProtos {
        * Unique name for the device containing the resource.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public com.google.protobuf.ByteString
           getDeviceBytes() {
@@ -777,7 +799,7 @@ public final class ResourceHandleProtos {
        * Unique name for the device containing the resource.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDevice(
           java.lang.String value) {
@@ -794,7 +816,7 @@ public final class ResourceHandleProtos {
        * Unique name for the device containing the resource.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder clearDevice() {
         
@@ -807,7 +829,7 @@ public final class ResourceHandleProtos {
        * Unique name for the device containing the resource.
        * </pre>
        *
-       * <code>optional string device = 1;</code>
+       * <code>string device = 1;</code>
        */
       public Builder setDeviceBytes(
           com.google.protobuf.ByteString value) {
@@ -827,7 +849,7 @@ public final class ResourceHandleProtos {
        * Container in which this resource is placed.
        * </pre>
        *
-       * <code>optional string container = 2;</code>
+       * <code>string container = 2;</code>
        */
       public java.lang.String getContainer() {
         java.lang.Object ref = container_;
@@ -846,7 +868,7 @@ public final class ResourceHandleProtos {
        * Container in which this resource is placed.
        * </pre>
        *
-       * <code>optional string container = 2;</code>
+       * <code>string container = 2;</code>
        */
       public com.google.protobuf.ByteString
           getContainerBytes() {
@@ -866,7 +888,7 @@ public final class ResourceHandleProtos {
        * Container in which this resource is placed.
        * </pre>
        *
-       * <code>optional string container = 2;</code>
+       * <code>string container = 2;</code>
        */
       public Builder setContainer(
           java.lang.String value) {
@@ -883,7 +905,7 @@ public final class ResourceHandleProtos {
        * Container in which this resource is placed.
        * </pre>
        *
-       * <code>optional string container = 2;</code>
+       * <code>string container = 2;</code>
        */
       public Builder clearContainer() {
         
@@ -896,7 +918,7 @@ public final class ResourceHandleProtos {
        * Container in which this resource is placed.
        * </pre>
        *
-       * <code>optional string container = 2;</code>
+       * <code>string container = 2;</code>
        */
       public Builder setContainerBytes(
           com.google.protobuf.ByteString value) {
@@ -916,7 +938,7 @@ public final class ResourceHandleProtos {
        * Unique name of this resource.
        * </pre>
        *
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -935,7 +957,7 @@ public final class ResourceHandleProtos {
        * Unique name of this resource.
        * </pre>
        *
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -955,7 +977,7 @@ public final class ResourceHandleProtos {
        * Unique name of this resource.
        * </pre>
        *
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -972,7 +994,7 @@ public final class ResourceHandleProtos {
        * Unique name of this resource.
        * </pre>
        *
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder clearName() {
         
@@ -985,7 +1007,7 @@ public final class ResourceHandleProtos {
        * Unique name of this resource.
        * </pre>
        *
-       * <code>optional string name = 3;</code>
+       * <code>string name = 3;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1006,7 +1028,7 @@ public final class ResourceHandleProtos {
        * and in the same execution.
        * </pre>
        *
-       * <code>optional uint64 hash_code = 4;</code>
+       * <code>uint64 hash_code = 4;</code>
        */
       public long getHashCode() {
         return hashCode_;
@@ -1017,7 +1039,7 @@ public final class ResourceHandleProtos {
        * and in the same execution.
        * </pre>
        *
-       * <code>optional uint64 hash_code = 4;</code>
+       * <code>uint64 hash_code = 4;</code>
        */
       public Builder setHashCode(long value) {
         
@@ -1031,7 +1053,7 @@ public final class ResourceHandleProtos {
        * and in the same execution.
        * </pre>
        *
-       * <code>optional uint64 hash_code = 4;</code>
+       * <code>uint64 hash_code = 4;</code>
        */
       public Builder clearHashCode() {
         
@@ -1047,7 +1069,7 @@ public final class ResourceHandleProtos {
        * available.
        * </pre>
        *
-       * <code>optional string maybe_type_name = 5;</code>
+       * <code>string maybe_type_name = 5;</code>
        */
       public java.lang.String getMaybeTypeName() {
         java.lang.Object ref = maybeTypeName_;
@@ -1067,7 +1089,7 @@ public final class ResourceHandleProtos {
        * available.
        * </pre>
        *
-       * <code>optional string maybe_type_name = 5;</code>
+       * <code>string maybe_type_name = 5;</code>
        */
       public com.google.protobuf.ByteString
           getMaybeTypeNameBytes() {
@@ -1088,7 +1110,7 @@ public final class ResourceHandleProtos {
        * available.
        * </pre>
        *
-       * <code>optional string maybe_type_name = 5;</code>
+       * <code>string maybe_type_name = 5;</code>
        */
       public Builder setMaybeTypeName(
           java.lang.String value) {
@@ -1106,7 +1128,7 @@ public final class ResourceHandleProtos {
        * available.
        * </pre>
        *
-       * <code>optional string maybe_type_name = 5;</code>
+       * <code>string maybe_type_name = 5;</code>
        */
       public Builder clearMaybeTypeName() {
         
@@ -1120,7 +1142,7 @@ public final class ResourceHandleProtos {
        * available.
        * </pre>
        *
-       * <code>optional string maybe_type_name = 5;</code>
+       * <code>string maybe_type_name = 5;</code>
        */
       public Builder setMaybeTypeNameBytes(
           com.google.protobuf.ByteString value) {
@@ -1135,12 +1157,12 @@ public final class ResourceHandleProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1163,7 +1185,7 @@ public final class ResourceHandleProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ResourceHandleProto(input, extensionRegistry);
+        return new ResourceHandleProto(input, extensionRegistry);
       }
     };
 

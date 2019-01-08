@@ -77,6 +77,7 @@ public final class FunctionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.FunctionDefLibrary)
       FunctionDefLibraryOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use FunctionDefLibrary.newBuilder() to construct.
     private FunctionDefLibrary(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -89,14 +90,19 @@ public final class FunctionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private FunctionDefLibrary(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -106,7 +112,8 @@ public final class FunctionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -143,6 +150,7 @@ public final class FunctionProtos {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           gradient_ = java.util.Collections.unmodifiableList(gradient_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -246,6 +254,7 @@ public final class FunctionProtos {
       for (int i = 0; i < gradient_.size(); i++) {
         output.writeMessage(2, gradient_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -261,11 +270,11 @@ public final class FunctionProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, gradient_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -281,6 +290,7 @@ public final class FunctionProtos {
           .equals(other.getFunctionList());
       result = result && getGradientList()
           .equals(other.getGradientList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -290,7 +300,7 @@ public final class FunctionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getFunctionCount() > 0) {
         hash = (37 * hash) + FUNCTION_FIELD_NUMBER;
         hash = (53 * hash) + getFunctionList().hashCode();
@@ -304,6 +314,17 @@ public final class FunctionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.FunctionProtos.FunctionDefLibrary parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -485,7 +506,7 @@ public final class FunctionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -498,12 +519,12 @@ public final class FunctionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -569,6 +590,7 @@ public final class FunctionProtos {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1077,12 +1099,12 @@ public final class FunctionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1105,7 +1127,7 @@ public final class FunctionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new FunctionDefLibrary(input, extensionRegistry);
+        return new FunctionDefLibrary(input, extensionRegistry);
       }
     };
 
@@ -1134,7 +1156,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     boolean hasSignature();
     /**
@@ -1143,7 +1165,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     com.tencent.angel.core.graph.OpDefProtos.OpDef getSignature();
     /**
@@ -1152,7 +1174,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     com.tencent.angel.core.graph.OpDefProtos.OpDefOrBuilder getSignatureOrBuilder();
 
@@ -1338,6 +1360,7 @@ public final class FunctionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.FunctionDef)
       FunctionDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use FunctionDef.newBuilder() to construct.
     private FunctionDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1349,14 +1372,19 @@ public final class FunctionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private FunctionDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1366,7 +1394,8 @@ public final class FunctionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1400,9 +1429,10 @@ public final class FunctionProtos {
                 mutable_bitField0_ |= 0x00000008;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              ret = input.readMessage(
+              ret__ = input.readMessage(
                   RetDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              ret_.getMutableMap().put(ret.getKey(), ret.getValue());
+              ret_.getMutableMap().put(
+                  ret__.getKey(), ret__.getValue());
               break;
             }
             case 42: {
@@ -1412,9 +1442,10 @@ public final class FunctionProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-              attr = input.readMessage(
+              attr__ = input.readMessage(
                   AttrDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              attr_.getMutableMap().put(attr.getKey(), attr.getValue());
+              attr_.getMutableMap().put(
+                  attr__.getKey(), attr__.getValue());
               break;
             }
           }
@@ -1428,6 +1459,7 @@ public final class FunctionProtos {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           nodeDef_ = java.util.Collections.unmodifiableList(nodeDef_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1465,7 +1497,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     public boolean hasSignature() {
       return signature_ != null;
@@ -1476,7 +1508,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     public com.tencent.angel.core.graph.OpDefProtos.OpDef getSignature() {
       return signature_ == null ? com.tencent.angel.core.graph.OpDefProtos.OpDef.getDefaultInstance() : signature_;
@@ -1487,7 +1519,7 @@ public final class FunctionProtos {
      * attrs etc.
      * </pre>
      *
-     * <code>optional .angel.OpDef signature = 1;</code>
+     * <code>.angel.OpDef signature = 1;</code>
      */
     public com.tencent.angel.core.graph.OpDefProtos.OpDefOrBuilder getSignatureOrBuilder() {
       return getSignature();
@@ -1764,24 +1796,19 @@ public final class FunctionProtos {
       for (int i = 0; i < nodeDef_.size(); i++) {
         output.writeMessage(3, nodeDef_.get(i));
       }
-      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-           : internalGetRet().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-        ret = RetDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(4, ret);
-      }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
-           : internalGetAttr().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
-            .setKey(entry.getKey())
-            .setValue(entry.getValue())
-            .build();
-        output.writeMessage(5, attr);
-      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetRet(),
+          RetDefaultEntryHolder.defaultEntry,
+          4);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAttr(),
+          AttrDefaultEntryHolder.defaultEntry,
+          5);
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1800,28 +1827,28 @@ public final class FunctionProtos {
       for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
            : internalGetRet().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-        ret = RetDefaultEntryHolder.defaultEntry.newBuilderForType()
+        ret__ = RetDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(4, ret);
+            .computeMessageSize(4, ret__);
       }
       for (java.util.Map.Entry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> entry
            : internalGetAttr().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue>
-        attr = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
+        attr__ = AttrDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(5, attr);
+            .computeMessageSize(5, attr__);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1844,6 +1871,7 @@ public final class FunctionProtos {
           .equals(other.getNodeDefList());
       result = result && internalGetRet().equals(
           other.internalGetRet());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1853,7 +1881,7 @@ public final class FunctionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasSignature()) {
         hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
         hash = (53 * hash) + getSignature().hashCode();
@@ -1875,6 +1903,17 @@ public final class FunctionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.FunctionProtos.FunctionDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.FunctionProtos.FunctionDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.FunctionProtos.FunctionDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2089,7 +2128,7 @@ public final class FunctionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2102,12 +2141,12 @@ public final class FunctionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2154,6 +2193,7 @@ public final class FunctionProtos {
         }
         internalGetMutableRet().mergeFrom(
             other.internalGetRet());
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2190,7 +2230,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public boolean hasSignature() {
         return signatureBuilder_ != null || signature_ != null;
@@ -2201,7 +2241,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDef getSignature() {
         if (signatureBuilder_ == null) {
@@ -2216,7 +2256,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public Builder setSignature(com.tencent.angel.core.graph.OpDefProtos.OpDef value) {
         if (signatureBuilder_ == null) {
@@ -2237,7 +2277,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public Builder setSignature(
           com.tencent.angel.core.graph.OpDefProtos.OpDef.Builder builderForValue) {
@@ -2256,7 +2296,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public Builder mergeSignature(com.tencent.angel.core.graph.OpDefProtos.OpDef value) {
         if (signatureBuilder_ == null) {
@@ -2279,7 +2319,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public Builder clearSignature() {
         if (signatureBuilder_ == null) {
@@ -2298,7 +2338,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDef.Builder getSignatureBuilder() {
         
@@ -2311,7 +2351,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       public com.tencent.angel.core.graph.OpDefProtos.OpDefOrBuilder getSignatureOrBuilder() {
         if (signatureBuilder_ != null) {
@@ -2327,7 +2367,7 @@ public final class FunctionProtos {
        * attrs etc.
        * </pre>
        *
-       * <code>optional .angel.OpDef signature = 1;</code>
+       * <code>.angel.OpDef signature = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.tencent.angel.core.graph.OpDefProtos.OpDef, com.tencent.angel.core.graph.OpDefProtos.OpDef.Builder, com.tencent.angel.core.graph.OpDefProtos.OpDefOrBuilder> 
@@ -2436,7 +2476,8 @@ public final class FunctionProtos {
       }
 
       public Builder clearAttr() {
-        getMutableAttr().clear();
+        internalGetMutableAttr().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -2450,7 +2491,8 @@ public final class FunctionProtos {
       public Builder removeAttr(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().remove(key);
+        internalGetMutableAttr().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -2473,7 +2515,8 @@ public final class FunctionProtos {
           com.tencent.angel.core.graph.AttrValueProtos.AttrValue value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableAttr().put(key, value);
+        internalGetMutableAttr().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -2486,7 +2529,8 @@ public final class FunctionProtos {
 
       public Builder putAllAttr(
           java.util.Map<java.lang.String, com.tencent.angel.core.graph.AttrValueProtos.AttrValue> values) {
-        getMutableAttr().putAll(values);
+        internalGetMutableAttr().getMutableMap()
+            .putAll(values);
         return this;
       }
 
@@ -2935,7 +2979,8 @@ public final class FunctionProtos {
       }
 
       public Builder clearRet() {
-        getMutableRet().clear();
+        internalGetMutableRet().getMutableMap()
+            .clear();
         return this;
       }
       /**
@@ -2950,7 +2995,8 @@ public final class FunctionProtos {
       public Builder removeRet(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        getMutableRet().remove(key);
+        internalGetMutableRet().getMutableMap()
+            .remove(key);
         return this;
       }
       /**
@@ -2974,7 +3020,8 @@ public final class FunctionProtos {
           java.lang.String value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
-        getMutableRet().put(key, value);
+        internalGetMutableRet().getMutableMap()
+            .put(key, value);
         return this;
       }
       /**
@@ -2988,17 +3035,18 @@ public final class FunctionProtos {
 
       public Builder putAllRet(
           java.util.Map<java.lang.String, java.lang.String> values) {
-        getMutableRet().putAll(values);
+        internalGetMutableRet().getMutableMap()
+            .putAll(values);
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3021,7 +3069,7 @@ public final class FunctionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new FunctionDef(input, extensionRegistry);
+        return new FunctionDef(input, extensionRegistry);
       }
     };
 
@@ -3049,7 +3097,7 @@ public final class FunctionProtos {
      * The function name.
      * </pre>
      *
-     * <code>optional string function_name = 1;</code>
+     * <code>string function_name = 1;</code>
      */
     java.lang.String getFunctionName();
     /**
@@ -3057,7 +3105,7 @@ public final class FunctionProtos {
      * The function name.
      * </pre>
      *
-     * <code>optional string function_name = 1;</code>
+     * <code>string function_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getFunctionNameBytes();
@@ -3067,7 +3115,7 @@ public final class FunctionProtos {
      * The gradient function's name.
      * </pre>
      *
-     * <code>optional string gradient_func = 2;</code>
+     * <code>string gradient_func = 2;</code>
      */
     java.lang.String getGradientFunc();
     /**
@@ -3075,7 +3123,7 @@ public final class FunctionProtos {
      * The gradient function's name.
      * </pre>
      *
-     * <code>optional string gradient_func = 2;</code>
+     * <code>string gradient_func = 2;</code>
      */
     com.google.protobuf.ByteString
         getGradientFuncBytes();
@@ -3105,6 +3153,7 @@ public final class FunctionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:angel.GradientDef)
       GradientDefOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GradientDef.newBuilder() to construct.
     private GradientDef(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3117,14 +3166,19 @@ public final class FunctionProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GradientDef(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3134,7 +3188,8 @@ public final class FunctionProtos {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3159,6 +3214,7 @@ public final class FunctionProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3181,7 +3237,7 @@ public final class FunctionProtos {
      * The function name.
      * </pre>
      *
-     * <code>optional string function_name = 1;</code>
+     * <code>string function_name = 1;</code>
      */
     public java.lang.String getFunctionName() {
       java.lang.Object ref = functionName_;
@@ -3200,7 +3256,7 @@ public final class FunctionProtos {
      * The function name.
      * </pre>
      *
-     * <code>optional string function_name = 1;</code>
+     * <code>string function_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getFunctionNameBytes() {
@@ -3223,7 +3279,7 @@ public final class FunctionProtos {
      * The gradient function's name.
      * </pre>
      *
-     * <code>optional string gradient_func = 2;</code>
+     * <code>string gradient_func = 2;</code>
      */
     public java.lang.String getGradientFunc() {
       java.lang.Object ref = gradientFunc_;
@@ -3242,7 +3298,7 @@ public final class FunctionProtos {
      * The gradient function's name.
      * </pre>
      *
-     * <code>optional string gradient_func = 2;</code>
+     * <code>string gradient_func = 2;</code>
      */
     public com.google.protobuf.ByteString
         getGradientFuncBytes() {
@@ -3276,6 +3332,7 @@ public final class FunctionProtos {
       if (!getGradientFuncBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, gradientFunc_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3289,11 +3346,11 @@ public final class FunctionProtos {
       if (!getGradientFuncBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, gradientFunc_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3309,6 +3366,7 @@ public final class FunctionProtos {
           .equals(other.getFunctionName());
       result = result && getGradientFunc()
           .equals(other.getGradientFunc());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3318,7 +3376,7 @@ public final class FunctionProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + FUNCTION_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getFunctionName().hashCode();
       hash = (37 * hash) + GRADIENT_FUNC_FIELD_NUMBER;
@@ -3328,6 +3386,17 @@ public final class FunctionProtos {
       return hash;
     }
 
+    public static com.tencent.angel.core.graph.FunctionProtos.GradientDef parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.tencent.angel.core.graph.FunctionProtos.GradientDef parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.tencent.angel.core.graph.FunctionProtos.GradientDef parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3496,7 +3565,7 @@ public final class FunctionProtos {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3509,12 +3578,12 @@ public final class FunctionProtos {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3536,6 +3605,7 @@ public final class FunctionProtos {
           gradientFunc_ = other.gradientFunc_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3568,7 +3638,7 @@ public final class FunctionProtos {
        * The function name.
        * </pre>
        *
-       * <code>optional string function_name = 1;</code>
+       * <code>string function_name = 1;</code>
        */
       public java.lang.String getFunctionName() {
         java.lang.Object ref = functionName_;
@@ -3587,7 +3657,7 @@ public final class FunctionProtos {
        * The function name.
        * </pre>
        *
-       * <code>optional string function_name = 1;</code>
+       * <code>string function_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getFunctionNameBytes() {
@@ -3607,7 +3677,7 @@ public final class FunctionProtos {
        * The function name.
        * </pre>
        *
-       * <code>optional string function_name = 1;</code>
+       * <code>string function_name = 1;</code>
        */
       public Builder setFunctionName(
           java.lang.String value) {
@@ -3624,7 +3694,7 @@ public final class FunctionProtos {
        * The function name.
        * </pre>
        *
-       * <code>optional string function_name = 1;</code>
+       * <code>string function_name = 1;</code>
        */
       public Builder clearFunctionName() {
         
@@ -3637,7 +3707,7 @@ public final class FunctionProtos {
        * The function name.
        * </pre>
        *
-       * <code>optional string function_name = 1;</code>
+       * <code>string function_name = 1;</code>
        */
       public Builder setFunctionNameBytes(
           com.google.protobuf.ByteString value) {
@@ -3657,7 +3727,7 @@ public final class FunctionProtos {
        * The gradient function's name.
        * </pre>
        *
-       * <code>optional string gradient_func = 2;</code>
+       * <code>string gradient_func = 2;</code>
        */
       public java.lang.String getGradientFunc() {
         java.lang.Object ref = gradientFunc_;
@@ -3676,7 +3746,7 @@ public final class FunctionProtos {
        * The gradient function's name.
        * </pre>
        *
-       * <code>optional string gradient_func = 2;</code>
+       * <code>string gradient_func = 2;</code>
        */
       public com.google.protobuf.ByteString
           getGradientFuncBytes() {
@@ -3696,7 +3766,7 @@ public final class FunctionProtos {
        * The gradient function's name.
        * </pre>
        *
-       * <code>optional string gradient_func = 2;</code>
+       * <code>string gradient_func = 2;</code>
        */
       public Builder setGradientFunc(
           java.lang.String value) {
@@ -3713,7 +3783,7 @@ public final class FunctionProtos {
        * The gradient function's name.
        * </pre>
        *
-       * <code>optional string gradient_func = 2;</code>
+       * <code>string gradient_func = 2;</code>
        */
       public Builder clearGradientFunc() {
         
@@ -3726,7 +3796,7 @@ public final class FunctionProtos {
        * The gradient function's name.
        * </pre>
        *
-       * <code>optional string gradient_func = 2;</code>
+       * <code>string gradient_func = 2;</code>
        */
       public Builder setGradientFuncBytes(
           com.google.protobuf.ByteString value) {
@@ -3741,12 +3811,12 @@ public final class FunctionProtos {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3769,7 +3839,7 @@ public final class FunctionProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GradientDef(input, extensionRegistry);
+        return new GradientDef(input, extensionRegistry);
       }
     };
 
@@ -3831,7 +3901,7 @@ public final class FunctionProtos {
       "re\030\001 \001(\0132\014.angel.OpDef\022*\n\004attr\030\005 \003(\0132\034.a" +
       "ngel.FunctionDef.AttrEntry\022 \n\010node_def\030\003" +
       " \003(\0132\016.angel.NodeDef\022(\n\003ret\030\004 \003(\0132\033.ange" +
-      "l.FunctionDef.RetEntry\032=\n\tAttrEntry\022\013\n\003k",
+      "l.FunctionDef.RetEntry\032=\n\tAttrEntry\022\013\n\003k" +
       "ey\030\001 \001(\t\022\037\n\005value\030\002 \001(\0132\020.angel.AttrValu" +
       "e:\0028\001\032*\n\010RetEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
       "\002 \001(\t:\0028\001J\004\010\002\020\003\";\n\013GradientDef\022\025\n\rfuncti" +
