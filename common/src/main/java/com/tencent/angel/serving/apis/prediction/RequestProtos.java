@@ -44,12 +44,12 @@ public final class RequestProtos {
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> 
+    java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> 
         getInstancesList();
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.Instance getInstances(int index);
+    com.tencent.angel.serving.apis.common.InstanceProtos.Instance getInstances(int index);
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
@@ -57,12 +57,12 @@ public final class RequestProtos {
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+    java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
         getInstancesOrBuilderList();
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getInstancesOrBuilder(
+    com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getInstancesOrBuilder(
         int index);
   }
   /**
@@ -134,11 +134,11 @@ public final class RequestProtos {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                instances_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.Instance>();
+                instances_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.Instance>();
                 mutable_bitField0_ |= 0x00000004;
               }
               instances_.add(
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.Instance.parser(), extensionRegistry));
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.Instance.parser(), extensionRegistry));
               break;
             }
           }
@@ -225,17 +225,17 @@ public final class RequestProtos {
     }
 
     public static final int INSTANCES_FIELD_NUMBER = 3;
-    private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> instances_;
+    private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> instances_;
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> getInstancesList() {
+    public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> getInstancesList() {
       return instances_;
     }
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+    public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
         getInstancesOrBuilderList() {
       return instances_;
     }
@@ -248,13 +248,13 @@ public final class RequestProtos {
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.Instance getInstances(int index) {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getInstances(int index) {
       return instances_.get(index);
     }
     /**
      * <code>repeated .angel.serving.Instance instances = 3;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getInstancesOrBuilder(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getInstancesOrBuilder(
         int index) {
       return instances_.get(index);
     }
@@ -817,22 +817,22 @@ public final class RequestProtos {
         return this;
       }
 
-      private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> instances_ =
+      private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> instances_ =
         java.util.Collections.emptyList();
       private void ensureInstancesIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          instances_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.Instance>(instances_);
+          instances_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.Instance>(instances_);
           bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> instancesBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> instancesBuilder_;
 
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> getInstancesList() {
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> getInstancesList() {
         if (instancesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(instances_);
         } else {
@@ -852,7 +852,7 @@ public final class RequestProtos {
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance getInstances(int index) {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getInstances(int index) {
         if (instancesBuilder_ == null) {
           return instances_.get(index);
         } else {
@@ -863,7 +863,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder setInstances(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (instancesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -880,7 +880,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder setInstances(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (instancesBuilder_ == null) {
           ensureInstancesIsMutable();
           instances_.set(index, builderForValue.build());
@@ -893,7 +893,7 @@ public final class RequestProtos {
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public Builder addInstances(com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+      public Builder addInstances(com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (instancesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -910,7 +910,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder addInstances(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (instancesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -927,7 +927,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder addInstances(
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (instancesBuilder_ == null) {
           ensureInstancesIsMutable();
           instances_.add(builderForValue.build());
@@ -941,7 +941,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder addInstances(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (instancesBuilder_ == null) {
           ensureInstancesIsMutable();
           instances_.add(index, builderForValue.build());
@@ -955,7 +955,7 @@ public final class RequestProtos {
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
       public Builder addAllInstances(
-          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.ValueProtos.Instance> values) {
+          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.InstanceProtos.Instance> values) {
         if (instancesBuilder_ == null) {
           ensureInstancesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -995,14 +995,14 @@ public final class RequestProtos {
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder getInstancesBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder getInstancesBuilder(
           int index) {
         return getInstancesFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getInstancesOrBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getInstancesOrBuilder(
           int index) {
         if (instancesBuilder_ == null) {
           return instances_.get(index);  } else {
@@ -1012,7 +1012,7 @@ public final class RequestProtos {
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+      public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
            getInstancesOrBuilderList() {
         if (instancesBuilder_ != null) {
           return instancesBuilder_.getMessageOrBuilderList();
@@ -1023,31 +1023,31 @@ public final class RequestProtos {
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder addInstancesBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder addInstancesBuilder() {
         return getInstancesFieldBuilder().addBuilder(
-            com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance());
+            com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder addInstancesBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder addInstancesBuilder(
           int index) {
         return getInstancesFieldBuilder().addBuilder(
-            index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance());
+            index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.Instance instances = 3;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder> 
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder> 
            getInstancesBuilderList() {
         return getInstancesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
           getInstancesFieldBuilder() {
         if (instancesBuilder_ == null) {
           instancesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder>(
+              com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder>(
                   instances_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
@@ -1139,7 +1139,7 @@ public final class RequestProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.tencent.angel.serving.apis.common.ValueProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.InstanceProtos.getDescriptor(),
           com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor(),
         }, assigner);
     internal_static_angel_serving_Request_descriptor =
@@ -1148,7 +1148,7 @@ public final class RequestProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_angel_serving_Request_descriptor,
         new java.lang.String[] { "ModelSpec", "Platform", "Instances", });
-    com.tencent.angel.serving.apis.common.ValueProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.InstanceProtos.getDescriptor();
     com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor();
   }
 

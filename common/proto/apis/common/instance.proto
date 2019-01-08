@@ -3,7 +3,7 @@ syntax = "proto3";
 package angel.serving;
 option java_multiple_files = false;
 option java_package = "com.tencent.angel.serving.apis.common";
-option java_outer_classname = "ValueProtos";
+option java_outer_classname = "InstanceProtos";
 
 
 import "apis/common/types.proto";

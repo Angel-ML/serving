@@ -2,10 +2,10 @@ package com.tencent.angel.utils;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Int64Value;
-import com.tencent.angel.serving.apis.common.TensorShapeProtos;
+import com.tencent.angel.serving.apis.common.TensorShapeProtos.*;
 import com.tencent.angel.serving.apis.common.TypesProtos.DataType;
-import com.tencent.angel.serving.apis.common.ModelSpecProtos;
-import com.tencent.angel.serving.apis.common.ValueProtos;
+import com.tencent.angel.serving.apis.common.ModelSpecProtos.*;
+import com.tencent.angel.serving.apis.common.InstanceProtos.*;
 import scala.Tuple2;
 
 import java.util.Iterator;
@@ -18,11 +18,11 @@ public class ProtoUtils {
         return Int64Value.newBuilder().setValue(modelVersion).build();
     }
 
-    static public TensorShapeProtos.TensorShapeProto getShape(Long... dims) {
-        TensorShapeProtos.TensorShapeProto.Builder builder = TensorShapeProtos.TensorShapeProto.newBuilder();
+    static public TensorShapeProto getShape(Long... dims) {
+        TensorShapeProto.Builder builder = TensorShapeProto.newBuilder();
 
         for (long dim : dims) {
-            TensorShapeProtos.TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProtos.TensorShapeProto.Dim.newBuilder();
+            TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProto.Dim.newBuilder();
             dimBuilder.setSize(dim);
             builder.addDim(dimBuilder.build());
         }
@@ -30,11 +30,11 @@ public class ProtoUtils {
         return builder.build();
     }
 
-    static public TensorShapeProtos.TensorShapeProto getShape(String[] names, Long[] dims) {
-        TensorShapeProtos.TensorShapeProto.Builder builder = TensorShapeProtos.TensorShapeProto.newBuilder();
+    static public TensorShapeProto getShape(String[] names, Long[] dims) {
+        TensorShapeProto.Builder builder = TensorShapeProto.newBuilder();
 
         for (int i = 0; i < dims.length; i++) {
-            TensorShapeProtos.TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProtos.TensorShapeProto.Dim.newBuilder();
+            TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProto.Dim.newBuilder();
             dimBuilder.setName(names[i]);
             dimBuilder.setSize(dims[i]);
             builder.addDim(dimBuilder.build());
@@ -43,8 +43,8 @@ public class ProtoUtils {
         return builder.build();
     }
 
-    static public ModelSpecProtos.ModelSpec getModelSpec(String modelName, Long version, String signature) {
-        return ModelSpecProtos.ModelSpec.newBuilder()
+    static public ModelSpec getModelSpec(String modelName, Long version, String signature) {
+        return ModelSpec.newBuilder()
                 .setName(modelName)
                 .setVersion(getVersion(version))
                 .setSignatureName(signature)
@@ -52,8 +52,8 @@ public class ProtoUtils {
     }
 
     // 0 D
-    static public <T> ValueProtos.Instance getInstance(T value) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(T value) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(0L));
         if (value instanceof Boolean) {
@@ -85,8 +85,8 @@ public class ProtoUtils {
     }
 
     // named 0 D
-    static public <T> ValueProtos.Instance getInstance(String name, T value) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(String name, T value) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(0L));
         instanceBuilder.setName(name);
@@ -118,7 +118,7 @@ public class ProtoUtils {
         return instanceBuilder.build();
     }
 
-    static private <T> Tuple2<Integer, Integer> addElements(ValueProtos.ListValue.Builder lvBuilder, Iterator<T> values) throws Exception {
+    static private <T> Tuple2<Integer, Integer> addElements(ListValue.Builder lvBuilder, Iterator<T> values) throws Exception {
         int dim = 0;
         int dtype = -1;
         if (values.hasNext()) {
@@ -205,7 +205,7 @@ public class ProtoUtils {
         return new Tuple2<Integer, Integer>(dim, dtype);
     }
 
-    static private <K, V> int addElements(ValueProtos.MapValue.Builder mvBuilder, Map<K, V> values) throws Exception {
+    static private <K, V> int addElements(MapValue.Builder mvBuilder, Map<K, V> values) throws Exception {
         int dtype = -1;
         Iterator<Map.Entry<K, V>> iter = values.entrySet().iterator();
         if (iter.hasNext()) {
@@ -454,7 +454,7 @@ public class ProtoUtils {
         return dtype % 10;
     }
 
-    static private void setDType(ValueProtos.Instance.Builder instanceBuilder, int dtype) throws Exception {
+    static private void setDType(Instance.Builder instanceBuilder, int dtype) throws Exception {
         switch (dtype) {
             case 1:
                 instanceBuilder.setDType(DataType.DT_BOOL);
@@ -483,10 +483,10 @@ public class ProtoUtils {
     }
 
     // dense 1 D
-    static public <T> ValueProtos.Instance getInstance(Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 
@@ -496,10 +496,10 @@ public class ProtoUtils {
     }
 
     // dense named 1 D
-    static public <T> ValueProtos.Instance getInstance(String name, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(String name, Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 
@@ -510,10 +510,10 @@ public class ProtoUtils {
     }
 
     // sparse string key 1 D
-    static public <V> ValueProtos.Instance getInstance(Map<String, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(Map<String, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -522,12 +522,12 @@ public class ProtoUtils {
     }
 
     // sparse string key named 1 D
-    static public <V> ValueProtos.Instance getInstance(String name, Map<String, V> values) throws Exception  {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(String name, Map<String, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setName(name);
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -536,12 +536,12 @@ public class ProtoUtils {
     }
 
     // sparse int key 1 D
-    static public <V> ValueProtos.Instance getInstance(int dim, Map<Integer, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(int dim, Map<Integer, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(Long.valueOf(dim)));
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -550,13 +550,13 @@ public class ProtoUtils {
     }
 
     // sparse int key named 1 D
-    static public <V> ValueProtos.Instance getInstance(String name, int dim, Map<Integer, V> values) throws Exception  {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(String name, int dim, Map<Integer, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setName(name);
         instanceBuilder.setShape(getShape(Long.valueOf(dim)));
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -565,12 +565,12 @@ public class ProtoUtils {
     }
 
     // sparse long key 1 D
-    static public <V> ValueProtos.Instance getInstance(long dim, Map<Long, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(long dim, Map<Long, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(dim));
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -579,13 +579,13 @@ public class ProtoUtils {
     }
 
     // sparse long key named 1 D
-    static public <V>  ValueProtos.Instance getInstance(String name, long dim,  Map<Long, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <V> Instance getInstance(String name, long dim, Map<Long, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(dim));
         instanceBuilder.setName(name);
 
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
         int dtype = addElements(mvBuilder, values);
 
         setDType(instanceBuilder, dtype);
@@ -594,11 +594,11 @@ public class ProtoUtils {
     }
 
     // dense 2 D
-    static public <T> ValueProtos.Instance getInstance(int numRows, int numCols, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(int numRows, int numCols, Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
         instanceBuilder.setShape(getShape(Long.valueOf(numRows), Long.valueOf(numCols)));
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 
@@ -607,12 +607,12 @@ public class ProtoUtils {
     }
 
     // named dense 2 D
-    static public <T> ValueProtos.Instance getInstance(String name, int numRows, int numCols, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
+    static public <T> Instance getInstance(String name, int numRows, int numCols, Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
         instanceBuilder.setShape(getShape(Long.valueOf(numRows), Long.valueOf(numCols)));
         instanceBuilder.setName(name);
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 
@@ -621,11 +621,11 @@ public class ProtoUtils {
     }
 
     // dense 3 D
-    static public <T> ValueProtos.Instance getInstance(int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape((long)numRows, (long)numCols, (long)numChannel));
+    static public <T> Instance getInstance(int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
+        instanceBuilder.setShape(getShape((long) numRows, (long) numCols, (long) numChannel));
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 
@@ -634,12 +634,12 @@ public class ProtoUtils {
     }
 
     // named dense 3 D
-    static public <T> ValueProtos.Instance getInstance(String name, int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape((long)numRows, (long)numCols, (long)numChannel));
+    static public <T> Instance getInstance(String name, int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
+        instanceBuilder.setShape(getShape((long) numRows, (long) numCols, (long) numChannel));
         instanceBuilder.setName(name);
 
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
+        ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
 

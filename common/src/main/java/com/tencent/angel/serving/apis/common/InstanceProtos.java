@@ -3,8 +3,8 @@
 
 package com.tencent.angel.serving.apis.common;
 
-public final class ValueProtos {
-  private ValueProtos() {}
+public final class InstanceProtos {
+  private InstanceProtos() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -118,12 +118,12 @@ public final class ValueProtos {
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue> 
+    java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> 
         getVlistList();
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getVlist(int index);
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getVlist(int index);
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
@@ -131,23 +131,23 @@ public final class ValueProtos {
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> 
+    java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> 
         getVlistOrBuilderList();
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getVlistOrBuilder(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getVlistOrBuilder(
         int index);
 
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue> 
+    java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> 
         getMlistList();
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMlist(int index);
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMlist(int index);
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
@@ -155,12 +155,12 @@ public final class ValueProtos {
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> 
+    java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> 
         getMlistOrBuilderList();
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMlistOrBuilder(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMlistOrBuilder(
         int index);
   }
   /**
@@ -342,20 +342,20 @@ public final class ValueProtos {
             }
             case 66: {
               if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                vlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.ListValue>();
+                vlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>();
                 mutable_bitField0_ |= 0x00000080;
               }
               vlist_.add(
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.ListValue.parser(), extensionRegistry));
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.parser(), extensionRegistry));
               break;
             }
             case 74: {
               if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                mlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.MapValue>();
+                mlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>();
                 mutable_bitField0_ |= 0x00000100;
               }
               mlist_.add(
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.MapValue.parser(), extensionRegistry));
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.parser(), extensionRegistry));
               break;
             }
           }
@@ -399,14 +399,14 @@ public final class ValueProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_ListValue_descriptor;
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_ListValue_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_ListValue_fieldAccessorTable
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_ListValue_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.tencent.angel.serving.apis.common.ValueProtos.ListValue.class, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder.class);
+              com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.class, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder.class);
     }
 
     public static final int BS_FIELD_NUMBER = 1;
@@ -576,17 +576,17 @@ public final class ValueProtos {
     }
 
     public static final int VLIST_FIELD_NUMBER = 8;
-    private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue> vlist_;
+    private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> vlist_;
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getVlistList() {
+    public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getVlistList() {
       return vlist_;
     }
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> 
+    public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> 
         getVlistOrBuilderList() {
       return vlist_;
     }
@@ -599,29 +599,29 @@ public final class ValueProtos {
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getVlist(int index) {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getVlist(int index) {
       return vlist_.get(index);
     }
     /**
      * <code>repeated .angel.serving.ListValue vlist = 8;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getVlistOrBuilder(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getVlistOrBuilder(
         int index) {
       return vlist_.get(index);
     }
 
     public static final int MLIST_FIELD_NUMBER = 9;
-    private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue> mlist_;
+    private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> mlist_;
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getMlistList() {
+    public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getMlistList() {
       return mlist_;
     }
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> 
+    public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> 
         getMlistOrBuilderList() {
       return mlist_;
     }
@@ -634,13 +634,13 @@ public final class ValueProtos {
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMlist(int index) {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMlist(int index) {
       return mlist_.get(index);
     }
     /**
      * <code>repeated .angel.serving.MapValue mlist = 9;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMlistOrBuilder(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMlistOrBuilder(
         int index) {
       return mlist_.get(index);
     }
@@ -809,10 +809,10 @@ public final class ValueProtos {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.tencent.angel.serving.apis.common.ValueProtos.ListValue)) {
+      if (!(obj instanceof com.tencent.angel.serving.apis.common.InstanceProtos.ListValue)) {
         return super.equals(obj);
       }
-      com.tencent.angel.serving.apis.common.ValueProtos.ListValue other = (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) obj;
+      com.tencent.angel.serving.apis.common.InstanceProtos.ListValue other = (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) obj;
 
       boolean result = true;
       result = result && getBsList()
@@ -885,69 +885,69 @@ public final class ValueProtos {
       return hash;
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(byte[] data)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseDelimitedFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseDelimitedFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -959,7 +959,7 @@ public final class ValueProtos {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.tencent.angel.serving.apis.common.ValueProtos.ListValue prototype) {
+    public static Builder newBuilder(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -979,20 +979,20 @@ public final class ValueProtos {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:angel.serving.ListValue)
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_ListValue_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_ListValue_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_ListValue_fieldAccessorTable
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_ListValue_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.tencent.angel.serving.apis.common.ValueProtos.ListValue.class, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder.class);
+                com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.class, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder.class);
       }
 
-      // Construct using com.tencent.angel.serving.apis.common.ValueProtos.ListValue.newBuilder()
+      // Construct using com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1042,23 +1042,23 @@ public final class ValueProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_ListValue_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_ListValue_descriptor;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getDefaultInstanceForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getDefaultInstanceForType() {
+        return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue build() {
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue result = buildPartial();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue build() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue buildPartial() {
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue result = new com.tencent.angel.serving.apis.common.ValueProtos.ListValue(this);
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue buildPartial() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue result = new com.tencent.angel.serving.apis.common.InstanceProtos.ListValue(this);
         int from_bitField0_ = bitField0_;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           bs_ = java.util.Collections.unmodifiableList(bs_);
@@ -1144,16 +1144,16 @@ public final class ValueProtos {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.tencent.angel.serving.apis.common.ValueProtos.ListValue) {
-          return mergeFrom((com.tencent.angel.serving.apis.common.ValueProtos.ListValue)other);
+        if (other instanceof com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) {
+          return mergeFrom((com.tencent.angel.serving.apis.common.InstanceProtos.ListValue)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.tencent.angel.serving.apis.common.ValueProtos.ListValue other) {
-        if (other == com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue other) {
+        if (other == com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance()) return this;
         if (!other.bs_.isEmpty()) {
           if (bs_.isEmpty()) {
             bs_ = other.bs_;
@@ -1289,11 +1289,11 @@ public final class ValueProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue parsedMessage = null;
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) e.getUnfinishedMessage();
+          parsedMessage = (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1800,22 +1800,22 @@ public final class ValueProtos {
         return this;
       }
 
-      private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue> vlist_ =
+      private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> vlist_ =
         java.util.Collections.emptyList();
       private void ensureVlistIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          vlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.ListValue>(vlist_);
+          vlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>(vlist_);
           bitField0_ |= 0x00000080;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> vlistBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> vlistBuilder_;
 
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getVlistList() {
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getVlistList() {
         if (vlistBuilder_ == null) {
           return java.util.Collections.unmodifiableList(vlist_);
         } else {
@@ -1835,7 +1835,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getVlist(int index) {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getVlist(int index) {
         if (vlistBuilder_ == null) {
           return vlist_.get(index);
         } else {
@@ -1846,7 +1846,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder setVlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (vlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1863,7 +1863,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder setVlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder builderForValue) {
         if (vlistBuilder_ == null) {
           ensureVlistIsMutable();
           vlist_.set(index, builderForValue.build());
@@ -1876,7 +1876,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public Builder addVlist(com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+      public Builder addVlist(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (vlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1893,7 +1893,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder addVlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (vlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1910,7 +1910,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder addVlist(
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder builderForValue) {
         if (vlistBuilder_ == null) {
           ensureVlistIsMutable();
           vlist_.add(builderForValue.build());
@@ -1924,7 +1924,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder addVlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder builderForValue) {
         if (vlistBuilder_ == null) {
           ensureVlistIsMutable();
           vlist_.add(index, builderForValue.build());
@@ -1938,7 +1938,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
       public Builder addAllVlist(
-          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.ValueProtos.ListValue> values) {
+          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> values) {
         if (vlistBuilder_ == null) {
           ensureVlistIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -1978,14 +1978,14 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder getVlistBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder getVlistBuilder(
           int index) {
         return getVlistFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getVlistOrBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getVlistOrBuilder(
           int index) {
         if (vlistBuilder_ == null) {
           return vlist_.get(index);  } else {
@@ -1995,7 +1995,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> 
+      public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> 
            getVlistOrBuilderList() {
         if (vlistBuilder_ != null) {
           return vlistBuilder_.getMessageOrBuilderList();
@@ -2006,31 +2006,31 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder addVlistBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder addVlistBuilder() {
         return getVlistFieldBuilder().addBuilder(
-            com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance());
+            com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder addVlistBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder addVlistBuilder(
           int index) {
         return getVlistFieldBuilder().addBuilder(
-            index, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance());
+            index, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.ListValue vlist = 8;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder> 
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder> 
            getVlistBuilderList() {
         return getVlistFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> 
           getVlistFieldBuilder() {
         if (vlistBuilder_ == null) {
           vlistBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder>(
+              com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder>(
                   vlist_,
                   ((bitField0_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
@@ -2040,22 +2040,22 @@ public final class ValueProtos {
         return vlistBuilder_;
       }
 
-      private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue> mlist_ =
+      private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> mlist_ =
         java.util.Collections.emptyList();
       private void ensureMlistIsMutable() {
         if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          mlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.MapValue>(mlist_);
+          mlist_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>(mlist_);
           bitField0_ |= 0x00000100;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> mlistBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> mlistBuilder_;
 
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getMlistList() {
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getMlistList() {
         if (mlistBuilder_ == null) {
           return java.util.Collections.unmodifiableList(mlist_);
         } else {
@@ -2075,7 +2075,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMlist(int index) {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMlist(int index) {
         if (mlistBuilder_ == null) {
           return mlist_.get(index);
         } else {
@@ -2086,7 +2086,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder setMlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (mlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2103,7 +2103,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder setMlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder builderForValue) {
         if (mlistBuilder_ == null) {
           ensureMlistIsMutable();
           mlist_.set(index, builderForValue.build());
@@ -2116,7 +2116,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public Builder addMlist(com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+      public Builder addMlist(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (mlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2133,7 +2133,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder addMlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (mlistBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2150,7 +2150,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder addMlist(
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder builderForValue) {
         if (mlistBuilder_ == null) {
           ensureMlistIsMutable();
           mlist_.add(builderForValue.build());
@@ -2164,7 +2164,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder addMlist(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder builderForValue) {
         if (mlistBuilder_ == null) {
           ensureMlistIsMutable();
           mlist_.add(index, builderForValue.build());
@@ -2178,7 +2178,7 @@ public final class ValueProtos {
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
       public Builder addAllMlist(
-          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.ValueProtos.MapValue> values) {
+          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> values) {
         if (mlistBuilder_ == null) {
           ensureMlistIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2218,14 +2218,14 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder getMlistBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder getMlistBuilder(
           int index) {
         return getMlistFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMlistOrBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMlistOrBuilder(
           int index) {
         if (mlistBuilder_ == null) {
           return mlist_.get(index);  } else {
@@ -2235,7 +2235,7 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> 
+      public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> 
            getMlistOrBuilderList() {
         if (mlistBuilder_ != null) {
           return mlistBuilder_.getMessageOrBuilderList();
@@ -2246,31 +2246,31 @@ public final class ValueProtos {
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder addMlistBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder addMlistBuilder() {
         return getMlistFieldBuilder().addBuilder(
-            com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance());
+            com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder addMlistBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder addMlistBuilder(
           int index) {
         return getMlistFieldBuilder().addBuilder(
-            index, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance());
+            index, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.MapValue mlist = 9;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder> 
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder> 
            getMlistBuilderList() {
         return getMlistFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> 
           getMlistFieldBuilder() {
         if (mlistBuilder_ == null) {
           mlistBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder>(
+              com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder>(
                   mlist_,
                   ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
@@ -2294,12 +2294,12 @@ public final class ValueProtos {
     }
 
     // @@protoc_insertion_point(class_scope:angel.serving.ListValue)
-    private static final com.tencent.angel.serving.apis.common.ValueProtos.ListValue DEFAULT_INSTANCE;
+    private static final com.tencent.angel.serving.apis.common.InstanceProtos.ListValue DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.ValueProtos.ListValue();
+      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.InstanceProtos.ListValue();
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.ListValue getDefaultInstance() {
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2322,7 +2322,7 @@ public final class ValueProtos {
       return PARSER;
     }
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getDefaultInstanceForType() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2583,25 +2583,25 @@ public final class ValueProtos {
      * Use {@link #getS2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getS2ListMap();
     /**
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
-    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getS2ListMapMap();
     /**
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrDefault(
         java.lang.String key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue);
     /**
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrThrow(
         java.lang.String key);
 
     /**
@@ -2617,25 +2617,25 @@ public final class ValueProtos {
      * Use {@link #getS2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getS2MapMap();
     /**
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
-    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getS2MapMapMap();
     /**
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrDefault(
         java.lang.String key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue);
     /**
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrThrow(
         java.lang.String key);
 
     /**
@@ -2889,25 +2889,25 @@ public final class ValueProtos {
      * Use {@link #getI2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getI2ListMap();
     /**
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
-    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getI2ListMapMap();
     /**
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrDefault(
         int key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue);
     /**
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrThrow(
         int key);
 
     /**
@@ -2923,25 +2923,25 @@ public final class ValueProtos {
      * Use {@link #getI2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getI2MapMap();
     /**
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
-    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getI2MapMapMap();
     /**
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrDefault(
         int key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue);
     /**
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrThrow(
         int key);
 
     /**
@@ -3195,25 +3195,25 @@ public final class ValueProtos {
      * Use {@link #getL2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getL2ListMap();
     /**
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
-    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     getL2ListMapMap();
     /**
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrDefault(
         long key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue);
     /**
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrThrow(
         long key);
 
     /**
@@ -3229,25 +3229,25 @@ public final class ValueProtos {
      * Use {@link #getL2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getL2MapMap();
     /**
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
-    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+    java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     getL2MapMapMap();
     /**
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrDefault(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrDefault(
         long key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue);
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue);
     /**
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
 
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrThrow(
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrThrow(
         long key);
   }
   /**
@@ -3393,7 +3393,7 @@ public final class ValueProtos {
                     S2ListMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00000080;
               }
-              com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+              com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
               s2ListMap__ = input.readMessage(
                   S2ListMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               s2ListMap_.getMutableMap().put(
@@ -3406,7 +3406,7 @@ public final class ValueProtos {
                     S2MapMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00000100;
               }
-              com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+              com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
               s2MapMap__ = input.readMessage(
                   S2MapMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               s2MapMap_.getMutableMap().put(
@@ -3510,7 +3510,7 @@ public final class ValueProtos {
                     I2ListMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00010000;
               }
-              com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+              com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
               i2ListMap__ = input.readMessage(
                   I2ListMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               i2ListMap_.getMutableMap().put(
@@ -3523,7 +3523,7 @@ public final class ValueProtos {
                     I2MapMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x00020000;
               }
-              com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+              com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
               i2MapMap__ = input.readMessage(
                   I2MapMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               i2MapMap_.getMutableMap().put(
@@ -3627,7 +3627,7 @@ public final class ValueProtos {
                     L2ListMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x02000000;
               }
-              com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+              com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
               l2ListMap__ = input.readMessage(
                   L2ListMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               l2ListMap_.getMutableMap().put(
@@ -3640,7 +3640,7 @@ public final class ValueProtos {
                     L2MapMapDefaultEntryHolder.defaultEntry);
                 mutable_bitField0_ |= 0x04000000;
               }
-              com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+              com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
               l2MapMap__ = input.readMessage(
                   L2MapMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               l2MapMap_.getMutableMap().put(
@@ -3661,7 +3661,7 @@ public final class ValueProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_descriptor;
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_descriptor;
     }
 
     @SuppressWarnings({"rawtypes"})
@@ -3729,9 +3729,9 @@ public final class ValueProtos {
     }
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_fieldAccessorTable
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.tencent.angel.serving.apis.common.ValueProtos.MapValue.class, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder.class);
+              com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.class, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder.class);
     }
 
     public static final int S2BS_MAP_FIELD_NUMBER = 1;
@@ -3740,7 +3740,7 @@ public final class ValueProtos {
           java.lang.String, com.google.protobuf.ByteString> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, com.google.protobuf.ByteString>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2bsMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2bsMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.BYTES,
@@ -3816,7 +3816,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.Integer> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Integer>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2iMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2iMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.INT32,
@@ -3892,7 +3892,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.Long> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Long>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2lMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2lMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.INT64,
@@ -3968,7 +3968,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.Float> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Float>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2fMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2fMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.FLOAT,
@@ -4044,7 +4044,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.Double> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Double>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2dMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2dMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.DOUBLE,
@@ -4120,7 +4120,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.Boolean> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Boolean>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2bMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2bMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.BOOL,
@@ -4196,7 +4196,7 @@ public final class ValueProtos {
           java.lang.String, java.lang.String> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.String>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2sMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2sMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.STRING,
@@ -4269,18 +4269,18 @@ public final class ValueProtos {
     public static final int S2LIST_MAP_FIELD_NUMBER = 8;
     private static final class S2ListMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> defaultEntry =
+          java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2listMapEntry_descriptor, 
+              .<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2listMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> s2ListMap_;
-    private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> s2ListMap_;
+    private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     internalGetS2ListMap() {
       if (s2ListMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -4305,25 +4305,25 @@ public final class ValueProtos {
      * Use {@link #getS2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getS2ListMap() {
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getS2ListMap() {
       return getS2ListMapMap();
     }
     /**
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
 
-    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getS2ListMapMap() {
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getS2ListMapMap() {
       return internalGetS2ListMap().getMap();
     }
     /**
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrDefault(
         java.lang.String key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetS2ListMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -4331,10 +4331,10 @@ public final class ValueProtos {
      * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrThrow(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetS2ListMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -4345,18 +4345,18 @@ public final class ValueProtos {
     public static final int S2MAP_MAP_FIELD_NUMBER = 9;
     private static final class S2MapMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> defaultEntry =
+          java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_S2mapMapEntry_descriptor, 
+              .<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_S2mapMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> s2MapMap_;
-    private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> s2MapMap_;
+    private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     internalGetS2MapMap() {
       if (s2MapMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -4381,25 +4381,25 @@ public final class ValueProtos {
      * Use {@link #getS2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getS2MapMap() {
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getS2MapMap() {
       return getS2MapMapMap();
     }
     /**
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
 
-    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getS2MapMapMap() {
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getS2MapMapMap() {
       return internalGetS2MapMap().getMap();
     }
     /**
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrDefault(
         java.lang.String key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetS2MapMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -4407,10 +4407,10 @@ public final class ValueProtos {
      * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrThrow(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetS2MapMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -4424,7 +4424,7 @@ public final class ValueProtos {
           java.lang.Integer, com.google.protobuf.ByteString> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, com.google.protobuf.ByteString>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2bsMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2bsMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.BYTES,
@@ -4500,7 +4500,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.Integer> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.Integer>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2iMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2iMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.INT32,
@@ -4576,7 +4576,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.Long> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.Long>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2lMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2lMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.INT64,
@@ -4652,7 +4652,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.Float> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.Float>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2fMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2fMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.FLOAT,
@@ -4728,7 +4728,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.Double> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.Double>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2dMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2dMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.DOUBLE,
@@ -4804,7 +4804,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.Boolean> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.Boolean>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2bMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2bMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.BOOL,
@@ -4880,7 +4880,7 @@ public final class ValueProtos {
           java.lang.Integer, java.lang.String> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Integer, java.lang.String>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2sMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2sMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.STRING,
@@ -4953,18 +4953,18 @@ public final class ValueProtos {
     public static final int I2LIST_MAP_FIELD_NUMBER = 18;
     private static final class I2ListMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> defaultEntry =
+          java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2listMapEntry_descriptor, 
+              .<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2listMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> i2ListMap_;
-    private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> i2ListMap_;
+    private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     internalGetI2ListMap() {
       if (i2ListMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -4989,25 +4989,25 @@ public final class ValueProtos {
      * Use {@link #getI2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getI2ListMap() {
+    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getI2ListMap() {
       return getI2ListMapMap();
     }
     /**
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
 
-    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getI2ListMapMap() {
+    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getI2ListMapMap() {
       return internalGetI2ListMap().getMap();
     }
     /**
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrDefault(
         int key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
       
-      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetI2ListMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -5015,10 +5015,10 @@ public final class ValueProtos {
      * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrThrow(
         int key) {
       
-      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetI2ListMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -5029,18 +5029,18 @@ public final class ValueProtos {
     public static final int I2MAP_MAP_FIELD_NUMBER = 19;
     private static final class I2MapMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> defaultEntry =
+          java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_I2mapMapEntry_descriptor, 
+              .<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_I2mapMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT32,
                   0,
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> i2MapMap_;
-    private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> i2MapMap_;
+    private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     internalGetI2MapMap() {
       if (i2MapMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -5065,25 +5065,25 @@ public final class ValueProtos {
      * Use {@link #getI2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getI2MapMap() {
+    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getI2MapMap() {
       return getI2MapMapMap();
     }
     /**
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
 
-    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getI2MapMapMap() {
+    public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getI2MapMapMap() {
       return internalGetI2MapMap().getMap();
     }
     /**
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrDefault(
         int key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
       
-      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetI2MapMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -5091,10 +5091,10 @@ public final class ValueProtos {
      * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrThrow(
         int key) {
       
-      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetI2MapMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -5108,7 +5108,7 @@ public final class ValueProtos {
           java.lang.Long, com.google.protobuf.ByteString> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, com.google.protobuf.ByteString>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2bsMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2bsMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.BYTES,
@@ -5184,7 +5184,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.Integer> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.Integer>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2iMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2iMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.INT32,
@@ -5260,7 +5260,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.Long> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.Long>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2lMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2lMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.INT64,
@@ -5336,7 +5336,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.Float> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.Float>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2fMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2fMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.FLOAT,
@@ -5412,7 +5412,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.Double> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.Double>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2dMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2dMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.DOUBLE,
@@ -5488,7 +5488,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.Boolean> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.Boolean>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2bMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2bMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.BOOL,
@@ -5564,7 +5564,7 @@ public final class ValueProtos {
           java.lang.Long, java.lang.String> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.Long, java.lang.String>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2sMapEntry_descriptor, 
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2sMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.STRING,
@@ -5637,18 +5637,18 @@ public final class ValueProtos {
     public static final int L2LIST_MAP_FIELD_NUMBER = 28;
     private static final class L2ListMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> defaultEntry =
+          java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2listMapEntry_descriptor, 
+              .<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2listMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> l2ListMap_;
-    private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> l2ListMap_;
+    private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
     internalGetL2ListMap() {
       if (l2ListMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -5673,25 +5673,25 @@ public final class ValueProtos {
      * Use {@link #getL2ListMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getL2ListMap() {
+    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getL2ListMap() {
       return getL2ListMapMap();
     }
     /**
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
 
-    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getL2ListMapMap() {
+    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getL2ListMapMap() {
       return internalGetL2ListMap().getMap();
     }
     /**
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrDefault(
         long key,
-        com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
       
-      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetL2ListMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -5699,10 +5699,10 @@ public final class ValueProtos {
      * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrThrow(
         long key) {
       
-      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
           internalGetL2ListMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -5713,18 +5713,18 @@ public final class ValueProtos {
     public static final int L2MAP_MAP_FIELD_NUMBER = 29;
     private static final class L2MapMapDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> defaultEntry =
+          java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>newDefaultInstance(
-                  com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_L2mapMapEntry_descriptor, 
+              .<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>newDefaultInstance(
+                  com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_L2mapMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L,
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                  com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance());
+                  com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> l2MapMap_;
-    private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> l2MapMap_;
+    private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
     internalGetL2MapMap() {
       if (l2MapMap_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -5749,25 +5749,25 @@ public final class ValueProtos {
      * Use {@link #getL2MapMapMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getL2MapMap() {
+    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getL2MapMap() {
       return getL2MapMapMap();
     }
     /**
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
 
-    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getL2MapMapMap() {
+    public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getL2MapMapMap() {
       return internalGetL2MapMap().getMap();
     }
     /**
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrDefault(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrDefault(
         long key,
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
       
-      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetL2MapMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
@@ -5775,10 +5775,10 @@ public final class ValueProtos {
      * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
      */
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrThrow(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrThrow(
         long key) {
       
-      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+      java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
           internalGetL2MapMap().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -6038,9 +6038,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(7, s2SMap__);
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> entry
+      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> entry
            : internalGetS2ListMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
         s2ListMap__ = S2ListMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6048,9 +6048,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(8, s2ListMap__);
       }
-      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> entry
+      for (java.util.Map.Entry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> entry
            : internalGetS2MapMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        com.google.protobuf.MapEntry<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
         s2MapMap__ = S2MapMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6128,9 +6128,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(17, i2SMap__);
       }
-      for (java.util.Map.Entry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> entry
+      for (java.util.Map.Entry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> entry
            : internalGetI2ListMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
         i2ListMap__ = I2ListMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6138,9 +6138,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(18, i2ListMap__);
       }
-      for (java.util.Map.Entry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> entry
+      for (java.util.Map.Entry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> entry
            : internalGetI2MapMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        com.google.protobuf.MapEntry<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
         i2MapMap__ = I2MapMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6218,9 +6218,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(27, l2SMap__);
       }
-      for (java.util.Map.Entry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> entry
+      for (java.util.Map.Entry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> entry
            : internalGetL2ListMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+        com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
         l2ListMap__ = L2ListMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6228,9 +6228,9 @@ public final class ValueProtos {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(28, l2ListMap__);
       }
-      for (java.util.Map.Entry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> entry
+      for (java.util.Map.Entry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> entry
            : internalGetL2MapMap().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+        com.google.protobuf.MapEntry<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
         l2MapMap__ = L2MapMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -6248,10 +6248,10 @@ public final class ValueProtos {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.tencent.angel.serving.apis.common.ValueProtos.MapValue)) {
+      if (!(obj instanceof com.tencent.angel.serving.apis.common.InstanceProtos.MapValue)) {
         return super.equals(obj);
       }
-      com.tencent.angel.serving.apis.common.ValueProtos.MapValue other = (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) obj;
+      com.tencent.angel.serving.apis.common.InstanceProtos.MapValue other = (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) obj;
 
       boolean result = true;
       result = result && internalGetS2BsMap().equals(
@@ -6432,69 +6432,69 @@ public final class ValueProtos {
       return hash;
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(byte[] data)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseDelimitedFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseDelimitedFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6506,7 +6506,7 @@ public final class ValueProtos {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.tencent.angel.serving.apis.common.ValueProtos.MapValue prototype) {
+    public static Builder newBuilder(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -6526,10 +6526,10 @@ public final class ValueProtos {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:angel.serving.MapValue)
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_descriptor;
       }
 
       @SuppressWarnings({"rawtypes"})
@@ -6660,12 +6660,12 @@ public final class ValueProtos {
       }
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_fieldAccessorTable
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.tencent.angel.serving.apis.common.ValueProtos.MapValue.class, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder.class);
+                com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.class, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder.class);
       }
 
-      // Construct using com.tencent.angel.serving.apis.common.ValueProtos.MapValue.newBuilder()
+      // Construct using com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6714,23 +6714,23 @@ public final class ValueProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_MapValue_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_MapValue_descriptor;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getDefaultInstanceForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getDefaultInstanceForType() {
+        return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue build() {
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue result = buildPartial();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue build() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue buildPartial() {
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue result = new com.tencent.angel.serving.apis.common.ValueProtos.MapValue(this);
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue buildPartial() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue result = new com.tencent.angel.serving.apis.common.InstanceProtos.MapValue(this);
         int from_bitField0_ = bitField0_;
         result.s2BsMap_ = internalGetS2BsMap();
         result.s2BsMap_.makeImmutable();
@@ -6817,16 +6817,16 @@ public final class ValueProtos {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.tencent.angel.serving.apis.common.ValueProtos.MapValue) {
-          return mergeFrom((com.tencent.angel.serving.apis.common.ValueProtos.MapValue)other);
+        if (other instanceof com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) {
+          return mergeFrom((com.tencent.angel.serving.apis.common.InstanceProtos.MapValue)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.tencent.angel.serving.apis.common.ValueProtos.MapValue other) {
-        if (other == com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue other) {
+        if (other == com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance()) return this;
         internalGetMutableS2BsMap().mergeFrom(
             other.internalGetS2BsMap());
         internalGetMutableS2IMap().mergeFrom(
@@ -6894,11 +6894,11 @@ public final class ValueProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.tencent.angel.serving.apis.common.ValueProtos.MapValue parsedMessage = null;
+        com.tencent.angel.serving.apis.common.InstanceProtos.MapValue parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) e.getUnfinishedMessage();
+          parsedMessage = (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -7771,8 +7771,8 @@ public final class ValueProtos {
       }
 
       private com.google.protobuf.MapField<
-          java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> s2ListMap_;
-      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+          java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> s2ListMap_;
+      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetS2ListMap() {
         if (s2ListMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -7780,7 +7780,7 @@ public final class ValueProtos {
         }
         return s2ListMap_;
       }
-      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetMutableS2ListMap() {
         onChanged();;
         if (s2ListMap_ == null) {
@@ -7809,25 +7809,25 @@ public final class ValueProtos {
        * Use {@link #getS2ListMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getS2ListMap() {
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getS2ListMap() {
         return getS2ListMapMap();
       }
       /**
        * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
        */
 
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getS2ListMapMap() {
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getS2ListMapMap() {
         return internalGetS2ListMap().getMap();
       }
       /**
        * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrDefault(
           java.lang.String key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetS2ListMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -7835,10 +7835,10 @@ public final class ValueProtos {
        * <code>map&lt;string, .angel.serving.ListValue&gt; s2list_map = 8;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getS2ListMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getS2ListMapOrThrow(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetS2ListMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -7866,7 +7866,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       getMutableS2ListMap() {
         return internalGetMutableS2ListMap().getMutableMap();
       }
@@ -7875,7 +7875,7 @@ public final class ValueProtos {
        */
       public Builder putS2ListMap(
           java.lang.String key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableS2ListMap().getMutableMap()
@@ -7887,15 +7887,15 @@ public final class ValueProtos {
        */
 
       public Builder putAllS2ListMap(
-          java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> values) {
+          java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> values) {
         internalGetMutableS2ListMap().getMutableMap()
             .putAll(values);
         return this;
       }
 
       private com.google.protobuf.MapField<
-          java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> s2MapMap_;
-      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+          java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> s2MapMap_;
+      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetS2MapMap() {
         if (s2MapMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -7903,7 +7903,7 @@ public final class ValueProtos {
         }
         return s2MapMap_;
       }
-      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      private com.google.protobuf.MapField<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetMutableS2MapMap() {
         onChanged();;
         if (s2MapMap_ == null) {
@@ -7932,25 +7932,25 @@ public final class ValueProtos {
        * Use {@link #getS2MapMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getS2MapMap() {
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getS2MapMap() {
         return getS2MapMapMap();
       }
       /**
        * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
        */
 
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getS2MapMapMap() {
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getS2MapMapMap() {
         return internalGetS2MapMap().getMap();
       }
       /**
        * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrDefault(
           java.lang.String key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetS2MapMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -7958,10 +7958,10 @@ public final class ValueProtos {
        * <code>map&lt;string, .angel.serving.MapValue&gt; s2map_map = 9;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getS2MapMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getS2MapMapOrThrow(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetS2MapMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -7989,7 +7989,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       getMutableS2MapMap() {
         return internalGetMutableS2MapMap().getMutableMap();
       }
@@ -7998,7 +7998,7 @@ public final class ValueProtos {
        */
       public Builder putS2MapMap(
           java.lang.String key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableS2MapMap().getMutableMap()
@@ -8010,7 +8010,7 @@ public final class ValueProtos {
        */
 
       public Builder putAllS2MapMap(
-          java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> values) {
+          java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> values) {
         internalGetMutableS2MapMap().getMutableMap()
             .putAll(values);
         return this;
@@ -8878,8 +8878,8 @@ public final class ValueProtos {
       }
 
       private com.google.protobuf.MapField<
-          java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> i2ListMap_;
-      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+          java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> i2ListMap_;
+      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetI2ListMap() {
         if (i2ListMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -8887,7 +8887,7 @@ public final class ValueProtos {
         }
         return i2ListMap_;
       }
-      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetMutableI2ListMap() {
         onChanged();;
         if (i2ListMap_ == null) {
@@ -8916,25 +8916,25 @@ public final class ValueProtos {
        * Use {@link #getI2ListMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getI2ListMap() {
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getI2ListMap() {
         return getI2ListMapMap();
       }
       /**
        * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
        */
 
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getI2ListMapMap() {
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getI2ListMapMap() {
         return internalGetI2ListMap().getMap();
       }
       /**
        * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrDefault(
           int key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
         
-        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetI2ListMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -8942,10 +8942,10 @@ public final class ValueProtos {
        * <code>map&lt;int32, .angel.serving.ListValue&gt; i2list_map = 18;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getI2ListMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getI2ListMapOrThrow(
           int key) {
         
-        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetI2ListMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -8973,7 +8973,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       getMutableI2ListMap() {
         return internalGetMutableI2ListMap().getMutableMap();
       }
@@ -8982,7 +8982,7 @@ public final class ValueProtos {
        */
       public Builder putI2ListMap(
           int key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableI2ListMap().getMutableMap()
@@ -8994,15 +8994,15 @@ public final class ValueProtos {
        */
 
       public Builder putAllI2ListMap(
-          java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> values) {
+          java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> values) {
         internalGetMutableI2ListMap().getMutableMap()
             .putAll(values);
         return this;
       }
 
       private com.google.protobuf.MapField<
-          java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> i2MapMap_;
-      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+          java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> i2MapMap_;
+      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetI2MapMap() {
         if (i2MapMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -9010,7 +9010,7 @@ public final class ValueProtos {
         }
         return i2MapMap_;
       }
-      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      private com.google.protobuf.MapField<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetMutableI2MapMap() {
         onChanged();;
         if (i2MapMap_ == null) {
@@ -9039,25 +9039,25 @@ public final class ValueProtos {
        * Use {@link #getI2MapMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getI2MapMap() {
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getI2MapMap() {
         return getI2MapMapMap();
       }
       /**
        * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
        */
 
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getI2MapMapMap() {
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getI2MapMapMap() {
         return internalGetI2MapMap().getMap();
       }
       /**
        * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrDefault(
           int key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
         
-        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetI2MapMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -9065,10 +9065,10 @@ public final class ValueProtos {
        * <code>map&lt;int32, .angel.serving.MapValue&gt; i2map_map = 19;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getI2MapMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getI2MapMapOrThrow(
           int key) {
         
-        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetI2MapMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -9096,7 +9096,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      public java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       getMutableI2MapMap() {
         return internalGetMutableI2MapMap().getMutableMap();
       }
@@ -9105,7 +9105,7 @@ public final class ValueProtos {
        */
       public Builder putI2MapMap(
           int key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableI2MapMap().getMutableMap()
@@ -9117,7 +9117,7 @@ public final class ValueProtos {
        */
 
       public Builder putAllI2MapMap(
-          java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> values) {
+          java.util.Map<java.lang.Integer, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> values) {
         internalGetMutableI2MapMap().getMutableMap()
             .putAll(values);
         return this;
@@ -9985,8 +9985,8 @@ public final class ValueProtos {
       }
 
       private com.google.protobuf.MapField<
-          java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> l2ListMap_;
-      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+          java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> l2ListMap_;
+      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetL2ListMap() {
         if (l2ListMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -9994,7 +9994,7 @@ public final class ValueProtos {
         }
         return l2ListMap_;
       }
-      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       internalGetMutableL2ListMap() {
         onChanged();;
         if (l2ListMap_ == null) {
@@ -10023,25 +10023,25 @@ public final class ValueProtos {
        * Use {@link #getL2ListMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getL2ListMap() {
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getL2ListMap() {
         return getL2ListMapMap();
       }
       /**
        * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
        */
 
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> getL2ListMapMap() {
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> getL2ListMapMap() {
         return internalGetL2ListMap().getMap();
       }
       /**
        * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrDefault(
           long key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue defaultValue) {
         
-        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetL2ListMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -10049,10 +10049,10 @@ public final class ValueProtos {
        * <code>map&lt;int64, .angel.serving.ListValue&gt; l2list_map = 28;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getL2ListMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getL2ListMapOrThrow(
           long key) {
         
-        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> map =
+        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> map =
             internalGetL2ListMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -10080,7 +10080,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue>
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue>
       getMutableL2ListMap() {
         return internalGetMutableL2ListMap().getMutableMap();
       }
@@ -10089,7 +10089,7 @@ public final class ValueProtos {
        */
       public Builder putL2ListMap(
           long key,
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableL2ListMap().getMutableMap()
@@ -10101,15 +10101,15 @@ public final class ValueProtos {
        */
 
       public Builder putAllL2ListMap(
-          java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.ListValue> values) {
+          java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue> values) {
         internalGetMutableL2ListMap().getMutableMap()
             .putAll(values);
         return this;
       }
 
       private com.google.protobuf.MapField<
-          java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> l2MapMap_;
-      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+          java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> l2MapMap_;
+      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetL2MapMap() {
         if (l2MapMap_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -10117,7 +10117,7 @@ public final class ValueProtos {
         }
         return l2MapMap_;
       }
-      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      private com.google.protobuf.MapField<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       internalGetMutableL2MapMap() {
         onChanged();;
         if (l2MapMap_ == null) {
@@ -10146,25 +10146,25 @@ public final class ValueProtos {
        * Use {@link #getL2MapMapMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getL2MapMap() {
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getL2MapMap() {
         return getL2MapMapMap();
       }
       /**
        * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
        */
 
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> getL2MapMapMap() {
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> getL2MapMapMap() {
         return internalGetL2MapMap().getMap();
       }
       /**
        * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrDefault(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrDefault(
           long key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue defaultValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue defaultValue) {
         
-        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetL2MapMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
@@ -10172,10 +10172,10 @@ public final class ValueProtos {
        * <code>map&lt;int64, .angel.serving.MapValue&gt; l2map_map = 29;</code>
        */
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getL2MapMapOrThrow(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getL2MapMapOrThrow(
           long key) {
         
-        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> map =
+        java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> map =
             internalGetL2MapMap().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -10203,7 +10203,7 @@ public final class ValueProtos {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue>
+      public java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue>
       getMutableL2MapMap() {
         return internalGetMutableL2MapMap().getMutableMap();
       }
@@ -10212,7 +10212,7 @@ public final class ValueProtos {
        */
       public Builder putL2MapMap(
           long key,
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableL2MapMap().getMutableMap()
@@ -10224,7 +10224,7 @@ public final class ValueProtos {
        */
 
       public Builder putAllL2MapMap(
-          java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.ValueProtos.MapValue> values) {
+          java.util.Map<java.lang.Long, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue> values) {
         internalGetMutableL2MapMap().getMutableMap()
             .putAll(values);
         return this;
@@ -10244,12 +10244,12 @@ public final class ValueProtos {
     }
 
     // @@protoc_insertion_point(class_scope:angel.serving.MapValue)
-    private static final com.tencent.angel.serving.apis.common.ValueProtos.MapValue DEFAULT_INSTANCE;
+    private static final com.tencent.angel.serving.apis.common.InstanceProtos.MapValue DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.ValueProtos.MapValue();
+      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.InstanceProtos.MapValue();
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.MapValue getDefaultInstance() {
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10272,7 +10272,7 @@ public final class ValueProtos {
       return PARSER;
     }
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getDefaultInstanceForType() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10366,11 +10366,11 @@ public final class ValueProtos {
     /**
      * <code>.angel.serving.ListValue lv = 12;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValue getLv();
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getLv();
     /**
      * <code>.angel.serving.ListValue lv = 12;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getLvOrBuilder();
+    com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getLvOrBuilder();
 
     /**
      * <code>.angel.serving.MapValue mv = 13;</code>
@@ -10379,13 +10379,13 @@ public final class ValueProtos {
     /**
      * <code>.angel.serving.MapValue mv = 13;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMv();
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMv();
     /**
      * <code>.angel.serving.MapValue mv = 13;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMvOrBuilder();
+    com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMvOrBuilder();
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.Instance.ValueCase getValueCase();
+    public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.ValueCase getValueCase();
   }
   /**
    * Protobuf type {@code angel.serving.Instance}
@@ -10503,28 +10503,28 @@ public final class ValueProtos {
               break;
             }
             case 98: {
-              com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder subBuilder = null;
+              com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder subBuilder = null;
               if (valueCase_ == 12) {
-                subBuilder = ((com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_).toBuilder();
+                subBuilder = ((com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.ListValue.parser(), extensionRegistry);
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_);
+                subBuilder.mergeFrom((com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 12;
               break;
             }
             case 106: {
-              com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder subBuilder = null;
+              com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder subBuilder = null;
               if (valueCase_ == 13) {
-                subBuilder = ((com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_).toBuilder();
+                subBuilder = ((com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_).toBuilder();
               }
               value_ =
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.MapValue.parser(), extensionRegistry);
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_);
+                subBuilder.mergeFrom((com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_);
                 value_ = subBuilder.buildPartial();
               }
               valueCase_ = 13;
@@ -10544,14 +10544,14 @@ public final class ValueProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_Instance_descriptor;
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_Instance_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_Instance_fieldAccessorTable
+      return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_Instance_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.tencent.angel.serving.apis.common.ValueProtos.Instance.class, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder.class);
+              com.tencent.angel.serving.apis.common.InstanceProtos.Instance.class, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder.class);
     }
 
     private int valueCase_ = 0;
@@ -10805,20 +10805,20 @@ public final class ValueProtos {
     /**
      * <code>.angel.serving.ListValue lv = 12;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getLv() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getLv() {
       if (valueCase_ == 12) {
-         return (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_;
+         return (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_;
       }
-      return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+      return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
     }
     /**
      * <code>.angel.serving.ListValue lv = 12;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getLvOrBuilder() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getLvOrBuilder() {
       if (valueCase_ == 12) {
-         return (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_;
+         return (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_;
       }
-      return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+      return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
     }
 
     public static final int MV_FIELD_NUMBER = 13;
@@ -10831,20 +10831,20 @@ public final class ValueProtos {
     /**
      * <code>.angel.serving.MapValue mv = 13;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMv() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMv() {
       if (valueCase_ == 13) {
-         return (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_;
+         return (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_;
       }
-      return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+      return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
     }
     /**
      * <code>.angel.serving.MapValue mv = 13;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMvOrBuilder() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMvOrBuilder() {
       if (valueCase_ == 13) {
-         return (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_;
+         return (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_;
       }
-      return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+      return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10899,10 +10899,10 @@ public final class ValueProtos {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 11, value_);
       }
       if (valueCase_ == 12) {
-        output.writeMessage(12, (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_);
+        output.writeMessage(12, (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_);
       }
       if (valueCase_ == 13) {
-        output.writeMessage(13, (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_);
+        output.writeMessage(13, (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_);
       }
       unknownFields.writeTo(output);
     }
@@ -10962,11 +10962,11 @@ public final class ValueProtos {
       }
       if (valueCase_ == 12) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_);
+          .computeMessageSize(12, (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_);
       }
       if (valueCase_ == 13) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(13, (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_);
+          .computeMessageSize(13, (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -10978,10 +10978,10 @@ public final class ValueProtos {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.tencent.angel.serving.apis.common.ValueProtos.Instance)) {
+      if (!(obj instanceof com.tencent.angel.serving.apis.common.InstanceProtos.Instance)) {
         return super.equals(obj);
       }
-      com.tencent.angel.serving.apis.common.ValueProtos.Instance other = (com.tencent.angel.serving.apis.common.ValueProtos.Instance) obj;
+      com.tencent.angel.serving.apis.common.InstanceProtos.Instance other = (com.tencent.angel.serving.apis.common.InstanceProtos.Instance) obj;
 
       boolean result = true;
       result = result && dType_ == other.dType_;
@@ -11111,69 +11111,69 @@ public final class ValueProtos {
       return hash;
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(byte[] data)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseDelimitedFrom(java.io.InputStream input)
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseDelimitedFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance parseFrom(
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -11185,7 +11185,7 @@ public final class ValueProtos {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.tencent.angel.serving.apis.common.ValueProtos.Instance prototype) {
+    public static Builder newBuilder(com.tencent.angel.serving.apis.common.InstanceProtos.Instance prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -11205,20 +11205,20 @@ public final class ValueProtos {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:angel.serving.Instance)
-        com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder {
+        com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_Instance_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_Instance_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_Instance_fieldAccessorTable
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_Instance_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.tencent.angel.serving.apis.common.ValueProtos.Instance.class, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder.class);
+                com.tencent.angel.serving.apis.common.InstanceProtos.Instance.class, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder.class);
       }
 
-      // Construct using com.tencent.angel.serving.apis.common.ValueProtos.Instance.newBuilder()
+      // Construct using com.tencent.angel.serving.apis.common.InstanceProtos.Instance.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -11254,23 +11254,23 @@ public final class ValueProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.internal_static_angel_serving_Instance_descriptor;
+        return com.tencent.angel.serving.apis.common.InstanceProtos.internal_static_angel_serving_Instance_descriptor;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance getDefaultInstanceForType() {
-        return com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getDefaultInstanceForType() {
+        return com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance();
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance build() {
-        com.tencent.angel.serving.apis.common.ValueProtos.Instance result = buildPartial();
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance build() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.Instance result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance buildPartial() {
-        com.tencent.angel.serving.apis.common.ValueProtos.Instance result = new com.tencent.angel.serving.apis.common.ValueProtos.Instance(this);
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance buildPartial() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.Instance result = new com.tencent.angel.serving.apis.common.InstanceProtos.Instance(this);
         result.dType_ = dType_;
         result.name_ = name_;
         result.flag_ = flag_;
@@ -11346,16 +11346,16 @@ public final class ValueProtos {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.tencent.angel.serving.apis.common.ValueProtos.Instance) {
-          return mergeFrom((com.tencent.angel.serving.apis.common.ValueProtos.Instance)other);
+        if (other instanceof com.tencent.angel.serving.apis.common.InstanceProtos.Instance) {
+          return mergeFrom((com.tencent.angel.serving.apis.common.InstanceProtos.Instance)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.tencent.angel.serving.apis.common.ValueProtos.Instance other) {
-        if (other == com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.tencent.angel.serving.apis.common.InstanceProtos.Instance other) {
+        if (other == com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance()) return this;
         if (other.dType_ != 0) {
           setDTypeValue(other.getDTypeValue());
         }
@@ -11425,11 +11425,11 @@ public final class ValueProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.tencent.angel.serving.apis.common.ValueProtos.Instance parsedMessage = null;
+        com.tencent.angel.serving.apis.common.InstanceProtos.Instance parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.tencent.angel.serving.apis.common.ValueProtos.Instance) e.getUnfinishedMessage();
+          parsedMessage = (com.tencent.angel.serving.apis.common.InstanceProtos.Instance) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -11974,7 +11974,7 @@ public final class ValueProtos {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> lvBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> lvBuilder_;
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
@@ -11984,23 +11984,23 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue getLv() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue getLv() {
         if (lvBuilder_ == null) {
           if (valueCase_ == 12) {
-            return (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_;
+            return (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_;
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
         } else {
           if (valueCase_ == 12) {
             return lvBuilder_.getMessage();
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
         }
       }
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
-      public Builder setLv(com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+      public Builder setLv(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (lvBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12017,7 +12017,7 @@ public final class ValueProtos {
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
       public Builder setLv(
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder builderForValue) {
         if (lvBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -12030,11 +12030,11 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
-      public Builder mergeLv(com.tencent.angel.serving.apis.common.ValueProtos.ListValue value) {
+      public Builder mergeLv(com.tencent.angel.serving.apis.common.InstanceProtos.ListValue value) {
         if (lvBuilder_ == null) {
           if (valueCase_ == 12 &&
-              value_ != com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance()) {
-            value_ = com.tencent.angel.serving.apis.common.ValueProtos.ListValue.newBuilder((com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_)
+              value_ != com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance()) {
+            value_ = com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.newBuilder((com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -12071,35 +12071,35 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder getLvBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder getLvBuilder() {
         return getLvFieldBuilder().getBuilder();
       }
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder getLvOrBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder getLvOrBuilder() {
         if ((valueCase_ == 12) && (lvBuilder_ != null)) {
           return lvBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 12) {
-            return (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_;
+            return (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_;
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
         }
       }
       /**
        * <code>.angel.serving.ListValue lv = 12;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder> 
           getLvFieldBuilder() {
         if (lvBuilder_ == null) {
           if (!(valueCase_ == 12)) {
-            value_ = com.tencent.angel.serving.apis.common.ValueProtos.ListValue.getDefaultInstance();
+            value_ = com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.getDefaultInstance();
           }
           lvBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.ListValue, com.tencent.angel.serving.apis.common.ValueProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.ListValueOrBuilder>(
-                  (com.tencent.angel.serving.apis.common.ValueProtos.ListValue) value_,
+              com.tencent.angel.serving.apis.common.InstanceProtos.ListValue, com.tencent.angel.serving.apis.common.InstanceProtos.ListValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.ListValueOrBuilder>(
+                  (com.tencent.angel.serving.apis.common.InstanceProtos.ListValue) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -12110,7 +12110,7 @@ public final class ValueProtos {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> mvBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> mvBuilder_;
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
@@ -12120,23 +12120,23 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue getMv() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue getMv() {
         if (mvBuilder_ == null) {
           if (valueCase_ == 13) {
-            return (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_;
+            return (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_;
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
         } else {
           if (valueCase_ == 13) {
             return mvBuilder_.getMessage();
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
         }
       }
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
-      public Builder setMv(com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+      public Builder setMv(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (mvBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12153,7 +12153,7 @@ public final class ValueProtos {
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
       public Builder setMv(
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder builderForValue) {
         if (mvBuilder_ == null) {
           value_ = builderForValue.build();
           onChanged();
@@ -12166,11 +12166,11 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
-      public Builder mergeMv(com.tencent.angel.serving.apis.common.ValueProtos.MapValue value) {
+      public Builder mergeMv(com.tencent.angel.serving.apis.common.InstanceProtos.MapValue value) {
         if (mvBuilder_ == null) {
           if (valueCase_ == 13 &&
-              value_ != com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance()) {
-            value_ = com.tencent.angel.serving.apis.common.ValueProtos.MapValue.newBuilder((com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_)
+              value_ != com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance()) {
+            value_ = com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.newBuilder((com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_)
                 .mergeFrom(value).buildPartial();
           } else {
             value_ = value;
@@ -12207,35 +12207,35 @@ public final class ValueProtos {
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder getMvBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder getMvBuilder() {
         return getMvFieldBuilder().getBuilder();
       }
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder getMvOrBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder getMvOrBuilder() {
         if ((valueCase_ == 13) && (mvBuilder_ != null)) {
           return mvBuilder_.getMessageOrBuilder();
         } else {
           if (valueCase_ == 13) {
-            return (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_;
+            return (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_;
           }
-          return com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+          return com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
         }
       }
       /**
        * <code>.angel.serving.MapValue mv = 13;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder> 
           getMvFieldBuilder() {
         if (mvBuilder_ == null) {
           if (!(valueCase_ == 13)) {
-            value_ = com.tencent.angel.serving.apis.common.ValueProtos.MapValue.getDefaultInstance();
+            value_ = com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.getDefaultInstance();
           }
           mvBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.MapValue, com.tencent.angel.serving.apis.common.ValueProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.ValueProtos.MapValueOrBuilder>(
-                  (com.tencent.angel.serving.apis.common.ValueProtos.MapValue) value_,
+              com.tencent.angel.serving.apis.common.InstanceProtos.MapValue, com.tencent.angel.serving.apis.common.InstanceProtos.MapValue.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.MapValueOrBuilder>(
+                  (com.tencent.angel.serving.apis.common.InstanceProtos.MapValue) value_,
                   getParentForChildren(),
                   isClean());
           value_ = null;
@@ -12259,12 +12259,12 @@ public final class ValueProtos {
     }
 
     // @@protoc_insertion_point(class_scope:angel.serving.Instance)
-    private static final com.tencent.angel.serving.apis.common.ValueProtos.Instance DEFAULT_INSTANCE;
+    private static final com.tencent.angel.serving.apis.common.InstanceProtos.Instance DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.ValueProtos.Instance();
+      DEFAULT_INSTANCE = new com.tencent.angel.serving.apis.common.InstanceProtos.Instance();
     }
 
-    public static com.tencent.angel.serving.apis.common.ValueProtos.Instance getDefaultInstance() {
+    public static com.tencent.angel.serving.apis.common.InstanceProtos.Instance getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12287,7 +12287,7 @@ public final class ValueProtos {
       return PARSER;
     }
 
-    public com.tencent.angel.serving.apis.common.ValueProtos.Instance getDefaultInstanceForType() {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12539,9 +12539,9 @@ public final class ValueProtos {
       "\022\013\n\001l\030\007 \001(\003H\000\022\013\n\001f\030\010 \001(\002H\000\022\013\n\001d\030\t \001(\001H\000\022" +
       "\013\n\001b\030\n \001(\010H\000\022\013\n\001s\030\013 \001(\tH\000\022&\n\002lv\030\014 \001(\0132\030." +
       "angel.serving.ListValueH\000\022%\n\002mv\030\r \001(\0132\027." +
-      "angel.serving.MapValueH\000B\007\n\005valueB6\n%com" +
-      ".tencent.angel.serving.apis.commonB\013Valu" +
-      "eProtosP\000b\006proto3"
+      "angel.serving.MapValueH\000B\007\n\005valueB9\n%com" +
+      ".tencent.angel.serving.apis.commonB\016Inst" +
+      "anceProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

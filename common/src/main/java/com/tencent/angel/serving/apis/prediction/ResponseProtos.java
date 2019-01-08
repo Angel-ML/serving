@@ -34,12 +34,12 @@ public final class ResponseProtos {
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> 
+    java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> 
         getPredictionsList();
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.Instance getPredictions(int index);
+    com.tencent.angel.serving.apis.common.InstanceProtos.Instance getPredictions(int index);
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
@@ -47,12 +47,12 @@ public final class ResponseProtos {
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+    java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
         getPredictionsOrBuilderList();
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getPredictionsOrBuilder(
+    com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getPredictionsOrBuilder(
         int index);
 
     /**
@@ -128,11 +128,11 @@ public final class ResponseProtos {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                predictions_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.Instance>();
+                predictions_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.Instance>();
                 mutable_bitField0_ |= 0x00000002;
               }
               predictions_.add(
-                  input.readMessage(com.tencent.angel.serving.apis.common.ValueProtos.Instance.parser(), extensionRegistry));
+                  input.readMessage(com.tencent.angel.serving.apis.common.InstanceProtos.Instance.parser(), extensionRegistry));
               break;
             }
             case 26: {
@@ -191,17 +191,17 @@ public final class ResponseProtos {
     }
 
     public static final int PREDICTIONS_FIELD_NUMBER = 2;
-    private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> predictions_;
+    private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> predictions_;
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> getPredictionsList() {
+    public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> getPredictionsList() {
       return predictions_;
     }
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+    public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
         getPredictionsOrBuilderList() {
       return predictions_;
     }
@@ -214,13 +214,13 @@ public final class ResponseProtos {
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.Instance getPredictions(int index) {
+    public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getPredictions(int index) {
       return predictions_.get(index);
     }
     /**
      * <code>repeated .angel.serving.Instance predictions = 2;</code>
      */
-    public com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getPredictionsOrBuilder(
+    public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getPredictionsOrBuilder(
         int index) {
       return predictions_.get(index);
     }
@@ -748,22 +748,22 @@ public final class ResponseProtos {
         return modelSpecBuilder_;
       }
 
-      private java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> predictions_ =
+      private java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> predictions_ =
         java.util.Collections.emptyList();
       private void ensurePredictionsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          predictions_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.ValueProtos.Instance>(predictions_);
+          predictions_ = new java.util.ArrayList<com.tencent.angel.serving.apis.common.InstanceProtos.Instance>(predictions_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> predictionsBuilder_;
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> predictionsBuilder_;
 
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance> getPredictionsList() {
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance> getPredictionsList() {
         if (predictionsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(predictions_);
         } else {
@@ -783,7 +783,7 @@ public final class ResponseProtos {
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance getPredictions(int index) {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance getPredictions(int index) {
         if (predictionsBuilder_ == null) {
           return predictions_.get(index);
         } else {
@@ -794,7 +794,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder setPredictions(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (predictionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -811,7 +811,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder setPredictions(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (predictionsBuilder_ == null) {
           ensurePredictionsIsMutable();
           predictions_.set(index, builderForValue.build());
@@ -824,7 +824,7 @@ public final class ResponseProtos {
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public Builder addPredictions(com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+      public Builder addPredictions(com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (predictionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -841,7 +841,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder addPredictions(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance value) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance value) {
         if (predictionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -858,7 +858,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder addPredictions(
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (predictionsBuilder_ == null) {
           ensurePredictionsIsMutable();
           predictions_.add(builderForValue.build());
@@ -872,7 +872,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder addPredictions(
-          int index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder builderForValue) {
+          int index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder builderForValue) {
         if (predictionsBuilder_ == null) {
           ensurePredictionsIsMutable();
           predictions_.add(index, builderForValue.build());
@@ -886,7 +886,7 @@ public final class ResponseProtos {
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
       public Builder addAllPredictions(
-          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.ValueProtos.Instance> values) {
+          java.lang.Iterable<? extends com.tencent.angel.serving.apis.common.InstanceProtos.Instance> values) {
         if (predictionsBuilder_ == null) {
           ensurePredictionsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -926,14 +926,14 @@ public final class ResponseProtos {
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder getPredictionsBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder getPredictionsBuilder(
           int index) {
         return getPredictionsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder getPredictionsOrBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder getPredictionsOrBuilder(
           int index) {
         if (predictionsBuilder_ == null) {
           return predictions_.get(index);  } else {
@@ -943,7 +943,7 @@ public final class ResponseProtos {
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public java.util.List<? extends com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+      public java.util.List<? extends com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
            getPredictionsOrBuilderList() {
         if (predictionsBuilder_ != null) {
           return predictionsBuilder_.getMessageOrBuilderList();
@@ -954,31 +954,31 @@ public final class ResponseProtos {
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder addPredictionsBuilder() {
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder addPredictionsBuilder() {
         return getPredictionsFieldBuilder().addBuilder(
-            com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance());
+            com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder addPredictionsBuilder(
+      public com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder addPredictionsBuilder(
           int index) {
         return getPredictionsFieldBuilder().addBuilder(
-            index, com.tencent.angel.serving.apis.common.ValueProtos.Instance.getDefaultInstance());
+            index, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.getDefaultInstance());
       }
       /**
        * <code>repeated .angel.serving.Instance predictions = 2;</code>
        */
-      public java.util.List<com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder> 
+      public java.util.List<com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder> 
            getPredictionsBuilderList() {
         return getPredictionsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder> 
+          com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder> 
           getPredictionsFieldBuilder() {
         if (predictionsBuilder_ == null) {
           predictionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.tencent.angel.serving.apis.common.ValueProtos.Instance, com.tencent.angel.serving.apis.common.ValueProtos.Instance.Builder, com.tencent.angel.serving.apis.common.ValueProtos.InstanceOrBuilder>(
+              com.tencent.angel.serving.apis.common.InstanceProtos.Instance, com.tencent.angel.serving.apis.common.InstanceProtos.Instance.Builder, com.tencent.angel.serving.apis.common.InstanceProtos.InstanceOrBuilder>(
                   predictions_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -1139,7 +1139,7 @@ public final class ResponseProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.tencent.angel.serving.apis.common.ValueProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.InstanceProtos.getDescriptor(),
           com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor(),
         }, assigner);
     internal_static_angel_serving_Response_descriptor =
@@ -1148,7 +1148,7 @@ public final class ResponseProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_angel_serving_Response_descriptor,
         new java.lang.String[] { "ModelSpec", "Predictions", "Error", });
-    com.tencent.angel.serving.apis.common.ValueProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.InstanceProtos.getDescriptor();
     com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor();
   }
 
