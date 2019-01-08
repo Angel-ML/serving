@@ -1,22 +1,24 @@
 package com.tencent.angel.serving.service
 
 import io.grpc.ServerBuilder
-import java.io.{FileInputStream, FileReader, IOException}
+import java.io.{FileReader, IOException}
 
 import com.google.protobuf.{StringValue, TextFormat}
 import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.config.ModelServerConfigProtos.{ModelConfig, ModelConfigList, ModelServerConfig}
 import com.tencent.angel.config.PlatformConfigProtos.PlatformConfigMap
-import com.tencent.angel.serving.core.{EventBus, ServableState, ServableStateMonitor, ServerCore}
+import com.tencent.angel.serving.core._
 import com.tencent.angel.serving.serving.ModelServerConfig
 import org.eclipse.jetty.servlet.ServletContextHandler
 import com.sun.jersey.spi.container.servlet.ServletContainer
 import com.tencent.angel.config.MonitoringConfigProtos.MonitoringConfig
 import com.tencent.angel.servable.SessionBundleConfigProtos.{BatchingParameters, SessionBundleConfig}
+import com.tencent.angel.serving.service.ModelServer.hadoopConf
 import com.tencent.angel.serving.service.common.{ModelServiceImpl, PredictionServiceImpl}
 import com.tencent.angel.serving.service.util.{Options, PlatformConfigUtil}
 import io.grpc.services.ChannelzService
+import org.apache.hadoop.conf.Configuration
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
 
@@ -55,6 +57,10 @@ class ModelServer {
       return
     }
 
+    if (serverOptions.hadoop_home.nonEmpty){
+      hadoopConf.addResource(serverOptions.hadoop_home + "/hdfs-site.xml")
+      hadoopConf.addResource(serverOptions.hadoop_home + "/core-site.xml")
+    }
     var modelServerConfig: ModelServerConfig = null
     if(serverOptions.model_config_file.isEmpty){
       modelServerConfig = buildSingleModelConfig(serverOptions.model_name, "Angel",
@@ -195,6 +201,7 @@ class ModelServer {
 object ModelServer {
 
   var server: ModelServer = _
+  var hadoopConf: Configuration = new Configuration()
 
   @throws[IOException]
   def readPlatformConfigFile(platformConfigFile: String): PlatformConfigMap = {

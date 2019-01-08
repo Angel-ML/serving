@@ -16,4 +16,6 @@ class MetricsManager {
 
   def createNotifier(elapsedPredictTime: Long, resultStatus: String,
     modelName: String, modelVersion: Long): ServableStateNotifierFn = null
+
+  def getMetricsResult(): String = null
 }

@@ -319,7 +319,7 @@ object BasicManager {
       LOG.info(s"manage servable: ${servable.id.toString}")
       try {
         val harnessOpt = getHarnessInternal(servable.id)
-        if (harnessOpt == null) {
+        if (harnessOpt == null || harnessOpt.isEmpty) {
           val harness = LoaderHarness(servable.id, servable.data, maxNumLoadRetries, loadRetryIntervalMicros)
           harness.setAspired(aspired)
           managedMap.addBinding(servable.id.name, harness)
@@ -374,6 +374,7 @@ object BasicManager {
   }
 
   class ServingMap {
+    private val LOG: Logger = LoggerFactory.getLogger(classOf[ServingMap])
     private val lock = new ReentrantReadWriteLock()
     val readLock: ReentrantReadWriteLock.ReadLock = lock.readLock()
     private val writeLock: ReentrantReadWriteLock.WriteLock = lock.writeLock()
@@ -424,6 +425,7 @@ object BasicManager {
         if (harness != null) {
           UntypedServableHandle(harness.id, harness.loader)
         } else {
+          LOG.info("Servable not found for request: " + request.debugString())
           null.asInstanceOf[UntypedServableHandle]
         }
 

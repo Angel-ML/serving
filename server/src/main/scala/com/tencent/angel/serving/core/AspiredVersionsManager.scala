@@ -83,16 +83,19 @@ class AspiredVersionsManager (
     if ((oldInvalidateAspiredVersions -- newAspiredVersions).nonEmpty) {
       false // Sit on it for now. We'll check again later
     } else {
-      val oldWorkingAspiredVersions = servableStateSnapshots.collect {
+      val oldVersions = servableStateSnapshots.collect {
         case snapshot if snapshot.aspired =>
-          snapshot.id.version
+          snapshot
       }.toSet
+      val oldWorkingAspiredVersions = oldVersions.map {
+        case version => version.id.version
+      }
 
       val toLoad = newAspiredVersions -- oldWorkingAspiredVersions
       val toUnload = oldWorkingAspiredVersions -- newAspiredVersions
 
       // first deal with unload
-      versions.foreach {
+      oldVersions.foreach {
         case version if toUnload.contains(version.id.version) => // unload
           basicManager.setAspiredState(version.id, aspired = false)
           basicManager.cancelLoadServableRetry(version.id)

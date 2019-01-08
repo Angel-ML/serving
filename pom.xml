@@ -9,6 +9,7 @@
         <module>common</module>
         <module>server</module>
         <module>client</module>
+        <module>dist</module>
     </modules>
 
     <name>serving</name>

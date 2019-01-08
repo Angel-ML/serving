@@ -38,15 +38,21 @@ object Main {
           "models in that file. This config file can be used to " +
           "specify multiple models to serve and other advanced " +
           "parameters including non-default version policy. (If " +
-          "used, --model_name, --model_base_path are ignored.)")
+          "used, --model_name, --model_base_path are ignored.)" +
+          "add the prefix `file:///` to model_base_path when use localfs")
         .action((x, c) => c.copy(model_config_file = x))
+      opt[String]("hadoop_home")
+        .text("hadoop_home " +
+          "which contains hdfs-site.xml and core-site.xml.")
+        .action((x, c) => c.copy(hadoop_home = x))
       opt[String]("model_name")
         .text("name of model (ignored " +
           "if --model_config_file flag is set")
         .action((x, c) => c.copy(model_name = x))
       opt[String]("model_base_path")
         .text("path to export (ignored if --model_config_file flag " +
-          "is set, otherwise required)")
+          "is set, otherwise required), " +
+          "add the prefix `file:///` to model_base_path when use localfs")
         .action((x, c) => c.copy(model_base_path = x))
       opt[String]("saved_model_tags")
         .text("Comma-separated set of tags corresponding to the meta " +

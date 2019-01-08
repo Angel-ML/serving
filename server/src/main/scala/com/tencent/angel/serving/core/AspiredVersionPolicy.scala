@@ -46,7 +46,7 @@ abstract class AspiredVersionPolicy {
   protected def getLowestServableId(versions: List[ServableStateSnapshot]): Option[ServableId] = {
     var lowestVersionId: Option[ServableId] = None
     versions.foreach { snapshot =>
-      if (snapshot.aspired) {
+      if (!snapshot.aspired) {
         if (lowestVersionId.isEmpty) {
           lowestVersionId = Some(snapshot.id)
         } else {

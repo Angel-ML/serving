@@ -1,649 +1,309 @@
 package com.tencent.angel.utils;
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Int64Value;
-import com.tencent.angel.serving.apis.common.TensorShapeProtos;
-import com.tencent.angel.serving.apis.common.TypesProtos.DataType;
+import com.tencent.angel.core.graph.TensorProtos.TensorProto;
+import com.tencent.angel.ml.math2.VFactory;
+import com.tencent.angel.ml.math2.vector.Vector;
 import com.tencent.angel.serving.apis.common.ModelSpecProtos;
-import com.tencent.angel.serving.apis.common.ValueProtos;
-import scala.Tuple2;
-
-import java.util.Iterator;
-import java.util.Map;
+import com.tencent.angel.serving.apis.common.TensorShapeProtos.TensorShapeProto;
+import com.tencent.angel.serving.apis.common.TypesProtos.DataType;
 
 
 public class ProtoUtils {
 
-    static public Int64Value getVersion(Long modelVersion) {
-        return Int64Value.newBuilder().setValue(modelVersion).build();
-    }
-
-    static public TensorShapeProtos.TensorShapeProto getShape(Long... dims) {
-        TensorShapeProtos.TensorShapeProto.Builder builder = TensorShapeProtos.TensorShapeProto.newBuilder();
-
+    static public TensorShapeProto toShape(Long... dims) {
+        TensorShapeProto.Builder builder = TensorShapeProto.newBuilder();
         for (long dim : dims) {
-            TensorShapeProtos.TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProtos.TensorShapeProto.Dim.newBuilder();
-            dimBuilder.setSize(dim);
-            builder.addDim(dimBuilder.build());
+            TensorShapeProto.Dim tdim = TensorShapeProto.Dim.newBuilder().setSize(dim).build();
+            builder.addDim(tdim);
+        }
+        return builder.build();
+    }
+
+    static public <T> TensorProto toTensorProto(ArrayList<T> data) {
+        TensorProto.Builder builder = TensorProto.newBuilder();
+
+        builder.setTensorShape(toShape((long) data.size()));
+        String dataClassName = data.get(0).getClass().getSimpleName();
+
+        switch (dataClassName) {
+            case "Double":
+                builder.setDtype(DataType.DT_DOUBLE);
+                for (T d : data) {
+                    builder.addDoubleVal((Double) d);
+                }
+                break;
+            case "Float":
+                builder.setDtype(DataType.DT_FLOAT);
+                for (T d : data) {
+                    builder.addFloatVal((Float) d);
+                }
+                break;
+            case "Int":
+                builder.setDtype(DataType.DT_INT32);
+                for (T d : data) {
+                    builder.addIntVal((Integer) d);
+                }
+                break;
+            case "Long":
+                builder.setDtype(DataType.DT_INT64);
+                for (T d : data) {
+                    builder.addInt64Val((Long) d);
+                }
+                break;
         }
 
         return builder.build();
     }
 
-    static public TensorShapeProtos.TensorShapeProto getShape(String[] names, Long[] dims) {
-        TensorShapeProtos.TensorShapeProto.Builder builder = TensorShapeProtos.TensorShapeProto.newBuilder();
+    static private int getTypeSize(String dType) {
+        switch (dType) {
+            case "Integer":
+                return Integer.SIZE / 8;
+            case "Long":
+                return Long.SIZE / 8;
+            case "Float":
+                return Float.SIZE / 8;
+            case "Double":
+                return Double.SIZE / 8;
+        }
+        return -1;
+    }
 
-        for (int i = 0; i < dims.length; i++) {
-            TensorShapeProtos.TensorShapeProto.Dim.Builder dimBuilder = TensorShapeProtos.TensorShapeProto.Dim.newBuilder();
-            dimBuilder.setName(names[i]);
-            dimBuilder.setSize(dims[i]);
-            builder.addDim(dimBuilder.build());
+    static public <K, V> TensorProto toTensorProto(Long dim, List<K> keys, List<V> values) {
+        TensorProto.Builder builder = TensorProto.newBuilder();
+        builder.setTensorShape(toShape(dim));
+
+        String keyType = keys.get(0).getClass().getSimpleName();
+        String valueType = values.get(0).getClass().getSimpleName();
+
+        int keySize = getTypeSize(keyType) * keys.size();
+        int valueSize = getTypeSize(valueType) * values.size();
+
+        int capacity = keySize + valueSize + 3 * getTypeSize("Integer");
+        ByteBuffer buf = ByteBuffer.allocate(capacity);
+
+
+        buf.putInt(keys.size());
+        buf.putInt(getTypeSize(keyType));
+        switch (keyType) {
+            case "Integer":
+                for (K d : keys) {
+                    buf.putInt((Integer) d);
+                }
+                break;
+            case "Long":
+                for (K d : keys) {
+                    buf.putLong((Long) d);
+                }
+                break;
         }
 
+        buf.putInt(values.size());
+        switch (valueType) {
+            case "Double":
+                builder.setDtype(DataType.DT_DOUBLE);
+                for (V d : values) {
+                    buf.putDouble((Double) d);
+                }
+                break;
+            case "Float":
+                builder.setDtype(DataType.DT_FLOAT);
+                for (V d : values) {
+                    buf.putFloat((Float) d);
+                }
+                break;
+            case "Integer":
+                builder.setDtype(DataType.DT_INT32);
+                for (V d : values) {
+                    buf.putInt((Integer) d);
+                }
+                break;
+            case "Long":
+                builder.setDtype(DataType.DT_INT64);
+                for (V d : values) {
+                    buf.putLong((Long) d);
+                }
+                break;
+        }
+
+
+        ByteString bstring = ByteString.copyFrom(buf.array());
+        builder.setTensorContent(bstring);
+
         return builder.build();
+    }
+
+    static public Vector toVector(TensorProto tensor) {
+        Vector res = null;
+
+        DataType dType = tensor.getDtype();
+        long dim = tensor.getTensorShape().getDim(0).getSize();
+        ByteString content = tensor.getTensorContent();
+
+        int i = 0;
+        if (content != null && !content.isEmpty()) {
+            ByteBuffer buf = content.asReadOnlyByteBuffer();
+            int keySize = buf.getInt();
+            int keyType = buf.getInt();
+            int valueSize;
+            if (keyType == getTypeSize("Integer")) {
+                int[] keys = new int[keySize];
+                while (i < keySize) {
+                    keys[i] = buf.getInt();
+                    i++;
+                }
+
+                i = 0;
+                valueSize = buf.getInt();
+                assert (keySize == valueSize);
+                switch (dType) {
+                    case DT_DOUBLE: {
+                        double[] values = new double[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getDouble();
+                            i++;
+                        }
+                        res = VFactory.sparseDoubleVector((int) dim, keys, values);
+                        break;
+                    }
+                    case DT_FLOAT: {
+                        float[] values = new float[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getFloat();
+                            i++;
+                        }
+                        res = VFactory.sparseFloatVector((int) dim, keys, values);
+                        break;
+                    }
+                    case DT_INT32: {
+                        int[] values = new int[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getInt();
+                            i++;
+                        }
+                        res = VFactory.sparseIntVector((int) dim, keys, values);
+                        break;
+                    }
+                    case DT_INT64: {
+                        long[] values = new long[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getLong();
+                            i++;
+                        }
+                        res = VFactory.sparseLongVector((int) dim, keys, values);
+                        break;
+                    }
+                }
+            } else {
+                long[] keys = new long[keySize];
+                while (i < keySize) {
+                    keys[i] = buf.getLong();
+                    i++;
+                }
+
+                i = 0;
+                valueSize = buf.getInt();
+                assert (keySize == valueSize);
+                switch (dType) {
+                    case DT_DOUBLE: {
+                        double[] values = new double[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getDouble();
+                            i++;
+                        }
+                        res = VFactory.sparseLongKeyDoubleVector(dim, keys, values);
+                        break;
+                    }
+                    case DT_FLOAT: {
+                        float[] values = new float[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getFloat();
+                            i++;
+                        }
+                        res = VFactory.sparseLongKeyFloatVector(dim, keys, values);
+                        break;
+                    }
+                    case DT_INT32: {
+                        int[] values = new int[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getInt();
+                            i++;
+                        }
+                        res = VFactory.sparseLongKeyIntVector(dim, keys, values);
+                        break;
+                    }
+                    case DT_INT64: {
+                        long[] values = new long[valueSize];
+                        while (i < valueSize) {
+                            values[i] = buf.getLong();
+                            i++;
+                        }
+                        res = VFactory.sparseLongKeyLongVector(dim, keys, values);
+                        break;
+                    }
+                }
+            }
+
+        } else {
+            int size = (int) dim;
+            switch (dType) {
+                case DT_DOUBLE: {
+                    double[] values = new double[size];
+                    while (i < size) {
+                        values[i] = tensor.getDoubleVal(i);
+                        i++;
+                    }
+                    res = VFactory.denseDoubleVector(values);
+                    break;
+                }
+                case DT_FLOAT: {
+                    float[] values = new float[size];
+                    while (i < size) {
+                        values[i] = tensor.getFloatVal(i);
+                        i++;
+                    }
+                    res = VFactory.denseFloatVector(values);
+                    break;
+                }
+                case DT_INT32: {
+                    int[] values = new int[size];
+                    while (i < size) {
+                        values[i] = tensor.getIntVal(i);
+                        i++;
+                    }
+                    res = VFactory.denseIntVector(values);
+                    break;
+                }
+                case DT_INT64: {
+                    long[] values = new long[size];
+                    while (i < size) {
+                        values[i] = tensor.getInt64Val(i);
+                        i++;
+                    }
+                    res = VFactory.denseLongVector(values);
+                    break;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    static public Int64Value toVersion(Long modelVersion) {
+        return Int64Value.newBuilder().setValue(modelVersion).build();
     }
 
     static public ModelSpecProtos.ModelSpec getModelSpec(String modelName, Long version, String signature) {
         return ModelSpecProtos.ModelSpec.newBuilder()
                 .setName(modelName)
-                .setVersion(getVersion(version))
+                .setVersion(toVersion(version))
                 .setSignatureName(signature)
                 .build();
-    }
-
-    // 0 D
-    static public <T> ValueProtos.Instance getInstance(T value) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setShape(getShape(0L));
-        if (value instanceof Boolean) {
-            instanceBuilder.setDType(DataType.DT_BOOL);
-            instanceBuilder.setB((Boolean) value);
-        } else if (value instanceof Integer) {
-            instanceBuilder.setDType(DataType.DT_INT32);
-            instanceBuilder.setI((Integer) value);
-        } else if (value instanceof Long) {
-            instanceBuilder.setDType(DataType.DT_INT64);
-            instanceBuilder.setL((Long) value);
-        } else if (value instanceof Float) {
-            instanceBuilder.setDType(DataType.DT_FLOAT);
-            instanceBuilder.setF((Float) value);
-        } else if (value instanceof Double) {
-            instanceBuilder.setDType(DataType.DT_DOUBLE);
-            instanceBuilder.setD((Double) value);
-        } else if (value instanceof String) {
-            instanceBuilder.setDType(DataType.DT_STRING);
-            instanceBuilder.setS((String) value);
-        } else if (value instanceof ByteString) {
-            instanceBuilder.setDType(DataType.DT_STRING);
-            instanceBuilder.setBs((ByteString) value);
-        } else {
-            throw new Exception("unsuported data type!");
-        }
-
-        return instanceBuilder.build();
-    }
-
-    // named 0 D
-    static public <T> ValueProtos.Instance getInstance(String name, T value) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setShape(getShape(0L));
-        instanceBuilder.setName(name);
-        if (value instanceof Boolean) {
-            instanceBuilder.setDType(DataType.DT_BOOL);
-            instanceBuilder.setB((Boolean) value);
-        } else if (value instanceof Integer) {
-            instanceBuilder.setDType(DataType.DT_INT32);
-            instanceBuilder.setI((Integer) value);
-        } else if (value instanceof Long) {
-            instanceBuilder.setDType(DataType.DT_INT64);
-            instanceBuilder.setL((Long) value);
-        } else if (value instanceof Float) {
-            instanceBuilder.setDType(DataType.DT_FLOAT);
-            instanceBuilder.setF((Float) value);
-        } else if (value instanceof Double) {
-            instanceBuilder.setDType(DataType.DT_DOUBLE);
-            instanceBuilder.setD((Double) value);
-        } else if (value instanceof ByteString) {
-            instanceBuilder.setDType(DataType.DT_STRING);
-            instanceBuilder.setBs((ByteString) value);
-        } else if (value instanceof String) {
-            instanceBuilder.setDType(DataType.DT_STRING);
-            instanceBuilder.setS((String) value);
-        } else {
-            throw new Exception("unsuported data type!");
-        }
-
-        return instanceBuilder.build();
-    }
-
-    static private <T> Tuple2<Integer, Integer> addElements(ValueProtos.ListValue.Builder lvBuilder, Iterator<T> values) throws Exception {
-        int dim = 0;
-        int dtype = -1;
-        if (values.hasNext()) {
-            T value = values.next();
-            if (value instanceof Boolean) {
-                dtype = 1;
-                lvBuilder.addB((Boolean) value);
-            } else if (value instanceof Integer) {
-                dtype = 2;
-                lvBuilder.addI((Integer) value);
-            } else if (value instanceof Long) {
-                dtype = 3;
-                lvBuilder.addL((Long) value);
-            } else if (value instanceof Float) {
-                dtype = 4;
-                lvBuilder.addF((Float) value);
-            } else if (value instanceof Double) {
-                dtype = 5;
-                lvBuilder.addD((Double) value);
-            } else if (value instanceof String) {
-                dtype = 6;
-                lvBuilder.addS((String) value);
-            } else if (value instanceof ByteString) {
-                dtype = 7;
-                lvBuilder.addBs((ByteString) value);
-            } else {
-                throw new Exception("unsuported data type!");
-            }
-
-            dim++;
-        }
-
-        switch (dtype) {
-            case 1:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addB((Boolean) value);
-                    dim++;
-                }
-            case 2:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addI((Integer) value);
-                    dim++;
-                }
-                break;
-            case 3:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addL((Long) value);
-                    dim++;
-                }
-                break;
-            case 4:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addF((Float) value);
-                    dim++;
-                }
-                break;
-            case 5:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addD((Double) value);
-                    dim++;
-                }
-                break;
-            case 6:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addS((String) value);
-                    dim++;
-                }
-                break;
-            case 7:
-                while (values.hasNext()) {
-                    T value = values.next();
-                    lvBuilder.addBs((ByteString) value);
-                    dim++;
-                }
-                break;
-        }
-
-        return new Tuple2<Integer, Integer>(dim, dtype);
-    }
-
-    static private <K, V> int addElements(ValueProtos.MapValue.Builder mvBuilder, Map<K, V> values) throws Exception {
-        int dtype = -1;
-        Iterator<Map.Entry<K, V>> iter = values.entrySet().iterator();
-        if (iter.hasNext()) {
-            Map.Entry<K, V> entry = iter.next();
-            K key = entry.getKey();
-            V value = entry.getValue();
-            if (key instanceof Integer && value instanceof Boolean) {
-                dtype = 11;
-                mvBuilder.putI2BMap((Integer) key, (Boolean) value);
-            } else if (key instanceof Integer && value instanceof Integer) {
-                dtype = 12;
-                mvBuilder.putI2IMap((Integer) key, (Integer) value);
-            } else if (key instanceof Integer && value instanceof Long) {
-                dtype = 13;
-                mvBuilder.putI2LMap((Integer) key, (Long) value);
-            } else if (key instanceof Integer && value instanceof Float) {
-                dtype = 14;
-                mvBuilder.putI2FMap((Integer) key, (Float) value);
-            } else if (key instanceof Integer && value instanceof Double) {
-                dtype = 15;
-                mvBuilder.putI2DMap((Integer) key, (Double) value);
-            } else if (key instanceof Integer && value instanceof String) {
-                dtype = 16;
-                mvBuilder.putI2SMap((Integer) key, (String) value);
-            } else if (key instanceof Integer && value instanceof ByteString) {
-                dtype = 17;
-                mvBuilder.putI2BsMap((Integer) key, (ByteString) value);
-            } else if (key instanceof Long && value instanceof Boolean) {
-                dtype = 21;
-                mvBuilder.putL2BMap((Long) key, (Boolean) value);
-            } else if (key instanceof Long && value instanceof Integer) {
-                dtype = 22;
-                mvBuilder.putL2IMap((Long) key, (Integer) value);
-            } else if (key instanceof Long && value instanceof Long) {
-                dtype = 23;
-                mvBuilder.putL2LMap((Long) key, (Long) value);
-            } else if (key instanceof Long && value instanceof Float) {
-                dtype = 24;
-                mvBuilder.putL2FMap((Long) key, (Float) value);
-            } else if (key instanceof Long && value instanceof Double) {
-                dtype = 25;
-                mvBuilder.putL2DMap((Long) key, (Double) value);
-            } else if (key instanceof Long && value instanceof String) {
-                dtype = 26;
-                mvBuilder.putL2SMap((Long) key, (String) value);
-            } else if (key instanceof Long && value instanceof ByteString) {
-                dtype = 27;
-                mvBuilder.putL2BsMap((Long) key, (ByteString) value);
-            } else if (key instanceof String && value instanceof Boolean) {
-                dtype = 31;
-                mvBuilder.putS2BMap((String) key, (Boolean) value);
-            } else if (key instanceof String && value instanceof Integer) {
-                dtype = 32;
-                mvBuilder.putS2IMap((String) key, (Integer) value);
-            } else if (key instanceof String && value instanceof Long) {
-                dtype = 33;
-                mvBuilder.putS2LMap((String) key, (Long) value);
-            } else if (key instanceof String && value instanceof Float) {
-                dtype = 34;
-                mvBuilder.putS2FMap((String) key, (Float) value);
-            } else if (key instanceof String && value instanceof Double) {
-                dtype = 35;
-                mvBuilder.putS2DMap((String) key, (Double) value);
-            } else if (key instanceof String && value instanceof String) {
-                dtype = 36;
-                mvBuilder.putS2SMap((String) key, (String) value);
-            } else if (key instanceof String && value instanceof ByteString) {
-                dtype = 36;
-                mvBuilder.putS2BsMap((String) key, (ByteString) value);
-            } else {
-                throw new Exception("unsuported data type!");
-            }
-        }
-
-        switch (dtype) {
-            case 11:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2BMap((Integer) key, (Boolean) value);
-                }
-                break;
-            case 12:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2IMap((Integer) key, (Integer) value);
-                }
-                break;
-            case 13:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2LMap((Integer) key, (Long) value);
-                }
-                break;
-            case 14:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2FMap((Integer) key, (Float) value);
-                }
-                break;
-            case 15:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2DMap((Integer) key, (Double) value);
-                }
-                break;
-            case 16:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2SMap((Integer) key, (String) value);
-                }
-                break;
-            case 17:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putI2BsMap((Integer) key, (ByteString) value);
-                }
-                break;
-            case 21:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2BMap((Long) key, (Boolean) value);
-                }
-                break;
-            case 22:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2IMap((Long) key, (Integer) value);
-                }
-                break;
-            case 23:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2LMap((Long) key, (Long) value);
-                }
-                break;
-            case 24:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2FMap((Long) key, (Float) value);
-                }
-                break;
-            case 25:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2DMap((Long) key, (Double) value);
-                }
-                break;
-            case 26:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2SMap((Long) key, (String) value);
-                }
-                break;
-            case 27:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putL2BsMap((Long) key, (ByteString) value);
-                }
-                break;
-            case 31:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2BMap((String) key, (Boolean) value);
-                }
-                break;
-            case 32:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2IMap((String) key, (Integer) value);
-                }
-                break;
-            case 33:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2LMap((String) key, (Long) value);
-                }
-                break;
-            case 34:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2FMap((String) key, (Float) value);
-                }
-                break;
-            case 35:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2DMap((String) key, (Double) value);
-                }
-                break;
-            case 36:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2SMap((String) key, (String) value);
-                }
-                break;
-            case 37:
-                while (iter.hasNext()) {
-                    Map.Entry<K, V> entry = iter.next();
-                    K key = entry.getKey();
-                    V value = entry.getValue();
-                    mvBuilder.putS2BsMap((String) key, (ByteString) value);
-                }
-                break;
-        }
-
-        return dtype % 10;
-    }
-
-    static private void setDType(ValueProtos.Instance.Builder instanceBuilder, int dtype) throws Exception {
-        switch (dtype) {
-            case 1:
-                instanceBuilder.setDType(DataType.DT_BOOL);
-                break;
-            case 2:
-                instanceBuilder.setDType(DataType.DT_INT32);
-                break;
-            case 3:
-                instanceBuilder.setDType(DataType.DT_INT64);
-                break;
-            case 4:
-                instanceBuilder.setDType(DataType.DT_FLOAT);
-                break;
-            case 5:
-                instanceBuilder.setDType(DataType.DT_DOUBLE);
-                break;
-            case 6:
-                instanceBuilder.setDType(DataType.DT_STRING);
-                break;
-            case 7:
-                instanceBuilder.setDType(DataType.DT_STRING);
-                break;
-            default:
-                throw new Exception("unsuported data type!");
-        }
-    }
-
-    // dense 1 D
-    static public <T> ValueProtos.Instance getInstance(Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
-        setDType(instanceBuilder, tuple._2);
-        return instanceBuilder.build();
-    }
-
-    // dense named 1 D
-    static public <T> ValueProtos.Instance getInstance(String name, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
-        setDType(instanceBuilder, tuple._2);
-        instanceBuilder.setName(name);
-        return instanceBuilder.build();
-    }
-
-    // sparse string key 1 D
-    static public <V> ValueProtos.Instance getInstance(Map<String, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // sparse string key named 1 D
-    static public <V> ValueProtos.Instance getInstance(String name, Map<String, V> values) throws Exception  {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setName(name);
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // sparse int key 1 D
-    static public <V> ValueProtos.Instance getInstance(int dim, Map<Integer, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setShape(getShape(Long.valueOf(dim)));
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // sparse int key named 1 D
-    static public <V> ValueProtos.Instance getInstance(String name, int dim, Map<Integer, V> values) throws Exception  {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setName(name);
-        instanceBuilder.setShape(getShape(Long.valueOf(dim)));
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // sparse long key 1 D
-    static public <V> ValueProtos.Instance getInstance(long dim, Map<Long, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setShape(getShape(dim));
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // sparse long key named 1 D
-    static public <V>  ValueProtos.Instance getInstance(String name, long dim,  Map<Long, V> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-
-        instanceBuilder.setShape(getShape(dim));
-        instanceBuilder.setName(name);
-
-        ValueProtos.MapValue.Builder mvBuilder = ValueProtos.MapValue.newBuilder();
-        int dtype = addElements(mvBuilder, values);
-
-        setDType(instanceBuilder, dtype);
-        instanceBuilder.setMv(mvBuilder.build());
-        return instanceBuilder.build();
-    }
-
-    // dense 2 D
-    static public <T> ValueProtos.Instance getInstance(int numRows, int numCols, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape(Long.valueOf(numRows), Long.valueOf(numCols)));
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        setDType(instanceBuilder, tuple._2);
-        return instanceBuilder.build();
-    }
-
-    // named dense 2 D
-    static public <T> ValueProtos.Instance getInstance(String name, int numRows, int numCols, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape(Long.valueOf(numRows), Long.valueOf(numCols)));
-        instanceBuilder.setName(name);
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        setDType(instanceBuilder, tuple._2);
-        return instanceBuilder.build();
-    }
-
-    // dense 3 D
-    static public <T> ValueProtos.Instance getInstance(int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape((long)numRows, (long)numCols, (long)numChannel));
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        setDType(instanceBuilder, tuple._2);
-        return instanceBuilder.build();
-    }
-
-    // named dense 3 D
-    static public <T> ValueProtos.Instance getInstance(String name, int numRows, int numCols, int numChannel, Iterator<T> values) throws Exception {
-        ValueProtos.Instance.Builder instanceBuilder = ValueProtos.Instance.newBuilder();
-        instanceBuilder.setShape(getShape((long)numRows, (long)numCols, (long)numChannel));
-        instanceBuilder.setName(name);
-
-        ValueProtos.ListValue.Builder lvBuilder = ValueProtos.ListValue.newBuilder();
-        Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
-        instanceBuilder.setLv(lvBuilder.build());
-
-        setDType(instanceBuilder, tuple._2);
-        return instanceBuilder.build();
     }
 }

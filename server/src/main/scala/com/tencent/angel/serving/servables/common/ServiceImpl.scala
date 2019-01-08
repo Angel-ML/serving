@@ -15,7 +15,7 @@ import org.slf4j.{Logger, LoggerFactory}
 object ServiceImpl {
 
   private val LOG: Logger = LoggerFactory.getLogger(getClass)
-  private val predictionCount = new AtomicLong(0)
+  private val predictionCount = new AtomicLong(1)
 
   def classify(runOptions: RunOptions, core: ServerCore,
                request: ClassificationRequest, responseBuilder: ClassificationResponse.Builder): Unit = {
@@ -38,14 +38,24 @@ object ServiceImpl {
 
     val servableHandle = getServableHandle(request, core)
     LOG.info(s"servableHandle ${servableHandle.id.toString}")
-    servableHandle.servable.runPredict(runOptions, request, responseBuilder)
-    val predictEndTime = System.currentTimeMillis()
-    var elapsedTime: Long = 0
-    if(predictEndTime > predictStartTime) {
-      elapsedTime = predictEndTime - predictStartTime
+    var resultStatus = "ok"
+    try {
+      servableHandle.servable.runPredict(runOptions, request, responseBuilder)
+    } catch {
+      case ex: Exception =>
+        ex.printStackTrace()
+        resultStatus = "error"
+      case _ =>
+        resultStatus = "error"
+    } finally {
+      val predictEndTime = System.currentTimeMillis()
+      var elapsedTime: Long = 0
+      if(predictEndTime > predictStartTime) {
+        elapsedTime = predictEndTime - predictStartTime
+      }
+      core.createMetricEvent("PredictMetric", predictionCount.getAndIncrement(),
+        ManagerState.kEnd, elapsedTime, resultStatus, request.getModelSpec)
     }
-    core.createMetricEvent("PredictMetric", predictionCount.getAndIncrement(),
-      ManagerState.kEnd, elapsedTime, "ok", request.getModelSpec)
   }
 
   def regress(runOptions: RunOptions, core: ServerCore,
@@ -79,8 +89,7 @@ object ServiceImpl {
   private def getServableHandle[T](request: T, core: ServerCore): ServableHandle[SavedModelBundle] = {
     val modelSpec = getModelSpecFromRequest[T](request)
     LOG.info(s"modelSpec: ${modelSpec.getName}, ${modelSpec.getVersion}")
-    val servableRequest = ServableRequest.specific(modelSpec.getName, modelSpec.getVersion.getValue)
-
+    val servableRequest = core.servableRequestFromModelSpec(modelSpec)
     core.servableHandle(servableRequest)
   }
 
