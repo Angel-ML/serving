@@ -1,10 +1,8 @@
 package com.tencent.angel.serving.service.common
 
-import com.tencent.angel.serving.apis.prediction.ClassificationProtos.{ClassificationRequest, ClassificationResponse}
 import com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.{GetModelMetadataRequest, GetModelMetadataResponse}
-import com.tencent.angel.serving.apis.prediction.InferenceProtos.{MultiInferenceRequest, MultiInferenceResponse}
-import com.tencent.angel.serving.apis.prediction.PredictProtos.{PredictRequest, PredictResponse}
-import com.tencent.angel.serving.apis.prediction.RegressionProtos.{RegressionRequest, RegressionResponse}
+import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
+import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.apis.prediction._
 import com.tencent.angel.serving.core.ServerCore
 import com.tencent.angel.serving.servables.angel._
@@ -23,36 +21,36 @@ class PredictionServiceImpl extends PredictionServiceGrpc.PredictionServiceImplB
     this.serverCore = serverCore
   }
 
-  override def predict(request: PredictRequest, responseObserver: StreamObserver[PredictResponse]): Unit = {
+  override def predict(request: Request, responseObserver: StreamObserver[Response]): Unit = {
     val runOptions = new RunOptions()
-    val responseBuilder = PredictResponse.newBuilder()
+    val responseBuilder = Response.newBuilder()
     ServiceImpl.predict(runOptions, serverCore, request, responseBuilder)
     val predictResponse = responseBuilder.build()
     responseObserver.onNext(predictResponse)
     responseObserver.onCompleted()
   }
 
-  override def classify(request: ClassificationRequest, responseObserver: StreamObserver[ClassificationResponse]): Unit = {
+  override def classify(request: Request, responseObserver: StreamObserver[Response]): Unit = {
     val runOptions = new RunOptions()
-    val responseBuilder = ClassificationResponse.newBuilder()
+    val responseBuilder = Response.newBuilder()
     ServiceImpl.classify(runOptions, serverCore, request, responseBuilder)
     val classificationResponse = responseBuilder.build()
     responseObserver.onNext(classificationResponse)
     responseObserver.onCompleted()
   }
 
-  override def regress(request: RegressionRequest, responseObserver: StreamObserver[RegressionResponse]): Unit = {
+  override def regress(request: Request, responseObserver: StreamObserver[Response]): Unit = {
     val runOptions = new RunOptions()
-    val responseBuilder = RegressionResponse.newBuilder()
+    val responseBuilder = Response.newBuilder()
     ServiceImpl.regress(runOptions, serverCore, request, responseBuilder)
     val regressionResponse = responseBuilder.build()
     responseObserver.onNext(regressionResponse)
     responseObserver.onCompleted()
   }
 
-  override def multiInference(request: MultiInferenceRequest, responseObserver: StreamObserver[MultiInferenceResponse]): Unit = {
+  override def multiInference(request: Request, responseObserver: StreamObserver[Response]): Unit = {
     val runOptions = new RunOptions()
-    val responseBuilder = MultiInferenceResponse.newBuilder()
+    val responseBuilder = Response.newBuilder()
     ServiceImpl.multiInference(runOptions, serverCore, request, responseBuilder)
     val multiInferenceResponse = responseBuilder.build()
     responseObserver.onNext(multiInferenceResponse)
