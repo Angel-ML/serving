@@ -4,20 +4,19 @@ import java.util
 import java.io.File
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
-import com.tencent.angel.core.graph.TensorProtos
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.ml.core.PredictResult
 import com.tencent.angel.ml.core.conf.{MLConf, SharedConf}
 import com.tencent.angel.ml.core.data.LabeledData
+import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
 import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
 import com.tencent.angel.ml.core.utils.JsonUtils
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.common.SavedModelBundle
+import com.tencent.angel.serving.servables.common.{RunOptions, Session, SavedModelBundle}
 import org.slf4j.{Logger, LoggerFactory}
-import com.tencent.angel.utils.ProtoUtils
-import com.tencent.angel.serving.servables.Utils.predictResult2TensorProto
+import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.ehcache.sizeof.SizeOf
 
 class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
@@ -35,26 +34,63 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   override def runMultiInference(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
   override def runPredict(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
-    /*
     val modelSpec = request.getModelSpec
-    val iter = request.getInputsMap.entrySet().iterator()
-
     responseBuilder.setModelSpec(modelSpec)
 
-    while(iter.hasNext) {
-      val entry = iter.next()
-      val key = entry.getKey
-      val value = entry.getValue
+    val numInst = request.getInstancesCount
+    if (numInst == 1) {
+      try {
+        val instance = request.getInstances(0)
+        val vector = InstanceUtils.getVector(instance)
+        val predictResult: PredictResult = model.predict(new LabeledData(vector, 0.0, instance.getName))
+        responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
+      } catch {
+        case e: Exception => responseBuilder.setError(e.getMessage)
+      }
+    } else {
+      val esb = new StringBuilder
 
-      val res: PredictResult = model.predict(new LabeledData(ProtoUtils.toVector(value), 0.0))
-      LOG.info(s"res: ${res.getText}")
-      responseBuilder.putOutputs(key, predictResult2TensorProto(res))
+      try {
+        val maxUseMemroy: Long = 100 * SizeOf.newInstance().deepSizeOf(request)
+        val dataBlock = new LocalMemoryDataBlock(numInst, maxUseMemroy)
+        (0 until numInst).foreach{ idx =>
+          val instance = request.getInstances(idx)
+          val vector = InstanceUtils.getVector(instance)
+          dataBlock.put(new LabeledData(vector, 0.0, instance.getName))
+        }
+        val predictResults: List[PredictResult] = model.predict(dataBlock)
+        predictResults.zipWithIndex.foreach{ case (predictResult, idx) =>
+          try {
+            val instance = request.getInstances(idx)
+            if (predictResult == null) {
+              throw new Exception(s"Error in ${instance.getName}, the predictResult is null.")
+            }
+            responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
+          } catch {
+            case e: Exception => esb.append(e.getMessage).append("\n")
+          }
+        }
+      } catch {
+        case e: Exception => esb.append(e.getMessage).append("\n")
+      }
+
+      responseBuilder.setError(esb.toString())
     }
-    */
   }
 
-  override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
+  override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
 
+  private def toMap(predictResult: PredictResult): util.HashMap[String, String] = {
+    val tempMap = new util.HashMap[String, String]()
+
+    tempMap.put("sid", predictResult.sid)
+    tempMap.put("pred", predictResult.pred.toString)
+    tempMap.put("proba", predictResult.proba.toString)
+    tempMap.put("predLabel", predictResult.predLabel.toString)
+    tempMap.put("trueLabel", predictResult.trueLabel.toString)
+    tempMap.put("attached", predictResult.attached.toString)
+
+    tempMap
   }
 }
 

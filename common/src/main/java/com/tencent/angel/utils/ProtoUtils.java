@@ -489,6 +489,7 @@ public class ProtoUtils {
         ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_SCALAR);
 
         instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
         setDType(instanceBuilder, tuple._2);
@@ -502,6 +503,7 @@ public class ProtoUtils {
         ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_SCALAR);
 
         instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
         setDType(instanceBuilder, tuple._2);
@@ -518,6 +520,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_STRINGKEY_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -532,6 +535,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_STRINGKEY_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -546,6 +550,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_INTKEY_SPARSE_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -561,6 +566,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_INTKEY_SPARSE_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -575,6 +581,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_LONGKEY_SPARSE_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -590,6 +597,7 @@ public class ProtoUtils {
 
         setDType(instanceBuilder, dtype);
         instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_LONGKEY_SPARSE_VECTOR);
         return instanceBuilder.build();
     }
 
@@ -603,6 +611,7 @@ public class ProtoUtils {
         instanceBuilder.setLv(lvBuilder.build());
 
         setDType(instanceBuilder, tuple._2);
+        instanceBuilder.setFlag(InstanceFlag.IF_2D_MATRIX);
         return instanceBuilder.build();
     }
 
@@ -617,6 +626,7 @@ public class ProtoUtils {
         instanceBuilder.setLv(lvBuilder.build());
 
         setDType(instanceBuilder, tuple._2);
+        instanceBuilder.setFlag(InstanceFlag.IF_2D_MATRIX);
         return instanceBuilder.build();
     }
 
@@ -630,6 +640,7 @@ public class ProtoUtils {
         instanceBuilder.setLv(lvBuilder.build());
 
         setDType(instanceBuilder, tuple._2);
+        instanceBuilder.setFlag(InstanceFlag.IF_3D_MATRIX);
         return instanceBuilder.build();
     }
 
@@ -644,6 +655,7 @@ public class ProtoUtils {
         instanceBuilder.setLv(lvBuilder.build());
 
         setDType(instanceBuilder, tuple._2);
+        instanceBuilder.setFlag(InstanceFlag.IF_3D_MATRIX);
         return instanceBuilder.build();
     }
 }
