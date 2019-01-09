@@ -21,8 +21,6 @@ import io.grpc.services.ChannelzService
 import org.apache.hadoop.conf.Configuration
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
-import scala.tools.nsc.util.HashSet
-
 
 class ModelServer {
 

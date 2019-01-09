@@ -7,7 +7,6 @@ import com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.{GetMode
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.{ManagerState, ServableHandle, ServableRequest, ServerCore}
-import com.tencent.angel.serving.servables.angel.RunOptions
 import org.slf4j.{Logger, LoggerFactory}
 
 object ServiceImpl {

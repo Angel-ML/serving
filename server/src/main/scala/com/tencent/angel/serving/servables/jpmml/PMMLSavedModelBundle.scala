@@ -21,6 +21,8 @@ import org.xml.sax.SAXException
 import com.google.common.collect.Iterables
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
+import scala.collection.JavaConversions._
+
 
 class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
   override val session: Session = null

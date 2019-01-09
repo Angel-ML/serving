@@ -4,9 +4,9 @@ import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 
-trait RunOptions
+class RunOptions
 
-trait Session
+class Session
 
 trait SavedModelBundle {
   val session: Session
