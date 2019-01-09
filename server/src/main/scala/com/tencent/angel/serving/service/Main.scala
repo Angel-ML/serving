@@ -54,6 +54,10 @@ object Main {
           "is set, otherwise required), " +
           "add the prefix `file:///` to model_base_path when use localfs")
         .action((x, c) => c.copy(model_base_path = x))
+      opt[String]("model_platform")
+        .text("platform for model serving (ignored if --model_config_file flag " +
+          "is set, otherwise required), ")
+        .action((x, c) => c.copy(model_platform = x))
       opt[String]("saved_model_tags")
         .text("Comma-separated set of tags corresponding to the meta " +
           "graph def to load from SavedModel.")

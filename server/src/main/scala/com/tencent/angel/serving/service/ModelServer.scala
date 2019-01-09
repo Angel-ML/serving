@@ -21,6 +21,8 @@ import io.grpc.services.ChannelzService
 import org.apache.hadoop.conf.Configuration
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
+import scala.tools.nsc.util.HashSet
+
 
 class ModelServer {
 
@@ -36,8 +38,8 @@ class ModelServer {
   var httpServer: org.eclipse.jetty.server.Server = _
 
   def buildSingleModelConfig(modelName : String, platform: String, modelBasePath: String): ModelServerConfig ={
-    LOG.info("Building single Angel model file config: " +
-      "model_name: " + modelName + " model_base_path: " + modelBasePath)
+    LOG.info("Building single model file config: " +
+      "model_name: " + modelName + " model_base_path: " + modelBasePath + " model_platform: " + platform)
     val singelModel: ModelConfig = ModelConfig.newBuilder().setName(modelName)
       .setBasePath(modelBasePath).setModelPlatform(platform).build()
     val modelServerConfig = ModelServerConfig.newBuilder().setModelConfigList(ModelConfigList.newBuilder().addConfig(singelModel)).build()
@@ -62,11 +64,16 @@ class ModelServer {
       hadoopConf.addResource(serverOptions.hadoop_home + "/core-site.xml")
     }
     var modelServerConfig: ModelServerConfig = null
+    val modelPlatformSet = scala.collection.mutable.Set[String]()
     if(serverOptions.model_config_file.isEmpty){
-      modelServerConfig = buildSingleModelConfig(serverOptions.model_name, "Angel",
+      modelServerConfig = buildSingleModelConfig(serverOptions.model_name, serverOptions.model_platform,
         serverOptions.model_base_path)
+      modelPlatformSet.add(serverOptions.model_platform)
     } else {
       modelServerConfig = readModelConfigFile(serverOptions.model_config_file)
+      (0 until modelServerConfig.getModelConfigList.getConfigCount).map { idx =>
+        modelPlatformSet.add(modelServerConfig.getModelConfigList.getConfig(idx).getModelPlatform)
+      }
     }
 
     var platformConfigMap: PlatformConfigMap = null
@@ -80,7 +87,7 @@ class ModelServer {
         } else {
           sessionBundleConfigBuilder.setBatchingParameters(readBatchingParametersFile(serverOptions.batching_parameters_file))
         }
-      } else if(!serverOptions.platform_config_file.isEmpty) {
+      } else if(!serverOptions.batching_parameters_file.isEmpty) {
         LOG.info("serverOptions.batching_parameters_file is set without setting " +
           "serverOptions.enable_batching to true.")
       }
@@ -89,7 +96,7 @@ class ModelServer {
         sessionBundleConfigBuilder.addSavedModelTags(tag)
       }
       platformConfigMap = PlatformConfigUtil
-        .createAngelPlatformConfigMap(sessionBundleConfigBuilder.build(), useSavedModel)
+        .createPlatformConfigMap(sessionBundleConfigBuilder.build(), useSavedModel, modelPlatformSet.toSet)
     } else {
       platformConfigMap = readPlatformConfigFile(serverOptions.platform_config_file)
     }
