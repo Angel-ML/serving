@@ -7,25 +7,48 @@ import com.tencent.angel.servable.SessionBundleSourceAdapterConfigProtos.Session
 import com.tencent.angel.serving.serving.SessionBundleConfig
 
 object PlatformConfigUtil {
-  def createAngelPlatformConfigMap(sessionBundleConfig: SessionBundleConfig,
-                                   useSavedModel:Boolean): PlatformConfigMap = {
-    val sourceAdapterConfig: Any = if(useSavedModel) {
-      val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig.newBuilder()
-        .setAdapterClassName("com.tencent.angel.serving.servables.angel.SavedModelBundleSourceAdapter")
-        .setLegacyConfig(sessionBundleConfig)
-        .build()
-      Any.pack(savedModelBundleSourceAdapterConfig)
-    } else {
-      val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
-        .setAdapterClassName("com.tencent.angel.serving.servables.angel.SavedModelBundleSourceAdapter")
-        .setConfig(sessionBundleConfig)
-        .build()
+  def createPlatformConfigMap(sessionBundleConfig: SessionBundleConfig,
+                                   useSavedModel:Boolean, platformSet: Set[String]): PlatformConfigMap = {
+    val builder = PlatformConfigMap.newBuilder()
+    val angelAdapterClassName = "com.tencent.angel.serving.servables.angel.AngelSourceAdapter"
+    val jpmmlAdapterClassName = "com.tencent.angel.serving.servables.jpmml.PMMLSourceAdapter"
+    platformSet.foreach { platform =>
+      if (platform.toLowerCase.equals("angel")) {
+        val sourceAdapterConfig: Any = if (useSavedModel) {
+          val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(angelAdapterClassName)
+            .setLegacyConfig(sessionBundleConfig)
+            .build()
+          Any.pack(savedModelBundleSourceAdapterConfig)
+        } else {
+          val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(angelAdapterClassName)
+            .setConfig(sessionBundleConfig)
+            .build()
 
-      Any.pack(sessionBundleSourceAdapterConfig)
+          Any.pack(sessionBundleSourceAdapterConfig)
+        }
+        builder
+          .putPlatformConfigs(platform, PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
+      } else if (platform.toLowerCase.equals("pmml")) {
+        val sourceAdapterConfig: Any = if (useSavedModel) {
+          val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(jpmmlAdapterClassName)
+            .setLegacyConfig(sessionBundleConfig)
+            .build()
+          Any.pack(savedModelBundleSourceAdapterConfig)
+        } else {
+          val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(jpmmlAdapterClassName)
+            .setConfig(sessionBundleConfig)
+            .build()
+
+          Any.pack(sessionBundleSourceAdapterConfig)
+        }
+        builder
+          .putPlatformConfigs(platform, PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
+      }
     }
-
-    PlatformConfigMap.newBuilder()
-      .putPlatformConfigs("Angel", PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
-      .build()
+    builder.build()
   }
 }
