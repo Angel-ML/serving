@@ -14,6 +14,158 @@ public final class InstanceProtos {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  /**
+   * Protobuf enum {@code angel.serving.InstanceFlag}
+   */
+  public enum InstanceFlag
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>IF_SCALAR = 0;</code>
+     */
+    IF_SCALAR(0),
+    /**
+     * <code>IF_DENSE_VECTOR = 2;</code>
+     */
+    IF_DENSE_VECTOR(2),
+    /**
+     * <code>IF_INTKEY_SPARSE_VECTOR = 3;</code>
+     */
+    IF_INTKEY_SPARSE_VECTOR(3),
+    /**
+     * <code>IF_LONGKEY_SPARSE_VECTOR = 4;</code>
+     */
+    IF_LONGKEY_SPARSE_VECTOR(4),
+    /**
+     * <code>IF_STRINGKEY_VECTOR = 5;</code>
+     */
+    IF_STRINGKEY_VECTOR(5),
+    /**
+     * <code>IF_2D_MATRIX = 6;</code>
+     */
+    IF_2D_MATRIX(6),
+    /**
+     * <code>IF_3D_MATRIX = 7;</code>
+     */
+    IF_3D_MATRIX(7),
+    /**
+     * <code>IF_MAP_OBJECT = 8;</code>
+     */
+    IF_MAP_OBJECT(8),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>IF_SCALAR = 0;</code>
+     */
+    public static final int IF_SCALAR_VALUE = 0;
+    /**
+     * <code>IF_DENSE_VECTOR = 2;</code>
+     */
+    public static final int IF_DENSE_VECTOR_VALUE = 2;
+    /**
+     * <code>IF_INTKEY_SPARSE_VECTOR = 3;</code>
+     */
+    public static final int IF_INTKEY_SPARSE_VECTOR_VALUE = 3;
+    /**
+     * <code>IF_LONGKEY_SPARSE_VECTOR = 4;</code>
+     */
+    public static final int IF_LONGKEY_SPARSE_VECTOR_VALUE = 4;
+    /**
+     * <code>IF_STRINGKEY_VECTOR = 5;</code>
+     */
+    public static final int IF_STRINGKEY_VECTOR_VALUE = 5;
+    /**
+     * <code>IF_2D_MATRIX = 6;</code>
+     */
+    public static final int IF_2D_MATRIX_VALUE = 6;
+    /**
+     * <code>IF_3D_MATRIX = 7;</code>
+     */
+    public static final int IF_3D_MATRIX_VALUE = 7;
+    /**
+     * <code>IF_MAP_OBJECT = 8;</code>
+     */
+    public static final int IF_MAP_OBJECT_VALUE = 8;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static InstanceFlag valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static InstanceFlag forNumber(int value) {
+      switch (value) {
+        case 0: return IF_SCALAR;
+        case 2: return IF_DENSE_VECTOR;
+        case 3: return IF_INTKEY_SPARSE_VECTOR;
+        case 4: return IF_LONGKEY_SPARSE_VECTOR;
+        case 5: return IF_STRINGKEY_VECTOR;
+        case 6: return IF_2D_MATRIX;
+        case 7: return IF_3D_MATRIX;
+        case 8: return IF_MAP_OBJECT;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<InstanceFlag>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        InstanceFlag> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<InstanceFlag>() {
+            public InstanceFlag findValueByNumber(int number) {
+              return InstanceFlag.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.tencent.angel.serving.apis.common.InstanceProtos.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final InstanceFlag[] VALUES = values();
+
+    public static InstanceFlag valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private InstanceFlag(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:angel.serving.InstanceFlag)
+  }
+
   public interface ListValueOrBuilder extends
       // @@protoc_insertion_point(interface_extends:angel.serving.ListValue)
       com.google.protobuf.MessageOrBuilder {
@@ -10302,9 +10454,13 @@ public final class InstanceProtos {
         getNameBytes();
 
     /**
-     * <code>int32 flag = 3;</code>
+     * <code>.angel.serving.InstanceFlag flag = 3;</code>
      */
-    int getFlag();
+    int getFlagValue();
+    /**
+     * <code>.angel.serving.InstanceFlag flag = 3;</code>
+     */
+    com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag getFlag();
 
     /**
      * <code>.angel.TensorShapeProto shape = 4;</code>
@@ -10449,8 +10605,9 @@ public final class InstanceProtos {
               break;
             }
             case 24: {
+              int rawValue = input.readEnum();
 
-              flag_ = input.readInt32();
+              flag_ = rawValue;
               break;
             }
             case 34: {
@@ -10659,10 +10816,17 @@ public final class InstanceProtos {
     public static final int FLAG_FIELD_NUMBER = 3;
     private int flag_;
     /**
-     * <code>int32 flag = 3;</code>
+     * <code>.angel.serving.InstanceFlag flag = 3;</code>
      */
-    public int getFlag() {
+    public int getFlagValue() {
       return flag_;
+    }
+    /**
+     * <code>.angel.serving.InstanceFlag flag = 3;</code>
+     */
+    public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag getFlag() {
+      com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag result = com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.valueOf(flag_);
+      return result == null ? com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.UNRECOGNIZED : result;
     }
 
     public static final int SHAPE_FIELD_NUMBER = 4;
@@ -10865,8 +11029,8 @@ public final class InstanceProtos {
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
-      if (flag_ != 0) {
-        output.writeInt32(3, flag_);
+      if (flag_ != com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.IF_SCALAR.getNumber()) {
+        output.writeEnum(3, flag_);
       }
       if (shape_ != null) {
         output.writeMessage(4, getShape());
@@ -10919,9 +11083,9 @@ public final class InstanceProtos {
       if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
-      if (flag_ != 0) {
+      if (flag_ != com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.IF_SCALAR.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, flag_);
+          .computeEnumSize(3, flag_);
       }
       if (shape_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -10987,8 +11151,7 @@ public final class InstanceProtos {
       result = result && dType_ == other.dType_;
       result = result && getName()
           .equals(other.getName());
-      result = result && (getFlag()
-          == other.getFlag());
+      result = result && flag_ == other.flag_;
       result = result && (hasShape() == other.hasShape());
       if (hasShape()) {
         result = result && getShape()
@@ -11057,7 +11220,7 @@ public final class InstanceProtos {
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + FLAG_FIELD_NUMBER;
-      hash = (53 * hash) + getFlag();
+      hash = (53 * hash) + flag_;
       if (hasShape()) {
         hash = (37 * hash) + SHAPE_FIELD_NUMBER;
         hash = (53 * hash) + getShape().hashCode();
@@ -11363,8 +11526,8 @@ public final class InstanceProtos {
           name_ = other.name_;
           onChanged();
         }
-        if (other.getFlag() != 0) {
-          setFlag(other.getFlag());
+        if (other.flag_ != 0) {
+          setFlagValue(other.getFlagValue());
         }
         if (other.hasShape()) {
           mergeShape(other.getShape());
@@ -11567,24 +11730,42 @@ public final class InstanceProtos {
         return this;
       }
 
-      private int flag_ ;
+      private int flag_ = 0;
       /**
-       * <code>int32 flag = 3;</code>
+       * <code>.angel.serving.InstanceFlag flag = 3;</code>
        */
-      public int getFlag() {
+      public int getFlagValue() {
         return flag_;
       }
       /**
-       * <code>int32 flag = 3;</code>
+       * <code>.angel.serving.InstanceFlag flag = 3;</code>
        */
-      public Builder setFlag(int value) {
-        
+      public Builder setFlagValue(int value) {
         flag_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 flag = 3;</code>
+       * <code>.angel.serving.InstanceFlag flag = 3;</code>
+       */
+      public com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag getFlag() {
+        com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag result = com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.valueOf(flag_);
+        return result == null ? com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.angel.serving.InstanceFlag flag = 3;</code>
+       */
+      public Builder setFlag(com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        flag_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.angel.serving.InstanceFlag flag = 3;</code>
        */
       public Builder clearFlag() {
         
@@ -12532,16 +12713,22 @@ public final class InstanceProtos {
       "MapEntry\022\013\n\003key\030\001 \001(\003\022\'\n\005value\030\002 \001(\0132\030.a" +
       "ngel.serving.ListValue:\0028\001\032H\n\rL2mapMapEn" +
       "try\022\013\n\003key\030\001 \001(\003\022&\n\005value\030\002 \001(\0132\027.angel." +
-      "serving.MapValue:\0028\001\"\242\002\n\010Instance\022\036\n\005dTy" +
+      "serving.MapValue:\0028\001\"\277\002\n\010Instance\022\036\n\005dTy" +
       "pe\030\001 \001(\0162\017.angel.DataType\022\014\n\004name\030\002 \001(\t\022" +
-      "\014\n\004flag\030\003 \001(\005\022&\n\005shape\030\004 \001(\0132\027.angel.Ten" +
-      "sorShapeProto\022\014\n\002bs\030\005 \001(\014H\000\022\013\n\001i\030\006 \001(\005H\000" +
-      "\022\013\n\001l\030\007 \001(\003H\000\022\013\n\001f\030\010 \001(\002H\000\022\013\n\001d\030\t \001(\001H\000\022" +
-      "\013\n\001b\030\n \001(\010H\000\022\013\n\001s\030\013 \001(\tH\000\022&\n\002lv\030\014 \001(\0132\030." +
-      "angel.serving.ListValueH\000\022%\n\002mv\030\r \001(\0132\027." +
-      "angel.serving.MapValueH\000B\007\n\005valueB9\n%com" +
-      ".tencent.angel.serving.apis.commonB\016Inst" +
-      "anceProtosP\000b\006proto3"
+      ")\n\004flag\030\003 \001(\0162\033.angel.serving.InstanceFl" +
+      "ag\022&\n\005shape\030\004 \001(\0132\027.angel.TensorShapePro" +
+      "to\022\014\n\002bs\030\005 \001(\014H\000\022\013\n\001i\030\006 \001(\005H\000\022\013\n\001l\030\007 \001(\003" +
+      "H\000\022\013\n\001f\030\010 \001(\002H\000\022\013\n\001d\030\t \001(\001H\000\022\013\n\001b\030\n \001(\010H" +
+      "\000\022\013\n\001s\030\013 \001(\tH\000\022&\n\002lv\030\014 \001(\0132\030.angel.servi" +
+      "ng.ListValueH\000\022%\n\002mv\030\r \001(\0132\027.angel.servi" +
+      "ng.MapValueH\000B\007\n\005value*\275\001\n\014InstanceFlag\022" +
+      "\r\n\tIF_SCALAR\020\000\022\023\n\017IF_DENSE_VECTOR\020\002\022\033\n\027I" +
+      "F_INTKEY_SPARSE_VECTOR\020\003\022\034\n\030IF_LONGKEY_S" +
+      "PARSE_VECTOR\020\004\022\027\n\023IF_STRINGKEY_VECTOR\020\005\022" +
+      "\020\n\014IF_2D_MATRIX\020\006\022\020\n\014IF_3D_MATRIX\020\007\022\021\n\rI" +
+      "F_MAP_OBJECT\020\010B9\n%com.tencent.angel.serv" +
+      "ing.apis.commonB\016InstanceProtosP\000b\006proto" +
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

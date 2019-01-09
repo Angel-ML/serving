@@ -1,12 +1,13 @@
 package com.tencent.angel.serving.core
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
+import com.tencent.angel.serving.servables.common.SavedModelBundle
 
 import scala.collection.mutable
 import scala.language.reflectiveCalls
 
-class SimpleLoader[ServableType <: { def unload(): Unit } ](creator: () => ServableType,
-                                 resourceEstimate: () => ResourceAllocation) extends Loader {
+class SimpleLoader[ServableType <: SavedModelBundle](creator: () => ServableType,
+                                                     resourceEstimate: () => ResourceAllocation) extends Loader {
 
   private var postLoadResourceEstimate: () => ResourceAllocation = _
   private var memorizedResourceEstimator: ResourceAllocation = _
@@ -17,7 +18,7 @@ class SimpleLoader[ServableType <: { def unload(): Unit } ](creator: () => Serva
 
   override def estimateResources(): ResourceAllocation = {
     val run = Runtime.getRuntime
-    val available = (run.totalMemory() * 0.8 * 0.2).toLong  // byte
+    val available = (run.totalMemory() * 0.8 * 0.2).toLong // byte
     ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), available)))
   }
 
@@ -32,7 +33,7 @@ class SimpleLoader[ServableType <: { def unload(): Unit } ](creator: () => Serva
 
   override def unload(): Unit = {
     // val resourceEstimate = estimateResources()
-    servable_.unload()
+    servable_.unLoad()
     servable_ = null.asInstanceOf[ServableType]
     //todo: release resource
   }
@@ -41,8 +42,8 @@ class SimpleLoader[ServableType <: { def unload(): Unit } ](creator: () => Serva
 }
 
 object SimpleLoader {
-  def apply[ServableType](creator: () => ServableType, resourceEstimate: () => ResourceAllocation
-                         ): SimpleLoader[ServableType] = {
+  def apply[ServableType <: SavedModelBundle](creator: () => ServableType, resourceEstimate: () => ResourceAllocation
+                                             ): SimpleLoader[ServableType] = {
     val loader = new SimpleLoader[ServableType](creator, resourceEstimate)
     val resourceOptions = ResourceOptions(mutable.Map(DeviceType.kMain -> 1))
     loader.resourceUtil = new ResourceUtil(resourceOptions)
@@ -50,8 +51,8 @@ object SimpleLoader {
     loader
   }
 
-  def apply[ServableType](creator: () => ServableType, resourceEstimate: () => ResourceAllocation,
-                          postLoadResourceEstimate: () => ResourceAllocation): SimpleLoader[ServableType] = {
+  def apply[ServableType <: SavedModelBundle](creator: () => ServableType, resourceEstimate: () => ResourceAllocation,
+                                              postLoadResourceEstimate: () => ResourceAllocation): SimpleLoader[ServableType] = {
     val loader = SimpleLoader(creator, resourceEstimate)
     loader.postLoadResourceEstimate = postLoadResourceEstimate
     loader

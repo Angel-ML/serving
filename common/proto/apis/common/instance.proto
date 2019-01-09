@@ -53,13 +53,25 @@ message MapValue {
     map<int64, MapValue> l2map_map = 29;
 }
 
+
+enum InstanceFlag {
+    IF_SCALAR = 0;
+    IF_DENSE_VECTOR = 2;
+    IF_INTKEY_SPARSE_VECTOR = 3;
+    IF_LONGKEY_SPARSE_VECTOR = 4;
+    IF_STRINGKEY_VECTOR = 5;
+    IF_2D_MATRIX = 6;
+    IF_3D_MATRIX = 7;
+    IF_MAP_OBJECT = 8;
+}
+
 message Instance {
 
     DataType dType = 1;
 
     string name = 2;
 
-    int32 flag = 3;
+    InstanceFlag flag = 3;
 
     TensorShapeProto shape = 4;
 

@@ -3,7 +3,10 @@ package com.tencent.angel.serving.servables.common
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
-import com.tencent.angel.serving.servables.angel.{RunOptions, Session}
+
+trait RunOptions
+
+trait Session
 
 trait SavedModelBundle {
   val session: Session

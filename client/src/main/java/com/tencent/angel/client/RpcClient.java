@@ -3,7 +3,7 @@ package com.tencent.angel.client;
 import com.google.protobuf.Int64Value;
 import com.tencent.angel.core.graph.TensorProtos.TensorProto;
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec;
-import com.tencent.angel.serving.apis.common.ValueProtos;
+import com.tencent.angel.serving.apis.common.InstanceProtos;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusRequest;
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse;
 import com.tencent.angel.serving.apis.modelmgr.ModelServiceGrpc;
@@ -66,7 +66,7 @@ public class RpcClient {
             values.put(rand.nextInt(dim), rand.nextFloat());
         }
 
-        ValueProtos.Instance instance = ProtoUtils.getInstance(dim, values);
+        InstanceProtos.Instance instance = ProtoUtils.getInstance(dim, values);
         // Generate gRPC request, signature inputs name should be correct or exceptions
         ModelSpec modelSpec = ProtoUtils.getModelSpec(modelName, modelVersion, "predict");
         Request request = Request.newBuilder().setModelSpec(modelSpec).addInstances(instance).build();
@@ -95,7 +95,7 @@ public class RpcClient {
             long start = System.currentTimeMillis();
             Response response = blockingStub.predict(request);
             LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));
-            ValueProtos.Instance result = response.getPredictions(0);
+            InstanceProtos.Instance result = response.getPredictions(0);
             LOG.info(result.toString());
             start = System.currentTimeMillis();
             GetModelStatusResponse statusResponse = modelServiceBlockingStub.getModelStatus(statusRequest);

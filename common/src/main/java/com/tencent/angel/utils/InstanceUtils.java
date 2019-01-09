@@ -8,13 +8,12 @@ import com.tencent.angel.serving.apis.common.TypesProtos.*;
 import com.tencent.angel.serving.apis.common.InstanceProtos.*;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class InstanceUtils {
 
     // for dense vector
-    static public Vector getDenseVector(Instance instance) {
+    static private Vector getDenseVector(Instance instance) {
         long dim = instance.getShape().getDim(0).getSize();
         ListValue listValue = instance.getLv();
 
@@ -66,7 +65,7 @@ public class InstanceUtils {
     }
 
     // for int key sparse vector
-    static public Vector getIntKeySparseVector(Instance instance) {
+    static private Vector getIntKeySparseVector(Instance instance) {
         int dim = (int) instance.getShape().getDim(0).getSize();
         MapValue mapValue = instance.getMv();
 
@@ -132,7 +131,7 @@ public class InstanceUtils {
     }
 
     // for long key sparse vector
-    static public Vector getLongKeySparseVector(Instance instance) {
+    static private Vector getLongKeySparseVector(Instance instance) {
         long dim = instance.getShape().getDim(0).getSize();
         MapValue mapValue = instance.getMv();
 
@@ -197,8 +196,21 @@ public class InstanceUtils {
         return null;
     }
 
+    static public Vector getVector(Instance instance) {
+        switch(instance.getFlag()) {
+            case IF_DENSE_VECTOR:
+                return getDenseVector(instance);
+            case IF_INTKEY_SPARSE_VECTOR:
+                return getIntKeySparseVector(instance);
+            case IF_LONGKEY_SPARSE_VECTOR:
+                return getLongKeySparseVector(instance);
+        }
+
+        return null;
+    }
+
     // for string key vector
-    static public Map<String, ?> getStringKeyMap(Instance instance) {
+    static public Map<String, ?> getStringKeyVector(Instance instance) {
         MapValue mapValue = instance.getMv();
 
         DataType dType = instance.getDType();
