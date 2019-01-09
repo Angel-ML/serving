@@ -44,11 +44,16 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
     groupFieldNameSet.add(fieldName.getValue)
   }
 
+  private val resultFields: util.List[FieldName] = new util.ArrayList[FieldName]()
   private val targetFields: util.List[TargetField] = evaluator.getTargetFields
+  for (targetField: TargetField <- targetFields) {
+    resultFields.add(targetField.getName)
+  }
+
   private val outputFields: util.List[OutputField] = evaluator.getOutputFields
-  private val resultFields: util.List[FieldName] = EvaluatorUtil.getNames(
-    Lists.newArrayList(Iterables.concat(targetFields, outputFields))
-  )
+  for (outputField: OutputField <- outputFields) {
+    resultFields.add(outputField.getName)
+  }
 
   override def runClassify(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
     runPredict(runOptions, request, responseBuilder)

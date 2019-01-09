@@ -6,8 +6,7 @@ import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.prediction.GetModelMetadataProtos.{GetModelMetadataRequest, GetModelMetadataResponse}
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
-import com.tencent.angel.serving.core.{ManagerState, ServableHandle, ServableRequest, ServerCore}
-import com.tencent.angel.serving.servables.angel.RunOptions
+import com.tencent.angel.serving.core.{ManagerState, ServableHandle, ServerCore}
 import org.slf4j.{Logger, LoggerFactory}
 
 object ServiceImpl {
