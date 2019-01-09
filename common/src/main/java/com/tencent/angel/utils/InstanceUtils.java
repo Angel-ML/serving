@@ -1,5 +1,6 @@
 package com.tencent.angel.utils;
 
+import com.google.protobuf.ByteString;
 import com.tencent.angel.ml.math2.MFactory;
 import com.tencent.angel.ml.math2.VFactory;
 import com.tencent.angel.ml.math2.matrix.Matrix;
@@ -197,7 +198,7 @@ public class InstanceUtils {
     }
 
     static public Vector getVector(Instance instance) {
-        switch(instance.getFlag()) {
+        switch (instance.getFlag()) {
             case IF_DENSE_VECTOR:
                 return getDenseVector(instance);
             case IF_INTKEY_SPARSE_VECTOR:
@@ -223,6 +224,13 @@ public class InstanceUtils {
                 return mapValue.getS2FMapMap();
             case DT_DOUBLE:
                 return mapValue.getS2DMapMap();
+            case DT_STRING:
+                Map<String, String> temp = mapValue.getS2SMapMap();
+                if (temp != null) {
+                    return temp;
+                } else {
+                    return mapValue.getS2BsMapMap();
+                }
         }
 
         return null;
