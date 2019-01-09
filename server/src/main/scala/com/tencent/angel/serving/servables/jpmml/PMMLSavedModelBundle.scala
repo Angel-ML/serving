@@ -69,7 +69,7 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
       val instance = request.getInstances(idx)
       assert(instance.getFlag == InstanceFlag.IF_STRINGKEY_VECTOR)
 
-      val dataMap = InstanceUtils.getStringKeyVector(instance)
+      val dataMap = InstanceUtils.getStringKeyMap(instance)
 
       val missingInputFields = Sets.difference(fieldNameSet, dataMap.keySet())
       val missingGroupFields = Sets.difference(groupFieldNameSet, dataMap.keySet())

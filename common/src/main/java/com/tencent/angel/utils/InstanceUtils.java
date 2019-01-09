@@ -1,5 +1,6 @@
 package com.tencent.angel.utils;
 
+import com.google.protobuf.ByteString;
 import com.tencent.angel.ml.math2.MFactory;
 import com.tencent.angel.ml.math2.VFactory;
 import com.tencent.angel.ml.math2.matrix.Matrix;
@@ -197,7 +198,7 @@ public class InstanceUtils {
     }
 
     static public Vector getVector(Instance instance) {
-        switch(instance.getFlag()) {
+        switch (instance.getFlag()) {
             case IF_DENSE_VECTOR:
                 return getDenseVector(instance);
             case IF_INTKEY_SPARSE_VECTOR:
@@ -210,7 +211,7 @@ public class InstanceUtils {
     }
 
     // for string key vector
-    static public Map<String, ?> getStringKeyVector(Instance instance) {
+    static public Map<String, ?> getStringKeyMap(Instance instance) {
         MapValue mapValue = instance.getMv();
 
         DataType dType = instance.getDType();
@@ -223,13 +224,20 @@ public class InstanceUtils {
                 return mapValue.getS2FMapMap();
             case DT_DOUBLE:
                 return mapValue.getS2DMapMap();
+            case DT_STRING:
+                Map<String, String> temp = mapValue.getS2SMapMap();
+                if (temp != null) {
+                    return temp;
+                } else {
+                    return mapValue.getS2BsMapMap();
+                }
         }
 
         return null;
     }
 
     // for dense matrix
-    static public Matrix getBlasVector(Instance instance) {
+    static public Matrix getBlasMatrix(Instance instance) {
         int numRows = (int) instance.getShape().getDim(0).getSize();
         int numCols = (int) instance.getShape().getDim(1).getSize();
         ListValue listValue = instance.getLv();
