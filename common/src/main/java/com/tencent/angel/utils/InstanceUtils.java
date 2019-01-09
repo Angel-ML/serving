@@ -211,7 +211,7 @@ public class InstanceUtils {
     }
 
     // for string key vector
-    static public Map<String, ?> getStringKeyVector(Instance instance) {
+    static public Map<String, ?> getStringKeyMap(Instance instance) {
         MapValue mapValue = instance.getMv();
 
         DataType dType = instance.getDType();
@@ -237,7 +237,7 @@ public class InstanceUtils {
     }
 
     // for dense matrix
-    static public Matrix getBlasVector(Instance instance) {
+    static public Matrix getBlasMatrix(Instance instance) {
         int numRows = (int) instance.getShape().getDim(0).getSize();
         int numCols = (int) instance.getShape().getDim(1).getSize();
         ListValue listValue = instance.getLv();
