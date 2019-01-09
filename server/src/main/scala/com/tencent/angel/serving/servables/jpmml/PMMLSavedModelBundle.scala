@@ -18,7 +18,6 @@ import org.jpmml.model.PMMLUtil
 import org.jpmml.model.visitors.MemoryMeasurer
 import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
-import com.google.common.collect.Iterables
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import scala.collection.JavaConversions._
