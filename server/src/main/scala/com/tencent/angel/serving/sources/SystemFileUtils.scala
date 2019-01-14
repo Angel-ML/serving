@@ -12,7 +12,7 @@ object SystemFileUtils {
   private var fileSystem = null.asInstanceOf[FileSystem]
   def getFileSystem(conf: Configuration = ModelServer.hadoopConf): FileSystem ={
     if (fileSystem == null) {
-      fileSystem.synchronized {
+      this.synchronized {
         if (fileSystem == null) {
           try {
             if (conf == null) {
