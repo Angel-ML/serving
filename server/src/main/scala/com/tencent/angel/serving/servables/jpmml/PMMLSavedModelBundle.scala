@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.servables.jpmml
 
-import java.io.{File, FileInputStream, IOException}
+import java.io.{File, InputStream, IOException}
 import java.util
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
@@ -10,7 +10,7 @@ import com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.common.{RunOptions, Session, SavedModelBundle}
+import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
 import javax.xml.bind.JAXBException
 import org.dmg.pmml.{FieldName, PMML}
 import org.jpmml.evaluator._
@@ -20,6 +20,9 @@ import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
+import com.tencent.angel.serving.sources.SystemFileUtils
+import org.apache.hadoop.fs.Path
+
 import scala.collection.JavaConversions._
 
 
@@ -142,10 +145,10 @@ object PMMLSavedModelBundle {
   private var pmml: PMML = _
 
   def create(path: StoragePath): PMMLSavedModelBundle = {
-    var inputStream: FileInputStream = null
+    var inputStream: InputStream = null
     try {
       LOG.info("Begin to load model ...")
-      inputStream = new FileInputStream(path)
+      inputStream = SystemFileUtils.getFileSystem().open(new Path(path))
       pmml = PMMLUtil.unmarshal(inputStream)
       LOG.info("End to load model ...")
       new PMMLSavedModelBundle(pmml)
@@ -168,9 +171,8 @@ object PMMLSavedModelBundle {
 
   def resourceEstimate(modelPath: String): ResourceAllocation = {
     if (modelPath != null) {
-      val modelFile = new File(modelPath)
-      if (modelFile.exists()) {
-        val fileSize = (modelFile.getTotalSpace * 1.2).toLong
+      if (SystemFileUtils.fileExist(modelPath)) {
+        val fileSize = (SystemFileUtils.getTotalSpace(modelPath) * 1.2).toLong
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), fileSize)))
       } else {
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))

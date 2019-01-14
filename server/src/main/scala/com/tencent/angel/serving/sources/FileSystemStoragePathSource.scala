@@ -141,12 +141,12 @@ class FileSystemStoragePathSource(config: FileSystemStoragePathSourceConfig) ext
   }
 
   def pollFileSystemForServable(servable: ServableToMonitor): List[ServableData[StoragePath]] = {
-    if (!SystemFileUtils.fileExist(servable.getBasePath, ModelServer.hadoopConf)) {
+    if (!SystemFileUtils.dirExist(servable.getBasePath)) {
       throw new Exception(s"Could not find base path ${servable.getBasePath} for servable ${servable.getServableName}")
     }
 
     //Retrieve a list of base-path children from the file system.
-    val children = SystemFileUtils.getChildren(servable.getBasePath, ModelServer.hadoopConf)
+    val children = SystemFileUtils.getChildren(servable.getBasePath)
     if (children.isEmpty) {
       throw InvalidArguments("The base path " + servable.getBasePath + " for servable " +
         servable.getServableName + "has not children")

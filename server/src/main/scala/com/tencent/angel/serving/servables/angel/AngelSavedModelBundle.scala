@@ -14,7 +14,8 @@ import com.tencent.angel.ml.core.utils.JsonUtils
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.common.{RunOptions, Session, SavedModelBundle}
+import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
+import com.tencent.angel.serving.sources.SystemFileUtils
 import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.ehcache.sizeof.SizeOf
@@ -103,7 +104,7 @@ object AngelSavedModelBundle {
     val graphJsonFile = s"$path${File.separator}graph.json"
     LOG.info(s"the graph file is $graphJsonFile")
 
-    assert(new File(graphJsonFile).exists())
+    assert(SystemFileUtils.fileExist(graphJsonFile))
 
     val conf = SharedConf.get()
     conf.set(MLConf.ML_JSON_CONF_FILE, graphJsonFile)
@@ -130,9 +131,8 @@ object AngelSavedModelBundle {
 
   def resourceEstimate(modelPath: String): ResourceAllocation = {
     if (modelPath != null) {
-      val modelFile = new File(modelPath)
-      if (modelFile.exists()) {
-        val fileSize = (modelFile.getTotalSpace * 1.2).toLong
+      if (SystemFileUtils.fileExist(modelPath)) {
+        val fileSize = (SystemFileUtils.getTotalSpace(modelPath) * 1.2).toLong
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), fileSize)))
       } else {
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
