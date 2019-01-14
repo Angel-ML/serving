@@ -4,9 +4,9 @@ import com.google.protobuf.Int64Value
 import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
-import com.tencent.angel.serving.apis.prediction.PredictProtos.{PredictRequest, PredictResponse}
-import com.tencent.angel.serving.servables.angel.RunOptions
-import com.tencent.angel.serving.servables.common.ServiceImpl
+import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
+import com.tencent.angel.serving.apis.prediction.ResponseProtos
+import com.tencent.angel.serving.servables.common.{RunOptions, ServiceImpl}
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
 import com.tencent.angel.serving.service.jersey.util.ProcessInputOutput
@@ -15,7 +15,6 @@ import javax.ws.rs.core.{MediaType, Response}
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.matching.Regex
-
 
 @Path("/")
 class HttpRestApiHandler {
@@ -119,14 +118,13 @@ class HttpRestApiHandler {
     if(modelVersion !=null && !modelVersion.isEmpty) {
       modelSpecBuilder.setVersion(Int64Value.newBuilder().setValue(modelVersion.toLong))
     }
-    val requestBuilder = PredictRequest.newBuilder()
+    val requestBuilder = Request.newBuilder()
     requestBuilder.setModelSpec(modelSpecBuilder.build())
-    val format =ProcessInputOutput.fillPredictRequestFromJson(requestBody, requestBuilder, modelSpecBuilder)
-    val responseBuilder = PredictResponse.newBuilder()
+    ProcessInputOutput.fillPredictRequestFromJson(requestBody, requestBuilder, modelSpecBuilder)
+    val responseBuilder = ResponseProtos.Response.newBuilder()
     val runOptions = new RunOptions()
     ServiceImpl.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
-    //JSON.toJSONString(responseBuilder.build().getOutputs, SerializerFeature.EMPTY:_*)
-    responseBuilder.build().getOutputs.toString
+    responseBuilder.build().getPredictionsList.toString
   }
 
   def processRegressRequest(): Unit = {

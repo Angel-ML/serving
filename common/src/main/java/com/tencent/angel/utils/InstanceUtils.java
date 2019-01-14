@@ -1,6 +1,5 @@
 package com.tencent.angel.utils;
 
-import com.google.protobuf.ByteString;
 import com.tencent.angel.ml.math2.MFactory;
 import com.tencent.angel.ml.math2.VFactory;
 import com.tencent.angel.ml.math2.matrix.Matrix;
@@ -31,7 +30,7 @@ public class InstanceUtils {
                 return VFactory.denseIntVector(data);
             }
             case DT_INT64: {
-                int count = listValue.getICount();
+                int count = listValue.getLCount();
                 assert (dim == count);
                 long[] data = new long[count];
                 for (int i = 0; i < count; i++) {
@@ -41,7 +40,7 @@ public class InstanceUtils {
                 return VFactory.denseLongVector(data);
             }
             case DT_FLOAT: {
-                int count = listValue.getICount();
+                int count = listValue.getFCount();
                 assert (dim == count);
                 float[] data = new float[count];
                 for (int i = 0; i < count; i++) {
@@ -51,7 +50,7 @@ public class InstanceUtils {
                 return VFactory.denseFloatVector(data);
             }
             case DT_DOUBLE: {
-                int count = listValue.getICount();
+                int count = listValue.getDCount();
                 assert (dim == count);
                 double[] data = new double[count];
                 for (int i = 0; i < count; i++) {
@@ -76,7 +75,7 @@ public class InstanceUtils {
         switch (dType) {
             case DT_INT32: {
                 Iterator<Map.Entry<Integer, Integer>> iter = mapValue.getI2IMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2IMapCount();
                 int[] keys = new int[count];
                 int[] data = new int[count];
                 while (iter.hasNext()) {
@@ -89,7 +88,7 @@ public class InstanceUtils {
             }
             case DT_INT64: {
                 Iterator<Map.Entry<Integer, Long>> iter = mapValue.getI2LMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2LMapCount();
                 int[] keys = new int[count];
                 long[] data = new long[count];
                 while (iter.hasNext()) {
@@ -102,7 +101,7 @@ public class InstanceUtils {
             }
             case DT_FLOAT: {
                 Iterator<Map.Entry<Integer, Float>> iter = mapValue.getI2FMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2FMapCount();
                 int[] keys = new int[count];
                 float[] data = new float[count];
                 while (iter.hasNext()) {
@@ -115,7 +114,7 @@ public class InstanceUtils {
             }
             case DT_DOUBLE: {
                 Iterator<Map.Entry<Integer, Double>> iter = mapValue.getI2DMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2DMapCount();
                 int[] keys = new int[count];
                 double[] data = new double[count];
                 while (iter.hasNext()) {
@@ -142,7 +141,7 @@ public class InstanceUtils {
         switch (dType) {
             case DT_INT32: {
                 Iterator<Map.Entry<Long, Integer>> iter = mapValue.getL2IMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2IMapCount();
                 long[] keys = new long[count];
                 int[] data = new int[count];
                 while (iter.hasNext()) {
@@ -155,7 +154,7 @@ public class InstanceUtils {
             }
             case DT_INT64: {
                 Iterator<Map.Entry<Long, Long>> iter = mapValue.getL2LMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2LMapCount();
                 long[] keys = new long[count];
                 long[] data = new long[count];
                 while (iter.hasNext()) {
@@ -168,7 +167,7 @@ public class InstanceUtils {
             }
             case DT_FLOAT: {
                 Iterator<Map.Entry<Long, Float>> iter = mapValue.getL2FMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2FMapCount();
                 long[] keys = new long[count];
                 float[] data = new float[count];
                 while (iter.hasNext()) {
@@ -181,7 +180,7 @@ public class InstanceUtils {
             }
             case DT_DOUBLE: {
                 Iterator<Map.Entry<Long, Double>> iter = mapValue.getL2DMapMap().entrySet().iterator();
-                int count = mapValue.getI2BMapCount();
+                int count = mapValue.getI2DMapCount();
                 long[] keys = new long[count];
                 double[] data = new double[count];
                 while (iter.hasNext()) {
@@ -254,7 +253,7 @@ public class InstanceUtils {
                 return MFactory.denseFloatMatrix(numRows, numCols, data);
             }
             case DT_DOUBLE: {
-                int count = listValue.getICount();
+                int count = listValue.getDCount();
                 double[] data = new double[count];
                 for (int i = 0; i < count; i++) {
                     data[i] = listValue.getD(i);

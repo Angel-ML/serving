@@ -1,8 +1,7 @@
-import com.tencent.angel.core.graph.TensorProtos;
+import com.tencent.angel.serving.apis.common.InstanceProtos;
 import com.tencent.angel.utils.ProtoUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.tencent.angel.ml.math2.vector.Vector;
 
 import java.util.*;
 
@@ -46,26 +45,31 @@ public class TestUtils {
     }
 
     @Test
-    public void totensorTest1() {
-        TensorProtos.TensorProto tensor = ProtoUtils.toTensorProto(values);
-
-        for (Float i : tensor.getFloatValList()) {
+    public void totensorTest1() throws Exception {
+        InstanceProtos.Instance instance = ProtoUtils.getInstance(values);
+        for (Float i : instance.getLv().getFList()) {
             System.out.println(i);
         }
-
-        System.out.println(tensor.toString());
+        System.out.println(instance.toString());
     }
 
     @Test
-    public void totensorTest2() {
-        TensorProtos.TensorProto tensor = ProtoUtils.toTensorProto(32L, keysLong, values);
-
-        System.out.println(tensor.toString());
+    public void totensorTest2() throws Exception {
+        Map<Long, Float> longFloatMap = new HashMap<>();
+        for(int i = 0; i < keysLong.size(); i++) {
+            longFloatMap.put(keysLong.get(i), values.get(i));
+        }
+        InstanceProtos.Instance instance = ProtoUtils.getInstance(32L, longFloatMap);
+        System.out.println(instance.toString());
     }
 
     @Test
-    public void totensorTest3() {
-        TensorProtos.TensorProto tensor = ProtoUtils.toTensorProto(32L, keysInt, values);
-        Vector vec = ProtoUtils.toVector(tensor);
+    public void totensorTest3() throws Exception {
+        Map<Integer, Float> integerFloatHashMap = new HashMap<>();
+        for(int i = 0; i < keysInt.size(); i++) {
+            integerFloatHashMap.put(keysInt.get(i), values.get(i));
+        }
+        InstanceProtos.Instance instance = ProtoUtils.getInstance(32, integerFloatHashMap);
+        System.out.println(instance.toString());
     }
 }
