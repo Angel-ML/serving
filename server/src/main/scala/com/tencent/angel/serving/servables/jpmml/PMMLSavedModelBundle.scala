@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.servables.jpmml
 
-import java.io.{File, InputStream, IOException}
+import java.io.{IOException, InputStream}
 import java.util
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
@@ -15,13 +15,13 @@ import javax.xml.bind.JAXBException
 import org.dmg.pmml.{FieldName, PMML}
 import org.jpmml.evaluator._
 import org.jpmml.model.PMMLUtil
-import org.jpmml.model.visitors.MemoryMeasurer
 import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import com.tencent.angel.serving.sources.SystemFileUtils
 import org.apache.hadoop.fs.Path
+import org.ehcache.sizeof.SizeOf
 
 import scala.collection.JavaConversions._
 
@@ -147,8 +147,11 @@ object PMMLSavedModelBundle {
   def create(path: StoragePath): PMMLSavedModelBundle = {
     var inputStream: InputStream = null
     try {
+      val fs = SystemFileUtils.getFileSystem()
+      val fileStatus  = fs.listStatus(new Path(path))
+      fileStatus.filter(x => x.isFile).filterNot(x => x.getPath.toString.endsWith(".pmml"))
       LOG.info("Begin to load model ...")
-      inputStream = SystemFileUtils.getFileSystem().open(new Path(path))
+      inputStream = fs.open(fileStatus(0).getPath)
       pmml = PMMLUtil.unmarshal(inputStream)
       LOG.info("End to load model ...")
       new PMMLSavedModelBundle(pmml)
@@ -184,9 +187,10 @@ object PMMLSavedModelBundle {
 
   def estimateResourceRequirement(modelPath: String): ResourceAllocation = {
     if (pmml != null) {
-      val memoryMeasurer = new MemoryMeasurer
-      memoryMeasurer.applyTo(pmml)
-      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), memoryMeasurer.getSize)))
+      val sizeOf =  SizeOf.newInstance()
+      val size = sizeOf.deepSizeOf(pmml)
+      LOG.info("pmml model size is: " + size)
+      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), size)))
     } else {
       ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
     }

@@ -102,7 +102,9 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
         case LoadExceptions(msg) =>
           LOG.info(msg)
           false
-        case _: Exception => false
+        case ex: Exception  =>
+          ex.printStackTrace()
+          false
       }
     }
 
