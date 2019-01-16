@@ -1812,6 +1812,67 @@ public final class GetModelStatusProtos {
      */
     com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatusOrBuilder getModelVersionStatusOrBuilder(
         int index);
+
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    int getTypeMapCount();
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    boolean containsTypeMap(
+        java.lang.String key);
+    /**
+     * Use {@link #getTypeMapMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+    getTypeMap();
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+    getTypeMapMap();
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrDefault(
+        java.lang.String key,
+        com.tencent.angel.serving.apis.common.TypesProtos.DataType defaultValue);
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrThrow(
+        java.lang.String key);
+    /**
+     * Use {@link #getTypeMapValueMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.Integer>
+    getTypeMapValue();
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.Integer>
+    getTypeMapValueMap();
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    int getTypeMapValueOrDefault(
+        java.lang.String key,
+        int defaultValue);
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    int getTypeMapValueOrThrow(
+        java.lang.String key);
+
+    /**
+     * <code>int64 dim = 3;</code>
+     */
+    long getDim();
   }
   /**
    * <pre>
@@ -1831,6 +1892,7 @@ public final class GetModelStatusProtos {
     }
     private GetModelStatusResponse() {
       modelVersionStatus_ = java.util.Collections.emptyList();
+      dim_ = 0L;
     }
 
     @java.lang.Override
@@ -1873,6 +1935,24 @@ public final class GetModelStatusProtos {
                   input.readMessage(com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus.parser(), extensionRegistry));
               break;
             }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                typeMap_ = com.google.protobuf.MapField.newMapField(
+                    TypeMapDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000002;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Integer>
+              typeMap__ = input.readMessage(
+                  TypeMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              typeMap_.getMutableMap().put(
+                  typeMap__.getKey(), typeMap__.getValue());
+              break;
+            }
+            case 24: {
+
+              dim_ = input.readInt64();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1893,6 +1973,17 @@ public final class GetModelStatusProtos {
       return com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.internal_static_angel_serving_GetModelStatusResponse_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 2:
+          return internalGetTypeMap();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.internal_static_angel_serving_GetModelStatusResponse_fieldAccessorTable
@@ -1900,6 +1991,7 @@ public final class GetModelStatusProtos {
               com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse.class, com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse.Builder.class);
     }
 
+    private int bitField0_;
     public static final int MODEL_VERSION_STATUS_FIELD_NUMBER = 1;
     private java.util.List<com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.ModelVersionStatus> modelVersionStatus_;
     /**
@@ -1955,6 +2047,150 @@ public final class GetModelStatusProtos {
       return modelVersionStatus_.get(index);
     }
 
+    public static final int TYPE_MAP_FIELD_NUMBER = 2;
+    private static final class TypeMapDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.Integer> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.Integer>newDefaultInstance(
+                  com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.ENUM,
+                  com.tencent.angel.serving.apis.common.TypesProtos.DataType.DT_INVALID.getNumber());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.Integer> typeMap_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Integer>
+    internalGetTypeMap() {
+      if (typeMap_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            TypeMapDefaultEntryHolder.defaultEntry);
+      }
+      return typeMap_;
+    }
+    private static final
+    com.google.protobuf.Internal.MapAdapter.Converter<
+        java.lang.Integer, com.tencent.angel.serving.apis.common.TypesProtos.DataType> typeMapValueConverter =
+            com.google.protobuf.Internal.MapAdapter.newEnumConverter(
+                com.tencent.angel.serving.apis.common.TypesProtos.DataType.internalGetValueMap(),
+                com.tencent.angel.serving.apis.common.TypesProtos.DataType.UNRECOGNIZED);
+    private static final java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+    internalGetAdaptedTypeMapMap(
+        java.util.Map<java.lang.String, java.lang.Integer> map) {
+      return new com.google.protobuf.Internal.MapAdapter<
+          java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType, java.lang.Integer>(
+              map, typeMapValueConverter);
+    }
+
+    public int getTypeMapCount() {
+      return internalGetTypeMap().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public boolean containsTypeMap(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetTypeMap().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getTypeMapMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+    getTypeMap() {
+      return getTypeMapMap();
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+    getTypeMapMap() {
+      return internalGetAdaptedTypeMapMap(
+          internalGetTypeMap().getMap());}
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrDefault(
+        java.lang.String key,
+        com.tencent.angel.serving.apis.common.TypesProtos.DataType defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Integer> map =
+          internalGetTypeMap().getMap();
+      return map.containsKey(key)
+             ? typeMapValueConverter.doForward(map.get(key))
+             : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Integer> map =
+          internalGetTypeMap().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return typeMapValueConverter.doForward(map.get(key));
+    }
+    /**
+     * Use {@link #getTypeMapValueMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.Integer>
+    getTypeMapValue() {
+      return getTypeMapValueMap();
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.Integer>
+    getTypeMapValueMap() {
+      return internalGetTypeMap().getMap();
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public int getTypeMapValueOrDefault(
+        java.lang.String key,
+        int defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Integer> map =
+          internalGetTypeMap().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+     */
+
+    public int getTypeMapValueOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Integer> map =
+          internalGetTypeMap().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int DIM_FIELD_NUMBER = 3;
+    private long dim_;
+    /**
+     * <code>int64 dim = 3;</code>
+     */
+    public long getDim() {
+      return dim_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1970,6 +2206,15 @@ public final class GetModelStatusProtos {
       for (int i = 0; i < modelVersionStatus_.size(); i++) {
         output.writeMessage(1, modelVersionStatus_.get(i));
       }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetTypeMap(),
+          TypeMapDefaultEntryHolder.defaultEntry,
+          2);
+      if (dim_ != 0L) {
+        output.writeInt64(3, dim_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1981,6 +2226,20 @@ public final class GetModelStatusProtos {
       for (int i = 0; i < modelVersionStatus_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, modelVersionStatus_.get(i));
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Integer> entry
+           : internalGetTypeMap().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Integer>
+        typeMap__ = TypeMapDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, typeMap__);
+      }
+      if (dim_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, dim_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2000,6 +2259,10 @@ public final class GetModelStatusProtos {
       boolean result = true;
       result = result && getModelVersionStatusList()
           .equals(other.getModelVersionStatusList());
+      result = result && internalGetTypeMap().equals(
+          other.internalGetTypeMap());
+      result = result && (getDim()
+          == other.getDim());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2015,6 +2278,13 @@ public final class GetModelStatusProtos {
         hash = (37 * hash) + MODEL_VERSION_STATUS_FIELD_NUMBER;
         hash = (53 * hash) + getModelVersionStatusList().hashCode();
       }
+      if (!internalGetTypeMap().getMap().isEmpty()) {
+        hash = (37 * hash) + TYPE_MAP_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetTypeMap().hashCode();
+      }
+      hash = (37 * hash) + DIM_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getDim());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2124,6 +2394,28 @@ public final class GetModelStatusProtos {
         return com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.internal_static_angel_serving_GetModelStatusResponse_descriptor;
       }
 
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 2:
+            return internalGetTypeMap();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 2:
+            return internalGetMutableTypeMap();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.internal_static_angel_serving_GetModelStatusResponse_fieldAccessorTable
@@ -2155,6 +2447,9 @@ public final class GetModelStatusProtos {
         } else {
           modelVersionStatusBuilder_.clear();
         }
+        internalGetMutableTypeMap().clear();
+        dim_ = 0L;
+
         return this;
       }
 
@@ -2178,6 +2473,7 @@ public final class GetModelStatusProtos {
       public com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse buildPartial() {
         com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse result = new com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         if (modelVersionStatusBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             modelVersionStatus_ = java.util.Collections.unmodifiableList(modelVersionStatus_);
@@ -2187,6 +2483,10 @@ public final class GetModelStatusProtos {
         } else {
           result.modelVersionStatus_ = modelVersionStatusBuilder_.build();
         }
+        result.typeMap_ = internalGetTypeMap();
+        result.typeMap_.makeImmutable();
+        result.dim_ = dim_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -2253,6 +2553,11 @@ public final class GetModelStatusProtos {
               modelVersionStatusBuilder_.addAllMessages(other.modelVersionStatus_);
             }
           }
+        }
+        internalGetMutableTypeMap().mergeFrom(
+            other.internalGetTypeMap());
+        if (other.getDim() != 0L) {
+          setDim(other.getDim());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2593,6 +2898,230 @@ public final class GetModelStatusProtos {
         }
         return modelVersionStatusBuilder_;
       }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.Integer> typeMap_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Integer>
+      internalGetTypeMap() {
+        if (typeMap_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              TypeMapDefaultEntryHolder.defaultEntry);
+        }
+        return typeMap_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Integer>
+      internalGetMutableTypeMap() {
+        onChanged();;
+        if (typeMap_ == null) {
+          typeMap_ = com.google.protobuf.MapField.newMapField(
+              TypeMapDefaultEntryHolder.defaultEntry);
+        }
+        if (!typeMap_.isMutable()) {
+          typeMap_ = typeMap_.copy();
+        }
+        return typeMap_;
+      }
+
+      public int getTypeMapCount() {
+        return internalGetTypeMap().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public boolean containsTypeMap(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetTypeMap().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getTypeMapMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+      getTypeMap() {
+        return getTypeMapMap();
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+      getTypeMapMap() {
+        return internalGetAdaptedTypeMapMap(
+            internalGetTypeMap().getMap());}
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrDefault(
+          java.lang.String key,
+          com.tencent.angel.serving.apis.common.TypesProtos.DataType defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Integer> map =
+            internalGetTypeMap().getMap();
+        return map.containsKey(key)
+               ? typeMapValueConverter.doForward(map.get(key))
+               : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public com.tencent.angel.serving.apis.common.TypesProtos.DataType getTypeMapOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Integer> map =
+            internalGetTypeMap().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return typeMapValueConverter.doForward(map.get(key));
+      }
+      /**
+       * Use {@link #getTypeMapValueMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Integer>
+      getTypeMapValue() {
+        return getTypeMapValueMap();
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.Integer>
+      getTypeMapValueMap() {
+        return internalGetTypeMap().getMap();
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public int getTypeMapValueOrDefault(
+          java.lang.String key,
+          int defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Integer> map =
+            internalGetTypeMap().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public int getTypeMapValueOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Integer> map =
+            internalGetTypeMap().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearTypeMap() {
+        internalGetMutableTypeMap().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+
+      public Builder removeTypeMap(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTypeMap().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType>
+      getMutableTypeMap() {
+        return internalGetAdaptedTypeMapMap(
+             internalGetMutableTypeMap().getMutableMap());
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+      public Builder putTypeMap(
+          java.lang.String key,
+          com.tencent.angel.serving.apis.common.TypesProtos.DataType value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTypeMap().getMutableMap()
+            .put(key, typeMapValueConverter.doBackward(value));
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+      public Builder putAllTypeMap(
+          java.util.Map<java.lang.String, com.tencent.angel.serving.apis.common.TypesProtos.DataType> values) {
+        internalGetAdaptedTypeMapMap(
+            internalGetMutableTypeMap().getMutableMap())
+                .putAll(values);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Integer>
+      getMutableTypeMapValue() {
+        return internalGetMutableTypeMap().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+      public Builder putTypeMapValue(
+          java.lang.String key,
+          int value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableTypeMap().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .angel.DataType&gt; type_map = 2;</code>
+       */
+      public Builder putAllTypeMapValue(
+          java.util.Map<java.lang.String, java.lang.Integer> values) {
+        internalGetMutableTypeMap().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private long dim_ ;
+      /**
+       * <code>int64 dim = 3;</code>
+       */
+      public long getDim() {
+        return dim_;
+      }
+      /**
+       * <code>int64 dim = 3;</code>
+       */
+      public Builder setDim(long value) {
+        
+        dim_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 dim = 3;</code>
+       */
+      public Builder clearDim() {
+        
+        dim_ = 0L;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -2657,6 +3186,11 @@ public final class GetModelStatusProtos {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_angel_serving_GetModelStatusResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2667,20 +3201,25 @@ public final class GetModelStatusProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n$apis/modelmgr/get_model_status.proto\022\r" +
-      "angel.serving\032\027apis/common/model.proto\032\032" +
-      "apis/modelmgr/status.proto\"E\n\025GetModelSt" +
-      "atusRequest\022,\n\nmodel_spec\030\001 \001(\0132\030.angel." +
-      "serving.ModelSpec\"\336\001\n\022ModelVersionStatus" +
-      "\022\017\n\007version\030\001 \001(\003\0226\n\005state\030\002 \001(\0162\'.angel" +
-      ".serving.ModelVersionStatus.State\022*\n\006sta" +
-      "tus\030\003 \001(\0132\032.angel.serving.StatusProto\"S\n" +
-      "\005State\022\013\n\007UNKNOWN\020\000\022\t\n\005START\020\n\022\013\n\007LOADIN" +
-      "G\020\024\022\r\n\tAVAILABLE\020\036\022\r\n\tUNLOADING\020(\022\007\n\003END" +
-      "\0202\"o\n\026GetModelStatusResponse\022U\n\024model_ve" +
-      "rsion_status\030\001 \003(\0132!.angel.serving.Model" +
-      "VersionStatusR\024model_version_statusBA\n\'c" +
-      "om.tencent.angel.serving.apis.modelmgrB\024" +
-      "GetModelStatusProtosP\000b\006proto3"
+      "angel.serving\032\027apis/common/model.proto\032\027" +
+      "apis/common/types.proto\032\032apis/modelmgr/s" +
+      "tatus.proto\"E\n\025GetModelStatusRequest\022,\n\n" +
+      "model_spec\030\001 \001(\0132\030.angel.serving.ModelSp" +
+      "ec\"\336\001\n\022ModelVersionStatus\022\017\n\007version\030\001 \001" +
+      "(\003\0226\n\005state\030\002 \001(\0162\'.angel.serving.ModelV" +
+      "ersionStatus.State\022*\n\006status\030\003 \001(\0132\032.ang" +
+      "el.serving.StatusProto\"S\n\005State\022\013\n\007UNKNO" +
+      "WN\020\000\022\t\n\005START\020\n\022\013\n\007LOADING\020\024\022\r\n\tAVAILABL" +
+      "E\020\036\022\r\n\tUNLOADING\020(\022\007\n\003END\0202\"\203\002\n\026GetModel" +
+      "StatusResponse\022U\n\024model_version_status\030\001" +
+      " \003(\0132!.angel.serving.ModelVersionStatusR" +
+      "\024model_version_status\022D\n\010type_map\030\002 \003(\0132" +
+      "2.angel.serving.GetModelStatusResponse.T" +
+      "ypeMapEntry\022\013\n\003dim\030\003 \001(\003\032?\n\014TypeMapEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022\036\n\005value\030\002 \001(\0162\017.angel.Dat" +
+      "aType:\0028\001BA\n\'com.tencent.angel.serving.a" +
+      "pis.modelmgrB\024GetModelStatusProtosP\000b\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2694,6 +3233,7 @@ public final class GetModelStatusProtos {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor(),
+          com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor(),
           com.tencent.angel.serving.apis.modelmgr.StatusProtos.getDescriptor(),
         }, assigner);
     internal_static_angel_serving_GetModelStatusRequest_descriptor =
@@ -2713,8 +3253,15 @@ public final class GetModelStatusProtos {
     internal_static_angel_serving_GetModelStatusResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_angel_serving_GetModelStatusResponse_descriptor,
-        new java.lang.String[] { "ModelVersionStatus", });
+        new java.lang.String[] { "ModelVersionStatus", "TypeMap", "Dim", });
+    internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_descriptor =
+      internal_static_angel_serving_GetModelStatusResponse_descriptor.getNestedTypes().get(0);
+    internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_angel_serving_GetModelStatusResponse_TypeMapEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     com.tencent.angel.serving.apis.common.ModelSpecProtos.getDescriptor();
+    com.tencent.angel.serving.apis.common.TypesProtos.getDescriptor();
     com.tencent.angel.serving.apis.modelmgr.StatusProtos.getDescriptor();
   }
 

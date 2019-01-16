@@ -10,7 +10,7 @@ import com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.common.{RunOptions, Session, SavedModelBundle}
+import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
 import javax.xml.bind.JAXBException
 import org.dmg.pmml.{FieldName, PMML}
 import org.jpmml.evaluator._
@@ -20,8 +20,11 @@ import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
-import scala.collection.JavaConversions._
+import com.tencent.angel.serving.apis.common.TypesProtos
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 
+import scala.collection.JavaConversions._
+import org.dmg.pmml.DataType
 
 class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
   override val session: Session = null
@@ -133,6 +136,21 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
 
   override def unLoad(): Unit = {
     PMMLSavedModelBundle.unLoad()
+  }
+
+  override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = {
+    for (inputField: InputField <- inputFields) {
+      val fieldName = inputField.getName.getValue
+
+      inputField.getDataType match {
+        case DataType.STRING => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_STRING)
+        case DataType.INTEGER => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_INT32)
+        case DataType.FLOAT => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_FLOAT)
+        case DataType.DOUBLE => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_DOUBLE)
+        case _ => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_INVALID)
+      }
+    }
+
   }
 }
 

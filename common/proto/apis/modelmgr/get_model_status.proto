@@ -7,6 +7,7 @@ option java_outer_classname = "GetModelStatusProtos";
 
 
 import "apis/common/model.proto";
+import "apis/common/types.proto";
 import "apis/modelmgr/status.proto";
 
 
@@ -67,4 +68,6 @@ message ModelVersionStatus {
 message GetModelStatusResponse {
   // Version number and status information for applicable model version(s).
   repeated ModelVersionStatus model_version_status = 1 [json_name = "model_version_status"];
+  map<string, DataType> type_map = 2;
+  int64 dim = 3;
 }

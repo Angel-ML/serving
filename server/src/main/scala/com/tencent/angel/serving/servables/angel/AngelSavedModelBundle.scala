@@ -11,10 +11,12 @@ import com.tencent.angel.ml.core.data.LabeledData
 import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
 import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
 import com.tencent.angel.ml.core.utils.JsonUtils
+import com.tencent.angel.serving.apis.common.TypesProtos
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.common.{RunOptions, Session, SavedModelBundle}
+import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
 import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.ehcache.sizeof.SizeOf
@@ -91,6 +93,19 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
     tempMap.put("attached", predictResult.attached.toString)
 
     tempMap
+  }
+
+  override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = {
+    model.graph.valueType match {
+      case "string" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_STRING)
+      case "int" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT32)
+      case "long" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT64)
+      case "float" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_FLOAT)
+      case "double" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_DOUBLE)
+      case _ => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INVALID)
+    }
+
+    responseBuilder.setDim(model.graph.indexRange)
   }
 }
 
