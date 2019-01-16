@@ -1,7 +1,7 @@
 package com.tencent.angel.serving.service.common
 
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
-import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse, ModelVersionStatus}
 import com.tencent.angel.serving.apis.modelmgr.ModelManagement.{ReloadConfigRequest, ReloadConfigResponse}
 import com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto
 import com.tencent.angel.serving.apis.modelmgr.{ErrorCodesProtos, ModelServiceGrpc}
@@ -24,9 +24,12 @@ class ModelServiceImpl extends ModelServiceGrpc.ModelServiceImplBase {
     val responseBuilder = GetModelStatusResponse.newBuilder()
     GetModelStatusImpl.getModelStatus(serverCore, request, responseBuilder)
 
-    val servableRequest = serverCore.servableRequestFromModelSpec(request.getModelSpec)
-    val servableHandle = serverCore.servableHandle[SavedModelBundle](servableRequest)
-    servableHandle.servable.fillInputInfo(responseBuilder)
+    (0 until responseBuilder.getModelVersionStatusCount).collectFirst{
+      case idx if responseBuilder.getModelVersionStatus(idx).getState == ModelVersionStatus.State.AVAILABLE =>
+        val servableRequest = serverCore.servableRequestFromModelSpec(request.getModelSpec)
+        val servableHandle = serverCore.servableHandle[SavedModelBundle](servableRequest)
+        servableHandle.servable.fillInputInfo(responseBuilder)
+    }
 
     responseObserver.onNext(responseBuilder.build())
     responseObserver.onCompleted()
