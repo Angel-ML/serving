@@ -489,7 +489,7 @@ public class ProtoUtils {
         ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
-        instanceBuilder.setFlag(InstanceFlag.IF_SCALAR);
+        instanceBuilder.setFlag(InstanceFlag.IF_DENSE_VECTOR);
 
         instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
         setDType(instanceBuilder, tuple._2);
@@ -503,7 +503,7 @@ public class ProtoUtils {
         ListValue.Builder lvBuilder = ListValue.newBuilder();
         Tuple2<Integer, Integer> tuple = addElements(lvBuilder, values);
         instanceBuilder.setLv(lvBuilder.build());
-        instanceBuilder.setFlag(InstanceFlag.IF_SCALAR);
+        instanceBuilder.setFlag(InstanceFlag.IF_DENSE_VECTOR);
 
         instanceBuilder.setShape(getShape(Long.valueOf(tuple._1)));
         setDType(instanceBuilder, tuple._2);

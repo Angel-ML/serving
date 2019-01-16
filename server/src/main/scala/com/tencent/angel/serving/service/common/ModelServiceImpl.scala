@@ -1,15 +1,12 @@
 package com.tencent.angel.serving.service.common
 
 import com.tencent.angel.config.ModelServerConfigProtos.ModelServerConfig
-import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
 import com.tencent.angel.serving.apis.modelmgr.ModelManagement.{ReloadConfigRequest, ReloadConfigResponse}
 import com.tencent.angel.serving.apis.modelmgr.StatusProtos.StatusProto
 import com.tencent.angel.serving.apis.modelmgr.{ErrorCodesProtos, ModelServiceGrpc}
 import com.tencent.angel.serving.core.ServerCore
-import com.tencent.angel.serving.servables.angel.AngelSavedModelBundle
 import com.tencent.angel.serving.servables.common.SavedModelBundle
-import com.tencent.angel.serving.servables.jpmml.PMMLSavedModelBundle
 import io.grpc.stub.StreamObserver
 import org.slf4j.{Logger, LoggerFactory}
 

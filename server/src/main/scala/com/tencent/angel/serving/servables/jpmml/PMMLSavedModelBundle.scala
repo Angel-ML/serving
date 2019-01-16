@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.servables.jpmml
 
-import java.io.{File, FileInputStream, IOException}
+import java.io.{IOException, InputStream}
 import java.util
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
@@ -15,13 +15,18 @@ import javax.xml.bind.JAXBException
 import org.dmg.pmml.{FieldName, PMML}
 import org.jpmml.evaluator._
 import org.jpmml.model.PMMLUtil
-import org.jpmml.model.visitors.MemoryMeasurer
 import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
+import com.tencent.angel.serving.sources.SystemFileUtils
+import org.apache.hadoop.fs.Path
+import org.ehcache.sizeof.SizeOf
+
+import scala.collection.JavaConversions._
+
 
 import scala.collection.JavaConversions._
 import org.dmg.pmml.DataType
@@ -160,10 +165,13 @@ object PMMLSavedModelBundle {
   private var pmml: PMML = _
 
   def create(path: StoragePath): PMMLSavedModelBundle = {
-    var inputStream: FileInputStream = null
+    var inputStream: InputStream = null
     try {
+      val fs = SystemFileUtils.getFileSystem()
+      val fileStatus  = fs.listStatus(new Path(path))
+      fileStatus.filter(x => x.isFile).filterNot(x => x.getPath.toString.endsWith(".pmml"))
       LOG.info("Begin to load model ...")
-      inputStream = new FileInputStream(path)
+      inputStream = fs.open(fileStatus(0).getPath)
       pmml = PMMLUtil.unmarshal(inputStream)
       LOG.info("End to load model ...")
       new PMMLSavedModelBundle(pmml)
@@ -186,9 +194,8 @@ object PMMLSavedModelBundle {
 
   def resourceEstimate(modelPath: String): ResourceAllocation = {
     if (modelPath != null) {
-      val modelFile = new File(modelPath)
-      if (modelFile.exists()) {
-        val fileSize = (modelFile.getTotalSpace * 1.2).toLong
+      if (SystemFileUtils.fileExist(modelPath)) {
+        val fileSize = (SystemFileUtils.getTotalSpace(modelPath) * 1.2).toLong
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), fileSize)))
       } else {
         ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
@@ -200,9 +207,10 @@ object PMMLSavedModelBundle {
 
   def estimateResourceRequirement(modelPath: String): ResourceAllocation = {
     if (pmml != null) {
-      val memoryMeasurer = new MemoryMeasurer
-      memoryMeasurer.applyTo(pmml)
-      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), memoryMeasurer.getSize)))
+      val sizeOf =  SizeOf.newInstance()
+      val size = sizeOf.deepSizeOf(pmml)
+      LOG.info("pmml model size is: " + size)
+      ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), size)))
     } else {
       ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), 0L)))
     }
