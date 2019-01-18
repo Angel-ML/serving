@@ -31,7 +31,6 @@ public class TestUtils {
         keysLong.add(19L);
         keysLong.add(22L);
         keysLong.add(26L);
-        keysLong.add(30L);
 
         values.add(1.0f);
         values.add(2.0f);
@@ -46,7 +45,7 @@ public class TestUtils {
 
     @Test
     public void totensorTest1() throws Exception {
-        InstanceProtos.Instance instance = ProtoUtils.getInstance(values);
+        InstanceProtos.Instance instance = ProtoUtils.getInstance(values.iterator());
         for (Float i : instance.getLv().getFList()) {
             System.out.println(i);
         }
