@@ -19,12 +19,17 @@ import org.slf4j.{Logger, LoggerFactory}
 import org.xml.sax.SAXException
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
+import com.tencent.angel.serving.apis.common.TypesProtos
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 import com.tencent.angel.serving.sources.SystemFileUtils
 import org.apache.hadoop.fs.Path
 import org.ehcache.sizeof.SizeOf
 
 import scala.collection.JavaConversions._
 
+
+import scala.collection.JavaConversions._
+import org.dmg.pmml.DataType
 
 class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
   override val session: Session = null
@@ -136,6 +141,21 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
 
   override def unLoad(): Unit = {
     PMMLSavedModelBundle.unLoad()
+  }
+
+  override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = {
+    for (inputField: InputField <- inputFields) {
+      val fieldName = inputField.getName.getValue
+
+      inputField.getDataType match {
+        case DataType.STRING => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_STRING)
+        case DataType.INTEGER => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_INT32)
+        case DataType.FLOAT => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_FLOAT)
+        case DataType.DOUBLE => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_DOUBLE)
+        case _ => responseBuilder.putTypeMap(fieldName, TypesProtos.DataType.DT_INVALID)
+      }
+    }
+
   }
 }
 
