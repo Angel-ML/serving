@@ -3,10 +3,10 @@ package com.tencent.angel.serving.service.jersey.resources
 import com.google.protobuf.Int64Value
 import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
-import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse}
+import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse, ModelVersionStatus}
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos
-import com.tencent.angel.serving.servables.common.{RunOptions, ServiceImpl}
+import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, ServiceImpl}
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
 import com.tencent.angel.serving.service.jersey.util.ProcessInputOutput
@@ -56,6 +56,12 @@ class HttpRestApiHandler {
       val request = GetModelStatusRequest.newBuilder().setModelSpec(modelSpec).build()
       val builder = GetModelStatusResponse.newBuilder()
       GetModelStatusImpl.getModelStatus(ModelServer.getServerCore, request, builder)
+      (0 until builder.getModelVersionStatusCount).collectFirst{
+        case idx if builder.getModelVersionStatus(idx).getState == ModelVersionStatus.State.AVAILABLE =>
+          val servableRequest = ModelServer.getServerCore.servableRequestFromModelSpec(request.getModelSpec)
+          val servableHandle = ModelServer.getServerCore.servableHandle[SavedModelBundle](servableRequest)
+          servableHandle.servable.fillInputInfo(builder)
+      }
       val jsonFormat = JsonFormat.printer().print(builder.build())
       Response.status(200).entity(jsonFormat).build()
     }
