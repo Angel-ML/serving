@@ -97,7 +97,8 @@ POST http://host:port/angelServing/v1.0/models/${MODEL_NAME}[/versions/${MODEL_V
 Pmml的数据输入为map格式:
 
 ```
-{"instances": [{"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}, "key": 1}]}```
+{"instances": [{"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}, "key": 1}]}
+```
 
 可以省略实例名:
 
@@ -105,8 +106,7 @@ Pmml的数据输入为map格式:
 {
   "instances": [
     {"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.3}, "key": 1},
-    {"values": {"x1":3.2, "x2":4.2, "x3":2.1, "x4":1.5}, "key": 2},
-    ...
+    {"values": {"x1":3.2, "x2":4.2, "x3":2.1, "x4":1.5}, "key": 2}
   ]
 }
 ```
