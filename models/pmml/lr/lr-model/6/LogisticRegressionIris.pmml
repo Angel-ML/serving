@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header>
+		<Application name="JPMML-SkLearn" version="1.5.9"/>
+		<Timestamp>2018-12-24T09:11:48Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension>PMMLPipeline(steps=[('pca', PCA(copy=True, iterated_power='auto', n_components=3, random_state=None,
+  svd_solver='auto', tol=0.0, whiten=False)),
+       ('selector', SelectKBest(k=2, score_func=&lt;function f_classif at 0x000001C5CA66A400&gt;)),
+       ('classifier', LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='warn',
+          n_jobs=None, penalty='l2', random_state=None, solver='warn',
+          tol=0.0001, verbose=0, warm_start=False))])
+       </Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="y" optype="categorical" dataType="integer">
+			<Value value="-1"/>
+			<Value value="1"/>
+		</DataField>
+		<DataField name="x1" optype="continuous" dataType="double"/>
+		<DataField name="x2" optype="continuous" dataType="double"/>
+		<DataField name="x3" optype="continuous" dataType="double"/>
+		<DataField name="x4" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="pca@1[0]" optype="continuous" dataType="double">
+			<Apply function="sum">
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x1"/>
+						<Constant dataType="double">5.471000000000001</Constant>
+					</Apply>
+					<Constant dataType="double">0.3232744749568389</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x2"/>
+						<Constant dataType="double">3.0989999999999998</Constant>
+					</Apply>
+					<Constant dataType="double">-0.1712149801333591</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x3"/>
+						<Constant dataType="double">2.861</Constant>
+					</Apply>
+					<Constant dataType="double">0.86913407020636</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x4"/>
+						<Constant dataType="double">0.7859999999999998</Constant>
+					</Apply>
+					<Constant dataType="double">0.33284382587910427</Constant>
+				</Apply>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="pca@1[1]" optype="continuous" dataType="double">
+			<Apply function="sum">
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x1"/>
+						<Constant dataType="double">5.471000000000001</Constant>
+					</Apply>
+					<Constant dataType="double">0.6583581614789004</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x2"/>
+						<Constant dataType="double">3.0989999999999998</Constant>
+					</Apply>
+					<Constant dataType="double">0.7471018811176536</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x3"/>
+						<Constant dataType="double">2.861</Constant>
+					</Apply>
+					<Constant dataType="double">-0.0883773771499791</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="x4"/>
+						<Constant dataType="double">0.7859999999999998</Constant>
+					</Apply>
+					<Constant dataType="double">-0.024346450514923068</Constant>
+				</Apply>
+			</Apply>
+		</DerivedField>
+	</TransformationDictionary>
+	<RegressionModel functionName="classification" normalizationMethod="logit">
+		<MiningSchema>
+			<MiningField name="y" usageType="target"/>
+			<MiningField name="x1"/>
+			<MiningField name="x2"/>
+			<MiningField name="x3"/>
+			<MiningField name="x4"/>
+		</MiningSchema>
+		<Output>
+			<OutputField name="probability(-1)" optype="continuous" dataType="double" feature="probability" value="-1"/>
+			<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+		</Output>
+		<RegressionTable intercept="0.22685375474270827" targetCategory="1">
+			<NumericPredictor name="pca@1[0]" coefficient="2.6068833281353143"/>
+			<NumericPredictor name="pca@1[1]" coefficient="-0.6541965967190988"/>
+		</RegressionTable>
+		<RegressionTable intercept="0.0" targetCategory="-1"/>
+	</RegressionModel>
+</PMML>
