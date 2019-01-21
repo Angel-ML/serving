@@ -91,11 +91,13 @@ POST http://host:port/angelServing/v1.0/models/${MODEL_NAME}[/versions/${MODEL_V
     [3.3, 4.4, 5.5],
     ...
   ]
-}```
+}
+```
 
 Pmml的数据输入为map格式:
 
-```{"instances": [{"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}, "key": 1}]}```
+```
+{"instances": [{"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}, "key": 1}]}```
 
 可以省略实例名:
 
@@ -118,7 +120,7 @@ Response proto的json字符串
 请求：
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"values":{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}}]}' localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
+curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"values":{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}}]}' localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
 ```
 
 返回：
