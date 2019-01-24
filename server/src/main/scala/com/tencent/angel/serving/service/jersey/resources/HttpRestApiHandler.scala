@@ -1,6 +1,6 @@
 package com.tencent.angel.serving.service.jersey.resources
 
-import java.util.concurrent.atomic.AtomicInteger
+import java.util
 
 import com.google.protobuf.Int64Value
 import com.google.protobuf.util.JsonFormat
@@ -8,12 +8,14 @@ import com.tencent.angel.serving.apis.common.ModelSpecProtos.ModelSpec
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.{GetModelStatusRequest, GetModelStatusResponse, ModelVersionStatus}
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos
-import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, ServiceImpl}
+import com.tencent.angel.serving.servables.common.{RunOptions, ServiceImpl}
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.service.common.GetModelStatusImpl
 import com.tencent.angel.serving.service.jersey.util.Json2Instances
+import com.tencent.angel.utils.InstanceUtils
 import javax.ws.rs._
 import javax.ws.rs.core.{MediaType, Response}
+import org.json4s.native.Serialization._
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.util.matching.Regex
@@ -93,7 +95,7 @@ class HttpRestApiHandler {
     } catch {
       case ex: Exception =>
         val errorMessage = "Resolve request path error, exception: " + ex
-        return Response.status(500).entity(errorMessage).build()
+        return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
     }
     var output: String = null
     if(modelMethod.equals("classify")) {
@@ -105,7 +107,7 @@ class HttpRestApiHandler {
     } else {
       val errorMessage = "model method: " + modelMethod + " can not found."
       LOG.info(errorMessage)
-      return Response.status(500).entity(errorMessage).build()
+      return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
     }
     Response.status(200).entity(output).build()
   }
@@ -126,7 +128,21 @@ class HttpRestApiHandler {
     val responseBuilder = ResponseProtos.Response.newBuilder()
     val runOptions = new RunOptions()
     ServiceImpl.predict(runOptions, ModelServer.getServerCore, requestBuilder.build(), responseBuilder)
-    responseBuilder.build().getPredictionsList.toString
+    val response = responseBuilder.build()
+    val resultCount = response.getPredictionsCount
+    if(resultCount > 0) {
+      import scala.collection.mutable
+      val results = new util.ArrayList[mutable.Map[String, _<:Any]]()
+      val iter = response.getPredictionsList.iterator()
+      implicit val formats = org.json4s.DefaultFormats
+      while(iter.hasNext) {
+        import scala.collection.JavaConverters._
+        results.add(InstanceUtils.getStringKeyMap(iter.next()).asScala)
+      }
+      "{\"predictions\": " + write(results) + "}"
+    } else {
+      "{\"error\": "+  response.getError + "}"
+    }
   }
 
   def processRegressRequest(): Unit = {

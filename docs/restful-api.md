@@ -65,7 +65,7 @@ GET http://host:port/angelServing/v1.0/monitoring/metrics
 
 ### Predict API ###
 
-用于预测服务的请求api，返回response.proto定义的数据的json表示
+用于预测服务的请求api，返回的数据为json表示
 
 ##### 请求URL #####
 
@@ -139,7 +139,25 @@ Angel serving的restful api还支持稀疏的输入数据，该格式的稀疏�
 
 ##### Response format #####
 
-Response proto的json字符串
+Response 返回的结果为json对象
+
+```
+﻿{
+  "predictions": [
+    {
+      object
+    }
+  ]
+}
+```
+
+若预测错误则会返回
+
+```$xslt
+{
+  "error": string
+}
+```
 
 ##### Examples #####
 
@@ -152,21 +170,13 @@ curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "
 返回：
 
 ```
-[dType: DT_STRING
-flag: IF_STRINGKEY_VECTOR
-mv {
-  s2s_map {
-    key: "probability(1)"
-    value: "0.10978009160848745"
-  }
-  s2s_map {
-    key: "probability(-1)"
-    value: "0.8902199083915125"
-  }
-  s2s_map {
-    key: "y"
-    value: "-1"
-  }
+{
+  "predictions": [
+    {
+      "probability(1)":"0.07969969495447403",
+      "probability(-1)":"0.920300305045526",
+      "y":"-1"
+    }
+  ]
 }
-]
 ```
