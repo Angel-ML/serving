@@ -19,9 +19,10 @@ public class RestClient {
     private static final Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
     public static void main(String[] args) throws InterruptedException {
+        //pmml model test.
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Set<Callable<String>> callables = new HashSet<Callable<String>>();
-        for(int i=0; i<30; i++) {
+        for(int i=0; i<10; i++) {
             callables.add(new Callable<String>() {
                 public String call() throws Exception {
                     restRun();
@@ -35,27 +36,13 @@ public class RestClient {
 
     private static void restRun() {
         LOG.info("Now in thread.");
-        String getResource = "http://localhost:8501/angelServing/v1.0/models/default/versions/1";
-        String postResource = "http://localhost:8501/angelServing/v1.0/models/default/versions/1:predict";
+        String postResource = "http://localhost:8501/angelServing/v1.0/models/lr/versions/6:predict";
         Client client = Client.create();
-        WebResource getWebResource = client
-                .resource(getResource);
         WebResource postWebResource = client
                 .resource(postResource);
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 20; i++) {
+            String input = "{\"instances\":[{\"values\":{\"x1\":6.2, \"x2\":2.2, \"x3\":1.1, \"x4\":1.5}}]}";
             long start = System.currentTimeMillis();
-            ClientResponse getResponse = getWebResource.accept("application/json")
-                    .get(ClientResponse.class);
-            LOG.info("Finished get model status with {} ms", (System.currentTimeMillis() - start));
-            if (getResponse.getStatus() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + getResponse.getStatus() + ", error message: "
-                        + getResponse.getEntity(String.class));
-            }
-            LOG.info(getResponse.getEntity(String.class));
-            LOG.info("status code: " + getResponse.getStatus());
-            String input = "{instances: [{input: [1.0,2.0,3.0,4.0,5.0]}]}";
-            start = System.currentTimeMillis();
             ClientResponse postResponse = postWebResource.type("application/json")
                     .post(ClientResponse.class, input);
             LOG.info("Finished prediction with {} ms", (System.currentTimeMillis() - start));

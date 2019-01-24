@@ -68,7 +68,6 @@ public class RpcClient {
         for (int j = 0; j < 13; j++) {
             integerFloatHashMap.put(rand.nextInt((int)dim), rand.nextFloat());
         }
-        System.out.println(integerFloatHashMap.toString());
         InstanceProtos.Instance sparseInstance = ProtoUtils.getInstance((int)dim, integerFloatHashMap);
 
         //for pmml test data
@@ -141,13 +140,13 @@ public class RpcClient {
         int port = Integer.valueOf(cmd.getOptionValue("rpcPort"));
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Set<Callable<String>> callables = new HashSet<Callable<String>>();
-        for(int i=0; i<1; i++) {
+        for(int i=0; i<10; i++) {
             callables.add(new Callable<String>() {
                 public String call() throws Exception {
                     LOG.info("Now in thread.");
                     RpcClient client = new RpcClient("localhost", port);
                     try {
-                        for(int i = 0; i < 1; i++) {
+                        for(int i = 0; i < 10; i++) {
                             client.doPredict(name, version, platform);
                         }
                     } finally {

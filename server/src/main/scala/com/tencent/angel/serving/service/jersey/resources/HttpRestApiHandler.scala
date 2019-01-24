@@ -44,12 +44,12 @@ class HttpRestApiHandler {
     } catch {
       case ex: Exception =>
         val errorMessage = "Resolve request path error, exception: " + ex
-        return Response.status(500).entity(errorMessage).build()
+        return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
     }
     if(modelName == null || modelName.isEmpty) {
       val errorMessage = "Missing model name in request."
       LOG.info(errorMessage)
-      Response.status(500).entity(errorMessage).build()
+      Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
     } else {
       val modelSpecBuilder = ModelSpec.newBuilder()
       modelSpecBuilder.setName(modelName)
