@@ -157,6 +157,21 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
     }
 
   }
+
+  override def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long) = {
+    var keyType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
+    var valueType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
+    var dim: Long = -1
+    inputFields.get(0).getDataType match {
+      case DataType.STRING => valueType = TypesProtos.DataType.DT_STRING
+      case DataType.INTEGER => valueType = TypesProtos.DataType.DT_INT32
+      case DataType.FLOAT => valueType = TypesProtos.DataType.DT_FLOAT
+      case DataType.DOUBLE => valueType = TypesProtos.DataType.DT_DOUBLE
+      case _ => valueType = TypesProtos.DataType.DT_INVALID
+    }
+    (keyType, valueType, dim)
+  }
+
 }
 
 

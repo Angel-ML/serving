@@ -1,6 +1,7 @@
 package com.tencent.angel.serving.servables.common
 
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
+import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
@@ -28,4 +29,6 @@ trait SavedModelBundle {
   def unLoad(): Unit
 
   def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit
+
+  def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long)
 }

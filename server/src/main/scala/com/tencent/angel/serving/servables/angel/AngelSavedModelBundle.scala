@@ -106,8 +106,38 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       case "double" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_DOUBLE)
       case _ => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INVALID)
     }
+    model.graph.keyType match {
+      case "string" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_STRING)
+      case "int" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INT32)
+      case "long" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INT64)
+      case _ => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INVALID)
+    }
 
     responseBuilder.setDim(model.graph.indexRange)
+  }
+
+  override def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long) = {
+    var keyType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
+    var valueType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
+    var dim: Long = -1
+
+    model.graph.keyType match {
+      case "int" => keyType = TypesProtos.DataType.DT_INT32
+      case "long" => keyType = TypesProtos.DataType.DT_INT64
+      case _ => keyType = TypesProtos.DataType.DT_INVALID
+    }
+
+    model.graph.valueType match {
+      case "string" => valueType = TypesProtos.DataType.DT_STRING
+      case "int" => valueType = TypesProtos.DataType.DT_INT32
+      case "long" => valueType = TypesProtos.DataType.DT_INT64
+      case "float" => valueType = TypesProtos.DataType.DT_FLOAT
+      case "double" => valueType = TypesProtos.DataType.DT_DOUBLE
+      case _ => valueType = TypesProtos.DataType.DT_INVALID
+    }
+
+    dim = model.graph.indexRange
+    (keyType, valueType, dim)
   }
 }
 
