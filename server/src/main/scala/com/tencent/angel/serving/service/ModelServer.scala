@@ -130,7 +130,9 @@ class ModelServer {
       return
     }
     grpcServerStart()
-    LOG.info("Running gRPC ModelServer at " + serverOptions.grpc_port)
+    import java.net.InetAddress
+    val addr = InetAddress.getLocalHost.getHostAddress
+    LOG.info("Running gRPC ModelServer at " + addr + ":" + serverOptions.grpc_port)
 
     if(serverOptions.http_port != 0) {
       if(serverOptions.http_port != serverOptions.grpc_port) {
@@ -153,14 +155,14 @@ class ModelServer {
         if(httpServer != null) {
           try {
             httpServer.start()
-            LOG.info("Exporting HTTP/REST API at: " + serverOptions.http_port)
+            LOG.info("Exporting HTTP/REST API at: " + addr + ":" + serverOptions.http_port)
             httpServer.join()
           }
           catch {
             case ex: Exception => LOG.info("Error occurred while starting Jetty")
           }
         } else {
-          LOG.info("Failed to start HTTP Server at " + serverOptions.http_port)
+          LOG.info("Failed to start HTTP Server at " + addr + ":" + serverOptions.http_port)
         }
       } else {
         LOG.info("server_options.http_port cannot be same as grpc_port. " +
