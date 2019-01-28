@@ -1,0 +1,4 @@
+Manifest-Version: 0.1.0
+Created-By: com.tencent.angel
+Built-By: Tencent
+Main-Class: com.tencent.angel.serving.service.Main

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+
+export SERVING_HOME="$(cd "`dirname "$0"`"/..; pwd)"
+
+. "$SERVING_HOME"/conf/serving-env.sh
+
+# Find the java binary
+if [ -n "${JAVA_HOME}" ]; then
+  RUNNER="${JAVA_HOME}/bin/java"
+else
+  if [ `command -v java` ]; then
+    RUNNER="java"
+  else
+    echo "JAVA_HOME is not set" >&2
+    exit 1
+  fi
+fi
+
+SERVING_CLASS=com.tencent.angel.serving.service.Main
+LAUNCH_CLASSPATH=$SERVING_CLASSPATH
+
+exec "$RUNNER" -cp "$LAUNCH_CLASSPATH" "$SERVING_CLASS" "$@"

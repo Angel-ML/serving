@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #restful api test scripts.
 
 #get model status
