@@ -16,6 +16,7 @@ import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStat
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
+import com.tencent.angel.serving.servables.angel.AngelSavedModelBundle.model
 import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
 import com.tencent.angel.serving.sources.SystemFileUtils
 import org.slf4j.{Logger, LoggerFactory}
@@ -172,17 +173,18 @@ object AngelSavedModelBundle {
       model.loadModel(LocalEvnContext(), path)
 
       LOG.info(s"model has loaded!")
+      new AngelSavedModelBundle(model)
     } catch {
       case ase: AssertionError =>
         LOG.info(s"the graph file $graphJsonFile is not exist.")
         ase.printStackTrace()
         System.exit(-1)
+        null.asInstanceOf[AngelSavedModelBundle]
       case ex: Exception =>
         ex.printStackTrace()
         System.exit(-1)
+        null.asInstanceOf[AngelSavedModelBundle]
     }
-
-    new AngelSavedModelBundle(model)
   }
 
   def resourceEstimate(modelPath: String): ResourceAllocation = {
