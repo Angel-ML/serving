@@ -193,12 +193,15 @@ object PMMLSavedModelBundle {
     } catch {
       case e: JAXBException =>
         e.printStackTrace()
+        System.exit(-1)
         null.asInstanceOf[PMMLSavedModelBundle]
       case e: SAXException =>
         e.printStackTrace()
+        System.exit(-1)
         null.asInstanceOf[PMMLSavedModelBundle]
       case e: IOException =>
         e.printStackTrace()
+        System.exit(-1)
         null.asInstanceOf[PMMLSavedModelBundle]
     } finally {
       if (inputStream != null) {

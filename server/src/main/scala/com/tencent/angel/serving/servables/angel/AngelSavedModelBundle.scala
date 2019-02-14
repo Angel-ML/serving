@@ -150,27 +150,37 @@ object AngelSavedModelBundle {
     val graphJsonFile = s"$path${File.separator}graph.json"
     LOG.info(s"the graph file is $graphJsonFile")
 
-    assert(SystemFileUtils.fileExist(graphJsonFile))
+    try {
+      assert(SystemFileUtils.fileExist(graphJsonFile))
 
-    val conf = SharedConf.get()
-    conf.set(MLConf.ML_JSON_CONF_FILE, graphJsonFile)
-    conf.setJson()
+      val conf = SharedConf.get()
+      conf.set(MLConf.ML_JSON_CONF_FILE, graphJsonFile)
+      conf.setJson()
 
-    println(JsonUtils.J2Pretty(conf.getJson))
+      println(JsonUtils.J2Pretty(conf.getJson))
 
-    LOG.info(s"model load path is $path ")
+      LOG.info(s"model load path is $path ")
 
-     // update model load path
-     conf.set(MLConf.ML_LOAD_MODEL_PATH, path)
+      // update model load path
+      conf.set(MLConf.ML_LOAD_MODEL_PATH, path)
 
-    val model = new LocalModel(conf)
-    LOG.info(s"buildNetwork for model")
-    model.buildNetwork()
+      val model = new LocalModel(conf)
+      LOG.info(s"buildNetwork for model")
+      model.buildNetwork()
 
-    LOG.info(s"start to load parameters for model")
-    model.loadModel(LocalEvnContext(), path)
+      LOG.info(s"start to load parameters for model")
+      model.loadModel(LocalEvnContext(), path)
 
-    LOG.info(s"model has loaded!")
+      LOG.info(s"model has loaded!")
+    } catch {
+      case ase: AssertionError =>
+        LOG.info(s"the graph file $graphJsonFile is not exist.")
+        ase.printStackTrace()
+        System.exit(-1)
+      case ex: Exception =>
+        ex.printStackTrace()
+        System.exit(-1)
+    }
 
     new AngelSavedModelBundle(model)
   }
