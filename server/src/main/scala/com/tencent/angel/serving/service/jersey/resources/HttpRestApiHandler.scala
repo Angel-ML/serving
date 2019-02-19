@@ -77,7 +77,7 @@ class HttpRestApiHandler {
   @Path("/angelServing/v1.0/monitoring/metrics/histogram")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processHistogramRequest(): Response = {
-    val result =  ModelServer.getServerCore.context.metricsManager.getCountDistributionResult()
+    val result =  ModelServer.getServerCore.context.metricsManager.getResponseTimeDistributionResult()
     Response.status(200).entity(result).build()
   }
 
