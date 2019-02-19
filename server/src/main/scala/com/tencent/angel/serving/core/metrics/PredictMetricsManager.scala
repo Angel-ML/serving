@@ -14,6 +14,11 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
   private val _metricsCollector: MetricsCollector = metricsCollector
   private val _metricsMap = new mutable.HashMap[ServableId, PredictMetric]()
   private val _summaryMetrics = new mutable.HashMap[String, PredictMetricSummary]()
+  private val _countDistribution = new mutable.HashMap[String, Long]()
+  private var n0Count: Long = 0
+  private var n1Count: Long = 0
+  private var n2Count: Long = 0
+  private var n3Count: Long = 0
   private var successPredictCount: Long = 0
   private var failedPredictCount: Long = 0
   private var predictCount: Long = 0
@@ -53,6 +58,16 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
         summaryKey = successSummaryKey
         successPredictCount = successPredictCount + 1
         predictCount = successPredictCount
+        val predictTimeMs = predictMetric._predictTimeMs
+        if(predictTimeMs >= 0 && predictTimeMs <=5) {
+          n0Count = n0Count + 1
+        } else if(predictTimeMs > 5 && predictTimeMs <= 10) {
+          n1Count = n1Count + 1
+        } else if(predictTimeMs > 10 && predictTimeMs <= 15) {
+          n2Count = n2Count + 1
+        } else {
+          n3Count = n3Count + 1
+        }
       } else {
         summaryKey = failedSummaryKey
         failedPredictCount = failedPredictCount + 1
@@ -71,6 +86,10 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
           _metricSummaryWaitSeconds, predictMetric._predictTimeMs)
       }
     }
+    _countDistribution("0-5ms") = n0Count
+    _countDistribution("5-10ms") = n1Count
+    _countDistribution("10-15ms") = n2Count
+    _countDistribution("15+ms") = n3Count
   }
 
   def killSummaryThread(): Unit = {
@@ -87,6 +106,12 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
       summaryMetricsResult("Info") = "There is no summary metrics."
     }
     scala.util.parsing.json.JSONObject(summaryMetricsResult.toMap).toString().replace("\\", "")
+  }
+
+  override def getResponseTimeDistributionResult(): String = {
+    "{ response_time_distribution: " +
+      scala.util.parsing.json.JSONObject(_countDistribution.toMap).toString().replace("\\", "") +
+      " }"
   }
 
   override def createNotifier(elapsedPredictTime: Long, resultStatus: String,

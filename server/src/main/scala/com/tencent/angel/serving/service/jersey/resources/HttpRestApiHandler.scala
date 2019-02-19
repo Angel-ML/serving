@@ -66,10 +66,18 @@ class HttpRestApiHandler {
   }
 
   @GET
-  @Path("/angelServing/v1.0/monitoring/metrics")
+  @Path("/angelServing/v1.0/monitoring/metrics/summary")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processMetricsRequest(): Response = {
     val result =  ModelServer.getServerCore.context.metricsManager.getMetricsResult()
+    Response.status(200).entity(result).build()
+  }
+
+  @GET
+  @Path("/angelServing/v1.0/monitoring/metrics/histogram")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def processHistogramRequest(): Response = {
+    val result =  ModelServer.getServerCore.context.metricsManager.getCountDistributionResult()
     Response.status(200).entity(result).build()
   }
 

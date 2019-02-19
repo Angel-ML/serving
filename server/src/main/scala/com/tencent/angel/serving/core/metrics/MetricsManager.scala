@@ -18,4 +18,6 @@ class MetricsManager {
     modelName: String, modelVersion: Long): ServableStateNotifierFn = null
 
   def getMetricsResult(): String = null
+
+  def getResponseTimeDistributionResult(): String = null
 }
