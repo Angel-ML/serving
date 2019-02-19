@@ -20,3 +20,6 @@ curl localhost:8501/angelServing/v1.0/monitoring/metrics/summary
 
 #get prediction response time histogram metric
 curl localhost:8501/angelServing/v1.0/monitoring/metrics/histogram
+
+#get model load attempt count and latency
+curl localhost:8501/angelServing/v1.0/monitoring/metrics/loads

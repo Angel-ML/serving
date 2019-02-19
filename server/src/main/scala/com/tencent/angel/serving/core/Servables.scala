@@ -84,7 +84,7 @@ class LoaderHarness(val id: ServableId, val loader: Loader, maxNumLoadRetries: I
   private var retryFlag: Boolean = false
   var errorCallback: ErrorCallback = (ServableId, State) => {}
 
-  private val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
+  val retry = new Retry(maxNumLoadRetries, loadRetryIntervalMicros)
 
   def loadRequested(): Unit = transitionState(kNew, kLoadRequested)
 
