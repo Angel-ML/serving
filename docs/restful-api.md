@@ -41,12 +41,18 @@ curl localhost:8501/angelServing/v1.0/models/lr
 
 ### Prediction Metrics API ###
 
-返回预测指标，包括成功次数、失败次数、平均预测时间等
+包括两种api，一个是返回预测指标的总结信息，包括请求成功次数、失败次数、平均预测时间等   
+另一个是预测请求的响应时间分布，分布区间默认间隔为5ms，分别有0-5ms、5-10ms、10-15ms   
+以及15+ms响应时间的请求成功次数
 
 ##### 请求URL #####
 
 ```
-GET http://host:port/angelServing/v1.0/monitoring/metrics
+GET http://host:port/angelServing/v1.0/monitoring/metrics/summary
+```
+
+```
+GET http://host:port/angelServing/v1.0/monitoring/metrics/histogram
 ```
 
 ##### Examples #####
@@ -54,13 +60,24 @@ GET http://host:port/angelServing/v1.0/monitoring/metrics
 请求：
 
 ```
-GET http://host:port/angelServing/v1.0/monitoring/metrics
+curl http://host:port/angelServing/v1.0/monitoring/metrics/summary
 ```  
 
 返回：
 
 ```
 {"lr6_success" : metric_name="PredictSummary", prediction_count=5, model_name="lr", model_version=6, is_success=true, average_predict_time_ms=0.2}
+```
+请求：
+
+```
+curl http://host:port/angelServing/v1.0/monitoring/metrics/histogram
+```  
+
+返回：
+
+```
+{ response_time_distribution: {"15+ms" : 1, "5-10ms" : 0, "0-5ms" : 19, "10-15ms" : 0} }
 ```
 
 ### Predict API ###

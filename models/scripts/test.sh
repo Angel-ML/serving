@@ -14,3 +14,9 @@ curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"sparseIndi
 #pmml model prediction test.
 curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}]}' \
   localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
+
+#get prediction summary metric
+curl localhost:8501/angelServing/v1.0/monitoring/metrics/summary
+
+#get prediction response time histogram metric
+curl localhost:8501/angelServing/v1.0/monitoring/metrics/histogram
