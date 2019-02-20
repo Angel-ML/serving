@@ -102,6 +102,9 @@ object Main {
       opt[Boolean]("enable_metric_summary")
         .text("Enable summary for metrics, launch an async task.")
         .action((x, c) => c.copy(enable_metric_summary = x))
+      opt[String]("count_distribution_bucket")
+        .text("response time interval distribution.")
+        .action((x, c) => c.copy(count_distribution_bucket = x))
       opt[Int]("metric_summary_wait_seconds")
         .text("Interval in seconds between each summary of metrics." +
           "(Ignored if --enable_metric_summary=false)")

@@ -20,6 +20,7 @@ case class Options(
                    enable_model_warmup: Boolean = true,
                    monitoring_config_file: String = "",
                    metric_summary_wait_seconds: Int = 30,
+                   count_distribution_bucket: String = "5,10,15",
                    enable_metric_summary: Boolean = true,
                    target_publishing_metric: String = "logger"
                  ) extends AbstractOptions[Options]

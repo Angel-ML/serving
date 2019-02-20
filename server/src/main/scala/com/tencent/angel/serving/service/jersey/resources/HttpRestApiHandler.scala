@@ -73,23 +73,6 @@ class HttpRestApiHandler {
     Response.status(200).entity(result).build()
   }
 
-  @GET
-  @Path("/angelServing/v1.0/monitoring/metrics/histogram")
-  @Produces(Array(MediaType.APPLICATION_JSON))
-  def processHistogramRequest(): Response = {
-    val result =  ModelServer.getServerCore.context.metricsManager.getResponseTimeDistributionResult()
-    Response.status(200).entity(result).build()
-  }
-
-  @GET
-  @Path("/angelServing/v1.0/monitoring/metrics/loads")
-  @Produces(Array(MediaType.APPLICATION_JSON))
-  def processModelLoadsRequest(): Response = {
-    val resultMap = ModelServer.getServerCore.context.manager.basicManager.loadMetricMap
-    val result = scala.util.parsing.json.JSONObject(resultMap.toMap).toString().replace("\\", "")
-    Response.status(200).entity(result).build()
-  }
-
   @POST
   @Path("/angelServing/v1.0/models/{requestPath:([^/:]+)(?:/versions/(\\d+))?:(classify|regress|predict)}")
   @Consumes(Array(MediaType.APPLICATION_JSON))

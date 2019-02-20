@@ -114,6 +114,7 @@ class ModelServer {
     servingContext.targetPublishingMetric = serverOptions.target_publishing_metric
     servingContext.enableMetricSummary = serverOptions.enable_metric_summary
     servingContext.metricSummaryWaitSeconds = serverOptions.metric_summary_wait_seconds
+    servingContext.countDistributionBucket = serverOptions.count_distribution_bucket
 
     serverCore = new ServerCore(servingContext)
     serverCore.reloadConfig(modelServerConfig)

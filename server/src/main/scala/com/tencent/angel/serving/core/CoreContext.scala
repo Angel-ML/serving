@@ -35,6 +35,7 @@ abstract class CoreContext(val eventBus: EventBus[ServableState],
   var manager: AspiredVersionsManager = _
 
   var metricSummaryWaitSeconds: Int = 30
+  var countDistributionBucket: String = "5,10,15"
   var enableMetricSummary: Boolean = false
   var targetPublishingMetric: String = "logger"
   var metricsManager: MetricsManager = _

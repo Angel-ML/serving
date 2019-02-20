@@ -34,7 +34,7 @@ class ServerCore(val context: CoreContext) extends Manager {
   private var config: ModelServerConfig = ModelServerConfig.newBuilder().build()
 
   private val metricsManager = (new MetricsManager).create(context.targetPublishingMetric,
-    context.enableMetricSummary, context.metricSummaryWaitSeconds)
+    context.enableMetricSummary, context.metricSummaryWaitSeconds, context.countDistributionBucket)
 
   context.manager = manager
   context.metricsManager = metricsManager

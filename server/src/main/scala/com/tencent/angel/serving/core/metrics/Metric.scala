@@ -23,20 +23,25 @@ class PredictMetric(metricName: String, metricVersion: Long, predictTimeMs: Long
   }
 }
 
-class PredictMetricSummary(metricName: String, predictionCount: Long = 0, averagePredictTimesMs: Double = 0,
-                           modelName: String, modelVersion: Long, isSucess: Boolean = false,
-                           summaryPeriod: Int = 30, accumuPredictTimesMs: Long = 0)
+class PredictMetricSummary(metricName: String, predictionCountTotal: Long, predictionCountSuccess: Long,
+                           predictionCountFailed: Long, modelName: String, modelVersion: Long,
+                           accumuPredictTimesMs: Long = 0, countDistribution0: Long, countDistribution1: Long,
+                           countDistribution2: Long, countDistribution3: Long)
   extends Metric(metricName, 0, modelName, modelVersion) {
-  var _predictionCount: Long = predictionCount
-  var _summaryPeriod: Int = summaryPeriod
-  var _averagePredictTimeMs: Double = averagePredictTimesMs
-  var _isSucess: Boolean = isSucess
+  var _predictionCountTotal: Long = predictionCountTotal
+  var _predictionCountSuccess: Long = predictionCountSuccess
+  var _predictionCountFailed: Long = predictionCountFailed
   var _accumuPredictTimesMs: Long = accumuPredictTimesMs
+  var _countDistribution0: Long = countDistribution0
+  var _countDistribution1: Long = countDistribution1
+  var _countDistribution2: Long = countDistribution2
+  var _countDistribution3: Long = countDistribution3
 
   override def debugString: String ={
-    "metric_name=\"" + _metricName + "\", " + "prediction_count=" + _predictionCount + ", " +
-    "model_name=\"" + _modelName + "\", " + "model_version=" + _modelVersion + ", " + "is_success=" +
-    _isSucess + ", " + "average_predict_time_ms=" + _averagePredictTimeMs + ", " + "summary_period=" +
-    _summaryPeriod
+    "metric_name=\"" + _metricName + "\", " + "model_name=\"" + _modelName + "\", " + "model_version=" + _modelVersion + ", " +
+      "prediction_count_total=" + _predictionCountTotal + ", " + "prediction_count_success=" + _predictionCountSuccess +
+    ", " + "prediction_count_failed=" + _predictionCountFailed + ", " + "total_predict_time_ms=" + _accumuPredictTimesMs + ",\n" +
+    "count_distribution0=" + _countDistribution0 + ", count_distribution1=" + _countDistribution1 + ", count_distribution2=" +
+    _countDistribution2 + ", count_distribution3=" + _countDistribution3
   }
 }

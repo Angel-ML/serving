@@ -4,14 +4,14 @@ import com.tencent.angel.serving.core.ServableStateMonitor.ServableStateNotifier
 
 class MetricsManager {
   def create(target: String, enableMetricSummary: Boolean,
-                      metricSummaryWaitSeconds: Int): MetricsManager ={
+                      metricSummaryWaitSeconds: Int, countDistributionBucket: String): MetricsManager ={
     var metricsCollector: MetricsCollector = null
     if(target.equals("logger")) {
       metricsCollector = new MetricLogger
     } else if(target.equals("syslog")) {
       metricsCollector = new MetricSyslog
     }
-    new PredictMetricsManager(metricsCollector, enableMetricSummary, metricSummaryWaitSeconds)
+    new PredictMetricsManager(metricsCollector, enableMetricSummary, metricSummaryWaitSeconds, countDistributionBucket)
   }
 
   def createNotifier(elapsedPredictTime: Long, resultStatus: String,
@@ -19,5 +19,4 @@ class MetricsManager {
 
   def getMetricsResult(): String = null
 
-  def getResponseTimeDistributionResult(): String = null
 }

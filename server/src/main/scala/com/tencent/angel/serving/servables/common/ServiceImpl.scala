@@ -39,6 +39,9 @@ object ServiceImpl {
     var resultStatus = "ok"
     try {
       servableHandle.servable.runPredict(runOptions, request, responseBuilder)
+      if(!responseBuilder.getError.isEmpty) {
+        resultStatus = "error"
+      }
     } catch {
       case ex: Exception =>
         ex.printStackTrace()
