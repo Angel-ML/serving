@@ -5,7 +5,6 @@ import org.slf4j.{Logger, LoggerFactory}
 
 class Retry(maxNumRetries: Int, retryIntervalMicros: Long) {
   private val LOG: Logger = LoggerFactory.getLogger(classOf[Retry])
-  private var _numTries: Int = 0
 
   LOG.info(s"Retry Info: <$maxNumRetries, $retryIntervalMicros>")
 
@@ -23,16 +22,11 @@ class Retry(maxNumRetries: Int, retryIntervalMicros: Long) {
       LOG.info(s"[Retry] call function: retriedFn")
       isSuccess = retriedFn()
       numTries += 1
-      _numTries = numTries
       LOG.info(s"\t --> The $numTries-th retry finished!")
     } while (!isCancelledFn() && !isSuccess && numTries <= maxNumRetries)
 
     LOG.info("End retry")
     isSuccess
-  }
-
-  def getNumRetries: Int ={
-    _numTries
   }
 }
 

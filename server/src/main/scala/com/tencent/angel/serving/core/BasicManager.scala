@@ -32,8 +32,6 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   val managedMap: ManagedMap = new ManagedMap(maxNumLoadRetries, loadRetryIntervalMicros)
   val servingMap: ServingMap = new ServingMap
 
-  val loadMetricMap = new mutable.HashMap[String, Long]()
-
   //---------------------------------------------------------------------------Load/UnloadActions
   def loadServable(id: ServableId): Unit = {
     val req = LoadOrUnloadRequest(id, Kind.kLoad)
@@ -139,11 +137,7 @@ class BasicManager(var numLoadThreads: Int, var numUnloadThreads: Int,
   private def executeLoad(harness: LoaderHarness): Unit = {
     publishOnEventBus(new ServableState(harness.id, ManagerState.kLoading))
     LOG.info("[Manager-State] kLoading")
-    val start = System.currentTimeMillis()
     harness.load()
-    val elapsedTime = System.currentTimeMillis() - start
-    loadMetricMap("model_load_latency_ms") = elapsedTime
-    loadMetricMap("model_load_attempt_count") = harness.retry.getNumRetries.toLong
     LOG.info("[LoaderHarness-State] kLoadApproved --> kLoading --> kReady")
     servingMap.update(managedMap)
     publishOnEventBus(new ServableState(harness.id, ManagerState.kAvailable))

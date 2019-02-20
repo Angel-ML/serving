@@ -82,20 +82,13 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
         }
       } else {
         failedPredictCountMap(summaryKey) = failedPredictCountMap(summaryKey) + 1
-        val predictTimeMs = predictMetric._predictTimeMs
-        if(predictTimeMs >= 0 && predictTimeMs <=_countDistributionBucketList.get(0)) {
-          n0CountMap(summaryKey) = n0CountMap(summaryKey) + 1
-        } else if(predictTimeMs > _countDistributionBucketList.get(0) && predictTimeMs <= _countDistributionBucketList.get(1)) {
-          n1CountMap(summaryKey) = n1CountMap(summaryKey) + 1
-        } else if(predictTimeMs > _countDistributionBucketList.get(1) && predictTimeMs <= _countDistributionBucketList.get(2)) {
-          n2CountMap(summaryKey) = n2CountMap(summaryKey) + 1
-        } else {
-          n3CountMap(summaryKey) = n3CountMap(summaryKey) + 1
-        }
       }
       if(_summaryMetrics.contains(summaryKey)) {
         val metric = _summaryMetrics(summaryKey)
-        val accumuPredictTimesMs:Long = metric._accumuPredictTimesMs + predictMetric._predictTimeMs
+        var accumuPredictTimesMs:Long = metric._accumuPredictTimesMs
+        if(predictMetric._isSucess) {
+          accumuPredictTimesMs = accumuPredictTimesMs + predictMetric._predictTimeMs
+        }
         val predictionCountSuccess: Long = successPredictCountMap(summaryKey)
         val predictionCountFailed: Long = failedPredictCountMap(summaryKey)
         val predictCountTotal: Long = predictionCountSuccess + predictionCountFailed
@@ -106,9 +99,13 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
         val predictionCountSuccess: Long = successPredictCountMap(summaryKey)
         val predictionCountFailed: Long = failedPredictCountMap(summaryKey)
         val predictCountTotal: Long = predictionCountSuccess + predictionCountFailed
+        var accumuPredictTimesMs: Long = 0
+        if(predictMetric._isSucess) {
+          accumuPredictTimesMs = predictMetric._predictTimeMs
+        }
         _summaryMetrics(summaryKey) = new PredictMetricSummary("PredictSummary", predictCountTotal,
           predictionCountSuccess, predictionCountFailed, predictMetric._modelName, predictMetric._modelVersion,
-          predictMetric._predictTimeMs, n0CountMap(summaryKey), n1CountMap(summaryKey), n2CountMap(summaryKey),
+          accumuPredictTimesMs, n0CountMap(summaryKey), n1CountMap(summaryKey), n2CountMap(summaryKey),
           n3CountMap(summaryKey))
       }
     }
