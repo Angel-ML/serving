@@ -117,9 +117,12 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
   }
 
   override def getMetricsResult(): String ={
-    val summaryMetricsResult = new mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, Any]]()
+    val summaryMetricsResult = new mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, Any]]]()
     _summaryMetrics.foreach{case (summaryKey, predictMetricSummary) =>
-      summaryMetricsResult(summaryKey) = mutable.LinkedHashMap("model_name"->predictMetricSummary._modelName,
+      if(!summaryMetricsResult.contains(predictMetricSummary._modelName)) {
+        summaryMetricsResult(predictMetricSummary._modelName) = new mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, Any]]
+      }
+      val value = mutable.LinkedHashMap("model_name"->predictMetricSummary._modelName,
         "model_version"->predictMetricSummary._modelVersion,
         "prediction_count_total"->predictMetricSummary._predictionCountTotal,
         "prediction_count_success"->predictMetricSummary._predictionCountSuccess,
@@ -129,9 +132,10 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
         "count_distribution1"->predictMetricSummary._countDistribution1,
         "count_distribution2"->predictMetricSummary._countDistribution2,
         "count_distribution3"->predictMetricSummary._countDistribution3)
+      summaryMetricsResult(predictMetricSummary._modelName).put(predictMetricSummary._modelVersion.toString, value)
     }
     if(summaryMetricsResult.isEmpty) {
-      summaryMetricsResult("INFO") = mutable.LinkedHashMap("return" -> "There is no summary metrics.")
+      summaryMetricsResult("null") = mutable.LinkedHashMap("null" -> mutable.LinkedHashMap("null" -> "There is no summary metrics."))
     }
     import org.json4s.native.Json
     import org.json4s.DefaultFormats

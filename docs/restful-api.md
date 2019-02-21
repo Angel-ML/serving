@@ -63,31 +63,59 @@ curl http://host:port/angelServing/v1.0/monitoring/metrics/summary
 
 ```
 {
-  "lr_5":{
-           "model_name":"lr",
-           "model_version":5,
-           "prediction_count_total":7,
-           "prediction_count_success":7,
-           "prediction_count_failed":0,
-           "total_predict_time_ms":7,
-           "count_distribution0":7,
-           "count_distribution1":0,
-           "count_distribution2":0,
-           "count_distribution3":0
-         },
-  "lr_6":{
-           "model_name":"lr",
-           "model_version":6,
-           "prediction_count_total":7,
-           "prediction_count_success":6,
-           "prediction_count_failed":1,
-           "total_predict_time_ms":76,
-           "count_distribution0":5,
-           "count_distribution1":0,
-           "count_distribution2":0,
-           "count_distribution3":1
-         }
-}
+  "lr":{
+         "5":{
+               "model_name":"lr",
+               "model_version":5,
+               "prediction_count_total":10,
+               "prediction_count_success":10,
+               "prediction_count_failed":0,
+               "total_predict_time_ms":5,
+               "count_distribution0":10,
+               "count_distribution1":0,
+               "count_distribution2":0,
+               "count_distribution3":0
+             },
+         "6":{
+               "model_name":"lr",
+               "model_version":6,
+               "prediction_count_total":10,
+               "prediction_count_success":8,
+               "prediction_count_failed":2,
+               "total_predict_time_ms":5,
+               "count_distribution0":8,
+               "count_distribution1":0,
+               "count_distribution2":0,
+               "count_distribution3":0
+             }
+       },
+  "lrplus":{
+             "6":{
+                   "model_name":"lrplus",
+                   "model_version":6,
+                   "prediction_count_total":13,
+                   "prediction_count_success":10,
+                   "prediction_count_failed":3,
+                   "total_predict_time_ms":94,
+                   "count_distribution0":9,
+                   "count_distribution1":0,
+                   "count_distribution2":0,
+                   "count_distribution3":1
+                 },
+             "5":{
+                   "model_name":"lrplus",
+                   "model_version":5,
+                   "prediction_count_total":10,
+                   "prediction_count_success":10,
+                   "prediction_count_failed":0,
+                   "total_predict_time_ms":7,
+                   "count_distribution0":10,
+                   "count_distribution1":0,
+                   "count_distribution2":0,
+                   "count_distribution3":0
+                 }
+           }
+  }
 ```
 
 ### Predict API ###
