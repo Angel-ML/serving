@@ -4,6 +4,7 @@ import java.util
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 
+import com.google.protobuf.util.JsonFormat
 import com.tencent.angel.serving.core.ManagerState.ManagerState
 import com.tencent.angel.serving.core.{ManagerState, ServableId}
 import com.tencent.angel.serving.core.ServableStateMonitor.ServableStateNotifierFn
@@ -117,29 +118,33 @@ class PredictMetricsManager(metricsCollector: MetricsCollector, enableMetricSumm
   }
 
   override def getMetricsResult(): String ={
-    val summaryMetricsResult = new mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, Any]]]()
-    _summaryMetrics.foreach{case (summaryKey, predictMetricSummary) =>
-      if(!summaryMetricsResult.contains(predictMetricSummary._modelName)) {
-        summaryMetricsResult(predictMetricSummary._modelName) = new mutable.LinkedHashMap[String, mutable.LinkedHashMap[String, Any]]
+    import com.tencent.angel.metrics.ServingMetricsProtos
+    val metricsResponseBuilder = ServingMetricsProtos.MetricsResponse.newBuilder()
+    val models = new mutable.HashMap[String, ServingMetricsProtos.MetricsResponse.Versions.Builder]()
+    _summaryMetrics.foreach { case (summaryKey, predictMetricSummary) =>
+      val metricsBuilder = ServingMetricsProtos.Metrics.newBuilder()
+      metricsBuilder.setModelName(predictMetricSummary._modelName)
+        .setModelVersion(predictMetricSummary._modelVersion.toInt)
+        .setPredictionCountTotal(predictMetricSummary._predictionCountTotal)
+        .setPredictionCountSuccess(predictMetricSummary._predictionCountSuccess)
+        .setPredictionCountFailed(predictMetricSummary._predictionCountFailed)
+        .setTotalPredictTimeMs(predictMetricSummary._accumuPredictTimesMs.toDouble)
+        .setCountDistribution0(predictMetricSummary._countDistribution0)
+        .setCountDistribution1(predictMetricSummary._countDistribution1)
+        .setCountDistribution2(predictMetricSummary._countDistribution2)
+        .setCountDistribution3(predictMetricSummary._countDistribution3)
+      if(models.contains(predictMetricSummary._modelName)) {
+        models(predictMetricSummary._modelName).putVersions(predictMetricSummary._modelVersion.toString, metricsBuilder.build())
+      } else {
+        val versionsBuilder = ServingMetricsProtos.MetricsResponse.Versions.newBuilder()
+        versionsBuilder.putVersions(predictMetricSummary._modelVersion.toString, metricsBuilder.build())
+        models.put(predictMetricSummary._modelName, versionsBuilder)
       }
-      val value = mutable.LinkedHashMap("model_name"->predictMetricSummary._modelName,
-        "model_version"->predictMetricSummary._modelVersion,
-        "prediction_count_total"->predictMetricSummary._predictionCountTotal,
-        "prediction_count_success"->predictMetricSummary._predictionCountSuccess,
-        "prediction_count_failed"->predictMetricSummary._predictionCountFailed,
-        "total_predict_time_ms"->predictMetricSummary._accumuPredictTimesMs,
-        "count_distribution0"->predictMetricSummary._countDistribution0,
-        "count_distribution1"->predictMetricSummary._countDistribution1,
-        "count_distribution2"->predictMetricSummary._countDistribution2,
-        "count_distribution3"->predictMetricSummary._countDistribution3)
-      summaryMetricsResult(predictMetricSummary._modelName).put(predictMetricSummary._modelVersion.toString, value)
     }
-    if(summaryMetricsResult.isEmpty) {
-      summaryMetricsResult("null") = mutable.LinkedHashMap("null" -> mutable.LinkedHashMap("null" -> "There is no summary metrics."))
+    models.foreach { case (modelName, versionBuilder) =>
+        metricsResponseBuilder.putModels(modelName, versionBuilder.build())
     }
-    import org.json4s.native.Json
-    import org.json4s.DefaultFormats
-    Json(DefaultFormats).write(summaryMetricsResult)
+    JsonFormat.printer().preservingProtoFieldNames().print(metricsResponseBuilder.build())
   }
 
   override def createNotifier(elapsedPredictTime: Long, resultStatus: String,

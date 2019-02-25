@@ -63,59 +63,43 @@ curl http://host:port/angelServing/v1.0/monitoring/metrics/summary
 
 ```
 {
-  "lr":{
-         "5":{
-               "model_name":"lr",
-               "model_version":5,
-               "prediction_count_total":10,
-               "prediction_count_success":10,
-               "prediction_count_failed":0,
-               "total_predict_time_ms":5,
-               "count_distribution0":10,
-               "count_distribution1":0,
-               "count_distribution2":0,
-               "count_distribution3":0
-             },
-         "6":{
-               "model_name":"lr",
-               "model_version":6,
-               "prediction_count_total":10,
-               "prediction_count_success":8,
-               "prediction_count_failed":2,
-               "total_predict_time_ms":5,
-               "count_distribution0":8,
-               "count_distribution1":0,
-               "count_distribution2":0,
-               "count_distribution3":0
-             }
-       },
-  "lrplus":{
-             "6":{
-                   "model_name":"lrplus",
-                   "model_version":6,
-                   "prediction_count_total":13,
-                   "prediction_count_success":10,
-                   "prediction_count_failed":3,
-                   "total_predict_time_ms":94,
-                   "count_distribution0":9,
-                   "count_distribution1":0,
-                   "count_distribution2":0,
-                   "count_distribution3":1
-                 },
-             "5":{
-                   "model_name":"lrplus",
-                   "model_version":5,
-                   "prediction_count_total":10,
-                   "prediction_count_success":10,
-                   "prediction_count_failed":0,
-                   "total_predict_time_ms":7,
-                   "count_distribution0":10,
-                   "count_distribution1":0,
-                   "count_distribution2":0,
-                   "count_distribution3":0
-                 }
-           }
+  "models": {
+    "lrplus": {
+      "versions": {
+        "6": {
+          "model_name": "lrplus",
+          "model_version": 6,
+          "prediction_count_total": "5",
+          "prediction_count_success": "5",
+          "total_predict_time_ms": 1.0,
+          "count_distribution0": "5"
+        }
+      }
+    },
+    "lr": {
+      "versions": {
+        "5": {
+          "model_name": "lr",
+          "model_version": 5,
+          "prediction_count_total": "10",
+          "prediction_count_success": "10",
+          "total_predict_time_ms": 6.0,
+          "count_distribution0": "10"
+        },
+        "6": {
+          "model_name": "lr",
+          "model_version": 6,
+          "prediction_count_total": "10",
+          "prediction_count_success": "8",
+          "prediction_count_failed": "2",
+          "total_predict_time_ms": 89.0,
+          "count_distribution0": "7",
+          "count_distribution3": "1"
+        }
+      }
+    }
   }
+
 ```
 
 ### Predict API ###
