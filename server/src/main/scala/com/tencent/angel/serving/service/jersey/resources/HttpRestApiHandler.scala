@@ -66,7 +66,7 @@ class HttpRestApiHandler {
   }
 
   @GET
-  @Path("/angelServing/v1.0/monitoring/metrics/summary")
+  @Path("/monitoring/prometheus/metrics")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processMetricsRequest(): Response = {
     val result =  ModelServer.getServerCore.context.metricsManager.getMetricsResult()

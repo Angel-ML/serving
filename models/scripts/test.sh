@@ -16,4 +16,4 @@ curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "
   localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
 
 #get prediction summary metric
-curl localhost:8501/angelServing/v1.0/monitoring/metrics/summary
+curl localhost:8501/monitoring/prometheus/metrics

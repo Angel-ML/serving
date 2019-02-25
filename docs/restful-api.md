@@ -48,7 +48,7 @@ curl localhost:8501/angelServing/v1.0/models/lr
 ##### 请求URL #####
 
 ```
-GET http://host:port/angelServing/v1.0/monitoring/metrics/summary
+GET http://host:port/monitoring/prometheus/metrics
 ```
 
 ##### Examples #####
@@ -56,7 +56,7 @@ GET http://host:port/angelServing/v1.0/monitoring/metrics/summary
 请求：
 
 ```
-curl http://host:port/angelServing/v1.0/monitoring/metrics/summary
+curl http://host:port/monitoring/prometheus/metrics
 ```  
 
 返回：
