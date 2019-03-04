@@ -130,9 +130,14 @@ class ModelServer {
       LOG.info("Failed to BuildAndStart gRPC server.")
       return
     }
-    grpcServerStart()
-    import java.net.InetAddress
-    val addr = InetAddress.getLocalHost.getHostAddress
+    try {
+      grpcServerStart()
+    } catch {
+      case ex: Exception =>
+        ex.printStackTrace()
+        System.exit(-1)
+    }
+    val addr = "127.0.0.1"
     LOG.info("Running gRPC ModelServer at " + addr + ":" + serverOptions.grpc_port)
 
     if(serverOptions.http_port != 0) {
@@ -160,7 +165,10 @@ class ModelServer {
             httpServer.join()
           }
           catch {
-            case ex: Exception => LOG.info("Error occurred while starting Jetty")
+            case ex: Exception =>
+              ex.printStackTrace()
+              LOG.info("Error occurred while starting Jetty")
+              System.exit(-1)
           }
         } else {
           LOG.info("Failed to start HTTP Server at " + addr + ":" + serverOptions.http_port)
