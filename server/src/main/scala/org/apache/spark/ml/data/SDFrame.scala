@@ -109,7 +109,7 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
     val checked = col.check
     require(checked, "not all the columns is right!")
 
-    val outSchema = schema.copy()
+    val outSchema = new StructType(schema.toArray)
 
     val data = rows.filter { case SRow(values: Array[Any]) =>
       col(values).asInstanceOf[Boolean]
@@ -129,13 +129,23 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
     val idxs = new ListBuffer[Int]()
     val outSchema = new StructType()
 
-    cols.foreach(col =>
-      schema.zipWithIndex.collectFirst {
-        case (sf, idx) if sf.name.equalsIgnoreCase(col.name) =>
-          outSchema.add(sf)
-          idxs.append(idx)
+    val idxSet = cols.map { col =>
+      val colIdx = schema.zipWithIndex.collectFirst {
+        case (sf, idx) if sf.name.equalsIgnoreCase(col.name) => idx
       }
-    )
+
+      if (colIdx.isEmpty) {
+        return null
+      }
+
+      colIdx.get
+    }.toSet
+
+    cols.indices.collect{
+      case idx if !idxSet.contains(idx) =>
+        idxs.append(idx)
+        outSchema.add(schema(idx))
+    }
 
     val data = rows.map { case SRow(values: Array[Any]) =>
       val newValue = new Array[Any](idxs.length)

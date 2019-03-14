@@ -20,3 +20,7 @@ case class SRow(values: Array[Any]) {
 
   def toSeq: Seq[Any] = values.clone()
 }
+
+object SRow {
+  def unapply(arg: SRow): Option[Array[Any]] = ???
+}
