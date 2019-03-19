@@ -176,6 +176,47 @@ Angel serving的restful api还支持稀疏的输入数据，该格式的稀疏�
 }
 ```
 
+```注```：如果用户不知道预测模型的scheme(如特征名称，数据类型，特征维度等)，可以通过获取模型的status restful api 
+得到，然后根据其scheme填充预测json数据
+##### Examples #####
+请求：
+
+```
+curl localhost:8501/angelServing/v1.0/models/lr
+```
+
+返回：
+
+angel平台
+```
+{
+  "model_version_status": [{
+    "version": "6",
+    "state": "AVAILABLE"
+  }],
+  "typeMap": {
+    "valueType": "DT_FLOAT",
+    "keyType": "DT_INT32"
+  },
+  "dim": "123"
+}
+```
+pmml平台
+```$xslt
+{
+  "model_version_status": [{
+    "version": "6",
+    "state": "AVAILABLE"
+  }],
+  "typeMap": {
+    "x1": "DT_DOUBLE",
+    "x2": "DT_DOUBLE",
+    "x3": "DT_DOUBLE",
+    "x4": "DT_DOUBLE"
+  }
+}
+```
+
 ##### Response format #####
 
 Response 返回的结果为json对象
