@@ -77,6 +77,8 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
     }
   }
 
+  def withColum(udfCol: SCol): SDFrame = ???
+
   def select(cols: SCol*): SDFrame = {
     val checked = cols.forall(_.check)
     require(checked, "not all the columns is right!")
@@ -161,4 +163,6 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
 //  def drop(colName: String*): SDFrame = {
 //    drop(colName.map(name => new SimpleCol(name)): _*)
 //  }
+
+  def apply(colName: String): SCol = SCol(colName)
 }

@@ -8,6 +8,7 @@ import org.apache.spark.ml.recommendation.ALSModel
 import org.apache.spark.ml.regression._
 import org.apache.spark.ml.transformer.{ServingModel, ServingPipelineModel, ServingStage, ServingTrans}
 import org.apache.spark.ml.tuning.{CrossValidatorModel, TrainValidationSplitModel}
+import org.apache.spark.ml.tunning.{CrossValidatorServingModel, TrainValidationSplitServingModel}
 import org.apache.spark.ml.util.DefaultParamsReader
 import org.apache.spark.ml.{MetaSnapshot, Model, PipelineModel, Transformer}
 import org.apache.spark.sql.SparkSession
@@ -118,7 +119,105 @@ object ModelUtils {
     }
   }
 
-  private def trans(stage: Transformer): ServingTrans = ???
+  private def trans(stage: Transformer): ServingTrans = {
+    stage match {
+      case transformer: AFTSurvivalRegressionModel => AFTSurvivalRegressionServingModel(transformer)
+      case transformer: Bucketizer => BucketizerServing(transformer)
+      case transformer: IsotonicRegressionModel => IsotonicRegressionServingModel(transformer)
+      case transformer: MinMaxScalerModel => MinMaxScalerServingModel(transformer)
+      case transformer: RFormulaModel => RFormulaServingModel(transformer)
+      case transformer: Word2VecModel => ???
+      case transformer: KMeansModel => KMeansServingModel(transformer)
+      case transformer: StringIndexerModel => StringIndexerServingModel(transformer)//todo:cast
+      case transformer: MinHashLSHModel => MinHashLSHServingModel(transformer)
+      case transformer: BucketedRandomProjectionLSHModel => BucketedRandomProjectionLSHServingModel(transformer)
+      case transformer: CrossValidatorModel => CrossValidatorServingModel(transformer)
+      case transformer: DistributedLDAModel => ???
+      case transformer: LocalLDAModel => LocalLDAServingModel(transformer)
+      case transformer: MaxAbsScalerModel => MaxAbsScalerServingModel(transformer)
+      case transformer: ImputerModel => ???
+      case transformer: TrainValidationSplitModel => TrainValidationSplitServingModel(transformer)
+      case transformer: BisectingKMeansModel => BisectingKMeansServingModel(transformer)
+      case transformer: RandomForestRegressionModel => RandomForestRegressionServingModel(transformer)
+      case transformer: GBTRegressionModel => GBTRegressionServingModel(transformer)
+      case transformer: GeneralizedLinearRegressionModel => GeneralizedLinearRegressionServingModel(transformer)
+      case transformer: LinearRegressionModel => LinearRegressionServingModel(transformer)
+      case transformer: DecisionTreeRegressionModel => DecisionTreeRegressionServingModel(transformer)
+      case transformer: LinearSVCModel => LinearSVCServingModel(transformer)
+      case transformer: NaiveBayesModel => NaiveBayesServingModel(transformer)
+      case transformer: GBTClassificationModel => GBTClassificationServingModel(transformer)
+      case transformer: DecisionTreeClassificationModel => DecisionTreeClassificationServingModel(transformer)
+      case transformer: MultilayerPerceptronClassificationModel => MultilayerPerceptronClassificationServingModel(transformer)
+      case transformer: LogisticRegressionModel => LogisticRegressionServingModel(transformer)
+      case transformer: RandomForestClassificationModel => RandomForestClassificationServingModel(transformer)
+      case transformer: GaussianMixtureModel => GaussianMixtureServingModel(transformer)
+      case transformer: PCAModel => PCAServingModel(transformer)
+      case transformer: ChiSqSelectorModel => ChiSqSelectorServingModel(transformer)
+      case transformer: VectorIndexerModel => VectorIndexerServingModel(transformer)//todo: new col whether needs metadata
+      case transformer: ALSModel => ???
+      case transformer: OneHotEncoderModel => ???
+      case transformer: OneVsRestModel => ???
+      case transformer: FPGrowthModel => ???
+      case transformer: StandardScalerModel => StandardScalerServingModel(transformer)
+      case transformer: CountVectorizerModel => CountVectorizerServingModel(transformer)
+      case transformer: IDFModel => IDFServingModel(transformer)
+      case transformer: VectorSizeHint => VectorSizeHintServing(transformer)//todo:new col whether needs metadata
+      case transformer: FeatureHasher => ???
+      case transformer: SQLTransformer => ???
+      case transformer: ElementwiseProduct => ElementwiseProductServing(transformer)
+      case transformer: Tokenizer => TokenizerServing(transformer)
+      case transformer: RegexTokenizer => RegexTokenizerServing(transformer)
+      case transformer: Normalizer => NormalizerServing(transformer)
+      case transformer: NGram => NGramServing(transformer)
+      case transformer: DCT => DCTServing(transformer)
+      case transformer: PolynomialExpansion => PolynomialExpansionServing(transformer)
+      case transformer: VectorSlicer => VectorSlicerServing(transformer)//todo: whether metadata is necessary
+      case transformer: Binarizer => BinarizerServing(transformer)//todo: whether metadata is necessary
+      case transformer: HashingTF => HashingTFServing(transformer)//todo: whether metadata is necessary
+      case transformer: StopWordsRemover => StopWordsRemoverServing(transformer)//todo: whether metadata is necessary
+      case transformer: IndexToString => IndexToStringServing(transformer)//todo: whether select is correct
+      case transformer: VectorAssembler => VectorAssemblerServing(transformer)//todo: struct
+      case transformer: Interaction => InteractionServing(transformer)//todo: struct
+    }
+  }
 
 
+  def loadTransformer(name: String, path: String): Transformer = {
+    name match {
+      case modelName if classOf[VectorSizeHint].getSimpleName.equalsIgnoreCase(modelName) =>
+        VectorSizeHint.load(path)
+      case modelName if classOf[FeatureHasher].getSimpleName.equalsIgnoreCase(modelName) =>
+        FeatureHasher.load(path)
+      case modelName if classOf[SQLTransformer].getSimpleName.equalsIgnoreCase(modelName) =>
+        SQLTransformer.load(path)
+      case modelName if classOf[ElementwiseProduct].getSimpleName.equalsIgnoreCase(modelName) =>
+        ElementwiseProduct.load(path)
+      case modelName if classOf[Tokenizer].getSimpleName.equalsIgnoreCase(modelName) =>
+        Tokenizer.load(path)
+      case modelName if classOf[RegexTokenizer].getSimpleName.equalsIgnoreCase(modelName) =>
+        RegexTokenizer.load(path)
+      case modelName if classOf[Normalizer].getSimpleName.equalsIgnoreCase(modelName) =>
+        Normalizer.load(path)
+      case modelName if classOf[NGram].getSimpleName.equalsIgnoreCase(modelName) =>
+        NGram.load(path)
+      case modelName if classOf[DCT].getSimpleName.equalsIgnoreCase(modelName) =>
+        DCT.load(path)
+      case modelName if classOf[PolynomialExpansion].getSimpleName.equalsIgnoreCase(modelName) =>
+        PolynomialExpansion.load(path)
+      case modelName if classOf[VectorSlicer].getSimpleName.equalsIgnoreCase(modelName) =>
+        VectorSlicer.load(path)
+      case modelName if classOf[Binarizer].getSimpleName.equalsIgnoreCase(modelName) =>
+        Binarizer.load(path)
+      case modelName if classOf[HashingTF].getSimpleName.equalsIgnoreCase(modelName) =>
+        HashingTF.load(path)
+      case modelName if classOf[StopWordsRemover].getSimpleName.equalsIgnoreCase(modelName) =>
+        StopWordsRemover.load(path)
+      case modelName if classOf[IndexToString].getSimpleName.equalsIgnoreCase(modelName) =>
+        IndexToString.load(path)
+      case modelName if classOf[VectorAssembler].getSimpleName.equalsIgnoreCase(modelName) =>
+        VectorAssembler.load(path)
+      case modelName if classOf[Interaction].getSimpleName.equalsIgnoreCase(modelName) =>
+        Interaction.load(path)
+    }
+  }
 }

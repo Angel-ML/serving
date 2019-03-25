@@ -22,5 +22,5 @@ case class SRow(values: Array[Any]) {
 }
 
 object SRow {
-  def unapply(arg: SRow): Option[Array[Any]] = ???
+//  def unapply(arg: SRow): Option[Array[Any]] = ???
 }
