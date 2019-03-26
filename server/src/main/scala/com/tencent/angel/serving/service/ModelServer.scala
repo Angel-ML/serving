@@ -60,6 +60,9 @@ class ModelServer {
     if (serverOptions.hadoop_home.nonEmpty){
       hadoopConf.addResource(serverOptions.hadoop_home + "/hdfs-site.xml")
       hadoopConf.addResource(serverOptions.hadoop_home + "/core-site.xml")
+      if(serverOptions.hadoop_job_ugi.nonEmpty) {
+        hadoopConf.set("hadoop.job.ugi", serverOptions.hadoop_job_ugi)
+      }
     }
     var modelServerConfig: ModelServerConfig = null
     val modelPlatformSet = scala.collection.mutable.Set[String]()
