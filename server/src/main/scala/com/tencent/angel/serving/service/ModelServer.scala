@@ -58,8 +58,10 @@ class ModelServer {
     }
 
     if (serverOptions.hadoop_home.nonEmpty){
-      hadoopConf.addResource(serverOptions.hadoop_home + "/hdfs-site.xml")
-      hadoopConf.addResource(serverOptions.hadoop_home + "/core-site.xml")
+      import org.apache.hadoop.fs.Path
+      hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/hdfs-site.xml"))
+      hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/core-site.xml"))
+      println(hadoopConf.get("fs.defaultFS"))
       if(serverOptions.hadoop_job_ugi.nonEmpty) {
         hadoopConf.set("hadoop.job.ugi", serverOptions.hadoop_job_ugi)
       }
