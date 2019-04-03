@@ -11,6 +11,7 @@ class UDF(val f: AnyRef, val dataType: DataType, val inputTypes: Option[Seq[Data
   private var inCols: Seq[SCol] = _
 
   def getNumInput: Int = {
+    println(inputTypes)
     if (inputTypes.isEmpty) {
       0
     } else {

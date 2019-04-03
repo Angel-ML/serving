@@ -1,10 +1,11 @@
 package org.apache.spark.ml.clustering
 
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.ml.util.SchemaUtils
+import org.apache.spark.sql.types.{IntegerType, StructType}
 
 class BisectingKMeansServingModel(stage: BisectingKMeansModel)
   extends ServingModel[BisectingKMeansServingModel] with BisectingKMeansParams {
@@ -14,14 +15,23 @@ class BisectingKMeansServingModel(stage: BisectingKMeansModel)
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
-    //todo:predict whether is accessible
+    transformSchema(dataset.schema, logging = true)
     val predictUDF = UDF.make[Int, Vector](features => stage.predict(features))
-    dataset.withColum(predictUDF(${stage.predictionCol}, SCol(${stage.featuresCol})))
+    dataset.withColum(predictUDF(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema)
+    validateAndTransformSchemaImpl(schema)
+  }
+
+  /**
+    * Validates and transforms the input schema.
+    * @param schema input schema
+    * @return output schema
+    */
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getFeaturesCol, new VectorUDT)
+    SchemaUtils.appendColumn(schema, stage.getPredictionCol, IntegerType)
   }
 
   override val uid: String = stage.uid

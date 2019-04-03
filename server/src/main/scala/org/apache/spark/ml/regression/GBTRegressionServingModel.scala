@@ -1,13 +1,13 @@
 package org.apache.spark.ml.regression
 
 import com.github.fommil.netlib.BLAS.{getInstance => blas}
+import org.apache.spark.ml.classification.PredictionServingModel
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.feature.PredictionServingModel
 import org.apache.spark.ml.linalg.{Vector, Vectors}
 import org.apache.spark.ml.param.ParamMap
 
 class GBTRegressionServingModel(stage: GBTRegressionModel)
-  extends PredictionServingModel[Vector, GBTRegressionServingModel] {
+  extends PredictionServingModel[Vector, GBTRegressionServingModel, GBTRegressionModel](stage) {
 
   override def copy(extra: ParamMap): GBTRegressionServingModel = {
     new GBTRegressionServingModel(stage.copy(extra))
@@ -20,7 +20,7 @@ class GBTRegressionServingModel(stage: GBTRegressionModel)
 
   override def transformImpl(dataset: SDFrame): SDFrame = {
     val predictUDF = UDF.make[Double, Vector](features => predict(features))
-    dataset.withColum(predictUDF.apply($(stage.predictionCol), SCol($(stage.featuresCol))))
+    dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 
   override val uid: String = stage.uid

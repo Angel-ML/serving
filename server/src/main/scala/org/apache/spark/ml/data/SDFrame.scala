@@ -45,8 +45,8 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
 
     if (findRes.isEmpty) {
       // append model
-      val outSchema = new StructType(schema.toArray)
-      SCol.mergeSchema(outSchema, udfCol.resSchema)
+      var outSchema = StructType(schema.toArray)
+      outSchema = SCol.mergeSchema(outSchema, udfCol.resSchema)
 
       val data = rows.map { case SRow(values: Array[Any]) =>
         val newValues = new Array[Any](values.length + 1)
@@ -77,14 +77,55 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
     }
   }
 
-  def withColum(udfCol: SCol): SDFrame = ???
+//  def withColum(col: SCol): SDFrame = {
+//    val findRes = schema.zipWithIndex.collectFirst {
+//      case (sf, idx) if sf.name.equals(col.name) => (sf, idx)
+//    }
+//
+//    require(col.check, "not all the columns is right!")
+//
+//    if (findRes.isEmpty) {
+//      // append model
+//      var outSchema = StructType(schema.toArray)
+//      outSchema = SCol.mergeSchema(outSchema, col.resSchema)
+//
+//      val data = rows.map { case SRow(values: Array[Any]) =>
+//        val newValues = new Array[Any](values.length + 1)
+//        values.indices.foreach(idx => newValues(idx) = values(idx))
+//        newValues(values.length) = col(values)
+//        SRow(newValues)
+//      }
+//
+//      new SDFrame(data)(outSchema)
+//    } else {
+//      // replace model
+//      val (sf: StructField, idx: Int) = findRes.get
+//
+//      val checked = col.resSchema.head.dataType.getClass.getSimpleName.equalsIgnoreCase(
+//        sf.dataType.getClass.getSimpleName
+//      )
+//
+//      require(checked, "data type not match!")
+//
+//      val outSchema = new StructType(schema.toArray)
+//      val data = rows.map { case SRow(values: Array[Any]) =>
+//        val newValues = values.clone()
+//        newValues(idx) = col(values)
+//        SRow(newValues)
+//      }
+//
+//      new SDFrame(data)(outSchema)
+//    }
+//  }
 
   def select(cols: SCol*): SDFrame = {
     val checked = cols.forall(_.check)
     require(checked, "not all the columns is right!")
 
     val outSchema = cols.foldLeft(new StructType) {
-      case (st, col) => SCol.mergeSchema(st, col.resSchema)
+      case (st, col) => {
+        SCol.mergeSchema(st, col.resSchema)
+      }
     }
 
     val data = rows.map { case SRow(values: Array[Any]) =>
@@ -129,11 +170,13 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
 
   def drop(cols: SimpleCol*): SDFrame = {
     val idxs = new ListBuffer[Int]()
-    val outSchema = new StructType()
+    var outSchema: StructType = null
 
     val idxSet = cols.map { col =>
       val colIdx = schema.zipWithIndex.collectFirst {
-        case (sf, idx) if sf.name.equalsIgnoreCase(col.name) => idx
+        case (sf, idx) if sf.name.equalsIgnoreCase(col.name) => {
+          idx
+        }
       }
 
       if (colIdx.isEmpty) {
@@ -143,10 +186,15 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
       colIdx.get
     }.toSet
 
-    cols.indices.collect{
+    this.columns.indices.collect{
       case idx if !idxSet.contains(idx) =>
         idxs.append(idx)
-        outSchema.add(schema(idx))
+        if (outSchema == null) {
+          outSchema = new StructType().add(schema(idx))
+        } else {
+          outSchema = outSchema.add(schema(idx))
+        }
+
     }
 
     val data = rows.map { case SRow(values: Array[Any]) =>
@@ -164,5 +212,45 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
 //    drop(colName.map(name => new SimpleCol(name)): _*)
 //  }
 
-  def apply(colName: String): SCol = SCol(colName)
+  def apply(colName: String): SCol = {
+    SCol(colName).setSchema(colName, schema(colName).dataType, schema(colName).metadata)
+  }
+
+  def withColumnRenamed(oldName: String, newName: String): SDFrame = {
+    val col = SCol(oldName)
+    val idxs = new ListBuffer[Int]()
+    val outSchema = new StructType()
+
+
+    val colIdx = schema.zipWithIndex.collectFirst {
+      case (sf, idx) if sf.name.equalsIgnoreCase(col.name) => idx
+    }
+
+    if (colIdx.isEmpty) {
+      return null
+    }
+
+    schema.indices.collect{
+      case idx  =>
+        if (idx != colIdx.get) {
+          idxs.append(idx)
+          outSchema.add(schema(idx))
+        } else {
+          idxs.append(idx)
+          val oldSchema = schema(idx)
+          outSchema.add(newName, oldSchema.dataType, oldSchema.nullable, oldSchema.metadata)
+        }
+
+    }
+
+    val data = rows.map { case SRow(values: Array[Any]) =>
+      val newValue = new Array[Any](idxs.length)
+      idxs.zipWithIndex.foreach {
+        case (oldId, newId) => newValue(newId) = values(oldId)
+      }
+      SRow(newValue)
+    }
+
+    new SDFrame(data)(outSchema)
+  }
 }

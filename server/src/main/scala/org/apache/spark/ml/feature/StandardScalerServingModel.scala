@@ -1,14 +1,14 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.feature.StandardScalerModel
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.types.{StructField, StructType}
 import org.apache.spark.ml.linalg._
+import org.apache.spark.ml.util.SchemaUtils
 
 class StandardScalerServingModel(stage: StandardScalerModel)
-  extends ServingModel[StandardScalerServingModel] with StandardScalerParams {
+  extends ServingModel[StandardScalerServingModel] {
 
   override def copy(extra: ParamMap): StandardScalerServingModel = {
     new StandardScalerServingModel(stage.copy(extra))
@@ -17,11 +17,20 @@ class StandardScalerServingModel(stage: StandardScalerModel)
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
     val scaleUDF = UDF.make[Vector, Vector](features => trans(features))
-    dataset.withColum(scaleUDF.apply($(stage.outputCol), SCol($(stage.inputCol))))
+    dataset.withColum(scaleUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema)
+    validateAndTransformSchemaImpl(schema)
+  }
+
+  /** Validates and transforms the input schema. */
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getInputCol, new VectorUDT)
+    require(!schema.fieldNames.contains(stage.getOutputCol),
+      s"Output column ${stage.getOutputCol} already exists.")
+    val outputFields = schema.fields :+ StructField(stage.getOutputCol, new VectorUDT, false)
+    StructType(outputFields)
   }
 
   override val uid: String = stage.uid
@@ -30,7 +39,7 @@ class StandardScalerServingModel(stage: StandardScalerModel)
 
   def trans(features:Vector): Vector ={
     require(stage.mean.size == features.size)
-    if (${stage.withMean}) {
+    if (stage.getWithMean) {
       // By default, Scala generates Java methods for member variables. So every time when
       // the member variables are accessed, `invokespecial` will be called which is expensive.
       // This can be avoid by having a local reference of `shift`.
@@ -42,7 +51,7 @@ class StandardScalerServingModel(stage: StandardScalerModel)
         case v: Vector => v.toArray
       }
       val size = values.length
-      if (${stage.withStd}) {
+      if (stage.getWithStd) {
         var i = 0
         while (i < size) {
           values(i) = if (stage.std(i) != 0.0) (values(i) - localShift(i)) * (1.0 / stage.std(i)) else 0.0
@@ -56,7 +65,7 @@ class StandardScalerServingModel(stage: StandardScalerModel)
         }
       }
       Vectors.dense(values)
-    } else if (${stage.withStd}) {
+    } else if (stage.getWithStd) {
       features match {
         case DenseVector(vs) =>
           val values = vs.clone()

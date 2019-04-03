@@ -4,55 +4,57 @@ import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 
 abstract class ProbabilisticClassificationServingModel[
-    FeaturesType, M <: ProbabilisticClassificationServingModel[FeaturesType, M]]
-  extends ClassificationServingModel[FeaturesType, M] with ProbabilisticClassifierParams {
+    FeaturesType, M <: ProbabilisticClassificationServingModel[FeaturesType, M, T],
+    T <: ProbabilisticClassificationModel[FeaturesType, T]](stage: T)
+  extends ClassificationServingModel[FeaturesType, M, T](stage) with ProbabilisticClassifierParams {
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
 
-    if (isDefined(thresholds)) {
-      require($(thresholds).length == numClasses, this.getClass.getSimpleName +
+    if (isDefined(stage.thresholds)) {
+      require(stage.getThresholds.length == numClasses, this.getClass.getSimpleName +
         ".transform() called with non-matching numClasses and thresholds.length." +
-        s" numClasses=$numClasses, but thresholds has length ${$(thresholds).length}")
+        s" numClasses=$numClasses, but thresholds has length ${stage.getThresholds.length}")
     }
 
     // Output selected columns only.
     // This is a bit complicated since it tries to avoid repeated computation.
     var outputData = dataset
     var numColsOutput = 0
-    if ($(rawPredictionCol).nonEmpty) {
-      val predictRawUDF = UDF.make[Vector, Any](features =>
-        predictRaw(features.asInstanceOf[FeaturesType])
+    if (stage.getRawPredictionCol.nonEmpty) {
+      val predictRawUDF = UDF.make[Vector, Vector](features =>
+        predictRaw(features.asInstanceOf[Vector])
       )
-      outputData = outputData.withColum(predictRawUDF.apply(getRawPredictionCol, SCol(getFeaturesCol)))
+      println(stage.getFeaturesCol)
+      outputData = outputData.withColum(predictRawUDF.apply(stage.getRawPredictionCol, SCol(stage.getFeaturesCol)))
       numColsOutput += 1
     }
-    if ($(probabilityCol).nonEmpty) {
-      val probUDF = if ($(rawPredictionCol).nonEmpty) {
+    if (stage.getProbabilityCol.nonEmpty) {
+      val probUDF = if (stage.getRawPredictionCol.nonEmpty) {
         UDF.make[Vector, Vector](features =>
           raw2probability(features))
-          .apply($(probabilityCol), SCol($(rawPredictionCol)))
+          .apply(stage.getProbabilityCol, SCol(stage.getRawPredictionCol))
       } else {
         UDF.make[Vector, Any](features =>
-          predictProbability(features.asInstanceOf[FeaturesType]))
-          .apply($(probabilityCol), SCol($(featuresCol)))
+          predictProbability(features.asInstanceOf[Vector]))
+          .apply(stage.getProbabilityCol, SCol(stage.getFeaturesCol))
       }
       outputData = outputData.withColum(probUDF)
       numColsOutput += 1
     }
-    if ($(predictionCol).nonEmpty) {
-      val predUDF = if ($(rawPredictionCol).nonEmpty) {
+    if (stage.getPredictionCol.nonEmpty) {
+      val predUDF = if (stage.getRawPredictionCol.nonEmpty) {
         UDF.make[Double, Vector](features =>
           raw2prediction(features))
-          .apply($(predictionCol), SCol($(rawPredictionCol)))
-      } else if ($(probabilityCol).nonEmpty) {
+          .apply(stage.getPredictionCol, SCol(stage.getRawPredictionCol))
+      } else if (stage.getProbabilityCol.nonEmpty) {
         UDF.make[Double, Vector](features =>
           probability2prediction(features))
-          .apply($(predictionCol), SCol($(probabilityCol)))
+          .apply(stage.getPredictionCol, SCol(stage.getProbabilityCol))
       } else {
-        UDF.make[Double, Any](features =>
-          predict(features.asInstanceOf[FeaturesType]))
-          .apply($(predictionCol), SCol($(featuresCol)))
+        UDF.make[Double, Vector](features =>
+          predict(features.asInstanceOf[Vector]))
+          .apply(stage.getPredictionCol, SCol(stage.getFeaturesCol))
       }
       outputData = outputData.withColum(predUDF)
       numColsOutput += 1
@@ -66,7 +68,7 @@ abstract class ProbabilisticClassificationServingModel[
   }
 
   override def raw2prediction(rawPrediction: Vector): Double = {
-    if (!isDefined(thresholds)) {
+    if (!isDefined(stage.thresholds)) {
       rawPrediction.argmax
     } else {
       probability2prediction(raw2probability(rawPrediction))
@@ -78,16 +80,16 @@ abstract class ProbabilisticClassificationServingModel[
     raw2probabilityInPlace(probs)
   }
 
-  def predictProbability(features: FeaturesType): Vector = {
+  def predictProbability(features: Vector): Vector = {
     val rawPreds = predictRaw(features)
     raw2probabilityInPlace(rawPreds)
   }
 
   def probability2prediction(probability: Vector): Double = {
-    if (!isDefined(thresholds)) {
+    if (!isDefined(stage.thresholds)) {
       probability.argmax
     } else {
-      val thresholds = getThresholds
+      val thresholds = stage.getThresholds
       var argMax = 0
       var max = Double.NegativeInfinity
       var i = 0

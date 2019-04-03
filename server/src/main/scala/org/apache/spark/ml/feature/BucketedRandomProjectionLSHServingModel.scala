@@ -4,12 +4,12 @@ import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
 class BucketedRandomProjectionLSHServingModel(stage: BucketedRandomProjectionLSHModel)
-  extends LSHServingModel[BucketedRandomProjectionLSHServingModel] {
+  extends LSHServingModel[BucketedRandomProjectionLSHServingModel, BucketedRandomProjectionLSHModel](stage) {
 
   override val hashFunction: Vector => Array[Vector] = {
     key: Vector => {
       val hashValues: Array[Double] = stage.randUnitVectors.map({
-        randUnitVector => Math.floor(BLAS.dot(key, randUnitVector) / $(stage.bucketLength))
+        randUnitVector => Math.floor(BLAS.dot(key, randUnitVector) /stage.getBucketLength)
       })
       // TODO: Output vectors of dimension numHashFunctions in SPARK-18450
       hashValues.map(Vectors.dense(_))

@@ -2,8 +2,7 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.AttributeGroup
-import org.apache.spark.ml.data.{SCol, SDFrame, SimpleCol, UDF}
-import org.apache.spark.ml.feature.VectorSizeHint
+import org.apache.spark.ml.data._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
 import org.apache.spark.sql.types.StructType
@@ -17,12 +16,15 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
     val localHandleInvalid = stage.getHandleInvalid
 
     val group = AttributeGroup.fromStructField(dataset.schema(localInputCol))
-    val newGroup = validateSchemaAndSize(dataset.schema, group)//todo: whether needs
+    val newGroup = validateSchemaAndSize(dataset.schema, group)
     if (localHandleInvalid == VectorSizeHintServing.OPTIMISTIC_INVALID && group.size == localSize) {
       dataset
     } else {
       val newCol: SCol = localHandleInvalid match {
-        case VectorSizeHintServing.OPTIMISTIC_INVALID => SCol(localInputCol)
+        case VectorSizeHintServing.OPTIMISTIC_INVALID => {
+          val inputUDF = UDF.make[Vector, Vector](input => input)
+          inputUDF.apply(localInputCol, SCol(localInputCol))
+        }
         case VectorSizeHintServing.ERROR_INVALID =>
           val checkVectorSizeUDF = UDF.make[Vector, Vector](vector => {
             if (vector == null) {
@@ -46,7 +48,7 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
           })
           checkVectorSizeUDF.apply(localInputCol, SCol(localInputCol))
       }
-      val res = dataset.withColum(newCol)
+      val res = dataset.withColum(newCol.setSchema(localInputCol, newGroup.toMetadata()).asInstanceOf[UDFCol])
       if (localHandleInvalid == VectorSizeHintServing.SKIP_INVALID) {
         res.na
       } else {

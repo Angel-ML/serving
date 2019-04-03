@@ -1,28 +1,44 @@
 package org.apache.spark.ml.clustering
 
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.linalg.{Vector, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import breeze.linalg.{DenseVector => BDV}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.stat.distribution.MultivariateGaussian
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.ml.util.SchemaUtils
+import org.apache.spark.sql.types.{IntegerType, StructType}
 
-class GaussianMixtureServingModel(stage: GaussianMixtureModel) extends ServingModel[GaussianMixtureServingModel] {
+class GaussianMixtureServingModel(stage: GaussianMixtureModel)
+  extends ServingModel[GaussianMixtureServingModel] with GaussianMixtureParams {
 
   override def copy(extra: ParamMap): GaussianMixtureServingModel = {
     new GaussianMixtureServingModel(stage.copy(extra))
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
+    transformSchema(dataset.schema, true)
     val predUDF = UDF.make[Int, Vector](features => predict(features))
     val probUDF = UDF.make[Vector, Vector](features => predictProbability(features))
-    dataset.withColum(predUDF.apply(${stage.predictionCol}, SCol(${stage.featuresCol})))
-      .withColum(probUDF.apply(${stage.probabilityCol}, SCol(${stage.featuresCol})))
+    dataset.withColum(predUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
+      .withColum(probUDF.apply(stage.getProbabilityCol, SCol(stage.getFeaturesCol)))
   }
 
-  override def transformSchema(schema: StructType): StructType = ???
+  override def transformSchema(schema: StructType): StructType = {
+    validateAndTransformSchemaImpl(schema)
+  }
+
+  /**
+    * Validates and transforms the input schema.
+    *
+    * @param schema input schema
+    * @return output schema
+    */
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getFeaturesCol, new VectorUDT)
+    val schemaWithPredictionCol = SchemaUtils.appendColumn(schema, stage.getPredictionCol, IntegerType)
+    SchemaUtils.appendColumn(schemaWithPredictionCol, stage.getProbabilityCol, new VectorUDT)
+  }
 
   override val uid: String = stage.uid
 

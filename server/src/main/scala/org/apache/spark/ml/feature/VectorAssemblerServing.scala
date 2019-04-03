@@ -16,7 +16,7 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
     // Schema transformation.
     val schema = dataset.schema
     lazy val first = dataset.getRow(0)
-    val attrs = $(stage.inputCols).flatMap { c =>
+    val attrs = stage.getInputCols.flatMap { c =>
       val field = schema(c)
       val index = schema.fieldIndex(c)
       field.dataType match {
@@ -53,11 +53,12 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
           throw new SparkException(s"VectorAssembler does not support the $otherType type")
       }
     }
-    val metadata = new AttributeGroup($(stage.outputCol), attrs).toMetadata()
+    val metadata = new AttributeGroup(stage.getOutputCol, attrs).toMetadata()
+
 
     // Data transformation.
     val assembleUDF = UDF.make[Vector, SRow](row => VectorAssemblerServing.assemble(row.toSeq: _*))
-    val args = $(stage.inputCols).map { c =>
+    val args = stage.getInputCols.map { c =>
       schema(c).dataType match {
         case DoubleType => dataset(c)
         case _: VectorUDT => dataset(c)
@@ -65,7 +66,7 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
       }
     }
     //todo: select, struct, metadata
-    dataset.select(SCol(), assembleUDF.apply($(stage.outputCol), args:_*))//todo: struct
+    dataset.select(SCol(), assembleUDF.apply(stage.getOutputCol, args:_*).setSchema(stage.getOutputCol, metadata))//todo: struct
   }
 
   override def copy(extra: ParamMap): VectorAssemblerServing = {
@@ -73,8 +74,8 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    val inputColNames = $(stage.inputCols)
-    val outputColName = $(stage.outputCol)
+    val inputColNames = stage.getInputCols
+    val outputColName = stage.getOutputCol
     val incorrectColumns = inputColNames.flatMap { name =>
       schema(name).dataType match {
         case _: NumericType | BooleanType => None

@@ -4,7 +4,8 @@ import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
 class MultilayerPerceptronClassificationServingModel(stage: MultilayerPerceptronClassificationModel)
-  extends ProbabilisticClassificationServingModel[Vector, MultilayerPerceptronClassificationServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, MultilayerPerceptronClassificationServingModel,
+    MultilayerPerceptronClassificationModel](stage) with MultilayerPerceptronParams {
 
   override def raw2probabilityInPlace(rawPrediction: Vector): Vector = {
     stage.mlpModel.raw2ProbabilityInPlace(rawPrediction)
@@ -26,7 +27,7 @@ class MultilayerPerceptronClassificationServingModel(stage: MultilayerPerceptron
     * Predict label for the given features.
     * This internal method is used to implement `transform()` and output [[predictionCol]].
     */
-  override protected def predict(features: Vector): Double = {
+  override def predict(features: Vector): Double = {
     LabelConverter.decodeLabel(stage.mlpModel.predict(features))
   }
 }

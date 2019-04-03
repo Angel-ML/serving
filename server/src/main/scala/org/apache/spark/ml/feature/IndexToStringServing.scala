@@ -7,17 +7,18 @@ import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
 import org.apache.spark.sql.types.{NumericType, StringType, StructField, StructType}
 
-class IndexToStringServing(stage: IndexToString) extends ServingTrans {
+class IndexToStringServing(stage: IndexToString) extends ServingTrans{
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, logging = true)
-    val inputColSchema = dataset.schema($(stage.inputCol))
+    val inputColSchema = dataset.schema(stage.getInputCol)
     // If the labels array is empty use column metadata
-    val values = if (!isDefined(stage.labels) || $(stage.labels).isEmpty) {
+    val values = if (!stage.isDefined(stage.labels) || stage.getLabels.isEmpty) {
+      println(!stage.isDefined(stage.labels))
       Attribute.fromStructField(inputColSchema)
         .asInstanceOf[NominalAttribute].values.get
     } else {
-      $(stage.labels)
+      stage.getLabels
     }
     val indexer = UDF.make[String, Double](index => {
       val idx = index.toInt
@@ -27,9 +28,8 @@ class IndexToStringServing(stage: IndexToString) extends ServingTrans {
         throw new SparkException(s"Unseen index: $index ??")
       }
     })
-    val outputColName = $(stage.outputCol)
-    //todo: whether select is correct, cast type
-    dataset.select(SCol(), indexer.apply(outputColName, dataset($(stage.inputCol))))
+    val outputColName = stage.getOutputCol
+    dataset.select(SCol(), indexer.apply(outputColName, dataset(stage.getInputCol)))
   }
 
   override def copy(extra: ParamMap): IndexToStringServing = {
@@ -37,16 +37,16 @@ class IndexToStringServing(stage: IndexToString) extends ServingTrans {
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    val inputColName = $(stage.inputCol)
+    val inputColName = stage.getInputCol
     val inputDataType = schema(inputColName).dataType
     require(inputDataType.isInstanceOf[NumericType],
       s"The input column $inputColName must be a numeric type, " +
         s"but got $inputDataType.")
     val inputFields = schema.fields
-    val outputColName = $(stage.outputCol)
+    val outputColName = stage.getOutputCol
     require(inputFields.forall(_.name != outputColName),
       s"Output column $outputColName already exists.")
-    val outputFields = inputFields :+ StructField($(stage.outputCol), StringType)
+    val outputFields = inputFields :+ StructField(stage.getOutputCol, StringType)
     StructType(outputFields)
   }
 

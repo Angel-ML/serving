@@ -3,9 +3,11 @@ package org.apache.spark.ml.classification
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
+import org.apache.spark.ml.tree.RandomForestClassifierParams
 
 class RandomForestClassificationServingModel(stage: RandomForestClassificationModel)
-  extends ProbabilisticClassificationServingModel[Vector, RandomForestClassificationServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, RandomForestClassificationServingModel,
+    RandomForestClassificationModel](stage) with RandomForestClassifierParams {
 
     override def raw2probabilityInPlace(rawPrediction: Vector): Vector = {
       rawPrediction match {
@@ -36,7 +38,7 @@ class RandomForestClassificationServingModel(stage: RandomForestClassificationMo
 
     override def transformImpl(dataset: SDFrame): SDFrame = {
       val predictUDF = UDF.make[Double, Any](features => predict(features.asInstanceOf[Vector]))
-      dataset.withColum(predictUDF.apply($(stage.predictionCol), SCol($(stage.featuresCol))))
+      dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
     }
 
     override def copy(extra: ParamMap): RandomForestClassificationServingModel = {

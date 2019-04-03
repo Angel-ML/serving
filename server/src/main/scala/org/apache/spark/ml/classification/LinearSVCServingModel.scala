@@ -2,7 +2,8 @@ package org.apache.spark.ml.classification
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
-class LinearSVCServingModel(stage: LinearSVCModel) extends ClassificationServingModel[Vector, LinearSVCServingModel] {
+class LinearSVCServingModel(stage: LinearSVCModel)
+  extends ClassificationServingModel[Vector, LinearSVCServingModel, LinearSVCModel](stage) with LinearSVCParams {
 
   override def predictRaw(features: Vector): Vector = {
     val m = margin(features)
@@ -22,11 +23,11 @@ class LinearSVCServingModel(stage: LinearSVCModel) extends ClassificationServing
   }
 
   override def predict(features: Vector): Double ={
-    if (margin(features) > $(stage.threshold)) 1.0 else 0.0
+    if (margin(features) > stage.getThreshold) 1.0 else 0.0
   }
 
   override def raw2prediction(rawPrediction: Vector): Double = {
-    if (rawPrediction(1) > $(stage.threshold)) 1.0 else 0.0
+    if (rawPrediction(1) > stage.getThreshold) 1.0 else 0.0
   }
 }
 

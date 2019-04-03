@@ -5,10 +5,12 @@ import org.apache.spark.ml.classification.GBTClassificationModel
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
+import org.apache.spark.ml.tree.GBTClassifierParams
 import org.apache.spark.mllib.tree.loss.{LogLoss => OldLogLoss}
 
 class GBTClassificationServingModel(stage: GBTClassificationModel)
-  extends ProbabilisticClassificationServingModel[Vector, GBTClassificationServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, GBTClassificationServingModel, GBTClassificationModel
+    ](stage) with GBTClassifierParams {
 
   override def copy(extra: ParamMap): GBTClassificationServingModel = {
     new GBTClassificationServingModel(stage.copy(extra))
@@ -16,7 +18,7 @@ class GBTClassificationServingModel(stage: GBTClassificationModel)
 
   override def transformImpl(dataset: SDFrame): SDFrame = {
     val predictUDF = UDF.make[Double, Any](features => predict(features.asInstanceOf[Vector]))
-    dataset.withColum(predictUDF.apply($(stage.predictionCol), SCol($(stage.featuresCol))))
+    dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 
   override def raw2probabilityInPlace(rawPrediction: Vector): Vector = {

@@ -9,18 +9,17 @@ import org.apache.spark.sql.types.{ArrayType, StringType, StructType}
 class StopWordsRemoverServing(stage: StopWordsRemover) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema)
-    val tUDF = if ($(stage.caseSensitive)) {
-      val stopWordsSet = $(stage.stopWords).toSet
+    val tUDF = if (stage.getCaseSensitive) {
+      val stopWordsSet = stage.getStopWords.toSet
       UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !stopWordsSet.contains(s)))
     } else {
       // TODO: support user locale (SPARK-15064)
       val toLower = (s: String) => if (s != null) s.toLowerCase else s
-      val lowerStopWords = $(stage.stopWords).map(toLower(_)).toSet
+      val lowerStopWords = stage.getStopWords.map(toLower(_)).toSet
       UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !lowerStopWords.contains(toLower(s))))
     }
-    val metadata = outputSchema($(stage.outputCol)).metadata
-    //todo: whether select is correct, metadata
-    dataset.select(SCol(), tUDF($(stage.outputCol), SCol($(stage.inputCol))))
+    val metadata = outputSchema(stage.getOutputCol).metadata
+    dataset.select(SCol(), tUDF(stage.getOutputCol, SCol(stage.getInputCol)).setSchema(stage.getOutputCol, metadata))
   }
 
   override def copy(extra: ParamMap): StopWordsRemoverServing = {
@@ -28,10 +27,10 @@ class StopWordsRemoverServing(stage: StopWordsRemover) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    val inputType = schema($(stage.inputCol)).dataType
+    val inputType = schema(stage.getInputCol).dataType
     require(inputType.sameType(ArrayType(StringType)),
       s"Input type must be ArrayType(StringType) but got $inputType.")
-    SchemaUtils.appendColumn(schema, $(stage.outputCol), inputType, schema($(stage.inputCol)).nullable)
+    SchemaUtils.appendColumn(schema, stage.getOutputCol, inputType, schema(stage.getInputCol).nullable)
   }
 
   override val uid: String = stage.uid

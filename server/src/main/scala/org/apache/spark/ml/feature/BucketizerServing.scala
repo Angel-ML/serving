@@ -10,7 +10,7 @@ import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
 
 class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServing]
   with HasHandleInvalid with HasInputCol with HasOutputCol
-  with HasInputCols with HasOutputCols with DefaultParamsWritable {
+  with HasInputCols with HasOutputCols{
 
   override def copy(extra: ParamMap): BucketizerServing = {
     new BucketizerServing(stage.copy(extra))
@@ -19,59 +19,60 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
   override def transform(dataset: SDFrame): SDFrame = {
     val transformedSchema = transformSchema(dataset.schema)
 
-    val (inputColumns, outputColumns) = if (isSet(inputCols)) {
-      ($(inputCols).toSeq, $(outputCols).toSeq)
+    val (inputColumns, outputColumns) = if (isSet(stage.inputCols)) {
+      (stage.getInputCols.toSeq, stage.getOutputCols.toSeq)
     } else {
-      (Seq($(inputCol)), Seq($(outputCol)))
+      (Seq(stage.getInputCol), Seq(stage.getOutputCol))
     }
 
     val (filteredDataset, keepInvalid) = {
-      if (getHandleInvalid == Bucketizer.SKIP_INVALID) {
+      if (stage.getHandleInvalid == Bucketizer.SKIP_INVALID) {
         // "skip" NaN option is set, will filter out NaN values in the dataset
         (dataset.na(), false)
       } else {
-        (dataset, getHandleInvalid == Bucketizer.KEEP_INVALID)
+        (dataset, stage.getHandleInvalid == Bucketizer.KEEP_INVALID)
       }
     }
 
-    val seqOfSplits = if (isSet(inputCols)) {
-      $(stage.splitsArray).toSeq
+    val seqOfSplits = if (isSet(stage.inputCols)) {
+      stage.getSplitsArray.toSeq
     } else {
-      Seq($(stage.splits))
+      Seq(stage.getSplits)
     }
 
     val bucketizers: Seq[UDF] = seqOfSplits.zipWithIndex.map { case (splits, idx) =>
       UDF.make[Double, Double](feature => Bucketizer.binarySearchForBuckets(splits, feature, keepInvalid))
     }
 
+    var output = dataset
     inputColumns.zipWithIndex.map { case (inputCol, idx) =>
-      filteredDataset.withColum(bucketizers(idx)(outputColumns(idx), filteredDataset(inputCol)))
+      output = output.withColum(bucketizers(idx)(outputColumns(idx), filteredDataset(inputCol))
+        .setSchema(outputColumns(idx), transformedSchema(outputColumns(idx)).metadata))
     }
-
-    filteredDataset
+    output
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    ParamValidators.checkSingleVsMultiColumnParams(this, Seq(outputCol, stage.splits),
-      Seq(outputCols, stage.splitsArray))
+    ParamValidators.checkSingleVsMultiColumnParams(stage, Seq(stage.outputCol, stage.splits),
+      Seq(stage.outputCols, stage.splitsArray))
 
-    if (isSet(inputCols)) {
-      require(getInputCols.length == getOutputCols.length &&
-        getInputCols.length == stage.getSplitsArray.length, s"Bucketizer $this has mismatched Params " +
+    if (isSet(stage.inputCols)) {
+      require(stage.getInputCols.length == stage.getOutputCols.length &&
+        stage.getInputCols.length == stage.getSplitsArray.length, s"Bucketizer $stage has mismatched Params " +
         s"for multi-column transform.  Params (inputCols, outputCols, splitsArray) should have " +
         s"equal lengths, but they have different lengths: " +
-        s"(${getInputCols.length}, ${getOutputCols.length}, ${stage.getSplitsArray.length}).")
+        s"(${stage.getInputCols.length}, ${stage.getOutputCols.length}, ${stage.getSplitsArray.length}).")
 
       var transformedSchema = schema
-      $(inputCols).zip($(outputCols)).zipWithIndex.foreach { case ((inputCol, outputCol), idx) =>
+      stage.getInputCols.zip(stage.getOutputCols).zipWithIndex.foreach { case ((inputCol, outputCol), idx) =>
         SchemaUtils.checkNumericType(transformedSchema, inputCol)
         transformedSchema = SchemaUtils.appendColumn(transformedSchema,
-          prepOutputField($(stage.splitsArray)(idx), outputCol))
+          prepOutputField(stage.getSplitsArray(idx), outputCol))
       }
       transformedSchema
     } else {
-      SchemaUtils.checkNumericType(schema, $(inputCol))
-      SchemaUtils.appendColumn(schema, prepOutputField($(stage.splits), $(outputCol)))
+      SchemaUtils.checkNumericType(schema, stage.getInputCol)
+      SchemaUtils.appendColumn(schema, prepOutputField(stage.getSplits, stage.getOutputCol))
     }
   }
 

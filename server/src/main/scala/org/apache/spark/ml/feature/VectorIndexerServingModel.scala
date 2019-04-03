@@ -11,7 +11,8 @@ import org.apache.spark.sql.types.{StructField, StructType}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.util.SchemaUtils
 
-class VectorIndexerServingModel(stage: VectorIndexerModel) extends ServingModel[VectorIndexerServingModel] {
+class VectorIndexerServingModel(stage: VectorIndexerModel)
+  extends ServingModel[VectorIndexerServingModel] with VectorIndexerParams {
   private val SKIP_INVALID: String = "skip"
   private val ERROR_INVALID: String = "error"
   private val KEEP_INVALID: String = "keep"
@@ -21,11 +22,11 @@ class VectorIndexerServingModel(stage: VectorIndexerModel) extends ServingModel[
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
-    //todo:
-    val newField = ???
+    transformSchema(dataset.schema, true)
+    val metadata = prepOutputField(dataset.schema).metadata
     val transformUDF = UDF.make[Vector, Vector](features => transformFunc(features))
-    val ds = dataset.withColum(transformUDF.apply($(stage.outputCol), dataset(${stage.inputCol})))
+    val ds = dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
+      .setSchema(stage.getOutputCol, metadata))
     if (stage.getHandleInvalid == SKIP_INVALID) {
       ds.na()
     } else {
@@ -35,21 +36,21 @@ class VectorIndexerServingModel(stage: VectorIndexerModel) extends ServingModel[
 
   override def transformSchema(schema: StructType): StructType = {
     val dataType = new VectorUDT
-    require(isDefined(stage.inputCol),
-      s"VectorIndexerModel requires input column parameter: ${stage.inputCol}")
-    require(isDefined(stage.outputCol),
-      s"VectorIndexerModel requires output column parameter: ${stage.outputCol}")
-    SchemaUtils.checkColumnType(schema, $(stage.inputCol), dataType)
+//    require(isDefined(stage.inputCol),
+//      s"VectorIndexerModel requires input column parameter: ${stage.inputCol}")
+//    require(isDefined(stage.outputCol),
+//      s"VectorIndexerModel requires output column parameter: ${stage.outputCol}")
+    SchemaUtils.checkColumnType(schema, stage.getInputCol, dataType)
 
     // If the input metadata specifies numFeatures, compare with expected numFeatures.
-    val origAttrGroup = AttributeGroup.fromStructField(schema($(stage.inputCol)))
+    val origAttrGroup = AttributeGroup.fromStructField(schema(stage.getInputCol))
     val origNumFeatures: Option[Int] = if (origAttrGroup.attributes.nonEmpty) {
       Some(origAttrGroup.attributes.get.length)
     } else {
       origAttrGroup.numAttributes
     }
     require(origNumFeatures.forall(_ == stage.numFeatures), "VectorIndexerModel expected" +
-      s" ${stage.numFeatures} features, but input column ${$(stage.inputCol)} had metadata specifying" +
+      s" ${stage.numFeatures} features, but input column ${stage.getInputCol} had metadata specifying" +
       s" ${origAttrGroup.numAttributes.get} features.")
 
     val newField = prepOutputField(schema)
@@ -134,7 +135,7 @@ class VectorIndexerServingModel(stage: VectorIndexerModel) extends ServingModel[
     * @return  Output column field.  This field does not contain non-ML metadata.
     */
   private def prepOutputField(schema: StructType): StructField = {
-    val origAttrGroup = AttributeGroup.fromStructField(schema($(stage.inputCol)))
+    val origAttrGroup = AttributeGroup.fromStructField(schema(stage.getInputCol))
     val featureAttributes: Array[Attribute] = if (origAttrGroup.attributes.nonEmpty) {
       // Convert original attributes to modified attributes
       val origAttrs: Array[Attribute] = origAttrGroup.attributes.get
@@ -159,7 +160,7 @@ class VectorIndexerServingModel(stage: VectorIndexerModel) extends ServingModel[
     } else {
       partialFeatureAttributes
     }
-    val newAttributeGroup = new AttributeGroup($(stage.outputCol), featureAttributes)
+    val newAttributeGroup = new AttributeGroup(stage.getOutputCol, featureAttributes)
     newAttributeGroup.toStructField()
   }
 

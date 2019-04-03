@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <hadoop-version>2.2.0</hadoop-version>
+        <hadoop-version>2.7.0</hadoop-version>
         <scala.version>2.11.8</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.logging.version>3.9.0</scala.logging.version>
@@ -115,12 +115,12 @@
             <version>4.4</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>

@@ -7,8 +7,6 @@ import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.sql.types.{StructField, StructType}
 import org.apache.spark.ml.linalg.{DenseVector, SparseVector, Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.util.SchemaUtils
-import org.apache.spark.mllib.linalg.{Vector => oldVector, Vectors => OldVectors}
-
 import scala.collection.mutable.ArrayBuilder
 
 class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[ChiSqSelectorServingModel] {
@@ -18,16 +16,17 @@ class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
+    val transformedSchema = transformSchema(dataset.schema, true)
+    val metadata = transformedSchema.last.metadata
 
     val selectorUDF = UDF.make[Vector, Vector](
-      features => compress(OldVectors.fromML(features)))
-    //todo: newField.metadata whether is necessary
-    dataset.withColum(selectorUDF.apply($(stage.outputCol), SCol($(stage.featuresCol))))
+      features => compress(features))
+    dataset.withColum(selectorUDF.apply(stage.getOutputCol, SCol(stage.getFeaturesCol))
+      .setSchema(stage.getOutputCol, metadata))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    SchemaUtils.checkColumnType(schema, $(stage.featuresCol), new VectorUDT)
+    SchemaUtils.checkColumnType(schema, stage.getFeaturesCol, new VectorUDT)
     val newField = prepOutputField(schema)
     val outputFields = schema.fields :+ newField
     StructType(outputFields)
@@ -41,7 +40,7 @@ class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[
     * Might be moved to Vector as .slice
     * @param features vector
     */
-  private def compress(features: oldVector): Vector = {
+  private def compress(features: Vector): Vector = {
     val filterIndices = stage.selectedFeatures.sorted
     features match {
       case SparseVector(size, indices, values) =>
@@ -84,13 +83,13 @@ class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[
     */
   private def prepOutputField(schema: StructType): StructField = {
     val selector = stage.selectedFeatures.toSet
-    val origAttrGroup = AttributeGroup.fromStructField(schema($(stage.featuresCol)))
+    val origAttrGroup = AttributeGroup.fromStructField(schema(stage.getFeaturesCol))
     val featureAttributes: Array[Attribute] = if (origAttrGroup.attributes.nonEmpty) {
       origAttrGroup.attributes.get.zipWithIndex.filter(x => selector.contains(x._2)).map(_._1)
     } else {
       Array.fill[Attribute](selector.size)(NominalAttribute.defaultAttr)
     }
-    val newAttributeGroup = new AttributeGroup($(stage.outputCol), featureAttributes)
+    val newAttributeGroup = new AttributeGroup(stage.getOutputCol, featureAttributes)
     newAttributeGroup.toStructField()
   }
 }

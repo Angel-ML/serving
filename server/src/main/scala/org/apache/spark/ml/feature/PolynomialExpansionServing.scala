@@ -1,6 +1,7 @@
 package org.apache.spark.ml.feature
 
 import org.apache.commons.math3.util.CombinatoricsUtils
+import org.apache.spark.ml.data.{SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.sql.types.DataType
@@ -8,14 +9,20 @@ import org.apache.spark.sql.types.DataType
 import scala.collection.mutable
 
 class PolynomialExpansionServing(stage: PolynomialExpansion)
-  extends UnaryTransformerServing[Vector, Vector, PolynomialExpansionServing] {
+  extends UnaryTransformerServing[Vector, Vector, PolynomialExpansionServing, PolynomialExpansion](stage) {
   /**
     * Creates the transform function using the given param map. The input param map already takes
     * account of the embedded param map. So the param values should be determined solely by the input
     * param map.
     */
-  override protected def createTransformFunc: Vector => Vector = { v =>
-    PolynomialExpansionServing.expand(v, $(stage.degree))
+  protected def createTransformFunc: Vector => Vector = { v =>
+    PolynomialExpansionServing.expand(v,stage.getDegree)
+  }
+
+  override def transform(dataset: SDFrame): SDFrame = {
+    transformSchema(dataset.schema, true)
+    val transformUDF = UDF.make[Vector, Vector](feature => this.createTransformFunc(feature))
+    dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol)))
   }
 
   override val uid: String = stage.uid
@@ -27,7 +34,7 @@ class PolynomialExpansionServing(stage: PolynomialExpansion)
   /**
     * Returns the data type of the output column.
     */
-  override protected def outputDataType: DataType = new VectorUDT()
+  override def outputDataType: DataType = new VectorUDT()
 }
 
 object PolynomialExpansionServing {

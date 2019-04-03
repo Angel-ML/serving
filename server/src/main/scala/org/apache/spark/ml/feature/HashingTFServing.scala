@@ -12,15 +12,15 @@ import org.apache.spark.unsafe.hash.Murmur3_x86_32._
 import org.apache.spark.unsafe.types.UTF8String
 import org.apache.spark.util.Utils
 
+import scala.language.implicitConversions
 import scala.collection.mutable
 
 class HashingTFServing(stage: HashingTF) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema)
-    val tUDF = UDF.make[Vector, Seq[_]](terms => trans(terms))
-    val metadata = outputSchema($(stage.outputCol)).metadata
-    //todo: whether select is correct, metadata
-    dataset.select(SCol(), tUDF($(stage.outputCol), SCol($(stage.inputCol))))
+    val tUDF = UDF.make[Vector, Seq[String]](terms => trans(terms))
+    val metadata = outputSchema(stage.getOutputCol).metadata
+    dataset.select(SCol(), tUDF(stage.getOutputCol, SCol(stage.getInputCol)).setSchema(stage.getOutputCol, metadata))
   }
 
   override def copy(extra: ParamMap): HashingTFServing = {
@@ -28,10 +28,10 @@ class HashingTFServing(stage: HashingTF) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    val inputType = schema($(stage.inputCol)).dataType
+    val inputType = schema(stage.getInputCol).dataType
     require(inputType.isInstanceOf[ArrayType],
       s"The input column must be ArrayType, but got $inputType.")
-    val attrGroup = new AttributeGroup($(stage.outputCol), $(stage.numFeatures))
+    val attrGroup = new AttributeGroup(stage.getOutputCol, stage.getNumFeatures)
     SchemaUtils.appendColumn(schema, attrGroup.toStructField())
   }
 
@@ -39,16 +39,16 @@ class HashingTFServing(stage: HashingTF) extends ServingTrans{
 
   private var hashAlgorithm = HashingTFServing.Murmur3
 
-  def trans(document: Iterable[_]): Vector = {
+  def trans(document: Iterable[String]): Vector = {
     val termFrequencies = mutable.HashMap.empty[Int, Double]
     val setTF =
-      if (stage.binary.asInstanceOf[Boolean]) (i: Int) => 1.0 else (i: Int) => termFrequencies.getOrElse(i, 0.0) + 1.0
+      if (stage.getBinary) (i: Int) => 1.0 else (i: Int) => termFrequencies.getOrElse(i, 0.0) + 1.0
     val hashFunc: Any => Int = getHashFunction
     document.foreach { term =>
-      val i = Utils.nonNegativeMod(hashFunc(term), ${stage.numFeatures})
+      val i = Utils.nonNegativeMod(hashFunc(term), stage.getNumFeatures)
       termFrequencies.put(i, setTF(i))
     }
-    Vectors.sparse(${stage.numFeatures}, termFrequencies.toSeq)
+    Vectors.sparse(stage.getNumFeatures, termFrequencies.toSeq)
   }
 
   private def getHashFunction: Any => Int = hashAlgorithm match {

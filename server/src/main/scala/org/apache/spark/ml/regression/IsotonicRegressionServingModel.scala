@@ -5,31 +5,31 @@ import java.util.Arrays.binarySearch
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
-import org.apache.spark.ml.regression.IsotonicRegressionModel
 import org.apache.spark.ml.transformer.ServingModel
+import org.apache.spark.ml.util.SchemaUtils
 import org.apache.spark.sql.types.{DoubleType, StructType}
 
 class IsotonicRegressionServingModel(stage: IsotonicRegressionModel)
-  extends ServingModel[IsotonicRegressionServingModel] with IsotonicRegressionBase {
+  extends ServingModel[IsotonicRegressionServingModel] {
 
   override def copy(extra: ParamMap): IsotonicRegressionServingModel = {
     new IsotonicRegressionServingModel(stage.copy(extra))
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
-    val predictUDF = dataset.schema($(stage.featuresCol)).dataType match {
+    transformSchema(dataset.schema, true)
+    val predictUDF = dataset.schema(stage.getFeaturesCol).dataType match {
       case DoubleType =>
         UDF.make[Double, Double](feature => predict(feature))
       case _: VectorUDT =>
-        val idx = $(stage.featureIndex)
+        val idx = stage.getFeatureIndex
         UDF.make[Double, Vector](feature => predict(feature(idx)))
     }
-    dataset.withColum(predictUDF.apply($(stage.predictionCol), SCol($(stage.featuresCol))))
+    dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema, false)
+    validateAndTransformSchemaImpl(schema, false)
   }
 
   override val uid: String = stage.uid
@@ -62,8 +62,27 @@ class IsotonicRegressionServingModel(stage: IsotonicRegressionModel)
       predictions(foundIndex)
     }
   }
+
+  def validateAndTransformSchemaImpl(
+                                schema: StructType,
+                                fitting: Boolean): StructType = {
+    if (fitting) {
+      SchemaUtils.checkNumericType(schema, stage.getLabelCol)
+      if (stage.hasWeightCol) {
+        SchemaUtils.checkNumericType(schema, stage.getWeightCol)
+      } else {
+        logInfo("The weight column is not defined. Treat all instance weights as 1.0.")
+      }
+    }
+
+    val featuresType = schema(stage.getFeaturesCol).dataType
+    require(featuresType == DoubleType || featuresType.isInstanceOf[VectorUDT])
+    SchemaUtils.appendColumn(schema, stage.getPredictionCol, DoubleType)
+  }
+
 }
 
 object IsotonicRegressionServingModel {
-  def apply(stage: IsotonicRegressionModel): IsotonicRegressionServingModel = new IsotonicRegressionServingModel(stage)
+  def apply(stage: IsotonicRegressionModel): IsotonicRegressionServingModel =
+    new IsotonicRegressionServingModel(stage)
 }

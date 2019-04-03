@@ -3,22 +3,21 @@ package org.apache.spark.ml.feature
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.NominalAttribute
 import org.apache.spark.ml.data.{SCol, SDFrame, SimpleCol, UDF}
-import org.apache.spark.ml.feature.{StringIndexer, StringIndexerModel}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.{StringType, StructType}
+import org.apache.spark.sql.types.{NumericType, StringType, StructType}
 import org.apache.spark.util.collection.OpenHashMap
 
 class StringIndexerServingModel(stage: StringIndexerModel)
-  extends ServingModel[StringIndexerServingModel] with StringIndexerBase {
+  extends ServingModel[StringIndexerServingModel] {
 
   override def copy(extra: ParamMap): StringIndexerServingModel = {
     new StringIndexerServingModel(stage.copy(extra))
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    if (!dataset.schema.fieldNames.contains(${stage.inputCol})) {
-      logInfo(s"Input column ${$(stage.inputCol)} does not exist during transformation. " +
+    if (!dataset.schema.fieldNames.contains(stage.getInputCol)) {
+      logInfo(s"Input column ${stage.getInputCol} does not exist during transformation. " +
         "Skip StringIndexerModel.")
       return dataset
     }
@@ -30,12 +29,12 @@ class StringIndexerServingModel(stage: StringIndexerModel)
     }
 
     val metadata = NominalAttribute.defaultAttr
-      .withName($(stage.outputCol)).withValues(filteredLabels).toMetadata()
+      .withName(stage.getOutputCol).withValues(filteredLabels).toMetadata()
     // If we are skipping invalid records, filter them out.
     val (filteredDataset, keepInvalid) = stage.getHandleInvalid match {
       case StringIndexerServingModel.SKIP_INVALID =>
         val filtererUDF = UDF.make[Boolean, String](label => labelToIndex.contains(label))
-        (dataset.na.filter(filtererUDF.apply($(stage.inputCol), dataset($(stage.inputCol)))), false)
+        (dataset.na.filter(filtererUDF.apply(stage.getInputCol, dataset(stage.getInputCol))), false)
       case _ => (dataset, stage.getHandleInvalid == StringIndexerServingModel.KEEP_INVALID)
     }
 
@@ -58,16 +57,33 @@ class StringIndexerServingModel(stage: StringIndexerModel)
         }
       }
     })
-    filteredDataset.select(SCol(), indexerUDF($(stage.outputCol), dataset($(stage.inputCol))))//todo:cast
+    filteredDataset.select(SCol(), indexerUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
+      .setSchema(stage.getOutputCol, metadata))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    if (schema.fieldNames.contains($(inputCol))) {
-      validateAndTransformSchema(schema)
+    if (schema.fieldNames.contains(stage.getInputCol)) {
+      validateAndTransformSchemaImpl(schema)
     } else {
       // If the input column does not exist during transformation, we skip StringIndexerModel.
       schema
     }
+  }
+
+  /** Validates and transforms the input schema. */
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    val inputColName = stage.getInputCol
+    val inputDataType = schema(inputColName).dataType
+    require(inputDataType == StringType || inputDataType.isInstanceOf[NumericType],
+      s"The input column $inputColName must be either string type or numeric type, " +
+        s"but got $inputDataType.")
+    val inputFields = schema.fields
+    val outputColName = stage.getOutputCol
+    require(inputFields.forall(_.name != outputColName),
+      s"Output column $outputColName already exists.")
+    val attr = NominalAttribute.defaultAttr.withName(stage.getOutputCol)
+    val outputFields = inputFields :+ attr.toStructField()
+    StructType(outputFields)
   }
 
   override val uid: String = stage.uid

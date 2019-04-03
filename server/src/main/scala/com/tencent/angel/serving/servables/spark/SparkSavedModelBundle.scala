@@ -11,7 +11,7 @@ import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle,
 import com.tencent.angel.serving.sources.SystemFileUtils
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.ml.utils.ModelUtils
+import org.apache.spark.ml.feature.utils.ModelUtils
 import org.ehcache.sizeof.SizeOf
 
 class SparkSavedModelBundle(servingModel: ServingModel[_]) extends SavedModelBundle {

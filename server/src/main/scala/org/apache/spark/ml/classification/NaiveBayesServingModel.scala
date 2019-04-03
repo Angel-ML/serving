@@ -1,11 +1,10 @@
 package org.apache.spark.ml.classification
 
-import org.apache.spark.ml.classification.NaiveBayesModel
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
 class NaiveBayesServingModel(stage: NaiveBayesModel)
-  extends ProbabilisticClassificationServingModel[Vector, NaiveBayesServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, NaiveBayesServingModel, NaiveBayesModel](stage) with NaiveBayesParams {
 
   private val Multinomial: String = "multinomial"
 
@@ -35,14 +34,15 @@ class NaiveBayesServingModel(stage: NaiveBayesModel)
   }
 
   override def predictRaw(features: Vector): Vector = {
-    $(stage.modelType) match {
+    stage.getModelType match {
       case Multinomial =>
+        stage.getModelType
         multinomialCalculation(features)
       case Bernoulli =>
         bernoulliCalculation(features)
       case _ =>
         // This should never happen.
-        throw new UnknownError(s"Invalid modelType: ${$(stage.modelType)}.")
+        throw new UnknownError(s"Invalid modelType: ${stage.getModelType}.")
     }
   }
 
@@ -74,7 +74,7 @@ class NaiveBayesServingModel(stage: NaiveBayesModel)
     * This precomputes log(1.0 - exp(theta)) and its sum which are used for the linear algebra
     * application of this condition (in predict function).
     */
-  private lazy val (thetaMinusNegTheta, negThetaSum) = $(stage.modelType) match {
+  private lazy val (thetaMinusNegTheta, negThetaSum) = stage.getModelType match {
     case Multinomial => (None, None)
     case Bernoulli =>
       val negTheta = stage.theta.map(value => math.log(1.0 - math.exp(value)))
@@ -85,7 +85,7 @@ class NaiveBayesServingModel(stage: NaiveBayesModel)
       (Option(thetaMinusNegTheta), Option(negTheta.multiply(ones)))
     case _ =>
       // This should never happen.
-      throw new UnknownError(s"Invalid modelType: ${$(stage.modelType)}.")
+      throw new UnknownError(s"Invalid modelType: ${stage.getModelType}.")
   }
 
   override def numClasses: Int = stage.numClasses

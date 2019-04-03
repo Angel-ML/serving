@@ -1,20 +1,21 @@
 package org.apache.spark.ml.regression
 
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.linalg.{Vector}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.ml.util.SchemaUtils
+import org.apache.spark.sql.types.{DoubleType, StructType}
 
 class AFTSurvivalRegressionServingModel(stage: AFTSurvivalRegressionModel)
-  extends ServingModel[AFTSurvivalRegressionServingModel] with AFTSurvivalRegressionParams{
+  extends ServingModel[AFTSurvivalRegressionServingModel] {
 
   override def copy(extra: ParamMap): AFTSurvivalRegressionServingModel = {
     new AFTSurvivalRegressionServingModel(stage.copy(extra))
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
+    transformSchema(dataset.schema, true)
     val predictUDF = {
       UDF.make[Double, Vector](feature =>
         stage.predict(feature))
@@ -23,17 +24,40 @@ class AFTSurvivalRegressionServingModel(stage: AFTSurvivalRegressionModel)
       UDF.make[Vector, Vector](feature =>
         stage.predictQuantiles(feature))
     }
-    if (hasQuantilesCol) {
-      dataset.withColum(predictUDF.apply(${stage.predictionCol}, SCol(${stage.featuresCol})))
-        .withColum(predictQuantilesUDF.apply(${stage.quantilesCol}, SCol(${stage.featuresCol})))
+    var output = dataset
+    if (stage.hasQuantilesCol) {
+      output = dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
+        .withColum(predictQuantilesUDF.apply(stage.getQuantilesCol, SCol(stage.getFeaturesCol)))
     } else {
-      dataset.withColum(predictUDF.apply(${stage.predictionCol}, SCol(${stage.featuresCol})))
+      output = dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
     }
-
+    output
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema, false)
+    validateAndTransformSchemaImpl(schema, false)
+  }
+
+  /**
+    * Validates and transforms the input schema with the provided param map.
+    * @param schema input schema
+    * @param fitting whether this is in fitting or prediction
+    * @return output schema
+    */
+  def validateAndTransformSchemaImpl(
+                                      schema: StructType,
+                                      fitting: Boolean): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getFeaturesCol, new VectorUDT)
+    if (fitting) {
+      SchemaUtils.checkNumericType(schema, stage.getCensorCol)
+      SchemaUtils.checkNumericType(schema, stage.getLabelCol)
+    }
+
+    val schemaWithQuantilesCol = if (stage.hasQuantilesCol) {
+      SchemaUtils.appendColumn(schema, stage.getQuantilesCol, new VectorUDT)
+    } else schema
+
+    SchemaUtils.appendColumn(schemaWithQuantilesCol, stage.getPredictionCol, DoubleType)
   }
 
   override val uid: String = stage.uid

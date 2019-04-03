@@ -1,12 +1,14 @@
 package org.apache.spark.ml.regression
 
+import org.apache.spark.ml.classification.PredictionServingModel
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.feature.PredictionServingModel
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
+import org.apache.spark.ml.tree.DecisionTreeRegressorParams
 
 class DecisionTreeRegressionServingModel(stage: DecisionTreeRegressionModel)
-  extends PredictionServingModel[Vector, DecisionTreeRegressionServingModel] {
+  extends PredictionServingModel[Vector, DecisionTreeRegressionServingModel, DecisionTreeRegressionModel](stage)
+    with DecisionTreeRegressorParams {
 
   override def copy(extra: ParamMap): DecisionTreeRegressionServingModel = {
     new DecisionTreeRegressionServingModel(stage.copy(extra))
@@ -21,7 +23,7 @@ class DecisionTreeRegressionServingModel(stage: DecisionTreeRegressionModel)
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
+    transformSchema(dataset.schema, true)
     transformImpl(dataset)
   }
 
@@ -34,13 +36,14 @@ class DecisionTreeRegressionServingModel(stage: DecisionTreeRegressionModel)
       UDF.make[Double, Vector](feature =>
         predictVariance(feature))
     }
-    if ($(predictionCol).nonEmpty) {
-      dataset.withColum(predictUDF.apply(${stage.predictionCol},SCol(${stage.featuresCol})))
+    var output = dataset
+    if (stage.getPredictionCol.nonEmpty) {
+      output = dataset.withColum(predictUDF.apply(stage.getPredictionCol,SCol(stage.getFeaturesCol)))
     }
-    if (isDefined(stage.varianceCol) && $(stage.varianceCol).nonEmpty) {
-      dataset.withColum(predictVarianceUDF.apply(${stage.varianceCol}, SCol(${stage.featuresCol})))
+    if (isDefined(stage.varianceCol) && stage.getVarianceCol.nonEmpty) {
+      output = dataset.withColum(predictVarianceUDF.apply(stage.getVarianceCol, SCol(stage.getFeaturesCol)))
     }
-     dataset
+     output
   }
 
   override val uid: String = stage.uid

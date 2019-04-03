@@ -3,16 +3,17 @@ package org.apache.spark.ml.regression
 import java.util.Locale
 
 import breeze.stats.{distributions => dist}
+import org.apache.spark.ml.classification.PredictionServingModel
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.feature.OffsetInstance
 import org.apache.spark.ml.linalg.{BLAS, Vector, Vectors}
 import org.apache.spark.ml.optim.WeightedLeastSquaresModel
 import org.apache.spark.ml.param.ParamMap
-import org.apache.spark.ml.feature.PredictionServingModel
 import org.apache.spark.rdd.RDD
 
 class GeneralizedLinearRegressionServingModel(stage: GeneralizedLinearRegressionModel)
-  extends PredictionServingModel[Vector, GeneralizedLinearRegressionServingModel] {
+  extends PredictionServingModel[Vector, GeneralizedLinearRegressionServingModel, GeneralizedLinearRegressionModel](stage)
+    with GeneralizedLinearRegressionBase {
   import GeneralizedLinearRegressionServingModel._
 
   override def copy(extra: ParamMap): GeneralizedLinearRegressionServingModel = {
@@ -47,25 +48,28 @@ class GeneralizedLinearRegressionServingModel(stage: GeneralizedLinearRegression
 
     var output = dataset
     val offSetUDF = UDF.make[Double]( () => 0.0)//todo:create a new Col `offset`
-    val offset = if (!hasOffsetCol) offSetUDF.apply($(stage.offsetCol)) else SCol($(stage.offsetCol))
+    val offset = if (!stage.hasOffsetCol) {
+      output = dataset.withColum(offSetUDF.apply("offset"))
+      SCol("offset")
+    } else SCol(stage.getOffsetCol)
 
-    if ($(stage.predictionCol).nonEmpty) {
-      output = output.withColum(predictUDF.apply(${stage.predictionCol}, SCol(${stage.featuresCol}), offset))
+    if (stage.getPredictionCol.nonEmpty) {
+      output = output.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol), offset))
     }
-    if (hasLinkPredictionCol) {
-      output = output.withColum(predictLinkUDF.apply(${stage.linkPredictionCol}, SCol(${stage.featuresCol}), offset))
+    if (stage.hasLinkPredictionCol) {
+      output = output.withColum(predictLinkUDF.apply(stage.getLinkPredictionCol, SCol(stage.getFeaturesCol), offset))
     }
     output
   }
 
   override val uid: String = stage.uid
 
-  private def hasLinkPredictionCol: Boolean = {
-    isDefined(stage.linkPredictionCol) && $(stage.linkPredictionCol).nonEmpty
+  private def hasLinkPredictionColImpl: Boolean = {
+    isDefined(stage.linkPredictionCol) && stage.getLinkPredictionCol.nonEmpty
   }
 
-  private def hasOffsetCol: Boolean =
-    isSet(stage.offsetCol) && $(stage.offsetCol).nonEmpty
+  private def hasOffsetColImpl: Boolean =
+    isSet(stage.offsetCol) && stage.getOffsetCol.nonEmpty
 
 }
 
@@ -76,7 +80,7 @@ object GeneralizedLinearRegressionServingModel{
 
   private val epsilon: Double = 1E-16
 
-  private class FamilyAndLink(val family: Family, val link: Link) extends Serializable {
+  class FamilyAndLink(val family: Family, val link: Link) extends Serializable {
 
     /** Linear predictor based on given mu. */
     def predict(mu: Double): Double = link.link(family.project(mu))
@@ -100,7 +104,7 @@ object GeneralizedLinearRegressionServingModel{
     }
   }
 
-  private object FamilyAndLink {
+  object FamilyAndLink {
 
     /**
       * Constructs the FamilyAndLink object from a parameter map
@@ -125,7 +129,7 @@ object GeneralizedLinearRegressionServingModel{
     *
     * @param name the name of the family.
     */
-  private abstract class Family(val name: String) extends Serializable {
+  abstract class Family(val name: String) extends Serializable {
 
     /** The default link instance of this family. */
     val defaultLink: Link
@@ -157,7 +161,7 @@ object GeneralizedLinearRegressionServingModel{
     def project(mu: Double): Double = mu
   }
 
-  private object Family {
+  object Family {
 
     /**
       * Gets the [[Family]] object based on param family and variancePower.
@@ -184,7 +188,7 @@ object GeneralizedLinearRegressionServingModel{
     }
   }
 
-  private abstract class Link(val name: String) extends Serializable {
+  abstract class Link(val name: String) extends Serializable {
 
     /** The link function. */
     def link(mu: Double): Double
@@ -196,7 +200,7 @@ object GeneralizedLinearRegressionServingModel{
     def unlink(eta: Double): Double
   }
 
-  private object Link {
+  object Link {
 
     /**
       * Gets the [[Link]] object based on param family, link and linkPower.

@@ -14,8 +14,8 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema, logging = true)
     val schema = dataset.schema
-    val inputType = schema($(stage.inputCol)).dataType
-    val td = $(stage.threshold)
+    val inputType = schema(stage.getInputCol).dataType
+    val td = stage.getThreshold
 
     val binarizerDouble = UDF.make[Double, Double]{ in => if (in > td) 1.0 else 0.0 }
     val binarizerVector = UDF.make[Vector, Vector](data => {
@@ -32,13 +32,14 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
       Vectors.sparse(data.size, indices.result(), values.result()).compressed
     })
 
-    val metadata = outputSchema($(stage.outputCol)).metadata
-    //todo: metadata, whether select() is correct
+    val metadata = outputSchema(stage.getOutputCol).metadata
     inputType match {
       case DoubleType =>
-        dataset.select(SCol(), binarizerDouble.apply($(stage.outputCol), SCol($(stage.inputCol))))
+        dataset.select(SCol(), binarizerDouble.apply(stage.getOutputCol, SCol(stage.getInputCol))
+          .setSchema(stage.getOutputCol, metadata))
       case _: VectorUDT =>
-        dataset.select(SCol(), binarizerVector($(stage.outputCol), SCol($(stage.inputCol))))
+        dataset.select(SCol(), binarizerVector.apply(stage.getOutputCol, SCol(stage.getInputCol))
+          .setSchema(stage.getOutputCol, metadata))
     }
   }
 
@@ -47,8 +48,8 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    val inputType = schema($(stage.inputCol)).dataType
-    val outputColName = $(stage.outputCol)
+    val inputType = schema(stage.getInputCol).dataType
+    val outputColName = stage.getOutputCol
 
     val outCol: StructField = inputType match {
       case DoubleType =>

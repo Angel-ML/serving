@@ -1,12 +1,13 @@
 package org.apache.spark.ml.clustering
 
 import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
-import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.ml.util.SchemaUtils
+import org.apache.spark.sql.types.{IntegerType, StructType}
 
-class KMeansServingModel(stage: KMeansModel) extends ServingModel[KMeansServingModel] with KMeansParams {
+class KMeansServingModel(stage: KMeansModel) extends ServingModel[KMeansServingModel] {
 
   override def copy(extra: ParamMap): KMeansServingModel = {
     new KMeansServingModel(stage.copy(extra))
@@ -16,11 +17,16 @@ class KMeansServingModel(stage: KMeansModel) extends ServingModel[KMeansServingM
     transformSchema(dataset.schema)
 
     val predictUDF = UDF.make[Int, Vector](features => stage.predict(features))
-    dataset.withColum(predictUDF.apply(${stage.predictionCol}, SCol(${stage.featuresCol})))
+    dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema)
+    validateAndTransformSchemaImpl(schema)
+  }
+
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getFeaturesCol, new VectorUDT)
+    SchemaUtils.appendColumn(schema, stage.getPredictionCol, IntegerType)
   }
 
   override val uid: String = stage.uid

@@ -4,7 +4,7 @@ import org.apache.spark.ml.data.SDFrame
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.tuning.TrainValidationSplitModel
-import org.apache.spark.ml.utils.ModelUtils
+import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.types.StructType
 
 class TrainValidationSplitServingModel(stage: TrainValidationSplitModel)
@@ -15,7 +15,7 @@ class TrainValidationSplitServingModel(stage: TrainValidationSplitModel)
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
+    transformSchema(dataset.schema, logging = true)
     ModelUtils.transModel(stage.bestModel).transform(dataset)
   }
 

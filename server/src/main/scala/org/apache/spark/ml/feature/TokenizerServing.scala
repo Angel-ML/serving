@@ -1,13 +1,14 @@
 package org.apache.spark.ml.feature
 
+import org.apache.spark.ml.data.{SDFrame, UDF}
 import org.apache.spark.ml.param.ParamMap
-import org.apache.spark.sql.types.{ArrayType, DataType, StringType}
+import org.apache.spark.sql.types._
 
-class TokenizerServing(stage: Tokenizer) extends UnaryTransformerServing[String, Seq[String], TokenizerServing] {
+class TokenizerServing(stage: Tokenizer) extends UnaryTransformerServing[String, Seq[String], TokenizerServing, Tokenizer](stage) {
 
   override val uid: String = stage.uid
 
-  override protected def createTransformFunc: String => Seq[String] = {
+  def createTransformFunc: String => Seq[String] = {
     _.toLowerCase.split("\\s")
   }
 
@@ -18,7 +19,15 @@ class TokenizerServing(stage: Tokenizer) extends UnaryTransformerServing[String,
   /**
     * Returns the data type of the output column.
     */
-  override protected def outputDataType: DataType = new ArrayType(StringType, true)
+  def outputDataType: DataType = new ArrayType(StringType, true)
+
+  override def transform(dataset: SDFrame): SDFrame = {
+    val stuctType = transformSchema(dataset.schema, true)
+    val metadata = stuctType(stage.getOutputCol).metadata
+    val transformUDF = UDF.make[Seq[String], String](feature => createTransformFunc(feature))
+    dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
+      .setSchema(stage.getOutputCol, metadata))
+  }
 }
 
 object TokenizerServing {

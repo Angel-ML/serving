@@ -1,13 +1,13 @@
 package org.apache.spark.ml.regression
 
+import org.apache.spark.ml.classification.PredictionServingModel
 import org.apache.spark.ml.linalg.BLAS.dot
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.regression.LinearRegressionModel
-import org.apache.spark.ml.feature.PredictionServingModel
 
 class LinearRegressionServingModel(stage: LinearRegressionModel)
-  extends PredictionServingModel[Vector, LinearRegressionServingModel] {
+  extends PredictionServingModel[Vector, LinearRegressionServingModel, LinearRegressionModel](stage) {
 
   override def copy(extra: ParamMap): LinearRegressionServingModel = {
     new LinearRegressionServingModel(stage.copy(extra))

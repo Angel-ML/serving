@@ -119,12 +119,6 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.json4s</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 

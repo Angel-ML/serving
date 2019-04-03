@@ -1,4 +1,4 @@
-package org.apache.spark.ml.utils
+package org.apache.spark.ml.feature.utils
 
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.clustering._
@@ -115,7 +115,19 @@ object ModelUtils {
       case model: PipelineModel =>
         val serStages = model.stages.map(trans)
         new ServingPipelineModel(model.uid, serStages)
-      case model => trans(model).asInstanceOf[ServingModel[_]]
+      case model => {
+        println(model.toString)
+        trans(model).asInstanceOf[ServingModel[_]]
+      }
+    }
+  }
+
+  def transTransformer(sparkModel: Transformer): ServingTrans = {
+    sparkModel match {
+      case model: PipelineModel =>
+        val serStages = model.stages.map(trans)
+        new ServingPipelineModel(model.uid, serStages)
+      case model => trans(model)
     }
   }
 
@@ -125,10 +137,10 @@ object ModelUtils {
       case transformer: Bucketizer => BucketizerServing(transformer)
       case transformer: IsotonicRegressionModel => IsotonicRegressionServingModel(transformer)
       case transformer: MinMaxScalerModel => MinMaxScalerServingModel(transformer)
-      case transformer: RFormulaModel => RFormulaServingModel(transformer)
+      case transformer: RFormulaModel => RFormulaServingModel(transformer)//todo:test???
       case transformer: Word2VecModel => ???
       case transformer: KMeansModel => KMeansServingModel(transformer)
-      case transformer: StringIndexerModel => StringIndexerServingModel(transformer)//todo:cast
+      case transformer: StringIndexerModel => StringIndexerServingModel(transformer)
       case transformer: MinHashLSHModel => MinHashLSHServingModel(transformer)
       case transformer: BucketedRandomProjectionLSHModel => BucketedRandomProjectionLSHServingModel(transformer)
       case transformer: CrossValidatorModel => CrossValidatorServingModel(transformer)
@@ -153,15 +165,15 @@ object ModelUtils {
       case transformer: GaussianMixtureModel => GaussianMixtureServingModel(transformer)
       case transformer: PCAModel => PCAServingModel(transformer)
       case transformer: ChiSqSelectorModel => ChiSqSelectorServingModel(transformer)
-      case transformer: VectorIndexerModel => VectorIndexerServingModel(transformer)//todo: new col whether needs metadata
+      case transformer: VectorIndexerModel => VectorIndexerServingModel(transformer)
       case transformer: ALSModel => ???
-      case transformer: OneHotEncoderModel => ???
-      case transformer: OneVsRestModel => ???
+      case transformer: OneHotEncoderModel => OneHotEncoderServingModel(transformer)//use value to create SCol
+      case transformer: OneVsRestModel => OneVsRestServingModel(transformer)
       case transformer: FPGrowthModel => ???
       case transformer: StandardScalerModel => StandardScalerServingModel(transformer)
       case transformer: CountVectorizerModel => CountVectorizerServingModel(transformer)
       case transformer: IDFModel => IDFServingModel(transformer)
-      case transformer: VectorSizeHint => VectorSizeHintServing(transformer)//todo:new col whether needs metadata
+      case transformer: VectorSizeHint => VectorSizeHintServing(transformer)
       case transformer: FeatureHasher => ???
       case transformer: SQLTransformer => ???
       case transformer: ElementwiseProduct => ElementwiseProductServing(transformer)
@@ -171,13 +183,15 @@ object ModelUtils {
       case transformer: NGram => NGramServing(transformer)
       case transformer: DCT => DCTServing(transformer)
       case transformer: PolynomialExpansion => PolynomialExpansionServing(transformer)
-      case transformer: VectorSlicer => VectorSlicerServing(transformer)//todo: whether metadata is necessary
-      case transformer: Binarizer => BinarizerServing(transformer)//todo: whether metadata is necessary
-      case transformer: HashingTF => HashingTFServing(transformer)//todo: whether metadata is necessary
-      case transformer: StopWordsRemover => StopWordsRemoverServing(transformer)//todo: whether metadata is necessary
-      case transformer: IndexToString => IndexToStringServing(transformer)//todo: whether select is correct
-      case transformer: VectorAssembler => VectorAssemblerServing(transformer)//todo: struct
-      case transformer: Interaction => InteractionServing(transformer)//todo: struct
+      case transformer: VectorSlicer => VectorSlicerServing(transformer)
+      case transformer: Binarizer => BinarizerServing(transformer)
+      case transformer: HashingTF => HashingTFServing(transformer)
+      case transformer: StopWordsRemover => StopWordsRemoverServing(transformer)
+      case transformer: IndexToString => IndexToStringServing(transformer)
+      case transformer: VectorAssembler => VectorAssemblerServing(transformer)//todo: struct test???
+      case transformer: Interaction => InteractionServing(transformer)//todo: struct, test???
+      case transformer: VectorAttributeRewriter => VectorAttributeRewriterServing(transformer)
+      case transformer: ColumnPruner => ColumnPrunerServing(transformer)
     }
   }
 
@@ -218,6 +232,7 @@ object ModelUtils {
         VectorAssembler.load(path)
       case modelName if classOf[Interaction].getSimpleName.equalsIgnoreCase(modelName) =>
         Interaction.load(path)
+      case modelName if modelName.startsWith("vectorAttrRewriter") => ???
     }
   }
 }

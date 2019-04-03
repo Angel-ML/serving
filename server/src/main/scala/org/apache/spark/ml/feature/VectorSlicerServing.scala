@@ -13,9 +13,9 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
 
-    val inputAttr = AttributeGroup.fromStructField(dataset.schema($(stage.inputCol)))
+    val inputAttr = AttributeGroup.fromStructField(dataset.schema(stage.getInputCol))
     inputAttr.numAttributes.foreach { numFeatures =>
-      val maxIndex = $(stage.indices).max
+      val maxIndex = stage.getIndices.max
       require(maxIndex < numFeatures,
         s"Selected feature index $maxIndex invalid for only $numFeatures input features.")
     }
@@ -26,8 +26,8 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
       inds.map(index => attrs(index))
     }
     val outputAttr = selectedAttrs match {
-      case Some(attrs) => new AttributeGroup($(stage.outputCol), attrs)
-      case None => new AttributeGroup($(stage.outputCol), inds.length)
+      case Some(attrs) => new AttributeGroup(stage.getOutputCol, attrs)
+      case None => new AttributeGroup(stage.getOutputCol, inds.length)
     }
 
     // Select features
@@ -37,8 +37,8 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
         case features: SparseVector => features.slice(inds)
       }
     )
-    //todo: whether metadata is necessary
-    dataset.withColum(slicerUDF.apply($(stage.outputCol), dataset($(stage.inputCol))))
+    dataset.withColum(slicerUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
+      .setSchema(stage.getOutputCol, outputAttr.toMetadata()))
   }
 
   override def copy(extra: ParamMap): VectorSlicerServing = {
@@ -46,15 +46,15 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    require($(stage.indices).length > 0 || $(stage.names).length > 0,
+    require(stage.getIndices.length > 0 || stage.getNames.length > 0,
       s"VectorSlicer requires that at least one feature be selected.")
-    SchemaUtils.checkColumnType(schema, $(stage.inputCol), new VectorUDT)
+    SchemaUtils.checkColumnType(schema, stage.getInputCol, new VectorUDT)
 
-    if (schema.fieldNames.contains($(stage.outputCol))) {
-      throw new IllegalArgumentException(s"Output column ${$(stage.outputCol)} already exists.")
+    if (schema.fieldNames.contains(stage.getOutputCol)) {
+      throw new IllegalArgumentException(s"Output column ${stage.getOutputCol} already exists.")
     }
-    val numFeaturesSelected = $(stage.indices).length + $(stage.names).length
-    val outputAttr = new AttributeGroup($(stage.outputCol), numFeaturesSelected)
+    val numFeaturesSelected = stage.getIndices.length + stage.getNames.length
+    val outputAttr = new AttributeGroup(stage.getOutputCol, numFeaturesSelected)
     val outputFields = schema.fields :+ outputAttr.toStructField()
     StructType(outputFields)
   }
@@ -63,14 +63,14 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
 
   /** Get the feature indices in order: indices, names */
   private def getSelectedFeatureIndices(schema: StructType): Array[Int] = {
-    val nameFeatures = MetadataUtils.getFeatureIndicesFromNames(schema($(stage.inputCol)), $(stage.names))
-    val indFeatures = $(stage.indices)
+    val nameFeatures = MetadataUtils.getFeatureIndicesFromNames(schema(stage.getInputCol), stage.getNames)
+    val indFeatures = stage.getIndices
     val numDistinctFeatures = (nameFeatures ++ indFeatures).distinct.length
     lazy val errMsg = "VectorSlicer requires indices and names to be disjoint" +
       s" sets of features, but they overlap." +
       s" indices: ${indFeatures.mkString("[", ",", "]")}." +
       s" names: " +
-      nameFeatures.zip($(stage.names)).map { case (i, n) => s"$i:$n" }.mkString("[", ",", "]")
+      nameFeatures.zip(stage.getNames).map { case (i, n) => s"$i:$n" }.mkString("[", ",", "]")
     require(nameFeatures.length + indFeatures.length == numDistinctFeatures, errMsg)
     indFeatures ++ nameFeatures
   }

@@ -4,7 +4,8 @@ import org.apache.spark.ml.feature.{MinHashLSH, MinHashLSHModel}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
-class MinHashLSHServingModel(stage: MinHashLSHModel) extends LSHServingModel[MinHashLSHServingModel] {
+class MinHashLSHServingModel(stage: MinHashLSHModel)
+  extends LSHServingModel[MinHashLSHServingModel, MinHashLSHModel](stage) {
 
   override val hashFunction: Vector => Array[Vector] = {
     elems: Vector => {

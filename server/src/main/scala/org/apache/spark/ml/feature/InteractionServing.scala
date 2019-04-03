@@ -15,11 +15,11 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, logging = true)
-    val inputFeatures = $(stage.inputCols).map(c => dataset.schema(c))
+    val inputFeatures = stage.getInputCols.map(c => dataset.schema(c))
     val featureEncoders = getFeatureEncoders(inputFeatures)
     val featureAttrs = getFeatureAttrs(inputFeatures)
 
-    def interactUDF = UDF.make[Vector, SRow](row => {
+    val interactUDF = UDF.make[Vector, SRow](row => {
       var indices = ArrayBuilder.make[Int]
       var values = ArrayBuilder.make[Double]
       var size = 1
@@ -55,7 +55,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
       }
     }
     dataset.select(SCol(),
-      interactUDF.apply($(stage.outputCol), featureCols:_*))//todo: struct
+      interactUDF.apply(stage.getOutputCol, featureCols:_*).setSchema(stage.getOutputCol, featureAttrs.toMetadata()))//todo: struct
   }
 
   override def copy(extra: ParamMap): InteractionServing = {
@@ -63,11 +63,11 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    require(get(stage.inputCols).isDefined, "Input cols must be defined first.")
-    require(get(stage.outputCol).isDefined, "Output col must be defined first.")
-    require($(stage.inputCols).length > 0, "Input cols must have non-zero length.")
-    require($(stage.inputCols).distinct.length == $(stage.inputCols).length, "Input cols must be distinct.")
-    StructType(schema.fields :+ StructField($(stage.outputCol), new VectorUDT, false))
+//    require(get(stage.inputCols).isDefined, "Input cols must be defined first.")
+//    require(get(stage.outputCol).isDefined, "Output col must be defined first.")
+    require(stage.getInputCols.length > 0, "Input cols must have non-zero length.")
+    require(stage.getInputCols.distinct.length == stage.getInputCols.length, "Input cols must be distinct.")
+    StructType(schema.fields :+ StructField(stage.getOutputCol, new VectorUDT, false))
   }
 
   override val uid: String = stage.uid
@@ -137,7 +137,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
         }
       }
     }
-    new AttributeGroup($(stage.outputCol), featureAttrs.toArray)
+    new AttributeGroup(stage.getOutputCol, featureAttrs.toArray)
   }
 
   /**

@@ -1,9 +1,13 @@
 package org.apache.spark.ml.classification
+import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
+import org.apache.spark.ml.tree.DecisionTreeClassifierParams
 
 class DecisionTreeClassificationServingModel(stage: DecisionTreeClassificationModel)
-  extends ProbabilisticClassificationServingModel[Vector, DecisionTreeClassificationServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, DecisionTreeClassificationServingModel,
+    DecisionTreeClassificationModel](stage) with DecisionTreeClassifierParams {
+
   override def raw2probabilityInPlace(rawPrediction: Vector): Vector = {
     rawPrediction match {
       case dv: DenseVector =>

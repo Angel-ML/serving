@@ -3,7 +3,8 @@ import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 
 class LogisticRegressionServingModel(stage: LogisticRegressionModel)
-  extends ProbabilisticClassificationServingModel[Vector, LogisticRegressionServingModel] {
+  extends ProbabilisticClassificationServingModel[Vector, LogisticRegressionServingModel, LogisticRegressionModel](stage)
+  with LogisticRegressionParams {
 
   private val isMultinomial: Boolean = if (stage.numClasses > 2) true else false
 

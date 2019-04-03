@@ -6,21 +6,32 @@ import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.ml.linalg._
+import org.apache.spark.ml.util.SchemaUtils
 
-class IDFServingModel(stage: IDFModel)  extends ServingModel[IDFServingModel] with IDFBase {
+class IDFServingModel(stage: IDFModel)  extends ServingModel[IDFServingModel] {
 
   override def copy(extra: ParamMap): IDFServingModel = {
     new IDFServingModel(stage.copy(extra))
   }
 
   override def transform(dataset: SDFrame): SDFrame = {
-    transformSchema(dataset.schema)
-    val idfUDF = UDF.make[Vector, Vector](features => trans(stage.idf, features))
-    dataset.withColum(idfUDF.apply($(stage.outputCol), SCol($(stage.inputCol))))
+    transformSchema(dataset.schema, true)
+    val idfUDF = UDF.make[Vector, Vector](features => {
+      trans(stage.idf, features)
+    })
+    dataset.withColum(idfUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 
   override def transformSchema(schema: StructType): StructType = {
-    validateAndTransformSchema(schema)
+    validateAndTransformSchemaImpl(schema)
+  }
+
+  /**
+    * Validate and transform the input schema.
+    */
+  def validateAndTransformSchemaImpl(schema: StructType): StructType = {
+    SchemaUtils.checkColumnType(schema, stage.getInputCol, new VectorUDT)
+    SchemaUtils.appendColumn(schema, stage.getOutputCol, new VectorUDT)
   }
 
   override val uid: String = stage.uid
