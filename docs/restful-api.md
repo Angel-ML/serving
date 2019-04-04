@@ -244,7 +244,7 @@ Response 返回的结果为json对象
 请求：
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}]}' localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
+curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}]}' localhost:8501/v1/models/lr/versions/6:predict
 ```
 
 返回：
