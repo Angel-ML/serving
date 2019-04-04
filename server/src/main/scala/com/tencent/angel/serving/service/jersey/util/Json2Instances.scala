@@ -479,6 +479,7 @@ object Json2Instances {
               case TypesProtos.DataType.DT_FLOAT =>
                 example = array.values.map {
                   case x: Float => x
+                  case x: Double => x.toFloat
                   case x: Long => x.toFloat
                   case x: Int => x.toInt
                   case x: String => x.toFloat
