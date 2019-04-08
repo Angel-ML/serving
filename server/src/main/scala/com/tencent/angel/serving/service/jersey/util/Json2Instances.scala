@@ -76,6 +76,7 @@ object Json2Instances {
                       example = jObject.values.map {
                         case (k, v: Int) => (k, v)
                         case (k, v: String) => (k, v.toInt)
+                        case (k, v: BigInt) => (k, v.toInt)
                         case (_, v) =>
                           throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Int")
                       }
@@ -84,6 +85,7 @@ object Json2Instances {
                         case (k, v: Long) => (k, v)
                         case (k, v: Int) => (k, v.toLong)
                         case (k, v: String) => (k, v.toLong)
+                        case (k, v: BigInt) => (k, v.toLong)
                         case (_, v) =>
                           throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Long")
                       }
@@ -94,6 +96,7 @@ object Json2Instances {
                         case (k, v: Long) => (k, v.toFloat)
                         case (k, v: Int) => (k, v.toFloat)
                         case (k, v: String) => (k, v.toFloat)
+                        case (k, v: BigInt) => (k, v.toFloat)
                         case (_, v) =>
                           throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                       }
@@ -104,6 +107,7 @@ object Json2Instances {
                         case (k, v: Long) => (k, v.toDouble)
                         case (k, v: Int) => (k, v.toDouble)
                         case (k, v: String) => (k, v.toDouble)
+                        case (k, v: BigInt) => (k, v.toDouble)
                         case (_, v) =>
                           throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                       }
@@ -148,6 +152,7 @@ object Json2Instances {
                   case (k, v: Long) => (k, v.toFloat)
                   case (k, v: Int) => (k, v.toFloat)
                   case (k, v: String) => (k, v.toFloat)
+                  case (k, v: BigInt) => (k, v.toFloat)
                   case (_, v) =>
                     throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                 }
@@ -158,6 +163,7 @@ object Json2Instances {
                   case (k, v: Long) => (k, v.toDouble)
                   case (k, v: Int) => (k, v.toDouble)
                   case (k, v: String) => (k, v.toDouble)
+                  case (k, v: BigInt) => (k, v.toDouble)
                   case (_, v) =>
                     throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                 }
@@ -207,6 +213,7 @@ object Json2Instances {
                             case v: Long => v.toFloat
                             case v: Int => v.toFloat
                             case v: String => v.toFloat
+                            case v: BigInt => v.toFloat
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                           }
@@ -217,6 +224,7 @@ object Json2Instances {
                             case v: Long => v.toDouble
                             case v: Int => v.toDouble
                             case v: String => v.toDouble
+                            case v: BigInt => v.toDouble
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                           }
@@ -257,6 +265,7 @@ object Json2Instances {
                             case (k, v: Long) => (k, v.toFloat)
                             case (k, v: Int) => (k, v.toFloat)
                             case (k, v: String) => (k, v.toFloat)
+                            case (k, v: BigInt) => (k, v.toFloat)
                             case (_, v) =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                           }
@@ -267,6 +276,7 @@ object Json2Instances {
                             case (k, v: Long) => (k, v.toDouble)
                             case (k, v: Int) => (k, v.toDouble)
                             case (k, v: String) => (k, v.toDouble)
+                            case (k, v: BigInt) => (k, v.toDouble)
                             case (_, v) =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                           }
@@ -313,6 +323,7 @@ object Json2Instances {
                       case (k, v: Long) => (k, v.toFloat)
                       case (k, v: Int) => (k, v.toFloat)
                       case (k, v: String) => (k, v.toFloat)
+                      case (k, v: BigInt) => (k, v.toFloat)
                       case (_, v) =>
                         throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                     }
@@ -323,6 +334,7 @@ object Json2Instances {
                       case (k, v: Long) => (k, v.toDouble)
                       case (k, v: Int) => (k, v.toDouble)
                       case (k, v: String) => (k, v.toDouble)
+                      case (k, v: BigInt) => (k, v.toDouble)
                       case (_, v) =>
                         throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                     }
@@ -369,6 +381,7 @@ object Json2Instances {
                             case v: Long => v.toFloat
                             case v: Int => v.toFloat
                             case v: String => v.toFloat
+                            case v: BigInt => v.toFloat
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                           }
@@ -379,6 +392,7 @@ object Json2Instances {
                             case v: Long => v.toDouble
                             case v: Int => v.toDouble
                             case v: String => v.toDouble
+                            case v: BigInt => v.toDouble
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                           }
@@ -420,6 +434,7 @@ object Json2Instances {
                             case v: Long => v.toFloat
                             case v: Int => v.toFloat
                             case x: String => x.toFloat
+                            case v: BigInt => v.toFloat
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
                           }
@@ -430,6 +445,7 @@ object Json2Instances {
                             case v: Long => v.toDouble
                             case v: Int => v.toDouble
                             case x: String => x.toDouble
+                            case v: BigInt => v.toDouble
                             case v =>
                               throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
                           }
@@ -483,6 +499,7 @@ object Json2Instances {
                   case x: Long => x.toFloat
                   case x: Int => x.toInt
                   case x: String => x.toFloat
+                  case v: BigInt => v.toFloat
                   case x =>
                     throw new Exception(s"${x.getClass.getSimpleName} Data Type not match Float")
                 }
@@ -493,6 +510,7 @@ object Json2Instances {
                   case x: Long => x.toDouble
                   case x: Int => x.toDouble
                   case x: String => x.toDouble
+                  case v: BigInt => v.toDouble
                   case x =>
                     throw new Exception(s"${x.getClass.getSimpleName} Data Type not match Double")
                 }
