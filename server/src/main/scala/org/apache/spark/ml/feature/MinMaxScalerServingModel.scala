@@ -31,7 +31,7 @@ class MinMaxScalerServingModel(stage: MinMaxScalerModel)
         i += 1
       }
       Vectors.dense(values)
-    })
+    }, false)
     dataset.withColum(reScaleUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

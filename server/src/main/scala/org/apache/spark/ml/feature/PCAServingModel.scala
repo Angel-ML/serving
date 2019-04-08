@@ -23,7 +23,7 @@ class PCAServingModel(stage: PCAModel) extends ServingModel[PCAServingModel] {
       OldMatrices.fromML(stage.pc).asInstanceOf[OldDenseMatrix],
       OldVectors.fromML(stage.explainedVariance).asInstanceOf[OldDenseVector])
     val pcaUDF = UDF.make[Vector, Vector](
-      features => pcaModel.transform(OldVectors.fromML(features)).asML)
+      features => pcaModel.transform(OldVectors.fromML(features)).asML, false)
     dataset.withColum(pcaUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

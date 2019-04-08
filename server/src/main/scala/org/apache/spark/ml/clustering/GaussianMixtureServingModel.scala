@@ -18,8 +18,8 @@ class GaussianMixtureServingModel(stage: GaussianMixtureModel)
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, true)
-    val predUDF = UDF.make[Int, Vector](features => predict(features))
-    val probUDF = UDF.make[Vector, Vector](features => predictProbability(features))
+    val predUDF = UDF.make[Int, Vector](predict, false)
+    val probUDF = UDF.make[Vector, Vector](predictProbability, false)
     dataset.withColum(predUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
       .withColum(probUDF.apply(stage.getProbabilityCol, SCol(stage.getFeaturesCol)))
   }

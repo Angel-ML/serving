@@ -12,7 +12,7 @@ abstract class LSHServingModel[M <: LSHServingModel[M, T], T <: LSHModel[T]](sta
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
-    val transformUDF = UDF.make[Array[Vector], Vector](feature => hashFunction(feature))
+    val transformUDF = UDF.make[Array[Vector], Vector](hashFunction, false)
     dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol)))
   }
 

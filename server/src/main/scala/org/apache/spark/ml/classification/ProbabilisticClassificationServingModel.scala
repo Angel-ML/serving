@@ -22,21 +22,17 @@ abstract class ProbabilisticClassificationServingModel[
     var outputData = dataset
     var numColsOutput = 0
     if (stage.getRawPredictionCol.nonEmpty) {
-      val predictRawUDF = UDF.make[Vector, Vector](features =>
-        predictRaw(features.asInstanceOf[Vector])
-      )
+      val predictRawUDF = UDF.make[Vector, Vector](predictRaw, false)
       println(stage.getFeaturesCol)
       outputData = outputData.withColum(predictRawUDF.apply(stage.getRawPredictionCol, SCol(stage.getFeaturesCol)))
       numColsOutput += 1
     }
     if (stage.getProbabilityCol.nonEmpty) {
       val probUDF = if (stage.getRawPredictionCol.nonEmpty) {
-        UDF.make[Vector, Vector](features =>
-          raw2probability(features))
+        UDF.make[Vector, Vector](raw2probability, false)
           .apply(stage.getProbabilityCol, SCol(stage.getRawPredictionCol))
       } else {
-        UDF.make[Vector, Any](features =>
-          predictProbability(features.asInstanceOf[Vector]))
+        UDF.make[Vector, Vector](predictProbability, false)
           .apply(stage.getProbabilityCol, SCol(stage.getFeaturesCol))
       }
       outputData = outputData.withColum(probUDF)
@@ -44,16 +40,13 @@ abstract class ProbabilisticClassificationServingModel[
     }
     if (stage.getPredictionCol.nonEmpty) {
       val predUDF = if (stage.getRawPredictionCol.nonEmpty) {
-        UDF.make[Double, Vector](features =>
-          raw2prediction(features))
+        UDF.make[Double, Vector](raw2prediction, false)
           .apply(stage.getPredictionCol, SCol(stage.getRawPredictionCol))
       } else if (stage.getProbabilityCol.nonEmpty) {
-        UDF.make[Double, Vector](features =>
-          probability2prediction(features))
+        UDF.make[Double, Vector](probability2prediction, false)
           .apply(stage.getPredictionCol, SCol(stage.getProbabilityCol))
       } else {
-        UDF.make[Double, Vector](features =>
-          predict(features.asInstanceOf[Vector]))
+        UDF.make[Double, Vector](predict, false)
           .apply(stage.getPredictionCol, SCol(stage.getFeaturesCol))
       }
       outputData = outputData.withColum(predUDF)

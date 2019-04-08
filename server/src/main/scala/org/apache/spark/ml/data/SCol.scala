@@ -1,6 +1,6 @@
 package org.apache.spark.ml.data
 
-import org.apache.spark.sql.types.{DataType, Metadata, StructField, StructType}
+import org.apache.spark.sql.types._
 
 abstract class SCol(val name: String) {
   var resSchema: StructType
@@ -31,6 +31,7 @@ object SCol {
 
 class StarCol(name: String = "*") extends SCol(name) {
   override var resSchema: StructType = _
+
   def apply(ipRow: Array[Any]): Any = ipRow
 
   override def check(implicit schema: StructType): Boolean = {
@@ -77,8 +78,8 @@ class SimpleCol(name: String) extends SCol(name) {
   }
 
   override def setSchema(
-                 name: String,
-                 metadata: Metadata = Metadata.empty): UDFCol = ???
+                          name: String,
+                          metadata: Metadata = Metadata.empty): UDFCol = ???
 
   override def setSchema(name: String, dataType: DataType, metadata: Metadata): SCol = {
     if (this.resSchema == null) {
@@ -103,13 +104,25 @@ class UDFCol(name: String, udf: UDF) extends SCol(name) {
         fun0()
       case 1 =>
         val fun1 = udf.f.asInstanceOf[Any => Any]
-        fun1(ipRow(idxs.head))
+        if (udf.isVarParams) {
+          fun1(idxs.map(i => ipRow(i)))
+        } else {
+          fun1(ipRow(idxs.head))
+        }
       case 2 =>
         val fun2 = udf.f.asInstanceOf[(Any, Any) => Any]
-        fun2(ipRow(idxs.head), ipRow(idxs(1)))
+        if (udf.isVarParams) {
+          fun2(ipRow(idxs.head), idxs.tail.map(i => ipRow(i)))
+        } else {
+          fun2(ipRow(idxs.head), ipRow(idxs(1)))
+        }
       case 3 =>
         val fun3 = udf.f.asInstanceOf[(Any, Any, Any) => Any]
-        fun3(ipRow(idxs.head), ipRow(idxs(1)), ipRow(idxs(2)))
+        if (udf.isVarParams) {
+          fun3(ipRow(idxs.head), ipRow(idxs(1)), idxs.tail.tail.map(i => ipRow(i)))
+        } else {
+          fun3(ipRow(idxs.head), ipRow(idxs(1)), ipRow(idxs(2)))
+        }
       case _ => false
     }
   }
@@ -131,8 +144,37 @@ class UDFCol(name: String, udf: UDF) extends SCol(name) {
 
     // 2. check input data type
     if (udf.inputTypes.nonEmpty) {
-      val isMatch = udf.inputTypes.get.zip(inColDTs).forall {
-        case (dt1, dt2) => dt1.getClass.getSimpleName == dt2.getClass.getSimpleName
+      val isMatch = if (inColDTs.length == udf.inputTypes.get.length && !udf.isVarParams) {
+        udf.inputTypes.get.zip(inColDTs).forall {
+          case (dt1, dt2) =>
+            dt1.getClass.getSimpleName == dt2.getClass.getSimpleName
+        }
+      } else if (inColDTs.length == udf.inputTypes.get.length - 1 && udf.isVarParams) {
+        // no params for VarParams
+        inColDTs.zipWithIndex.forall {
+          case (dt2, idx) =>
+            val dt1 = udf.inputTypes.get.apply(idx)
+            dt1.getClass.getSimpleName == dt2.getClass.getSimpleName
+        }
+      } else if (inColDTs.length >= udf.inputTypes.get.length && udf.isVarParams) {
+        // Note: varParam must come last
+        val lastParamIdx = udf.inputTypes.get.length - 1
+        udf.inputTypes.get.zipWithIndex.forall {
+          case (dt1, idx) if idx != lastParamIdx =>
+            val dt2 = inColDTs(idx)
+            dt1.getClass.getSimpleName == dt2.getClass.getSimpleName
+          case (ArrayType(eleType, _), idx) if idx == lastParamIdx =>
+            val dt1Name = eleType.getClass.getSimpleName
+            if (dt1Name == classOf[AnyType].getSimpleName) {
+              true
+            } else {
+              (idx until inColDTs.length).forall { i =>
+                inColDTs(i).getClass.getSimpleName == dt1Name
+              }
+            }
+        }
+      } else {
+        false
       }
 
       if (!isMatch) {
@@ -141,16 +183,16 @@ class UDFCol(name: String, udf: UDF) extends SCol(name) {
     }
 
     // 3. prepare output schema
-    this.resSchema = new StructType().add(new StructField(name, udf.dataType, udf.isNullable))
+    this.resSchema = new StructType().add(StructField(name, udf.dataType, udf.isNullable))
 
     true
   }
 
   override def setSchema(
-                name: String,
-                metadata: Metadata = Metadata.empty): UDFCol ={
+                          name: String,
+                          metadata: Metadata = Metadata.empty): UDFCol = {
     if (this.resSchema == null) {
-      this.resSchema = new StructType().add(new StructField(name, udf.dataType, udf.isNullable, metadata))
+      this.resSchema = new StructType().add(StructField(name, udf.dataType, udf.isNullable, metadata))
     } else {
       val iter = this.resSchema.iterator
       iter.dropWhile(s => s.name == name)
@@ -161,7 +203,7 @@ class UDFCol(name: String, udf: UDF) extends SCol(name) {
 
   override def setSchema(name: String, dataType: DataType, metadata: Metadata): SCol = {
     if (this.resSchema == null) {
-      this.resSchema = new StructType().add(new StructField(name, dataType, udf.isNullable, metadata))
+      this.resSchema = new StructType().add(StructField(name, dataType, udf.isNullable, metadata))
     } else {
       val iter = this.resSchema.iterator
       iter.dropWhile(s => s.name == name)

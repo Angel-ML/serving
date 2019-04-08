@@ -21,7 +21,7 @@ class CountVectorizerServingModel(stage: CountVectorizerModel)
     //todo: broadcast whether is necessary
     val dict = stage.vocabulary.zipWithIndex.toMap
     val minTf = stage.getMinTF
-    val vectorizerUDF = UDF.make[Vector, Array[String]]{ document =>
+    val vectorizerUDF = UDF.make[Vector, Array[String]](document => {
       val termCounts = new OpenHashMap[Int, Double]
       var tokenCount = 0L
       document.foreach { term =>
@@ -39,7 +39,7 @@ class CountVectorizerServingModel(stage: CountVectorizerModel)
       }
 
       Vectors.sparse(dict.size, effectiveCounts)
-    }
+    }, false)
      dataset.withColum(vectorizerUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

@@ -16,7 +16,7 @@ class BisectingKMeansServingModel(stage: BisectingKMeansModel)
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, logging = true)
-    val predictUDF = UDF.make[Int, Vector](features => stage.predict(features))
+    val predictUDF = UDF.make[Int, Vector](stage.predict, false)
     dataset.withColum(predictUDF(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 

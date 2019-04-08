@@ -19,7 +19,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
     val featureEncoders = getFeatureEncoders(inputFeatures)
     val featureAttrs = getFeatureAttrs(inputFeatures)
 
-    val interactUDF = UDF.make[Vector, SRow](row => {
+    val interactUDF = UDF.make[Vector, Seq[Any]](row => {
       var indices = ArrayBuilder.make[Int]
       var values = ArrayBuilder.make[Double]
       var size = 1
@@ -34,7 +34,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
         indices = ArrayBuilder.make[Int]
         values = ArrayBuilder.make[Double]
         size *= currentEncoder.outputSize
-        currentEncoder.foreachNonzeroOutput(row.get(featureIndex), (i, a) => {
+        currentEncoder.foreachNonzeroOutput(row(featureIndex), (i, a) => {
           var j = 0
           while (j < prevIndices.length) {
             indices += prevIndices(j) + i * prevSize
@@ -45,7 +45,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
         featureIndex -= 1
       }
       Vectors.sparse(size, indices.result(), values.result()).compressed
-    })
+    }, true)
 
     val featureCols = inputFeatures.map { f =>
       f.dataType match {

@@ -17,12 +17,10 @@ class AFTSurvivalRegressionServingModel(stage: AFTSurvivalRegressionModel)
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, true)
     val predictUDF = {
-      UDF.make[Double, Vector](feature =>
-        stage.predict(feature))
+      UDF.make[Double, Vector](stage.predict, false)
     }
     val predictQuantilesUDF = {
-      UDF.make[Vector, Vector](feature =>
-        stage.predictQuantiles(feature))
+      UDF.make[Vector, Vector](stage.predictQuantiles, false)
     }
     var output = dataset
     if (stage.hasQuantilesCol) {

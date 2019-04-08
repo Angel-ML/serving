@@ -25,8 +25,7 @@ abstract class PredictionServingModel[FeaturesType, M <: PredictionServingModel[
 
   def transformImpl(dataset: SDFrame): SDFrame = {
     val predictUDF = {
-      UDF.make[Double, Vector](feature =>
-        predict(feature))
+      UDF.make[Double, Vector](predict, false)
     }
 
     dataset.withColum(predictUDF.apply(stage.getPredictionCol,SCol(stage.getFeaturesCol)))

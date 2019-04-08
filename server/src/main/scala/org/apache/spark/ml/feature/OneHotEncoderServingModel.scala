@@ -69,7 +69,7 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
         } else {
           Vectors.sparse(size, Array.empty[Int], Array.empty[Double])
         }
-      })
+      }, false)
 
       val idxUDF =UDF.make[Int](() => idx)
       output = output.withColum(idxUDF.apply("idx"))

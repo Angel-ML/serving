@@ -16,7 +16,7 @@ class StandardScalerServingModel(stage: StandardScalerModel)
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
-    val scaleUDF = UDF.make[Vector, Vector](features => trans(features))
+    val scaleUDF = UDF.make[Vector, Vector](trans, false)
     dataset.withColum(scaleUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

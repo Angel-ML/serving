@@ -17,7 +17,7 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
     val inputType = schema(stage.getInputCol).dataType
     val td = stage.getThreshold
 
-    val binarizerDouble = UDF.make[Double, Double]{ in => if (in > td) 1.0 else 0.0 }
+    val binarizerDouble = UDF.make[Double, Double]( in => {if (in > td) 1.0 else 0.0 }, false)
     val binarizerVector = UDF.make[Vector, Vector](data => {
       val indices = ArrayBuilder.make[Int]
       val values = ArrayBuilder.make[Double]
@@ -30,7 +30,7 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
       }
 
       Vectors.sparse(data.size, indices.result(), values.result()).compressed
-    })
+    }, false)
 
     val metadata = outputSchema(stage.getOutputCol).metadata
     inputType match {

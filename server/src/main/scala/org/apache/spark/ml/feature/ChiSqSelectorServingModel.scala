@@ -19,8 +19,7 @@ class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[
     val transformedSchema = transformSchema(dataset.schema, true)
     val metadata = transformedSchema.last.metadata
 
-    val selectorUDF = UDF.make[Vector, Vector](
-      features => compress(features))
+    val selectorUDF = UDF.make[Vector, Vector](compress, false)
     dataset.withColum(selectorUDF.apply(stage.getOutputCol, SCol(stage.getFeaturesCol))
       .setSchema(stage.getOutputCol, metadata))
   }

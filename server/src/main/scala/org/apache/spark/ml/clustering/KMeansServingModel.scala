@@ -16,7 +16,7 @@ class KMeansServingModel(stage: KMeansModel) extends ServingModel[KMeansServingM
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
 
-    val predictUDF = UDF.make[Int, Vector](features => stage.predict(features))
+    val predictUDF = UDF.make[Int, Vector](stage.predict, false)
     dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }
 

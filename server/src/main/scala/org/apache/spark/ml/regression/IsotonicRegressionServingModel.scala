@@ -20,10 +20,10 @@ class IsotonicRegressionServingModel(stage: IsotonicRegressionModel)
     transformSchema(dataset.schema, true)
     val predictUDF = dataset.schema(stage.getFeaturesCol).dataType match {
       case DoubleType =>
-        UDF.make[Double, Double](feature => predict(feature))
+        UDF.make[Double, Double](predict, false)
       case _: VectorUDT =>
         val idx = stage.getFeatureIndex
-        UDF.make[Double, Vector](feature => predict(feature(idx)))
+        UDF.make[Double, Vector](feature => predict(feature(idx)), false)
     }
     dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
   }

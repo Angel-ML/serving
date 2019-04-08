@@ -27,7 +27,7 @@ class IndexToStringServing(stage: IndexToString) extends ServingTrans{
       } else {
         throw new SparkException(s"Unseen index: $index ??")
       }
-    })
+    }, false)
     val outputColName = stage.getOutputCol
     dataset.select(SCol(), indexer.apply(outputColName, dataset(stage.getInputCol)))
   }

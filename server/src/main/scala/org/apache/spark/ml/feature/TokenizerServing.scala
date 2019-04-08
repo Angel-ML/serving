@@ -24,7 +24,7 @@ class TokenizerServing(stage: Tokenizer) extends UnaryTransformerServing[String,
   override def transform(dataset: SDFrame): SDFrame = {
     val stuctType = transformSchema(dataset.schema, true)
     val metadata = stuctType(stage.getOutputCol).metadata
-    val transformUDF = UDF.make[Seq[String], String](feature => createTransformFunc(feature))
+    val transformUDF = UDF.make[Seq[String], String](createTransformFunc, false)
     dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
       .setSchema(stage.getOutputCol, metadata))
   }

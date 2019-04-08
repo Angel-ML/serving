@@ -42,9 +42,9 @@ class GeneralizedLinearRegressionServingModel(stage: GeneralizedLinearRegression
 
   override def transformImpl(dataset: SDFrame): SDFrame = {
     val predictUDF = UDF.make[Double, Vector, Double](
-      (feature, offset) => predict(feature, offset))
+      (feature, offset) => predict(feature, offset), false)
     val predictLinkUDF = UDF.make[Double, Vector, Double](
-      (feature, offset) => predictLink(feature, offset))
+      (feature, offset) => predictLink(feature, offset), false)
 
     var output = dataset
     val offSetUDF = UDF.make[Double]( () => 0.0)//todo:create a new Col `offset`

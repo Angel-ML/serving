@@ -37,7 +37,7 @@ class RandomForestClassificationServingModel(stage: RandomForestClassificationMo
     }
 
     override def transformImpl(dataset: SDFrame): SDFrame = {
-      val predictUDF = UDF.make[Double, Any](features => predict(features.asInstanceOf[Vector]))
+      val predictUDF = UDF.make[Double, Vector](predict, false)
       dataset.withColum(predictUDF.apply(stage.getPredictionCol, SCol(stage.getFeaturesCol)))
     }
 
