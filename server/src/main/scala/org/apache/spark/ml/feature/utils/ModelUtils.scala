@@ -232,7 +232,10 @@ object ModelUtils {
         VectorAssembler.load(path)
       case modelName if classOf[Interaction].getSimpleName.equalsIgnoreCase(modelName) =>
         Interaction.load(path)
-      case modelName if modelName.startsWith("vectorAttrRewriter") => ???
+      case modelName if classOf[VectorAttributeRewriter].getSimpleName.equalsIgnoreCase(modelName) =>
+        VectorAttributeRewriter.load(path)
+      case modelName if classOf[ColumnPruner].getSimpleName.equalsIgnoreCase(modelName) =>
+        ColumnPruner.load(path)
     }
   }
 }

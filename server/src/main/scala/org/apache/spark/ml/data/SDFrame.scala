@@ -219,7 +219,7 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
   def withColumnRenamed(oldName: String, newName: String): SDFrame = {
     val col = SCol(oldName)
     val idxs = new ListBuffer[Int]()
-    val outSchema = new StructType()
+    var outSchema = new StructType()
 
 
     val colIdx = schema.zipWithIndex.collectFirst {
@@ -234,11 +234,11 @@ class SDFrame(val rows: Array[SRow])(implicit val schema: StructType) extends Se
       case idx  =>
         if (idx != colIdx.get) {
           idxs.append(idx)
-          outSchema.add(schema(idx))
+          outSchema = outSchema.add(schema(idx))
         } else {
           idxs.append(idx)
           val oldSchema = schema(idx)
-          outSchema.add(newName, oldSchema.dataType, oldSchema.nullable, oldSchema.metadata)
+          outSchema = outSchema.add(newName, oldSchema.dataType, oldSchema.nullable, oldSchema.metadata)
         }
 
     }
