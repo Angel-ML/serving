@@ -11,12 +11,12 @@ class StopWordsRemoverServing(stage: StopWordsRemover) extends ServingTrans{
     val outputSchema = transformSchema(dataset.schema)
     val tUDF = if (stage.getCaseSensitive) {
       val stopWordsSet = stage.getStopWords.toSet
-      UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !stopWordsSet.contains(s)))
+      UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !stopWordsSet.contains(s)), false)
     } else {
       // TODO: support user locale (SPARK-15064)
       val toLower = (s: String) => if (s != null) s.toLowerCase else s
       val lowerStopWords = stage.getStopWords.map(toLower(_)).toSet
-      UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !lowerStopWords.contains(toLower(s))))
+      UDF.make[Seq[String], Seq[String]](terms => terms.filter(s => !lowerStopWords.contains(toLower(s))), false)
     }
     val metadata = outputSchema(stage.getOutputCol).metadata
     dataset.select(SCol(), tUDF(stage.getOutputCol, SCol(stage.getInputCol)).setSchema(stage.getOutputCol, metadata))

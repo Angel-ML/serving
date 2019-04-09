@@ -41,7 +41,7 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
     }
 
     val bucketizers: Seq[UDF] = seqOfSplits.zipWithIndex.map { case (splits, idx) =>
-      UDF.make[Double, Double](feature => Bucketizer.binarySearchForBuckets(splits, feature, keepInvalid))
+      UDF.make[Double, Double](feature => Bucketizer.binarySearchForBuckets(splits, feature, keepInvalid), false)
     }
 
     var output = dataset

@@ -17,7 +17,7 @@ abstract class LDAServingModel extends ServingModel[LDAServingModel] with LDAPar
       // TODO: Make the transformer natively in ml framework to avoid extra conversion.
       val transformer = oldLocalModel.getTopicDistributionMethod
 
-      val tUDF = UDF.make[Vector, Vector](v => transformer(OldVectors.fromML(v)).asML)
+      val tUDF = UDF.make[Vector, Vector](v => transformer(OldVectors.fromML(v)).asML, false)
 
       dataset.withColum(tUDF.apply("topicDistribution",SCol("features")))
     } else {

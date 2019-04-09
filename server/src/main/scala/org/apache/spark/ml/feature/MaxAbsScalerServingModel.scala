@@ -20,7 +20,7 @@ class MaxAbsScalerServingModel(stage: MaxAbsScalerModel)
     val reScaleUDF = UDF.make[Vector, Vector](feature => {
       val brz = feature.asBreeze / maxAbsUnzero.asBreeze
       Vectors.fromBreeze(brz)
-    })
+    }, false)
     dataset.withColum(reScaleUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

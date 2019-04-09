@@ -57,7 +57,7 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
 
 
     // Data transformation.
-    val assembleUDF = UDF.make[Vector, SRow](row => VectorAssemblerServing.assemble(row.toSeq: _*))
+    val assembleUDF = UDF.make[Vector, Seq[Any]](VectorAssemblerServing.assemble, true)
     val args = stage.getInputCols.map { c =>
       schema(c).dataType match {
         case DoubleType => dataset(c)
@@ -66,7 +66,7 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
       }
     }
     //todo: select, struct, metadata
-    dataset.select(SCol(), assembleUDF.apply(stage.getOutputCol, args:_*).setSchema(stage.getOutputCol, metadata))//todo: struct
+    dataset.select(SCol(), assembleUDF(stage.getOutputCol, args:_*).setSchema(stage.getOutputCol, metadata))//todo: struct
   }
 
   override def copy(extra: ParamMap): VectorAssemblerServing = {
@@ -89,7 +89,7 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
     if (schema.fieldNames.contains(outputColName)) {
       throw new IllegalArgumentException(s"Output column $outputColName already exists.")
     }
-    StructType(schema.fields :+ new StructField(outputColName, new VectorUDT, true))
+    StructType(schema.fields :+ StructField(outputColName, new VectorUDT, true))
   }
 
   override val uid: String = stage.uid
@@ -103,6 +103,24 @@ object VectorAssemblerServing {
     val values = ArrayBuilder.make[Double]
     var cur = 0
     vv.foreach {
+      case v: Int =>
+        if (v != 0.0) {
+          indices += cur
+          values += v
+        }
+        cur += 1
+      case v: Long =>
+        if (v != 0.0) {
+          indices += cur
+          values += v
+        }
+        cur += 1
+      case v: Float =>
+        if (v != 0.0) {
+          indices += cur
+          values += v
+        }
+        cur += 1
       case v: Double =>
         if (v != 0.0) {
           indices += cur

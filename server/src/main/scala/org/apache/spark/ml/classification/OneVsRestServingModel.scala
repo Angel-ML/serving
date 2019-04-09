@@ -39,7 +39,7 @@ class OneVsRestServingModel(stage: OneVsRestModel)
         tmpColName = "mbc$tmp" + UUID.randomUUID().toString
         val updateUDF = UDF.make[Map[Int, Double], Map[Int, Double], Vector](
           (predictions: Map[Int, Double], prediction: Vector) =>
-            predictions + ((index, prediction(1)))
+            predictions + ((index, prediction(1))), false
         )
 
         model.setFeaturesCol(stage.getFeaturesCol)
@@ -54,7 +54,7 @@ class OneVsRestServingModel(stage: OneVsRestModel)
 
     // output the index of the classifier with highest confidence as prediction
     val labelUDF = UDF.make[Double, Map[Int, Double]](
-      predictions => predictions.maxBy(_._2)._1.toDouble)
+      predictions => predictions.maxBy(_._2)._1.toDouble, false)
 
     // output label and label metadata as prediction
     aggregatedDataset

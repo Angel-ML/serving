@@ -18,7 +18,7 @@ class IDFServingModel(stage: IDFModel)  extends ServingModel[IDFServingModel] {
     transformSchema(dataset.schema, true)
     val idfUDF = UDF.make[Vector, Vector](features => {
       trans(stage.idf, features)
-    })
+    }, false)
     dataset.withColum(idfUDF.apply(stage.getOutputCol, SCol(stage.getInputCol)))
   }
 

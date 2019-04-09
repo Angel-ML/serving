@@ -1,121 +1,77 @@
-19/04/03 16:36:23 INFO spark.SparkContext : Running Spark version 2.3.3
-19/04/03 16:36:23 INFO spark.SparkContext : Submitted application: MLTest
-19/04/03 16:36:23 INFO spark.SecurityManager : Changing view acls to: rachelsun
-19/04/03 16:36:23 INFO spark.SecurityManager : Changing modify acls to: rachelsun
-19/04/03 16:36:23 INFO spark.SecurityManager : Changing view acls groups to: 
-19/04/03 16:36:23 INFO spark.SecurityManager : Changing modify acls groups to: 
-19/04/03 16:36:23 INFO spark.SecurityManager : SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(rachelsun); groups with view permissions: Set(); users  with modify permissions: Set(rachelsun); groups with modify permissions: Set()
-19/04/03 16:36:23 INFO util.Utils : Successfully started service 'sparkDriver' on port 59141.
-19/04/03 16:36:23 INFO spark.SparkEnv : Registering MapOutputTracker
-19/04/03 16:36:23 INFO spark.SparkEnv : Registering BlockManagerMaster
-19/04/03 16:36:23 INFO storage.BlockManagerMasterEndpoint : Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-19/04/03 16:36:23 INFO storage.BlockManagerMasterEndpoint : BlockManagerMasterEndpoint up
-19/04/03 16:36:23 INFO storage.DiskBlockManager : Created local directory at C:\Users\rachelsun\AppData\Local\Temp\blockmgr-34afcc97-f06d-401c-b275-eb6610783892
-19/04/03 16:36:23 INFO memory.MemoryStore : MemoryStore started with capacity 1988.7 MB
-19/04/03 16:36:23 INFO spark.SparkEnv : Registering OutputCommitCoordinator
-19/04/03 16:36:23 INFO util.log : Logging initialized @1895ms
-19/04/03 16:36:23 INFO server.Server : jetty-9.3.z-SNAPSHOT, build timestamp: unknown, git hash: unknown
-19/04/03 16:36:23 INFO server.Server : Started @1947ms
-19/04/03 16:36:23 INFO server.AbstractConnector : Started ServerConnector@2484f433{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
-19/04/03 16:36:23 INFO util.Utils : Successfully started service 'SparkUI' on port 4040.
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@40dd3977{/jobs,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@1cb3ec38{/jobs/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@403132fc{/jobs/job,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2cab9998{/jobs/job/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2f7a7219{/stages,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@669513d8{/stages/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3a1d593e{/stages/stage,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@7859e786{/stages/stage/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@285d851a{/stages/pool,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@314b8f2d{/stages/pool/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@664a9613{/storage,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5118388b{/storage/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@15a902e7{/storage/rdd,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@7876d598{/storage/rdd/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4a3e3e8b{/environment,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5af28b27{/environment/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@71104a4{/executors,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4985cbcb{/executors/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@72f46e16{/executors/threadDump,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3c9168dc{/executors/threadDump/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@332a7fce{/static,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5db4c359{/,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@209775a9{/api,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@6fefce9e{/jobs/job/kill,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4f8969b0{/stages/stage/kill,null,AVAILABLE,@Spark}
-19/04/03 16:36:24 INFO ui.SparkUI : Bound SparkUI to 0.0.0.0, and started at http://rachelsun-PC0.tencent.com:4040
-19/04/03 16:36:24 INFO executor.Executor : Starting executor ID driver on host localhost
-19/04/03 16:36:24 INFO util.Utils : Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 59155.
-19/04/03 16:36:24 INFO netty.NettyBlockTransferService : Server created on rachelsun-PC0.tencent.com:59155
-19/04/03 16:36:24 INFO storage.BlockManager : Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-19/04/03 16:36:24 INFO storage.BlockManagerMaster : Registering BlockManager BlockManagerId(driver, rachelsun-PC0.tencent.com, 59155, None)
-19/04/03 16:36:24 INFO storage.BlockManagerMasterEndpoint : Registering block manager rachelsun-PC0.tencent.com:59155 with 1988.7 MB RAM, BlockManagerId(driver, rachelsun-PC0.tencent.com, 59155, None)
-19/04/03 16:36:24 INFO storage.BlockManagerMaster : Registered BlockManager BlockManagerId(driver, rachelsun-PC0.tencent.com, 59155, None)
-19/04/03 16:36:24 INFO storage.BlockManager : Initialized BlockManager: BlockManagerId(driver, rachelsun-PC0.tencent.com, 59155, None)
-19/04/03 16:36:24 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@78f9ed3e{/metrics/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO internal.SharedState : Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/F:/GitHub/rachelsunrh/serving/spark-warehouse/').
-19/04/03 16:36:25 INFO internal.SharedState : Warehouse path is 'file:/F:/GitHub/rachelsunrh/serving/spark-warehouse/'.
-19/04/03 16:36:25 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5b5b59{/SQL,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@1934ad7c{/SQL/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@f1266c6{/SQL/execution,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3913f206{/SQL/execution/json,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@41ccb3b9{/static/sql,null,AVAILABLE,@Spark}
-19/04/03 16:36:25 INFO state.StateStoreCoordinatorRef : Registered StateStoreCoordinator endpoint
-19/04/03 16:36:26 INFO codegen.CodeGenerator : Code generated in 178.556231 ms
-19/04/03 16:36:26 INFO codegen.CodeGenerator : Code generated in 8.963111 ms
-19/04/03 16:36:26 INFO codegen.CodeGenerator : Code generated in 15.53092 ms
-19/04/03 16:36:26 INFO codegen.CodeGenerator : Code generated in 10.113686 ms
-19/04/03 16:36:26 INFO spark.ContextCleaner : Cleaned accumulator 0
-19/04/03 16:36:26 INFO spark.SparkContext : Starting job: countByValue at StringIndexer.scala:140
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Registering RDD 7 (countByValue at StringIndexer.scala:140)
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Got job 0 (countByValue at StringIndexer.scala:140) with 1 output partitions
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Final stage: ResultStage 1 (countByValue at StringIndexer.scala:140)
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Parents of final stage: List(ShuffleMapStage 0)
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Missing parents: List(ShuffleMapStage 0)
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Submitting ShuffleMapStage 0 (MapPartitionsRDD[7] at countByValue at StringIndexer.scala:140), which has no missing parents
-19/04/03 16:36:27 INFO memory.MemoryStore : Block broadcast_0 stored as values in memory (estimated size 12.5 KB, free 1988.7 MB)
-19/04/03 16:36:27 INFO memory.MemoryStore : Block broadcast_0_piece0 stored as bytes in memory (estimated size 6.1 KB, free 1988.7 MB)
-19/04/03 16:36:27 INFO storage.BlockManagerInfo : Added broadcast_0_piece0 in memory on rachelsun-PC0.tencent.com:59155 (size: 6.1 KB, free: 1988.7 MB)
-19/04/03 16:36:27 INFO spark.SparkContext : Created broadcast 0 from broadcast at DAGScheduler.scala:1039
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Submitting 1 missing tasks from ShuffleMapStage 0 (MapPartitionsRDD[7] at countByValue at StringIndexer.scala:140) (first 15 tasks are for partitions Vector(0))
-19/04/03 16:36:27 INFO scheduler.TaskSchedulerImpl : Adding task set 0.0 with 1 tasks
-19/04/03 16:36:27 INFO scheduler.TaskSetManager : Starting task 0.0 in stage 0.0 (TID 0, localhost, executor driver, partition 0, PROCESS_LOCAL, 8182 bytes)
-19/04/03 16:36:27 INFO executor.Executor : Running task 0.0 in stage 0.0 (TID 0)
-19/04/03 16:36:27 INFO codegen.CodeGenerator : Code generated in 7.189034 ms
-19/04/03 16:36:27 INFO executor.Executor : Finished task 0.0 in stage 0.0 (TID 0). 1498 bytes result sent to driver
-19/04/03 16:36:27 INFO scheduler.TaskSetManager : Finished task 0.0 in stage 0.0 (TID 0) in 140 ms on localhost (executor driver) (1/1)
-19/04/03 16:36:27 INFO scheduler.TaskSchedulerImpl : Removed TaskSet 0.0, whose tasks have all completed, from pool 
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : ShuffleMapStage 0 (countByValue at StringIndexer.scala:140) finished in 0.330 s
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : looking for newly runnable stages
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : running: Set()
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : waiting: Set(ResultStage 1)
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : failed: Set()
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Submitting ResultStage 1 (ShuffledRDD[8] at countByValue at StringIndexer.scala:140), which has no missing parents
-19/04/03 16:36:27 INFO memory.MemoryStore : Block broadcast_1 stored as values in memory (estimated size 3.3 KB, free 1988.7 MB)
-19/04/03 16:36:27 INFO memory.MemoryStore : Block broadcast_1_piece0 stored as bytes in memory (estimated size 2021.0 B, free 1988.7 MB)
-19/04/03 16:36:27 INFO storage.BlockManagerInfo : Added broadcast_1_piece0 in memory on rachelsun-PC0.tencent.com:59155 (size: 2021.0 B, free: 1988.7 MB)
-19/04/03 16:36:27 INFO spark.SparkContext : Created broadcast 1 from broadcast at DAGScheduler.scala:1039
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Submitting 1 missing tasks from ResultStage 1 (ShuffledRDD[8] at countByValue at StringIndexer.scala:140) (first 15 tasks are for partitions Vector(0))
-19/04/03 16:36:27 INFO scheduler.TaskSchedulerImpl : Adding task set 1.0 with 1 tasks
-19/04/03 16:36:27 INFO scheduler.TaskSetManager : Starting task 0.0 in stage 1.0 (TID 1, localhost, executor driver, partition 0, ANY, 7649 bytes)
-19/04/03 16:36:27 INFO executor.Executor : Running task 0.0 in stage 1.0 (TID 1)
-19/04/03 16:36:27 INFO storage.ShuffleBlockFetcherIterator : Getting 1 non-empty blocks out of 1 blocks
-19/04/03 16:36:27 INFO storage.ShuffleBlockFetcherIterator : Started 0 remote fetches in 0 ms
-19/04/03 16:36:27 INFO executor.Executor : Finished task 0.0 in stage 1.0 (TID 1). 1228 bytes result sent to driver
-19/04/03 16:36:27 INFO scheduler.TaskSetManager : Finished task 0.0 in stage 1.0 (TID 1) in 60 ms on localhost (executor driver) (1/1)
-19/04/03 16:36:27 INFO scheduler.TaskSchedulerImpl : Removed TaskSet 1.0, whose tasks have all completed, from pool 
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : ResultStage 1 (countByValue at StringIndexer.scala:140) finished in 0.060 s
-19/04/03 16:36:27 INFO scheduler.DAGScheduler : Job 0 finished: countByValue at StringIndexer.scala:140, took 0.591172 s
-19/04/03 16:36:27 INFO codegen.CodeGenerator : Code generated in 7.405497 ms
-19/04/03 16:36:27 INFO codegen.CodeGenerator : Code generated in 7.300821 ms
-19/04/03 16:36:27 INFO spark.SparkContext : Invoking stop() from shutdown hook
-19/04/03 16:36:27 INFO server.AbstractConnector : Stopped Spark@2484f433{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
-19/04/03 16:36:27 INFO ui.SparkUI : Stopped Spark web UI at http://rachelsun-PC0.tencent.com:4040
-19/04/03 16:36:27 INFO spark.MapOutputTrackerMasterEndpoint : MapOutputTrackerMasterEndpoint stopped!
-19/04/03 16:36:27 INFO memory.MemoryStore : MemoryStore cleared
-19/04/03 16:36:27 INFO storage.BlockManager : BlockManager stopped
-19/04/03 16:36:27 INFO storage.BlockManagerMaster : BlockManagerMaster stopped
-19/04/03 16:36:27 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint : OutputCommitCoordinator stopped!
-19/04/03 16:36:27 INFO spark.SparkContext : Successfully stopped SparkContext
-19/04/03 16:36:27 INFO util.ShutdownHookManager : Shutdown hook called
-19/04/03 16:36:27 INFO util.ShutdownHookManager : Deleting directory C:\Users\rachelsun\AppData\Local\Temp\spark-cdda33d1-df4b-4996-8760-172055cba03f
+19/04/08 09:47:20 INFO spark.SparkContext : Running Spark version 2.3.3
+19/04/08 09:47:20 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+19/04/08 09:47:20 INFO spark.SparkContext : Submitted application: MLTest
+19/04/08 09:47:20 INFO spark.SecurityManager : Changing view acls to: fitzwang
+19/04/08 09:47:20 INFO spark.SecurityManager : Changing modify acls to: fitzwang
+19/04/08 09:47:20 INFO spark.SecurityManager : Changing view acls groups to: 
+19/04/08 09:47:20 INFO spark.SecurityManager : Changing modify acls groups to: 
+19/04/08 09:47:20 INFO spark.SecurityManager : SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(fitzwang); groups with view permissions: Set(); users  with modify permissions: Set(fitzwang); groups with modify permissions: Set()
+19/04/08 09:47:20 INFO util.Utils : Successfully started service 'sparkDriver' on port 50828.
+19/04/08 09:47:20 INFO spark.SparkEnv : Registering MapOutputTracker
+19/04/08 09:47:20 INFO spark.SparkEnv : Registering BlockManagerMaster
+19/04/08 09:47:20 INFO storage.BlockManagerMasterEndpoint : Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+19/04/08 09:47:20 INFO storage.BlockManagerMasterEndpoint : BlockManagerMasterEndpoint up
+19/04/08 09:47:20 INFO storage.DiskBlockManager : Created local directory at C:\Users\fitzwang\AppData\Local\Temp\blockmgr-2f7d84e2-26eb-4706-a219-1612bb875b16
+19/04/08 09:47:20 INFO memory.MemoryStore : MemoryStore started with capacity 1990.8 MB
+19/04/08 09:47:20 INFO spark.SparkEnv : Registering OutputCommitCoordinator
+19/04/08 09:47:20 INFO util.log : Logging initialized @1660ms
+19/04/08 09:47:20 INFO server.Server : jetty-9.3.z-SNAPSHOT, build timestamp: unknown, git hash: unknown
+19/04/08 09:47:20 INFO server.Server : Started @1706ms
+19/04/08 09:47:20 INFO server.AbstractConnector : Started ServerConnector@3ebff828{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+19/04/08 09:47:20 INFO util.Utils : Successfully started service 'SparkUI' on port 4040.
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@25f7391e{/jobs,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@64bc21ac{/jobs/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@493dfb8e{/jobs/job,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@ce5a68e{/jobs/job/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@9d157ff{/stages,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2f162cc0{/stages/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5df417a7{/stages/stage,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@61078690{/stages/stage/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@1cb3ec38{/stages/pool,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@403132fc{/stages/pool/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@71c5b236{/storage,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2cab9998{/storage/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:20 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2f7a7219{/storage/rdd,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@669513d8{/storage/rdd/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3a1d593e{/environment,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4a8a60bc{/environment/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@361c294e{/executors,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@7859e786{/executors/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@285d851a{/executors/threadDump,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@314b8f2d{/executors/threadDump/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@664a9613{/static,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@6e9319f{/,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@72e34f77{/api,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@1fc0053e{/jobs/job/kill,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@290b1b2e{/stages/stage/kill,null,AVAILABLE,@Spark}
+19/04/08 09:47:21 INFO ui.SparkUI : Bound SparkUI to 0.0.0.0, and started at http://fitzwang-PC0.tencent.com:4040
+19/04/08 09:47:21 INFO executor.Executor : Starting executor ID driver on host localhost
+19/04/08 09:47:21 INFO util.Utils : Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 50844.
+19/04/08 09:47:21 INFO netty.NettyBlockTransferService : Server created on fitzwang-PC0.tencent.com:50844
+19/04/08 09:47:21 INFO storage.BlockManager : Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+19/04/08 09:47:21 INFO storage.BlockManagerMaster : Registering BlockManager BlockManagerId(driver, fitzwang-PC0.tencent.com, 50844, None)
+19/04/08 09:47:21 INFO storage.BlockManagerMasterEndpoint : Registering block manager fitzwang-PC0.tencent.com:50844 with 1990.8 MB RAM, BlockManagerId(driver, fitzwang-PC0.tencent.com, 50844, None)
+19/04/08 09:47:21 INFO storage.BlockManagerMaster : Registered BlockManager BlockManagerId(driver, fitzwang-PC0.tencent.com, 50844, None)
+19/04/08 09:47:21 INFO storage.BlockManager : Initialized BlockManager: BlockManagerId(driver, fitzwang-PC0.tencent.com, 50844, None)
+19/04/08 09:47:21 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@304b9f1a{/metrics/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO internal.SharedState : Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/E:/github/fitzwang/serving/spark-warehouse/').
+19/04/08 09:47:22 INFO internal.SharedState : Warehouse path is 'file:/E:/github/fitzwang/serving/spark-warehouse/'.
+19/04/08 09:47:22 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@626c19cf{/SQL,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@54a2d96e{/SQL/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2da99821{/SQL/execution,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@62cba181{/SQL/execution/json,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@629984eb{/static/sql,null,AVAILABLE,@Spark}
+19/04/08 09:47:22 INFO state.StateStoreCoordinatorRef : Registered StateStoreCoordinator endpoint
+19/04/08 09:47:23 INFO codegen.CodeGenerator : Code generated in 132.836485 ms
+19/04/08 09:47:23 INFO codegen.CodeGenerator : Code generated in 8.25117 ms
+19/04/08 09:47:23 INFO spark.SparkContext : Invoking stop() from shutdown hook
+19/04/08 09:47:23 INFO server.AbstractConnector : Stopped Spark@3ebff828{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+19/04/08 09:47:23 INFO ui.SparkUI : Stopped Spark web UI at http://fitzwang-PC0.tencent.com:4040
+19/04/08 09:47:23 INFO spark.MapOutputTrackerMasterEndpoint : MapOutputTrackerMasterEndpoint stopped!
+19/04/08 09:47:23 INFO memory.MemoryStore : MemoryStore cleared
+19/04/08 09:47:23 INFO storage.BlockManager : BlockManager stopped
+19/04/08 09:47:23 INFO storage.BlockManagerMaster : BlockManagerMaster stopped
+19/04/08 09:47:23 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint : OutputCommitCoordinator stopped!
+19/04/08 09:47:23 INFO spark.SparkContext : Successfully stopped SparkContext
+19/04/08 09:47:23 INFO util.ShutdownHookManager : Shutdown hook called
+19/04/08 09:47:23 INFO util.ShutdownHookManager : Deleting directory C:\Users\fitzwang\AppData\Local\Temp\spark-8d6b8d55-9226-42ac-bfe2-2a91dd754ff5

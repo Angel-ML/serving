@@ -24,7 +24,7 @@ class VectorIndexerServingModel(stage: VectorIndexerModel)
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, true)
     val metadata = prepOutputField(dataset.schema).metadata
-    val transformUDF = UDF.make[Vector, Vector](features => transformFunc(features))
+    val transformUDF = UDF.make[Vector, Vector](features => transformFunc(features), false)
     val ds = dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
       .setSchema(stage.getOutputCol, metadata))
     if (stage.getHandleInvalid == SKIP_INVALID) {

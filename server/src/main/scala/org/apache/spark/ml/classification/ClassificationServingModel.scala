@@ -15,17 +15,16 @@ abstract class ClassificationServingModel[FeaturesType, M <: ClassificationServi
       var outputData = dataset
       var numColsOutput = 0
       if (stage.getRawPredictionCol != "") {
-        val predictRawUDF = UDF.make[Vector, Vector](features =>
-          predictRaw(features))
+        val predictRawUDF = UDF.make[Vector, Vector](predictRaw, false)
         outputData = outputData.withColum(predictRawUDF.apply(stage.getRawPredictionCol, SCol(stage.getFeaturesCol)))
         numColsOutput += 1
       }
       if (stage.getPredictionCol != "") {
         val predUDF = if (stage.getRawPredictionCol != "") {
-          UDF.make[Double, Vector](features => raw2prediction(features))
+          UDF.make[Double, Vector](raw2prediction, false)
             .apply(stage.getPredictionCol, SCol(stage.getRawPredictionCol))
         } else {
-          UDF.make[Double, Vector](features => predict(features.asInstanceOf[Vector]))
+          UDF.make[Double, Vector](predict, false)
             .apply(stage.getPredictionCol,SCol(stage.getFeaturesCol))
         }
         outputData = outputData.withColum(predUDF)

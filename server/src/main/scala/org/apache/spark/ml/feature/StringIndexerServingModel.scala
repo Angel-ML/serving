@@ -33,7 +33,7 @@ class StringIndexerServingModel(stage: StringIndexerModel)
     // If we are skipping invalid records, filter them out.
     val (filteredDataset, keepInvalid) = stage.getHandleInvalid match {
       case StringIndexerServingModel.SKIP_INVALID =>
-        val filtererUDF = UDF.make[Boolean, String](label => labelToIndex.contains(label))
+        val filtererUDF = UDF.make[Boolean, String](label => labelToIndex.contains(label), false)
         (dataset.na.filter(filtererUDF.apply(stage.getInputCol, dataset(stage.getInputCol))), false)
       case _ => (dataset, stage.getHandleInvalid == StringIndexerServingModel.KEEP_INVALID)
     }
@@ -56,7 +56,7 @@ class StringIndexerServingModel(stage: StringIndexerModel)
             s"set Param handleInvalid to ${StringIndexerServingModel.KEEP_INVALID}.")
         }
       }
-    })
+    }, false)
     filteredDataset.select(SCol(), indexerUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
       .setSchema(stage.getOutputCol, metadata))
   }

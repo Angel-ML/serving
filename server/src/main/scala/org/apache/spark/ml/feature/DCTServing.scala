@@ -21,7 +21,7 @@ class DCTServing(stage: DCT) extends UnaryTransformerServing[Vector, Vector, DCT
 
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, true)
-    val transformUDF = UDF.make[Vector, Vector](feature => this.createTransformFunc(feature))
+    val transformUDF = UDF.make[Vector, Vector](this.createTransformFunc, false)
     dataset.withColum(transformUDF.apply(stage.getOutputCol, dataset(stage.getInputCol)))
   }
 

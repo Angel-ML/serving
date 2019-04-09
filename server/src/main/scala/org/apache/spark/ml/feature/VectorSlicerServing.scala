@@ -35,8 +35,7 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
       vec match {
         case features: DenseVector => Vectors.dense(inds.map(features.apply))
         case features: SparseVector => features.slice(inds)
-      }
-    )
+      }, false)
     dataset.withColum(slicerUDF.apply(stage.getOutputCol, dataset(stage.getInputCol))
       .setSchema(stage.getOutputCol, outputAttr.toMetadata()))
   }

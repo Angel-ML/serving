@@ -29,12 +29,10 @@ class DecisionTreeRegressionServingModel(stage: DecisionTreeRegressionModel)
 
   override def transformImpl(dataset: SDFrame): SDFrame = {
     val predictUDF = {
-      UDF.make[Double, Vector](feature =>
-        predict(feature))
+      UDF.make[Double, Vector](predict, false)
     }
     val predictVarianceUDF = {
-      UDF.make[Double, Vector](feature =>
-        predictVariance(feature))
+      UDF.make[Double, Vector](predictVariance, false)
     }
     var output = dataset
     if (stage.getPredictionCol.nonEmpty) {

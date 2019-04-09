@@ -18,7 +18,7 @@ import scala.collection.mutable
 class HashingTFServing(stage: HashingTF) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema)
-    val tUDF = UDF.make[Vector, Seq[String]](terms => trans(terms))
+    val tUDF = UDF.make[Vector, Seq[String]](trans, false)
     val metadata = outputSchema(stage.getOutputCol).metadata
     dataset.select(SCol(), tUDF(stage.getOutputCol, SCol(stage.getInputCol)).setSchema(stage.getOutputCol, metadata))
   }

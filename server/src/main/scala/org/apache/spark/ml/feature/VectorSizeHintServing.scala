@@ -22,7 +22,7 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
     } else {
       val newCol: SCol = localHandleInvalid match {
         case VectorSizeHintServing.OPTIMISTIC_INVALID => {
-          val inputUDF = UDF.make[Vector, Vector](input => input)
+          val inputUDF = UDF.make[Vector, Vector](input => input, false)
           inputUDF.apply(localInputCol, SCol(localInputCol))
         }
         case VectorSizeHintServing.ERROR_INVALID =>
@@ -36,7 +36,7 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
                 s" got ${vector.size}")
             }
             vector
-          })
+          }, false)
           checkVectorSizeUDF.apply(localInputCol, SCol(localInputCol))
         case VectorSizeHintServing.SKIP_INVALID =>
           val checkVectorSizeUDF = UDF.make[Vector, Vector](vector => {
@@ -45,7 +45,7 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
             } else {
               null
             }
-          })
+          }, false)
           checkVectorSizeUDF.apply(localInputCol, SCol(localInputCol))
       }
       val res = dataset.withColum(newCol.setSchema(localInputCol, newGroup.toMetadata()).asInstanceOf[UDFCol])
