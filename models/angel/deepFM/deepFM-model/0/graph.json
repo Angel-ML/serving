@@ -1,6 +1,6 @@
 {
   "data" : {
-    "format" : "dummy",
+    "format" : "libsvm",
     "indexrange" : 148,
     "numfield" : 13,
     "validateratio" : 0.1,
