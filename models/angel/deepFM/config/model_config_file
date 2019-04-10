@@ -1,0 +1,12 @@
+model_config_list: {
+  config: {
+    name: "lr",
+    base_path: "/Users/ouyangwen/projects/servingTest/test",
+    model_platform: "Angel",
+    model_version_policy: {
+     latest: {
+      num_versions: 1
+     }
+  }
+  }
+}
