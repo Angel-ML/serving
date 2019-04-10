@@ -26,7 +26,7 @@ class HttpRestApiHandler {
   private val LOG: Logger = LoggerFactory.getLogger(classOf[ModelServer])
 
   @GET
-  @Path("/angelServing/v1.0/models{requestPath:(?:/([^/:]+))?(?:/versions/(\\d+))?}")
+  @Path("/v1/models{requestPath:(?:/([^/:]+))?(?:/versions/(\\d+))?}")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processModelServiceRequest(@PathParam("requestPath") requestPath: String): Response = {
     var modelName: String = null
@@ -80,7 +80,7 @@ class HttpRestApiHandler {
   }
 
   @POST
-  @Path("/angelServing/v1.0/models/{requestPath:([^/:]+)(?:/versions/(\\d+))?:(classify|regress|predict)}")
+  @Path("/v1/models/{requestPath:([^/:]+)(?:/versions/(\\d+))?:(classify|regress|predict)}")
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def processPredictionServiceRequest(requestBody: String, @PathParam("requestPath") requestPath: String): Response ={
