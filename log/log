@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 19/04/10 19:50:17 INFO service.ModelServer : Building single model file config: model_name: deepFM model_base_path: E:/github/fitzwang/serving/models/angel/deepFM/deepFM-model model_platform: angel
 19/04/10 19:50:17 INFO core.Retry : Retry Info: <5, 60000000>
 19/04/10 19:50:17 INFO core.ServerCore : adding or updating models
@@ -57,3 +58,10 @@
 19/04/10 19:50:26 INFO metrics.MetricsCollector : metric_name="PredictMetric", metric_version=1, model_name="deepFM", model_version=0, is_success=false, predict_time_ms=80
 19/04/10 19:50:47 INFO metrics.MetricsCollector : metric_name="PredictSummary", model_name="deepFM", model_version=0, prediction_count_total=1, prediction_count_success=0, prediction_count_failed=1, total_predict_time_ms=0,
 count_distribution0=0, count_distribution1=0, count_distribution2=0, count_distribution3=0
+=======
+19/04/10 18:32:51 INFO service.ModelServer : Building single model file config: model_name: default model_base_path: E:/github/fitzwang/serving/models/angel/deepFM/deepFM-model model_platform: angel
+19/04/10 18:32:51 INFO core.Retry : Retry Info: <5, 60000000>
+19/04/10 18:32:51 INFO core.ServerCore : adding or updating models
+19/04/10 18:32:51 INFO service.ServingContext : (re-)adding model: default
+19/04/10 18:32:52 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+>>>>>>> develop

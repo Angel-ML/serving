@@ -173,6 +173,7 @@ object AngelSavedModelBundle {
       model.createMatrices(envCtx)
 
       LOG.info(s"start to load parameters for model")
+
       model.loadModel(envCtx, path)
 
       LOG.info(s"model has loaded!")
