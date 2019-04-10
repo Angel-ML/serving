@@ -1,41 +1,59 @@
-19/04/10 16:33:58 INFO service.ModelServer : Building single model file config: model_name: default model_base_path: E:/github/fitzwang/serving/models/angel/deepFM/deepFM-model model_platform: angel
-19/04/10 16:33:59 INFO core.Retry : Retry Info: <5, 60000000>
-19/04/10 16:33:59 INFO core.ServerCore : adding or updating models
-19/04/10 16:33:59 INFO service.ServingContext : (re-)adding model: default
-19/04/10 16:33:59 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-19/04/10 16:34:00 INFO core.BasicManager : manage servable: {name: default, version: 0}
-19/04/10 16:34:00 INFO core.Retry : Retry Info: <5, 60000000>
-19/04/10 16:34:00 INFO core.BasicManager : [Event] <{name: default, version: 0}, kStart>
-19/04/10 16:34:00 INFO core.BasicManager : loadServable: {name: default, version: 0}
-19/04/10 16:34:00 INFO core.BasicManager : request: <{name: default, version: 0}, kLoad> is ready to send to thread!
-19/04/10 16:34:00 INFO core.BasicManager : [LoaderHarness-State] kNew --> kLoadRequested
-19/04/10 16:34:00 INFO core.BasicManager : approveLoadOrUnload
-19/04/10 16:34:00 INFO core.BasicManager : The frist step of approveLoad: reserveResources
-19/04/10 16:34:00 INFO core.BasicManager : [reserveResources] 1. get harnesses that has used resources
-19/04/10 16:34:00 INFO core.BasicManager : [reserveResources] 2. recomputeUsedResources
-19/04/10 16:34:00 INFO core.BasicManager : [reserveResources] 3. reserveResources
-19/04/10 16:34:00 INFO core.Retry : Begin to retry
-19/04/10 16:34:00 INFO core.Retry : [Retry] call function: retriedFn
-19/04/10 16:34:00 INFO core.ResourceTracker : [reserveResources] 1. estimateResources
-19/04/10 16:34:00 INFO core.ResourceTracker : [reserveResources] 2. verify and ensure the resources is satisfied
-19/04/10 16:34:00 INFO core.Retry : 	 --> The 1-th retry finished!
-19/04/10 16:34:00 INFO core.Retry : End retry
-19/04/10 16:34:00 INFO core.BasicManager : The second step of approveLoad: update status in LoaderHarness
-19/04/10 16:34:00 INFO core.BasicManager : [LoaderHarness-State] kLoadRequested --> kLoadApproved
-19/04/10 16:34:00 INFO core.BasicManager : approved, Begin to execute
-19/04/10 16:34:00 INFO core.BasicManager : [Event] <{name: default, version: 0}, kLoading>
-19/04/10 16:34:00 INFO core.BasicManager : [Manager-State] kLoading
-19/04/10 16:34:00 INFO core.Retry : Begin to retry
-19/04/10 16:34:00 INFO core.Retry : [Retry] call function: retriedFn
-19/04/10 16:34:00 INFO angel.AngelSavedModelBundle$ : the graph file is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\graph.json
-19/04/10 16:34:00 INFO SharedConfObject : inctrain does not have default value!
-19/04/10 16:34:00 INFO SharedConfObject : train does not have default value!
-19/04/10 16:34:00 INFO SharedConfObject : predict does not have default value!
-19/04/10 16:34:00 INFO angel.AngelSavedModelBundle$ : model load path is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0 
-19/04/10 16:34:00 INFO angel.AngelSavedModelBundle$ : buildNetwork for model
-19/04/10 16:34:00 INFO angel.AngelSavedModelBundle$ : start to load parameters for model
-19/04/10 16:34:00 INFO io.MatrixLoaderSaverImpl : load matrix input_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_weight
-19/04/10 16:34:00 INFO io.MatrixLoaderSaverImpl : load matrix input_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_bias
-19/04/10 16:34:00 INFO io.MatrixLoaderSaverImpl : load matrix embedding_embedding from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\embedding_embedding
-19/04/10 16:34:00 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_weight
-19/04/10 16:34:00 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_bias
+19/04/10 19:50:17 INFO service.ModelServer : Building single model file config: model_name: deepFM model_base_path: E:/github/fitzwang/serving/models/angel/deepFM/deepFM-model model_platform: angel
+19/04/10 19:50:17 INFO core.Retry : Retry Info: <5, 60000000>
+19/04/10 19:50:17 INFO core.ServerCore : adding or updating models
+19/04/10 19:50:17 INFO service.ServingContext : (re-)adding model: deepFM
+19/04/10 19:50:18 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+19/04/10 19:50:18 INFO core.BasicManager : manage servable: {name: deepFM, version: 0}
+19/04/10 19:50:18 INFO core.Retry : Retry Info: <5, 60000000>
+19/04/10 19:50:18 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kStart>
+19/04/10 19:50:18 INFO core.BasicManager : loadServable: {name: deepFM, version: 0}
+19/04/10 19:50:18 INFO core.BasicManager : request: <{name: deepFM, version: 0}, kLoad> is ready to send to thread!
+19/04/10 19:50:18 INFO core.BasicManager : [LoaderHarness-State] kNew --> kLoadRequested
+19/04/10 19:50:18 INFO core.BasicManager : approveLoadOrUnload
+19/04/10 19:50:18 INFO core.BasicManager : The frist step of approveLoad: reserveResources
+19/04/10 19:50:18 INFO core.BasicManager : [reserveResources] 1. get harnesses that has used resources
+19/04/10 19:50:18 INFO core.BasicManager : [reserveResources] 2. recomputeUsedResources
+19/04/10 19:50:18 INFO core.BasicManager : [reserveResources] 3. reserveResources
+19/04/10 19:50:18 INFO core.Retry : Begin to retry
+19/04/10 19:50:18 INFO core.Retry : [Retry] call function: retriedFn
+19/04/10 19:50:18 INFO core.ResourceTracker : [reserveResources] 1. estimateResources
+19/04/10 19:50:18 INFO core.ResourceTracker : [reserveResources] 2. verify and ensure the resources is satisfied
+19/04/10 19:50:18 INFO core.Retry : 	 --> The 1-th retry finished!
+19/04/10 19:50:18 INFO core.Retry : End retry
+19/04/10 19:50:18 INFO core.BasicManager : The second step of approveLoad: update status in LoaderHarness
+19/04/10 19:50:18 INFO core.BasicManager : [LoaderHarness-State] kLoadRequested --> kLoadApproved
+19/04/10 19:50:18 INFO core.BasicManager : approved, Begin to execute
+19/04/10 19:50:18 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kLoading>
+19/04/10 19:50:18 INFO core.BasicManager : [Manager-State] kLoading
+19/04/10 19:50:18 INFO core.Retry : Begin to retry
+19/04/10 19:50:18 INFO core.Retry : [Retry] call function: retriedFn
+19/04/10 19:50:18 INFO angel.AngelSavedModelBundle$ : the graph file is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\graph.json
+19/04/10 19:50:18 INFO angel.AngelSavedModelBundle$ : model load path is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0 
+19/04/10 19:50:18 INFO angel.AngelSavedModelBundle$ : buildNetwork for model
+19/04/10 19:50:18 INFO angel.AngelSavedModelBundle$ : start to load parameters for model
+19/04/10 19:50:18 INFO io.MatrixLoaderSaverImpl : load matrix input_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_bias
+19/04/10 19:50:18 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_0_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_0_weight
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_0_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_0_bias
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_weight
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_bias
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_weight
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_bias
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix embedding_embedding from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\embedding_embedding
+19/04/10 19:50:19 INFO io.MatrixLoaderSaverImpl : load matrix input_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_weight
+19/04/10 19:50:19 INFO angel.AngelSavedModelBundle$ : model has loaded!
+19/04/10 19:50:19 INFO core.Retry : 	 --> The 1-th retry finished!
+19/04/10 19:50:19 INFO core.Retry : End retry
+19/04/10 19:50:19 INFO core.BasicManager : [LoaderHarness-State] kLoadApproved --> kLoading --> kReady
+19/04/10 19:50:19 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kAvailable>
+19/04/10 19:50:19 INFO core.BasicManager : [Manager-State] kAvailable
+19/04/10 19:50:19 INFO service.ModelServer : Running gRPC ModelServer at 127.0.0.1:8500
+19/04/10 19:50:20 INFO service.ModelServer : Exporting HTTP/REST API at: 127.0.0.1:8501
+19/04/10 19:50:26 INFO common.ServiceImpl$ : modelSpec: deepFM, 
+19/04/10 19:50:26 INFO common.ServiceImpl$ : servableHandle {name: deepFM, version: 0}
+19/04/10 19:50:26 INFO impl.JvmInformation : Detected JVM data model settings of: 64-Bit HotSpot JVM with Compressed OOPs
+19/04/10 19:50:26 INFO impl.AgentLoader : Extracted agent jar to temporary file C:\Users\fitzwang\AppData\Local\Temp\ehcache-sizeof-agent4222650021202747176.jar
+19/04/10 19:50:26 INFO impl.AgentLoader : Trying to load agent @ C:\Users\fitzwang\AppData\Local\Temp\ehcache-sizeof-agent4222650021202747176.jar
+19/04/10 19:50:26 INFO impl.AgentLoader : Agent successfully loaded and available!
+19/04/10 19:50:26 INFO metrics.MetricsCollector : metric_name="PredictMetric", metric_version=1, model_name="deepFM", model_version=0, is_success=false, predict_time_ms=80
+19/04/10 19:50:47 INFO metrics.MetricsCollector : metric_name="PredictSummary", model_name="deepFM", model_version=0, prediction_count_total=1, prediction_count_success=0, prediction_count_failed=1, total_predict_time_ms=0,
+count_distribution0=0, count_distribution1=0, count_distribution2=0, count_distribution3=0
