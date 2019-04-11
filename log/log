@@ -1,56 +1,80 @@
-19/04/11 11:27:56 INFO service.ModelServer : Building single model file config: model_name: deepFM model_base_path: E:/github/fitzwang/serving/models/angel/deepFM/deepFM-model model_platform: angel
-19/04/11 11:27:56 INFO core.Retry : Retry Info: <5, 60000000>
-19/04/11 11:27:56 INFO core.ServerCore : adding or updating models
-19/04/11 11:27:56 INFO service.ServingContext : (re-)adding model: deepFM
-19/04/11 11:27:56 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-19/04/11 11:27:57 INFO core.BasicManager : manage servable: {name: deepFM, version: 0}
-19/04/11 11:27:57 INFO core.Retry : Retry Info: <5, 60000000>
-19/04/11 11:27:57 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kStart>
-19/04/11 11:27:57 INFO core.BasicManager : loadServable: {name: deepFM, version: 0}
-19/04/11 11:27:57 INFO core.BasicManager : request: <{name: deepFM, version: 0}, kLoad> is ready to send to thread!
-19/04/11 11:27:57 INFO core.BasicManager : [LoaderHarness-State] kNew --> kLoadRequested
-19/04/11 11:27:57 INFO core.BasicManager : approveLoadOrUnload
-19/04/11 11:27:57 INFO core.BasicManager : The frist step of approveLoad: reserveResources
-19/04/11 11:27:57 INFO core.BasicManager : [reserveResources] 1. get harnesses that has used resources
-19/04/11 11:27:57 INFO core.BasicManager : [reserveResources] 2. recomputeUsedResources
-19/04/11 11:27:57 INFO core.BasicManager : [reserveResources] 3. reserveResources
-19/04/11 11:27:57 INFO core.Retry : Begin to retry
-19/04/11 11:27:57 INFO core.Retry : [Retry] call function: retriedFn
-19/04/11 11:27:57 INFO core.ResourceTracker : [reserveResources] 1. estimateResources
-19/04/11 11:27:57 INFO core.ResourceTracker : [reserveResources] 2. verify and ensure the resources is satisfied
-19/04/11 11:27:57 INFO core.Retry : 	 --> The 1-th retry finished!
-19/04/11 11:27:57 INFO core.Retry : End retry
-19/04/11 11:27:57 INFO core.BasicManager : The second step of approveLoad: update status in LoaderHarness
-19/04/11 11:27:57 INFO core.BasicManager : [LoaderHarness-State] kLoadRequested --> kLoadApproved
-19/04/11 11:27:57 INFO core.BasicManager : approved, Begin to execute
-19/04/11 11:27:57 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kLoading>
-19/04/11 11:27:57 INFO core.BasicManager : [Manager-State] kLoading
-19/04/11 11:27:57 INFO core.Retry : Begin to retry
-19/04/11 11:27:57 INFO core.Retry : [Retry] call function: retriedFn
-19/04/11 11:27:57 INFO angel.AngelSavedModelBundle$ : the graph file is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\graph.json
-19/04/11 11:27:57 INFO angel.AngelSavedModelBundle$ : model load path is E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0 
-19/04/11 11:27:57 INFO angel.AngelSavedModelBundle$ : buildNetwork for model
-19/04/11 11:27:57 INFO angel.AngelSavedModelBundle$ : start to load parameters for model
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix input_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_bias
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_0_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_0_weight
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_0_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_0_bias
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_weight
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_bias
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_weight
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix fclayer_1_bias from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\fclayer_1_bias
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix embedding_embedding from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\embedding_embedding
-19/04/11 11:27:57 INFO io.MatrixLoaderSaverImpl : load matrix input_weight from path E:\github\fitzwang\serving\models\angel\deepFM\deepFM-model\0\input_weight
-19/04/11 11:27:57 INFO angel.AngelSavedModelBundle$ : model has loaded!
-19/04/11 11:27:57 INFO core.Retry : 	 --> The 1-th retry finished!
-19/04/11 11:27:57 INFO core.Retry : End retry
-19/04/11 11:27:57 INFO core.BasicManager : [LoaderHarness-State] kLoadApproved --> kLoading --> kReady
-19/04/11 11:27:57 INFO core.BasicManager : [Event] <{name: deepFM, version: 0}, kAvailable>
-19/04/11 11:27:57 INFO core.BasicManager : [Manager-State] kAvailable
-19/04/11 11:27:58 INFO service.ModelServer : Running gRPC ModelServer at 127.0.0.1:8500
-19/04/11 11:27:58 INFO service.ModelServer : Exporting HTTP/REST API at: 127.0.0.1:8501
-19/04/11 11:28:20 INFO common.ServiceImpl$ : modelSpec: deepFM, 
-19/04/11 11:28:20 INFO common.ServiceImpl$ : servableHandle {name: deepFM, version: 0}
-19/04/11 11:28:20 WARN math2.MatrixExecutors : angel.math.matrix.op.parallel.worker.num is not set, just use default worker number:8
-19/04/11 11:28:20 INFO metrics.MetricsCollector : metric_name="PredictMetric", metric_version=1, model_name="deepFM", model_version=0, is_success=true, predict_time_ms=210
-19/04/11 11:28:26 INFO metrics.MetricsCollector : metric_name="PredictSummary", model_name="deepFM", model_version=0, prediction_count_total=1, prediction_count_success=1, prediction_count_failed=0, total_predict_time_ms=210,
-count_distribution0=0, count_distribution1=0, count_distribution2=0, count_distribution3=1
+19/04/11 11:48:04 INFO spark.SparkContext : Running Spark version 2.3.3
+19/04/11 11:48:04 WARN util.NativeCodeLoader : Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+19/04/11 11:48:04 INFO spark.SparkContext : Submitted application: MLTest
+19/04/11 11:48:04 INFO spark.SecurityManager : Changing view acls to: fitzwang
+19/04/11 11:48:04 INFO spark.SecurityManager : Changing modify acls to: fitzwang
+19/04/11 11:48:04 INFO spark.SecurityManager : Changing view acls groups to: 
+19/04/11 11:48:04 INFO spark.SecurityManager : Changing modify acls groups to: 
+19/04/11 11:48:04 INFO spark.SecurityManager : SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(fitzwang); groups with view permissions: Set(); users  with modify permissions: Set(fitzwang); groups with modify permissions: Set()
+19/04/11 11:48:04 INFO util.Utils : Successfully started service 'sparkDriver' on port 65508.
+19/04/11 11:48:04 INFO spark.SparkEnv : Registering MapOutputTracker
+19/04/11 11:48:04 INFO spark.SparkEnv : Registering BlockManagerMaster
+19/04/11 11:48:04 INFO storage.BlockManagerMasterEndpoint : Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+19/04/11 11:48:04 INFO storage.BlockManagerMasterEndpoint : BlockManagerMasterEndpoint up
+19/04/11 11:48:04 INFO storage.DiskBlockManager : Created local directory at C:\Users\fitzwang\AppData\Local\Temp\blockmgr-354793b9-9d8e-4f08-ae32-fe49ba8e6cde
+19/04/11 11:48:04 INFO memory.MemoryStore : MemoryStore started with capacity 1990.8 MB
+19/04/11 11:48:04 INFO spark.SparkEnv : Registering OutputCommitCoordinator
+19/04/11 11:48:04 INFO util.log : Logging initialized @2419ms
+19/04/11 11:48:05 INFO server.Server : jetty-9.3.z-SNAPSHOT, build timestamp: unknown, git hash: unknown
+19/04/11 11:48:05 INFO server.Server : Started @2468ms
+19/04/11 11:48:05 INFO server.AbstractConnector : Started ServerConnector@60fa3495{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+19/04/11 11:48:05 INFO util.Utils : Successfully started service 'SparkUI' on port 4040.
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@65e61854{/jobs,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@61861a29{/jobs/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@31024624{/jobs/job,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@32cb636e{/jobs/job/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@63cd604c{/stages,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@40dd3977{/stages/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3a4e343{/stages/stage,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4b6579e8{/stages/stage/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@6fff253c{/stages/pool,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@6c6357f9{/stages/pool/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@591e58fa{/storage,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@3954d008{/storage/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@2f94c4db{/storage/rdd,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@593e824f{/storage/rdd/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@72ccd81a{/environment,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@6d8792db{/environment/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@64bc21ac{/executors,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@493dfb8e{/executors/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5d25e6bb{/executors/threadDump,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@ce5a68e{/executors/threadDump/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@9d157ff{/static,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5118388b{/,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@15a902e7{/api,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@71104a4{/jobs/job/kill,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@4985cbcb{/stages/stage/kill,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO ui.SparkUI : Bound SparkUI to 0.0.0.0, and started at http://fitzwang-PC0.tencent.com:4040
+19/04/11 11:48:05 INFO executor.Executor : Starting executor ID driver on host localhost
+19/04/11 11:48:05 INFO util.Utils : Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 65521.
+19/04/11 11:48:05 INFO netty.NettyBlockTransferService : Server created on fitzwang-PC0.tencent.com:65521
+19/04/11 11:48:05 INFO storage.BlockManager : Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+19/04/11 11:48:05 INFO storage.BlockManagerMaster : Registering BlockManager BlockManagerId(driver, fitzwang-PC0.tencent.com, 65521, None)
+19/04/11 11:48:05 INFO storage.BlockManagerMasterEndpoint : Registering block manager fitzwang-PC0.tencent.com:65521 with 1990.8 MB RAM, BlockManagerId(driver, fitzwang-PC0.tencent.com, 65521, None)
+19/04/11 11:48:05 INFO storage.BlockManagerMaster : Registered BlockManager BlockManagerId(driver, fitzwang-PC0.tencent.com, 65521, None)
+19/04/11 11:48:05 INFO storage.BlockManager : Initialized BlockManager: BlockManagerId(driver, fitzwang-PC0.tencent.com, 65521, None)
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@680362a{/metrics/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO internal.SharedState : Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/E:/github/fitzwang/serving/spark-warehouse/').
+19/04/11 11:48:05 INFO internal.SharedState : Warehouse path is 'file:/E:/github/fitzwang/serving/spark-warehouse/'.
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@5b5caf08{/SQL,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@23cd4ff2{/SQL/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@9f6e406{/SQL/execution,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@7a94b64e{/SQL/execution/json,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO handler.ContextHandler : Started o.s.j.s.ServletContextHandler@34237b90{/static/sql,null,AVAILABLE,@Spark}
+19/04/11 11:48:05 INFO state.StateStoreCoordinatorRef : Registered StateStoreCoordinator endpoint
+19/04/11 11:48:05 WARN libsvm.LibSVMFileFormat : 'numFeatures' option not specified, determining the number of features by going though the input. If you know the number in advance, please specify it via 'numFeatures' option to avoid the extra scan.
+19/04/11 11:48:07 INFO datasources.FileSourceStrategy : Pruning directories with: 
+19/04/11 11:48:07 INFO datasources.FileSourceStrategy : Post-Scan Filters: NOT (length(trim(value#0, None)) = 0),NOT StartsWith(trim(value#0, None), #)
+19/04/11 11:48:07 INFO datasources.FileSourceStrategy : Output Data Schema: struct<value: string>
+19/04/11 11:48:07 INFO execution.FileSourceScanExec : Pushed Filters: 
+19/04/11 11:48:07 INFO spark.SparkContext : Invoking stop() from shutdown hook
+19/04/11 11:48:07 INFO server.AbstractConnector : Stopped Spark@60fa3495{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+19/04/11 11:48:07 INFO ui.SparkUI : Stopped Spark web UI at http://fitzwang-PC0.tencent.com:4040
+19/04/11 11:48:07 INFO spark.MapOutputTrackerMasterEndpoint : MapOutputTrackerMasterEndpoint stopped!
+19/04/11 11:48:07 INFO memory.MemoryStore : MemoryStore cleared
+19/04/11 11:48:07 INFO storage.BlockManager : BlockManager stopped
+19/04/11 11:48:07 INFO storage.BlockManagerMaster : BlockManagerMaster stopped
+19/04/11 11:48:07 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint : OutputCommitCoordinator stopped!
+19/04/11 11:48:07 INFO spark.SparkContext : Successfully stopped SparkContext
+19/04/11 11:48:07 INFO util.ShutdownHookManager : Shutdown hook called
+19/04/11 11:48:07 INFO util.ShutdownHookManager : Deleting directory C:\Users\fitzwang\AppData\Local\Temp\spark-3620cd2f-ca98-47e1-99e6-6bf488d564d2
