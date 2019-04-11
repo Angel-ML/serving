@@ -53,7 +53,7 @@ class StarCol(name: String = "*") extends SCol(name) {
 
 class SimpleCol(name: String) extends SCol(name) {
   private var idx: Int = -1
-  override var resSchema: StructType = new StructType()
+  override var resSchema: StructType = _
 
   def apply(ipRow: Array[Any]): Any = {
     assert(idx != -1)
@@ -69,7 +69,13 @@ class SimpleCol(name: String) extends SCol(name) {
 
     // 2. prepare output schema and retuen
     if (findRes.nonEmpty) {
-      resSchema.add(findRes.get._1)
+      if (this.resSchema == null) {
+        this.resSchema = new StructType().add(findRes.get._1)
+      } else {
+        this.resSchema = this.resSchema.add(
+          StructField(findRes.get._1.name, findRes.get._1.dataType, findRes.get._1.nullable, findRes.get._1.metadata))
+      }
+//      resSchema.add(findRes.get._1)
       idx = findRes.get._2
       true
     } else {

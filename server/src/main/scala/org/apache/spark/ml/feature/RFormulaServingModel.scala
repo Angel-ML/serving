@@ -45,7 +45,7 @@ class RFormulaServingModel(stage: RFormulaModel) extends ServingModel[RFormulaSe
     } else if (dataset.schema.exists(_.name == labelName)) {
       dataset.schema(labelName).dataType match {
         case _: NumericType | BooleanType =>
-          val labelUDF = UDF.make[Double, String](labelName => dataset(labelName).asInstanceOf[Double], false)
+          val labelUDF = UDF.make[Double, Double](label => label, false)
           dataset.withColum(labelUDF.apply(stage.getLabelCol, dataset(labelName)))
         case other =>
           throw new IllegalArgumentException("Unsupported type for label: " + other)

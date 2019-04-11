@@ -27,13 +27,13 @@ object RFormulaServingModelTest {
 
     val output = formula.fit(dataset)
     val out = output.transform(dataset)
-
+    out.show()
     out.select("features", "label").show()
 
 
     val res = trans(output)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+      res.getRow(0).get(4).toString, res.getRow(0).get(5).toString)
     res.printSchema()
   }
 

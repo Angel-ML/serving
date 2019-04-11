@@ -22,6 +22,7 @@ object InteractionServingTest {
       (6, 1, 1, 4, 2, 8, 4)
     )).toDF("id1", "id2", "id3", "id4", "id5", "id6", "id7")
 
+    println(df.show())
     val assembler1 = new VectorAssembler().
       setInputCols(Array("id2", "id3", "id4")).
       setOutputCol("vec1")
@@ -44,21 +45,23 @@ object InteractionServingTest {
 
     val res = trans(interaction)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+      res.getRow(0).get(0).toString, res.getRow(0).get(3).toString)
     res.printSchema()
   }
 
   def trans(model: Interaction): SDFrame = {
     val transModel = ModelUtils.transTransformer(model).asInstanceOf[InteractionServing]
     val rowsFeatures = new Array[SRow](1)
-    val training = Seq(Array(1, Array(1.0,2.0,3.0), Array(8.0,4.0,5.0)))
+    val index = Array(0,1,2)
+    val training = Seq(
+      Array(1, Vectors.sparse(3, index, Array(1.0,2.0,3.0)), Vectors.sparse(3, index, Array(8.0,4.0,5.0))))
     for (i <- 0 until rowsFeatures.length) {
       rowsFeatures(i) = new SRow(training(i))
     }
 
     val schema = new StructType().add(new StructField("id1", IntegerType, true))
-      .add(new StructField("vec1", DoubleType, true))
-      .add(new StructField("vec2", DoubleType, true))
+      .add(new StructField("vec1", new VectorUDT, true))
+      .add(new StructField("vec2", new VectorUDT, true))
     val dataset = new SDFrame(rowsFeatures)(schema)
     transModel.transform(dataset)
   }

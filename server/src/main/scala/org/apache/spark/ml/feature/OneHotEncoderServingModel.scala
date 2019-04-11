@@ -73,7 +73,7 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
 
       val idxUDF =UDF.make[Int](() => idx)
       output = output.withColum(idxUDF.apply("idx"))
-      println(output.printSchema())
+
       output = output.withColum(encoderUDF.apply(outputColName, SCol(inputColName), SCol("idx"))
         .setSchema(outputColName, metadata))
     }

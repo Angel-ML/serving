@@ -27,7 +27,7 @@ object VectorAssemblerServingTest {
 
     val res = trans(assembler)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+      res.getRow(0).get(0).toString, res.getRow(0).get(5).toString)
     res.printSchema()
   }
 
@@ -44,11 +44,7 @@ object VectorAssemblerServingTest {
       .add(new StructField("mobile", DoubleType, true))
       .add(new StructField("userFeatures", new VectorUDT, true))
       .add(new StructField("clicked", DoubleType, true))
-    println("data schema : ",schema)
     val dataset = new SDFrame(rowsFeatures)(schema)
-    println(dataset.schema, dataset.columns.length, dataset.columns(0),
-      dataset.getRow(0).get(0).toString, dataset.getRow(0).get(1).toString)
-    dataset.printSchema()
     transModel.transform(dataset)
   }
 }

@@ -65,8 +65,8 @@ class VectorAssemblerServing(stage: VectorAssembler) extends ServingTrans{
         case _: NumericType | BooleanType => dataset(c)//todo: whether name is needed .as(s"${c}_double_$uid")
       }
     }
-    //todo: select, struct, metadata
-    dataset.select(SCol(), assembleUDF(stage.getOutputCol, args:_*).setSchema(stage.getOutputCol, metadata))//todo: struct
+
+    dataset.select(SCol(), assembleUDF(stage.getOutputCol, args:_*).setSchema(stage.getOutputCol, metadata))
   }
 
   override def copy(extra: ParamMap): VectorAssemblerServing = {

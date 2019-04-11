@@ -45,7 +45,7 @@ object SDFrameTest {
       output.getRow(0).get(0), output.getRow(0).get(1), output.getRow(0).get(2))
 
     //test filter
-    val filterUDF = UDF.make[Boolean, Boolean](f => f)
+    val filterUDF = UDF.make[Boolean, Boolean](f => f, false)
     output = dataset.filter(filterUDF("filter_res", SCol("filter")))
     println(output.printSchema(), output.columns.length, output.columns,
       output.getRow(0).get(0), output.getRow(0).get(1), output.getRow(0).get(2))
@@ -61,8 +61,18 @@ object SDFrameTest {
       output.getRow(0).get(0), output.getRow(0).get(1), output.getRow(0).get(2), output.getRow(0).get(3))
     
     //test select
-    output = output.select(SCol("filter"))
-    println(output.printSchema(), output.columns.length, output.columns,
-      output.getRow(0).get(0))
+    val select = output.select(SCol("filter"))
+    val selectAll = output.select(SCol())
+    println("selectAll test", selectAll.printSchema(), selectAll.columns.length, selectAll.columns,
+      selectAll.getRow(0).get(0))
+    println("select test", select.printSchema(), select.columns.length, select.columns,
+      select.getRow(0).get(0))
+
+
+    //test drop
+    println(output.printSchema())
+    val drop = output.drop(new SimpleCol("filter"))
+    println("drop test", drop.printSchema(), drop.columns.length, drop.columns,
+      drop.getRow(0).get(0))
   }
 }

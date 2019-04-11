@@ -2,8 +2,7 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute._
-import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
-import org.apache.spark.ml.feature.{FeatureEncoder, Interaction}
+import org.apache.spark.ml.data._
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
@@ -16,8 +15,8 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, logging = true)
     val inputFeatures = stage.getInputCols.map(c => dataset.schema(c))
-    val featureEncoders = getFeatureEncoders(inputFeatures)
-    val featureAttrs = getFeatureAttrs(inputFeatures)
+    val featureEncoders = getFeatureEncoders(inputFeatures, dataset)
+    val featureAttrs = getFeatureAttrs(inputFeatures, dataset)
 
     val interactUDF = UDF.make[Vector, Seq[Any]](row => {
       var indices = ArrayBuilder.make[Int]
@@ -55,7 +54,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
       }
     }
     dataset.select(SCol(),
-      interactUDF.apply(stage.getOutputCol, featureCols:_*).setSchema(stage.getOutputCol, featureAttrs.toMetadata()))//todo: struct
+      interactUDF.apply(stage.getOutputCol, featureCols:_*).setSchema(stage.getOutputCol, featureAttrs.toMetadata()))
   }
 
   override def copy(extra: ParamMap): InteractionServing = {
@@ -78,7 +77,7 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
     *
     * @param features The input feature columns to create encoders for.
     */
-  private def getFeatureEncoders(features: Seq[StructField]): Array[FeatureEncoder] = {
+  private def getFeatureEncoders(features: Seq[StructField], dataset: SDFrame): Array[FeatureEncoder] = {
     def getNumFeatures(attr: Attribute): Int = {
       attr match {
         case nominal: NominalAttribute =>
@@ -88,14 +87,22 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
           1  // numeric feature
       }
     }
+    lazy val first = dataset.getRow(0)
+    val schema = dataset.schema
     features.map { f =>
+      val index = schema.fieldIndex(f.name)
       val numFeatures = f.dataType match {
         case _: NumericType | BooleanType =>
           Array(getNumFeatures(Attribute.fromStructField(f)))
         case _: VectorUDT =>
-          val attrs = AttributeGroup.fromStructField(f).attributes.getOrElse(
-            throw new SparkException("Vector attributes must be defined for interaction."))
-          attrs.map(getNumFeatures)
+          val group = AttributeGroup.fromStructField(f)
+          if (group.attributes.isDefined) {
+            val attrs = group.attributes.getOrElse(
+              throw new SparkException("Vector attributes must be defined for interaction."))
+            attrs.map(getNumFeatures)
+          } else {
+            (0 until first.get(index).asInstanceOf[Vector].size).map(_ => 1).toArray[Int]
+          }
       }
       new FeatureEncoder(numFeatures)
     }.toArray
@@ -110,8 +117,10 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
     *
     * @param features The input feature columns to the Interaction transformer.
     */
-  private def getFeatureAttrs(features: Seq[StructField]): AttributeGroup = {
+  private def getFeatureAttrs(features: Seq[StructField], dataset: SDFrame): AttributeGroup = {
     var featureAttrs: Seq[Attribute] = Nil
+    lazy val first = dataset.getRow(0)
+    val schema = dataset.schema
     features.reverse.foreach { f =>
       val encodedAttrs = f.dataType match {
         case _: NumericType | BooleanType =>
@@ -124,8 +133,15 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
             encodedFeatureAttrs(Seq(attr), None)
           }
         case _: VectorUDT =>
+          val index = schema.fieldIndex(f.name)
           val group = AttributeGroup.fromStructField(f)
-          encodedFeatureAttrs(group.attributes.get, Some(group.name))
+          if (group.attributes.isDefined) {
+            encodedFeatureAttrs(group.attributes.get, Some(group.name))
+          } else {
+            val numAttrs = group.numAttributes.getOrElse(first.get(index).asInstanceOf[Vector].size)
+            val attr = Array.tabulate(numAttrs)(i => NumericAttribute.defaultAttr.withName(f.name + "_" + i))
+            encodedFeatureAttrs(attr, Some(group.name))
+          }
       }
       if (featureAttrs.isEmpty) {
         featureAttrs = encodedAttrs
@@ -177,4 +193,102 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
 
 object InteractionServing {
   def apply(stage: Interaction): InteractionServing = new InteractionServing(stage)
+}
+
+/**
+  * This class performs on-the-fly one-hot encoding of features as you iterate over them. To
+  * indicate which input features should be one-hot encoded, an array of the feature counts
+  * must be passed in ahead of time.
+  *
+  * @param numFeatures Array of feature counts for each input feature. For nominal features this
+  *                    count is equal to the number of categories. For numeric features the count
+  *                    should be set to 1.
+  */
+class FeatureEncoder(numFeatures: Array[Int]) extends Serializable {
+  assert(numFeatures.forall(_ > 0), "Features counts must all be positive.")
+
+  /** The size of the output vector. */
+  val outputSize = numFeatures.sum
+
+  /** Precomputed offsets for the location of each output feature. */
+  private val outputOffsets = {
+    val arr = new Array[Int](numFeatures.length)
+    var i = 1
+    while (i < arr.length) {
+      arr(i) = arr(i - 1) + numFeatures(i - 1)
+      i += 1
+    }
+    arr
+  }
+
+  /**
+    * Given an input row of features, invokes the specific function for every non-zero output.
+    *
+    * @param value The row value to encode, either a Double or Vector.
+    * @param f The callback to invoke on each non-zero (index, value) output pair.
+    */
+  def foreachNonzeroOutput(value: Any, f: (Int, Double) => Unit): Unit = value match {
+    case d: Integer =>
+      assert(numFeatures.length == 1, "DoubleType columns should only contain one feature.")
+      val numOutputCols = numFeatures.head
+      if (numOutputCols > 1) {
+        assert(
+          d >= 0.0 && d == d.toInt && d < numOutputCols,
+          s"Values from column must be indices, but got $d.")
+        f(d.toInt, 1.0)
+      } else {
+        f(0, d.toDouble)
+      }
+    case d: Long =>
+      assert(numFeatures.length == 1, "DoubleType columns should only contain one feature.")
+      val numOutputCols = numFeatures.head
+      if (numOutputCols > 1) {
+        assert(
+          d >= 0.0 && d == d.toInt && d < numOutputCols,
+          s"Values from column must be indices, but got $d.")
+        f(d.toInt, 1.0)
+      } else {
+        f(0, d.toDouble)
+      }
+    case d: Float =>
+      assert(numFeatures.length == 1, "DoubleType columns should only contain one feature.")
+      val numOutputCols = numFeatures.head
+      if (numOutputCols > 1) {
+        assert(
+          d >= 0.0 && d == d.toInt && d < numOutputCols,
+          s"Values from column must be indices, but got $d.")
+        f(d.toInt, 1.0)
+      } else {
+        f(0, d.toDouble)
+      }
+    case d: Double =>
+      assert(numFeatures.length == 1, "DoubleType columns should only contain one feature.")
+      val numOutputCols = numFeatures.head
+      if (numOutputCols > 1) {
+        assert(
+          d >= 0.0 && d == d.toInt && d < numOutputCols,
+          s"Values from column must be indices, but got $d.")
+        f(d.toInt, 1.0)
+      } else {
+        f(0, d)
+      }
+    case vec: Vector =>
+      assert(numFeatures.length == vec.size,
+        s"Vector column size was ${vec.size}, expected ${numFeatures.length}")
+      vec.foreachActive { (i, v) =>
+        val numOutputCols = numFeatures(i)
+        if (numOutputCols > 1) {
+          assert(
+            v >= 0.0 && v == v.toInt && v < numOutputCols,
+            s"Values from column must be indices, but got $v.")
+          f(outputOffsets(i) + v.toInt, 1.0)
+        } else {
+          f(outputOffsets(i), v)
+        }
+      }
+    case null =>
+      throw new SparkException("Values to interact cannot be null.")
+    case o =>
+      throw new SparkException(s"$o of type ${o.getClass.getName} is not supported.")
+  }
 }
