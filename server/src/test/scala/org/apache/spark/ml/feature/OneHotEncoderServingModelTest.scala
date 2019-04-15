@@ -4,7 +4,7 @@ import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
 
 object OneHotEncoderServingModelTest {
   def main(args: Array[String]): Unit = {
@@ -14,49 +14,45 @@ object OneHotEncoderServingModelTest {
       .getOrCreate()
 
     val df = spark.createDataFrame(Seq(
-      (0, "a"),
-      (1, "b"),
-      (2, "c"),
-      (3, "a"),
-      (4, "a"),
-      (5, "c")
-    )).toDF("id", "category")
+      (0.0, 1.0),
+      (1.0, 0.0),
+      (2.0, 1.0),
+      (0.0, 2.0),
+      (0.0, 1.0),
+      (2.0, 0.0)
+    )).toDF("categoryIndex1", "categoryIndex2")
 
-    val indexer = new StringIndexer()
-      .setInputCol("category")
-      .setOutputCol("categoryIndex")
-      .fit(df)
-    val indexed = indexer.transform(df)
+    val encoder = new OneHotEncoderEstimator()
+      .setInputCols(Array("categoryIndex1", "categoryIndex2"))
+      .setOutputCols(Array("categoryVec1", "categoryVec2"))
+    val model = encoder.fit(df)
 
-    val encoder = new OneHotEncoder()
-      .setInputCol("categoryIndex")
-      .setOutputCol("categoryVec")
-
-    val encoded = encoder.transform(indexed)
+    val encoded = model.transform(df)
     encoded.show()
 
-    val res = trans(indexer)
+    val res = trans(model)
     println(res.schema, res.columns.length, res.columns(0),
       res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
     res.printSchema()
   }
 
-  def trans(model: StringIndexerModel): SDFrame = {
-    val transModel = ModelUtils.transModel(model).asInstanceOf[StringIndexerServingModel]
+  def trans(model: OneHotEncoderModel): SDFrame = {
+    val transModel = ModelUtils.transTransformer(model).asInstanceOf[OneHotEncoderServingModel]
     val rowsFeatures = new Array[SRow](5)
     val training = Seq(
-      (0, "a"),
-      (1, "b"),
-      (2, "c"),
-      (3, "a"),
-      (4, "a"),
-      (5, "c")
+      Array(0.0, 1.0),
+      Array(1.0, 0.0),
+      Array(2.0, 1.0),
+      Array(0.0, 2.0),
+      Array(0.0, 1.0),
+      Array(2.0, 0.0)
     )
     for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
+      rowsFeatures(i) = new SRow(training(i).toArray)
     }
 
-    val schema = new StructType().add(new StructField(model.getInputCol, StringType, true))
+    val schema = new StructType().add(new StructField("categoryIndex1", DoubleType, true))
+      .add(new StructField("categoryIndex2", DoubleType, true))
     val dataset = new SDFrame(rowsFeatures)(schema)
     transModel.transform(dataset)
   }

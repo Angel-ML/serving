@@ -3,7 +3,7 @@ package org.apache.spark.ml.clustering
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.mllib.clustering.{LocalLDAModel => OldLocalLDAModel}
 
-class LocalLDAServingModel(stage: LocalLDAModel) extends LDAServingModel {
+class LocalLDAServingModel(stage: LocalLDAModel) extends LDAServingModel[LocalLDAServingModel, LocalLDAModel](stage) {
 
   override def oldLocalModel: OldLocalLDAModel = stage.oldLocalModel
 

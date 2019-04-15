@@ -10,7 +10,7 @@ import org.apache.spark.ml.transformer.{ServingModel, ServingPipelineModel, Serv
 import org.apache.spark.ml.tuning.{CrossValidatorModel, TrainValidationSplitModel}
 import org.apache.spark.ml.tunning.{CrossValidatorServingModel, TrainValidationSplitServingModel}
 import org.apache.spark.ml.util.DefaultParamsReader
-import org.apache.spark.ml.{MetaSnapshot, Model, PipelineModel, Transformer}
+import org.apache.spark.ml._
 import org.apache.spark.sql.SparkSession
 
 
@@ -116,7 +116,6 @@ object ModelUtils {
         val serStages = model.stages.map(trans)
         new ServingPipelineModel(model.uid, serStages)
       case model => {
-        println(model.toString)
         trans(model).asInstanceOf[ServingModel[_]]
       }
     }
@@ -131,13 +130,13 @@ object ModelUtils {
     }
   }
 
-  private def trans(stage: Transformer): ServingTrans = {
+  private def trans(stage: PipelineStage): ServingTrans = {
     stage match {
       case transformer: AFTSurvivalRegressionModel => AFTSurvivalRegressionServingModel(transformer)
       case transformer: Bucketizer => BucketizerServing(transformer)
       case transformer: IsotonicRegressionModel => IsotonicRegressionServingModel(transformer)
       case transformer: MinMaxScalerModel => MinMaxScalerServingModel(transformer)
-      case transformer: RFormulaModel => RFormulaServingModel(transformer)//todo:test???
+      case transformer: RFormulaModel => RFormulaServingModel(transformer)
       case transformer: Word2VecModel => ???
       case transformer: KMeansModel => KMeansServingModel(transformer)
       case transformer: StringIndexerModel => StringIndexerServingModel(transformer)
@@ -174,7 +173,7 @@ object ModelUtils {
       case transformer: CountVectorizerModel => CountVectorizerServingModel(transformer)
       case transformer: IDFModel => IDFServingModel(transformer)
       case transformer: VectorSizeHint => VectorSizeHintServing(transformer)
-      case transformer: FeatureHasher => ???
+      case transformer: FeatureHasher => FeatureHasherServing(transformer)
       case transformer: SQLTransformer => ???
       case transformer: ElementwiseProduct => ElementwiseProductServing(transformer)
       case transformer: Tokenizer => TokenizerServing(transformer)
@@ -188,8 +187,8 @@ object ModelUtils {
       case transformer: HashingTF => HashingTFServing(transformer)
       case transformer: StopWordsRemover => StopWordsRemoverServing(transformer)
       case transformer: IndexToString => IndexToStringServing(transformer)
-      case transformer: VectorAssembler => VectorAssemblerServing(transformer)//todo: struct test???
-      case transformer: Interaction => InteractionServing(transformer)//todo: struct, test???
+      case transformer: VectorAssembler => VectorAssemblerServing(transformer)
+      case transformer: Interaction => InteractionServing(transformer)
       case transformer: VectorAttributeRewriter => VectorAttributeRewriterServing(transformer)
       case transformer: ColumnPruner => ColumnPrunerServing(transformer)
     }
