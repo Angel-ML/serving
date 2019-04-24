@@ -49,8 +49,8 @@ object MinMaxScalerServingModelTest {
       rowsFeatures(i) = new SRow(Array(training(i)._2))
     }
 
-    val schema = new StructType().add(new StructField(model.getInputCol, new VectorUDT, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField(model.getInputCol, new VectorUDT, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

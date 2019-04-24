@@ -49,7 +49,7 @@ object VectorSizeHintServingTest {
 
     val res = trans(sizeHint)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+      res.getRow(0).get(0).toString)
     res.printSchema()
   }
 
@@ -57,17 +57,17 @@ object VectorSizeHintServingTest {
     val transModel = ModelUtils.transTransformer(model).asInstanceOf[VectorSizeHintServing]
     val rowsFeatures = new Array[SRow](2)
     val training = Seq(
-      Array(18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0),
-      Array(18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0))
+      Array(Vectors.dense(0.0, 10.0, 0.5), 1.0),
+      Array(Vectors.dense(0.0, 10.0, 0.5), 1.0))
     for (i <- 0 until rowsFeatures.length) {
       println(training(i))
       rowsFeatures(i) = new SRow(training(i))
     }
 
-    val schema = new StructType().add(new StructField("hour", IntegerType, true))
-    .add(new StructField("mobile", DoubleType, true))
-    .add(new StructField("userFeatures", new VectorUDT, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField("hour", IntegerType, true))
+//    .add(new StructField("mobile", DoubleType, true))
+//    .add(new StructField("userFeatures", new VectorUDT, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

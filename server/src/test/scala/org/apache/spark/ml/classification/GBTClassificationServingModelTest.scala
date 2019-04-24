@@ -50,7 +50,7 @@ object GBTClassificationServingModelTest {
 
     // Chain indexers and GBT in a Pipeline.
     val pipeline = new Pipeline()
-      .setStages(Array(labelIndexer, featureIndexer, gbt, labelConverter))
+      .setStages(Array(featureIndexer, labelIndexer, gbt, labelConverter))
 
     // Train model. This also runs the indexers.
     val model = pipeline.fit(trainingData)
@@ -89,8 +89,8 @@ object GBTClassificationServingModelTest {
       rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
     }
 
-    val schema = new StructType().add(new StructField("features", new VectorUDT, true))
-    val dataset = new SDFrame(rows)(schema)
+//    val schema = new StructType().add(new StructField("features", new VectorUDT, true))
+    val dataset = transModel.prepareData(rows)
     transModel.transform(dataset)
   }
 }

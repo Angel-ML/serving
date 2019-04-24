@@ -2,14 +2,14 @@ package org.apache.spark.ml.classification
 
 import java.util.UUID
 
-import org.apache.spark.ml.data.{SCol, SDFrame, SimpleCol, UDF}
-import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.ml.data._
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.param.shared.HasWeightCol
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.SchemaUtils
 import org.apache.spark.ml.feature.utils.ModelUtils
-import org.apache.spark.sql.types.{DataType, DoubleType, StructType}
+import org.apache.spark.sql.types._
 
 class OneVsRestServingModel(stage: OneVsRestModel)
   extends ServingModel[OneVsRestServingModel] {
@@ -96,6 +96,15 @@ class OneVsRestServingModel(stage: OneVsRestModel)
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.featuresCol)) {
+      val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
 }
 
 object OneVsRestServingModel {

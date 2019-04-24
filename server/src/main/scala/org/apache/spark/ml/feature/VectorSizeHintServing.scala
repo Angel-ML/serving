@@ -5,7 +5,7 @@ import org.apache.spark.ml.attribute.AttributeGroup
 import org.apache.spark.ml.data._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.types._
 import org.apache.spark.ml.linalg._
 
 class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
@@ -94,6 +94,15 @@ class VectorSizeHintServing(stage: VectorSizeHint) extends ServingTrans {
         val msg = s"Trying to set size of vectors in `$localInputCol` to $localSize but size " +
           s"already set to ${group.size}."
         throw new IllegalArgumentException(msg)
+    }
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
 }

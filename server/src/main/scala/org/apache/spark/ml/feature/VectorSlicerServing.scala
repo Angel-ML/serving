@@ -1,15 +1,16 @@
 package org.apache.spark.ml.feature
 
-import org.apache.spark.ml.attribute.{Attribute, AttributeGroup}
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.attribute.{Attribute, AttributeGroup, NumericAttribute}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.feature.VectorSlicer
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
 import org.apache.spark.ml.util.{MetadataUtils, SchemaUtils}
-import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.types.{AnyType, ArrayType, StructField, StructType}
 
 class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
+
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema)
 
@@ -72,6 +73,15 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
       nameFeatures.zip(stage.getNames).map { case (i, n) => s"$i:$n" }.mkString("[", ",", "]")
     require(nameFeatures.length + indFeatures.length == numDistinctFeatures, errMsg)
     indFeatures ++ nameFeatures
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    val featureNum = rows(0).get(0).asInstanceOf[Vector].size
+    val defaultAttr = NumericAttribute.defaultAttr
+    val attrs = (0 until featureNum).map(n => "f" + (n + 1)).toArray.map(defaultAttr.withName)
+    val attrGroup = new AttributeGroup(stage.getInputCol, attrs.asInstanceOf[Array[Attribute]])
+    val schema =new StructType(Array(attrGroup.toStructField()))
+    new SDFrame(rows)(schema)
   }
 }
 

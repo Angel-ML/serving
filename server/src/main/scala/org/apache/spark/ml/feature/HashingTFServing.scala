@@ -2,10 +2,10 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.AttributeGroup
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.sql.types.{ArrayType, StructType}
+import org.apache.spark.sql.types._
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.util.SchemaUtils
 import org.apache.spark.unsafe.hash.Murmur3_x86_32._
@@ -16,6 +16,7 @@ import scala.language.implicitConversions
 import scala.collection.mutable
 
 class HashingTFServing(stage: HashingTF) extends ServingTrans{
+
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema)
     val tUDF = UDF.make[Vector, Seq[String]](trans, false)
@@ -58,6 +59,15 @@ class HashingTFServing(stage: HashingTF) extends ServingTrans{
       // This should never happen.
       throw new IllegalArgumentException(
         s"HashingTF does not recognize hash algorithm $hashAlgorithm")
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, ArrayType(StringType), true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol of ${stage} is not defined!")
+    }
   }
 }
 

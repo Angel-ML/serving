@@ -2,15 +2,16 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute._
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.feature.OneHotEncoderModel
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.SchemaUtils
-import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[OneHotEncoderServingModel] {
+
   private val KEEP_INVALID: String = "keep"
   private val ERROR_INVALID: String = "error"
 
@@ -161,6 +162,34 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
       }
     }
     schema
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if(stage.isDefined(stage.inputCols)) {
+      val featuresTypes = rows(0).values.map{ feature =>
+        feature match {
+          case _ : Double => DoubleType
+          case _ : String => StringType
+          case _ : Integer => IntegerType
+          case _ : Vector => new VectorUDT
+          case _ : Array[String] => ArrayType(StringType)
+        }
+      }
+      var schema: StructType = null
+      val iter = stage.getInputCols.zip(featuresTypes).iterator
+      while (iter.hasNext) {
+        val (colName, featureType) = iter.next()
+        if (schema == null) {
+          schema = new StructType().add(new StructField(colName, featureType, true))
+        } else {
+          schema = schema.add(new StructField(colName, featureType, true))
+        }
+      }
+
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
   }
 }
 

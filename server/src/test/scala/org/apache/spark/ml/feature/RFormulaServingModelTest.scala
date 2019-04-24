@@ -41,19 +41,19 @@ object RFormulaServingModelTest {
     val transModel = ModelUtils.transModel(model).asInstanceOf[RFormulaServingModel]
     val rowsFeatures = new Array[SRow](3)
     val training = Seq(
-      Array("US", 18, 1.0),
-      Array("CA", 12, 0.0),
-      Array("NZ", 15, 0.0)
+      Array(1, "US", 18, 1.0),
+      Array(2, "CA", 12, 0.0),
+      Array(3, "NZ", 15, 0.0)
     )
     for (i <- 0 until rowsFeatures.length) {
       rowsFeatures(i) = new SRow(training(i))
     }
 
-    val schema = new StructType()
-      .add(new StructField("country", StringType, true))
-      .add(new StructField("hour", IntegerType, true))
-      .add(new StructField("clicked", DoubleType, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType()
+//      .add(new StructField("country", StringType, true))
+//      .add(new StructField("hour", IntegerType, true))
+//      .add(new StructField("clicked", DoubleType, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

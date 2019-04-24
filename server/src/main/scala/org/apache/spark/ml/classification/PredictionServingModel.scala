@@ -1,12 +1,12 @@
 package org.apache.spark.ml.classification
 
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.shared.HasWeightCol
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.SchemaUtils
 import org.apache.spark.ml.{PredictionModel, PredictorParams}
-import org.apache.spark.sql.types.{DataType, DoubleType, StructType}
+import org.apache.spark.sql.types._
 
 abstract class PredictionServingModel[FeaturesType, M <: PredictionServingModel[FeaturesType, M, T],
   T <: PredictionModel[FeaturesType, T]](stage: T)
@@ -76,4 +76,12 @@ abstract class PredictionServingModel[FeaturesType, M <: PredictionServingModel[
 
   def predict(features: Vector): Double
 
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.featuresCol)) {
+      val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
 }

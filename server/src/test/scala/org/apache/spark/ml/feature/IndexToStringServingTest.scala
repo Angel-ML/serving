@@ -2,10 +2,10 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.attribute.Attribute
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 object IndexToStringServingTest {
   def main(args: Array[String]): Unit = {
@@ -57,16 +57,17 @@ object IndexToStringServingTest {
 
   def trans(model: IndexToString): SDFrame = {
     val transModel = ModelUtils.transTransformer(model).asInstanceOf[IndexToStringServing]
-    val rowsFeatures = new Array[SRow](1)
+    val rowsFeatures = new Array[SRow](2)
     val training = Seq(
-      (0, 0.0)
+      Array[Any](0.0),
+      Array[Any](0.0)
     )
     for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
+      rowsFeatures(i) = new SRow(training(i))
     }
 
-    val schema = new StructType().add(new StructField(model.getInputCol, DoubleType, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField(model.getInputCol, DoubleType, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

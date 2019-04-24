@@ -1,10 +1,11 @@
 package org.apache.spark.ml.feature
 
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.feature.RFormulaModel
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.feature.utils.ModelUtils
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.sql.types._
 
 class RFormulaServingModel(stage: RFormulaModel) extends ServingModel[RFormulaServingModel] {
@@ -67,6 +68,44 @@ class RFormulaServingModel(stage: RFormulaModel) extends ServingModel[RFormulaSe
 
   protected def hasLabelCol(schema: StructType): Boolean = {
     schema.map(_.name).contains(stage.getLabelCol)
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    var features = stage.resolvedFormula.terms.map(term => term(0))
+    features = features :+ stage.resolvedFormula.label
+    var schema: StructType = null
+    val featuresTypes = rows(0).values.map{ feature =>
+      feature match {
+        case _ : Double => DoubleType
+        case _ : String => StringType
+        case _ : Integer => IntegerType
+        case _ : Vector => new VectorUDT
+        case _ : Array[String] => ArrayType(StringType)
+      }
+    }
+    if (features.length == featuresTypes.length - 1) {
+      (0 until featuresTypes.length).foreach{ index =>
+        if (index == 0) {
+          schema = new StructType().add(new StructField("id", featuresTypes(index), true))
+        } else {
+          schema = schema.add(new StructField(features(index - 1), featuresTypes(index), true))
+        }
+      }
+    } else if (features.length == featuresTypes.length) {
+      val iter = features.zip(featuresTypes).iterator
+      while (iter.hasNext) {
+        val (colName, featureType) = iter.next()
+        if (schema == null) {
+          schema = new StructType().add(new StructField(colName, featureType, true))
+        } else {
+          schema = schema.add(new StructField(colName, featureType, true))
+        }
+      }
+    } else {
+      throw new Exception("the inputData is not match the struct of data in train model")
+    }
+
+    new SDFrame(rows)(schema)
   }
 }
 

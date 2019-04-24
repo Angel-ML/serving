@@ -189,6 +189,34 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
         Seq(NumericAttribute.defaultAttr.withName(format(i, a.name, None)))
     }
   }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if(stage.isDefined(stage.inputCols)) {
+      val featuresTypes = rows(0).values.map{ feature =>
+        feature match {
+          case _ : Double => DoubleType
+          case _ : String => StringType
+          case _ : Integer => IntegerType
+          case _ : Vector => new VectorUDT
+          case _ : Array[String] => ArrayType(StringType)
+        }
+      }
+      var schema: StructType = null
+      val iter = stage.getInputCols.zip(featuresTypes).iterator
+      while (iter.hasNext) {
+        val (colName, featureType) = iter.next()
+        if (schema == null) {
+          schema = new StructType().add(new StructField(colName, featureType, true))
+        } else {
+          schema = schema.add(new StructField(colName, featureType, true))
+        }
+      }
+
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
 }
 
 object InteractionServing {

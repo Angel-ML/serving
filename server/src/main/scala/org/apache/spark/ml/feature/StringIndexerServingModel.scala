@@ -2,10 +2,11 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.NominalAttribute
-import org.apache.spark.ml.data.{SCol, SDFrame, SimpleCol, UDF}
+import org.apache.spark.ml.data._
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.{NumericType, StringType, StructType}
+import org.apache.spark.sql.types._
 import org.apache.spark.util.collection.OpenHashMap
 
 class StringIndexerServingModel(stage: StringIndexerModel)
@@ -97,6 +98,16 @@ class StringIndexerServingModel(stage: StringIndexerModel)
       i += 1
     }
     map
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, StringType, true))
+      println("StringIndexer:   ", schema)
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
   }
 }
 

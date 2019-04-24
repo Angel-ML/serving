@@ -39,11 +39,11 @@ object FeatureHasherServingTest {
       rowsFeatures(i) = new SRow(training(i))
     }
 
-    val schema = new StructType().add(new StructField("real", DoubleType, true))
-      .add(new StructField("bool", BooleanType, true))
-      .add(new StructField("stringNum", StringType, true))
-      .add(new StructField("string", StringType, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField("real", DoubleType, true))
+//      .add(new StructField("bool", BooleanType, true))
+//      .add(new StructField("stringNum", StringType, true))
+//      .add(new StructField("string", StringType, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

@@ -30,10 +30,12 @@ object VectorSlicerServingTest {
     val slicer = new VectorSlicer().setInputCol("userFeatures").setOutputCol("features")
 
     slicer.setIndices(Array(1)).setNames(Array("f3"))
-    // or slicer.setIndices(Array(1, 2)), or slicer.setNames(Array("f2", "f3"))
 
-    val output = slicer.transform(dataset)
-    output.show(false)
+//     slicer.setIndices(Array(1, 2))
+//    //or slicer.setNames(Array("f2", "f3"))
+//
+//    val output = slicer.transform(dataset)
+//    output.show(false)
 
     val res = trans(slicer)
     println(res.schema, res.columns.length, res.columns(0),
@@ -45,15 +47,15 @@ object VectorSlicerServingTest {
     val transModel = ModelUtils.transTransformer(model).asInstanceOf[VectorSlicerServing]
     val rowsFeatures = new Array[SRow](1)
     for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(Vectors.sparse(3, Seq((0, -2.0), (1, 2.3)))))
+      rowsFeatures(i) = new SRow(Array(Vectors.sparse(3, Seq((0, -2.0)))))
     }
 
-    val defaultAttr = NumericAttribute.defaultAttr
-    val attrs = Array("f1", "f2", "f3").map(defaultAttr.withName)
-    val attrGroup = new AttributeGroup("userFeatures", attrs.asInstanceOf[Array[Attribute]])
-    val schema = new StructType(Array(attrGroup.toStructField()))
-    println(schema.toString())
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val defaultAttr = NumericAttribute.defaultAttr
+//    val attrs = Array("f1", "f2", "f3").map(defaultAttr.withName)
+//    val attrGroup = new AttributeGroup("userFeatures", attrs.asInstanceOf[Array[Attribute]])
+//    val schema = new StructType(Array(attrGroup.toStructField()))
+//    println(schema.toString())
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

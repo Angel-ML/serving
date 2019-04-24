@@ -1,13 +1,13 @@
 package org.apache.spark.ml.clustering
 
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import breeze.linalg.{DenseVector => BDV}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.stat.distribution.MultivariateGaussian
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.SchemaUtils
-import org.apache.spark.sql.types.{IntegerType, StructType}
+import org.apache.spark.sql.types._
 
 class GaussianMixtureServingModel(stage: GaussianMixtureModel)
   extends ServingModel[GaussianMixtureServingModel] with GaussianMixtureParams {
@@ -51,6 +51,15 @@ class GaussianMixtureServingModel(stage: GaussianMixtureModel)
     val probs: Array[Double] =
       GaussianMixtureServingModel.computeProbabilities(features.asBreeze.toDenseVector, stage.gaussians, stage.weights)
     Vectors.dense(probs)
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.featuresCol)) {
+      val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
   }
 }
 

@@ -1,11 +1,11 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.attribute.AttributeGroup
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.ml.util.{SchemaUtils}
+import org.apache.spark.ml.util.SchemaUtils
 import org.apache.spark.sql.types._
 import org.apache.spark.util.Utils
 import org.apache.spark.util.collection.OpenHashMap
@@ -99,6 +99,35 @@ class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if(stage.isDefined(stage.inputCols)) {
+      val featuresTypes = rows(0).values.map{ feature =>
+        feature match {
+          case _ : Double => DoubleType
+          case _ : String => StringType
+          case _ : Integer => IntegerType
+          case _ : Vector => new VectorUDT
+          case _ : Boolean => BooleanType
+          case _ : Array[String] => ArrayType(StringType)
+        }
+      }
+      var schema: StructType = null
+      val iter = stage.getInputCols.zip(featuresTypes).iterator
+      while (iter.hasNext) {
+        val (colName, featureType) = iter.next()
+        if (schema == null) {
+          schema = new StructType().add(new StructField(colName, featureType, true))
+        } else {
+          schema = schema.add(new StructField(colName, featureType, true))
+        }
+      }
+
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
 }
 
 object FeatureHasherServing {

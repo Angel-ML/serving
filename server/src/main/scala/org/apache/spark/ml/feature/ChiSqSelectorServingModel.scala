@@ -1,12 +1,13 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.attribute.{Attribute, AttributeGroup, NominalAttribute}
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.{StructField, StructType}
+import org.apache.spark.sql.types._
 import org.apache.spark.ml.linalg.{DenseVector, SparseVector, Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.util.SchemaUtils
+
 import scala.collection.mutable.ArrayBuilder
 
 class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[ChiSqSelectorServingModel] {
@@ -90,6 +91,15 @@ class ChiSqSelectorServingModel(stage: ChiSqSelectorModel) extends ServingModel[
     }
     val newAttributeGroup = new AttributeGroup(stage.getOutputCol, featureAttributes)
     newAttributeGroup.toStructField()
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.featuresCol)) {
+      val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
   }
 }
 

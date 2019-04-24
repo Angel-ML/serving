@@ -1,6 +1,6 @@
 package org.apache.spark.ml.transformer
 
-import org.apache.spark.ml.data.SDFrame
+import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.sql.types.StructType
 
@@ -20,5 +20,9 @@ class ServingPipelineModel(override val uid: String,
 
   override def transformSchema(schema: StructType): StructType = {
     stages.foldLeft(schema)((cur, transformer) => transformer.transformSchema(cur))
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    stages(0).prepareData(rows)
   }
 }

@@ -1,11 +1,11 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.attribute.BinaryAttribute
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 import scala.collection.mutable.ArrayBuilder
 
@@ -67,6 +67,15 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, DoubleType, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
 }
 
 object BinarizerServing {

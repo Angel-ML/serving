@@ -51,9 +51,9 @@ object OneHotEncoderServingModelTest {
       rowsFeatures(i) = new SRow(training(i).toArray)
     }
 
-    val schema = new StructType().add(new StructField("categoryIndex1", DoubleType, true))
-      .add(new StructField("categoryIndex2", DoubleType, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField("categoryIndex1", DoubleType, true))
+//      .add(new StructField("categoryIndex2", DoubleType, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

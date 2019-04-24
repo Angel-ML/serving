@@ -4,15 +4,16 @@ import java.util.NoSuchElementException
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute._
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
-import org.apache.spark.sql.types.{StructField, StructType}
+import org.apache.spark.sql.types._
 import org.apache.spark.ml.linalg._
 import org.apache.spark.ml.util.SchemaUtils
 
 class VectorIndexerServingModel(stage: VectorIndexerModel)
   extends ServingModel[VectorIndexerServingModel] with VectorIndexerParams {
+
   private val SKIP_INVALID: String = "skip"
   private val ERROR_INVALID: String = "error"
   private val KEEP_INVALID: String = "keep"
@@ -36,10 +37,10 @@ class VectorIndexerServingModel(stage: VectorIndexerModel)
 
   override def transformSchema(schema: StructType): StructType = {
     val dataType = new VectorUDT
-//    require(isDefined(stage.inputCol),
-//      s"VectorIndexerModel requires input column parameter: ${stage.inputCol}")
-//    require(isDefined(stage.outputCol),
-//      s"VectorIndexerModel requires output column parameter: ${stage.outputCol}")
+    require(stage.isDefined(stage.inputCol),
+      s"VectorIndexerModel requires input column parameter: ${stage.inputCol}")
+    require(stage.isDefined(stage.outputCol),
+      s"VectorIndexerModel requires output column parameter: ${stage.outputCol}")
     SchemaUtils.checkColumnType(schema, stage.getInputCol, dataType)
 
     // If the input metadata specifies numFeatures, compare with expected numFeatures.
@@ -200,6 +201,15 @@ class VectorIndexerServingModel(stage: VectorIndexerModel)
     require(categoricalFeatureCount == stage.categoryMaps.size, "VectorIndexerModel given categoryMaps" +
       s" with keys outside expected range [0,...,numFeatures), where numFeatures=${stage.numFeatures}")
     attrs
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
   }
 }
 

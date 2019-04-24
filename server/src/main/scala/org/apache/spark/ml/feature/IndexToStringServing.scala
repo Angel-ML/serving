@@ -2,10 +2,11 @@ package org.apache.spark.ml.feature
 
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.{Attribute, NominalAttribute}
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.sql.types.{NumericType, StringType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 class IndexToStringServing(stage: IndexToString) extends ServingTrans{
 
@@ -51,6 +52,15 @@ class IndexToStringServing(stage: IndexToString) extends ServingTrans{
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, DoubleType, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
 }
 
 object IndexToStringServing {

@@ -1,11 +1,11 @@
 package org.apache.spark.ml.feature
 
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.SchemaUtils
-import org.apache.spark.sql.types.{StructField, StructType}
+import org.apache.spark.sql.types._
 
 class MinMaxScalerServingModel(stage: MinMaxScalerModel)
   extends ServingModel[MinMaxScalerServingModel] {
@@ -49,6 +49,15 @@ class MinMaxScalerServingModel(stage: MinMaxScalerModel)
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
 }
 
 object MinMaxScalerServingModel {

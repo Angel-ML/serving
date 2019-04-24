@@ -1,11 +1,12 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.UnaryTransformer
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
+import org.apache.spark.ml.linalg.VectorUDT
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.param.shared.{HasInputCol, HasOutputCol}
 import org.apache.spark.ml.transformer.ServingTrans
-import org.apache.spark.sql.types.{DataType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 abstract class UnaryTransformerServing[IN, OUT, M <: UnaryTransformerServing[IN, OUT, M, T], T <: UnaryTransformer[IN, OUT, T]](stage: T)
   extends ServingTrans with HasInputCol with HasOutputCol{
@@ -32,4 +33,13 @@ abstract class UnaryTransformerServing[IN, OUT, M <: UnaryTransformerServing[IN,
     * Returns the data type of the output column.
     */
   def outputDataType: DataType
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, new VectorUDT, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
 }

@@ -59,10 +59,10 @@ object InteractionServingTest {
       rowsFeatures(i) = new SRow(training(i))
     }
 
-    val schema = new StructType().add(new StructField("id1", IntegerType, true))
-      .add(new StructField("vec1", new VectorUDT, true))
-      .add(new StructField("vec2", new VectorUDT, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField("id1", IntegerType, true))
+//      .add(new StructField("vec1", new VectorUDT, true))
+//      .add(new StructField("vec2", new VectorUDT, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

@@ -1,6 +1,6 @@
 package org.apache.spark.ml.tunning
 
-import org.apache.spark.ml.data.SDFrame
+import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.tuning.TrainValidationSplitModel
@@ -24,6 +24,10 @@ class TrainValidationSplitServingModel(stage: TrainValidationSplitModel)
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    ModelUtils.transModel(stage.bestModel).prepareData(rows)
+  }
 }
 
 object TrainValidationSplitServingModel {

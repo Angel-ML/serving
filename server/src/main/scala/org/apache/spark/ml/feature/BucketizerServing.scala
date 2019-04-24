@@ -1,12 +1,13 @@
 package org.apache.spark.ml.feature
 
 import org.apache.spark.ml.attribute.NominalAttribute
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT}
 import org.apache.spark.ml.param.{ParamMap, ParamValidators}
 import org.apache.spark.ml.param.shared._
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.ml.util.{DefaultParamsWritable, SchemaUtils}
-import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServing]
   with HasHandleInvalid with HasInputCol with HasOutputCol
@@ -83,6 +84,37 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
     val attr = new NominalAttribute(name = Some(outputCol), isOrdinal = Some(true),
       values = Some(buckets))
     attr.toStructField()
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, DoubleType, true))
+      new SDFrame(rows)(schema)
+    } else if(stage.isDefined(stage.inputCols)) {
+      val featuresTypes = rows(0).values.map{ feature =>
+        feature match {
+          case _ : Double => DoubleType
+          case _ : String => StringType
+          case _ : Integer => IntegerType
+          case _ : Vector => new VectorUDT
+          case _ : Array[String] => ArrayType(StringType)
+        }
+      }
+      var schema: StructType = null
+      val iter = stage.getInputCols.zip(featuresTypes).iterator
+      while (iter.hasNext) {
+        val (colName, featureType) = iter.next()
+        if (schema == null) {
+          schema = new StructType().add(new StructField(colName, featureType, true))
+        } else {
+          schema = schema.add(new StructField(colName, featureType, true))
+        }
+      }
+
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
   }
 }
 

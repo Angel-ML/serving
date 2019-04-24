@@ -33,7 +33,7 @@ object IsotonicRegressionTest {
   }
 
   def trans(model: IsotonicRegressionModel): SDFrame = {
-    val transModel = ModelUtils.transModel(model).asInstanceOf[IsotonicRegressionServingModel]
+    val transModel = ModelUtils.transModel(model)//.asInstanceOf[IsotonicRegressionServingModel]
     val rows = new Array[SRow](5)
     val x = 0.0
     for (i <- 0 until rows.length) {

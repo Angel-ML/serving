@@ -62,8 +62,8 @@ object GeneralizedLinearRegressionServingModelTest {
       rowsFeatures(i) = new SRow(Array(Vectors.sparse(size, index, value)))
     }
 
-    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

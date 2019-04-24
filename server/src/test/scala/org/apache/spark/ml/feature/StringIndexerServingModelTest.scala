@@ -39,8 +39,8 @@ object StringIndexerServingModelTest {
       rowsFeatures(i) = new SRow(Array(training(i)._2))
     }
 
-    val schema = new StructType().add(new StructField(model.getInputCol, StringType, true))
-    val dataset = new SDFrame(rowsFeatures)(schema)
+//    val schema = new StructType().add(new StructField(model.getInputCol, StringType, true))
+    val dataset = transModel.prepareData(rowsFeatures)
     transModel.transform(dataset)
   }
 }

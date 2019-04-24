@@ -26,15 +26,15 @@ object LogisticRegressionTest {
     // Print the coefficients and intercept for logistic regression
     println(s"Coefficients: ${model.coefficients} Intercept: ${model.intercept}")
 
-    val resdataset = trans(model)
-    println(resdataset.schema, resdataset.columns.length, resdataset.columns(0),
-      resdataset.getRow(0).get(0).toString, resdataset.getRow(0).get(1).toString)
-    resdataset.printSchema()
-
 
     // Create new column "indexed" with categorical values transformed to indices
     val indexedData = model.transform(training)
     indexedData.show()
+
+    val resdataset = trans(model)
+    println(resdataset.schema, resdataset.columns.length, resdataset.columns(0),
+      resdataset.getRow(0).get(0).toString, resdataset.getRow(0).get(1).toString)
+    resdataset.printSchema()
 
     spark.stop()
   }
@@ -50,8 +50,8 @@ object LogisticRegressionTest {
       rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
     }
 
-    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = new SDFrame(rows)(schema)
+//    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
+    val dataset = transModel.prepareData(rows)
     transModel.transform(dataset)
   }
 }

@@ -53,8 +53,8 @@ object NaiveBayesServingModelTest {
       rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
     }
 
-    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = new SDFrame(rows)(schema)
+//    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
+    val dataset = transModel.prepareData(rows)
     transModel.transform(dataset)
   }
 }

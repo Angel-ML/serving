@@ -1,11 +1,10 @@
 package org.apache.spark.ml.feature
-import org.apache.spark.ml.data.{SDFrame, UDF}
+import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.param.ParamMap
-import org.apache.spark.ml.transformer.ServingTrans
 import org.apache.spark.sql.types._
 
 class RegexTokenizerServing(stage: RegexTokenizer)
-  extends ServingTrans {
+  extends UnaryTransformerServing[String, Seq[String], RegexTokenizerServing, RegexTokenizer](stage) {
   /**
     * Creates the transform function using the given param map. The input param map already takes
     * account of the embedded param map. So the param values should be determined solely by the input
@@ -50,8 +49,17 @@ class RegexTokenizerServing(stage: RegexTokenizer)
   /**
     * Validates the input type. Throw an exception if it is invalid.
     */
-  protected def validateInputType(inputType: DataType): Unit = {
+  override protected def validateInputType(inputType: DataType): Unit = {
     require(inputType == StringType, s"Input type must be string type but got $inputType.")
+  }
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, StringType, true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
   }
 }
 

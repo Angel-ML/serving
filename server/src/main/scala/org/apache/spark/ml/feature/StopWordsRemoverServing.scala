@@ -1,12 +1,13 @@
 package org.apache.spark.ml.feature
 
-import org.apache.spark.ml.data.{SCol, SDFrame, UDF}
+import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
 import org.apache.spark.ml.util.SchemaUtils
-import org.apache.spark.sql.types.{ArrayType, StringType, StructType}
+import org.apache.spark.sql.types.{ArrayType, StringType, StructField, StructType}
 
 class StopWordsRemoverServing(stage: StopWordsRemover) extends ServingTrans{
+
   override def transform(dataset: SDFrame): SDFrame = {
     val outputSchema = transformSchema(dataset.schema)
     val tUDF = if (stage.getCaseSensitive) {
@@ -34,6 +35,15 @@ class StopWordsRemoverServing(stage: StopWordsRemover) extends ServingTrans{
   }
 
   override val uid: String = stage.uid
+
+  override def prepareData(rows: Array[SRow]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val schema = new StructType().add(new StructField(stage.getInputCol, ArrayType(StringType), true))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
 }
 
 object StopWordsRemoverServing {
