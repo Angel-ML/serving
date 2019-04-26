@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.feature.RFormulaModel
 import org.apache.spark.ml.param.ParamMap
@@ -106,6 +108,41 @@ class RFormulaServingModel(stage: RFormulaModel) extends ServingModel[RFormulaSe
     }
 
     new SDFrame(rows)(schema)
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    var featuresCol = stage.resolvedFormula.terms.map(term => term(0))
+    featuresCol = featuresCol :+ stage.resolvedFormula.label
+    var schema: StructType = null
+    val rows = new Array[Any](feature.size())
+      val featureNames = feature.keySet.toArray
+      if (featureNames.size < featuresCol.length) {
+        throw new Exception (s"the input cols doesn't match ${featuresCol.length}")
+      } else {
+        var index = 0
+        featuresCol.foreach{ colName =>
+          if (!feature.containsKey(colName)) {
+            throw new Exception (s"the ${colName} is not included in the input col(s)")
+          } else {
+            val value = feature.get(colName)
+            val valueType = value match {
+              case _ : Double => DoubleType
+              case _ : String => StringType
+              case _ : Integer => IntegerType
+              case _ : Vector => new VectorUDT
+              case _ : Array[String] => ArrayType(StringType)
+            }
+            if (schema == null) {
+              schema = new StructType().add(new StructField(colName, valueType, true))
+            } else {
+              schema = schema.add(new StructField(colName, valueType, true))
+            }
+            rows(index) = value
+            index += 1
+          }
+        }
+        new SDFrame(Array(new SRow(rows)))(schema)
+      }
   }
 }
 

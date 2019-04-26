@@ -1,8 +1,10 @@
 package org.apache.spark.ml.classification
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -60,12 +62,14 @@ object OneVsRestServingModelTest {
     val size = 4
     val index = Array[Int](0, 1, 2, 3)
     val value = Array[Double](-0.222222, 0.5, -0.762712, -0.833333)
-    for (i <- 0 until rows.length) {
-      rows(i) = new SRow(Array(Vectors.dense(value)))
-    }
+//    for (i <- 0 until rows.length) {
+//      rows(i) = new SRow(Array(Vectors.dense(value)))
+//    }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put(model.getFeaturesCol, Vectors.sparse(size, index, value))
 
 //    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = transModel.prepareData(rows)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.SparkException
 import org.apache.spark.ml.attribute.AttributeGroup
 import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
@@ -66,7 +68,24 @@ class HashingTFServing(stage: HashingTF) extends ServingTrans{
       val schema = new StructType().add(new StructField(stage.getInputCol, ArrayType(StringType), true))
       new SDFrame(rows)(schema)
     } else {
-      throw new Exception (s"inputCol of ${stage} is not defined!")
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val featureName = feature.keySet.toArray
+      if (!featureName.contains(stage.getInputCol)) {
+        throw new Exception (s"the ${stage.getInputCol} is not included in the input col(s)")
+      } else if (!feature.get(stage.getInputCol).isInstanceOf[Seq[String]]) {
+        throw new Exception (s"the type of col ${stage.getInputCol} is not Seq[String]")
+      } else {
+        val schema = new StructType().add(new StructField(stage.getInputCol, ArrayType(StringType), true))
+        val rows =  Array(new SRow(Array(feature.get(stage.getInputCol))))
+        new SDFrame(rows)(schema)
+      }
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
 }

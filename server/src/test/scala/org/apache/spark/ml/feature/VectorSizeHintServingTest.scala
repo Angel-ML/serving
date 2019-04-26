@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DoubleType, IntegerType, StructField, StructType}
@@ -59,15 +61,17 @@ object VectorSizeHintServingTest {
     val training = Seq(
       Array(Vectors.dense(0.0, 10.0, 0.5), 1.0),
       Array(Vectors.dense(0.0, 10.0, 0.5), 1.0))
-    for (i <- 0 until rowsFeatures.length) {
-      println(training(i))
-      rowsFeatures(i) = new SRow(training(i))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      println(training(i))
+//      rowsFeatures(i) = new SRow(training(i))
+//    }
+    val data: util.Map[String, Any] = new util.HashMap[String, Any]
+    data.put("userFeatures", Vectors.dense(0.0, 10.0, 0.5))
 
 //    val schema = new StructType().add(new StructField("hour", IntegerType, true))
 //    .add(new StructField("mobile", DoubleType, true))
 //    .add(new StructField("userFeatures", new VectorUDT, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

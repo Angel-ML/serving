@@ -1,10 +1,12 @@
 package org.apache.spark.ml.classification
 
+import java.util
+
 import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -86,9 +88,11 @@ object DecisionTreeClassificationServingModelTest {
     for (i <- 0 until rows.length) {
       rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
     }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put("features", Vectors.sparse(size, index, value))
 
 //    val schema = new StructType().add(new StructField("features", new VectorUDT, true))
-    val dataset = transModel.prepareData(rows)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

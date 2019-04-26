@@ -1,8 +1,10 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
@@ -56,26 +58,10 @@ object IDFServingModelTest {
       rowsFeatures(i) = new SRow(Array(training(i)._2))
     }
 
+    val data: util.Map[String, String] = new util.HashMap[String, String]
+    data.put("sentence", "Hi I heard about Spark")
 //    val schema = new StructType().add(new StructField("sentence", StringType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
-
-//  def trans(model: IDFModel): SDFrame = {
-//    val transModel = ModelUtils.transModel(model).asInstanceOf[IDFServingModel]
-//    val rowsFeatures = new Array[SRow](1)
-//    val training = Seq(
-//      (0.0, "Hi I heard about Spark")
-//    )
-//    val size = 20
-//    val index = Array[Int](0,5,9,17)
-//    val value = Array[Double](1,3,5,7)
-//    for (i <- 0 until rowsFeatures.length) {
-//      rowsFeatures(i) = new SRow(Array(Vectors.sparse(size, index, value)))
-//    }
-//
-//    val schema = new StructType().add(new StructField("rawFeatures", new VectorUDT, true))
-//    val dataset = new SDFrame(rowsFeatures)(schema)
-//    transModel.transform(dataset)
-//  }
 }

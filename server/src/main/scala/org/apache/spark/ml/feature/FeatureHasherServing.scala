@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.attribute.AttributeGroup
 import org.apache.spark.ml.data.{SCol, SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
@@ -125,7 +127,45 @@ class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
 
       new SDFrame(rows)(schema)
     } else {
-      throw new Exception (s"featuresCol of ${stage} is not defined!")
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    var schema: StructType = null
+    val rows = new Array[Any](feature.size())
+    if (stage.isDefined(stage.inputCols)) {
+      val featureNames = feature.keySet.toArray
+      if (featureNames.size < stage.getInputCols.length) {
+        throw new Exception (s"the input cols doesn't match ${stage.getInputCols.length}")
+      } else {
+        var index = 0
+        stage.getInputCols.foreach{ colName =>
+          if (!feature.containsKey(colName)) {
+            throw new Exception (s"There is not the input col ${colName} in the input data!")
+          } else {
+            val value = feature.get(colName)
+            val valueType = value match {
+              case _ : Double => DoubleType
+              case _ : String => StringType
+              case _ : Integer => IntegerType
+              case _ : Vector => new VectorUDT
+              case _ : Boolean => BooleanType
+              case _ : Array[String] => ArrayType(StringType)
+            }
+            if (schema == null) {
+              schema = new StructType().add(new StructField(colName, valueType, true))
+            } else {
+              schema = schema.add(new StructField(colName, valueType, true))
+            }
+            rows(index) = value
+            index += 1
+          }
+        }
+        new SDFrame(Array(new SRow(rows)))(schema)
+      }
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
 }

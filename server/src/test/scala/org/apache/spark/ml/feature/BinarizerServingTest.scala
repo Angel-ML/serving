@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
@@ -38,12 +40,14 @@ object BinarizerServingTest {
     val training = Seq(
       (0, 0.1), (1, 0.8), (2, 0.2)
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(training(i)._2))
+//    }
+    val data: util.Map[String, Double] = new util.HashMap[String, Double]
+    data.put(model.getInputCol, 0.2)
 
 //    val schema = new StructType().add(new StructField(model.getInputCol, DoubleType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

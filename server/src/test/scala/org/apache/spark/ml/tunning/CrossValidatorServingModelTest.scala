@@ -1,5 +1,7 @@
 package org.apache.spark.ml.tunning
 
+import java.util
+
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.data.{SDFrame, SRow}
@@ -99,12 +101,14 @@ object CrossValidatorServingModelTest {
       (6L, "mapreduce spark"),
       (7L, "apache hadoop")
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(training(i)._2))
+//    }
+    val data: util.Map[String, String] = new util.HashMap[String, String]
+    data.put("text", "spark i j k")
 
 //    val schema = new StructType().add(new StructField("text", StringType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

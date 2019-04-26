@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.attribute.{Attribute, AttributeGroup, NumericAttribute}
 import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.feature.VectorSlicer
@@ -76,12 +78,38 @@ class VectorSlicerServing(stage: VectorSlicer) extends ServingTrans{
   }
 
   override def prepareData(rows: Array[SRow]): SDFrame = {
-    val featureNum = rows(0).get(0).asInstanceOf[Vector].size
-    val defaultAttr = NumericAttribute.defaultAttr
-    val attrs = (0 until featureNum).map(n => "f" + (n + 1)).toArray.map(defaultAttr.withName)
-    val attrGroup = new AttributeGroup(stage.getInputCol, attrs.asInstanceOf[Array[Attribute]])
-    val schema =new StructType(Array(attrGroup.toStructField()))
-    new SDFrame(rows)(schema)
+    if (stage.isDefined(stage.inputCol)) {
+      val featureNum = rows(0).get(0).asInstanceOf[Vector].size
+      val defaultAttr = NumericAttribute.defaultAttr
+      val attrs = (0 until featureNum).map(n => "f" + (n + 1)).toArray.map(defaultAttr.withName)
+      val attrGroup = new AttributeGroup(stage.getInputCol, attrs.asInstanceOf[Array[Attribute]])
+      val schema =new StructType(Array(attrGroup.toStructField()))
+      new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    if (stage.isDefined(stage.inputCol)) {
+      val featureName = feature.keySet.toArray
+      if (!featureName.contains(stage.getInputCol)) {
+        throw new Exception (s"the ${stage.getInputCol} is not included in the input col(s)")
+      } else if (!feature.get(stage.getInputCol).isInstanceOf[Vector]) {
+        throw new Exception (s"the type of col ${stage.getInputCol} is not Vector")
+      } else {
+        val value = feature.get(stage.getInputCol)
+        val featureNum = value.asInstanceOf[Vector].size
+        val defaultAttr = NumericAttribute.defaultAttr
+        val attrs = (0 until featureNum).map(n => "f" + (n + 1)).toArray.map(defaultAttr.withName)
+        val attrGroup = new AttributeGroup(stage.getInputCol, attrs.asInstanceOf[Array[Attribute]])
+        val schema =new StructType(Array(attrGroup.toStructField()))
+        val rows =  Array(new SRow(Array(value)))
+        new SDFrame(rows)(schema)
+      }
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
   }
 }
 

@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors, Vector}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
@@ -58,7 +60,13 @@ object VectorAssemblerServingTest {
       }
     }
 
-    val dataset = new SDFrame(rowsFeatures)(schema)
+    val data: util.Map[String, Any] = new util.HashMap[String, Any]
+    data.put("userFeatures", Vectors.dense(0.0, 10.0, 0.5))
+    data.put("mobile", 1.0)
+    data.put("hour", 18)
+
+
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

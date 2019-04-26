@@ -1,5 +1,7 @@
 package org.apache.spark.ml.tunning
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingModel
@@ -26,6 +28,10 @@ class CrossValidatorServingModel(stage: CrossValidatorModel) extends ServingMode
 
   override def prepareData(rows: Array[SRow]): SDFrame = {
     ModelUtils.transModel(stage.bestModel).prepareData(rows)
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    ModelUtils.transModel(stage.bestModel).prepareData(feature)
   }
 }
 

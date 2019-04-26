@@ -1,5 +1,6 @@
 package org.apache.spark.ml.classification
 
+import java.util
 import java.util.UUID
 
 import org.apache.spark.ml.data._
@@ -101,6 +102,23 @@ class OneVsRestServingModel(stage: OneVsRestModel)
     if (stage.isDefined(stage.featuresCol)) {
       val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
       new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"featuresCol of ${stage} is not defined!")
+    }
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    if (stage.isDefined(stage.featuresCol)) {
+      val featureName = feature.keySet.toArray
+      if (!featureName.contains(stage.getFeaturesCol)) {
+        throw new Exception (s"the ${stage.getFeaturesCol} is not included in the input col(s)")
+      } else if (!feature.get(stage.getFeaturesCol).isInstanceOf[Vector]) {
+        throw new Exception (s"the type of col ${stage.getFeaturesCol} is not Vector")
+      } else {
+        val schema = new StructType().add(new StructField(stage.getFeaturesCol, new VectorUDT, true))
+        val rows =  Array(new SRow(Array(feature.get(stage.getFeaturesCol))))
+        new SDFrame(rows)(schema)
+      }
     } else {
       throw new Exception (s"featuresCol of ${stage} is not defined!")
     }

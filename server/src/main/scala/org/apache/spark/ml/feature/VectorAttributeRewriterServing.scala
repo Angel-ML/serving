@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SCol, SDFrame, SRow}
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.transformer.ServingTrans
@@ -26,6 +28,8 @@ class VectorAttributeRewriterServing(stage: VectorAttributeRewriter) extends Ser
   override val uid: String = stage.uid
 
   override def prepareData(rows: Array[SRow]): SDFrame = ??? //todo
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = ??? //todo
 }
 
 object VectorAttributeRewriterServing {

@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.attribute.Attribute
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
@@ -62,12 +64,14 @@ object IndexToStringServingTest {
       Array[Any](0.0),
       Array[Any](0.0)
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(training(i))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(training(i))
+//    }
+    val data: util.Map[String, Double] = new util.HashMap[String, Double]
+    data.put(model.getInputCol, 0.0)
 
 //    val schema = new StructType().add(new StructField(model.getInputCol, DoubleType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

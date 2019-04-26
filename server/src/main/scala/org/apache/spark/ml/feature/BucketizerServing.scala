@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.attribute.NominalAttribute
 import org.apache.spark.ml.data.{SDFrame, SRow, UDF}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT}
@@ -112,6 +114,54 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
       }
 
       new SDFrame(rows)(schema)
+    } else {
+      throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
+    }
+  }
+
+  override def prepareData(feature: util.Map[String, _]): SDFrame = {
+    var schema: StructType = null
+    val rows = new Array[Any](feature.size())
+    if (stage.isDefined(stage.inputCol)) {
+      val featureName = feature.keySet.toArray
+      if (!featureName.contains(stage.getInputCol)) {
+        throw new Exception (s"the ${stage.getInputCol} is not included in the input col(s)")
+      } else if (!feature.get(stage.getInputCol).isInstanceOf[Double]) {
+        throw new Exception (s"the type of col ${stage.getInputCol} is not Double")
+      } else {
+        val schema = new StructType().add(new StructField(stage.getInputCol, DoubleType, true))
+        val rows =  Array(new SRow(Array(feature.get(stage.getInputCol))))
+        new SDFrame(rows)(schema)
+      }
+    } else if (stage.isDefined(stage.inputCols)) {
+      val featureNames = feature.keySet.toArray
+      if (featureNames.size < stage.getInputCols.length) {
+        throw new Exception (s"the input cols doesn't match ${stage.getInputCols.length}")
+      } else {
+        var index = 0
+        stage.getInputCols.foreach{ colName =>
+          if (!feature.containsKey(colName)) {
+            throw new Exception (s"There is not the input col ${colName} in the input data!")
+          } else {
+            val value = feature.get(colName)
+            val valueType = value match {
+              case _ : Double => DoubleType
+              case _ : String => StringType
+              case _ : Integer => IntegerType
+              case _ : Vector => new VectorUDT
+              case _ : Array[String] => ArrayType(StringType)
+            }
+            if (schema == null) {
+              schema = new StructType().add(new StructField(colName, valueType, true))
+            } else {
+              schema = schema.add(new StructField(colName, valueType, true))
+            }
+            rows(index) = value
+            index += 1
+          }
+        }
+        new SDFrame(Array(new SRow(rows)))(schema)
+      }
     } else {
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }

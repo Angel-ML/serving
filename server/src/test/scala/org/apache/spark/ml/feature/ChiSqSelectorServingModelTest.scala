@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors, Vector}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -47,12 +49,14 @@ object ChiSqSelectorServingModelTest {
       (8, Vectors.dense(0.0, 1.0, 12.0, 0.0), 0.0),
       (9, Vectors.dense(1.0, 0.0, 15.0, 0.1), 0.0)
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(training(i)._2))
+//    }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put(model.getFeaturesCol, Vectors.dense(0.0, 0.0, 18.0, 1.0))
 
 //    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

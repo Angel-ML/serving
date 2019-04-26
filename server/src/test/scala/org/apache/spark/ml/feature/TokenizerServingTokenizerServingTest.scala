@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
@@ -72,12 +74,14 @@ object TokenizerServingTokenizerServingTest {
       (1, "I wish Java could use case classes"),
       (2, "Logistic,regression,models,are,neat")
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(training(i)._2))
+//    }
+    val data: util.Map[String, String] = new util.HashMap[String, String]
+    data.put(model.getInputCol, "Hi I heard about Spark")
 
 //    val schema = new StructType().add(new StructField(model.getInputCol, StringType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

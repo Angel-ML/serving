@@ -1,7 +1,12 @@
 package com.tencent.angel.serving.servables.spark
 
+import java.util
+
+import com.google.common.collect.Sets
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos
+import com.tencent.angel.ml.core.PredictResult
+import com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag
 import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 import com.tencent.angel.serving.apis.prediction.RequestProtos
@@ -9,6 +14,8 @@ import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
 import com.tencent.angel.serving.sources.SystemFileUtils
+import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
+import org.apache.spark.ml.data.SDFrame
 import org.apache.spark.ml.transformer.ServingModel
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.ml.feature.utils.ModelUtils
@@ -22,11 +29,37 @@ class SparkSavedModelBundle(servingModel: ServingModel[_]) extends SavedModelBun
 
   override def runMultiInference(runOptions: RunOptions, request: RequestProtos.Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def runPredict(runOptions: RunOptions, request: RequestProtos.Request, responseBuilder: Response.Builder): Unit = ???
+  override def runPredict(runOptions: RunOptions, request: RequestProtos.Request, responseBuilder: Response.Builder): Unit = {
+    val numInstances = request.getInstancesCount
+
+    responseBuilder.setModelSpec(request.getModelSpec)
+    val outputRecords: util.Map[String, SDFrame] = new util.HashMap[String, SDFrame]()
+    val esb = new StringBuilder()
+    (0 until numInstances).foreach { idx =>
+      val instance = request.getInstances(idx)
+      try {
+        val dataMap = InstanceUtils.getStringKeyMap(instance)
+        val result = servingModel.transform(servingModel.prepareData(dataMap))
+
+        outputRecords.put("result", result)
+
+        responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, outputRecords))
+      } catch {
+        case e: Exception => esb.append(e.getMessage).append("\n")
+      }
+    }
+    outputRecords.clear()
+
+    if (esb.nonEmpty) {
+      responseBuilder.setError(esb.toString())
+    }
+  }
 
   override def runRegress(runOptions: RunOptions, request: RequestProtos.Request, responseBuilder: Response.Builder): Unit = ???
 
-  override def unLoad(): Unit = ???
+  override def unLoad(): Unit = {
+    SparkSavedModelBundle.unLoad()
+  }
 
   override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = ???
 

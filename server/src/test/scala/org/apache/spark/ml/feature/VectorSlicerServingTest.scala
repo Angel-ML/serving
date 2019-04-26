@@ -4,7 +4,7 @@ import java.util
 
 import org.apache.spark.ml.attribute.{Attribute, AttributeGroup, NumericAttribute}
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -46,16 +46,19 @@ object VectorSlicerServingTest {
   def trans(model: VectorSlicer): SDFrame = {
     val transModel = ModelUtils.transTransformer(model).asInstanceOf[VectorSlicerServing]
     val rowsFeatures = new Array[SRow](1)
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(Vectors.sparse(3, Seq((0, -2.0)))))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(Vectors.sparse(3, Seq((0, -2.0)))))
+//    }
 
 //    val defaultAttr = NumericAttribute.defaultAttr
 //    val attrs = Array("f1", "f2", "f3").map(defaultAttr.withName)
 //    val attrGroup = new AttributeGroup("userFeatures", attrs.asInstanceOf[Array[Attribute]])
 //    val schema = new StructType(Array(attrGroup.toStructField()))
 //    println(schema.toString())
-    val dataset = transModel.prepareData(rowsFeatures)
+val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put("userFeatures", Vectors.sparse(3, Seq((0, -2.0))))
+
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

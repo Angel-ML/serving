@@ -1,7 +1,9 @@
 package org.apache.spark.ml.clustering
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -41,12 +43,13 @@ object BisectingKMeansServingModelTest {
     val size = 3
     val index = Array[Int](0, 1, 2)
     val value = Array[Double](0.1, 0.0, 0.0)
-    for (i <- 0 until rows.length) {
-      rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
-    }
-
+//    for (i <- 0 until rows.length) {
+//      rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
+//    }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put(model.getFeaturesCol, Vectors.sparse(size, index, value))
 //    val schema = new StructType().add(new StructField(model.getFeaturesCol, new VectorUDT, true))
-    val dataset = transModel.prepareData(rows)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

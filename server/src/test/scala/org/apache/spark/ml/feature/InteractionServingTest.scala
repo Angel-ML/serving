@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
@@ -58,11 +60,15 @@ object InteractionServingTest {
     for (i <- 0 until rowsFeatures.length) {
       rowsFeatures(i) = new SRow(training(i))
     }
+    val data: util.Map[String, Any] = new util.HashMap[String, Any]
+    data.put("id1", 1)
+    data.put("vec1", Vectors.sparse(3, index, Array(1.0,2.0,3.0)))
+    data.put("vec2",  Vectors.sparse(3, index, Array(8.0,4.0,5.0)))
 
 //    val schema = new StructType().add(new StructField("id1", IntegerType, true))
 //      .add(new StructField("vec1", new VectorUDT, true))
 //      .add(new StructField("vec2", new VectorUDT, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

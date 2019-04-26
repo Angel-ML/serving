@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
@@ -38,12 +40,17 @@ object FeatureHasherServingTest {
     for (i <- 0 until rowsFeatures.length) {
       rowsFeatures(i) = new SRow(training(i))
     }
+    val data: util.Map[String, Any] = new util.HashMap[String, Any]
+    data.put("real", 0.0)
+    data.put("bool", true)
+    data.put("stringNum", "1")
+    data.put("string", "foo")
 
 //    val schema = new StructType().add(new StructField("real", DoubleType, true))
 //      .add(new StructField("bool", BooleanType, true))
 //      .add(new StructField("stringNum", StringType, true))
 //      .add(new StructField("string", StringType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

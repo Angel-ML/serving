@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{StructField, StructType}
@@ -55,12 +57,14 @@ object StandardScalerServingModelTest {
       162.0,85.0,252.0,249.0,146.0,48.0,29.0,85.0,178.0,225.0,253.0,223.0,167.0,56.0,85.0,252.0,252.0,252.0,229.0,215.0,
       252.0,252.0,252.0,196.0,130.0,28.0,199.0,252.0,252.0,253.0,252.0,252.0,233.0,145.0,25.0,128.0,252.0,253.0,252.0,141.0,37.0)
 
-    for (i <- 0 until rows.length) {
-      rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
-    }
+//    for (i <- 0 until rows.length) {
+//      rows(i) = new SRow(Array(Vectors.sparse(size, index, value)))
+//    }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put(model.getInputCol, Vectors.sparse(size, index, value))
 
 //    val schema = new StructType().add(new StructField(model.getInputCol, new VectorUDT, true))
-    val dataset = transModel.prepareData(rows)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

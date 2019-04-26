@@ -1,7 +1,9 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{ArrayType, StringType, StructField, StructType}
@@ -37,12 +39,14 @@ object StopWordsRemoverServingTest {
       (0, Seq("I", "saw", "the", "red", "balloon")),
       (1, Seq("Mary", "had", "a", "little", "lamb"))
     )
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(training(i)._2))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(training(i)._2))
+//    }
+    val data: util.Map[String, Seq[String]] = new util.HashMap[String, Seq[String]]
+    data.put(model.getInputCol, Seq("I", "saw", "the", "red", "balloon"))
 
 //    val schema = new StructType().add(new StructField(model.getInputCol, ArrayType(StringType), true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

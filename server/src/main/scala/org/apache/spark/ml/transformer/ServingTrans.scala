@@ -1,5 +1,6 @@
 package org.apache.spark.ml.transformer
 
+import java.util
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.param.{ParamMap, ParamPair}
 
@@ -24,4 +25,6 @@ abstract class ServingTrans extends ServingStage {
   override def copy(extra: ParamMap): ServingTrans
 
   def prepareData(rows: Array[SRow]): SDFrame
+
+  def prepareData(feature: util.Map[String, _]): SDFrame
 }

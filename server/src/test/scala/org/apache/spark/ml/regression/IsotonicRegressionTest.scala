@@ -1,5 +1,7 @@
 package org.apache.spark.ml.regression
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
@@ -39,9 +41,10 @@ object IsotonicRegressionTest {
     for (i <- 0 until rows.length) {
       rows(i) = new SRow(Array(x + 0.01))
     }
-
-    val schema = new StructType().add(new StructField(model.getFeaturesCol, DoubleType, true))
-    val dataset = new SDFrame(rows)(schema)
+    val data: util.Map[String, Double] = new util.HashMap[String, Double]
+    data.put(model.getFeaturesCol, 0.1)
+//    val schema = new StructType().add(new StructField(model.getFeaturesCol, DoubleType, true))
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.SparkSession
@@ -43,8 +45,10 @@ object HashingTFServingTest {
       rowsFeatures(i) = new SRow(Array(training(i)._2))
     }
 
+    val data: util.Map[String, Seq[String]] = new util.HashMap[String, Seq[String]]
+    data.put("words", Seq("hi", "i", "heard", "about", "spark"))
 //    val schema = new StructType().add(new StructField("words", ArrayType(StringType), true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

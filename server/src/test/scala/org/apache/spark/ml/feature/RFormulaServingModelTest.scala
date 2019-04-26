@@ -1,5 +1,7 @@
 package org.apache.spark.ml.feature
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
@@ -53,7 +55,12 @@ object RFormulaServingModelTest {
 //      .add(new StructField("country", StringType, true))
 //      .add(new StructField("hour", IntegerType, true))
 //      .add(new StructField("clicked", DoubleType, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val data: util.Map[String, Any] = new util.HashMap[String, Any]
+    data.put("country", "US")
+    data.put("hour", 18)
+    data.put("clicked", 1.0)
+
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }

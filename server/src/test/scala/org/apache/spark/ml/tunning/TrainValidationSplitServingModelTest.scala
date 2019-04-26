@@ -1,8 +1,10 @@
 package org.apache.spark.ml.tunning
 
+import java.util
+
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.evaluation.RegressionEvaluator
-import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
+import org.apache.spark.ml.linalg.{VectorUDT, Vectors, Vector}
 import org.apache.spark.ml.regression.LinearRegression
 import org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit, TrainValidationSplitModel}
 import org.apache.spark.ml.feature.utils.ModelUtils
@@ -63,12 +65,14 @@ object TrainValidationSplitServingModelTest {
     val index = Array[Int](0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
     val value = Array[Double](0.4551273600657362, 0.36644694351969087, -0.38256108933468047, -0.4458430198517267,
       0.33109790358914726, 0.8067445293443565, -0.2624341731773887, -0.44850386111659524, -0.07269284838169332, 0.5658035575800715)
-    for (i <- 0 until rowsFeatures.length) {
-      rowsFeatures(i) = new SRow(Array(Vectors.sparse(size, index, value)))
-    }
+//    for (i <- 0 until rowsFeatures.length) {
+//      rowsFeatures(i) = new SRow(Array(Vectors.sparse(size, index, value)))
+//    }
+    val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
+    data.put("features", Vectors.sparse(size, index, value))
 
 //    val schema = new StructType().add(new StructField("features", new VectorUDT, true))
-    val dataset = transModel.prepareData(rowsFeatures)
+    val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
   }
 }
