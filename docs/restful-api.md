@@ -15,7 +15,7 @@ Serving的request和response的数据都是json格式，即使预测错误也会
 ##### 请求URL #####
 
 ```
-GET http://host:port/angelServing/v1.0//models/${MODEL_NAME}[/versions/${MODEL_VERSION}]
+GET http://host:port/v1/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]
 ```  
 
 其中```/versions/${MODEL_VERSION}```是可选的，如果没有指定，则会返回所有的版本
@@ -25,7 +25,7 @@ GET http://host:port/angelServing/v1.0//models/${MODEL_NAME}[/versions/${MODEL_V
 请求：
 
 ```
-curl localhost:8501/angelServing/v1.0/models/lr
+curl localhost:8501/v1/models/lr
 ```  
 
 返回：
@@ -109,7 +109,7 @@ curl http://host:port/monitoring/prometheus/metrics
 ##### 请求URL #####
 
 ```
-POST http://host:port/angelServing/v1.0/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]:predict
+POST http://host:port/v1/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]:predict
 ```  
 
 其中```/versions/${MODEL_VERSION}```是可选的，如果没有指定，则会使用最新版本做预测
@@ -182,7 +182,7 @@ Angel serving的restful api还支持稀疏的输入数据，该格式的稀疏�
 请求：
 
 ```
-curl localhost:8501/angelServing/v1.0/models/lr
+curl localhost:8501/v1/models/lr
 ```
 
 返回：
@@ -244,7 +244,7 @@ Response 返回的结果为json对象
 请求：
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}]}' localhost:8501/angelServing/v1.0/models/lr/versions/6:predict
+curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}]}' localhost:8501/v1/models/lr/versions/6:predict
 ```
 
 返回：
