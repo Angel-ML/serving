@@ -41,6 +41,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   override def runPredict(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
     val modelSpec = request.getModelSpec
     responseBuilder.setModelSpec(modelSpec)
+    val esb = new StringBuilder
 
     val numInst = request.getInstancesCount
     if (numInst == 1) {
@@ -50,11 +51,14 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
         val predictResult: PredictResult = model.predict(new LabeledData(vector, 0.0, instance.getName))
         responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
       } catch {
-        case e: Exception => responseBuilder.setError(e.getMessage)
+        case e: Exception =>
+          e.printStackTrace()
+          responseBuilder.setError(e.getMessage)
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
     } else {
-      val esb = new StringBuilder
-
       try {
         val maxUseMemroy: Long = 100 * SizeOf.newInstance().deepSizeOf(request)
         val dataBlock = new LocalMemoryDataBlock(numInst, maxUseMemroy)
@@ -72,15 +76,25 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
             }
             responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
           } catch {
-            case e: Exception => esb.append(e.getMessage).append("\n")
+            case e: Exception =>
+              e.printStackTrace()
+              esb.append(e.getMessage).append("\n")
+            case ae: AssertionError =>
+              ae.printStackTrace()
+              esb.append(ae.getMessage).append("\n")
           }
         }
       } catch {
-        case e: Exception => esb.append(e.getMessage).append("\n")
+        case e: Exception =>
+          e.printStackTrace()
+          esb.append(e.getMessage).append("\n")
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
-
-      responseBuilder.setError(esb.toString())
     }
+
+    responseBuilder.setError(esb.toString())
   }
 
   override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???

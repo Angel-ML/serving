@@ -122,7 +122,12 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
 
           responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, outputRecords))
         } catch {
-          case e: Exception => esb.append(e.getMessage).append("\n")
+          case e: Exception =>
+            e.printStackTrace()
+            esb.append(e.getMessage).append("\n")
+          case ae: AssertionError =>
+            ae.printStackTrace()
+            esb.append(ae.getMessage).append("\n")
         }
       }
 
