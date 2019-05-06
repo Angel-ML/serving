@@ -53,7 +53,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       } catch {
         case e: Exception =>
           e.printStackTrace()
-          responseBuilder.setError(e.getMessage)
+          esb.append(e.getMessage).append("\n")
         case ae: AssertionError =>
           ae.printStackTrace()
           esb.append(ae.getMessage).append("\n")
