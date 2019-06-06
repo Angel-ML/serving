@@ -45,7 +45,7 @@ object IndexToStringServingTest {
       .setLabels(indexer.labels)
 
     val converted = converter.transform(indexed)
-
+    converter.save("f:/model/IndexToString")
     println(s"Transformed indexed column '${converter.getInputCol}' back to original string " +
       s"column '${converter.getOutputCol}' using labels in metadata")
     converted.select("id", "categoryIndex", "originalCategory").show()

@@ -32,7 +32,7 @@ object RFormulaServingModelTest {
     out.show()
     out.select("features", "label").show()
 
-
+    output.save("f:/model/rformula")
     val res = trans(output)
     println(res.schema, res.columns.length, res.columns(0),
       res.getRow(0).get(4).toString, res.getRow(0).get(5).toString)

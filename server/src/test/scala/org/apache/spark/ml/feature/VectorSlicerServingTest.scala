@@ -7,7 +7,9 @@ import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{Vector, VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.apache.spark.sql.{Row, SparkSession}
-import org.apache.spark.sql.types.{StructField, StructType}
+import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
+
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object VectorSlicerServingTest {
   def main(args: Array[String]): Unit = {
@@ -60,5 +62,31 @@ val data: util.Map[String, Vector] = new util.HashMap[String, Vector]
 
     val dataset = transModel.prepareData(data)
     transModel.transform(dataset)
+  }
+
+  private def parseLine(line: String): (Float, Array[Int], Array[Double]) = {
+    val indices = ArrayBuffer[Int]()
+    val values = ArrayBuffer[Double]()
+    val items = line.split("\\s+|,").map(_.trim)
+    val label = items.head.toFloat
+
+    for (item <- items.tail) {
+      val ids = item.split(":")
+      if (ids.length == 2) {
+        indices += ids(0).toInt - 1 // convert 1-based indices to 0-based indices
+        values += ids(1).toDouble
+      }
+      // check if indices are one-based and in ascending order
+      var previous = -1
+      var i = 0
+      val indicesLength = indices.length
+      while (i < indicesLength) {
+        val current = indices(i)
+        require(current > previous, "indices should be one-based and in ascending order")
+        previous = current
+        i += 1
+      }
+    }
+    (label, indices.toArray, values.toArray)
   }
 }

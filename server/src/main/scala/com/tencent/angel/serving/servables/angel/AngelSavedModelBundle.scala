@@ -8,7 +8,7 @@ import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.ml.core.PredictResult
 import com.tencent.angel.ml.core.conf.{MLCoreConf, SharedConf}
 import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
-import com.tencent.angel.ml.core.local.{LocalEnvContext, LocalModel}
+import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
 import com.tencent.angel.ml.core.utils.JsonUtils
 import com.tencent.angel.ml.math2.utils.LabeledData
 import com.tencent.angel.serving.apis.common.TypesProtos
@@ -148,7 +148,7 @@ object AngelSavedModelBundle {
   def create(path: StoragePath): SavedModelBundle = {
     // load
     val graphJsonFile = s"$path${File.separator}graph.json"
-    val envCtx = LocalEnvContext()
+    val envCtx = LocalEvnContext()
     LOG.info(s"the graph file is $graphJsonFile")
 
     try {

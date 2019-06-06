@@ -24,87 +24,87 @@ object ModelUtils {
 
   def loadModel(name: String, path: String): Model[_] = {
     name match {
-      case modelName if classOf[AFTSurvivalRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[AFTSurvivalRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         AFTSurvivalRegressionModel.load(path)
-      case modelName if classOf[Bucketizer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Bucketizer].getCanonicalName.equalsIgnoreCase(modelName) =>
         Bucketizer.load(path)
-      case modelName if classOf[IsotonicRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[IsotonicRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         IsotonicRegressionModel.load(path)
-      case modelName if classOf[MinMaxScalerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[MinMaxScalerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         MinMaxScalerModel.load(path)
-      case modelName if classOf[RFormulaModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[RFormulaModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         RFormulaModel.load(path)
-      case modelName if classOf[Word2VecModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Word2VecModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         Word2VecModel.load(path)
-      case modelName if classOf[KMeansModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[KMeansModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         KMeansModel.load(path)
-      case modelName if classOf[StringIndexerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[StringIndexerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         StringIndexerModel.load(path)
-      case modelName if classOf[MinHashLSHModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[MinHashLSHModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         MinHashLSHModel.load(path)
-      case modelName if classOf[BucketedRandomProjectionLSHModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[BucketedRandomProjectionLSHModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         BucketedRandomProjectionLSHModel.load(path)
-      case modelName if classOf[CrossValidatorModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[CrossValidatorModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         CrossValidatorModel.load(path)
-      case modelName if classOf[DistributedLDAModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[DistributedLDAModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         DistributedLDAModel.load(path)
-      case modelName if classOf[LocalLDAModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[LocalLDAModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         LocalLDAModel.load(path)
-      case modelName if classOf[MaxAbsScalerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[MaxAbsScalerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         MaxAbsScalerModel.load(path)
-      case modelName if classOf[ImputerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[ImputerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         ImputerModel.load(path)
-      case modelName if classOf[TrainValidationSplitModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[TrainValidationSplitModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         TrainValidationSplitModel.load(path)
-      case modelName if classOf[BisectingKMeansModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[BisectingKMeansModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         BisectingKMeansModel.load(path)
-      case modelName if classOf[RandomForestRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[RandomForestRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         RandomForestRegressionModel.load(path)
-      case modelName if classOf[GBTRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[GBTRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         GBTRegressionModel.load(path)
-      case modelName if classOf[GeneralizedLinearRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[GeneralizedLinearRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         GeneralizedLinearRegressionModel.load(path)
-      case modelName if classOf[LinearRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[LinearRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         LinearRegressionModel.load(path)
-      case modelName if classOf[DecisionTreeRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[DecisionTreeRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         DecisionTreeRegressionModel.load(path)
-      case modelName if classOf[LinearSVCModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[LinearSVCModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         LinearSVCModel.load(path)
-      case modelName if classOf[NaiveBayesModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[NaiveBayesModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         NaiveBayesModel.load(path)
-      case modelName if classOf[GBTClassificationModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[GBTClassificationModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         GBTClassificationModel.load(path)
-      case modelName if classOf[DecisionTreeClassificationModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[DecisionTreeClassificationModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         DecisionTreeClassificationModel.load(path)
-      case modelName if classOf[MultilayerPerceptronClassificationModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[MultilayerPerceptronClassificationModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         MultilayerPerceptronClassificationModel.load(path)
-      case modelName if classOf[LogisticRegressionModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[LogisticRegressionModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         LogisticRegressionModel.load(path)
-      case modelName if classOf[RandomForestClassificationModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[RandomForestClassificationModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         RandomForestClassificationModel.load(path)
-      case modelName if classOf[GaussianMixtureModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[GaussianMixtureModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         GaussianMixtureModel.load(path)
-      case modelName if classOf[PCAModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[PCAModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         PCAModel.load(path)
-      case modelName if classOf[PipelineModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[PipelineModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         PipelineModel.load(path)
-      case modelName if classOf[ChiSqSelectorModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[ChiSqSelectorModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         ChiSqSelectorModel.load(path)
-      case modelName if classOf[VectorIndexerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[VectorIndexerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         VectorIndexerModel.load(path)
-      case modelName if classOf[ALSModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[ALSModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         ALSModel.load(path)
-      case modelName if classOf[OneHotEncoderModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[OneHotEncoderModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         OneHotEncoderModel.load(path)
-      case modelName if classOf[OneVsRestModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[OneVsRestModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         OneVsRestModel.load(path)
-      case modelName if classOf[FPGrowthModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[FPGrowthModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         FPGrowthModel.load(path)
-      case modelName if classOf[StandardScalerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[StandardScalerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         StandardScalerModel.load(path)
-      case modelName if classOf[CountVectorizerModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[CountVectorizerModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         CountVectorizerModel.load(path)
-      case modelName if classOf[IDFModel].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[IDFModel].getCanonicalName.equalsIgnoreCase(modelName) =>
         IDFModel.load(path)
     }
   }
@@ -197,43 +197,43 @@ object ModelUtils {
 
   def loadTransformer(name: String, path: String): Transformer = {
     name match {
-      case modelName if classOf[VectorSizeHint].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[VectorSizeHint].getCanonicalName.equalsIgnoreCase(modelName) =>
         VectorSizeHint.load(path)
-      case modelName if classOf[FeatureHasher].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[FeatureHasher].getCanonicalName.equalsIgnoreCase(modelName) =>
         FeatureHasher.load(path)
-      case modelName if classOf[SQLTransformer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[SQLTransformer].getCanonicalName.equalsIgnoreCase(modelName) =>
         SQLTransformer.load(path)
-      case modelName if classOf[ElementwiseProduct].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[ElementwiseProduct].getCanonicalName.equalsIgnoreCase(modelName) =>
         ElementwiseProduct.load(path)
-      case modelName if classOf[Tokenizer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Tokenizer].getCanonicalName.equalsIgnoreCase(modelName) =>
         Tokenizer.load(path)
-      case modelName if classOf[RegexTokenizer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[RegexTokenizer].getCanonicalName.equalsIgnoreCase(modelName) =>
         RegexTokenizer.load(path)
-      case modelName if classOf[Normalizer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Normalizer].getCanonicalName.equalsIgnoreCase(modelName) =>
         Normalizer.load(path)
-      case modelName if classOf[NGram].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[NGram].getCanonicalName.equalsIgnoreCase(modelName) =>
         NGram.load(path)
-      case modelName if classOf[DCT].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[DCT].getCanonicalName.equalsIgnoreCase(modelName) =>
         DCT.load(path)
-      case modelName if classOf[PolynomialExpansion].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[PolynomialExpansion].getCanonicalName.equalsIgnoreCase(modelName) =>
         PolynomialExpansion.load(path)
-      case modelName if classOf[VectorSlicer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[VectorSlicer].getCanonicalName.equalsIgnoreCase(modelName) =>
         VectorSlicer.load(path)
-      case modelName if classOf[Binarizer].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Binarizer].getCanonicalName.equalsIgnoreCase(modelName) =>
         Binarizer.load(path)
-      case modelName if classOf[HashingTF].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[HashingTF].getCanonicalName.equalsIgnoreCase(modelName) =>
         HashingTF.load(path)
-      case modelName if classOf[StopWordsRemover].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[StopWordsRemover].getCanonicalName.equalsIgnoreCase(modelName) =>
         StopWordsRemover.load(path)
-      case modelName if classOf[IndexToString].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[IndexToString].getCanonicalName.equalsIgnoreCase(modelName) =>
         IndexToString.load(path)
-      case modelName if classOf[VectorAssembler].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[VectorAssembler].getCanonicalName.equalsIgnoreCase(modelName) =>
         VectorAssembler.load(path)
-      case modelName if classOf[Interaction].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[Interaction].getCanonicalName.equalsIgnoreCase(modelName) =>
         Interaction.load(path)
-      case modelName if classOf[VectorAttributeRewriter].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[VectorAttributeRewriter].getCanonicalName.equalsIgnoreCase(modelName) =>
         VectorAttributeRewriter.load(path)
-      case modelName if classOf[ColumnPruner].getSimpleName.equalsIgnoreCase(modelName) =>
+      case modelName if classOf[ColumnPruner].getCanonicalName.equalsIgnoreCase(modelName) =>
         ColumnPruner.load(path)
     }
   }

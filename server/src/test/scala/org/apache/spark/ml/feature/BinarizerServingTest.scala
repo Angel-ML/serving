@@ -5,6 +5,7 @@ import java.util
 import org.apache.spark.ml.data.{SDFrame, SRow}
 import org.apache.spark.ml.linalg.{VectorUDT, Vectors}
 import org.apache.spark.ml.feature.utils.ModelUtils
+import org.apache.spark.ml.util.{DefaultParamsReader, DefaultParamsWriter}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
 
@@ -15,23 +16,33 @@ object BinarizerServingTest {
       .master("local")
       .getOrCreate()
 
-    val data = Array((0, 0.1), (1, 0.8), (2, 0.2))
-    val dataFrame = spark.createDataFrame(data).toDF("id", "feature")
+//    val data = Array((0, 0.1), (1, 0.8), (2, 0.2))
+//    val dataFrame = spark.createDataFrame(data).toDF("id", "feature")
+//
+//    val binarizer: Binarizer = new Binarizer()
+//      .setInputCol("feature")
+//      .setOutputCol("binarized_feature")
+//      .setThreshold(0.5)
+//
+//    val binarizedDataFrame = binarizer.transform(dataFrame)
+//
+//    println(s"Binarizer output with Threshold = ${binarizer.getThreshold}")
+//    binarizedDataFrame.show()
+//    DefaultParamsWriter.saveMetadata(binarizer, "f:/model/binarizer", spark.sparkContext)
 
-    val binarizer: Binarizer = new Binarizer()
-      .setInputCol("feature")
-      .setOutputCol("binarized_feature")
-      .setThreshold(0.5)
+    try {
+      val metadata = DefaultParamsReader.loadMetadata("f:/model/binarizer", spark.sparkContext)
+      println(metadata.toString)
+    } catch {
+      case ex: Exception =>
+        ex.printStackTrace()
+    }
 
-    val binarizedDataFrame = binarizer.transform(dataFrame)
-
-    println(s"Binarizer output with Threshold = ${binarizer.getThreshold}")
-    binarizedDataFrame.show()
-
-    val res = trans(binarizer)
-    println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
-    res.printSchema()
+//
+//    val res = trans(binarizer)
+//    println(res.schema, res.columns.length, res.columns(0),
+//      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+//    res.printSchema()
   }
 
   def trans(model: Binarizer): SDFrame = {

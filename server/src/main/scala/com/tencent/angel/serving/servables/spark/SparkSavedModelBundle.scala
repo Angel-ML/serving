@@ -77,9 +77,14 @@ object SparkSavedModelBundle {
       .master("local")
       .getOrCreate()
 
-    val metadata = ModelUtils.loadMetadata(path, spark)
-    val model = ModelUtils.loadModel(metadata.className, path)
-    val servingModel = ModelUtils.transModel(model)
+    try {
+      val metadata = ModelUtils.loadMetadata(path, spark)
+      val model = ModelUtils.loadModel(metadata.className, path)
+      val servingModel = ModelUtils.transModel(model)
+    } catch {
+      case ex: Exception =>
+        ex.printStackTrace()
+    }
 
     new SparkSavedModelBundle(servingModel)
   }
