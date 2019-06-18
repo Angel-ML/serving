@@ -23,5 +23,7 @@ case class Options(
                    count_distribution_bucket: String = "5,10,15",
                    enable_metric_summary: Boolean = true,
                    target_publishing_metric: String = "logger",
-                   hadoop_job_ugi: String = ""
+                   hadoop_job_ugi: String = "",
+                   principal: String = "",
+                   keytab: String = ""
                  ) extends AbstractOptions[Options]

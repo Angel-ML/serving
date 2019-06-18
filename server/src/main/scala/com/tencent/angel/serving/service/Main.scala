@@ -108,6 +108,12 @@ object Main {
       opt[String]("hadoop_job_ugi")
         .text("hadoop job ugi to access hdfs, Separated by commas, example:\"test, test\".")
         .action((x, c) => c.copy(hadoop_job_ugi = x))
+      opt[String]("principal")
+        .text("principal for kerberos auth.")
+        .action((x, c) => c.copy(principal = x))
+      opt[String]("keytab")
+        .text("keytab for kerberos auth.")
+        .action((x, c) => c.copy(keytab = x))
       opt[Int]("metric_summary_wait_seconds")
         .text("Interval in seconds between each summary of metrics." +
           "(Ignored if --enable_metric_summary=false)")
