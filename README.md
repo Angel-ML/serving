@@ -6,7 +6,7 @@ to flexible and high-performance.
 
 ----
 
-![][1]
+![Angel Serving Architecture][1]
 
 ### Features
 - One can access Angel Serving through gRPC and Restful API
@@ -43,7 +43,7 @@ There is a pluggable mechanism for the third party platform join in, now we supp
    After compiling, a distribution package named `serving-0.1.0-SNAPSHOT-bin.zip` will be generated under dist/target in the root directory.
 
 4. **Distribution Package**
-   Unpacking the distribution package, four subdirectories will be generated under the root directory:
+   Unpacking the distribution package, subdirectories will be generated under the root directory:
    - bin: contains Angel Serving start scripts.
    - conf: contains system config files.
    - lib: contains jars for Angel Serving and dependencies.
