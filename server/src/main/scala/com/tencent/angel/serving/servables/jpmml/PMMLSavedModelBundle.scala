@@ -122,7 +122,12 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
 
           responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, outputRecords))
         } catch {
-          case e: Exception => esb.append(e.getMessage).append("\n")
+          case e: Exception =>
+            e.printStackTrace()
+            esb.append(e.getMessage).append("\n")
+          case ae: AssertionError =>
+            ae.printStackTrace()
+            esb.append(ae.getMessage).append("\n")
         }
       }
 
@@ -184,9 +189,10 @@ object PMMLSavedModelBundle {
     try {
       val fs = SystemFileUtils.getFileSystem()
       val fileStatus  = fs.listStatus(new Path(path))
-      fileStatus.filter(x => x.isFile).filterNot(x => x.getPath.toString.endsWith(".pmml"))
-      LOG.info("Begin to load model ...")
-      inputStream = fs.open(fileStatus(0).getPath)
+      val filterFileStatus = fileStatus.filter(x => x.isFile)
+        .filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
+      LOG.info("Begin to load model ..., model path is: " + filterFileStatus(0).getPath)
+      inputStream = fs.open(filterFileStatus(0).getPath)
       pmml = PMMLUtil.unmarshal(inputStream)
       LOG.info("End to load model ...")
       new PMMLSavedModelBundle(pmml)

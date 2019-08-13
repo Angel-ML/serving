@@ -1,27 +1,27 @@
 package com.tencent.angel.serving.servables.angel
 
-import java.util
 import java.io.File
+import java.util
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
-import com.tencent.angel.ml.core.PredictResult
-import com.tencent.angel.ml.core.conf.{MLConf, SharedConf}
-import com.tencent.angel.ml.core.data.LabeledData
-import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
-import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
-import com.tencent.angel.ml.core.utils.JsonUtils
+import com.tencent.angel.mlcore.PredictResult
+import com.tencent.angel.mlcore.conf.{MLCoreConf, SharedConf}
+import com.tencent.angel.mlcore.local.data.LocalMemoryDataBlock
+import com.tencent.angel.mlcore.local.{LocalEnvContext, LocalModel}
+import com.tencent.angel.mlcore.utils.JsonUtils
+import com.tencent.angel.ml.math2.utils.LabeledData
 import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
 import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
-import com.tencent.angel.serving.servables.angel.AngelSavedModelBundle.model
 import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
+import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.sources.SystemFileUtils
-import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.ehcache.sizeof.SizeOf
+import org.slf4j.{Logger, LoggerFactory}
 
 
 class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
@@ -41,6 +41,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   override def runPredict(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
     val modelSpec = request.getModelSpec
     responseBuilder.setModelSpec(modelSpec)
+    val esb = new StringBuilder
 
     val numInst = request.getInstancesCount
     if (numInst == 1) {
@@ -50,21 +51,24 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
         val predictResult: PredictResult = model.predict(new LabeledData(vector, 0.0, instance.getName))
         responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
       } catch {
-        case e: Exception => responseBuilder.setError(e.getMessage)
+        case e: Exception =>
+          e.printStackTrace()
+          esb.append(e.getMessage).append("\n")
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
     } else {
-      val esb = new StringBuilder
-
       try {
         val maxUseMemroy: Long = 100 * SizeOf.newInstance().deepSizeOf(request)
         val dataBlock = new LocalMemoryDataBlock(numInst, maxUseMemroy)
-        (0 until numInst).foreach{ idx =>
+        (0 until numInst).foreach { idx =>
           val instance = request.getInstances(idx)
           val vector = InstanceUtils.getVector(instance)
           dataBlock.put(new LabeledData(vector, 0.0, instance.getName))
         }
         val predictResults: List[PredictResult] = model.predict(dataBlock)
-        predictResults.zipWithIndex.foreach{ case (predictResult, idx) =>
+        predictResults.zipWithIndex.foreach { case (predictResult, idx) =>
           try {
             val instance = request.getInstances(idx)
             if (predictResult == null) {
@@ -72,15 +76,25 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
             }
             responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
           } catch {
-            case e: Exception => esb.append(e.getMessage).append("\n")
+            case e: Exception =>
+              e.printStackTrace()
+              esb.append(e.getMessage).append("\n")
+            case ae: AssertionError =>
+              ae.printStackTrace()
+              esb.append(ae.getMessage).append("\n")
           }
         }
       } catch {
-        case e: Exception => esb.append(e.getMessage).append("\n")
+        case e: Exception =>
+          e.printStackTrace()
+          esb.append(e.getMessage).append("\n")
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
-
-      responseBuilder.setError(esb.toString())
     }
+
+    responseBuilder.setError(esb.toString())
   }
 
   override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
@@ -99,7 +113,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   }
 
   override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = {
-    model.graph.valueType match {
+    model.valueType match {
       case "string" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_STRING)
       case "int" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT32)
       case "long" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT64)
@@ -107,14 +121,14 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       case "double" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_DOUBLE)
       case _ => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INVALID)
     }
-    model.graph.keyType match {
+    model.keyType match {
       case "string" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_STRING)
       case "int" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INT32)
       case "long" => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INT64)
       case _ => responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INVALID)
     }
 
-    responseBuilder.setDim(model.graph.indexRange)
+    responseBuilder.setDim(model.indexRange)
   }
 
   override def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long) = {
@@ -122,13 +136,13 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
     var valueType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
     var dim: Long = -1
 
-    model.graph.keyType match {
+    model.keyType match {
       case "int" => keyType = TypesProtos.DataType.DT_INT32
       case "long" => keyType = TypesProtos.DataType.DT_INT64
       case _ => keyType = TypesProtos.DataType.DT_INVALID
     }
 
-    model.graph.valueType match {
+    model.valueType match {
       case "string" => valueType = TypesProtos.DataType.DT_STRING
       case "int" => valueType = TypesProtos.DataType.DT_INT32
       case "long" => valueType = TypesProtos.DataType.DT_INT64
@@ -137,7 +151,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
       case _ => valueType = TypesProtos.DataType.DT_INVALID
     }
 
-    dim = model.graph.indexRange
+    dim = model.indexRange
     (keyType, valueType, dim)
   }
 }
@@ -149,28 +163,31 @@ object AngelSavedModelBundle {
   def create(path: StoragePath): SavedModelBundle = {
     // load
     val graphJsonFile = s"$path${File.separator}graph.json"
+    val envCtx = LocalEnvContext()
     LOG.info(s"the graph file is $graphJsonFile")
 
     try {
       assert(SystemFileUtils.fileExist(graphJsonFile))
 
-      val conf = SharedConf.get()
-      conf.set(MLConf.ML_JSON_CONF_FILE, graphJsonFile)
-      conf.setJson()
-
-      println(JsonUtils.J2Pretty(conf.getJson))
+      val conf = new SharedConf
+      conf.set(MLCoreConf.ML_JSON_CONF_FILE, graphJsonFile)
+      JsonUtils.parseAndUpdateJson(graphJsonFile, conf, ModelServer.hadoopConf)
+      //println(JsonUtils.J2Pretty(conf.getJson))
 
       LOG.info(s"model load path is $path ")
 
       // update model load path
-      conf.set(MLConf.ML_LOAD_MODEL_PATH, path)
+      conf.set(MLCoreConf.ML_LOAD_MODEL_PATH, path)
 
       val model = new LocalModel(conf)
       LOG.info(s"buildNetwork for model")
       model.buildNetwork()
 
+      model.createMatrices(envCtx)
+
       LOG.info(s"start to load parameters for model")
-      model.loadModel(LocalEvnContext(), path)
+
+      model.loadModel(envCtx, path, ModelServer.hadoopConf)
 
       LOG.info(s"model has loaded!")
       new AngelSavedModelBundle(model)
@@ -202,7 +219,7 @@ object AngelSavedModelBundle {
 
   def estimateResourceRequirement(modelPath: String): ResourceAllocation = {
     if (model != null) {
-      val sizeOf =  SizeOf.newInstance()
+      val sizeOf = SizeOf.newInstance()
       val size = sizeOf.deepSizeOf(model)
       ResourceAllocation(List(Entry(Resource("CPU", 0, "Memmory"), size)))
     } else {

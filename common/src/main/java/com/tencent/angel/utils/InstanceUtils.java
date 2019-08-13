@@ -196,6 +196,11 @@ public class InstanceUtils {
         return null;
     }
 
+    //for str
+    static public String getStr(Instance instance) {
+        return instance.getS();
+    }
+
     static public Vector getVector(Instance instance) {
         switch (instance.getFlag()) {
             case IF_DENSE_VECTOR:

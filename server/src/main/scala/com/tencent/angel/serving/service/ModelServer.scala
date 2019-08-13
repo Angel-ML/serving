@@ -1,7 +1,7 @@
 package com.tencent.angel.serving.service
 
 import io.grpc.ServerBuilder
-import java.io.{FileReader, IOException}
+import java.io.{File, FileNotFoundException, FileReader, IOException}
 
 import com.google.protobuf.{StringValue, TextFormat}
 import org.slf4j.{Logger, LoggerFactory}
@@ -19,6 +19,7 @@ import com.tencent.angel.serving.service.common.{ModelServiceImpl, PredictionSer
 import com.tencent.angel.serving.service.util.{Options, PlatformConfigUtil}
 import io.grpc.services.ChannelzService
 import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.security.UserGroupInformation
 import org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS
 
 
@@ -57,9 +58,40 @@ class ModelServer {
       return
     }
 
+    println(System.getenv("SERVING_HOME"))
     if (serverOptions.hadoop_home.nonEmpty){
-      hadoopConf.addResource(serverOptions.hadoop_home + "/hdfs-site.xml")
-      hadoopConf.addResource(serverOptions.hadoop_home + "/core-site.xml")
+      import org.apache.hadoop.fs.Path
+      hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/hdfs-site.xml"))
+      hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/core-site.xml"))
+      println(hadoopConf.get("fs.defaultFS"))
+      if(serverOptions.hadoop_job_ugi.nonEmpty) {
+        hadoopConf.set("hadoop.job.ugi", serverOptions.hadoop_job_ugi)
+      }
+      UserGroupInformation.setConfiguration(hadoopConf)
+      if (hadoopConf.get("hadoop.security.authentication").equals("kerberos")
+        && hadoopConf.get("hadoop.security.authorization").equals("true")) {
+        hadoopConf.addResource(new Path(System.getenv("SERVING_HOME") + "/conf/angel-site.xml"))
+        if (serverOptions.principal == null || serverOptions.principal.equals("")) {
+          val keytab = hadoopConf.get("angel.serving.kerberos.keytab")
+          val principal = hadoopConf.get("angel.serving.kerberos.principal")
+          val loginFromKeytab = principal != null
+          if (loginFromKeytab) {
+            if (!new File(keytab).exists) throw new FileNotFoundException("Keytab file: " + keytab + " does not exist")
+            else {
+              LOG.info("Kerberos credentials: principal = " + principal + ", keytab = " + keytab)
+              UserGroupInformation.setConfiguration(hadoopConf)
+              UserGroupInformation.loginUserFromKeytab(principal, keytab)
+            }
+          } else {
+            LOG.info("principal is null for kerberos auth.")
+          }
+        } else if (!new File(serverOptions.keytab).exists) throw new FileNotFoundException("Keytab file: " + serverOptions.keytab + " does not exist")
+        else {
+          LOG.info("Kerberos credentials: principal = " + serverOptions.principal + ", keytab = " + serverOptions.keytab)
+          UserGroupInformation.setConfiguration(hadoopConf)
+          UserGroupInformation.loginUserFromKeytab(serverOptions.principal, serverOptions.keytab)
+        }
+      }
     }
     var modelServerConfig: ModelServerConfig = null
     val modelPlatformSet = scala.collection.mutable.Set[String]()

@@ -22,5 +22,8 @@ case class Options(
                    metric_summary_wait_seconds: Int = 30,
                    count_distribution_bucket: String = "5,10,15",
                    enable_metric_summary: Boolean = true,
-                   target_publishing_metric: String = "logger"
+                   target_publishing_metric: String = "logger",
+                   hadoop_job_ugi: String = "",
+                   principal: String = "",
+                   keytab: String = ""
                  ) extends AbstractOptions[Options]
