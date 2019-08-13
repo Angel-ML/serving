@@ -12,6 +12,7 @@ object PlatformConfigUtil {
     val builder = PlatformConfigMap.newBuilder()
     val angelAdapterClassName = "com.tencent.angel.serving.servables.angel.AngelSourceAdapter"
     val jpmmlAdapterClassName = "com.tencent.angel.serving.servables.jpmml.PMMLSourceAdapter"
+    val torchAdapterClassName = "com.tencent.angel.serving.servables.torch.TorchSourceAdapter"
     platformSet.foreach { platform =>
       if (platform.toLowerCase.equals("angel")) {
         val sourceAdapterConfig: Any = if (useSavedModel) {
@@ -40,6 +41,23 @@ object PlatformConfigUtil {
         } else {
           val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
             .setAdapterClassName(jpmmlAdapterClassName)
+            .setConfig(sessionBundleConfig)
+            .build()
+
+          Any.pack(sessionBundleSourceAdapterConfig)
+        }
+        builder
+          .putPlatformConfigs(platform, PlatformConfig.newBuilder().setSourceAdapterConfig(sourceAdapterConfig).build())
+      } else if (platform.toLowerCase.equals("torch")) {
+        val sourceAdapterConfig: Any = if (useSavedModel) {
+          val savedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(torchAdapterClassName)
+            .setLegacyConfig(sessionBundleConfig)
+            .build()
+          Any.pack(savedModelBundleSourceAdapterConfig)
+        } else {
+          val sessionBundleSourceAdapterConfig = SessionBundleSourceAdapterConfig.newBuilder()
+            .setAdapterClassName(torchAdapterClassName)
             .setConfig(sessionBundleConfig)
             .build()
 

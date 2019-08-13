@@ -44,12 +44,12 @@ class HttpRestApiHandler {
     } catch {
       case ex: Exception =>
         val errorMessage = "Resolve request path error, exception: " + ex
-        return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
+        return Response.status(500).entity("{\"error\": \""+  errorMessage + "\"}").build()
     }
     if(modelName == null || modelName.isEmpty) {
       val errorMessage = "Missing model name in request."
       LOG.info(errorMessage)
-      Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
+      Response.status(500).entity("{\"error\": \""+  errorMessage + "\"}").build()
     } else {
       val modelSpecBuilder = ModelSpec.newBuilder()
       modelSpecBuilder.setName(modelName)
@@ -101,7 +101,7 @@ class HttpRestApiHandler {
     } catch {
       case ex: Exception =>
         val errorMessage = "Resolve request path error, exception: " + ex
-        return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
+        return Response.status(500).entity("{\"error\": \""+  errorMessage + "\"}").build()
     }
     var output: String = null
     if(modelMethod.equals("classify")) {
@@ -113,7 +113,7 @@ class HttpRestApiHandler {
     } else {
       val errorMessage = "model method: " + modelMethod + " can not found."
       LOG.info(errorMessage)
-      return Response.status(500).entity("{\"error\": "+  errorMessage + "}").build()
+      return Response.status(500).entity("{\"error\": \""+  errorMessage + "\"}").build()
     }
     Response.status(200).entity(output).build()
   }
@@ -147,7 +147,7 @@ class HttpRestApiHandler {
       }
       "{\"predictions\": " + write(results) + "}"
     } else {
-      "{\"error\": "+  response.getError + "}"
+      "{\"error\": \""+ response.getError + "\"}"
     }
   }
 

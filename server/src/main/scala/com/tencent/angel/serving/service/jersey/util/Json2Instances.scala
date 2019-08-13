@@ -518,6 +518,9 @@ object Json2Instances {
             }
             val instance = ProtoUtils.getInstance(example.iterator.asJava)
             requestBuilder.addInstances(instance)
+          case str: JString =>
+            val instance = ProtoUtils.getInstance(str.values)
+            requestBuilder.addInstances(instance)
           case _ => new Exception("Json format error!")
         }
       }
