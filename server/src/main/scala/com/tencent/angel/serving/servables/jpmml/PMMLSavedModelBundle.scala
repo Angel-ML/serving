@@ -189,8 +189,8 @@ object PMMLSavedModelBundle {
     try {
       val fs = SystemFileUtils.getFileSystem()
       val fileStatus  = fs.listStatus(new Path(path))
-      val filterFileStatus = fileStatus.filter(x => x.isFile).filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
-      filterFileStatus
+      val filterFileStatus = fileStatus.filter(x => x.isFile)
+        .filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
       LOG.info("Begin to load model ..., model path is: " + filterFileStatus(0).getPath)
       inputStream = fs.open(filterFileStatus(0).getPath)
       pmml = PMMLUtil.unmarshal(inputStream)
