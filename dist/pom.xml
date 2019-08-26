@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.tencent.angel</groupId>
         <artifactId>serving</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
 
     <artifactId>serving-dist</artifactId>
