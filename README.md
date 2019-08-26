@@ -40,7 +40,7 @@ There is a pluggable mechanism for the third party platform join in, now we supp
    ```$xslt
    mvn clean package -Dmaven.test.skip=true
    ```
-   After compiling, a distribution package named `serving-0.1.0-SNAPSHOT-bin.zip` will be generated under dist/target in the root directory.
+   After compiling, a distribution package named `serving-0.1.0-bin.zip` will be generated under dist/target in the root directory.
 
 4. **Distribution Package**
    Unpacking the distribution package, subdirectories will be generated under the root directory:

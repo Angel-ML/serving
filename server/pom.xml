@@ -5,11 +5,11 @@
     <parent>
         <artifactId>serving</artifactId>
         <groupId>com.tencent.angel</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <serving.version>0.1.0-SNAPSHOT</serving.version>
+        <serving.version>0.1.0</serving.version>
         <angel.mllib.version>2.0.1</angel.mllib.version>
         <spark.version>2.3.3</spark.version>
     </properties>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>angel-mlcore</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <version>0.1.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.protobuf</groupId>
@@ -39,19 +39,8 @@
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>pytorch-on-angel</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1.0</version>
         </dependency>
-        <!--dependency>
-            <groupId>com.tencent.angel</groupId>
-            <artifactId>angel-ps-core</artifactId>
-            <version>2.2.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.protobuf</groupId>
-                    <artifactId>protobuf-java</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
@@ -65,17 +54,17 @@
         <dependency>
             <groupId>org.jpmml</groupId>
             <artifactId>pmml-model</artifactId>
-            <version>1.4.10</version>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>org.jpmml</groupId>
             <artifactId>pmml-evaluator</artifactId>
-            <version>1.4.8</version>
+            <version>1.4.4</version>
         </dependency>
         <dependency>
             <groupId>org.jpmml</groupId>
             <artifactId>pmml-evaluator-extension</artifactId>
-            <version>1.4.8</version>
+            <version>1.4.4</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
