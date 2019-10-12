@@ -3,3 +3,6 @@ Dockerfile
 tmp
 */target/
 .docker*
+README.md
+LICENSE
+.git*
