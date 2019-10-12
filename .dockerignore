@@ -1,0 +1,5 @@
+docker-compose*
+Dockerfile
+tmp
+*/target/
+.docker*
