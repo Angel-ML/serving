@@ -16,12 +16,12 @@ import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle,
 import com.tencent.angel.serving.sources.SystemFileUtils
 import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.apache.spark.ml.data.SDFrame
-import org.apache.spark.ml.transformer.ServingModel
+import org.apache.spark.ml.transformer.{ServingModel, ServingTrans}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.ml.feature.utils.ModelUtils
 import org.ehcache.sizeof.SizeOf
 
-class SparkSavedModelBundle(servingModel: ServingModel[_]) extends SavedModelBundle {
+class SparkSavedModelBundle(servingModel: ServingTrans) extends SavedModelBundle {
   override val session: Session = null
   override val metaGraphDef: MetaGraphProtos.MetaGraphDef = null
 
@@ -41,9 +41,7 @@ class SparkSavedModelBundle(servingModel: ServingModel[_]) extends SavedModelBun
         val dataMap = InstanceUtils.getStringKeyMap(instance)
         val result = servingModel.transform(servingModel.prepareData(dataMap))
 
-        outputRecords.put("result", result)
-
-        responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, outputRecords))
+        responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(result)))
       } catch {
         case e: Exception => esb.append(e.getMessage).append("\n")
       }
@@ -61,15 +59,53 @@ class SparkSavedModelBundle(servingModel: ServingModel[_]) extends SavedModelBun
     SparkSavedModelBundle.unLoad()
   }
 
-  override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = ???
+  override def fillInputInfo(responseBuilder: GetModelStatusResponse.Builder): Unit = {
+    servingModel.valueType().split(" ").foreach{ vtype =>
+      println(vtype)
+      vtype match {
+        case "string" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_STRING)
+        case "int" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT32)
+        case "long" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INT64)
+        case "float" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_FLOAT)
+        case "double" => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_DOUBLE)
+        case _ => responseBuilder.putTypeMap("valueType", TypesProtos.DataType.DT_INVALID)
+      }
+    }
+    responseBuilder.putTypeMap("keyType", TypesProtos.DataType.DT_INT32)
+  }
 
-  override def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long) = ???
+  override def getInputInfo(): (TypesProtos.DataType, TypesProtos.DataType, Long) = {
+    val keyType: TypesProtos.DataType = TypesProtos.DataType.DT_INT32
+    var valueType: TypesProtos.DataType = TypesProtos.DataType.DT_INVALID
+    val dim: Long = -10 //use to differ from angel or pmml
+
+    servingModel.valueType match {
+      case "string" => valueType = TypesProtos.DataType.DT_STRING
+      case "int" => valueType = TypesProtos.DataType.DT_INT32
+      case "long" => valueType = TypesProtos.DataType.DT_INT64
+      case "float" => valueType = TypesProtos.DataType.DT_FLOAT
+      case "double" => valueType = TypesProtos.DataType.DT_DOUBLE
+      case _ => valueType = TypesProtos.DataType.DT_INVALID
+    }
+    (keyType, valueType, dim)
+  }
+
+  private def toMap(sdf: SDFrame): util.HashMap[String, String] = {
+    val tempMap = new util.HashMap[String, String]()
+
+    tempMap.put("inputData", sdf.rows(0).get(0).toString)
+    (1 until sdf.rows(0).length).foreach{i =>
+      tempMap.put(sdf.columns(i), sdf.rows(0).get(i).toString)
+      }
+
+    tempMap
+  }
 }
 
 object SparkSavedModelBundle {
   private var model: SparkSavedModelBundle = _
   private var spark: SparkSession = _
-  private var servingModel: ServingModel[_] = _
+  private var servingModel: ServingTrans = _
 
   def create(path: StoragePath): SparkSavedModelBundle = {
     spark = SparkSession.builder()
@@ -79,8 +115,9 @@ object SparkSavedModelBundle {
 
     try {
       val metadata = ModelUtils.loadMetadata(path, spark)
-      val model = ModelUtils.loadModel(metadata.className, path)
-      val servingModel = ModelUtils.transModel(model)
+      println(metadata.className, path)
+      val model = ModelUtils.loadTransformer(metadata.className, path)//todo???
+      servingModel = ModelUtils.transTransformer(model)
     } catch {
       case ex: Exception =>
         ex.printStackTrace()

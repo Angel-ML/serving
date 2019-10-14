@@ -8,7 +8,7 @@ import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.ml.core.PredictResult
 import com.tencent.angel.ml.core.conf.{MLCoreConf, SharedConf}
 import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
-import com.tencent.angel.ml.core.local.{LocalEvnContext, LocalModel}
+import com.tencent.angel.ml.core.local.{LocalEnvContext, LocalModel}
 import com.tencent.angel.ml.core.utils.JsonUtils
 import com.tencent.angel.ml.math2.utils.LabeledData
 import com.tencent.angel.serving.apis.common.TypesProtos
@@ -17,6 +17,7 @@ import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.apis.prediction.ResponseProtos.Response
 import com.tencent.angel.serving.core.StoragePath
 import com.tencent.angel.serving.servables.common.{RunOptions, SavedModelBundle, Session}
+import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.serving.sources.SystemFileUtils
 import com.tencent.angel.utils.{InstanceUtils, ProtoUtils}
 import org.ehcache.sizeof.SizeOf
@@ -148,7 +149,7 @@ object AngelSavedModelBundle {
   def create(path: StoragePath): SavedModelBundle = {
     // load
     val graphJsonFile = s"$path${File.separator}graph.json"
-    val envCtx = LocalEvnContext()
+    val envCtx = LocalEnvContext()
     LOG.info(s"the graph file is $graphJsonFile")
 
     try {
@@ -156,7 +157,7 @@ object AngelSavedModelBundle {
 
       val conf = SharedConf.get()
       conf.set(MLCoreConf.ML_JSON_CONF_FILE, graphJsonFile)
-      val jObject = JsonUtils.parseAndUpdateJson(graphJsonFile, conf)
+      val jObject = JsonUtils.parseAndUpdateJson(graphJsonFile, conf, ModelServer.hadoopConf)
       conf.setJson(jObject)
 
       println(JsonUtils.J2Pretty(conf.getJson))
@@ -174,7 +175,7 @@ object AngelSavedModelBundle {
 
       LOG.info(s"start to load parameters for model")
 
-      model.loadModel(envCtx, path)
+      model.loadModel(envCtx, path, ModelServer.hadoopConf)
 
       LOG.info(s"model has loaded!")
       new AngelSavedModelBundle(model)
