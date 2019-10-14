@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.RFormulaModel","timestamp":1571059970891,"sparkVersion":"2.3.3","uid":"rFormula_29bc95c77f2d","paramMap":{"handleInvalid":"error","formula":"clicked ~ country + hour","forceIndexLabel":false,"stringIndexerOrderType":"frequencyDesc","featuresCol":"features","labelCol":"label"}}

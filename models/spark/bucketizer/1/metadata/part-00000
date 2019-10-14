@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.Bucketizer","timestamp":1556503942723,"sparkVersion":"2.3.3","uid":"bucketizer_ebb0178306ed","paramMap":{"outputCol":"bucketedFeatures","handleInvalid":"error","splits":["-Inf",-0.5,0.0,0.5,"Inf"],"inputCol":"features"}}

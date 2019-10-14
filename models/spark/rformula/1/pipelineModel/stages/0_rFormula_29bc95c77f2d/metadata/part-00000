@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1571059972496,"sparkVersion":"2.3.3","uid":"rFormula_29bc95c77f2d","paramMap":{"inputCols":["country","hour"],"outputCol":"features"}}

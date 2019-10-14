@@ -12,8 +12,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"sparseIndi
   localhost:8501/v1/models/lr/versions/6:predict
 
 #pmml model prediction test.
-curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}]}' \
-  localhost:8501/v1/models/lr/versions/6:predict
+curl -H "Content-Type: application/json" -X POST -d '{"instances": [{\"1\":6.2}]}' localhost:9001/v1/models/m/versions/1:predict
 
 #get prediction summary metric
 curl localhost:8501/monitoring/prometheus/metrics
