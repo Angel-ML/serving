@@ -72,6 +72,7 @@ object DecisionTreeClassificationServingModelTest {
     val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
     println("Learned classification tree model:\n" + treeModel.toDebugString)
 
+    model.save("./models/spark/tree/1")
     val res = trans(model)
     println(res.schema, res.columns.length, res.columns(0),
       res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)

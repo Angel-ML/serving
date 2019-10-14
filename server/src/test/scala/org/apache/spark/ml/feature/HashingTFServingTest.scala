@@ -27,6 +27,7 @@ object HashingTFServingTest {
     // alternatively, CountVectorizer can also be used to get term frequency vectors
     println(featurizedData.show())
 
+    hashingTF.save("./models/spark/hashingTF/1")
     val res = trans(hashingTF)
     println(res.schema, res.columns.length, res.columns(0),
       res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)

@@ -32,9 +32,10 @@ object OneHotEncoderServingModelTest {
     val encoded = model.transform(df)
     encoded.show()
 
+    model.save("./models/spark/onehot/1")
     val res = trans(model)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)
+      res.getRow(0).get(0).toString, res.getRow(0).get(4).toString)
     res.printSchema()
   }
 

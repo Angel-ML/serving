@@ -34,6 +34,8 @@ object LogisticRegressionTest {
     val indexedData = model.transform(training)
     indexedData.show()
 
+    model.save("./models/spark/lr/1")
+
     val resdataset = trans(model)
     println(resdataset.schema, resdataset.columns.length, resdataset.columns(0),
       resdataset.getRow(0).get(0).toString, resdataset.getRow(0).get(1).toString)

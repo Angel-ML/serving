@@ -42,6 +42,7 @@ object IDFServingModelTest {
     val pipe = new Pipeline().setStages(Array(tokenizer, hashingTF, idf))
     val model = pipe.fit(sentenceData)
 
+    model.save("./models/spark/IDF/1")
     val res = trans(model)
     println(res.schema, res.columns.length, res.columns(0),
       res.getRow(0).get(0).toString, res.getRow(0).get(1).toString)

@@ -16,9 +16,9 @@ object RFormulaServingModelTest {
       .getOrCreate()
 
     val dataset = spark.createDataFrame(Seq(
-      (7, "US", 18, 1.0),
-      (8, "CA", 12, 0.0),
-      (9, "NZ", 15, 0.0)
+      (7, 1, 18, 1.0),
+      (8, 2, 12, 0.0),
+      (9, 3, 15, 0.0)
     )).toDF("id", "country", "hour", "clicked")
     println(dataset.show())
 
@@ -32,10 +32,10 @@ object RFormulaServingModelTest {
     out.show()
     out.select("features", "label").show()
 
-    output.save("f:/model/rformula")
+    output.save("./models/spark/rformula/1")
     val res = trans(output)
     println(res.schema, res.columns.length, res.columns(0),
-      res.getRow(0).get(4).toString, res.getRow(0).get(5).toString)
+      res.getRow(0).get(2).toString, res.getRow(0).get(2).toString)
     res.printSchema()
   }
 
@@ -43,9 +43,9 @@ object RFormulaServingModelTest {
     val transModel = ModelUtils.transModel(model).asInstanceOf[RFormulaServingModel]
     val rowsFeatures = new Array[SRow](3)
     val training = Seq(
-      Array(1, "US", 18, 1.0),
-      Array(2, "CA", 12, 0.0),
-      Array(3, "NZ", 15, 0.0)
+      Array(1, "1", 18, 1.0),
+      Array(2, "2", 12, 0.0),
+      Array(3, "3", 15, 0.0)
     )
     for (i <- 0 until rowsFeatures.length) {
       rowsFeatures(i) = new SRow(training(i))
@@ -56,9 +56,9 @@ object RFormulaServingModelTest {
 //      .add(new StructField("hour", IntegerType, true))
 //      .add(new StructField("clicked", DoubleType, true))
     val data: util.Map[String, Any] = new util.HashMap[String, Any]
-    data.put("country", "US")
+    data.put("country", 1)
     data.put("hour", 18)
-    data.put("clicked", 1.0)
+//    data.put("clicked", 1.0)
 
     val dataset = transModel.prepareData(data)
     transModel.transform(dataset)

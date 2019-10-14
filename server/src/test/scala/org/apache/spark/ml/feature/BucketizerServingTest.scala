@@ -31,7 +31,7 @@ object BucketizerServingTest {
 
     println(s"Bucketizer output with ${bucketizer.getSplits.length-1} buckets")
     bucketedData.show()
-    bucketizer.save("f:/model/bucketizer")
+//    bucketizer.save("./models/spark/bucketizer/1")
 
     val res = trans(bucketizer)
     println(res.schema, res.columns.length, res.columns(0),
