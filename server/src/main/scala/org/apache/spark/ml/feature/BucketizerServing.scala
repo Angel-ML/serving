@@ -95,11 +95,22 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
     } else if(stage.isDefined(stage.inputCols)) {
       val featuresTypes = rows(0).values.map{ feature =>
         feature match {
-          case _ : Double => DoubleType
-          case _ : String => StringType
-          case _ : Integer => IntegerType
-          case _ : Vector => new VectorUDT
-          case _ : Array[String] => ArrayType(StringType)
+          case _ : Double => {
+            setValueType("double")
+            DoubleType
+          }
+          case _ : String =>
+            setValueType("string")
+            StringType
+          case _ : Integer =>
+            setValueType("int")
+            IntegerType
+          case _ : Vector =>
+            setValueType("double")
+            new VectorUDT
+          case _ : Array[String] =>
+            setValueType("string")
+            ArrayType(StringType)
         }
       }
       var schema: StructType = null
@@ -145,11 +156,22 @@ class BucketizerServing(stage: Bucketizer) extends ServingModel[BucketizerServin
           } else {
             val value = feature.get(colName)
             val valueType = value match {
-              case _ : Double => DoubleType
-              case _ : String => StringType
-              case _ : Integer => IntegerType
-              case _ : Vector => new VectorUDT
-              case _ : Array[String] => ArrayType(StringType)
+              case _ : Double => {
+                setValueType("double")
+                DoubleType
+              }
+              case _ : String =>
+                setValueType("string")
+                StringType
+              case _ : Integer =>
+                setValueType("int")
+                IntegerType
+              case _ : Vector =>
+                setValueType("double")
+                new VectorUDT
+              case _ : Array[String] =>
+                setValueType("string")
+                ArrayType(StringType)
             }
             if (schema == null) {
               schema = new StructType().add(new StructField(colName, valueType, true))

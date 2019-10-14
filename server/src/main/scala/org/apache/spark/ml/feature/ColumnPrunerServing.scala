@@ -27,6 +27,8 @@ class ColumnPrunerServing(stage: ColumnPruner) extends ServingTrans{
   override def prepareData(rows: Array[SRow]): SDFrame = ??? //todo
 
   override def prepareData(feature: util.Map[String, _]): SDFrame = ??? //todo
+
+  override def valueType(): String = ""//todo
 }
 
 object ColumnPrunerServing {

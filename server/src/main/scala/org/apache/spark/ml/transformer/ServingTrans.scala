@@ -6,6 +6,7 @@ import org.apache.spark.ml.param.{ParamMap, ParamPair}
 
 
 abstract class ServingTrans extends ServingStage {
+  def valueType(): scala.Predef.String
   def transform(dataset: SDFrame): SDFrame
 
   def transform(dataset: SDFrame, paramMap: ParamMap): SDFrame = {

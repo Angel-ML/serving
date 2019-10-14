@@ -61,4 +61,6 @@ abstract class UnaryTransformerServing[IN, OUT, M <: UnaryTransformerServing[IN,
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
+
+  override def valueType(): String = "double"
 }

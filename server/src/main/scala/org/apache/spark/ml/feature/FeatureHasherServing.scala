@@ -13,6 +13,8 @@ import org.apache.spark.util.Utils
 import org.apache.spark.util.collection.OpenHashMap
 
 class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
+
+  private var value_Type: String = ""
   
   override def transform(dataset: SDFrame): SDFrame = {
     val hashFunc: Any => Int = FeatureHasher.murmur3Hash
@@ -106,12 +108,25 @@ class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
     if(stage.isDefined(stage.inputCols)) {
       val featuresTypes = rows(0).values.map{ feature =>
         feature match {
-          case _ : Double => DoubleType
-          case _ : String => StringType
-          case _ : Integer => IntegerType
-          case _ : Vector => new VectorUDT
-          case _ : Boolean => BooleanType
-          case _ : Array[String] => ArrayType(StringType)
+          case _ : Double => {
+            setValueType("double")
+            DoubleType
+          }
+          case _ : String =>
+            setValueType("string")
+            StringType
+          case _ : Integer =>
+            setValueType("int")
+            IntegerType
+          case _ : Vector =>
+            setValueType("double")
+            new VectorUDT
+          case _ : Boolean =>
+            setValueType("boolean")
+            BooleanType
+          case _ : Array[String] =>
+            setValueType("string")
+            ArrayType(StringType)
         }
       }
       var schema: StructType = null
@@ -146,12 +161,26 @@ class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
           } else {
             val value = feature.get(colName)
             val valueType = value match {
-              case _ : Double => DoubleType
-              case _ : String => StringType
-              case _ : Integer => IntegerType
-              case _ : Vector => new VectorUDT
+              case _ : Double => {
+                setValueType("double")
+                DoubleType
+              }
+              case _ : String =>
+                setValueType("string")
+                StringType
+              case _ : Integer =>
+                setValueType("int")
+                IntegerType
+              case _ : Vector =>
+                setValueType("double")
+                new VectorUDT
+              case _ : Boolean =>
+                setValueType("boolean")
+                BooleanType
+              case _ : Array[String] =>
+                setValueType("string")
+                ArrayType(StringType)
               case _ : Boolean => BooleanType
-              case _ : Array[String] => ArrayType(StringType)
             }
             if (schema == null) {
               schema = new StructType().add(new StructField(colName, valueType, true))
@@ -167,6 +196,12 @@ class FeatureHasherServing(stage: FeatureHasher) extends ServingTrans {
     } else {
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
+  }
+
+  override def valueType(): String = value_Type
+
+  def setValueType(vtype: String): Unit = {
+    value_Type = vtype
   }
 }
 

@@ -83,6 +83,8 @@ class CountVectorizerServingModel(stage: CountVectorizerModel)
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
+
+  override def valueType(): String = "string"
 }
 
 object CountVectorizerServingModel {

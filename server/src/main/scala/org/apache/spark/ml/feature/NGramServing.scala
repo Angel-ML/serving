@@ -69,6 +69,8 @@ class NGramServing(stage: NGram) extends UnaryTransformerServing[Seq[String], Se
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
+
+  override def valueType(): String = "string"
 }
 
 object NGramServing {

@@ -9,6 +9,8 @@ import org.apache.spark.sql.types.StructType
 
 class VectorAttributeRewriterServing(stage: VectorAttributeRewriter) extends ServingTrans{
 
+  override def valueType(): String = ??? //todo???
+
   override def transform(dataset: SDFrame): SDFrame = {
     val otherCols = dataset.columns.filter(_ != stage.vectorCol).map(colName => SCol(colName))
     val rewrittenCol = SCol(stage.vectorCol)

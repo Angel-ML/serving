@@ -14,6 +14,8 @@ import scala.collection.mutable.ArrayBuilder
 
 class InteractionServing(stage: Interaction) extends ServingTrans{
 
+  private var value_Type: String = ""
+
   override def transform(dataset: SDFrame): SDFrame = {
     transformSchema(dataset.schema, logging = true)
     val inputFeatures = stage.getInputCols.map(c => dataset.schema(c))
@@ -196,11 +198,22 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
     if(stage.isDefined(stage.inputCols)) {
       val featuresTypes = rows(0).values.map{ feature =>
         feature match {
-          case _ : Double => DoubleType
-          case _ : String => StringType
-          case _ : Integer => IntegerType
-          case _ : Vector => new VectorUDT
-          case _ : Array[String] => ArrayType(StringType)
+          case _ : Double => {
+            setValueType("double")
+            DoubleType
+          }
+          case _ : String =>
+            setValueType("string")
+            StringType
+          case _ : Integer =>
+            setValueType("int")
+            IntegerType
+          case _ : Vector =>
+            setValueType("double")
+            new VectorUDT
+          case _ : Array[String] =>
+            setValueType("string")
+            ArrayType(StringType)
         }
       }
       var schema: StructType = null
@@ -235,11 +248,22 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
           } else {
             val value = feature.get(colName)
             val valueType = value match {
-              case _ : Double => DoubleType
-              case _ : String => StringType
-              case _ : Integer => IntegerType
-              case _ : Vector => new VectorUDT
-              case _ : Array[String] => ArrayType(StringType)
+              case _ : Double => {
+                setValueType("double")
+                DoubleType
+              }
+              case _ : String =>
+                setValueType("string")
+                StringType
+              case _ : Integer =>
+                setValueType("int")
+                IntegerType
+              case _ : Vector =>
+                setValueType("double")
+                new VectorUDT
+              case _ : Array[String] =>
+                setValueType("string")
+                ArrayType(StringType)
             }
             if (schema == null) {
               schema = new StructType().add(new StructField(colName, valueType, true))
@@ -255,6 +279,12 @@ class InteractionServing(stage: Interaction) extends ServingTrans{
     } else {
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
+  }
+
+  override def valueType(): String = value_Type
+
+  def setValueType(vtype: String): Unit = {
+    value_Type = vtype
   }
 }
 

@@ -29,10 +29,19 @@ abstract class LSHServingModel[M <: LSHServingModel[M, T], T <: LSHModel[T]](sta
   override def prepareData(rows: Array[SRow]): SDFrame = {
     if (stage.isDefined(stage.inputCol)) {
       val featureType = rows(0).get(0) match {
-        case _ : Double => DoubleType
-        case _ : String => StringType
-        case _ : Integer => IntegerType
-        case _ : Vector => new VectorUDT
+        case _ : Double => {
+          setValueType("double")
+          DoubleType
+        }
+        case _ : String =>
+          setValueType("string")
+          StringType
+        case _ : Integer =>
+          setValueType("int")
+          IntegerType
+        case _ : Vector =>
+          setValueType("double")
+          new VectorUDT
       }
       val schema = new StructType().add(new StructField(stage.getInputCol, featureType, true))
       new SDFrame(rows)(schema)
@@ -57,4 +66,6 @@ abstract class LSHServingModel[M <: LSHServingModel[M, T], T <: LSHModel[T]](sta
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
+
+  override def valueType(): String = valueType()
 }

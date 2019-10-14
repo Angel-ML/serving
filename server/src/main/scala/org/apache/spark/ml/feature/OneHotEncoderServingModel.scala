@@ -170,11 +170,22 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
     if(stage.isDefined(stage.inputCols)) {
       val featuresTypes = rows(0).values.map{ feature =>
         feature match {
-          case _ : Double => DoubleType
-          case _ : String => StringType
-          case _ : Integer => IntegerType
-          case _ : Vector => new VectorUDT
-          case _ : Array[String] => ArrayType(StringType)
+          case _ : Double => {
+            setValueType("double")
+            DoubleType
+          }
+          case _ : String =>
+            setValueType("string")
+            StringType
+          case _ : Integer =>
+            setValueType("int")
+            IntegerType
+          case _ : Vector =>
+            setValueType("double")
+            new VectorUDT
+          case _ : Array[String] =>
+            setValueType("string")
+            ArrayType(StringType)
         }
       }
       var schema: StructType = null
@@ -199,21 +210,32 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
     val rows = new Array[Any](feature.size())
     if (stage.isDefined(stage.inputCols)) {
       val featureNames = feature.keySet.toArray
-      if (featureNames.size < stage.getInputCols.length) {
-        throw new Exception (s"the input cols doesn't match ${stage.getInputCols.length}")
-      } else {
+//      if (featureNames.size < stage.getInputCols.length) {
+//        throw new Exception (s"the input cols doesn't match ${stage.getInputCols.length}")
+//      } else {
         var index = 0
         stage.getInputCols.foreach{ colName =>
-          if (!feature.containsKey(colName)) {
-            throw new Exception (s"the ${colName} is not included in the input col(s)")
-          } else {
+//          if (!feature.containsKey(colName)) {
+//            throw new Exception (s"the ${colName} is not included in the input col(s)")
+//          } else {
             val value = feature.get(colName)
             val valueType = value match {
-              case _ : Double => DoubleType
-              case _ : String => StringType
-              case _ : Integer => IntegerType
-              case _ : Vector => new VectorUDT
-              case _ : Array[String] => ArrayType(StringType)
+              case _ : Double => {
+                setValueType("double")
+                DoubleType
+              }
+              case _ : String =>
+                setValueType("string")
+                StringType
+              case _ : Integer =>
+                setValueType("int")
+                IntegerType
+              case _ : Vector =>
+                setValueType("double")
+                new VectorUDT
+              case _ : Array[String] =>
+                setValueType("string")
+                ArrayType(StringType)
             }
             if (schema == null) {
               schema = new StructType().add(new StructField(colName, valueType, true))
@@ -222,10 +244,10 @@ class OneHotEncoderServingModel(stage: OneHotEncoderModel) extends ServingModel[
             }
             rows(index) = value
             index += 1
-          }
+//          }
         }
         new SDFrame(Array(new SRow(rows)))(schema)
-      }
+//      }
     } else {
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }

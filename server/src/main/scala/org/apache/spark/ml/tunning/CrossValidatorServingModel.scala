@@ -27,11 +27,17 @@ class CrossValidatorServingModel(stage: CrossValidatorModel) extends ServingMode
   override val uid: String = stage.uid
 
   override def prepareData(rows: Array[SRow]): SDFrame = {
-    ModelUtils.transModel(stage.bestModel).prepareData(rows)
+    val model = ModelUtils.transModel(stage.bestModel)
+    val data = model.prepareData(rows)
+    this.setValueType(model.valueType())
+    data
   }
 
   override def prepareData(feature: util.Map[String, _]): SDFrame = {
-    ModelUtils.transModel(stage.bestModel).prepareData(feature)
+    val model = ModelUtils.transModel(stage.bestModel)
+    val data = model.prepareData(feature)
+    this.setValueType(model.valueType())
+    data
   }
 }
 

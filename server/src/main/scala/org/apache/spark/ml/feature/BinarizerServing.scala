@@ -95,6 +95,8 @@ class BinarizerServing(stage: Binarizer) extends ServingTrans{
       throw new Exception (s"inputCol or inputCols of ${stage} is not defined!")
     }
   }
+
+  override def valueType(): String = "double"
 }
 
 object BinarizerServing {
