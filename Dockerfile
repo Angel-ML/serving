@@ -34,6 +34,7 @@ COPY --from=JAVA_BUILDER /app/dist/target/serving-*-bin $SERVING_HOME
 WORKDIR $SERVING_HOME
 
 ENV PATH="$SERVING_HOME/bin:${PATH}" \
+    JAVA_OPTS=-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap \
     PORT=8500 \
     REST_API_PORT=8501 \
     MODEL_BASE_PATH=/models \

@@ -20,4 +20,4 @@ fi
 SERVING_CLASS=com.tencent.angel.serving.service.Main
 LAUNCH_CLASSPATH=$SERVING_CLASSPATH
 
-exec "$RUNNER" -ea -cp "$LAUNCH_CLASSPATH" "$SERVING_CLASS" "$@"
+exec "$RUNNER" $JAVA_OPTS -ea -cp "$LAUNCH_CLASSPATH" "$SERVING_CLASS" "$@"
