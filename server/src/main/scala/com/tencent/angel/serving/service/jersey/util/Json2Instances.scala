@@ -5,6 +5,8 @@ import com.tencent.angel.serving.apis.prediction.RequestProtos.Request
 import com.tencent.angel.serving.servables.common.SavedModelBundle
 import com.tencent.angel.serving.service.ModelServer
 import com.tencent.angel.utils.ProtoUtils
+import org.apache.jute.compiler.{JFloat, JLong}
+import org.apache.spark.ml.linalg.Vectors
 import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.slf4j.{Logger, LoggerFactory}
@@ -57,7 +59,379 @@ object Json2Instances {
         if (!isElementObject(ele)) {
           throw new Exception("Expecting object but got list at item " + instanceCount + " of input list.")
         }
-        if (dim < 0) {
+        if (dim == -10) {
+          //spark prediction data parse
+          if (ele.asInstanceOf[JObject].values.size < 2) {
+            var instanceName: String = ""
+            var example: Map[String, Any] = null
+            for ((key, values) <- ele.asInstanceOf[JObject].obj) {
+              values match {
+                case jObject: JObject =>
+                  jObject.asInstanceOf[JObject] \ Json2Instances.sparseKey match {
+                    case JNothing =>
+                      jObject.asInstanceOf[JObject] \ Json2Instances.sparseValue match {
+                        case arrValues: JArray =>
+                          keyType match {
+                            case TypesProtos.DataType.DT_INT32 =>
+                              var example: List[Any] = null
+                              valueType match {
+                                case TypesProtos.DataType.DT_DOUBLE =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v
+                                    case v: Float => v.toDouble
+                                    case v: Long => v.toDouble
+                                    case v: Int => v.toDouble
+                                    case v: String => v.toDouble
+                                    case v: BigInt => v.toDouble
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }
+                                case TypesProtos.DataType.DT_STRING =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toString
+                                    case v: Float => v.toString
+                                    case v: Long => v.toString
+                                    case v: Int => v.toString
+                                    case v: String => v
+                                    case v: BigInt => v.toString
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }
+                                case TypesProtos.DataType.DT_INT32 =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toInt
+                                    case v: Float => v.toInt
+                                    case v: Long => v.toInt
+                                    case v: Int => v
+                                    case v: String => v.toInt
+                                    case v: BigInt => v.toInt
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }
+                                case _ => new Exception("unsuported data type!")
+                              }
+                              val indices = (0 until example.length).map(_.toInt.asInstanceOf[java.lang.Integer]).toList
+                              val res = Map[String, java.util.Map[java.lang.Integer, Any]](key -> indices.zip(example).toMap.asJava)
+                              val instance = ProtoUtils.getInstance(res.asJava)
+                              println("instance type: ", instance.getDType, instance.getValueCase)
+                              requestBuilder.addInstances(instance)
+                            case _ => new Exception("unsuported key data type!")
+                          }
+                        case _ => throw new Exception("Json format error!")
+                      }
+                    case arrIndices: JArray =>
+                      val d = jObject.asInstanceOf[JObject] \ "dim" match {
+                        case jInt: JInt => jInt.values.toInt
+                        case jDouble: JInt => jDouble.values.toInt
+                        case jFloat: JInt => jFloat.values.toInt
+                        case jString: JInt => jString.values.toInt
+                        case jLong: JInt => jLong.values.toInt
+                      }
+                      jObject.asInstanceOf[JObject] \ Json2Instances.sparseValue match {
+                        case arrValues: JArray =>
+                          keyType match {
+                            case TypesProtos.DataType.DT_INT32 =>
+                              val indices = arrIndices.values.map(x => x.asInstanceOf[BigInt].toInt.asInstanceOf[java.lang.Integer]).toArray
+                              var example: Array[Any] = null
+                              valueType match {
+                                case TypesProtos.DataType.DT_DOUBLE =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v
+                                    case v: Float => v.toDouble
+                                    case v: Long => v.toDouble
+                                    case v: Int => v.toDouble
+                                    case v: String => v.toDouble
+                                    case v: BigInt => v.toDouble
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case TypesProtos.DataType.DT_STRING =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toString
+                                    case v: Float => v.toString
+                                    case v: Long => v.toString
+                                    case v: Int => v.toString
+                                    case v: String => v
+                                    case v: BigInt => v.toString
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case TypesProtos.DataType.DT_INT32 =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toInt
+                                    case v: Float => v.toInt
+                                    case v: Long => v.toInt
+                                    case v: Int => v
+                                    case v: String => v.toInt
+                                    case v: BigInt => v.toInt
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case _ => new Exception("unsuported data type!")
+                              }
+                              val res = (Map[String, java.util.Map[java.lang.Integer, Any]](key -> indices.zip(example).toMap.asJava)).asJava
+                              val instance = ProtoUtils.getInstance(res, d.toInt)
+                              requestBuilder.addInstances(instance)
+                            case TypesProtos.DataType.DT_INT64 =>
+                              val indices = arrIndices.values.map(x => x.asInstanceOf[BigInt].toInt.asInstanceOf[java.lang.Integer]).toArray
+                              var example: Array[Any] = null
+                              valueType match {
+                                case TypesProtos.DataType.DT_DOUBLE =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v
+                                    case v: Float => v.toDouble
+                                    case v: Long => v.toDouble
+                                    case v: Int => v.toDouble
+                                    case v: String => v.toDouble
+                                    case v: BigInt => v.toDouble
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case TypesProtos.DataType.DT_STRING =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toString
+                                    case v: Float => v.toString
+                                    case v: Long => v.toString
+                                    case v: Int => v.toString
+                                    case v: String => v
+                                    case v: BigInt => v.toString
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case TypesProtos.DataType.DT_INT32 =>
+                                  example = arrValues.values.map {
+                                    case v: Double => v.toInt
+                                    case v: Float => v.toInt
+                                    case v: Long => v.toInt
+                                    case v: Int => v
+                                    case v: String => v.toInt
+                                    case v: BigInt => v.toInt
+                                    case v =>
+                                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                                  }.toArray
+                                case _ => new Exception("unsuported data type!")
+                              }
+                              val res = Map[String, java.util.Map[java.lang.Integer, Any]](key -> indices.zip(example).toMap.asJava)
+                              val instance = ProtoUtils.getInstance(res.asJava, d.toInt)
+                              requestBuilder.addInstances(instance)
+                            case _ => new Exception("unsuported key data type!")
+                          }
+                        case _ => throw new Exception("Json format error!")
+                      }
+                    case _ => throw new Exception("Json format error!")
+                  }
+                case arrIndices: JArray =>
+
+                  ele.asInstanceOf[JObject] \ Json2Instances.sparseValue match {
+                    case JNothing =>
+                      var example: List[Any] = null
+                      valueType match {
+                        case TypesProtos.DataType.DT_DOUBLE =>
+                          example = arrIndices.values.map{
+                            case v: Double => v
+                            case v: Float => v.toDouble
+                            case v: Long => v.toDouble
+                            case v: Int => v.toDouble
+                            case v: String => v.toDouble
+                            case v: BigInt => v.toDouble
+                              throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                          }
+                        case TypesProtos.DataType.DT_STRING =>
+                          example = arrIndices.values.map{
+                            case v: Double => v.toString
+                            case v: Float => v.toString
+                            case v: Long => v.toString
+                            case v: Int => v.toString
+                            case v: String => v
+                            case v: BigInt => v.toString
+                            case v =>
+                              throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                          }
+                        case TypesProtos.DataType.DT_INT32 =>
+                          example = arrIndices.values.map {
+                            case v: Double => v.toInt
+                            case v: Float => v.toInt
+                            case v: Long => v.toInt
+                            case v: Int => v
+                            case v: String => v.toInt
+                            case v: BigInt => v.toInt
+                            case v =>
+                              throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                          }
+                        case _ => new Exception("unsuported data type!")
+                      }
+                      val res = Map[String, Any](key -> example.asJava)
+                      val instance = ProtoUtils.getInstance(res.asJava)
+                      requestBuilder.addInstances(instance)
+
+                    case arrValues: JArray =>
+                      keyType match {
+                        case TypesProtos.DataType.DT_INT32 =>
+                          val indices = arrIndices.values.map(x => x.asInstanceOf[BigInt].toInt.asInstanceOf[java.lang.Integer])
+                          var example: List[Any] = null
+                          valueType match {
+                            case TypesProtos.DataType.DT_DOUBLE =>
+                              example = arrValues.values.map {
+                                case v: Double => v
+                                case v: Float => v.toDouble
+                                case v: Long => v.toDouble
+                                case v: Int => v.toDouble
+                                case v: String => v.toDouble
+                                case v: BigInt => v.toDouble
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case TypesProtos.DataType.DT_STRING =>
+                              example = arrValues.values.map{
+                                case v: Double => v.toString
+                                case v: Float => v.toString
+                                case v: Long => v.toString
+                                case v: Int => v.toString
+                                case v: String => v
+                                case v: BigInt => v.toString
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case TypesProtos.DataType.DT_INT32 =>
+                              example = arrValues.values.map {
+                                case v: Double => v.toInt
+                                case v: Float => v.toInt
+                                case v: Long => v.toInt
+                                case v: Int => v
+                                case v: String => v.toInt
+                                case v: BigInt => v.toInt
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case _ => new Exception("unsuported data type!")
+                          }
+                          val instance = ProtoUtils.getInstance(dim.asInstanceOf[Int], indices.zip(example).toMap.asJava)
+                          requestBuilder.addInstances(instance)
+                        case TypesProtos.DataType.DT_INT64 =>
+                          val indices = arrIndices.values.map(x => x.asInstanceOf[BigInt].toLong.asInstanceOf[java.lang.Long])
+                          var example: List[Any] = null
+                          valueType match {
+                            case TypesProtos.DataType.DT_DOUBLE =>
+                              example = arrValues.values.map {
+                                case v: Double => v
+                                case v: Float => v.toDouble
+                                case v: Long => v.toDouble
+                                case v: Int => v.toDouble
+                                case x: String => x.toDouble
+                                case v: BigInt => v.toDouble
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case TypesProtos.DataType.DT_STRING =>
+                              example = arrValues.values.map{
+                                case v: Double => v.toString
+                                case v: Float => v.toString
+                                case v: Long => v.toString
+                                case v: Int => v.toString
+                                case v: String => v
+                                case v: BigInt => v.toString
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case TypesProtos.DataType.DT_INT32 =>
+                              example = arrValues.values.map {
+                                case v: Double => v.toInt
+                                case v: Float => v.toInt
+                                case v: Long => v.toInt
+                                case v: Int => v
+                                case v: String => v.toInt
+                                case v: BigInt => v.toInt
+                                case v =>
+                                  throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                              }
+                            case _ => new Exception("unsuported data type!")
+                          }
+                          val instance = ProtoUtils.getInstance(dim.asInstanceOf[Long], indices.zip(example).toMap.asJava)
+                          requestBuilder.addInstances(instance)
+                        case _ => new Exception("unsuported key data type!")
+                      }
+                    case _ => throw new Exception("Json format error!")
+                  }
+                case jInt: JInt =>
+                  var example: Any = null
+                  valueType match {
+                    case TypesProtos.DataType.DT_DOUBLE =>
+                      example = jInt.values.toDouble
+                    case _ => new Exception("unsuported data type!")
+                  }
+                  val res = Map[String, Any](key -> example)
+                  val instance = ProtoUtils.getInstance(res.asJava)
+                  requestBuilder.addInstances(instance)
+                case jInt: JDouble =>
+                  var example: Any = null
+                  valueType match {
+                    case TypesProtos.DataType.DT_DOUBLE =>
+                      example = jInt.values
+                    case _ => new Exception("unsuported data type!")
+                  }
+                  val res = Map[String, Any](key -> example)
+                  val instance = ProtoUtils.getInstance(res.asJava)
+                  requestBuilder.addInstances(instance)
+                case jString: JString =>
+                  var example: Any = null
+                  valueType match {
+                    case TypesProtos.DataType.DT_STRING =>
+                      example = jString.values
+                    case _ => new Exception("unsuported data type!")
+                  }
+                  val res = Map[String, Any](key -> example)
+                  val instance = ProtoUtils.getInstance(res.asJava)
+                  requestBuilder.addInstances(instance)
+                case jBool: JBool =>
+                  var example: Any = null
+                  valueType match {
+                    case TypesProtos.DataType.DT_BOOL =>
+                      example = jBool.values
+                    case _ => new Exception("unsuported data type!")
+                  }
+                  val res = Map[String, Any](key -> example)
+                  val instance = ProtoUtils.getInstance(res.asJava)
+                  requestBuilder.addInstances(instance)
+                case _ =>
+                  instanceName = values.toString
+              }
+            }
+            val instance = ProtoUtils.getInstance(instanceName, example.asJava)
+            requestBuilder.addInstances(instance)
+          } else {
+            var example: Map[String, Any] = null
+            valueType match {
+              case TypesProtos.DataType.DT_DOUBLE =>
+                example = ele.asInstanceOf[JObject].values.map {
+                  case (k, v: Double) => (k, v)
+                  case (k, v: Float) => (k, v.toDouble)
+                  case (k, v: Long) => (k, v.toDouble)
+                  case (k, v: Int) => (k, v.toDouble)
+                  case (k, v: String) => (k, v.toDouble)
+                  case (k, v: BigInt) => (k, v.toDouble)
+                  case (_, v) =>
+                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
+                }
+              case TypesProtos.DataType.DT_INT32 =>
+                example = ele.asInstanceOf[JObject].values.map {
+                  case (k, v: BigInt) => (k, v.toInt)
+                  case (k, v: Int) => (k, v)
+                  case (k, v: String) => (k, v.toInt)
+                  case (_, v) =>
+                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Int")
+                }
+              case TypesProtos.DataType.DT_STRING =>
+                example = ele.asInstanceOf[JObject].values.map {
+                  case (k, v: String) => (k, v)
+                  case (_, v) =>
+                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match String")
+                }
+              case _ => new Exception("unsuported data type!")
+            }
+            val instance = ProtoUtils.getInstance(example.asJava)
+            requestBuilder.addInstances(instance)
+          }
+        } else if (dim < 0) {
           //pmml prediction data parse
           if (ele.asInstanceOf[JObject].values.size <= 2) {
             var instanceName: String = ""

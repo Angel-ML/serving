@@ -166,6 +166,26 @@ public final class TypesProtos {
      */
     DT_UINT64(23),
     /**
+     * <code>DT_MAP_INT = 24;</code>
+     */
+    DT_MAP_INT(24),
+    /**
+     * <code>DT_MAP_LONG = 25;</code>
+     */
+    DT_MAP_LONG(25),
+    /**
+     * <code>DT_LIST_STRING = 26;</code>
+     */
+    DT_LIST_STRING(26),
+    /**
+     * <code>DT_LIST_INT = 27;</code>
+     */
+    DT_LIST_INT(27),
+    /**
+     * <code>DT_LIST_DOUBLE = 28;</code>
+     */
+    DT_LIST_DOUBLE(28),
+    /**
      * <pre>
      * Do not use!  These are only for parameters.  Every enum above
      * should have a corresponding value below (verified by types_test).
@@ -408,6 +428,26 @@ public final class TypesProtos {
      */
     public static final int DT_UINT64_VALUE = 23;
     /**
+     * <code>DT_MAP_INT = 24;</code>
+     */
+    public static final int DT_MAP_INT_VALUE = 24;
+    /**
+     * <code>DT_MAP_LONG = 25;</code>
+     */
+    public static final int DT_MAP_LONG_VALUE = 25;
+    /**
+     * <code>DT_LIST_STRING = 26;</code>
+     */
+    public static final int DT_LIST_STRING_VALUE = 26;
+    /**
+     * <code>DT_LIST_INT = 27;</code>
+     */
+    public static final int DT_LIST_INT_VALUE = 27;
+    /**
+     * <code>DT_LIST_DOUBLE = 28;</code>
+     */
+    public static final int DT_LIST_DOUBLE_VALUE = 28;
+    /**
      * <pre>
      * Do not use!  These are only for parameters.  Every enum above
      * should have a corresponding value below (verified by types_test).
@@ -548,6 +588,11 @@ public final class TypesProtos {
         case 21: return DT_VARIANT;
         case 22: return DT_UINT32;
         case 23: return DT_UINT64;
+        case 24: return DT_MAP_INT;
+        case 25: return DT_MAP_LONG;
+        case 26: return DT_LIST_STRING;
+        case 27: return DT_LIST_INT;
+        case 28: return DT_LIST_DOUBLE;
         case 101: return DT_FLOAT_REF;
         case 102: return DT_DOUBLE_REF;
         case 103: return DT_INT32_REF;
@@ -632,7 +677,7 @@ public final class TypesProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\027apis/common/types.proto\022\005angel*\252\006\n\010Dat" +
+      "\n\027apis/common/types.proto\022\005angel*\204\007\n\010Dat" +
       "aType\022\016\n\nDT_INVALID\020\000\022\014\n\010DT_FLOAT\020\001\022\r\n\tD" +
       "T_DOUBLE\020\002\022\014\n\010DT_INT32\020\003\022\014\n\010DT_UINT8\020\004\022\014" +
       "\n\010DT_INT16\020\005\022\013\n\007DT_INT8\020\006\022\r\n\tDT_STRING\020\007" +
@@ -642,19 +687,21 @@ public final class TypesProtos {
       "\017\022\016\n\nDT_QUINT16\020\020\022\r\n\tDT_UINT16\020\021\022\021\n\rDT_C" +
       "OMPLEX128\020\022\022\013\n\007DT_HALF\020\023\022\017\n\013DT_RESOURCE\020" +
       "\024\022\016\n\nDT_VARIANT\020\025\022\r\n\tDT_UINT32\020\026\022\r\n\tDT_U" +
-      "INT64\020\027\022\020\n\014DT_FLOAT_REF\020e\022\021\n\rDT_DOUBLE_R" +
-      "EF\020f\022\020\n\014DT_INT32_REF\020g\022\020\n\014DT_UINT8_REF\020h" +
-      "\022\020\n\014DT_INT16_REF\020i\022\017\n\013DT_INT8_REF\020j\022\021\n\rD" +
-      "T_STRING_REF\020k\022\024\n\020DT_COMPLEX64_REF\020l\022\020\n\014" +
-      "DT_INT64_REF\020m\022\017\n\013DT_BOOL_REF\020n\022\020\n\014DT_QI" +
-      "NT8_REF\020o\022\021\n\rDT_QUINT8_REF\020p\022\021\n\rDT_QINT3" +
-      "2_REF\020q\022\023\n\017DT_BFLOAT16_REF\020r\022\021\n\rDT_QINT1" +
-      "6_REF\020s\022\022\n\016DT_QUINT16_REF\020t\022\021\n\rDT_UINT16" +
-      "_REF\020u\022\025\n\021DT_COMPLEX128_REF\020v\022\017\n\013DT_HALF" +
-      "_REF\020w\022\023\n\017DT_RESOURCE_REF\020x\022\022\n\016DT_VARIAN" +
-      "T_REF\020y\022\021\n\rDT_UINT32_REF\020z\022\021\n\rDT_UINT64_" +
-      "REF\020{B6\n%com.tencent.angel.serving.apis." +
-      "commonB\013TypesProtosP\000b\006proto3"
+      "INT64\020\027\022\016\n\nDT_MAP_INT\020\030\022\017\n\013DT_MAP_LONG\020\031" +
+      "\022\022\n\016DT_LIST_STRING\020\032\022\017\n\013DT_LIST_INT\020\033\022\022\n" +
+      "\016DT_LIST_DOUBLE\020\034\022\020\n\014DT_FLOAT_REF\020e\022\021\n\rD" +
+      "T_DOUBLE_REF\020f\022\020\n\014DT_INT32_REF\020g\022\020\n\014DT_U" +
+      "INT8_REF\020h\022\020\n\014DT_INT16_REF\020i\022\017\n\013DT_INT8_" +
+      "REF\020j\022\021\n\rDT_STRING_REF\020k\022\024\n\020DT_COMPLEX64" +
+      "_REF\020l\022\020\n\014DT_INT64_REF\020m\022\017\n\013DT_BOOL_REF\020" +
+      "n\022\020\n\014DT_QINT8_REF\020o\022\021\n\rDT_QUINT8_REF\020p\022\021" +
+      "\n\rDT_QINT32_REF\020q\022\023\n\017DT_BFLOAT16_REF\020r\022\021" +
+      "\n\rDT_QINT16_REF\020s\022\022\n\016DT_QUINT16_REF\020t\022\021\n" +
+      "\rDT_UINT16_REF\020u\022\025\n\021DT_COMPLEX128_REF\020v\022" +
+      "\017\n\013DT_HALF_REF\020w\022\023\n\017DT_RESOURCE_REF\020x\022\022\n" +
+      "\016DT_VARIANT_REF\020y\022\021\n\rDT_UINT32_REF\020z\022\021\n\r" +
+      "DT_UINT64_REF\020{B6\n%com.tencent.angel.ser" +
+      "ving.apis.commonB\013TypesProtosP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

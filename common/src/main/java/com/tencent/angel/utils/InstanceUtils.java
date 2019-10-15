@@ -6,9 +6,11 @@ import com.tencent.angel.ml.math2.matrix.Matrix;
 import com.tencent.angel.ml.math2.vector.Vector;
 import com.tencent.angel.serving.apis.common.TypesProtos.*;
 import com.tencent.angel.serving.apis.common.InstanceProtos.*;
+import org.apache.spark.ml.linalg.Vectors;
+import scala.collection.Seq;
+import scala.collection.mutable.ArraySeq;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class InstanceUtils {
 
@@ -230,6 +232,40 @@ public class InstanceUtils {
                 } else {
                     return mapValue.getS2BsMapMap();
                 }
+            case DT_MAP_INT:
+                Map<String, MapValue> m = mapValue.getS2MapMapMap();
+                Map<Integer, Double> m2 = new LinkedHashMap<>();
+                ((MapValue)m.values().toArray()[0]).getI2DMapMap().entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEachOrdered(x -> m2.put(x.getKey(), x.getValue()));
+
+                int len = m2.size();
+                int[] indices = new int[len];
+                double[] values = new double[len];
+                int i = 0;
+
+                for (Map.Entry<Integer, Double> entry : m2.entrySet()) {
+                    indices[i] = entry.getKey();
+                    values[i] = entry.getValue();
+                    i += 1;
+                }
+                int dim = (int)instance.getShape().getDim(0).getSize();
+                org.apache.spark.ml.linalg.Vector vec = Vectors.sparse(dim, indices, values);
+                Map<String, org.apache.spark.ml.linalg.Vector> res = new HashMap<>();
+                res.put(m.keySet().toArray()[0].toString(), vec);
+                return res;
+            case DT_LIST_STRING:
+                Map<String, ListValue> ml = mapValue.getS2ListMapMap();
+
+                List<String> ll= ((ListValue)ml.values().toArray()[0]).getSList();
+                Seq<String> list = new ArraySeq<>(ll.size());
+                for (int j = 0; j < ll.size(); j++) {
+                    ((ArraySeq<String>) list).update(j, ll.get(j));
+                }
+
+                Map<String, Seq<String>> lres = new HashMap<>();
+                lres.put(ml.keySet().toArray()[0].toString(), list);
+                return lres;
         }
 
         return null;

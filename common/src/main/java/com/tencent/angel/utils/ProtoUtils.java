@@ -9,6 +9,7 @@ import com.tencent.angel.serving.apis.common.InstanceProtos.*;
 import scala.Tuple2;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 
@@ -90,6 +91,7 @@ public class ProtoUtils {
 
         instanceBuilder.setShape(getShape(0L));
         instanceBuilder.setName(name);
+        System.out.println(value.getClass().getCanonicalName());
         if (value instanceof Boolean) {
             instanceBuilder.setDType(DataType.DT_BOOL);
             instanceBuilder.setB((Boolean) value);
@@ -273,8 +275,20 @@ public class ProtoUtils {
                 dtype = 36;
                 mvBuilder.putS2SMap((String) key, (String) value);
             } else if (key instanceof String && value instanceof ByteString) {
-                dtype = 36;
+                dtype = 37;
                 mvBuilder.putS2BsMap((String) key, (ByteString) value);
+            } else if (key instanceof String && value instanceof Map) {
+                dtype = 38;
+                MapValue.Builder mvb = MapValue.newBuilder();
+                addElements(mvb, (Map)value);
+
+                mvBuilder.putS2MapMap((String) key, mvb.build());
+            } else if (key instanceof String && value instanceof List) {
+                dtype = 39;
+                ListValue.Builder lvb = ListValue.newBuilder();
+                addElements(lvb, ((List)value).iterator());
+
+                mvBuilder.putS2ListMap((String) key, lvb.build());
             } else {
                 throw new Exception("unsuported data type!");
             }
@@ -449,6 +463,28 @@ public class ProtoUtils {
                     mvBuilder.putS2BsMap((String) key, (ByteString) value);
                 }
                 break;
+            case 38:
+                while (iter.hasNext()) {
+                    Map.Entry<K, V> entry = iter.next();
+                    K key = entry.getKey();
+                    V value = entry.getValue();
+                    MapValue.Builder mvb = MapValue.newBuilder();
+                    addElements(mvb, (Map)value);
+
+                    mvBuilder.putS2MapMap((String) key, mvb.build());
+                }
+                break;
+            case 39:
+                while (iter.hasNext()) {
+                    Map.Entry<K, V> entry = iter.next();
+                    K key = entry.getKey();
+                    V value = entry.getValue();
+                    ListValue.Builder lvb = ListValue.newBuilder();
+                    addElements(lvb, ((List)value).iterator());
+
+                    mvBuilder.putS2ListMap((String) key, lvb.build());
+                }
+                break;
         }
 
         return dtype % 10;
@@ -476,6 +512,12 @@ public class ProtoUtils {
                 break;
             case 7:
                 instanceBuilder.setDType(DataType.DT_STRING);
+                break;
+            case 8:
+                instanceBuilder.setDType(DataType.DT_MAP_INT);
+                break;
+            case 9:
+                instanceBuilder.setDType(DataType.DT_LIST_STRING);
                 break;
             default:
                 throw new Exception("unsuported data type!");
@@ -541,6 +583,21 @@ public class ProtoUtils {
 
     // sparse int key 1 D
     static public <V> Instance getInstance(int dim, Map<Integer, V> values) throws Exception {
+        Instance.Builder instanceBuilder = Instance.newBuilder();
+
+        instanceBuilder.setShape(getShape(Long.valueOf(dim)));
+
+        MapValue.Builder mvBuilder = MapValue.newBuilder();
+        int dtype = addElements(mvBuilder, values);
+
+        setDType(instanceBuilder, dtype);
+        instanceBuilder.setMv(mvBuilder.build());
+        instanceBuilder.setFlag(InstanceFlag.IF_INTKEY_SPARSE_VECTOR);
+        return instanceBuilder.build();
+    }
+
+    // sparse int key 1 D
+    static public <V> Instance getInstance(Map<String, V> values, int dim) throws Exception {
         Instance.Builder instanceBuilder = Instance.newBuilder();
 
         instanceBuilder.setShape(getShape(Long.valueOf(dim)));

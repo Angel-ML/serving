@@ -36,6 +36,11 @@ enum DataType {
     DT_VARIANT = 21;  // Arbitrary C++ data types
     DT_UINT32 = 22;
     DT_UINT64 = 23;
+    DT_MAP_INT = 24;
+    DT_MAP_LONG = 25;
+    DT_LIST_STRING = 26;
+    DT_LIST_INT = 27;
+    DT_LIST_DOUBLE = 28;
 
     // Do not use!  These are only for parameters.  Every enum above
     // should have a corresponding value below (verified by types_test).
