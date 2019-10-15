@@ -27,4 +27,5 @@ target/*
 .idea
 .idea/*
 *.iml
+/log
 
