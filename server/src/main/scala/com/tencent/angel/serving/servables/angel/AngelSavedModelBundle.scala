@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making Angel available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * https://opensource.org/licenses/Apache-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ *
+ */
 package com.tencent.angel.serving.servables.angel
 
 import java.io.File
@@ -41,6 +57,7 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
   override def runPredict(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = {
     val modelSpec = request.getModelSpec
     responseBuilder.setModelSpec(modelSpec)
+    val esb = new StringBuilder
 
     val numInst = request.getInstancesCount
     if (numInst == 1) {
@@ -50,11 +67,14 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
         val predictResult: PredictResult = model.predict(new LabeledData(vector, 0.0, instance.getName))
         responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
       } catch {
-        case e: Exception => responseBuilder.setError(e.getMessage)
+        case e: Exception =>
+          e.printStackTrace()
+          esb.append(e.getMessage).append("\n")
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
     } else {
-      val esb = new StringBuilder
-
       try {
         val maxUseMemroy: Long = 100 * SizeOf.newInstance().deepSizeOf(request)
         val dataBlock = new LocalMemoryDataBlock(numInst, maxUseMemroy)
@@ -72,15 +92,25 @@ class AngelSavedModelBundle(model: LocalModel) extends SavedModelBundle {
             }
             responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, toMap(predictResult)))
           } catch {
-            case e: Exception => esb.append(e.getMessage).append("\n")
+            case e: Exception =>
+              e.printStackTrace()
+              esb.append(e.getMessage).append("\n")
+            case ae: AssertionError =>
+              ae.printStackTrace()
+              esb.append(ae.getMessage).append("\n")
           }
         }
       } catch {
-        case e: Exception => esb.append(e.getMessage).append("\n")
+        case e: Exception =>
+          e.printStackTrace()
+          esb.append(e.getMessage).append("\n")
+        case ae: AssertionError =>
+          ae.printStackTrace()
+          esb.append(ae.getMessage).append("\n")
       }
-
-      responseBuilder.setError(esb.toString())
     }
+
+    responseBuilder.setError(esb.toString())
   }
 
   override def runRegress(runOptions: RunOptions, request: Request, responseBuilder: Response.Builder): Unit = ???
@@ -156,12 +186,9 @@ object AngelSavedModelBundle {
       assert(SystemFileUtils.fileExist(graphJsonFile))
 
       val conf = new SharedConf
-//      val conf = SharedConf.get()
       conf.set(MLCoreConf.ML_JSON_CONF_FILE, graphJsonFile)
-      val jObject = JsonUtils.parseAndUpdateJson(graphJsonFile, conf, ModelServer.hadoopConf)
-//      conf.setJson(jObject)
-
-//      println(JsonUtils.J2Pretty(conf.getJson))
+      JsonUtils.parseAndUpdateJson(graphJsonFile, conf, ModelServer.hadoopConf)
+      //println(JsonUtils.J2Pretty(conf.getJson))
 
       LOG.info(s"model load path is $path ")
 

@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making Angel available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * https://opensource.org/licenses/Apache-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ *
+ */
 package com.tencent.angel.serving.servables.jpmml
 
 import java.io.{IOException, InputStream}
@@ -122,7 +138,12 @@ class PMMLSavedModelBundle(val pmml: PMML) extends SavedModelBundle {
 
           responseBuilder.addPredictions(ProtoUtils.getInstance(instance.getName, outputRecords))
         } catch {
-          case e: Exception => esb.append(e.getMessage).append("\n")
+          case e: Exception =>
+            e.printStackTrace()
+            esb.append(e.getMessage).append("\n")
+          case ae: AssertionError =>
+            ae.printStackTrace()
+            esb.append(ae.getMessage).append("\n")
         }
       }
 
@@ -184,8 +205,8 @@ object PMMLSavedModelBundle {
     try {
       val fs = SystemFileUtils.getFileSystem()
       val fileStatus  = fs.listStatus(new Path(path))
-      val filterFileStatus = fileStatus.filter(x => x.isFile).filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
-      filterFileStatus
+      val filterFileStatus = fileStatus.filter(x => x.isFile)
+        .filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
       LOG.info("Begin to load model ..., model path is: " + filterFileStatus(0).getPath)
       inputStream = fs.open(filterFileStatus(0).getPath)
       pmml = PMMLUtil.unmarshal(inputStream)

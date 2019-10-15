@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+      target: JAVA_DEV
+    volumes:
+      - ./:/app-dev
+      - maven-cache:/root/.m2
+    working_dir: /app-dev
+    command: cat
+    stdin_open: true
+    tty: true
+
+volumes:
+  maven-cache:
+    external: true

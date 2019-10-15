@@ -4,7 +4,7 @@
     <groupId>com.tencent.angel</groupId>
     <artifactId>serving</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <modules>
         <module>common</module>
         <module>server</module>
@@ -58,11 +58,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>tx_angel_serving</id>
+            <id>tx_angel</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>tx_angel_serving</id>
+            <id>tx_angel</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>

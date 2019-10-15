@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8500:8500"
+      - "8501:8501"
+    environment:
+      - PORT=8500
+      - REST_API_PORT=8501
+      - MODEL_BASE_PATH=/models
+      - MODEL_NAME=lr
+      - MODEL_PLATFORM=angel
+      - ENABLE_METRIC_SUMMARY=true
+    volumes:
+      - ./models/angel/lr/lr-model/:/models

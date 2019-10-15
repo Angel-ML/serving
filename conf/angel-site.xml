@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <!--property>
+    <name>angel.serving.kerberos.principal</name>
+    <value>hdfs@EXAMPLE.COM</value>
+  </property-->
+  <!--property>
+    <name>angel.serving.kerberos.keytab</name>
+    <value>/root/angel/hdfs.keytab</value>
+  </property-->
+</configuration>
