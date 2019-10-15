@@ -5,7 +5,7 @@ import java.util
 import com.google.common.collect.Sets
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos
-import com.tencent.angel.ml.core.PredictResult
+import com.tencent.angel.mlcore.PredictResult
 import com.tencent.angel.serving.apis.common.InstanceProtos.InstanceFlag
 import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse

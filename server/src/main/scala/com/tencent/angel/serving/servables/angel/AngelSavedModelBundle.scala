@@ -5,11 +5,11 @@ import java.util
 
 import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
-import com.tencent.angel.ml.core.PredictResult
-import com.tencent.angel.ml.core.conf.{MLCoreConf, SharedConf}
-import com.tencent.angel.ml.core.local.data.LocalMemoryDataBlock
-import com.tencent.angel.ml.core.local.{LocalEnvContext, LocalModel}
-import com.tencent.angel.ml.core.utils.JsonUtils
+import com.tencent.angel.mlcore.PredictResult
+import com.tencent.angel.mlcore.conf.{MLCoreConf, SharedConf}
+import com.tencent.angel.mlcore.local.data.LocalMemoryDataBlock
+import com.tencent.angel.mlcore.local.{LocalEnvContext, LocalModel}
+import com.tencent.angel.mlcore.utils.JsonUtils
 import com.tencent.angel.ml.math2.utils.LabeledData
 import com.tencent.angel.serving.apis.common.TypesProtos
 import com.tencent.angel.serving.apis.modelmgr.GetModelStatusProtos.GetModelStatusResponse
@@ -155,12 +155,13 @@ object AngelSavedModelBundle {
     try {
       assert(SystemFileUtils.fileExist(graphJsonFile))
 
-      val conf = SharedConf.get()
+      val conf = new SharedConf
+//      val conf = SharedConf.get()
       conf.set(MLCoreConf.ML_JSON_CONF_FILE, graphJsonFile)
       val jObject = JsonUtils.parseAndUpdateJson(graphJsonFile, conf, ModelServer.hadoopConf)
-      conf.setJson(jObject)
+//      conf.setJson(jObject)
 
-      println(JsonUtils.J2Pretty(conf.getJson))
+//      println(JsonUtils.J2Pretty(conf.getJson))
 
       LOG.info(s"model load path is $path ")
 
