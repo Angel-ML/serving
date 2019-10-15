@@ -5,6 +5,11 @@ services:
     build:
       context: .
       target: JAVA_DEV
+    environment:
+      - SERVING_HOME=/app-dev/dist/target/serving-0.1.0-bin/
+      - JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
+    ports:
+      - 5005:5005
     volumes:
       - ./:/app-dev
       - maven-cache:/root/.m2
