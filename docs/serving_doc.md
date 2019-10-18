@@ -1,49 +1,133 @@
-# Serving 使用文档
+# Angel Serving User Manual
 
 ## 1. Serving Server
 
-## 1.1 Main类
-Main为启动serving server的入口，在其中可配置运行serving所需的参数，所有参数类型及默认值放置在Options类中，具体参数如下：
+## 1.1 Main Class
+Main class is the entry point to start the serving server, in which you can configure the args required to run serving:
 
 ```
-case class Options(
-                   grpc_port: Int = 8500,//grpc端口号
-                   http_port: Int = 0,//http端口号
-                   http_timeout_in_ms: Int = 3000,//http服务超时等待时长（单位：毫秒）
-                   enable_batching: Boolean = true,//是否启用批量
-                   batching_parameters_file: String = "",//批量参数配置文件路径
-                   model_config_file: String = "",//模型配置文件路径
-                   platform_config_file: String = "",//平台配置文件路径
-                   model_name: String = "default",//模型名称
-                   model_base_path: String = "",//模型路径
-                   model_platform: String = "angel",//模型运行平台
-                   hadoop_home: String = "",//hadoop_home路径
-                   saved_model_tags: String = "serve",//模型标签
-                   max_num_load_retries: Int = 5,//最大加载重试次数
-                   load_retry_interval_micros: Long = 60*1000*1000,//加载重试间隔（单位：微秒）
-                   file_system_poll_wait_seconds: Int = 1,//文件系统轮训等待时间（单位：秒）
-                   flush_filesystem_caches: Boolean = true,//是否刷新文件系统缓存
-                   enable_model_warmup: Boolean = true,//模型是否启用热启动
-                   monitoring_config_file: String = "",//监视配置文件路径
-                   metric_summary_wait_seconds: Int = 30,//统计指标摘要间隔时间（单位：秒）
-                   enable_metric_summary: Boolean = true,//是否启用指标摘要
-                   target_publishing_metric: String = "logger"//以日志形式输出指标，还可以通过控制台输出"syslog"
-                 ) extends AbstractOptions[Options]
+val parser = new OptionParser[Options]("ModelServer") {
+
+      opt[Int]("port")
+        .text("Port to listen on for gRPC API")
+        .required()
+        .action((x, c) => c.copy(grpc_port = x))
+      opt[Int]("rest_api_port")
+        .text("Port to listen on for HTTP/REST API.If set to zero " +
+          "HTTP/REST API will not be exported. This port must be " +
+          "different than the one specified in --port.")
+        .required()
+        .action((x, c) => c.copy(http_port = x))
+      opt[Int]("rest_api_timeout_in_ms")
+        .text("Timeout for HTTP/REST API calls.")
+        .action((x, c) => c.copy(http_timeout_in_ms = x))
+      opt[Boolean]("enable_batching")
+        .text("enable batching.")
+        .action((x, c) => c.copy(enable_batching = x))
+      opt[String]("batching_parameters_file")
+        .text("If non-empty, read an ascii BatchingParameters " +
+          "protobuf from the supplied file name and use the " +
+          "contained values instead of the defaults.")
+        .action((x, c) => c.copy(batching_parameters_file = x))
+      opt[String]("model_config_file")
+        .text("If non-empty, read an ascii ModelServerConfig " +
+          "protobuf from the supplied file name, and serve the " +
+          "models in that file. This config file can be used to " +
+          "specify multiple models to serve and other advanced " +
+          "parameters including non-default version policy. (If " +
+          "used, --model_name, --model_base_path are ignored.)" +
+          "add the prefix `file:///` to model_base_path when use localfs")
+        .action((x, c) => c.copy(model_config_file = x))
+      opt[String]("hadoop_home")
+        .text("hadoop_home " +
+          "which contains hdfs-site.xml and core-site.xml.")
+        .action((x, c) => c.copy(hadoop_home = x))
+      opt[String]("model_name")
+        .text("name of model (ignored " +
+          "if --model_config_file flag is set")
+        .action((x, c) => c.copy(model_name = x))
+      opt[String]("model_base_path")
+        .text("path to export (ignored if --model_config_file flag " +
+          "is set, otherwise required), " +
+          "add the prefix `file:///` to model_base_path when use localfs")
+        .action((x, c) => c.copy(model_base_path = x))
+      opt[String]("model_platform")
+        .text("platform for model serving (ignored if --model_config_file flag " +
+          "is set, otherwise required), ")
+        .action((x, c) => c.copy(model_platform = x))
+      opt[String]("saved_model_tags")
+        .text("Comma-separated set of tags corresponding to the meta " +
+          "graph def to load from SavedModel.")
+        .action((x, c) => c.copy(saved_model_tags = x))
+      opt[Int]("max_num_load_retries")
+        .text("maximum number of times it retries loading a model " +
+          "after the first failure, before giving up. " +
+          "If set to 0, a load is attempted only once. " +
+          "Default: 5")
+        .action((x, c) => c.copy(max_num_load_retries = x))
+      opt[Long]("load_retry_interval_micros")
+        .text("The interval, in microseconds, between each servable " +
+          "load retry. If set negative, it doesn't wait. " +
+          "Default: 1 minute")
+        .action((x, c) => c.copy(load_retry_interval_micros = x))
+      opt[Int]("file_system_poll_wait_seconds")
+        .text("interval in seconds between each poll of the file " +
+          "system for new model version")
+        .action((x, c) => c.copy(file_system_poll_wait_seconds = x))
+      opt[Boolean]("flush_filesystem_caches")
+        .text("If true (the default), filesystem caches will be " +
+          "flushed after the initial load of all servables, and " +
+          "after each subsequent individual servable reload (if " +
+          "the number of load threads is 1). This reduces memory " +
+          "consumption of the model server, at the potential cost " +
+          "of cache misses if model files are accessed after " +
+          "servables are loaded.")
+        .action((x, c) => c.copy(flush_filesystem_caches = x))
+      opt[Boolean]("enable_model_warmup")
+        .text("Enables model warmup, which triggers lazy " +
+          "initializations (such as TF optimizations) at load " +
+          "time, to reduce first request latency.")
+        .action((x, c) => c.copy(enable_model_warmup = x))
+      opt[String]("monitoring_config_file")
+        .text("If non-empty, read an ascii MonitoringConfig protobuf from " +
+          "the supplied file name")
+        .action((x, c) => c.copy(monitoring_config_file = x))
+      opt[String]("metric_implementation")
+        .text("Defines the implementation of the metrics to be used (logger, " +
+          "syslog ...). ")
+        .action((x, c) => c.copy(target_publishing_metric = x))
+      opt[Boolean]("enable_metric_summary")
+        .text("Enable summary for metrics, launch an async task.")
+        .action((x, c) => c.copy(enable_metric_summary = x))
+      opt[String]("count_distribution_bucket")
+        .text("response time interval distribution.")
+        .action((x, c) => c.copy(count_distribution_bucket = x))
+      opt[String]("hadoop_job_ugi")
+        .text("hadoop job ugi to access hdfs, Separated by commas, example:\"test, test\".")
+        .action((x, c) => c.copy(hadoop_job_ugi = x))
+      opt[String]("principal")
+        .text("principal for kerberos auth.")
+        .action((x, c) => c.copy(principal = x))
+      opt[String]("keytab")
+        .text("keytab for kerberos auth.")
+        .action((x, c) => c.copy(keytab = x))
+      opt[Int]("metric_summary_wait_seconds")
+        .text("Interval in seconds between each summary of metrics." +
+          "(Ignored if --enable_metric_summary=false)")
+        .action((x, c) => c.copy(metric_summary_wait_seconds = x))
+    }
 ```
+`note:`Args with the required attribute must be specified
 
-其中并不是所有的参数都是必须的，以下列出运行serving所必须的参数：
-* 配置服务方式： grpc端口号，http端口号，两个端口号需要不同 
-* 选择一种配置模型的方式：配置模型名称和模型路径 或 模型配置文件路径
+## 1.2 Model configuration
 
-## 1.2 模型配置
+### Configuring the model by Args
+* model_name
+* model_base_path：model base path stores different version model named by version number
+* model_platform: angel、pmml or torch, default: angel
 
-### 配置参数
-* 模型名称
-* 模型路径：下存放了以数字命名的不同模型版本文件夹，版本文件夹中存放该版本模型的参数，构建图等。模型路径目前支持本地路径和HDFS路径。
-* 模型配置文件路径：模型配置文件的全路径，文件中包含了模型的配置信息，如：名称，路径，平台，服务规则等。如果配置了‘模型配置文件路径’，模型名称和模型路径的配置将失效。
-
-### 模型配置文件
-* Model_config_list结构：Model_config_list中可包含多个config，每个config对应一个模型，在config中设置模型的具体参数，其中name，base_path不能为空。
+### Configuring the model through a configuration file
+* Model_config_file：Model_config_list can contain multiple config, each config corresponds to a model, set the specific parameters of the model in config, where name, base_path can not be empty。
 
 	```
 	model_config_list: {
@@ -62,21 +146,21 @@ case class Options(
 	}
 	```
 
-* model_version_policy有三种选择
+* model_version_policy has three options: Latest、All and Specific
 
 	```
 	Latest：{
-	      num_versions: 2  //版本个数
-	     }//提供最新的两个版本进行服务
-	All：{}//提供所有版本进行服务
+	      num_versions: 2 // number of model versions
+	     }//Provide the latest two versions for service
+	All：{}//Provide all versions for service
 	Specific：{
-	      versions: 3 //版本号
+	      versions: 3
 	      versions: 1
 			…
-	     }//提供列表中的版本进行服务
+	     }//Provide the version specified in the list for service
 	```
 
-* 模型配置文件例子(三个模型同时服务)
+* examples(Three models serve simultaneously)
 
 	```
 	model_config_list: {
@@ -112,27 +196,28 @@ case class Options(
 	}
 	```
 
-### 注意事项
-* 本地文件路径需要在路径前加入 “file:///”，如file:///f:/
-* 模型路径下的不同版本应以数字形式命名
-* 只配置模型名称和模型路径的情况下，只能对单个模型进行服务。配置了‘模型配置文件路径’，可以对多个模型进行服务。
+### notes
+* Different versions under the model base path should be named numerically
+* In the case configuring the model by Args, only a single model can be serviced, while through a configuration file can serve multiple models.
 
-## 1.3 启动serving server的例子
-在命令行中输入以下命令并运行Main函数便可启动服务，参数之间以空格分开。
-### 例子一
-grpc端口号：8500， http端口号：8501， 模型名称：lr， 模型路径：“file:///f:/model/lr”
+## 1.3 examples for start serving server
+### example 1
 
-```
---port 8500 --rest_api_port 8501 --model_name "lr" --model_base_path "file:///f:/model/lr"
-```
+```$xslt
+   $SERVING_HOME/bin/serving-submit \
+      --port 8500 \
+      --rest_api_port 8501 \
+      --model_base_path /path/to/model \
+      --model_name lr \ 
+      --model_platform angel \
+      --enable_metric_summary true
+   ```
 
-### 例子二
-grpc端口号：8500， http端口号：8501，模型配置文件路径：“file:///f:/model/model_config_file.txt”
-
-```
---port 8500 --rest_api_port 8501 --model_config_file "file:///f:/model/model_config_file.txt"
-```
-
-# 2. Serving Client
-* RPCClient：使用的端口与server端定义的grpc端口一致
-* HTTPClient：使用的端口与server端定义的http端口一致
+### example 2
+```$xslt
+   $SERVING_HOME/bin/serving-submit \
+      --port 8500 \
+      --rest_api_port 8501 \
+      --model_config_file /path/to/model_config_file \
+      --enable_metric_summary true
+   ```
