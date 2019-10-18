@@ -63,7 +63,7 @@ object Json2Instances {
           //spark prediction data parse
           if (ele.asInstanceOf[JObject].values.size < 2) {
             var instanceName: String = ""
-            var example: Map[String, Any] = null
+            var examples: Map[String, Any] = null
             for ((key, values) <- ele.asInstanceOf[JObject].obj) {
               values match {
                 case jObject: JObject =>
@@ -394,10 +394,10 @@ object Json2Instances {
                   requestBuilder.addInstances(instance)
                 case _ =>
                   instanceName = values.toString
+                  val instance = ProtoUtils.getInstance(instanceName, examples.asJava)
+                  requestBuilder.addInstances(instance)
               }
             }
-            val instance = ProtoUtils.getInstance(instanceName, example.asJava)
-            requestBuilder.addInstances(instance)
           } else {
             var example: Map[String, Any] = null
             valueType match {
