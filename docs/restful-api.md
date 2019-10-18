@@ -1,6 +1,7 @@
 ## RESTful API ##
 
-Serving的request和response的数据都是json格式，即使预测错误也会返回错误信息的json对象:
+The request and response is a JSON object, In case of error, all APIs will return a JSON object in the response body with error 
+as key and the error message as the value::
 
 ```
 {
@@ -10,25 +11,25 @@ Serving的request和response的数据都是json格式，即使预测错误也会
 
 ### Model status API ###
 
-返回请求的服务的模型的状态，如果请求成功返回定义在GetModelStatusResponse protobuf的json表示.
+It returns the status of a model in the ModelServer, if successfully returns a json representation defined in GetModelStatusResponse protobuf.
 
-##### 请求URL #####
+##### URL #####
 
 ```
 GET http://host:port/v1/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]
 ```  
 
-其中```/versions/${MODEL_VERSION}```是可选的，如果没有指定，则会返回所有的版本
+```/versions/${MODEL_VERSION}```is optional. If omitted status for all versions is returned in the response.
 
 ##### Examples #####
 
-请求：
+request：
 
 ```
 curl localhost:8501/v1/models/lr
 ```  
 
-返回：
+response：
 
 ```
 {
@@ -41,11 +42,13 @@ curl localhost:8501/v1/models/lr
 
 ### Prediction Metrics API ###
 
-返回预测指标的总结信息，包括累加请求总数、累加请求成功总数、累加请求失败总数、累加请求成功总耗时、      
-指定分布区间内请求成功累加次数，分布区间默认间隔为5ms，分别有0-5ms、5-10ms、10-15ms   
-以及15+ms区间内的请求成功次数，可以设置分布区间，比如--count_distribution_bucket="1,5,8"
+Returns the summary information of the predicted indicators, including the total number of accumulated requests, 
+the total number of accumulated request successes, the total number of accumulated request failures, the total 
+time taken for the cumulative request to succeed, Specifies the number of successful request accumulations in 
+the distribution interval. The default interval of the distribution interval is 5ms, which is 0-5ms, 5-10ms, and 10-15ms respectively.
+And the number of request successes in the 15+ms interval, you can set the distribution interval, such as --count_distribution_bucket="1,5,8".
 
-##### 请求URL #####
+##### URL #####
 
 ```
 GET http://host:port/monitoring/prometheus/metrics
@@ -53,13 +56,13 @@ GET http://host:port/monitoring/prometheus/metrics
 
 ##### Examples #####
 
-请求：
+request：
 
 ```
 curl http://host:port/monitoring/prometheus/metrics
 ```  
 
-返回：
+response：
 
 ```
 {
@@ -104,25 +107,23 @@ curl http://host:port/monitoring/prometheus/metrics
 
 ### Predict API ###
 
-用于预测服务的请求api，返回的数据为json表示
+predict service api
 
-##### 请求URL #####
+##### URL #####
 
 ```
 POST http://host:port/v1/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]:predict
 ```  
 
-其中```/versions/${MODEL_VERSION}```是可选的，如果没有指定，则会使用最新版本做预测
+```/versions/${MODEL_VERSION}```is optional. If omitted the latest version is used.
 
 ##### Request format #####
 
-数据放入key为instances的list中：
+The data is placed in the list whose key is instances：
 
 ```
 {"instances": [{"values": [1, 2, 3, 4], "key": 1}]}
 ```
-
-可以省略命名：
 
 ```{
   "instances": [
@@ -133,13 +134,11 @@ POST http://host:port/v1/models/${MODEL_NAME}[/versions/${MODEL_VERSION}]:predic
 }
 ```
 
-Pmml的数据输入为map格式:
+PMML request data format is kv map:
 
 ```
 {"instances": [{"values": {"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.}, "key": 1}]}
 ```
-
-可以省略命名:
 
 ```
 {
@@ -161,8 +160,8 @@ Pmml的数据输入为map格式:
 }
 ```
 
-Angel serving的restful api还支持稀疏的输入数据，该格式的稀疏索引值需要放入key为sparseIndices的list  
-值需要放入key为sparseValues的list中，命名不能省略  
+Angel serving's restful api also supports sparse input. The sparse index value of this format needs to be placed in the list whose key is sparseIndices.
+The value needs to be placed in the list whose key is sparseValues. The name cannot be omitted.  
 
 ```
 {
@@ -176,18 +175,17 @@ Angel serving的restful api还支持稀疏的输入数据，该格式的稀疏�
 }
 ```
 
-```注```：如果用户不知道预测模型的scheme(如特征名称，数据类型，特征维度等)，可以通过获取模型的status restful api 
-得到，然后根据其scheme填充预测json数据
+```note```：It can get the schema of the predictive model (such as feature name, data type, feature dimension, etc.) through the model's status restful api.
 ##### Examples #####
-请求：
+request：
 
 ```
 curl localhost:8501/v1/models/lr
 ```
 
-返回：
+response：
 
-angel平台
+Angel Platform
 ```
 {
   "model_version_status": [{
@@ -201,7 +199,7 @@ angel平台
   "dim": "123"
 }
 ```
-pmml平台
+PMML
 ```$xslt
 {
   "model_version_status": [{
@@ -219,7 +217,7 @@ pmml平台
 
 ##### Response format #####
 
-Response 返回的结果为json对象
+Response return a json object
 
 ```
 ﻿{
@@ -231,23 +229,23 @@ Response 返回的结果为json对象
 }
 ```
 
-若预测错误则会返回
+In case of error, will return a JSON object in the response body with error
 
 ```$xslt
 {
-  "error": string
+  "error": [error message]
 }
 ```
 
 ##### Examples #####
 
-请求：
+request：
 
 ```
 curl -H "Content-Type: application/json" -X POST -d '{"instances": [{"x1":6.2, "x2":2.2, "x3":1.1, "x4":1.1}]}' localhost:8501/v1/models/lr/versions/6:predict
 ```
 
-返回：
+response：
 
 ```
 {
