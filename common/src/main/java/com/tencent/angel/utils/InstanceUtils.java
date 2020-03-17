@@ -23,6 +23,7 @@ import com.tencent.angel.ml.math2.vector.Vector;
 import com.tencent.angel.serving.apis.common.TypesProtos.*;
 import com.tencent.angel.serving.apis.common.InstanceProtos.*;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -233,9 +234,29 @@ public class InstanceUtils {
     // for string key vector
     static public Map<String, ?> getStringKeyMap(Instance instance) {
         MapValue mapValue = instance.getMv();
-
         DataType dType = instance.getDType();
         switch (dType) {
+            case DT_MULTI_TYPE:
+                Map<String,Object> result = new HashMap<>();
+                if (mapValue.getS2IMapMap().size() > 0)  {
+                    result.putAll(mapValue.getS2IMapMap());
+                }
+                if (mapValue.getS2SMapMap().size() > 0) {
+                    result.putAll(mapValue.getS2SMapMap());
+                }
+                if (mapValue.getS2DMapMap().size() > 0) {
+                    result.putAll(mapValue.getS2DMapMap());
+                }
+                if (mapValue.getS2BMapMap().size() > 0)  {
+                    result.putAll(mapValue.getS2BMapMap());
+                }
+                if (mapValue.getS2LMapMap().size() > 0) {
+                    result.putAll(mapValue.getS2LMapMap());
+                }
+                if (mapValue.getS2FMapMap().size() > 0) {
+                    result.putAll(mapValue.getS2FMapMap());
+                }
+                return result;
             case DT_INT32:
                 return mapValue.getS2IMapMap();
             case DT_INT64:
