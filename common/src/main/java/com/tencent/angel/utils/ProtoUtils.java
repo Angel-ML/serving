@@ -223,8 +223,9 @@ public class ProtoUtils {
 
     static private <K, V> int addElements(MapValue.Builder mvBuilder, Map<K, V> values) throws Exception {
         int dtype = -1;
+        boolean multipleType = false;
         Iterator<Map.Entry<K, V>> iter = values.entrySet().iterator();
-        if (iter.hasNext()) {
+        while (iter.hasNext()) {
             Map.Entry<K, V> entry = iter.next();
             K key = entry.getKey();
             V value = entry.getValue();
@@ -238,6 +239,7 @@ public class ProtoUtils {
                 dtype = 13;
                 mvBuilder.putI2LMap((Integer) key, (Long) value);
             } else if (key instanceof Integer && value instanceof Float) {
+
                 dtype = 14;
                 mvBuilder.putI2FMap((Integer) key, (Float) value);
             } else if (key instanceof Integer && value instanceof Double) {
@@ -271,30 +273,55 @@ public class ProtoUtils {
                 dtype = 27;
                 mvBuilder.putL2BsMap((Long) key, (ByteString) value);
             } else if (key instanceof String && value instanceof Boolean) {
+                if (dtype != -1 && dtype != 31) {
+                    multipleType = true;
+                }
                 dtype = 31;
                 mvBuilder.putS2BMap((String) key, (Boolean) value);
             } else if (key instanceof String && value instanceof Integer) {
+                if (dtype != -1 && dtype != 32) {
+                    multipleType = true;
+                }
                 dtype = 32;
                 mvBuilder.putS2IMap((String) key, (Integer) value);
             } else if (key instanceof String && value instanceof Long) {
+                if (dtype != -1 && dtype != 33) {
+                    multipleType = true;
+                }
                 dtype = 33;
                 mvBuilder.putS2LMap((String) key, (Long) value);
             } else if (key instanceof String && value instanceof Float) {
+                if (dtype != -1 && dtype != 34) {
+                    multipleType = true;
+                }
                 dtype = 34;
                 mvBuilder.putS2FMap((String) key, (Float) value);
             } else if (key instanceof String && value instanceof Double) {
+                if (dtype != -1 && dtype != 35) {
+                    multipleType = true;
+                }
                 dtype = 35;
                 mvBuilder.putS2DMap((String) key, (Double) value);
             } else if (key instanceof String && value instanceof String) {
+                if (dtype != -1 && dtype != 36) {
+                    multipleType = true;
+                }
                 dtype = 36;
                 mvBuilder.putS2SMap((String) key, (String) value);
             } else if (key instanceof String && value instanceof ByteString) {
+                if (dtype != -1 && dtype != 36) {
+                    multipleType = true;
+                }
                 dtype = 36;
                 mvBuilder.putS2BsMap((String) key, (ByteString) value);
             } else {
                 throw new Exception("unsuported data type!");
             }
         }
+        if (multipleType == true) {
+            return -2;
+        }
+
 
         switch (dtype) {
             case 11:
@@ -465,13 +492,19 @@ public class ProtoUtils {
                     mvBuilder.putS2BsMap((String) key, (ByteString) value);
                 }
                 break;
+
+
         }
+
 
         return dtype % 10;
     }
 
     static private void setDType(Instance.Builder instanceBuilder, int dtype) throws Exception {
         switch (dtype) {
+            case -2:
+                instanceBuilder.setDType(DataType.DT_MULTI_TYPE);
+                break;
             case 1:
                 instanceBuilder.setDType(DataType.DT_BOOL);
                 break;

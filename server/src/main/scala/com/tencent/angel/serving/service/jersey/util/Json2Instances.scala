@@ -81,53 +81,13 @@ object Json2Instances {
             for ((_, values) <- ele.asInstanceOf[JObject].obj) {
               values match {
                 case jObject: JObject =>
-                  valueType match {
-                    case TypesProtos.DataType.DT_STRING =>
-                      example = jObject.values.map {
-                        case (k, v: String) => (k, v)
-                        case (_, v) =>
-                          throw new Exception(s"${v.getClass.getSimpleName} Data Type not match String")
-                      }
-                    case TypesProtos.DataType.DT_INT32 =>
-                      example = jObject.values.map {
-                        case (k, v: Int) => (k, v)
-                        case (k, v: String) => (k, v.toInt)
-                        case (k, v: BigInt) => (k, v.toInt)
-                        case (_, v) =>
-                          throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Int")
-                      }
-                    case TypesProtos.DataType.DT_INT64 =>
-                      example = jObject.values.map {
-                        case (k, v: Long) => (k, v)
-                        case (k, v: Int) => (k, v.toLong)
-                        case (k, v: String) => (k, v.toLong)
-                        case (k, v: BigInt) => (k, v.toLong)
-                        case (_, v) =>
-                          throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Long")
-                      }
-                    case TypesProtos.DataType.DT_FLOAT =>
-                      example = jObject.values.map {
-                        case (k, v: Double) => (k, v.toFloat)
-                        case (k, v: Float) => (k, v)
-                        case (k, v: Long) => (k, v.toFloat)
-                        case (k, v: Int) => (k, v.toFloat)
-                        case (k, v: String) => (k, v.toFloat)
-                        case (k, v: BigInt) => (k, v.toFloat)
-                        case (_, v) =>
-                          throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
-                      }
-                    case TypesProtos.DataType.DT_DOUBLE =>
-                      example = jObject.values.map {
-                        case (k, v: Double) => (k, v)
-                        case (k, v: Float) => (k, v.toDouble)
-                        case (k, v: Long) => (k, v.toDouble)
-                        case (k, v: Int) => (k, v.toDouble)
-                        case (k, v: String) => (k, v.toDouble)
-                        case (k, v: BigInt) => (k, v.toDouble)
-                        case (_, v) =>
-                          throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
-                      }
-                    case _ => new Exception("unsuported data type!")
+                  example = jObject.values.map {
+                    case (k, v: BigInt) => (k, v.toInt)
+                    case (k, v: Int) => (k, v)
+                    case (k, v: String) => (k, v.toString)
+                    case (k, v: Double) => (k, v.toDouble)
+                    case (_, v) =>
+                      throw new Exception(s"${v.getClass.getSimpleName} Data Type not support")
                   }
                 case _ =>
                   instanceName = values.toString
@@ -137,53 +97,13 @@ object Json2Instances {
             requestBuilder.addInstances(instance)
           } else {
             var example: Map[String, Any] = null
-            valueType match {
-              case TypesProtos.DataType.DT_STRING =>
-                example = ele.asInstanceOf[JObject].values.map {
-                  case (k, v: String) => (k, v)
-                  case (_, v) =>
-                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match String")
-                }
-              case TypesProtos.DataType.DT_INT32 =>
-                example = ele.asInstanceOf[JObject].values.map {
-                  case (k, v: BigInt) => (k, v.toInt)
-                  case (k, v: Int) => (k, v)
-                  case (k, v: String) => (k, v.toInt)
-                  case (_, v) =>
-                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Int")
-                }
-              case TypesProtos.DataType.DT_INT64 =>
-                example = ele.asInstanceOf[JObject].values.map {
-                  case (k, v: BigInt) => (k, v.toLong)
-                  case (k, v: Long) => (k, v)
-                  case (k, v: Int) => (k, v.toLong)
-                  case (k, v: String) => (k, v.toLong)
-                  case (_, v) =>
-                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Long")
-                }
-              case TypesProtos.DataType.DT_FLOAT =>
-                example = ele.asInstanceOf[JObject].values.map {
-                  case (k, v: Double) => (k, v.toFloat)
-                  case (k, v: Float) => (k, v)
-                  case (k, v: Long) => (k, v.toFloat)
-                  case (k, v: Int) => (k, v.toFloat)
-                  case (k, v: String) => (k, v.toFloat)
-                  case (k, v: BigInt) => (k, v.toFloat)
-                  case (_, v) =>
-                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Float")
-                }
-              case TypesProtos.DataType.DT_DOUBLE =>
-                example = ele.asInstanceOf[JObject].values.map {
-                  case (k, v: Double) => (k, v)
-                  case (k, v: Float) => (k, v.toDouble)
-                  case (k, v: Long) => (k, v.toDouble)
-                  case (k, v: Int) => (k, v.toDouble)
-                  case (k, v: String) => (k, v.toDouble)
-                  case (k, v: BigInt) => (k, v.toDouble)
-                  case (_, v) =>
-                    throw new Exception(s"${v.getClass.getSimpleName} Data Type not match Double")
-                }
-              case _ => new Exception("unsuported data type!")
+            example = ele.asInstanceOf[JObject].values.map {
+              case (k, v: BigInt) => (k, v.toInt)
+              case (k, v: Int) => (k, v)
+              case (k, v: String) => (k, v.toString)
+              case (k, v: Double) => (k, v.toDouble)
+              case (_, v) =>
+                throw new Exception(s"${v.getClass.getSimpleName} Data Type not support")
             }
             val instance = ProtoUtils.getInstance(example.asJava)
             requestBuilder.addInstances(instance)
