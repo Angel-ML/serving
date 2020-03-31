@@ -62,6 +62,8 @@ enum DataType {
     DT_VARIANT_REF = 121;
     DT_UINT32_REF = 122;
     DT_UINT64_REF = 123;
+    // for containing multiple field's type  in a row
+    DT_MULTI_TYPE=-2;
 }
 // LINT.ThenChange(
 //    https://www.tensorflow.org/code/tensorflow/c/c_api.h,
