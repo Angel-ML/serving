@@ -22,7 +22,6 @@ import com.tencent.angel.config.{Entry, Resource, ResourceAllocation}
 import com.tencent.angel.core.saver.MetaGraphProtos.MetaGraphDef
 import com.tencent.angel.ml.math2.matrix.CooLongFloatMatrix
 import com.tencent.angel.pytorch.data.SampleParser
-import com.tencent.angel.pytorch.native.LibraryLoader
 import org.slf4j.{Logger, LoggerFactory}
 import com.tencent.angel.pytorch.torch.TorchModel
 import com.tencent.angel.serving.apis.common.TypesProtos
@@ -130,7 +129,7 @@ object TorchSavedModelBundle {
   def create(path: StoragePath): SavedModelBundle = {
     // load
     try {
-      val fs = SystemFileUtils.getFileSystem()
+      val fs = SystemFileUtils.getFileSystem(path)
       val fileStatus  = fs.listStatus(new Path(path))
       val filterFileStatus = fileStatus.filter(x => x.isFile)
         .filter(x => x.getPath.toString.endsWith(".pt"))
@@ -138,7 +137,6 @@ object TorchSavedModelBundle {
       val modulePath = path + "/" + moduleName
       LOG.info(s"Begin to load model, load path is " + modulePath)
       TorchModel.setPath(modulePath)
-      LibraryLoader.load
       val model = TorchModel.get()
       LOG.info(s"model has loaded!")
       new TorchSavedModelBundle(model)

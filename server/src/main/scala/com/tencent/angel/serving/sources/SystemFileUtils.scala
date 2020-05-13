@@ -16,7 +16,6 @@
  */
 package com.tencent.angel.serving.sources
 
-import java.net.URI
 import org.apache.hadoop.conf.Configuration
 import scala.collection.immutable.Set
 import org.apache.hadoop.fs.{FileSystem, Path}
@@ -26,7 +25,7 @@ import com.tencent.angel.serving.service.ModelServer
 
 object SystemFileUtils {
   private var fileSystem = null.asInstanceOf[FileSystem]
-  def getFileSystem(conf: Configuration = ModelServer.hadoopConf): FileSystem ={
+  def getFileSystem(path: String, conf: Configuration = ModelServer.hadoopConf): FileSystem ={
     if (fileSystem == null) {
       this.synchronized {
         if (fileSystem == null) {
@@ -34,7 +33,7 @@ object SystemFileUtils {
             if (conf == null) {
               throw FailedPreconditions("hadoop configuration has not been set!")
             }
-            fileSystem = FileSystem.get(conf)
+            fileSystem = new Path(path).getFileSystem(conf)
           } catch {
             case e: Exception =>
               e.printStackTrace()
@@ -46,7 +45,7 @@ object SystemFileUtils {
   }
 
   def dirExist(basePath: String, conf: Configuration = ModelServer.hadoopConf): Boolean ={
-    val fs = getFileSystem(conf)
+    val fs = getFileSystem(basePath, conf)
     if (fs.exists(new Path(basePath))) {
       fs.isDirectory(new Path(basePath))
     } else {
@@ -55,17 +54,17 @@ object SystemFileUtils {
   }
 
   def fileExist(basePath: String, conf: Configuration = ModelServer.hadoopConf): Boolean ={
-    val fs = getFileSystem(conf)
+    val fs = getFileSystem(basePath, conf)
     fs.exists(new Path(basePath))
   }
 
   def getTotalSpace(basePath: String, conf: Configuration = ModelServer.hadoopConf): Long ={
-    val fs = getFileSystem(conf)
+    val fs = getFileSystem(basePath, conf)
     fs.getContentSummary(new Path(basePath)).getLength
   }
 
   def getChildren(basePath: String, conf: Configuration = ModelServer.hadoopConf):Set[String] = {
-    val fs = getFileSystem(conf)
+    val fs = getFileSystem(basePath, conf)
     val path = new Path(basePath)
     val fileStatus  = fs.listStatus(path)
     val pattern = new Regex("^[0-9]*$")

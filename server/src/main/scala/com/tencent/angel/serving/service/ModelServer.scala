@@ -79,6 +79,12 @@ class ModelServer {
       import org.apache.hadoop.fs.Path
       hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/hdfs-site.xml"))
       hadoopConf.addResource(new Path(serverOptions.hadoop_home + "/core-site.xml"))
+      val uri  = new Path(serverOptions.model_base_path).toUri
+      val schema = if(uri.getScheme != null) uri.getScheme else "hdfs"
+      val host = if(uri.getHost != null) uri.getHost else ""
+      val port = if(uri.getPort > 0 ) ":" + uri.getPort else ""
+      val defaultFS = schema + "://" + host + port
+      hadoopConf.set("fs.defaultFS", defaultFS)
       println(hadoopConf.get("fs.defaultFS"))
       if(serverOptions.hadoop_job_ugi.nonEmpty) {
         hadoopConf.set("hadoop.job.ugi", serverOptions.hadoop_job_ugi)
@@ -121,7 +127,6 @@ class ModelServer {
         modelPlatformSet.add(modelServerConfig.getModelConfigList.getConfig(idx).getModelPlatform)
       }
     }
-
     var platformConfigMap: PlatformConfigMap = null
     if(serverOptions.platform_config_file.isEmpty) {
       val sessionBundleConfigBuilder = SessionBundleConfig.newBuilder()
