@@ -30,7 +30,7 @@ case class Options(
                    hadoop_home: String = "",
                    saved_model_tags: String = "serve",
                    max_num_load_retries: Int = 5,
-                   load_retry_interval_micros: Long = 60*1000*1000,
+                   load_retry_interval_micros: Long = 60000,
                    file_system_poll_wait_seconds: Int = 1,
                    flush_filesystem_caches: Boolean = true,
                    enable_model_warmup: Boolean = true,

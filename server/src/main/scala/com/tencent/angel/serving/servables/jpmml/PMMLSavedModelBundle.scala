@@ -203,7 +203,7 @@ object PMMLSavedModelBundle {
   def create(path: StoragePath): PMMLSavedModelBundle = {
     var inputStream: InputStream = null
     try {
-      val fs = SystemFileUtils.getFileSystem()
+      val fs = SystemFileUtils.getFileSystem(path)
       val fileStatus  = fs.listStatus(new Path(path))
       val filterFileStatus = fileStatus.filter(x => x.isFile)
         .filter(x => x.getPath.toString.endsWith(".pmml") || x.getPath.toString.endsWith(".txt"))
@@ -222,6 +222,10 @@ object PMMLSavedModelBundle {
         System.exit(-1)
         null.asInstanceOf[PMMLSavedModelBundle]
       case e: IOException =>
+        e.printStackTrace()
+        System.exit(-1)
+        null.asInstanceOf[PMMLSavedModelBundle]
+      case e: Exception =>
         e.printStackTrace()
         System.exit(-1)
         null.asInstanceOf[PMMLSavedModelBundle]
